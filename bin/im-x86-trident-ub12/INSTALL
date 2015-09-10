@@ -2,8 +2,7 @@
        ----------------------------
 
 This document describes how to install OpenNSL binary provided
-in this package on the supported SVKs. Refer the Release Notes
-for a list of supported SVKs.
+in this package on the IM platform.
 
 Building OpenNSL
 ================
@@ -17,15 +16,12 @@ following steps to compile OpenNSL including sample applications.
 
 3) Issue "make" to create an OpenNSL shared library object, linux kernel modules.
 
-Note: OpenNSL requires MAKE version 3.82. MAKE version 4.0 is not supported.
-To force the MAKE version, set the following variable.
-"export MAKEVER=3.82"
-
 4) The deliverables folder : opennsl_root/opennsl/output/im-x86-trident-ub12/build
    shall have the following files. 
-   a) Linux kernel module           : linux-kernel-bde.ko
-   b) Linux user module             : linux-user-bde.ko
-   c) OpenNSL shared object library : libopennsl.so
+   a) Linux kernel module                     : linux-kernel-bde.ko
+   b) Linux user module                       : linux-user-bde.ko
+   c) KNET driver module                      : linux-bcm-knet.ko
+   d) OpenNSL shared object library           : libopennsl.so
 
 Building example Applications
 =============================
@@ -51,9 +47,14 @@ Downloading and running OpenNSL sample applications
    i  ) Execute "lsmod" to list the installed linux kernel modules.
    ii ) Remove the linux kernel and user modules by using "rmmod" command.
    iii) Install linux kernel modules built for OpenNSL platform by using
-        the following commands.
-        # insmod linux-kernel-bde.ko dmasize=16M
+        the following commands. Please ensure that the modules are removed 
+        before inserting it using 'rmmod' command.
+        # mknod /dev/linux-kernel-bde c 127 0
+        # mknod /dev/linux-user-bde c 126 0
+        # mknod /dev/linux-bcm-knet c 122 0
+        # insmod linux-kernel-bde.ko
         # insmod linux-user-bde.ko
+        # insmod linux-bcm-knet.ko
 
 3) Install OpenNSL shared library. The destination directory to install the
    shared library depends on the host environment configuration.  Install the

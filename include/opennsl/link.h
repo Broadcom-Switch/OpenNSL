@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,14 +79,38 @@ extern int opennsl_linkscan_enable_set(
     int unit, 
     int us) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Enable and disable link scanning or set the polling interval.
+ *
+ *\description Calling opennsl_linkscan_enable_set with a non-zero scanning
+ *          interval sets the scan interval starts the linkscan task if
+ *          required. If the specified interval is zero, the linkscan task is
+ *          stopped. For this reason, it is required to have link scan enabled
+ *          and running with a non-zero interval even if all ports are
+ *          operating in hardware linkscan mode.
+ *          opennsl_linkscan_enable_get returns the current scan interval. A
+ *          returned scan interval of 0 indicates linkscan is disabled.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    us [OUT]   (for _set) Minimum time between software link scan cycles
+ *          in micro-seconds. 0 indicates linkscan is disabled.
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_MEMORY
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_linkscan_enable_get(
+    int unit, 
+    int *us) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 /** opennsl_linkscan_mode_e */
 typedef enum opennsl_linkscan_mode_e {
-    linkReservedEnum1,                  
+    OPENNSL_LINKSCAN_MODE_NONE   = 0,   
     OPENNSL_LINKSCAN_MODE_SW     = 1,   
-    linkReservedEnum2,                  
-    linkReservedEnum3                   
+    OPENNSL_LINKSCAN_MODE_HW     = 2,   
+    OPENNSL_LINKSCAN_MODE_COUNT = 3     
 } opennsl_linkscan_mode_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -102,7 +126,36 @@ typedef enum opennsl_linkscan_mode_e {
  *          any one port aborts the processing of the request and the link
  *          scan mode of all the ports specified is undefined. Ports not in
  *          the port bit map are unaffected.
- *          The use of cbm_linkscan_mode_set_pbm is not recommended.
+ *          The use of opennsl_linkscan_mode_set_pbm is not recommended.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port number to set or get the mode of
+ *\param    mode [IN]   (for _set and _set_pbm) Link scan mode, see table
+ *          =OPENNSL_LINKSCAN_MODE_e .
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PORT Invalid port
+ *\retval    OPENNSL_E_PARAM Invalid mode
+ *\retval    OPENNSL_E_UNAVAIL Mode requested is not support
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_linkscan_mode_set(
+    int unit, 
+    opennsl_port_t port, 
+    int mode) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the link scanning mode for a port.
+ *
+ *\description Get or set the current link scanning mode for a port. The possible
+ *          modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e .
+ *          opennsl_linkscan_mode_set operates on one port while
+ *          opennsl_linkscan_mode_set_pbm operates on all ports specified in
+ *          the port bit map. When operating on a port bit map, a failure on
+ *          any one port aborts the processing of the request and the link
+ *          scan mode of all the ports specified is undefined. Ports not in
+ *          the port bit map are unaffected.
+ *          The use of opennsl_linkscan_mode_set_pbm is not recommended.
  *
  *\param    unit [IN]   Unit number.
  *\param    pbm [IN]   Port bit map of ports to set the mode on
@@ -119,6 +172,35 @@ extern int opennsl_linkscan_mode_set_pbm(
     int unit, 
     opennsl_pbmp_t pbm, 
     int mode) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the link scanning mode for a port.
+ *
+ *\description Get or set the current link scanning mode for a port. The possible
+ *          modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e .
+ *          opennsl_linkscan_mode_set operates on one port while
+ *          opennsl_linkscan_mode_set_pbm operates on all ports specified in
+ *          the port bit map. When operating on a port bit map, a failure on
+ *          any one port aborts the processing of the request and the link
+ *          scan mode of all the ports specified is undefined. Ports not in
+ *          the port bit map are unaffected.
+ *          The use of opennsl_linkscan_mode_set_pbm is not recommended.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port number to set or get the mode of
+ *\param    mode [OUT]   (for _set and _set_pbm) Link scan mode, see table
+ *          =OPENNSL_LINKSCAN_MODE_e .
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PORT Invalid port
+ *\retval    OPENNSL_E_PARAM Invalid mode
+ *\retval    OPENNSL_E_UNAVAIL Mode requested is not support
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_linkscan_mode_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *mode) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Register and unregister link notification callouts.

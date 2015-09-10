@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -67,6 +67,7 @@
 #endif
 #define COMPILER_HAS_LONGLONG_ADDSUB
 #define COMPILER_HAS_LONGLONG_MUL
+#define COMPILER_HAS_LONGLONG_DIV
 #define COMPILER_HAS_LONGLONG_ANDOR
 #define COMPILER_HAS_LONGLONG_COMPARE
 
@@ -91,6 +92,7 @@
 #define COMPILER_HAS_LONGLONG_SHIFT
 #define COMPILER_HAS_LONGLONG_ADDSUB
 #define COMPILER_HAS_LONGLONG_MUL
+#define COMPILER_HAS_LONGLONG_DIV
 #define COMPILER_HAS_LONGLONG_ANDOR
 #define COMPILER_HAS_LONGLONG_COMPARE
 
@@ -103,7 +105,7 @@
 #else
 #define FUNCTION_NAME() (__FUNCTION__)
 #endif
- 
+
 #else /* !defined(__GNUC__) */
 
 #define COMPILER_ATTRIBUTE(_a)
@@ -126,6 +128,7 @@
 #define COMPILER_HAS_LONGLONG_SHIFT
 #define COMPILER_HAS_LONGLONG_ADDSUB
 #define COMPILER_HAS_LONGLONG_MUL
+#define COMPILER_HAS_LONGLONG_DIV
 #define COMPILER_HAS_LONGLONG_ANDOR
 #define COMPILER_HAS_LONGLONG_COMPARE
 
@@ -155,6 +158,7 @@
 #undef    COMPILER_HAS_LONGLONG_SHIFT
 #undef    COMPILER_HAS_LONGLONG_ADDSUB
 #undef    COMPILER_HAS_LONGLONG_MUL
+#undef    COMPILER_HAS_LONGLONG_DIV
 #undef    COMPILER_HAS_LONGLONG_ANDOR
 #undef    COMPILER_HAS_LONGLONG_COMPARE
 #endif
@@ -218,9 +222,11 @@ static int u64_LSW = 0;
 #define COMPILER_64_INIT(_hi, _lo)      ( (((long long) (_hi)) << 32) | (_lo))
 
 #else /* !COMPILER_HAS_LONGLONG */
+typedef struct sal_uint64_s { unsigned int u64_w[2]; } sal_uint64_t;
+typedef struct sal_int64_s  { int u64_w[2]; } sal_int64_t;
 
-#define COMPILER_UINT64                 struct uint64_s { unsigned int u64_w[2]; }
-#define COMPILER_INT64                  struct int64_s { int u64_w[2]; }
+#define COMPILER_UINT64     sal_uint64_t
+#define COMPILER_INT64      sal_int64_t
 #define u64_H(v)            ((v).u64_w[u64_MSW])
 #define u64_L(v)            ((v).u64_w[u64_LSW])
 
@@ -370,30 +376,30 @@ static int u64_LSW = 0;
 
 #define COMPILER_64_AND(dst, src)                    \
     do {                                \
-        u64_H(dst) &= u64_H(src);                    \
-        u64_L(dst) &= u64_L(src);                    \
+        u64_H((dst)) &= u64_H((src));                    \
+        u64_L((dst)) &= u64_L((src));                    \
     } while (0)
 #define COMPILER_64_OR(dst, src)                    \
     do {                                \
-        u64_H(dst) |= u64_H(src);                    \
-        u64_L(dst) |= u64_L(src);                    \
+        u64_H((dst)) |= u64_H((src));                    \
+        u64_L((dst)) |= u64_L((src));                    \
     } while (0)
 #define COMPILER_64_XOR(dst, src)                    \
     do {                                \
-        u64_H(dst) ^= u64_H(src);                    \
-        u64_L(dst) ^= u64_L(src);                    \
+        u64_H((dst)) ^= u64_H((src));                    \
+        u64_L((dst)) ^= u64_L((src));                    \
     } while (0)
 #define COMPILER_64_NOT(dst)                        \
     do {                                \
-        u64_H(dst) = ~u64_H(dst);                    \
-        u64_L(dst) = ~u64_L(dst);                    \
+        u64_H((dst)) = ~u64_H((dst));                    \
+        u64_L((dst)) = ~u64_L((dst));                    \
     } while (0)
 
 #endif /* !COMPILER_HAS_LONGLONG_ANDOR */
 
 #define COMPILER_64_ALLONES(dst)   \
-    COMPILER_64_ZERO(dst);\
-    COMPILER_64_NOT(dst)
+    COMPILER_64_ZERO((dst));\
+    COMPILER_64_NOT((dst))
 
 /*
  * 64-bit shift
@@ -490,6 +496,47 @@ static int u64_LSW = 0;
             COMPILER_64_SUB_64(src, last);\
         } while(0)
 
+#define COMPILER_64_BITSET(dst, n)              \
+        do {                                    \
+            uint64 temp64;                      \
+            COMPILER_64_SET(temp64, 0, 1);      \
+            COMPILER_64_SHL(temp64, n);         \
+            COMPILER_64_OR(dst, temp64);        \
+        } while(0)
+
+#define COMPILER_64_BITCLR(dst, n)              \
+        do {                                    \
+            uint64 temp64;                      \
+            COMPILER_64_SET(temp64, 0, 1);      \
+            COMPILER_64_SHL(temp64, n);         \
+            COMPILER_64_NOT(temp64);            \
+            COMPILER_64_AND(dst, temp64);       \
+        } while(0)
+
+
+ /*
+ * 64-bit division
+ */
+
+#if defined COMPILER_HAS_LONGLONG_DIV && ! defined (__KERNEL__)
+
+#define COMPILER_64_UDIV_64(dst, src)    ((dst) /= (src))
+
+#else /* !(defined COMPILER_HAS_LONGLONG_DIV && ! defined (__KERNEL__)) */
+
+/* Divide of unsigned 64-bit and unsigned 64-bit integers, no overflow handling  */
+#define COMPILER_64_UDIV_64(dst, src)                                       \
+    do {                                                                \
+        uint32 q_hi = 0, q_lo = 0;                                      \
+        while( COMPILER_64_GE(dst, src) )                               \
+            {                                                           \
+                COMPILER_64_SUB_64(dst, src);                           \
+                if (++q_lo == 0) ++q_hi;                                \
+            }                                                           \
+        COMPILER_64_SET(dst, q_hi, q_lo);                               \
+    } while (0)
+
+#endif /* defined COMPILER_HAS_LONGLONG_DIV && ! defined (__KERNEL__) */
 /*
  * Some macros for double support
  *

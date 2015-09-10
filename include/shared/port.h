@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -35,6 +35,19 @@
 #include <sal/types.h>
 
 typedef int _shr_port_t;
+
+/*
+ * Defines:
+ *	_SHR_PORT_DUPLEX_*
+ * Purpose:
+ *	Defines duplexity of a port
+ */
+
+typedef enum _shr_port_duplex_e {
+    _SHR_PORT_DUPLEX_HALF,
+    _SHR_PORT_DUPLEX_FULL,
+    _SHR_PORT_DUPLEX_COUNT	/* last, please */
+} _shr_port_duplex_t;
 
 /*
  * Defines:
@@ -81,6 +94,12 @@ typedef enum _shr_port_if_e {
     _SHR_PORT_IF_OLP,
     _SHR_PORT_IF_OAMP,
     _SHR_PORT_IF_ERP,
+    _SHR_PORT_IF_TM_INTERNAL_PKT,   
+    _SHR_PORT_IF_SR2,
+    _SHR_PORT_IF_KR2,
+    _SHR_PORT_IF_CR2,
+    _SHR_PORT_IF_XFI2,
+    _SHR_PORT_IF_XLAUI2,
     _SHR_PORT_IF_COUNT /* last, please */
 } _shr_port_if_t;
 
@@ -92,12 +111,12 @@ typedef enum _shr_port_if_e {
  */
 
 typedef enum _shr_port_stp_e {
-    _SHR_PORT_STP_DISABLE,
-    _SHR_PORT_STP_BLOCK,
-    _SHR_PORT_STP_LISTEN,
-    _SHR_PORT_STP_LEARN,
-    _SHR_PORT_STP_FORWARD,
-    _SHR_PORT_STP_COUNT    /* last, please */
+    _SHR_PORT_STP_DISABLE   = 0,
+    _SHR_PORT_STP_BLOCK     = 1,
+    _SHR_PORT_STP_LISTEN    = 2,
+    _SHR_PORT_STP_LEARN     = 3,
+    _SHR_PORT_STP_FORWARD   = 4,
+    _SHR_PORT_STP_COUNT = 5   /* last, please */
 } _shr_port_stp_t;
 
 /*

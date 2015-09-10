@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@
 #ifndef _SHR_PBMP_H
 #define _SHR_PBMP_H
 
+#include <sal/types.h>
 /*
  * Port Bitmap Macros
  *
@@ -272,5 +273,8 @@ extern int	_shr_pbmp_bmeq(_shr_pbmp_t *, _shr_pbmp_t *);
 	(_SHR_PBMP_ENTRY(bm, port) &= ~_SHR_PBMP_WBIT(port))
 #define _SHR_PBMP_PORT_FLIP(bm, port)	\
 	(_SHR_PBMP_ENTRY(bm, port) ^= _SHR_PBMP_WBIT(port))
+extern char		*_shr_pbmp_format(_shr_pbmp_t, char *);
+#define	_SHR_PBMP_FMT(bm, buf)		_shr_pbmp_format(bm, buf)
+#define	_SHR_PBMP_FMT_LEN		((_SHR_PBMP_WORD_MAX*8)+3)
 
 #endif	/* !_SHR_PBMP_H */

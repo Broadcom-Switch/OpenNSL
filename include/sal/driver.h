@@ -1,6 +1,6 @@
 /*********************************************************************
 *
-* (C) Copyright Broadcom Corporation 2013-2014
+* (C) Copyright Broadcom Corporation 2013-2015
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -16,23 +16,20 @@
 *
 **********************************************************************
 *
-* @filename     driver.h
+* \file         driver.h
 *
-* @purpose      This file contains utility functions called externally
-*
-* @component    driver
-*
-* @comments     none
-*
-* @create       15 Mar 2014
-*
-* @end
+* \brief        This file contains utility functions called externally
 *
 **********************************************************************/
 #ifndef DRIVER_H
 #define DRIVER_H
 
+#include <sal/commdefs.h>
+
 extern int opennsl_driver_init(void) LIB_DLL_EXPORTED ;
-extern int opennsldriver_shell_command(char *commandBuf) LIB_DLL_EXPORTED;
+#ifndef CDP_EXCLUDE
+extern int opennsl_driver_shell() LIB_DLL_EXPORTED;
+#endif
+extern int opennsl_driver_process_command(char *commandBuf) LIB_DLL_EXPORTED;
 
 #endif  /* DRIVER_H */

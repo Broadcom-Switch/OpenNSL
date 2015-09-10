@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -33,11 +33,12 @@
 #include <opennsl/vlan.h>
 #include <opennsl/switch.h>
 #include <sal/driver.h>
+#include <examples/util.h>
 
 #define DEFAULT_VLAN 1
 #define MAX_COUNTERS 4
 #define MAX_COSQ_COUNT 8
-#define SWITCH_UNIT_NUM 0
+#define DEFAULT_UNIT 0
 #define MAX_DIGITS_IN_CHOICE 5
 
 char example_usage[] =
@@ -50,76 +51,6 @@ char example_usage[] =
 "                                                                      \n\r"
 "Usage Guidelines: This program request the user to enter the port     \n\r"
 "                  number interactively                                \n\r";
-
-/*****************************************************************//**
- * \brief Include all ports to default vlan
- *
- * \param unit   [IN]    unit number
- *
- * \return OPENNSL_E_XXX     OpenNSL API return code
- ********************************************************************/
-int example_switch_default_vlan_config(int unit)
-{
-  opennsl_port_config_t pcfg;
-  int rv;
-
-  /*
-   * Create VLAN with id DEFAULT_VLAN and
-   * add ethernet ports to the VLAN
-   */
-  rv = opennsl_port_config_get(unit, &pcfg);
-  if (rv != OPENNSL_E_NONE) {
-    printf("Failed to get port configuration. Error %s\n", opennsl_errmsg(rv));
-    return rv;
-  }
-
-  rv = opennsl_vlan_port_add(unit, DEFAULT_VLAN, pcfg.e, pcfg.e);
-  if (rv != OPENNSL_E_NONE) {
-    printf("Failed to add ports to VLAN. Error %s\n", opennsl_errmsg(rv));
-    return rv;
-  }
-
-  return OPENNSL_E_NONE;
-}
-
-/**************************************************************************//**
- * \brief   Read numeric menu choice from user.
- *
- * \param   choice         [IN/OUT] choice
- *
- * \return  OPENNSL_E_xxx  OpenNSL API return code
- *****************************************************************************/
-int example_read_user_choice(int *choice)
-{
-    char val;
-    char digits[MAX_DIGITS_IN_CHOICE + 1];
-    int idx = 0;
-    int valid = TRUE;
-
-    /* parse input string until \n */
-    while((val = getchar()) != '\n')
-    {
-        if ((val >= '0' && val <= '9') && idx < MAX_DIGITS_IN_CHOICE)
-        {
-            digits[idx++] = val;
-        }
-        else
-        {
-            valid = FALSE;
-        }
-    }
-    if ((valid == TRUE) && idx != 0)
-    {
-        digits[idx] = '\0';
-        *choice = atoi(digits);
-        return(OPENNSL_E_NONE);
-    }
-    else
-    {
-        *choice = -1;
-        return(OPENNSL_E_FAIL);
-    }
-}
 
 typedef struct {
   opennsl_bst_stat_id_t bid;
@@ -139,8 +70,8 @@ int main(int argc, char *argv[])
 {
   opennsl_error_t   rc;
   int choice;
-  int unit = SWITCH_UNIT_NUM;
-  int index;
+  int unit = DEFAULT_UNIT;
+  int index,i,j;
   opennsl_gport_t gport;
   opennsl_port_t port;
   opennsl_cos_queue_t cosq;
@@ -151,7 +82,14 @@ int main(int argc, char *argv[])
     {opennslBstStatIdPriGroupShared,   "opennslBstStatIdPriGroupShared"},
     {opennslBstStatIdPriGroupHeadroom, "opennslBstStatIdPriGroupHeadroom"}
   };
-  uint64 val[MAX_COUNTERS][MAX_COSQ_COUNT] = {0};
+  uint64 val[MAX_COUNTERS][MAX_COSQ_COUNT];
+
+  /* Intitializing val array */
+  for (i = 0; i < MAX_COUNTERS; i++) {
+    for (j = 0; j < MAX_COSQ_COUNT; j++) {
+        val[i][j] = 0;
+    }
+  }
 
   if ((argc != 1) || ((argc > 1) && (strcmp(argv[1], "--help") == 0))) {
     printf("%s\n\r", example_usage);
@@ -190,7 +128,9 @@ int main(int argc, char *argv[])
     printf("\nUser Menu: Select one of the following options\n");
     printf("1. Display bst statistics of a port.\n");
     printf("2. Clear bst statistics of a port.\n");
+#ifndef CDP_EXCLUDE
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application.\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -276,11 +216,14 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 2 */
 
+#ifndef CDP_EXCLUDE
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
+#endif
+
       case 0:
       {
         printf("Exiting the application.\n");

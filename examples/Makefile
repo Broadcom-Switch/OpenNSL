@@ -1,6 +1,6 @@
 #*********************************************************************
 #
-# (C) Copyright Broadcom Corporation 2013-2014
+# (C) Copyright Broadcom Corporation 2013-2015
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 #
 # CROSS_COMPILE setting for GTO boards (Broadcom SVKs)
 CROSS_COMPILE_GTO = /projects/nwsoft-toolchains/brl_2.0/gto/bin/powerpc-broadcom-linux-gnu-
-# CROSS_COMPILE setting for IM-x86 boards
-CROSS_COMPILE_IMx86 =
+# CROSS_COMPILE setting for IM-x86 and Celestica Redstone-x86 boards
+CROSS_COMPILE_x86 = /usr/bin/
 
 # Default to GTO cross compile
 export CROSS_COMPILE = $(CROSS_COMPILE_GTO)
@@ -44,20 +44,37 @@ export RM      = rm
 
 export OPENNSL_ROOT = ./..
 
-export CFLAGS += -I$(OPENNSL_ROOT)/include -DCDP_PACKAGE
+export CFLAGS += -DCDP_EXCLUDE=1
+export CFLAGS += -I$(OPENNSL_ROOT)/include
 
-targets := $(basename $(notdir $(wildcard *.c)))
+FEATURE_LIST = L3
+CFLAGS  += $(foreach feature,$(FEATURE_LIST), -DINCLUDE_$(feature))
 
-.PHONY: all dump_vars
+OPENNSL_CFGFLAGS = -DOPENNSL_WARM_BOOT_SUPPORT
+CFLAGS += ${OPENNSL_CFGFLAGS}
 
-all: $(targets)
+EXAMPLE_UTIL_SRCS = $(abspath $(OPENNSL_ROOT)/examples/util.c)
+EXAMPLE_UTIL_OBJS = $(abspath $(OPENNSL_ROOT)/examples/util.o)
+
+targets := $(basename $(notdir $(wildcard example*.c)))
+
+.PHONY: exutils all clean dump_vars
+
+all: exutils $(targets)
+
+exutils:
+	$(CC) ${CFLAGS} -c $(EXAMPLE_UTIL_SRCS)
+
+clean:
+	$(RM) -rf *.d
+	$(RM) -rf *.o
 
 #
 # Build the target executables
 # The .o files are built by an implicit rule.
 #
 $(targets): % : %.o
-	$(CC) -o $@ -L$(OPENNSL_ROOT)/bin/$(platform) -Wl,-Bstatic $^ -Wl,-Bdynamic -lc -lopennsl
+	$(CC) -o $@ -L$(OPENNSL_ROOT)/bin/$(platform) -Wl,-Bstatic $^ $(EXAMPLE_UTIL_OBJS) -Wl,-Bdynamic -lc -lopennsl
 
 .SECONDEXPANSION:
 

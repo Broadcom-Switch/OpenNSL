@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -231,6 +231,7 @@ typedef uint32  sal_ip_addr_t;          /* IP Address */
 #define SAL_DEV_BUS_RD_16BIT    0x01000 /* 16 bit reads on bus */
 #define SAL_DEV_BUS_WR_16BIT    0x02000 /* 16 bit writes on bus */
 #define SAL_DEV_BUS_ALT         0x04000 /* Alternate access */
+#define SAL_DEV_BUS_MSI         0x08000 /* Message-signaled interrupts */
 #define SAL_DEV_FLAG_MASK       0x0f000
 
 /* BDE reserved mask (cannot be used by SAL) */

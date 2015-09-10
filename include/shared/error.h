@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -82,24 +82,37 @@ extern char *_shr_errmsg[];
 #define _SHR_E_SUCCESS(rv)              ((rv) >= 0)
 #define _SHR_E_FAILURE(rv)              ((rv) < 0)
 
+#define _SHR_ERROR_TRACE(__errcode__)
+#define _SHR_RETURN(__expr__)  return (__expr__)
+
+#define _SHR_E_IF_ERROR_RETURN(op) \
+    do { int __rv__; if ((__rv__ = (op)) < 0) { _SHR_ERROR_TRACE(__rv__);  return(__rv__); } } while(0)
+#define _SHR_E_IF_ERROR_NOT_UNAVAIL_RETURN(op)                       \
+    do {                                                                \
+        int __rv__;                                                     \
+        if (((__rv__ = (op)) < 0) && (__rv__ != _SHR_E_UNAVAIL)) {      \
+            return(__rv__);                                             \
+        }                                                               \
+    } while(0)
 typedef enum {
-    _SHR_SWITCH_EVENT_RESERVED_VAL1 = 1,
-    _SHR_SWITCH_EVENT_RESERVED_VAL2 = 2,
-    _SHR_SWITCH_EVENT_RESERVED_VAL3 = 3,
-    _SHR_SWITCH_EVENT_RESERVED_VAL4 = 4,
-    _SHR_SWITCH_EVENT_RESERVED_VAL5 = 5,
-    _SHR_SWITCH_EVENT_RESERVED_VAL6 = 6,
-    _SHR_SWITCH_EVENT_RESERVED_VAL7 = 7,
-    _SHR_SWITCH_EVENT_RESERVED_VAL8 = 8,
-    _SHR_SWITCH_EVENT_RESERVED_VAL9 = 9,
-    _SHR_SWITCH_EVENT_RESERVED_VAL10 = 10,
-    _SHR_SWITCH_EVENT_RESERVED_VAL11 = 11,
-    _SHR_SWITCH_EVENT_RESERVED_VAL12 = 12,
-    _SHR_SWITCH_EVENT_RESERVED_VAL13 = 13,
-    _SHR_SWITCH_EVENT_RESERVED_VAL14 = 14,
+    _SHR_SWITCH_EVENT_IO_ERROR      = 1,
+    _SHR_SWITCH_EVENT_PARITY_ERROR  = 2,
+    _SHR_SWITCH_EVENT_THREAD_ERROR  = 3,
+    _SHR_SWITCH_EVENT_ACCESS_ERROR  = 4,
+    _SHR_SWITCH_EVENT_ASSERT_ERROR  = 5,
+    _SHR_SWITCH_EVENT_MODID_CHANGE  = 6,
+    _SHR_SWITCH_EVENT_DOS_ATTACK    = 7,
+    _SHR_SWITCH_EVENT_STABLE_FULL   = 8,
+    _SHR_SWITCH_EVENT_STABLE_ERROR   = 9,
+    _SHR_SWITCH_EVENT_UNCONTROLLED_SHUTDOWN = 10,
+    _SHR_SWITCH_EVENT_WARM_BOOT_DOWNGRADE = 11,
+    _SHR_SWITCH_EVENT_TUNE_ERROR = 12,
+    _SHR_SWITCH_EVENT_DEVICE_INTERRUPT  = 13,
+    _SHR_SWITCH_EVENT_ALARM = 14,
     _SHR_SWITCH_EVENT_MMU_BST_TRIGGER = 15,
-    _SHR_SWITCH_EVENT_RESERVED_VAL16 = 16,
-    _SHR_SWITCH_EVENT_RESERVED_VAL17 /* last, as always */
+    _SHR_SWITCH_EVENT_EPON_ALARM = 16,
+    _SHR_SWITCH_EVENT_RUNT_DETECT = 17,
+    _SHR_SWITCH_EVENT_COUNT             /* last, as always */
 } _shr_switch_event_t;
 
 #endif  /* !_SHR_ERROR_H */

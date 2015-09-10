@@ -72,9 +72,10 @@ To force the MAKE version, set the following variable.
 
 4) The deliverables folder : opennsl_root/opennsl/output/gto-trident-brl20/build
    shall have the following files.
-   a) Linux kernel module           : linux-kernel-bde.ko
-   b) Linux user module             : linux-user-bde.ko
-   c) OpenNSL shared object library : libopennsl.so
+   a) Linux kernel module                     : linux-kernel-bde.ko
+   b) Linux user module                       : linux-user-bde.ko
+   c) KNET driver module                      : linux-bcm-knet.ko
+   d) OpenNSL shared object library           : libopennsl.so
 
 Building example Applications
 =============================
@@ -93,11 +94,12 @@ Use the following steps to compile example applications.
 Downloading and running OpenNSL
 ===============================
 * cd to target directory. To write to persistent flash storage, write to
-  /mnt/fastpath.
+  /mnt/opennsl.
 
 * Download the SDK kernel modules and configuration files on to the switch:
   # tftp -g -r <file_path>/linux-kernel-bde.ko <tftp_server_ip>
   # tftp -g -r <file_path>/linux-user-bde.ko <tftp_server_ip>
+  # tftp -g -r <file_path>/linux-bcm-knet.ko <tftp_server_ip>
 
 * Download the Shared objects and OpenNSL sample application on the switch:
 
@@ -105,6 +107,12 @@ Downloading and running OpenNSL
   # cp *.so /lib/
   # tftp -g -r <file_path>/sample_application <tftp_server_ip>
   # chmod 755 sample_application
+
+* Install kernel modules. Please ensure that the modules are removed 
+  before inserting it using 'rmmod' command.
+  # insmod linux-kernel-bde.ko
+  # insmod linux-user-bde.ko
+  # insmod linux-bcm-knet.ko
 
 * cd to target directory and start OpenNSL executable.
 

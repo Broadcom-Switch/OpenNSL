@@ -192,13 +192,29 @@ Appendix B
 
 Open Source Software
 
-bin/gto-trident-brl20/ - Broadcom Trident Switch Verification Kits
+bin/gto-trident-brl20/   - Broadcom Trident Switch Verification Kits
 
-example_l2_firewall                -> Covered by Apache 2.0
-gto_uImage                         -> Covered by GPL
+  gto_uImage                         -> Covered by GPLv2
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
 
 bin/im-x86-trident-ub12/ - Interface Masters Niagara 2948-6XLM-OCP Modular
 Switch System
 
-example_l2_firewall                -> Covered by Apache 2.0
-boardkeeper_1.0_amd64.deb          -> Covered by GPL
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP
+Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/wedge-trident        - Wedge
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2

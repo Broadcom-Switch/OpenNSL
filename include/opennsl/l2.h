@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,24 +28,26 @@
 
 #define OPENNSL_L2_DISCARD_SRC  0x00000002 
 #define OPENNSL_L2_DISCARD_DST  0x00000004 
+#define OPENNSL_L2_L3LOOKUP     0x00000010 
 #define OPENNSL_L2_STATIC       0x00000020 
 /** Device-independent L2 address structure. */
 typedef struct opennsl_l2_addr_s {
     uint32 flags;                       /**< OPENNSL_L2_xxx flags. */
     uint32 reserved1; 
-    opennsl_mac_t reserved2; 
-    opennsl_vlan_t reserved3; 
-    int reserved4; 
-    int reserved5; 
-    opennsl_trunk_t reserved6; 
-    opennsl_cos_t reserved7; 
-    opennsl_cos_t reserved8; 
-    opennsl_multicast_t reserved9; 
-    opennsl_pbmp_t reserved10; 
-    int reserved11; 
-    int reserved12; 
-    opennsl_fabric_distribution_t reserved13; 
-    int reserved14; 
+    opennsl_mac_t mac;                  /**< 802.3 MAC address. */
+    opennsl_vlan_t vid;                 /**< VLAN identifier. */
+    int port;                           /**< Zero-based port number. */
+    int modid;                          /**< XGS: modid. */
+    opennsl_trunk_t tgid;               /**< Trunk group ID. */
+    opennsl_cos_t reserved2; 
+    opennsl_cos_t reserved3; 
+    opennsl_multicast_t reserved4; 
+    opennsl_pbmp_t reserved5; 
+    int reserved6; 
+    int reserved7; 
+    opennsl_fabric_distribution_t reserved8; 
+    int reserved9; 
+    int reserved10; 
 } opennsl_l2_addr_t;
 
 /***************************************************************************//** 
@@ -128,6 +130,85 @@ extern int opennsl_l2_addr_get(
     opennsl_mac_t mac_addr, 
     opennsl_vlan_t vid, 
     opennsl_l2_addr_t *l2addr) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/Get the age timer.
+ *
+ *\description Set/Get the age timer of the specified switch unit. Setting the
+ *          age_seconds value to 0 disables the age timer. If age_seconds is
+ *          other than 0 Every specified interval aging task will iterate over
+ *          L2 table entries and do the following:  If the entry is active
+ *          (one of the hit bit is set) it will mark the entry as inactive
+ *          (clear the hit bit) otherwise it will remove the entry from the
+ *          table. Thus if entry with one of the hit bits set added to L2
+ *          table and aging interval set to X seconds then the entry should be
+ *          expected to completely disappear from L2 table after 2X seconds if
+ *          not hit during this period. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    age_seconds [IN]   Age timer value in seconds (0 to disable)
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_age_timer_set(
+    int unit, 
+    int age_seconds) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set/Get the age timer.
+ *
+ *\description Set/Get the age timer of the specified switch unit. Setting the
+ *          age_seconds value to 0 disables the age timer. If age_seconds is
+ *          other than 0 Every specified interval aging task will iterate over
+ *          L2 table entries and do the following:  If the entry is active
+ *          (one of the hit bit is set) it will mark the entry as inactive
+ *          (clear the hit bit) otherwise it will remove the entry from the
+ *          table. Thus if entry with one of the hit bits set added to L2
+ *          table and aging interval set to X seconds then the entry should be
+ *          expected to completely disappear from L2 table after 2X seconds if
+ *          not hit during this period. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    age_seconds [OUT]   Age timer value in seconds (0 to disable)
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_age_timer_get(
+    int unit, 
+    int *age_seconds) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+typedef int (*opennsl_l2_traverse_cb)(
+    int unit, 
+    opennsl_l2_addr_t *info, 
+    void *user_data);
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Iterates over all entries in the L2 table and executes user callback
+ *       function for each entry.
+ *
+ *\description Iterates over all valid entries in the L2 table and executes user
+ *          provided callback function that defined as following:  typedef int
+ *          (*opennsl_l2_traverse_cb)(int unit, opennsl_l2_addr_t *info, void
+ *          *user_data); .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    trav_fn [IN]   Call back function provided by API caller
+ *\param    user_data [IN]   Pointer to any data provided by API caller
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_traverse(
+    int unit, 
+    opennsl_l2_traverse_cb trav_fn, 
+    void *user_data) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@
 #include <opennsl/tx.h>
 
 #define OPENNSL_RX_CHANNELS     4          /**< Max. number of RX channels. */
-#define OPENNSL_RCO_F_ALL_COS   0x40000000 
+#define OPENNSL_RCO_F_COS_ACCEPT(cos)  (1 << (cos)) 
+#define OPENNSL_RCO_F_ALL_COS       0x40000000 
 /** Return values from PKT RX callout routines. */
 typedef enum opennsl_rx_e {
     rxReservedEnum1 = 0, 
@@ -93,6 +94,172 @@ typedef struct opennsl_rx_cfg_s {
                                            addresses - ignore if not relevant. */
 } opennsl_rx_cfg_t;
 
+/** 
+ * PKT RX Packet Reasons; reason CPU received the packet.
+ * 
+ * It is possible no reasons are set (directed to CPU from ARL for
+ * example), or multiple reasons may be set.
+ */
+typedef enum opennsl_rx_reason_e {
+    opennslrxReservedEnum3 = _SHR_RX_INVALID, 
+    opennslrxReservedEnum4 = _SHR_RX_ARP, 
+    opennslRxReasonBpdu = _SHR_RX_BPDU, 
+    opennslrxReservedEnum5 = _SHR_RX_BROADCAST, 
+    opennslrxReservedEnum6 = _SHR_RX_CLASS_BASED_MOVE, 
+    opennslrxReservedEnum7 = _SHR_RX_CLASS_TAG_PACKETS, 
+    opennslrxReservedEnum8 = _SHR_RX_CONTROL, 
+    opennslrxReservedEnum9 = _SHR_RX_CPU_LEARN, 
+    opennslrxReservedEnum10 = _SHR_RX_DEST_LOOKUP_FAIL, 
+    opennslrxReservedEnum11 = _SHR_RX_DHCP, 
+    opennslrxReservedEnum12 = _SHR_RX_DOS_ATTACK, 
+    opennslrxReservedEnum13 = _SHR_RX_E2E_HOL_IBP, 
+    opennslrxReservedEnum14 = _SHR_RX_ENCAP_HIGIG_ERROR, 
+    opennslrxReservedEnum15 = _SHR_RX_FILTER_MATCH, 
+    opennslrxReservedEnum16 = _SHR_RX_GRE_CHECKSUM, 
+    opennslrxReservedEnum17 = _SHR_RX_GRE_SOURCE_ROUTE, 
+    opennslrxReservedEnum18 = _SHR_RX_HIGIG_CONTROL, 
+    opennslrxReservedEnum19 = _SHR_RX_HIGIG_HDR_ERROR, 
+    opennslrxReservedEnum20 = _SHR_RX_ICMP_REDIRECT, 
+    opennslrxReservedEnum21 = _SHR_RX_IGMP, 
+    opennslrxReservedEnum22 = _SHR_RX_INGRESS_FILTER, 
+    opennslrxReservedEnum23 = _SHR_RX_IP, 
+    opennslrxReservedEnum24 = _SHR_RX_IPFIX_RATE_VIOLATION, 
+    opennslrxReservedEnum25 = _SHR_RX_IP_MCAST_MISS, 
+    opennslrxReservedEnum26 = _SHR_RX_IPMC_RSVD, 
+    opennslrxReservedEnum27 = _SHR_RX_IP_OPTION_VERSION, 
+    opennslrxReservedEnum28 = _SHR_RX_IPMC, 
+    opennslrxReservedEnum29 = _SHR_RX_L2_CPU, 
+    opennslrxReservedEnum30 = _SHR_RX_L2_DEST_MISS, 
+    opennslrxReservedEnum31 = _SHR_RX_L2_LEARN_LIMIT, 
+    opennslrxReservedEnum32 = _SHR_RX_L2_MOVE, 
+    opennslrxReservedEnum33 = _SHR_RX_L2_MTU_FAIL, 
+    opennslrxReservedEnum34 = _SHR_RX_L2_NON_UNICAST_MISS, 
+    opennslrxReservedEnum35 = _SHR_RX_L2_SOURCE_MISS, 
+    opennslrxReservedEnum36 = _SHR_RX_L3_ADDR_BIND_FAIL, 
+    opennslRxReasonL3DestMiss = _SHR_RX_L3_DEST_MISS, 
+    opennslrxReservedEnum37 = _SHR_RX_L3_HEADER_ERROR, 
+    opennslrxReservedEnum38 = _SHR_RX_L3_MTU_FAIL, 
+    opennslRxReasonL3Slowpath = _SHR_RX_L3_SLOW_PATH, 
+    opennslrxReservedEnum39 = _SHR_RX_L3_SOURCE_MISS, 
+    opennslrxReservedEnum40 = _SHR_RX_L3_SOUCE_MOVE, 
+    opennslrxReservedEnum41 = _SHR_RX_MARTIAN_ADDR, 
+    opennslrxReservedEnum42 = _SHR_RX_MCAST_IDX_ERROR, 
+    opennslrxReservedEnum43 = _SHR_RX_MCAST_MISS, 
+    opennslrxReservedEnum44 = _SHR_RX_MIM_SERVICE_ERROR, 
+    opennslrxReservedEnum45 = _SHR_RX_MPLS_CTRL_WORD_ERROR, 
+    opennslrxReservedEnum46 = _SHR_RX_MPLS_ERROR, 
+    opennslrxReservedEnum47 = _SHR_RX_MPLS_INVALID_ACTION, 
+    opennslrxReservedEnum48 = _SHR_RX_MPLS_INVALID_PAYLOAD, 
+    opennslrxReservedEnum49 = _SHR_RX_MPLS_LABEL_MISS, 
+    opennslrxReservedEnum50 = _SHR_RX_MPLS_SEQUENCE_NUMBER, 
+    opennslrxReservedEnum51 = _SHR_RX_MPLS_TTL, 
+    opennslrxReservedEnum52 = _SHR_RX_MULTICAST, 
+    opennslRxReasonNhop = _SHR_RX_NHOP, 
+    opennslrxReservedEnum53 = _SHR_RX_OAM_ERROR, 
+    opennslrxReservedEnum54 = _SHR_RX_OAM_SLOW_PATH, 
+    opennslrxReservedEnum55 = _SHR_RX_OAM_LMDM, 
+    opennslrxReservedEnum56 = _SHR_RX_PARITY_ERROR, 
+    opennslRxReasonProtocol = _SHR_RX_PROTOCOL, 
+    opennslrxReservedEnum57 = _SHR_RX_SAMPLE_DEST, 
+    opennslrxReservedEnum58 = _SHR_RX_SAMPLE_SOURCE, 
+    opennslrxReservedEnum59 = _SHR_RX_SHARED_VLAN_MISMATCH, 
+    opennslrxReservedEnum60 = _SHR_RX_SOURCE_ROUTE, 
+    opennslrxReservedEnum61 = _SHR_RX_TIME_STAMP, 
+    opennslrxReservedEnum62 = _SHR_RX_TTL, 
+    opennslrxReservedEnum63 = _SHR_RX_TTL1, 
+    opennslrxReservedEnum64 = _SHR_RX_TUNNEL_ERROR, 
+    opennslrxReservedEnum65 = _SHR_RX_UDP_CHECKSUM, 
+    opennslrxReservedEnum66 = _SHR_RX_UNKNOWN_VLAN, 
+    opennslrxReservedEnum67 = _SHR_RX_URPF_FAIL, 
+    opennslrxReservedEnum68 = _SHR_RX_VC_LABEL_MISS, 
+    opennslrxReservedEnum69 = _SHR_RX_VLAN_FILTER_MATCH, 
+    opennslrxReservedEnum70 = _SHR_RX_WLAN_CLIENT_ERROR, 
+    opennslrxReservedEnum71 = _SHR_RX_WLAN_SLOW_PATH, 
+    opennslrxReservedEnum72 = _SHR_RX_WLAN_DOT1X_DROP, 
+    opennslrxReservedEnum73 = _SHR_RX_EXCEPTION_FLOOD, 
+    opennslrxReservedEnum74 = _SHR_RX_TIMESYNC, 
+    opennslrxReservedEnum75 = _SHR_RX_EAV_DATA, 
+    opennslrxReservedEnum76 = _SHR_RX_SAME_PORT_BRIDGE, 
+    opennslrxReservedEnum77 = _SHR_RX_SPLIT_HORIZON, 
+    opennslrxReservedEnum78 = _SHR_RX_L4_ERROR, 
+    opennslrxReservedEnum79 = _SHR_RX_STP, 
+    opennslrxReservedEnum80 = _SHR_RX_EGRESS_FILTER_REDIRECT, 
+    opennslrxReservedEnum81 = _SHR_RX_FILTER_REDIRECT, 
+    opennslrxReservedEnum82 = _SHR_RX_LOOPBACK, 
+    opennslrxReservedEnum83 = _SHR_RX_VLAN_TRANSLATE, 
+    opennslrxReservedEnum84 = _SHR_RX_MMRP, 
+    opennslrxReservedEnum85 = _SHR_RX_SRP, 
+    opennslrxReservedEnum86 = _SHR_RX_TUNNEL_CONTROL, 
+    opennslrxReservedEnum87 = _SHR_RX_L2_MARKED, 
+    opennslrxReservedEnum88 = _SHR_RX_WLAN_SLOWPATH_KEEPALIVE, 
+    opennslrxReservedEnum89 = _SHR_RX_STATION, 
+    opennslrxReservedEnum90 = _SHR_RX_NIV, 
+    opennslrxReservedEnum91 = _SHR_RX_NIV_PRIO_DROP, 
+    opennslrxReservedEnum92 = _SHR_RX_NIV_INTERFACE_MISS, 
+    opennslrxReservedEnum93 = _SHR_RX_NIV_RPF_FAIL, 
+    opennslrxReservedEnum94 = _SHR_RX_NIV_TAG_INVALID, 
+    opennslrxReservedEnum95 = _SHR_RX_NIV_TAG_DROP, 
+    opennslrxReservedEnum96 = _SHR_RX_NIV_UNTAG_DROP, 
+    opennslrxReservedEnum97 = _SHR_RX_TRILL, 
+    opennslrxReservedEnum98 = _SHR_RX_TRILL_INVALID, 
+    opennslrxReservedEnum99 = _SHR_RX_TRILL_MISS, 
+    opennslrxReservedEnum100 = _SHR_RX_TRILL_RPF_FAIL, 
+    opennslrxReservedEnum101 = _SHR_RX_TRILL_SLOWPATH, 
+    opennslrxReservedEnum102 = _SHR_RX_TRILL_CORE_IS_IS, 
+    opennslrxReservedEnum103 = _SHR_RX_TRILL_TTL, 
+    opennslrxReservedEnum104 = _SHR_RX_TRILL_NAME, 
+    opennslrxReservedEnum105 = _SHR_RX_BFD_SLOWPATH, 
+    opennslrxReservedEnum106 = _SHR_RX_BFD_ERROR, 
+    opennslrxReservedEnum107 = _SHR_RX_MIRROR, 
+    opennslrxReservedEnum108 = _SHR_RX_REGEX_ACTION, 
+    opennslrxReservedEnum109 = _SHR_RX_REGEX_MATCH, 
+    opennslrxReservedEnum110 = _SHR_RX_FAILOVER_DROP, 
+    opennslrxReservedEnum111 = _SHR_RX_WLAN_TUNNEL_ERROR, 
+    opennslrxReservedEnum112 = _SHR_RX_CONGESTION_CNM_PROXY, 
+    opennslrxReservedEnum113 = _SHR_RX_CONGESTION_CNM_PROXY_ERROR, 
+    opennslrxReservedEnum114 = _SHR_RX_CONGESTION_CNM, 
+    opennslrxReservedEnum115 = _SHR_RX_MPLS_UNKNOWN_ACH, 
+    opennslrxReservedEnum116 = _SHR_RX_MPLS_LOOKUPS_EXCEEDED, 
+    opennslrxReservedEnum117 = _SHR_RX_MPLS_RESERVED_ENTROPY_LABEL, 
+    opennslrxReservedEnum118 = _SHR_RX_MPLS_ILLEGAL_RESERVED_LABEL, 
+    opennslrxReservedEnum119 = _SHR_RX_MPLS_ROUTER_ALERT_LABEL, 
+    opennslrxReservedEnum120 = _SHR_RX_NIV_PRUNE, 
+    opennslrxReservedEnum121 = _SHR_RX_VIRTUAL_PORT_PRUNE, 
+    opennslrxReservedEnum122 = _SHR_RX_NON_UNICAST_DROP, 
+    opennslrxReservedEnum123 = _SHR_RX_TRILL_PACKET_PORT_MISMATCH, 
+    opennslrxReservedEnum124 = _SHR_RX_WLAN_CLIENT_MOVE, 
+    opennslrxReservedEnum125 = _SHR_RX_WLAN_SOURCE_PORT_MISS, 
+    opennslrxReservedEnum126 = _SHR_RX_WLAN_CLIENT_SOURCE_MISS, 
+    opennslrxReservedEnum127 = _SHR_RX_WLAN_CLIENT_DEST_MISS, 
+    opennslrxReservedEnum128 = _SHR_RX_WLAN_MTU, 
+    opennslrxReservedEnum129 = _SHR_RX_L2GRE_SIP_MISS, 
+    opennslrxReservedEnum130 = _SHR_RX_L2GRE_VPN_ID_MISS, 
+    opennslrxReservedEnum131 = _SHR_RX_TIMESYNC_UNKNOWN_VERSION, 
+    opennslrxReservedEnum132 = _SHR_RX_BFD_UNKNOWN_VERSION, 
+    opennslrxReservedEnum133 = _SHR_RX_BFD_INVALID_VERSION, 
+    opennslrxReservedEnum134 = _SHR_RX_BFD_LOOKUP_FAILURE, 
+    opennslrxReservedEnum135 = _SHR_RX_BFD_INVALID_PACKET, 
+    opennslrxReservedEnum136 = _SHR_RX_VXLAN_SIP_MISS, 
+    opennslrxReservedEnum137 = _SHR_RX_VXLAN_VPN_ID_MISS, 
+    opennslrxReservedEnum138 = _SHR_RX_FCOE_ZONE_CHECK_FAIL, 
+    opennslrxReservedEnum139 = _SHR_RX_IPMC_INTERFACE_MISMATCH, 
+    opennslrxReservedEnum140 = _SHR_RX_NAT, 
+    opennslrxReservedEnum141 = _SHR_RX_TCP_UDP_NAT_MISS, 
+    opennslrxReservedEnum142 = _SHR_RX_ICMP_NAT_MISS, 
+    opennslrxReservedEnum143 = _SHR_RX_NAT_FRAGMENT, 
+    opennslrxReservedEnum144 = _SHR_RX_NAT_MISS, 
+    opennslrxReservedEnum145 = _SHR_RX_OAM_CCM_SLOWPATH, 
+    opennslrxReservedEnum146 = _SHR_RX_BHH_OAM_PACKET, 
+    opennslrxReservedEnum147 = _SHR_RX_UNKNOWN_SUBTENTING_PORT, 
+    opennslrxReservedEnum148 = _SHR_RX_RESERVED_0, 
+    opennslrxReservedEnum149 = _SHR_RX_OAM_MPLS_LMDM, 
+    opennslrxReservedEnum150 = _SHR_RX_REASON_COUNT 
+} opennsl_rx_reason_t;
+
+#define OPENNSL_RX_REASON_SET(_reasons, _reason)  \
+   _SHR_RX_REASON_SET(_reasons, _reason) 
+#define OPENNSL_RX_REASON_CLEAR_ALL(_reasons)  \
+   _SHR_RX_REASON_CLEAR_ALL(_reasons) 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -134,6 +301,27 @@ extern int opennsl_rx_start(
  *\retval    OPENNSL_E_NONE Success; RX is no longer running on this device
  ******************************************************************************/
 extern int opennsl_rx_stop(
+    int unit, 
+    opennsl_rx_cfg_t *cfg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the current configuration for the given device.
+ *
+ *\description If cfg is non-NULL, the current configuration for the indicated
+ *          device is copied there.  If the device has not had
+ *          =opennsl_rx_start called on it, the routine will return
+ *          OPENNSL_E_INIT.  In this case, the state of cfg will be undefined.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cfg [OUT]   Where to copy the device's configuration
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_INIT Start has not yet been called on the device
+ *\retval    OPENNSL_E_PARAM Invalid device
+ *\retval    OPENNSL_E_MEMORY Unable to allocate necessary objects for
+ *          initialization
+ ******************************************************************************/
+extern int opennsl_rx_cfg_get(
     int unit, 
     opennsl_rx_cfg_t *cfg) LIB_DLL_EXPORTED ;
 
@@ -238,5 +426,66 @@ extern int opennsl_rx_free(
 
 #if defined(OPENNSL_RPC_SUPPORT) || defined(OPENNSL_RCPU_SUPPORT)
 #endif
+typedef enum opennsl_rx_control_e {
+    opennslRxControlCRCStrip = 0,   /**< Strip CRC from packets. */
+    opennslrxReservedEnum151 = 1, 
+    opennslrxReservedEnum152 = 2, 
+    opennslrxReservedEnum153 = 3, 
+    opennslrxReservedEnum154 = 4, 
+    opennslrxReservedEnum155 = 5, 
+    opennslrxReservedEnum156 = 6, 
+    opennslrxReservedEnum157 = 7 
+} opennsl_rx_control_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/get RX operating modes.
+ *
+ *\description RX controls configure general behavior such as stripping of CRC or
+ *          VLAN tags. RX controls may be changed by the application at any
+ *          time.  Changes apply to newly received packets, but do not  affect
+ *          previously received and buffered packets.  Applications must be
+ *          prepared to continue to  handle packets according to the previous
+ *          control settings for some time, or else stop packet reception and
+ *          drain all queues before changing RX controls.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    type [IN]   RX control parameter (see =opennsl_rx_control_switches)
+ *\param    arg [OUT]   (for _set) Argument whose meaning is dependent on type
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Control unavailable
+ ******************************************************************************/
+extern int opennsl_rx_control_get(
+    int unit, 
+    opennsl_rx_control_t type, 
+    int *arg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set/get RX operating modes.
+ *
+ *\description RX controls configure general behavior such as stripping of CRC or
+ *          VLAN tags. RX controls may be changed by the application at any
+ *          time.  Changes apply to newly received packets, but do not  affect
+ *          previously received and buffered packets.  Applications must be
+ *          prepared to continue to  handle packets according to the previous
+ *          control settings for some time, or else stop packet reception and
+ *          drain all queues before changing RX controls.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    type [IN]   RX control parameter (see =opennsl_rx_control_switches)
+ *\param    arg [IN]   (for _set) Argument whose meaning is dependent on type
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Control unavailable
+ ******************************************************************************/
+extern int opennsl_rx_control_set(
+    int unit, 
+    opennsl_rx_control_t type, 
+    int arg) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #endif /* __OPENNSL_RX_H__ */
 /*@}*/

@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,15 +118,18 @@ typedef enum opennsl_bst_stat_id_e {
                                            tracing resource */
     opennslBstStatIdUcast = 7,          /**< BST Tracing resource for unicast */
     opennslBstStatIdMcast = 8,          /**< BST Tracing resource for multicast */
-    opennslBstStatIdEgrUCastPortShared = 9, /**< BST Tracing resource UC per egress
+    opennslBstStatIdHeadroomPool = 9,   /**< BST Tracing the Headroom Pool Usage
+                                           Count */
+    opennslBstStatIdEgrUCastPortShared = 10, /**< BST Tracing resource UC per egress
                                            port SP */
-    opennslBstStatIdEgrPortShared = 10, /**< BST Tracing resource per egress port
+    opennslBstStatIdEgrPortShared = 11, /**< BST Tracing resource per egress port
                                            SP */
-    opennslBstStatIdRQEQueue = 11,      /**< BST Tracing resource per RQE queue */
-    opennslBstStatIdRQEPool = 12,       /**< BST tracing resource per RQE Pool */
-    opennslBstStatIdUcastGroup = 13,    /**< BST Tracing resource per U cast queue
+    opennslBstStatIdRQEQueue = 12,      /**< BST Tracing resource per RQE queue */
+    opennslBstStatIdRQEPool = 13,       /**< BST tracing resource per RQE Pool */
+    opennslBstStatIdUcastGroup = 14,    /**< BST Tracing resource per Ucast queue
                                            group */
-    opennslBstStatIdMaxCount = 14       /**< Must be the last. Not a usable value. */
+    opennslBstStatIdCpuQueue = 15,      /**< BST Tracking resource per CPU queue */
+    opennslBstStatIdMaxCount = 16       /**< Must be the last. Not a usable value. */
 } opennsl_bst_stat_id_t;
 
 typedef struct opennsl_cosq_bst_profile_s {
@@ -145,7 +148,9 @@ typedef struct opennsl_cosq_bst_profile_s {
  *          identifies the MMU resource, for instance the bid
  *          opennslBstStatIdEgrPool identifies the egress service pool
  *          resource. cosq parameter identifies the object withing the various
- *          instances of resources within the identified resource.
+ *          instances of resources within the identified resource. Note: For
+ *          bid=opennslBstStatIdHeadroomPool, returns OPENNSL_E_PARAM as there
+ *          is no BST configuration required for Headroom Pool
  *          The bid parameter can be one of the following from the table.
  *
  *\param    unit [IN]   Unit number.
@@ -174,7 +179,9 @@ extern int opennsl_cosq_bst_profile_set(
  *          identifies the MMU resource, for instance the bid
  *          opennslBstStatIdEgrPool identifies the egress service pool
  *          resource. cosq parameter identifies the object withing the various
- *          instances of resources within the identified resource.
+ *          instances of resources within the identified resource. Note: For
+ *          bid=opennslBstStatIdHeadroomPool, returns OPENNSL_E_PARAM as there
+ *          is no BST configuration required for Headroom Pool
  *          The bid parameter can be one of the following from the table.
  *
  *\param    unit [IN]   Unit number.
@@ -227,7 +234,8 @@ extern int opennsl_cosq_bst_stat_sync(
  *          resource, for instance the bid opennslBstStatIdEgrPool identifies
  *          the egress service pool resource. cosq parameter identifies the
  *          object withing the various instances of resources within the
- *          identified resource. .
+ *          identified resource.  gport value of -1 will clear stats on all
+ *          ports.
  *
  *\param    unit [IN]   Unit number.
  *\param    gport [IN]   Device or logical port or GPORT ID

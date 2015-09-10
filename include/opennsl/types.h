@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,10 @@
 #define __OPENNSL_TYPES_H__
 
 #include <sal/types.h>
+#include <sal/commdefs.h>
 #include <shared/bitop.h>
 #include <shared/pbmp.h>
+#include <shared/gport.h>
 #include <shared/util.h>
 
 /** opennsl_multicast_t */
@@ -46,8 +48,15 @@ typedef int opennsl_multicast_t;
 #define OPENNSL_PBMP_EQ(pbm_a, pbm_b)  _SHR_PBMP_EQ(pbm_a, pbm_b) 
 #define OPENNSL_PBMP_NEQ(pbm_a, pbm_b)  _SHR_PBMP_NEQ(pbm_a, pbm_b) 
 #define OPENNSL_PBMP_ASSIGN(dst, src)  _SHR_PBMP_ASSIGN(dst, src) 
+#define OPENNSL_PBMP_AND(pbm_a, pbm_b)  _SHR_PBMP_AND(pbm_a, pbm_b) 
+#define OPENNSL_PBMP_OR(pbm_a, pbm_b)  _SHR_PBMP_OR(pbm_a, pbm_b) 
+#define OPENNSL_PBMP_XOR(pbm_a, pbm_b)  _SHR_PBMP_XOR(pbm_a, pbm_b) 
+#define OPENNSL_PBMP_REMOVE(pbm_a, pbm_b)  _SHR_PBMP_REMOVE(pbm_a, pbm_b) 
+#define OPENNSL_PBMP_NEGATE(pbm_a, pbm_b)  _SHR_PBMP_NEGATE(pbm_a, pbm_b) 
 #define OPENNSL_PBMP_PORT_SET(pbm, port)  _SHR_PBMP_PORT_SET(pbm, port) 
 #define OPENNSL_PBMP_PORT_ADD(pbm, port)  _SHR_PBMP_PORT_ADD(pbm, port) 
+#define OPENNSL_PBMP_PORT_REMOVE(pbm, port)  _SHR_PBMP_PORT_REMOVE(pbm, port) 
+#define OPENNSL_PBMP_PORT_FLIP(pbm, port)  _SHR_PBMP_PORT_FLIP(pbm, port) 
 /** Set the default tag protocol ID (TPID) for the specified port. */
 typedef int opennsl_port_t;
 
@@ -97,6 +106,14 @@ typedef int opennsl_trunk_t;
  */
 typedef int opennsl_gport_t;
 
+#define OPENNSL_GPORT_MODPORT_SET(_gport, _module, _port)  \
+    _SHR_GPORT_MODPORT_SET(_gport, _module, _port) 
+#define OPENNSL_GPORT_MODPORT_MODID_GET(_gport)  \
+    (!_SHR_GPORT_IS_MODPORT(_gport) ? -1 : \
+    _SHR_GPORT_MODPORT_MODID_GET(_gport)) 
+#define OPENNSL_GPORT_MODPORT_PORT_GET(_gport)  \
+    (!_SHR_GPORT_IS_MODPORT(_gport) ? -1 : \
+    _SHR_GPORT_MODPORT_PORT_GET(_gport)) 
 /** Multicast distribution set */
 typedef int opennsl_fabric_distribution_t;
 
@@ -124,6 +141,28 @@ typedef enum opennsl_color_e {
 #define opennsl_ntohl(_l)       (_l)       
 #define opennsl_ntohs(_s)       (_s)       
 #endif
+/***************************************************************************//** 
+ *
+ *
+ *\param    ip6 [OUT]
+ *\param    len [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_ip6_mask_create(
+    opennsl_ip6_t ip6, 
+    int len) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    len [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern opennsl_ip_t opennsl_ip_mask_create(
+    int len) LIB_DLL_EXPORTED ;
+
 /** VLAN Action definitions. */
 typedef enum opennsl_vlan_action_e {
     opennsltypesReservedEnum8, 
@@ -139,6 +178,41 @@ typedef enum opennsl_vlan_action_e {
     opennsltypesReservedEnum18, 
     opennsltypesReservedEnum19 
 } opennsl_vlan_action_t;
+
+/** Qualifier Forwarding Type (for opennsl_forwarding_type). */
+typedef enum opennsl_forwarding_type_e {
+    opennslForwardingTypeL2 = 0,        /**< L2 switching forwarding. */
+    opennslForwardingTypeIp4Ucast = 1,  /**< IPv4 Unicast Routing forwarding. */
+    opennslForwardingTypeIp4Mcast = 2,  /**< IPv4 Multicast Routing forwarding. */
+    opennslForwardingTypeIp6Ucast = 3,  /**< IPv6 Unicast Routing forwarding. */
+    opennslForwardingTypeIp6Mcast = 4,  /**< IPv6 Multicast Routing forwarding. */
+    opennslForwardingTypeMpls = 5,      /**< MPLS Switching forwarding. */
+    opennslForwardingTypeTrill = 6,     /**< Trill forwarding. */
+    opennslForwardingTypeRxReason = 7,  /**< Forwarding according to a RxReason. */
+    opennslForwardingTypeTrafficManagement = 8, /**< Traffic Management forwarding, when
+                                           an external Packet Processor sets the
+                                           forwarding decision. */
+    opennslForwardingTypeSnoop = 9,     /**< Snooped packet. */
+    opennslForwardingTypeFCoE = 10,     /**< Fiber Channel over Ethernet
+                                           forwarding. */
+    opennslForwardingTypeCount = 11     /**< Always Last. Not a usable value. */
+} opennsl_forwarding_type_t;
+
+#define OPENNSL_FORWARDINGTYPE_STRINGS \
+{ \
+    "L2", \
+    "Ip4Ucast", \
+    "Ip4Mcast", \
+    "Ip6Ucast", \
+    "Ip6Mcast", \
+    "Mpls", \
+    "Trill", \
+    "RxReason", \
+    "TrafficManagement", \
+    "Snoop", \
+    "FCoE", \
+    "Count"  \
+}
 
 #endif /* __OPENNSL_TYPES_H__ */
 /*@}*/

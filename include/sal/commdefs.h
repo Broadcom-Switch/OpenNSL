@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,15 +22,6 @@
 #ifndef _SAL_COMMDEFS_H
 #define _SAL_COMMDEFS_H
 
-#define HAVE_VISIBILITY 1
-
-#if defined(OPENNSL_BUILDING_LIB) && defined(HAVE_VISIBILITY)
 #define LIB_DLL_EXPORTED __attribute__((__visibility__("default")))
-#elif CDP_PACKAGE
-#define LIB_DLL_EXPORTED 
-#else
-#define LIB_DLL_EXPORTED
-#error "Error!!! LIB_DLL_EXPORTED defined to NULL"
-#endif
 
 #endif    /* !_SAL_COMMDEFS_H */

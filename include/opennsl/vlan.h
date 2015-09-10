@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -178,15 +178,17 @@ extern int opennsl_vlan_list(
     int *countp) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Destroy a list returned by opennsl_vlan_list.
  *
+ *\description Deallocate the array created by opennsl_vlan_list or
+ *          opennsl_vlan_list_by_pbmp. Also works for the zero-VLAN case (NULL
+ *          list).
  *
  *\param    unit [IN]   Unit number.
- *\param    list [IN]   Place where pointer to return array will be stored, which
- *          will be NULL if there are zero VLANs defined.
- *\param    count [IN]   Place where number of entries in array will be stored,
- *          which will be 0 if there are zero VLANs defined.
+ *\param    list [IN]   List returned by opennsl_vlan_list
+ *\param    count [IN]   Count returned by opennsl_vlan_list
  *
- *\retval   OPENNSL_E_xxx
+ *\retval    OPENNSL_E_NONE Success.
  ******************************************************************************/
 extern int opennsl_vlan_list_destroy(
     int unit, 
@@ -221,6 +223,62 @@ extern int opennsl_vlan_default_get(
 extern int opennsl_vlan_default_set(
     int unit, 
     opennsl_vlan_t vid) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/** opennsl_vlan_control_port_t */
+typedef enum opennsl_vlan_control_port_e {
+    opennslvlanReservedEnum1,           
+    opennslvlanReservedEnum2,           
+    opennslVlanTranslateIngressEnable = 2, 
+    opennslvlanReservedEnum3,           
+    opennslVlanTranslateIngressMissDrop = 4, 
+    opennslVlanTranslateEgressEnable = 5, 
+    opennslVlanTranslateEgressMissDrop = 6, 
+    opennslvlanReservedEnum4,           
+    opennslvlanReservedEnum5,           
+    opennslvlanReservedEnum6,           
+    opennslvlanReservedEnum7,           
+    opennslvlanReservedEnum8,           
+    opennslvlanReservedEnum9,           
+    opennslvlanReservedEnum10,          
+    opennslvlanReservedEnum11,          
+    opennslvlanReservedEnum12,          
+    opennslvlanReservedEnum13,          
+    opennslvlanReservedEnum14,          
+    opennslvlanReservedEnum15,          
+    opennslvlanReservedEnum16,          
+    opennslvlanReservedEnum17,          
+    opennslvlanReservedEnum18,          
+    opennslvlanReservedEnum19,          
+    opennslvlanReservedEnum20,          
+    opennslvlanReservedEnum21,          
+    opennslvlanReservedEnum22           
+} opennsl_vlan_control_port_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/get miscellaneous port-specific VLAN options.
+ *
+ *\description Sets/gets miscellaneous port-specific VLAN options. The options
+ *          are from the VLAN Control Port selection =vlan_ctrl_port .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    type [IN]   A value from the opennsl_vlan_control_port_t enumerated
+ *          list
+ *\param    arg [IN]   (for _set) A parameter whose meaning is  dependent on
+ *          'type'
+ *
+ *\retval    OPENNSL_E_UNAVAIL Feature not supported.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_control_port_set(
+    int unit, 
+    int port, 
+    opennsl_vlan_control_port_t type, 
+    int arg) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,12 @@
 #ifndef __OPENNSL_SWITCH_H__
 #define __OPENNSL_SWITCH_H__
 
+#include <opennsl/types.h>
 #include <opennsl/port.h>
 #include <opennsl/error.h>
+#include <opennsl/stg.h>
 #include <shared/switch.h>
+#include <shared/bitop.h>
 
 /** Switch controls. */
 typedef enum opennsl_switch_control_e {
@@ -56,128 +59,129 @@ typedef enum opennsl_switch_control_e {
     opennslswitchReservedEnum24 = 23, 
     opennslswitchReservedEnum25 = 24, 
     opennslswitchReservedEnum26 = 25, 
-    opennslswitchReservedEnum27 = 26, 
-    opennslswitchReservedEnum28 = 27, 
-    opennslswitchReservedEnum29 = 28, 
-    opennslswitchReservedEnum30 = 29, 
-    opennslswitchReservedEnum31 = 30, 
-    opennslswitchReservedEnum32 = 31, 
-    opennslswitchReservedEnum33 = 32, 
-    opennslswitchReservedEnum34 = 33, 
-    opennslswitchReservedEnum35 = 34, 
-    opennslswitchReservedEnum36 = 35, 
-    opennslswitchReservedEnum37 = 36, 
-    opennslswitchReservedEnum38 = 37, 
-    opennslswitchReservedEnum39 = 38, 
-    opennslswitchReservedEnum40 = 39, 
-    opennslswitchReservedEnum41 = 40, 
-    opennslswitchReservedEnum42 = 41, 
-    opennslswitchReservedEnum43 = 42, 
-    opennslswitchReservedEnum44 = 43, 
-    opennslswitchReservedEnum45 = 44, 
-    opennslswitchReservedEnum46 = 45, 
-    opennslswitchReservedEnum47 = 46, 
-    opennslswitchReservedEnum48 = 47, 
-    opennslswitchReservedEnum49 = 48, 
-    opennslswitchReservedEnum50 = 49, 
-    opennslswitchReservedEnum51 = 50, 
-    opennslswitchReservedEnum52 = 51, 
-    opennslswitchReservedEnum53 = 52, 
-    opennslswitchReservedEnum54 = 53, 
-    opennslswitchReservedEnum55 = 54, 
-    opennslswitchReservedEnum56 = 55, 
-    opennslswitchReservedEnum57 = 56, 
-    opennslswitchReservedEnum58 = 57, 
-    opennslswitchReservedEnum59 = 58, 
-    opennslswitchReservedEnum60 = 59, 
-    opennslswitchReservedEnum61 = 60, 
-    opennslswitchReservedEnum62 = 61, 
-    opennslswitchReservedEnum63 = 62, 
-    opennslswitchReservedEnum64 = 63, 
-    opennslswitchReservedEnum65 = 64, 
-    opennslswitchReservedEnum66 = 65, 
-    opennslswitchReservedEnum67 = 66, 
-    opennslswitchReservedEnum68 = 67, 
-    opennslswitchReservedEnum69 = 68, 
-    opennslswitchReservedEnum70 = 69, 
-    opennslswitchReservedEnum71 = 70, 
-    opennslswitchReservedEnum72 = 71, 
-    opennslswitchReservedEnum73 = 72, 
-    opennslswitchReservedEnum74 = 73, 
-    opennslswitchReservedEnum75 = 74, 
-    opennslswitchReservedEnum76 = 75, 
-    opennslswitchReservedEnum77 = 76, 
-    opennslswitchReservedEnum78 = 77, 
-    opennslswitchReservedEnum79 = 78, 
-    opennslswitchReservedEnum80 = 79, 
-    opennslswitchReservedEnum81 = 80, 
-    opennslswitchReservedEnum82 = 81, 
-    opennslswitchReservedEnum83 = 82, 
-    opennslswitchReservedEnum84 = 83, 
+    opennslSwitchUnknownL3DestToCpu = 26, /**< DIP not found in L3/LPM tables. */
+    opennslswitchReservedEnum27 = 27, 
+    opennslswitchReservedEnum28 = 28, 
+    opennslswitchReservedEnum29 = 29, 
+    opennslswitchReservedEnum30 = 30, 
+    opennslswitchReservedEnum31 = 31, 
+    opennslswitchReservedEnum32 = 32, 
+    opennslswitchReservedEnum33 = 33, 
+    opennslswitchReservedEnum34 = 34, 
+    opennslswitchReservedEnum35 = 35, 
+    opennslswitchReservedEnum36 = 36, 
+    opennslswitchReservedEnum37 = 37, 
+    opennslswitchReservedEnum38 = 38, 
+    opennslswitchReservedEnum39 = 39, 
+    opennslSwitchV6L3DstMissToCpu = 40, /**< IPv6 unknown dest packets to CPU. */
+    opennslswitchReservedEnum40 = 41, 
+    opennslswitchReservedEnum41 = 42, 
+    opennslSwitchV4L3DstMissToCpu = 43, /**< IPv6 unknown dest packets to CPU. */
+    opennslswitchReservedEnum42 = 44, 
+    opennslswitchReservedEnum43 = 45, 
+    opennslswitchReservedEnum44 = 46, 
+    opennslswitchReservedEnum45 = 47, 
+    opennslSwitchL3SlowpathToCpu = 48,  /**< Slowpath packets to CPU. */
+    opennslswitchReservedEnum46 = 49, 
+    opennslswitchReservedEnum47 = 50, 
+    opennslswitchReservedEnum48 = 51, 
+    opennslswitchReservedEnum49 = 52, 
+    opennslswitchReservedEnum50 = 53, 
+    opennslswitchReservedEnum51 = 54, 
+    opennslswitchReservedEnum52 = 55, 
+    opennslswitchReservedEnum53 = 56, 
+    opennslswitchReservedEnum54 = 57, 
+    opennslswitchReservedEnum55 = 58, 
+    opennslswitchReservedEnum56 = 59, 
+    opennslswitchReservedEnum57 = 60, 
+    opennslswitchReservedEnum58 = 61, 
+    opennslswitchReservedEnum59 = 62, 
+    opennslswitchReservedEnum60 = 63, 
+    opennslswitchReservedEnum61 = 64, 
+    opennslswitchReservedEnum62 = 65, 
+    opennslswitchReservedEnum63 = 66, 
+    opennslswitchReservedEnum64 = 67, 
+    opennslswitchReservedEnum65 = 68, 
+    opennslswitchReservedEnum66 = 69, 
+    opennslswitchReservedEnum67 = 70, 
+    opennslswitchReservedEnum68 = 71, 
+    opennslswitchReservedEnum69 = 72, 
+    opennslswitchReservedEnum70 = 73, 
+    opennslswitchReservedEnum71 = 74, 
+    opennslswitchReservedEnum72 = 75, 
+    opennslswitchReservedEnum73 = 76, 
+    opennslswitchReservedEnum74 = 77, 
+    opennslswitchReservedEnum75 = 78, 
+    opennslswitchReservedEnum76 = 79, 
+    opennslswitchReservedEnum77 = 80, 
+    opennslswitchReservedEnum78 = 81, 
+    opennslswitchReservedEnum79 = 82, 
+    opennslswitchReservedEnum80 = 83, 
     opennslSwitchArpReplyToCpu = 84,    /**< ARP replies to CPU. */
-    opennslswitchReservedEnum85 = 85, 
+    opennslswitchReservedEnum81 = 85, 
     opennslSwitchArpRequestToCpu = 86,  /**< ARP requests to CPU. */
-    opennslswitchReservedEnum86 = 87, 
-    opennslswitchReservedEnum87 = 88, 
+    opennslswitchReservedEnum82 = 87, 
+    opennslswitchReservedEnum83 = 88, 
     opennslSwitchNdPktToCpu = 89,       /**< ND packets to CPU. */
-    opennslswitchReservedEnum88 = 90, 
-    opennslswitchReservedEnum89 = 91, 
+    opennslswitchReservedEnum84 = 90, 
+    opennslswitchReservedEnum85 = 91, 
     opennslSwitchIgmpPktToCpu = 92,     /**< IGMP packets to CPU. */
-    opennslswitchReservedEnum90, 
-    opennslswitchReservedEnum91 = 93, 
+    opennslSwitchIgmpToCPU = opennslSwitchIgmpPktToCpu, /**< Legacy support for IGMP packets to
+                                           CPU. */
+    opennslswitchReservedEnum86 = 93, 
     opennslSwitchDhcpPktToCpu = 94,     /**< DHCP packets to CPU. */
-    opennslswitchReservedEnum92 = 95, 
-    opennslswitchReservedEnum93 = 96, 
-    opennslswitchReservedEnum94 = 97, 
-    opennslswitchReservedEnum95 = 98, 
-    opennslswitchReservedEnum96 = 99, 
-    opennslswitchReservedEnum97 = 100, 
-    opennslswitchReservedEnum98 = 101, 
-    opennslswitchReservedEnum99 = 102, 
-    opennslswitchReservedEnum100 = 103, 
-    opennslswitchReservedEnum101 = 104, 
-    opennslswitchReservedEnum102 = 105, 
-    opennslswitchReservedEnum103 = 106, 
-    opennslswitchReservedEnum104 = 107, 
-    opennslswitchReservedEnum105 = 108, 
-    opennslswitchReservedEnum106 = 109, 
-    opennslswitchReservedEnum107 = 110, 
-    opennslswitchReservedEnum108 = 111, 
-    opennslswitchReservedEnum109 = 112, 
-    opennslswitchReservedEnum110 = 113, 
-    opennslswitchReservedEnum111 = 114, 
-    opennslswitchReservedEnum112 = 115, 
-    opennslswitchReservedEnum113 = 116, 
-    opennslswitchReservedEnum114 = 117, 
-    opennslswitchReservedEnum115 = 118, 
-    opennslswitchReservedEnum116 = 119, 
-    opennslswitchReservedEnum117 = 120, 
-    opennslswitchReservedEnum118 = 121, 
-    opennslswitchReservedEnum119 = 122, 
-    opennslswitchReservedEnum120 = 123, 
-    opennslswitchReservedEnum121 = 124, 
-    opennslswitchReservedEnum122 = 125, 
-    opennslswitchReservedEnum123 = 126, 
-    opennslswitchReservedEnum124 = 127, 
-    opennslswitchReservedEnum125 = 128, 
-    opennslswitchReservedEnum126 = 129, 
-    opennslswitchReservedEnum127 = 130, 
-    opennslswitchReservedEnum128 = 131, 
-    opennslswitchReservedEnum129 = 132, 
-    opennslswitchReservedEnum130 = 133, 
-    opennslswitchReservedEnum131 = 134, 
-    opennslswitchReservedEnum132 = 135, 
+    opennslSwitchDhcpPktDrop = 95,      /**< DHCP packets dropped. */
+    opennslswitchReservedEnum87 = 96, 
+    opennslswitchReservedEnum88 = 97, 
+    opennslSwitchV4ResvdMcPktToCpu = 98, /**< IPv4 reserved MC packets to CPU. */
+    opennslswitchReservedEnum89 = 99, 
+    opennslswitchReservedEnum90 = 100, 
+    opennslswitchReservedEnum91 = 101, 
+    opennslswitchReservedEnum92 = 102, 
+    opennslswitchReservedEnum93 = 103, 
+    opennslswitchReservedEnum94 = 104, 
+    opennslswitchReservedEnum95 = 105, 
+    opennslswitchReservedEnum96 = 106, 
+    opennslswitchReservedEnum97 = 107, 
+    opennslswitchReservedEnum98 = 108, 
+    opennslswitchReservedEnum99 = 109, 
+    opennslswitchReservedEnum100 = 110, 
+    opennslswitchReservedEnum101 = 111, 
+    opennslswitchReservedEnum102 = 112, 
+    opennslswitchReservedEnum103 = 113, 
+    opennslswitchReservedEnum104 = 114, 
+    opennslswitchReservedEnum105 = 115, 
+    opennslswitchReservedEnum106 = 116, 
+    opennslswitchReservedEnum107 = 117, 
+    opennslswitchReservedEnum108 = 118, 
+    opennslswitchReservedEnum109 = 119, 
+    opennslswitchReservedEnum110 = 120, 
+    opennslswitchReservedEnum111 = 121, 
+    opennslswitchReservedEnum112 = 122, 
+    opennslswitchReservedEnum113 = 123, 
+    opennslswitchReservedEnum114 = 124, 
+    opennslswitchReservedEnum115 = 125, 
+    opennslswitchReservedEnum116 = 126, 
+    opennslswitchReservedEnum117 = 127, 
+    opennslswitchReservedEnum118 = 128, 
+    opennslswitchReservedEnum119 = 129, 
+    opennslswitchReservedEnum120 = 130, 
+    opennslswitchReservedEnum121 = 131, 
+    opennslswitchReservedEnum122 = 132, 
+    opennslswitchReservedEnum123 = 133, 
+    opennslswitchReservedEnum124 = 134, 
+    opennslswitchReservedEnum125 = 135, 
     opennslSwitchHashControl = 136,     /**< Hash Control of fields. */
-    opennslswitchReservedEnum133 = 137, 
-    opennslswitchReservedEnum134 = 138, 
-    opennslswitchReservedEnum135 = 139, 
-    opennslswitchReservedEnum136 = 140, 
-    opennslswitchReservedEnum137 = 141, 
-    opennslswitchReservedEnum138 = 142, 
-    opennslswitchReservedEnum139 = 143, 
-    opennslswitchReservedEnum140 = 144, 
-    opennslswitchReservedEnum141 = 145, 
-    opennslswitchReservedEnum142 = 146, 
+    opennslswitchReservedEnum126 = 137, 
+    opennslswitchReservedEnum127 = 138, 
+    opennslswitchReservedEnum128 = 139, 
+    opennslswitchReservedEnum129 = 140, 
+    opennslswitchReservedEnum130 = 141, 
+    opennslswitchReservedEnum131 = 142, 
+    opennslswitchReservedEnum132 = 143, 
+    opennslswitchReservedEnum133 = 144, 
+    opennslswitchReservedEnum134 = 145, 
+    opennslswitchReservedEnum135 = 146, 
     opennslSwitchHashSeed0 = 147,       /**< network switch hash seeds. */
     opennslSwitchHashSeed1 = 148,       /**< For enhanced hashing algoithm. */
     opennslSwitchHashField0PreProcessEnable = 149, /**< Enable pre-processing for enhanced
@@ -192,7 +196,7 @@ typedef enum opennsl_switch_control_e {
                                            config. */
     opennslSwitchHashField1Config1 = 154, /**< network switch enhanced hash mode 1
                                            config 1. */
-    opennslswitchReservedEnum143 = 155, 
+    opennslswitchReservedEnum136 = 155, 
     opennslSwitchHashSelectControl = 156, /**< network switch field selection
                                            control. */
     opennslSwitchHashIP4Field0 = 157,   /**< network switch enhanced hash field. */
@@ -211,755 +215,807 @@ typedef enum opennsl_switch_control_e {
     opennslSwitchHashIP6TcpUdpPortsEqualField1 = 168, /**< Selections for IPv6 TCP/UDP packets
                                            with source L4 port equals to
                                            destination L4 port. */
-    opennslswitchReservedEnum144 = 169, 
-    opennslswitchReservedEnum145 = 170, 
-    opennslswitchReservedEnum146 = 171, 
-    opennslswitchReservedEnum147 = 172, 
-    opennslswitchReservedEnum148 = 173, 
-    opennslswitchReservedEnum149 = 174, 
-    opennslswitchReservedEnum150 = 175, 
-    opennslswitchReservedEnum151 = 176, 
-    opennslswitchReservedEnum152 = 177, 
-    opennslswitchReservedEnum153 = 178, 
-    opennslswitchReservedEnum154 = 179, 
-    opennslswitchReservedEnum155 = 180, 
-    opennslswitchReservedEnum156 = 181, 
-    opennslswitchReservedEnum157 = 182, 
-    opennslswitchReservedEnum158 = 183, 
-    opennslswitchReservedEnum159 = 184, 
-    opennslswitchReservedEnum160 = 185, 
-    opennslswitchReservedEnum161 = 186, 
-    opennslswitchReservedEnum162 = 187, 
-    opennslswitchReservedEnum163 = 188, 
-    opennslswitchReservedEnum164 = 189, 
-    opennslswitchReservedEnum165 = 190, 
-    opennslswitchReservedEnum166 = 191, 
-    opennslswitchReservedEnum167 = 192, 
-    opennslswitchReservedEnum168 = 193, 
-    opennslswitchReservedEnum169 = 194, 
-    opennslswitchReservedEnum170 = 195, 
-    opennslswitchReservedEnum171 = 196, 
-    opennslswitchReservedEnum172 = 197, 
-    opennslswitchReservedEnum173 = 198, 
-    opennslswitchReservedEnum174 = 199, 
-    opennslswitchReservedEnum175 = 200, 
-    opennslswitchReservedEnum176 = 201, 
-    opennslswitchReservedEnum177 = 202, 
-    opennslswitchReservedEnum178 = 203, 
-    opennslswitchReservedEnum179 = 204, 
-    opennslswitchReservedEnum180 = 205, 
-    opennslswitchReservedEnum181 = 206, 
-    opennslswitchReservedEnum182 = 207, 
-    opennslswitchReservedEnum183 = 208, 
-    opennslswitchReservedEnum184 = 209, 
+    opennslswitchReservedEnum137 = 169, 
+    opennslswitchReservedEnum138 = 170, 
+    opennslswitchReservedEnum139 = 171, 
+    opennslswitchReservedEnum140 = 172, 
+    opennslswitchReservedEnum141 = 173, 
+    opennslswitchReservedEnum142 = 174, 
+    opennslswitchReservedEnum143 = 175, 
+    opennslswitchReservedEnum144 = 176, 
+    opennslswitchReservedEnum145 = 177, 
+    opennslswitchReservedEnum146 = 178, 
+    opennslswitchReservedEnum147 = 179, 
+    opennslswitchReservedEnum148 = 180, 
+    opennslswitchReservedEnum149 = 181, 
+    opennslswitchReservedEnum150 = 182, 
+    opennslswitchReservedEnum151 = 183, 
+    opennslswitchReservedEnum152 = 184, 
+    opennslswitchReservedEnum153 = 185, 
+    opennslswitchReservedEnum154 = 186, 
+    opennslswitchReservedEnum155 = 187, 
+    opennslswitchReservedEnum156 = 188, 
+    opennslswitchReservedEnum157 = 189, 
+    opennslswitchReservedEnum158 = 190, 
+    opennslswitchReservedEnum159 = 191, 
+    opennslswitchReservedEnum160 = 192, 
+    opennslswitchReservedEnum161 = 193, 
+    opennslswitchReservedEnum162 = 194, 
+    opennslswitchReservedEnum163 = 195, 
+    opennslswitchReservedEnum164 = 196, 
+    opennslswitchReservedEnum165 = 197, 
+    opennslswitchReservedEnum166 = 198, 
+    opennslswitchReservedEnum167 = 199, 
+    opennslswitchReservedEnum168 = 200, 
+    opennslswitchReservedEnum169 = 201, 
+    opennslswitchReservedEnum170 = 202, 
+    opennslswitchReservedEnum171 = 203, 
+    opennslswitchReservedEnum172 = 204, 
+    opennslswitchReservedEnum173 = 205, 
+    opennslswitchReservedEnum174 = 206, 
+    opennslswitchReservedEnum175 = 207, 
+    opennslswitchReservedEnum176 = 208, 
+    opennslswitchReservedEnum177 = 209, 
     opennslSwitchECMPHashSet0Offset = 210, /**< network switch enhanced hash bits. */
     opennslSwitchECMPHashSet1Offset = 211, /**< Selections for ECMP. */
-    opennslswitchReservedEnum185 = 212, 
-    opennslswitchReservedEnum186 = 213, 
-    opennslswitchReservedEnum187 = 214, 
-    opennslswitchReservedEnum188 = 215, 
-    opennslswitchReservedEnum189 = 216, 
-    opennslswitchReservedEnum190 = 217, 
-    opennslswitchReservedEnum191 = 218, 
-    opennslswitchReservedEnum192 = 219, 
-    opennslswitchReservedEnum193 = 220, 
-    opennslswitchReservedEnum194 = 221, 
-    opennslswitchReservedEnum195 = 222, 
-    opennslswitchReservedEnum196 = 223, 
-    opennslswitchReservedEnum197 = 224, 
-    opennslswitchReservedEnum198 = 225, 
-    opennslswitchReservedEnum199 = 226, 
-    opennslswitchReservedEnum200 = 227, 
-    opennslswitchReservedEnum201 = 228, 
-    opennslswitchReservedEnum202 = 229, 
+    opennslswitchReservedEnum178 = 212, 
+    opennslswitchReservedEnum179 = 213, 
+    opennslswitchReservedEnum180 = 214, 
+    opennslswitchReservedEnum181 = 215, 
+    opennslswitchReservedEnum182 = 216, 
+    opennslswitchReservedEnum183 = 217, 
+    opennslswitchReservedEnum184 = 218, 
+    opennslswitchReservedEnum185 = 219, 
+    opennslswitchReservedEnum186 = 220, 
+    opennslswitchReservedEnum187 = 221, 
+    opennslswitchReservedEnum188 = 222, 
+    opennslswitchReservedEnum189 = 223, 
+    opennslswitchReservedEnum190 = 224, 
+    opennslswitchReservedEnum191 = 225, 
+    opennslswitchReservedEnum192 = 226, 
+    opennslswitchReservedEnum193 = 227, 
+    opennslswitchReservedEnum194 = 228, 
+    opennslswitchReservedEnum195 = 229, 
     opennslSwitchL3EgressMode = 230,    /**< Enable advanced egress management. */
-    opennslswitchReservedEnum203 = 231, 
-    opennslswitchReservedEnum204 = 232, 
-    opennslswitchReservedEnum205 = 233, 
-    opennslswitchReservedEnum206 = 234, 
-    opennslswitchReservedEnum207 = 235, 
-    opennslswitchReservedEnum208 = 236, 
-    opennslswitchReservedEnum209 = 237, 
-    opennslswitchReservedEnum210 = 238, 
-    opennslswitchReservedEnum211 = 239, 
-    opennslswitchReservedEnum212 = 240, 
-    opennslswitchReservedEnum213 = 241, 
-    opennslswitchReservedEnum214 = 242, 
+    opennslswitchReservedEnum196 = 231, 
+    opennslSwitchL3IngressMode = 232,   /**< Enable advanced Ingress-interface
+                                           management. */
+    opennslswitchReservedEnum197 = 233, 
+    opennslswitchReservedEnum198 = 234, 
+    opennslswitchReservedEnum199 = 235, 
+    opennslswitchReservedEnum200 = 236, 
+    opennslswitchReservedEnum201 = 237, 
+    opennslSwitchWarmBoot = 238,        /**< Set Warm boot state. */
+    opennslSwitchStableSelect = 239,    /**< Select the storage (or stable)
+                                           location for Level 2 Warm Boot. */
+    opennslSwitchStableSize = 240,      /**< Select the storage (or stable) size
+                                           (bytes) for Level 2 Warm Boot. */
+    opennslSwitchStableUsed = 241,      /**< Query the storage (or stable) usage
+                                           (bytes) for Level 2 Warm Boot. */
+    opennslSwitchStableConsistent = 242, /**< Query the storage (or stable) for
+                                           whether state is believed consistent
+                                           with hardware (API completed prior to
+                                           warmboot). */
     opennslSwitchControlSync = 243,     /**< Force a sync of the Level 2 warm boot
                                            state on demand. */
-    opennslswitchReservedEnum215 = 244, 
-    opennslswitchReservedEnum216 = 245, 
-    opennslswitchReservedEnum217 = 246, 
-    opennslswitchReservedEnum218 = 247, 
-    opennslswitchReservedEnum219 = 248, 
-    opennslswitchReservedEnum220 = 249, 
-    opennslswitchReservedEnum221 = 250, 
-    opennslswitchReservedEnum222 = 251, 
-    opennslswitchReservedEnum223 = 252, 
-    opennslswitchReservedEnum224 = 253, 
-    opennslswitchReservedEnum225 = 254, 
-    opennslswitchReservedEnum226 = 255, 
-    opennslswitchReservedEnum227 = 256, 
-    opennslswitchReservedEnum228 = 257, 
-    opennslswitchReservedEnum229 = 258, 
-    opennslswitchReservedEnum230 = 259, 
-    opennslswitchReservedEnum231 = 260, 
-    opennslswitchReservedEnum232 = 261, 
-    opennslswitchReservedEnum233 = 262, 
-    opennslswitchReservedEnum234 = 263, 
-    opennslswitchReservedEnum235 = 264, 
-    opennslswitchReservedEnum236 = 265, 
-    opennslswitchReservedEnum237 = 266, 
-    opennslswitchReservedEnum238 = 267, 
-    opennslswitchReservedEnum239 = 268, 
-    opennslswitchReservedEnum240 = 269, 
-    opennslswitchReservedEnum241 = 270, 
-    opennslswitchReservedEnum242 = 271, 
-    opennslswitchReservedEnum243 = 272, 
-    opennslswitchReservedEnum244 = 273, 
-    opennslswitchReservedEnum245 = 274, 
-    opennslswitchReservedEnum246 = 275, 
-    opennslswitchReservedEnum247 = 276, 
-    opennslswitchReservedEnum248 = 277, 
-    opennslswitchReservedEnum249 = 278, 
-    opennslswitchReservedEnum250 = 279, 
-    opennslswitchReservedEnum251 = 280, 
-    opennslswitchReservedEnum252 = 281, 
-    opennslswitchReservedEnum253 = 282, 
-    opennslswitchReservedEnum254 = 283, 
-    opennslswitchReservedEnum255 = 284, 
-    opennslswitchReservedEnum256 = 285, 
-    opennslswitchReservedEnum257 = 286, 
-    opennslswitchReservedEnum258 = 287, 
-    opennslswitchReservedEnum259 = 288, 
-    opennslswitchReservedEnum260 = 289, 
-    opennslswitchReservedEnum261 = 290, 
-    opennslswitchReservedEnum262 = 291, 
-    opennslswitchReservedEnum263 = 292, 
-    opennslswitchReservedEnum264 = 293, 
-    opennslswitchReservedEnum265 = 294, 
-    opennslswitchReservedEnum266 = 295, 
-    opennslswitchReservedEnum267 = 296, 
-    opennslswitchReservedEnum268 = 297, 
-    opennslswitchReservedEnum269 = 298, 
-    opennslswitchReservedEnum270 = 299, 
-    opennslswitchReservedEnum271 = 300, 
-    opennslswitchReservedEnum272 = 301, 
-    opennslswitchReservedEnum273 = 302, 
-    opennslswitchReservedEnum274 = 303, 
-    opennslswitchReservedEnum275 = 304, 
-    opennslswitchReservedEnum276 = 305, 
-    opennslswitchReservedEnum277 = 306, 
-    opennslswitchReservedEnum278 = 307, 
-    opennslswitchReservedEnum279 = 308, 
-    opennslswitchReservedEnum280 = 309, 
-    opennslswitchReservedEnum281 = 310, 
-    opennslswitchReservedEnum282 = 311, 
-    opennslswitchReservedEnum283 = 312, 
-    opennslswitchReservedEnum284 = 313, 
-    opennslswitchReservedEnum285 = 314, 
-    opennslswitchReservedEnum286 = 315, 
-    opennslswitchReservedEnum287 = 316, 
-    opennslswitchReservedEnum288 = 317, 
-    opennslswitchReservedEnum289 = 318, 
-    opennslswitchReservedEnum290 = 319, 
-    opennslswitchReservedEnum291 = 320, 
-    opennslswitchReservedEnum292 = 321, 
-    opennslswitchReservedEnum293 = 322, 
-    opennslswitchReservedEnum294 = 323, 
-    opennslswitchReservedEnum295 = 324, 
-    opennslswitchReservedEnum296 = 325, 
-    opennslswitchReservedEnum297 = 326, 
-    opennslswitchReservedEnum298 = 327, 
-    opennslswitchReservedEnum299 = 328, 
-    opennslswitchReservedEnum300 = 329, 
-    opennslswitchReservedEnum301 = 330, 
-    opennslswitchReservedEnum302 = 331, 
-    opennslswitchReservedEnum303 = 332, 
-    opennslswitchReservedEnum304 = 333, 
-    opennslswitchReservedEnum305 = 334, 
-    opennslswitchReservedEnum306 = 335, 
-    opennslswitchReservedEnum307 = 336, 
-    opennslswitchReservedEnum308 = 337, 
-    opennslswitchReservedEnum309 = 338, 
-    opennslswitchReservedEnum310 = 339, 
-    opennslswitchReservedEnum311 = 340, 
-    opennslswitchReservedEnum312 = 341, 
-    opennslswitchReservedEnum313 = 342, 
-    opennslswitchReservedEnum314 = 343, 
-    opennslswitchReservedEnum315 = 344, 
-    opennslswitchReservedEnum316 = 345, 
-    opennslswitchReservedEnum317 = 346, 
-    opennslswitchReservedEnum318 = 347, 
-    opennslswitchReservedEnum319 = 348, 
-    opennslswitchReservedEnum320 = 349, 
-    opennslswitchReservedEnum321 = 350, 
-    opennslswitchReservedEnum322 = 351, 
-    opennslswitchReservedEnum323 = 352, 
-    opennslswitchReservedEnum324 = 353, 
-    opennslswitchReservedEnum325 = 354, 
-    opennslswitchReservedEnum326 = 355, 
-    opennslswitchReservedEnum327 = 356, 
-    opennslswitchReservedEnum328 = 357, 
-    opennslswitchReservedEnum329 = 358, 
-    opennslswitchReservedEnum330 = 359, 
-    opennslswitchReservedEnum331 = 360, 
-    opennslswitchReservedEnum332 = 361, 
-    opennslswitchReservedEnum333 = 362, 
-    opennslswitchReservedEnum334 = 363, 
-    opennslswitchReservedEnum335 = 364, 
-    opennslswitchReservedEnum336 = 365, 
-    opennslswitchReservedEnum337 = 366, 
-    opennslswitchReservedEnum338 = 367, 
-    opennslswitchReservedEnum339 = 368, 
-    opennslswitchReservedEnum340 = 369, 
-    opennslswitchReservedEnum341 = 370, 
-    opennslswitchReservedEnum342 = 371, 
-    opennslswitchReservedEnum343 = 372, 
-    opennslswitchReservedEnum344 = 373, 
-    opennslswitchReservedEnum345 = 374, 
-    opennslswitchReservedEnum346 = 375, 
-    opennslswitchReservedEnum347 = 376, 
-    opennslswitchReservedEnum348 = 377, 
-    opennslswitchReservedEnum349 = 378, 
-    opennslswitchReservedEnum350 = 379, 
-    opennslswitchReservedEnum351 = 380, 
-    opennslswitchReservedEnum352 = 381, 
-    opennslswitchReservedEnum353 = 382, 
-    opennslswitchReservedEnum354 = 383, 
-    opennslswitchReservedEnum355 = 384, 
-    opennslswitchReservedEnum356 = 385, 
-    opennslswitchReservedEnum357 = 386, 
-    opennslswitchReservedEnum358 = 387, 
-    opennslswitchReservedEnum359 = 388, 
-    opennslswitchReservedEnum360 = 389, 
-    opennslswitchReservedEnum361 = 390, 
-    opennslswitchReservedEnum362 = 391, 
-    opennslswitchReservedEnum363 = 392, 
-    opennslswitchReservedEnum364 = 393, 
-    opennslswitchReservedEnum365 = 394, 
-    opennslswitchReservedEnum366 = 395, 
-    opennslswitchReservedEnum367 = 396, 
-    opennslswitchReservedEnum368 = 397, 
-    opennslswitchReservedEnum369 = 398, 
-    opennslswitchReservedEnum370 = 399, 
-    opennslswitchReservedEnum371 = 400, 
-    opennslswitchReservedEnum372 = 401, 
-    opennslswitchReservedEnum373 = 402, 
-    opennslswitchReservedEnum374 = 403, 
-    opennslswitchReservedEnum375 = 404, 
-    opennslswitchReservedEnum376 = 405, 
-    opennslswitchReservedEnum377 = 406, 
-    opennslswitchReservedEnum378 = 407, 
-    opennslswitchReservedEnum379 = 408, 
-    opennslswitchReservedEnum380 = 409, 
-    opennslswitchReservedEnum381 = 410, 
-    opennslswitchReservedEnum382 = 411, 
-    opennslswitchReservedEnum383 = 412, 
-    opennslswitchReservedEnum384 = 413, 
-    opennslswitchReservedEnum385 = 414, 
-    opennslswitchReservedEnum386 = 415, 
-    opennslswitchReservedEnum387 = 416, 
-    opennslswitchReservedEnum388 = 417, 
-    opennslswitchReservedEnum389 = 418, 
-    opennslswitchReservedEnum390 = 419, 
-    opennslswitchReservedEnum391 = 420, 
-    opennslswitchReservedEnum392 = 421, 
-    opennslswitchReservedEnum393 = 422, 
-    opennslswitchReservedEnum394 = 423, 
-    opennslswitchReservedEnum395 = 424, 
-    opennslswitchReservedEnum396 = 425, 
-    opennslswitchReservedEnum397 = 426, 
-    opennslswitchReservedEnum398 = 427, 
-    opennslswitchReservedEnum399 = 428, 
-    opennslswitchReservedEnum400 = 429, 
-    opennslswitchReservedEnum401 = 430, 
-    opennslswitchReservedEnum402 = 431, 
-    opennslswitchReservedEnum403 = 432, 
-    opennslswitchReservedEnum404 = 433, 
-    opennslswitchReservedEnum405 = 434, 
-    opennslswitchReservedEnum406 = 435, 
-    opennslswitchReservedEnum407 = 436, 
-    opennslswitchReservedEnum408 = 437, 
-    opennslswitchReservedEnum409 = 438, 
-    opennslswitchReservedEnum410 = 439, 
-    opennslswitchReservedEnum411 = 440, 
-    opennslswitchReservedEnum412 = 441, 
-    opennslswitchReservedEnum413 = 442, 
-    opennslswitchReservedEnum414 = 443, 
-    opennslswitchReservedEnum415 = 444, 
-    opennslswitchReservedEnum416 = 445, 
-    opennslswitchReservedEnum417 = 446, 
-    opennslswitchReservedEnum418 = 447, 
-    opennslswitchReservedEnum419 = 448, 
-    opennslswitchReservedEnum420 = 449, 
-    opennslswitchReservedEnum421 = 450, 
-    opennslswitchReservedEnum422 = 451, 
-    opennslswitchReservedEnum423 = 452, 
-    opennslswitchReservedEnum424 = 453, 
-    opennslswitchReservedEnum425 = 454, 
-    opennslswitchReservedEnum426 = 455, 
-    opennslswitchReservedEnum427 = 456, 
-    opennslswitchReservedEnum428 = 457, 
-    opennslswitchReservedEnum429 = 458, 
-    opennslswitchReservedEnum430 = 459, 
-    opennslswitchReservedEnum431 = 460, 
-    opennslswitchReservedEnum432 = 461, 
-    opennslswitchReservedEnum433 = 462, 
-    opennslswitchReservedEnum434 = 463, 
-    opennslswitchReservedEnum435 = 464, 
-    opennslswitchReservedEnum436 = 465, 
-    opennslswitchReservedEnum437 = 466, 
-    opennslswitchReservedEnum438 = 467, 
-    opennslswitchReservedEnum439 = 468, 
-    opennslswitchReservedEnum440 = 469, 
-    opennslswitchReservedEnum441 = 470, 
-    opennslswitchReservedEnum442 = 471, 
-    opennslswitchReservedEnum443 = 472, 
-    opennslswitchReservedEnum444 = 473, 
-    opennslswitchReservedEnum445 = 474, 
-    opennslswitchReservedEnum446 = 475, 
-    opennslswitchReservedEnum447 = 476, 
-    opennslswitchReservedEnum448 = 477, 
-    opennslswitchReservedEnum449 = 478, 
-    opennslswitchReservedEnum450 = 479, 
-    opennslswitchReservedEnum451 = 480, 
-    opennslswitchReservedEnum452 = 481, 
-    opennslswitchReservedEnum453 = 482, 
-    opennslswitchReservedEnum454 = 483, 
-    opennslswitchReservedEnum455 = 484, 
-    opennslswitchReservedEnum456 = 485, 
-    opennslswitchReservedEnum457 = 486, 
-    opennslswitchReservedEnum458 = 487, 
-    opennslswitchReservedEnum459 = 488, 
-    opennslswitchReservedEnum460 = 489, 
-    opennslswitchReservedEnum461 = 490, 
-    opennslswitchReservedEnum462 = 491, 
-    opennslswitchReservedEnum463 = 492, 
-    opennslswitchReservedEnum464 = 493, 
-    opennslswitchReservedEnum465 = 494, 
-    opennslswitchReservedEnum466 = 495, 
-    opennslswitchReservedEnum467 = 496, 
-    opennslswitchReservedEnum468 = 497, 
-    opennslswitchReservedEnum469 = 498, 
-    opennslswitchReservedEnum470 = 499, 
-    opennslswitchReservedEnum471 = 500, 
-    opennslswitchReservedEnum472 = 501, 
-    opennslswitchReservedEnum473 = 502, 
-    opennslswitchReservedEnum474 = 503, 
-    opennslswitchReservedEnum475 = 504, 
-    opennslswitchReservedEnum476 = 505, 
-    opennslswitchReservedEnum477 = 506, 
-    opennslswitchReservedEnum478 = 507, 
-    opennslswitchReservedEnum479 = 508, 
-    opennslswitchReservedEnum480 = 509, 
-    opennslswitchReservedEnum481 = 510, 
-    opennslswitchReservedEnum482 = 511, 
-    opennslswitchReservedEnum483 = 512, 
-    opennslswitchReservedEnum484 = 513, 
-    opennslswitchReservedEnum485 = 514, 
-    opennslswitchReservedEnum486 = 515, 
-    opennslswitchReservedEnum487 = 516, 
-    opennslswitchReservedEnum488 = 517, 
-    opennslswitchReservedEnum489 = 518, 
-    opennslswitchReservedEnum490 = 519, 
-    opennslswitchReservedEnum491 = 520, 
-    opennslswitchReservedEnum492 = 521, 
-    opennslswitchReservedEnum493 = 522, 
-    opennslswitchReservedEnum494 = 523, 
-    opennslswitchReservedEnum495 = 524, 
-    opennslswitchReservedEnum496 = 525, 
-    opennslswitchReservedEnum497 = 526, 
-    opennslswitchReservedEnum498 = 527, 
-    opennslswitchReservedEnum499 = 528, 
-    opennslswitchReservedEnum500 = 529, 
-    opennslswitchReservedEnum501 = 530, 
-    opennslswitchReservedEnum502 = 531, 
-    opennslswitchReservedEnum503 = 532, 
-    opennslswitchReservedEnum504 = 533, 
-    opennslswitchReservedEnum505 = 534, 
-    opennslswitchReservedEnum506 = 535, 
-    opennslswitchReservedEnum507 = 536, 
-    opennslswitchReservedEnum508 = 537, 
-    opennslswitchReservedEnum509 = 538, 
-    opennslswitchReservedEnum510 = 539, 
-    opennslswitchReservedEnum511 = 540, 
-    opennslswitchReservedEnum512 = 541, 
-    opennslswitchReservedEnum513 = 542, 
-    opennslswitchReservedEnum514 = 543, 
-    opennslswitchReservedEnum515 = 544, 
-    opennslswitchReservedEnum516 = 545, 
-    opennslswitchReservedEnum517 = 546, 
-    opennslswitchReservedEnum518 = 547, 
-    opennslswitchReservedEnum519 = 548, 
-    opennslswitchReservedEnum520 = 549, 
-    opennslswitchReservedEnum521 = 550, 
-    opennslswitchReservedEnum522 = 551, 
-    opennslswitchReservedEnum523 = 552, 
-    opennslswitchReservedEnum524 = 553, 
-    opennslswitchReservedEnum525 = 554, 
-    opennslswitchReservedEnum526 = 555, 
-    opennslswitchReservedEnum527 = 556, 
-    opennslswitchReservedEnum528 = 557, 
-    opennslswitchReservedEnum529 = 558, 
-    opennslswitchReservedEnum530 = 559, 
-    opennslswitchReservedEnum531 = 560, 
-    opennslswitchReservedEnum532 = 561, 
-    opennslswitchReservedEnum533 = 562, 
-    opennslswitchReservedEnum534 = 563, 
-    opennslswitchReservedEnum535 = 564, 
-    opennslswitchReservedEnum536 = 565, 
-    opennslswitchReservedEnum537 = 566, 
-    opennslswitchReservedEnum538 = 567, 
-    opennslswitchReservedEnum539 = 568, 
-    opennslswitchReservedEnum540 = 569, 
-    opennslswitchReservedEnum541 = 570, 
-    opennslswitchReservedEnum542 = 571, 
-    opennslswitchReservedEnum543 = 572, 
-    opennslswitchReservedEnum544 = 573, 
-    opennslswitchReservedEnum545 = 574, 
-    opennslswitchReservedEnum546 = 575, 
-    opennslswitchReservedEnum547 = 576, 
-    opennslswitchReservedEnum548 = 577, 
-    opennslswitchReservedEnum549 = 578, 
-    opennslswitchReservedEnum550 = 579, 
-    opennslswitchReservedEnum551 = 580, 
-    opennslswitchReservedEnum552 = 581, 
-    opennslswitchReservedEnum553 = 582, 
-    opennslswitchReservedEnum554 = 583, 
-    opennslswitchReservedEnum555 = 584, 
-    opennslswitchReservedEnum556 = 585, 
-    opennslswitchReservedEnum557 = 586, 
-    opennslswitchReservedEnum558 = 587, 
-    opennslswitchReservedEnum559 = 588, 
-    opennslswitchReservedEnum560 = 589, 
-    opennslswitchReservedEnum561 = 590, 
-    opennslswitchReservedEnum562 = 591, 
-    opennslswitchReservedEnum563 = 592, 
-    opennslswitchReservedEnum564 = 593, 
-    opennslswitchReservedEnum565 = 594, 
-    opennslswitchReservedEnum566 = 595, 
-    opennslswitchReservedEnum567 = 596, 
-    opennslswitchReservedEnum568 = 597, 
-    opennslswitchReservedEnum569 = 598, 
-    opennslswitchReservedEnum570 = 599, 
-    opennslswitchReservedEnum571 = 600, 
-    opennslswitchReservedEnum572 = 601, 
-    opennslswitchReservedEnum573 = 602, 
-    opennslswitchReservedEnum574 = 603, 
-    opennslswitchReservedEnum575 = 604, 
-    opennslswitchReservedEnum576 = 605, 
-    opennslswitchReservedEnum577 = 606, 
-    opennslswitchReservedEnum578 = 607, 
-    opennslswitchReservedEnum579 = 608, 
-    opennslswitchReservedEnum580 = 609, 
-    opennslswitchReservedEnum581 = 610, 
-    opennslswitchReservedEnum582 = 611, 
-    opennslswitchReservedEnum583 = 612, 
-    opennslswitchReservedEnum584 = 613, 
-    opennslswitchReservedEnum585 = 614, 
-    opennslswitchReservedEnum586 = 615, 
-    opennslswitchReservedEnum587 = 616, 
-    opennslswitchReservedEnum588 = 617, 
-    opennslswitchReservedEnum589 = 618, 
-    opennslswitchReservedEnum590 = 619, 
-    opennslswitchReservedEnum591 = 620, 
-    opennslswitchReservedEnum592 = 621, 
-    opennslswitchReservedEnum593 = 622, 
-    opennslswitchReservedEnum594 = 623, 
-    opennslswitchReservedEnum595 = 624, 
-    opennslswitchReservedEnum596 = 625, 
-    opennslswitchReservedEnum597 = 626, 
-    opennslswitchReservedEnum598 = 627, 
-    opennslswitchReservedEnum599 = 628, 
-    opennslswitchReservedEnum600 = 629, 
-    opennslswitchReservedEnum601 = 630, 
-    opennslswitchReservedEnum602 = 631, 
-    opennslswitchReservedEnum603 = 632, 
-    opennslswitchReservedEnum604 = 633, 
-    opennslswitchReservedEnum605 = 634, 
-    opennslswitchReservedEnum606 = 635, 
-    opennslswitchReservedEnum607 = 636, 
-    opennslswitchReservedEnum608 = 637, 
-    opennslswitchReservedEnum609 = 638, 
-    opennslswitchReservedEnum610 = 639, 
-    opennslswitchReservedEnum611 = 640, 
-    opennslswitchReservedEnum612 = 641, 
-    opennslswitchReservedEnum613 = 642, 
-    opennslswitchReservedEnum614 = 643, 
-    opennslswitchReservedEnum615 = 644, 
-    opennslswitchReservedEnum616 = 645, 
-    opennslswitchReservedEnum617 = 646, 
-    opennslswitchReservedEnum618 = 647, 
-    opennslswitchReservedEnum619 = 648, 
-    opennslswitchReservedEnum620 = 649, 
-    opennslswitchReservedEnum621 = 650, 
-    opennslswitchReservedEnum622 = 651, 
-    opennslswitchReservedEnum623 = 652, 
-    opennslswitchReservedEnum624 = 653, 
-    opennslswitchReservedEnum625 = 654, 
-    opennslswitchReservedEnum626 = 655, 
-    opennslswitchReservedEnum627 = 656, 
-    opennslswitchReservedEnum628 = 657, 
-    opennslswitchReservedEnum629 = 658, 
-    opennslswitchReservedEnum630 = 659, 
-    opennslswitchReservedEnum631 = 660, 
-    opennslswitchReservedEnum632 = 661, 
-    opennslswitchReservedEnum633 = 662, 
-    opennslswitchReservedEnum634 = 663, 
-    opennslswitchReservedEnum635 = 664, 
-    opennslswitchReservedEnum636 = 665, 
-    opennslswitchReservedEnum637 = 666, 
-    opennslswitchReservedEnum638 = 667, 
-    opennslswitchReservedEnum639 = 668, 
-    opennslswitchReservedEnum640 = 669, 
-    opennslswitchReservedEnum641 = 670, 
-    opennslswitchReservedEnum642 = 671, 
-    opennslswitchReservedEnum643 = 672, 
-    opennslswitchReservedEnum644 = 673, 
-    opennslswitchReservedEnum645 = 674, 
-    opennslswitchReservedEnum646 = 675, 
-    opennslswitchReservedEnum647 = 676, 
-    opennslswitchReservedEnum648 = 677, 
-    opennslswitchReservedEnum649 = 678, 
-    opennslswitchReservedEnum650 = 679, 
-    opennslswitchReservedEnum651 = 680, 
-    opennslswitchReservedEnum652 = 681, 
-    opennslswitchReservedEnum653 = 682, 
-    opennslswitchReservedEnum654 = 683, 
-    opennslswitchReservedEnum655 = 684, 
-    opennslswitchReservedEnum656 = 685, 
-    opennslswitchReservedEnum657 = 686, 
-    opennslswitchReservedEnum658 = 687, 
-    opennslswitchReservedEnum659 = 688, 
-    opennslswitchReservedEnum660 = 689, 
-    opennslswitchReservedEnum661 = 690, 
-    opennslswitchReservedEnum662 = 691, 
-    opennslswitchReservedEnum663 = 692, 
-    opennslswitchReservedEnum664 = 693, 
-    opennslswitchReservedEnum665 = 694, 
-    opennslswitchReservedEnum666 = 695, 
-    opennslswitchReservedEnum667 = 696, 
-    opennslswitchReservedEnum668 = 697, 
-    opennslswitchReservedEnum669 = 698, 
-    opennslswitchReservedEnum670 = 699, 
-    opennslswitchReservedEnum671 = 700, 
-    opennslswitchReservedEnum672 = 701, 
-    opennslswitchReservedEnum673 = 702, 
-    opennslswitchReservedEnum674 = 703, 
-    opennslswitchReservedEnum675 = 704, 
-    opennslswitchReservedEnum676 = 705, 
-    opennslswitchReservedEnum677 = 706, 
-    opennslswitchReservedEnum678 = 707, 
-    opennslswitchReservedEnum679 = 708, 
-    opennslswitchReservedEnum680 = 709, 
-    opennslswitchReservedEnum681 = 710, 
-    opennslswitchReservedEnum682 = 711, 
-    opennslswitchReservedEnum683 = 712, 
-    opennslswitchReservedEnum684 = 713, 
-    opennslswitchReservedEnum685 = 714, 
-    opennslswitchReservedEnum686 = 715, 
-    opennslswitchReservedEnum687 = 716, 
+    opennslSwitchControlAutoSync = 244, /**< Perform a sync of the Level 2 warm
+                                           boot state after every API. */
+    opennslswitchReservedEnum202 = 245, 
+    opennslswitchReservedEnum203 = 246, 
+    opennslswitchReservedEnum204 = 247, 
+    opennslswitchReservedEnum205 = 248, 
+    opennslswitchReservedEnum206 = 249, 
+    opennslSwitchL3UcastTtl1ToCpu = 250, /**< Copy L3 Ucast with TTL 1 to CPU. */
+    opennslswitchReservedEnum207 = 251, 
+    opennslswitchReservedEnum208 = 252, 
+    opennslswitchReservedEnum209 = 253, 
+    opennslswitchReservedEnum210 = 254, 
+    opennslswitchReservedEnum211 = 255, 
+    opennslswitchReservedEnum212 = 256, 
+    opennslswitchReservedEnum213 = 257, 
+    opennslswitchReservedEnum214 = 258, 
+    opennslswitchReservedEnum215 = 259, 
+    opennslswitchReservedEnum216 = 260, 
+    opennslswitchReservedEnum217 = 261, 
+    opennslswitchReservedEnum218 = 262, 
+    opennslswitchReservedEnum219 = 263, 
+    opennslswitchReservedEnum220 = 264, 
+    opennslswitchReservedEnum221 = 265, 
+    opennslswitchReservedEnum222 = 266, 
+    opennslswitchReservedEnum223 = 267, 
+    opennslswitchReservedEnum224 = 268, 
+    opennslswitchReservedEnum225 = 269, 
+    opennslswitchReservedEnum226 = 270, 
+    opennslswitchReservedEnum227 = 271, 
+    opennslswitchReservedEnum228 = 272, 
+    opennslswitchReservedEnum229 = 273, 
+    opennslswitchReservedEnum230 = 274, 
+    opennslswitchReservedEnum231 = 275, 
+    opennslswitchReservedEnum232 = 276, 
+    opennslswitchReservedEnum233 = 277, 
+    opennslswitchReservedEnum234 = 278, 
+    opennslswitchReservedEnum235 = 279, 
+    opennslswitchReservedEnum236 = 280, 
+    opennslswitchReservedEnum237 = 281, 
+    opennslswitchReservedEnum238 = 282, 
+    opennslswitchReservedEnum239 = 283, 
+    opennslswitchReservedEnum240 = 284, 
+    opennslswitchReservedEnum241 = 285, 
+    opennslswitchReservedEnum242 = 286, 
+    opennslswitchReservedEnum243 = 287, 
+    opennslswitchReservedEnum244 = 288, 
+    opennslswitchReservedEnum245 = 289, 
+    opennslswitchReservedEnum246 = 290, 
+    opennslswitchReservedEnum247 = 291, 
+    opennslswitchReservedEnum248 = 292, 
+    opennslswitchReservedEnum249 = 293, 
+    opennslswitchReservedEnum250 = 294, 
+    opennslswitchReservedEnum251 = 295, 
+    opennslswitchReservedEnum252 = 296, 
+    opennslswitchReservedEnum253 = 297, 
+    opennslswitchReservedEnum254 = 298, 
+    opennslswitchReservedEnum255 = 299, 
+    opennslswitchReservedEnum256 = 300, 
+    opennslswitchReservedEnum257 = 301, 
+    opennslswitchReservedEnum258 = 302, 
+    opennslswitchReservedEnum259 = 303, 
+    opennslswitchReservedEnum260 = 304, 
+    opennslswitchReservedEnum261 = 305, 
+    opennslswitchReservedEnum262 = 306, 
+    opennslswitchReservedEnum263 = 307, 
+    opennslswitchReservedEnum264 = 308, 
+    opennslswitchReservedEnum265 = 309, 
+    opennslswitchReservedEnum266 = 310, 
+    opennslswitchReservedEnum267 = 311, 
+    opennslswitchReservedEnum268 = 312, 
+    opennslswitchReservedEnum269 = 313, 
+    opennslswitchReservedEnum270 = 314, 
+    opennslswitchReservedEnum271 = 315, 
+    opennslswitchReservedEnum272 = 316, 
+    opennslswitchReservedEnum273 = 317, 
+    opennslswitchReservedEnum274 = 318, 
+    opennslswitchReservedEnum275 = 319, 
+    opennslswitchReservedEnum276 = 320, 
+    opennslswitchReservedEnum277 = 321, 
+    opennslswitchReservedEnum278 = 322, 
+    opennslswitchReservedEnum279 = 323, 
+    opennslswitchReservedEnum280 = 324, 
+    opennslswitchReservedEnum281 = 325, 
+    opennslswitchReservedEnum282 = 326, 
+    opennslswitchReservedEnum283 = 327, 
+    opennslswitchReservedEnum284 = 328, 
+    opennslswitchReservedEnum285 = 329, 
+    opennslswitchReservedEnum286 = 330, 
+    opennslswitchReservedEnum287 = 331, 
+    opennslswitchReservedEnum288 = 332, 
+    opennslswitchReservedEnum289 = 333, 
+    opennslswitchReservedEnum290 = 334, 
+    opennslswitchReservedEnum291 = 335, 
+    opennslswitchReservedEnum292 = 336, 
+    opennslswitchReservedEnum293 = 337, 
+    opennslswitchReservedEnum294 = 338, 
+    opennslswitchReservedEnum295 = 339, 
+    opennslswitchReservedEnum296 = 340, 
+    opennslswitchReservedEnum297 = 341, 
+    opennslswitchReservedEnum298 = 342, 
+    opennslswitchReservedEnum299 = 343, 
+    opennslswitchReservedEnum300 = 344, 
+    opennslswitchReservedEnum301 = 345, 
+    opennslswitchReservedEnum302 = 346, 
+    opennslswitchReservedEnum303 = 347, 
+    opennslswitchReservedEnum304 = 348, 
+    opennslswitchReservedEnum305 = 349, 
+    opennslswitchReservedEnum306 = 350, 
+    opennslswitchReservedEnum307 = 351, 
+    opennslswitchReservedEnum308 = 352, 
+    opennslswitchReservedEnum309 = 353, 
+    opennslswitchReservedEnum310 = 354, 
+    opennslswitchReservedEnum311 = 355, 
+    opennslswitchReservedEnum312 = 356, 
+    opennslswitchReservedEnum313 = 357, 
+    opennslswitchReservedEnum314 = 358, 
+    opennslswitchReservedEnum315 = 359, 
+    opennslswitchReservedEnum316 = 360, 
+    opennslswitchReservedEnum317 = 361, 
+    opennslswitchReservedEnum318 = 362, 
+    opennslswitchReservedEnum319 = 363, 
+    opennslswitchReservedEnum320 = 364, 
+    opennslswitchReservedEnum321 = 365, 
+    opennslswitchReservedEnum322 = 366, 
+    opennslswitchReservedEnum323 = 367, 
+    opennslswitchReservedEnum324 = 368, 
+    opennslswitchReservedEnum325 = 369, 
+    opennslswitchReservedEnum326 = 370, 
+    opennslswitchReservedEnum327 = 371, 
+    opennslswitchReservedEnum328 = 372, 
+    opennslswitchReservedEnum329 = 373, 
+    opennslswitchReservedEnum330 = 374, 
+    opennslswitchReservedEnum331 = 375, 
+    opennslswitchReservedEnum332 = 376, 
+    opennslswitchReservedEnum333 = 377, 
+    opennslswitchReservedEnum334 = 378, 
+    opennslswitchReservedEnum335 = 379, 
+    opennslswitchReservedEnum336 = 380, 
+    opennslswitchReservedEnum337 = 381, 
+    opennslswitchReservedEnum338 = 382, 
+    opennslswitchReservedEnum339 = 383, 
+    opennslswitchReservedEnum340 = 384, 
+    opennslswitchReservedEnum341 = 385, 
+    opennslswitchReservedEnum342 = 386, 
+    opennslswitchReservedEnum343 = 387, 
+    opennslswitchReservedEnum344 = 388, 
+    opennslswitchReservedEnum345 = 389, 
+    opennslswitchReservedEnum346 = 390, 
+    opennslswitchReservedEnum347 = 391, 
+    opennslswitchReservedEnum348 = 392, 
+    opennslswitchReservedEnum349 = 393, 
+    opennslswitchReservedEnum350 = 394, 
+    opennslswitchReservedEnum351 = 395, 
+    opennslswitchReservedEnum352 = 396, 
+    opennslswitchReservedEnum353 = 397, 
+    opennslswitchReservedEnum354 = 398, 
+    opennslswitchReservedEnum355 = 399, 
+    opennslswitchReservedEnum356 = 400, 
+    opennslswitchReservedEnum357 = 401, 
+    opennslswitchReservedEnum358 = 402, 
+    opennslswitchReservedEnum359 = 403, 
+    opennslswitchReservedEnum360 = 404, 
+    opennslswitchReservedEnum361 = 405, 
+    opennslswitchReservedEnum362 = 406, 
+    opennslswitchReservedEnum363 = 407, 
+    opennslswitchReservedEnum364 = 408, 
+    opennslswitchReservedEnum365 = 409, 
+    opennslswitchReservedEnum366 = 410, 
+    opennslswitchReservedEnum367 = 411, 
+    opennslswitchReservedEnum368 = 412, 
+    opennslswitchReservedEnum369 = 413, 
+    opennslswitchReservedEnum370 = 414, 
+    opennslswitchReservedEnum371 = 415, 
+    opennslswitchReservedEnum372 = 416, 
+    opennslswitchReservedEnum373 = 417, 
+    opennslswitchReservedEnum374 = 418, 
+    opennslswitchReservedEnum375 = 419, 
+    opennslswitchReservedEnum376 = 420, 
+    opennslswitchReservedEnum377 = 421, 
+    opennslswitchReservedEnum378 = 422, 
+    opennslswitchReservedEnum379 = 423, 
+    opennslswitchReservedEnum380 = 424, 
+    opennslswitchReservedEnum381 = 425, 
+    opennslswitchReservedEnum382 = 426, 
+    opennslswitchReservedEnum383 = 427, 
+    opennslswitchReservedEnum384 = 428, 
+    opennslswitchReservedEnum385 = 429, 
+    opennslswitchReservedEnum386 = 430, 
+    opennslswitchReservedEnum387 = 431, 
+    opennslswitchReservedEnum388 = 432, 
+    opennslswitchReservedEnum389 = 433, 
+    opennslswitchReservedEnum390 = 434, 
+    opennslswitchReservedEnum391 = 435, 
+    opennslswitchReservedEnum392 = 436, 
+    opennslswitchReservedEnum393 = 437, 
+    opennslswitchReservedEnum394 = 438, 
+    opennslswitchReservedEnum395 = 439, 
+    opennslswitchReservedEnum396 = 440, 
+    opennslswitchReservedEnum397 = 441, 
+    opennslswitchReservedEnum398 = 442, 
+    opennslswitchReservedEnum399 = 443, 
+    opennslswitchReservedEnum400 = 444, 
+    opennslswitchReservedEnum401 = 445, 
+    opennslswitchReservedEnum402 = 446, 
+    opennslswitchReservedEnum403 = 447, 
+    opennslswitchReservedEnum404 = 448, 
+    opennslswitchReservedEnum405 = 449, 
+    opennslswitchReservedEnum406 = 450, 
+    opennslswitchReservedEnum407 = 451, 
+    opennslswitchReservedEnum408 = 452, 
+    opennslswitchReservedEnum409 = 453, 
+    opennslswitchReservedEnum410 = 454, 
+    opennslswitchReservedEnum411 = 455, 
+    opennslswitchReservedEnum412 = 456, 
+    opennslswitchReservedEnum413 = 457, 
+    opennslswitchReservedEnum414 = 458, 
+    opennslswitchReservedEnum415 = 459, 
+    opennslswitchReservedEnum416 = 460, 
+    opennslswitchReservedEnum417 = 461, 
+    opennslswitchReservedEnum418 = 462, 
+    opennslswitchReservedEnum419 = 463, 
+    opennslswitchReservedEnum420 = 464, 
+    opennslswitchReservedEnum421 = 465, 
+    opennslswitchReservedEnum422 = 466, 
+    opennslswitchReservedEnum423 = 467, 
+    opennslswitchReservedEnum424 = 468, 
+    opennslswitchReservedEnum425 = 469, 
+    opennslswitchReservedEnum426 = 470, 
+    opennslswitchReservedEnum427 = 471, 
+    opennslswitchReservedEnum428 = 472, 
+    opennslswitchReservedEnum429 = 473, 
+    opennslswitchReservedEnum430 = 474, 
+    opennslswitchReservedEnum431 = 475, 
+    opennslswitchReservedEnum432 = 476, 
+    opennslswitchReservedEnum433 = 477, 
+    opennslswitchReservedEnum434 = 478, 
+    opennslswitchReservedEnum435 = 479, 
+    opennslswitchReservedEnum436 = 480, 
+    opennslswitchReservedEnum437 = 481, 
+    opennslswitchReservedEnum438 = 482, 
+    opennslswitchReservedEnum439 = 483, 
+    opennslswitchReservedEnum440 = 484, 
+    opennslswitchReservedEnum441 = 485, 
+    opennslswitchReservedEnum442 = 486, 
+    opennslswitchReservedEnum443 = 487, 
+    opennslswitchReservedEnum444 = 488, 
+    opennslswitchReservedEnum445 = 489, 
+    opennslswitchReservedEnum446 = 490, 
+    opennslswitchReservedEnum447 = 491, 
+    opennslswitchReservedEnum448 = 492, 
+    opennslswitchReservedEnum449 = 493, 
+    opennslswitchReservedEnum450 = 494, 
+    opennslswitchReservedEnum451 = 495, 
+    opennslswitchReservedEnum452 = 496, 
+    opennslswitchReservedEnum453 = 497, 
+    opennslswitchReservedEnum454 = 498, 
+    opennslswitchReservedEnum455 = 499, 
+    opennslswitchReservedEnum456 = 500, 
+    opennslswitchReservedEnum457 = 501, 
+    opennslswitchReservedEnum458 = 502, 
+    opennslswitchReservedEnum459 = 503, 
+    opennslswitchReservedEnum460 = 504, 
+    opennslswitchReservedEnum461 = 505, 
+    opennslswitchReservedEnum462 = 506, 
+    opennslswitchReservedEnum463 = 507, 
+    opennslswitchReservedEnum464 = 508, 
+    opennslswitchReservedEnum465 = 509, 
+    opennslswitchReservedEnum466 = 510, 
+    opennslswitchReservedEnum467 = 511, 
+    opennslswitchReservedEnum468 = 512, 
+    opennslswitchReservedEnum469 = 513, 
+    opennslswitchReservedEnum470 = 514, 
+    opennslswitchReservedEnum471 = 515, 
+    opennslswitchReservedEnum472 = 516, 
+    opennslswitchReservedEnum473 = 517, 
+    opennslswitchReservedEnum474 = 518, 
+    opennslswitchReservedEnum475 = 519, 
+    opennslswitchReservedEnum476 = 520, 
+    opennslswitchReservedEnum477 = 521, 
+    opennslswitchReservedEnum478 = 522, 
+    opennslswitchReservedEnum479 = 523, 
+    opennslswitchReservedEnum480 = 524, 
+    opennslswitchReservedEnum481 = 525, 
+    opennslswitchReservedEnum482 = 526, 
+    opennslswitchReservedEnum483 = 527, 
+    opennslswitchReservedEnum484 = 528, 
+    opennslswitchReservedEnum485 = 529, 
+    opennslswitchReservedEnum486 = 530, 
+    opennslswitchReservedEnum487 = 531, 
+    opennslswitchReservedEnum488 = 532, 
+    opennslswitchReservedEnum489 = 533, 
+    opennslswitchReservedEnum490 = 534, 
+    opennslswitchReservedEnum491 = 535, 
+    opennslswitchReservedEnum492 = 536, 
+    opennslswitchReservedEnum493 = 537, 
+    opennslswitchReservedEnum494 = 538, 
+    opennslswitchReservedEnum495 = 539, 
+    opennslswitchReservedEnum496 = 540, 
+    opennslswitchReservedEnum497 = 541, 
+    opennslswitchReservedEnum498 = 542, 
+    opennslswitchReservedEnum499 = 543, 
+    opennslswitchReservedEnum500 = 544, 
+    opennslswitchReservedEnum501 = 545, 
+    opennslswitchReservedEnum502 = 546, 
+    opennslswitchReservedEnum503 = 547, 
+    opennslswitchReservedEnum504 = 548, 
+    opennslswitchReservedEnum505 = 549, 
+    opennslswitchReservedEnum506 = 550, 
+    opennslswitchReservedEnum507 = 551, 
+    opennslswitchReservedEnum508 = 552, 
+    opennslswitchReservedEnum509 = 553, 
+    opennslswitchReservedEnum510 = 554, 
+    opennslswitchReservedEnum511 = 555, 
+    opennslswitchReservedEnum512 = 556, 
+    opennslswitchReservedEnum513 = 557, 
+    opennslswitchReservedEnum514 = 558, 
+    opennslswitchReservedEnum515 = 559, 
+    opennslswitchReservedEnum516 = 560, 
+    opennslswitchReservedEnum517 = 561, 
+    opennslswitchReservedEnum518 = 562, 
+    opennslswitchReservedEnum519 = 563, 
+    opennslswitchReservedEnum520 = 564, 
+    opennslswitchReservedEnum521 = 565, 
+    opennslswitchReservedEnum522 = 566, 
+    opennslswitchReservedEnum523 = 567, 
+    opennslswitchReservedEnum524 = 568, 
+    opennslswitchReservedEnum525 = 569, 
+    opennslswitchReservedEnum526 = 570, 
+    opennslswitchReservedEnum527 = 571, 
+    opennslswitchReservedEnum528 = 572, 
+    opennslswitchReservedEnum529 = 573, 
+    opennslswitchReservedEnum530 = 574, 
+    opennslswitchReservedEnum531 = 575, 
+    opennslswitchReservedEnum532 = 576, 
+    opennslswitchReservedEnum533 = 577, 
+    opennslswitchReservedEnum534 = 578, 
+    opennslswitchReservedEnum535 = 579, 
+    opennslswitchReservedEnum536 = 580, 
+    opennslswitchReservedEnum537 = 581, 
+    opennslswitchReservedEnum538 = 582, 
+    opennslswitchReservedEnum539 = 583, 
+    opennslswitchReservedEnum540 = 584, 
+    opennslswitchReservedEnum541 = 585, 
+    opennslswitchReservedEnum542 = 586, 
+    opennslswitchReservedEnum543 = 587, 
+    opennslswitchReservedEnum544 = 588, 
+    opennslswitchReservedEnum545 = 589, 
+    opennslswitchReservedEnum546 = 590, 
+    opennslswitchReservedEnum547 = 591, 
+    opennslswitchReservedEnum548 = 592, 
+    opennslswitchReservedEnum549 = 593, 
+    opennslswitchReservedEnum550 = 594, 
+    opennslswitchReservedEnum551 = 595, 
+    opennslswitchReservedEnum552 = 596, 
+    opennslswitchReservedEnum553 = 597, 
+    opennslswitchReservedEnum554 = 598, 
+    opennslswitchReservedEnum555 = 599, 
+    opennslswitchReservedEnum556 = 600, 
+    opennslswitchReservedEnum557 = 601, 
+    opennslswitchReservedEnum558 = 602, 
+    opennslswitchReservedEnum559 = 603, 
+    opennslswitchReservedEnum560 = 604, 
+    opennslswitchReservedEnum561 = 605, 
+    opennslswitchReservedEnum562 = 606, 
+    opennslswitchReservedEnum563 = 607, 
+    opennslswitchReservedEnum564 = 608, 
+    opennslswitchReservedEnum565 = 609, 
+    opennslswitchReservedEnum566 = 610, 
+    opennslswitchReservedEnum567 = 611, 
+    opennslswitchReservedEnum568 = 612, 
+    opennslswitchReservedEnum569 = 613, 
+    opennslswitchReservedEnum570 = 614, 
+    opennslswitchReservedEnum571 = 615, 
+    opennslswitchReservedEnum572 = 616, 
+    opennslswitchReservedEnum573 = 617, 
+    opennslswitchReservedEnum574 = 618, 
+    opennslswitchReservedEnum575 = 619, 
+    opennslswitchReservedEnum576 = 620, 
+    opennslswitchReservedEnum577 = 621, 
+    opennslswitchReservedEnum578 = 622, 
+    opennslswitchReservedEnum579 = 623, 
+    opennslswitchReservedEnum580 = 624, 
+    opennslswitchReservedEnum581 = 625, 
+    opennslswitchReservedEnum582 = 626, 
+    opennslswitchReservedEnum583 = 627, 
+    opennslswitchReservedEnum584 = 628, 
+    opennslswitchReservedEnum585 = 629, 
+    opennslswitchReservedEnum586 = 630, 
+    opennslswitchReservedEnum587 = 631, 
+    opennslswitchReservedEnum588 = 632, 
+    opennslswitchReservedEnum589 = 633, 
+    opennslswitchReservedEnum590 = 634, 
+    opennslswitchReservedEnum591 = 635, 
+    opennslswitchReservedEnum592 = 636, 
+    opennslswitchReservedEnum593 = 637, 
+    opennslswitchReservedEnum594 = 638, 
+    opennslswitchReservedEnum595 = 639, 
+    opennslswitchReservedEnum596 = 640, 
+    opennslswitchReservedEnum597 = 641, 
+    opennslswitchReservedEnum598 = 642, 
+    opennslswitchReservedEnum599 = 643, 
+    opennslswitchReservedEnum600 = 644, 
+    opennslswitchReservedEnum601 = 645, 
+    opennslswitchReservedEnum602 = 646, 
+    opennslswitchReservedEnum603 = 647, 
+    opennslswitchReservedEnum604 = 648, 
+    opennslswitchReservedEnum605 = 649, 
+    opennslswitchReservedEnum606 = 650, 
+    opennslswitchReservedEnum607 = 651, 
+    opennslswitchReservedEnum608 = 652, 
+    opennslswitchReservedEnum609 = 653, 
+    opennslswitchReservedEnum610 = 654, 
+    opennslswitchReservedEnum611 = 655, 
+    opennslswitchReservedEnum612 = 656, 
+    opennslswitchReservedEnum613 = 657, 
+    opennslswitchReservedEnum614 = 658, 
+    opennslswitchReservedEnum615 = 659, 
+    opennslswitchReservedEnum616 = 660, 
+    opennslswitchReservedEnum617 = 661, 
+    opennslswitchReservedEnum618 = 662, 
+    opennslswitchReservedEnum619 = 663, 
+    opennslswitchReservedEnum620 = 664, 
+    opennslswitchReservedEnum621 = 665, 
+    opennslswitchReservedEnum622 = 666, 
+    opennslswitchReservedEnum623 = 667, 
+    opennslswitchReservedEnum624 = 668, 
+    opennslswitchReservedEnum625 = 669, 
+    opennslswitchReservedEnum626 = 670, 
+    opennslswitchReservedEnum627 = 671, 
+    opennslswitchReservedEnum628 = 672, 
+    opennslswitchReservedEnum629 = 673, 
+    opennslswitchReservedEnum630 = 674, 
+    opennslswitchReservedEnum631 = 675, 
+    opennslswitchReservedEnum632 = 676, 
+    opennslswitchReservedEnum633 = 677, 
+    opennslswitchReservedEnum634 = 678, 
+    opennslswitchReservedEnum635 = 679, 
+    opennslswitchReservedEnum636 = 680, 
+    opennslswitchReservedEnum637 = 681, 
+    opennslswitchReservedEnum638 = 682, 
+    opennslswitchReservedEnum639 = 683, 
+    opennslswitchReservedEnum640 = 684, 
+    opennslswitchReservedEnum641 = 685, 
+    opennslswitchReservedEnum642 = 686, 
+    opennslswitchReservedEnum643 = 687, 
+    opennslswitchReservedEnum644 = 688, 
+    opennslswitchReservedEnum645 = 689, 
+    opennslswitchReservedEnum646 = 690, 
+    opennslswitchReservedEnum647 = 691, 
+    opennslswitchReservedEnum648 = 692, 
+    opennslswitchReservedEnum649 = 693, 
+    opennslswitchReservedEnum650 = 694, 
+    opennslswitchReservedEnum651 = 695, 
+    opennslswitchReservedEnum652 = 696, 
+    opennslswitchReservedEnum653 = 697, 
+    opennslswitchReservedEnum654 = 698, 
+    opennslswitchReservedEnum655 = 699, 
+    opennslswitchReservedEnum656 = 700, 
+    opennslswitchReservedEnum657 = 701, 
+    opennslswitchReservedEnum658 = 702, 
+    opennslswitchReservedEnum659 = 703, 
+    opennslswitchReservedEnum660 = 704, 
+    opennslswitchReservedEnum661 = 705, 
+    opennslswitchReservedEnum662 = 706, 
+    opennslswitchReservedEnum663 = 707, 
+    opennslswitchReservedEnum664 = 708, 
+    opennslswitchReservedEnum665 = 709, 
+    opennslswitchReservedEnum666 = 710, 
+    opennslswitchReservedEnum667 = 711, 
+    opennslswitchReservedEnum668 = 712, 
+    opennslswitchReservedEnum669 = 713, 
+    opennslswitchReservedEnum670 = 714, 
+    opennslswitchReservedEnum671 = 715, 
+    opennslswitchReservedEnum672 = 716, 
     opennslSwitchBstEnable = 717,       /**< Enable BST tracking. */
     opennslSwitchBstTrackingMode = 718, /**< BST resource usage tracking mode. */
-    opennslswitchReservedEnum688 = 719, 
-    opennslswitchReservedEnum689 = 720, 
-    opennslswitchReservedEnum690 = 721, 
-    opennslswitchReservedEnum691 = 722, 
-    opennslswitchReservedEnum692 = 723, 
-    opennslswitchReservedEnum693 = 724, 
-    opennslswitchReservedEnum694 = 725, 
-    opennslswitchReservedEnum695 = 726, 
-    opennslswitchReservedEnum696 = 727, 
-    opennslswitchReservedEnum697 = 728, 
-    opennslswitchReservedEnum698 = 729, 
-    opennslswitchReservedEnum699 = 730, 
-    opennslswitchReservedEnum700 = 731, 
-    opennslswitchReservedEnum701 = 732, 
-    opennslswitchReservedEnum702 = 733, 
-    opennslswitchReservedEnum703 = 734, 
-    opennslswitchReservedEnum704 = 735, 
-    opennslswitchReservedEnum705 = 736, 
-    opennslswitchReservedEnum706 = 737, 
-    opennslswitchReservedEnum707 = 738, 
-    opennslswitchReservedEnum708 = 739, 
-    opennslswitchReservedEnum709 = 740, 
-    opennslswitchReservedEnum710 = 741, 
-    opennslswitchReservedEnum711 = 742, 
-    opennslswitchReservedEnum712 = 743, 
-    opennslswitchReservedEnum713 = 744, 
-    opennslswitchReservedEnum714 = 745, 
-    opennslswitchReservedEnum715 = 746, 
-    opennslswitchReservedEnum716 = 747, 
-    opennslswitchReservedEnum717 = 748, 
-    opennslswitchReservedEnum718 = 749, 
-    opennslswitchReservedEnum719 = 750, 
-    opennslswitchReservedEnum720 = 751, 
-    opennslswitchReservedEnum721 = 752, 
-    opennslswitchReservedEnum722 = 753, 
-    opennslswitchReservedEnum723 = 754, 
-    opennslswitchReservedEnum724 = 755, 
-    opennslswitchReservedEnum725 = 756, 
-    opennslswitchReservedEnum726 = 757, 
-    opennslswitchReservedEnum727 = 758, 
-    opennslswitchReservedEnum728 = 759, 
-    opennslswitchReservedEnum729 = 760, 
-    opennslswitchReservedEnum730 = 761, 
-    opennslswitchReservedEnum731 = 762, 
-    opennslswitchReservedEnum732 = 763, 
-    opennslswitchReservedEnum733 = 764, 
-    opennslswitchReservedEnum734 = 765, 
-    opennslswitchReservedEnum735 = 766, 
-    opennslswitchReservedEnum736 = 767, 
-    opennslswitchReservedEnum737 = 768, 
-    opennslswitchReservedEnum738 = 769, 
-    opennslswitchReservedEnum739 = 770, 
-    opennslswitchReservedEnum740 = 771, 
-    opennslswitchReservedEnum741 = 772, 
-    opennslswitchReservedEnum742 = 773, 
-    opennslswitchReservedEnum743 = 774, 
-    opennslswitchReservedEnum744 = 775, 
-    opennslswitchReservedEnum745 = 776, 
-    opennslswitchReservedEnum746 = 777, 
-    opennslswitchReservedEnum747 = 778, 
-    opennslswitchReservedEnum748 = 779, 
-    opennslswitchReservedEnum749 = 780, 
-    opennslswitchReservedEnum750 = 781, 
+    opennslswitchReservedEnum673 = 719, 
+    opennslswitchReservedEnum674 = 720, 
+    opennslswitchReservedEnum675 = 721, 
+    opennslswitchReservedEnum676 = 722, 
+    opennslswitchReservedEnum677 = 723, 
+    opennslswitchReservedEnum678 = 724, 
+    opennslswitchReservedEnum679 = 725, 
+    opennslswitchReservedEnum680 = 726, 
+    opennslswitchReservedEnum681 = 727, 
+    opennslswitchReservedEnum682 = 728, 
+    opennslswitchReservedEnum683 = 729, 
+    opennslswitchReservedEnum684 = 730, 
+    opennslswitchReservedEnum685 = 731, 
+    opennslswitchReservedEnum686 = 732, 
+    opennslswitchReservedEnum687 = 733, 
+    opennslswitchReservedEnum688 = 734, 
+    opennslswitchReservedEnum689 = 735, 
+    opennslswitchReservedEnum690 = 736, 
+    opennslswitchReservedEnum691 = 737, 
+    opennslswitchReservedEnum692 = 738, 
+    opennslswitchReservedEnum693 = 739, 
+    opennslswitchReservedEnum694 = 740, 
+    opennslswitchReservedEnum695 = 741, 
+    opennslswitchReservedEnum696 = 742, 
+    opennslswitchReservedEnum697 = 743, 
+    opennslswitchReservedEnum698 = 744, 
+    opennslswitchReservedEnum699 = 745, 
+    opennslswitchReservedEnum700 = 746, 
+    opennslswitchReservedEnum701 = 747, 
+    opennslswitchReservedEnum702 = 748, 
+    opennslswitchReservedEnum703 = 749, 
+    opennslswitchReservedEnum704 = 750, 
+    opennslswitchReservedEnum705 = 751, 
+    opennslswitchReservedEnum706 = 752, 
+    opennslswitchReservedEnum707 = 753, 
+    opennslswitchReservedEnum708 = 754, 
+    opennslswitchReservedEnum709 = 755, 
+    opennslswitchReservedEnum710 = 756, 
+    opennslswitchReservedEnum711 = 757, 
+    opennslswitchReservedEnum712 = 758, 
+    opennslswitchReservedEnum713 = 759, 
+    opennslswitchReservedEnum714 = 760, 
+    opennslswitchReservedEnum715 = 761, 
+    opennslswitchReservedEnum716 = 762, 
+    opennslswitchReservedEnum717 = 763, 
+    opennslswitchReservedEnum718 = 764, 
+    opennslswitchReservedEnum719 = 765, 
+    opennslswitchReservedEnum720 = 766, 
+    opennslswitchReservedEnum721 = 767, 
+    opennslswitchReservedEnum722 = 768, 
+    opennslswitchReservedEnum723 = 769, 
+    opennslswitchReservedEnum724 = 770, 
+    opennslswitchReservedEnum725 = 771, 
+    opennslswitchReservedEnum726 = 772, 
+    opennslswitchReservedEnum727 = 773, 
+    opennslswitchReservedEnum728 = 774, 
+    opennslswitchReservedEnum729 = 775, 
+    opennslswitchReservedEnum730 = 776, 
+    opennslswitchReservedEnum731 = 777, 
+    opennslswitchReservedEnum732 = 778, 
+    opennslswitchReservedEnum733 = 779, 
+    opennslswitchReservedEnum734 = 780, 
+    opennslswitchReservedEnum735 = 781, 
     opennslSwitchEcmpMacroFlowHashEnable = 782, /**< Enable ECMP macro-flow hashing. */
-    opennslswitchReservedEnum751 = 783, 
-    opennslswitchReservedEnum752 = 784, 
-    opennslswitchReservedEnum753 = 785, 
-    opennslswitchReservedEnum754 = 786, 
-    opennslswitchReservedEnum755 = 787, 
-    opennslswitchReservedEnum756 = 788, 
-    opennslswitchReservedEnum757 = 789, 
-    opennslswitchReservedEnum758 = 790, 
-    opennslswitchReservedEnum759 = 791, 
-    opennslswitchReservedEnum760 = 792, 
-    opennslswitchReservedEnum761 = 793, 
-    opennslswitchReservedEnum762 = 794, 
-    opennslswitchReservedEnum763 = 795, 
-    opennslswitchReservedEnum764 = 796, 
-    opennslswitchReservedEnum765 = 797, 
-    opennslswitchReservedEnum766 = 798, 
-    opennslswitchReservedEnum767 = 799, 
-    opennslswitchReservedEnum768 = 800, 
-    opennslswitchReservedEnum769 = 801, 
-    opennslswitchReservedEnum770 = 802, 
-    opennslswitchReservedEnum771 = 803, 
-    opennslswitchReservedEnum772 = 804, 
-    opennslswitchReservedEnum773 = 805, 
-    opennslswitchReservedEnum774 = 806, 
-    opennslswitchReservedEnum775 = 807, 
-    opennslswitchReservedEnum776 = 808, 
-    opennslswitchReservedEnum777 = 809, 
-    opennslswitchReservedEnum778 = 810, 
-    opennslswitchReservedEnum779 = 811, 
-    opennslswitchReservedEnum780 = 812, 
-    opennslswitchReservedEnum781 = 813, 
-    opennslswitchReservedEnum782 = 814, 
-    opennslswitchReservedEnum783 = 815, 
-    opennslswitchReservedEnum784 = 816, 
-    opennslswitchReservedEnum785 = 817, 
-    opennslswitchReservedEnum786 = 818, 
-    opennslswitchReservedEnum787 = 819, 
-    opennslswitchReservedEnum788 = 820, 
-    opennslswitchReservedEnum789 = 821, 
-    opennslswitchReservedEnum790 = 822, 
-    opennslswitchReservedEnum791 = 823, 
-    opennslswitchReservedEnum792 = 824, 
-    opennslswitchReservedEnum793 = 825, 
-    opennslswitchReservedEnum794 = 826, 
-    opennslswitchReservedEnum795 = 827, 
-    opennslswitchReservedEnum796 = 828, 
-    opennslswitchReservedEnum797 = 829, 
-    opennslswitchReservedEnum798 = 830, 
-    opennslswitchReservedEnum799 = 831, 
-    opennslswitchReservedEnum800 = 832, 
-    opennslswitchReservedEnum801 = 833, 
-    opennslswitchReservedEnum802 = 834, 
-    opennslswitchReservedEnum803 = 835, 
-    opennslswitchReservedEnum804 = 836, 
-    opennslswitchReservedEnum805 = 837, 
-    opennslswitchReservedEnum806 = 838, 
-    opennslswitchReservedEnum807 = 839, 
-    opennslswitchReservedEnum808 = 840, 
-    opennslswitchReservedEnum809 = 841, 
-    opennslswitchReservedEnum810 = 842, 
-    opennslswitchReservedEnum811 = 843, 
-    opennslswitchReservedEnum812 = 844, 
-    opennslswitchReservedEnum813 = 845, 
-    opennslswitchReservedEnum814 = 846, 
-    opennslswitchReservedEnum815 = 847, 
-    opennslswitchReservedEnum816 = 848, 
-    opennslswitchReservedEnum817 = 849, 
-    opennslswitchReservedEnum818 = 850, 
-    opennslswitchReservedEnum819 = 851, 
-    opennslswitchReservedEnum820 = 852, 
-    opennslswitchReservedEnum821 = 853, 
-    opennslswitchReservedEnum822 = 854, 
-    opennslswitchReservedEnum823 = 855, 
-    opennslswitchReservedEnum824 = 856, 
-    opennslswitchReservedEnum825 = 857, 
-    opennslswitchReservedEnum826 = 858, 
-    opennslswitchReservedEnum827 = 859, 
-    opennslswitchReservedEnum828 = 860, 
-    opennslswitchReservedEnum829 = 861, 
-    opennslswitchReservedEnum830 = 862, 
-    opennslswitchReservedEnum831 = 863, 
-    opennslswitchReservedEnum832 = 864, 
-    opennslswitchReservedEnum833 = 865, 
-    opennslswitchReservedEnum834 = 866, 
-    opennslswitchReservedEnum835 = 867, 
-    opennslswitchReservedEnum836 = 868, 
-    opennslswitchReservedEnum837 = 869, 
-    opennslswitchReservedEnum838 = 870, 
-    opennslswitchReservedEnum839 = 871, 
-    opennslswitchReservedEnum840 = 872, 
-    opennslswitchReservedEnum841 = 873, 
-    opennslswitchReservedEnum842 = 874, 
-    opennslswitchReservedEnum843 = 875, 
-    opennslswitchReservedEnum844 = 876, 
-    opennslswitchReservedEnum845 = 877, 
-    opennslswitchReservedEnum846 = 878, 
-    opennslswitchReservedEnum847 = 879, 
-    opennslswitchReservedEnum848 = 880, 
-    opennslswitchReservedEnum849 = 881, 
-    opennslswitchReservedEnum850 = 882, 
-    opennslswitchReservedEnum851 = 883, 
-    opennslswitchReservedEnum852 = 884, 
-    opennslswitchReservedEnum853 = 885, 
-    opennslswitchReservedEnum854 = 886, 
-    opennslswitchReservedEnum855 = 887, 
-    opennslswitchReservedEnum856 = 888, 
-    opennslswitchReservedEnum857 = 889, 
-    opennslswitchReservedEnum858 = 890, 
-    opennslswitchReservedEnum859 = 891, 
-    opennslswitchReservedEnum860 = 892, 
-    opennslswitchReservedEnum861 = 893, 
-    opennslswitchReservedEnum862 = 894, 
-    opennslswitchReservedEnum863 = 895, 
-    opennslswitchReservedEnum864 = 896, 
-    opennslswitchReservedEnum865 = 897, 
-    opennslswitchReservedEnum866 = 898, 
-    opennslswitchReservedEnum867 = 899, 
-    opennslswitchReservedEnum868 = 900, 
-    opennslswitchReservedEnum869 = 901, 
-    opennslswitchReservedEnum870 = 902, 
-    opennslswitchReservedEnum871 = 903, 
-    opennslswitchReservedEnum872 = 904, 
-    opennslswitchReservedEnum873 = 905, 
-    opennslswitchReservedEnum874 = 906, 
-    opennslswitchReservedEnum875 = 907, 
-    opennslswitchReservedEnum876 = 908, 
-    opennslswitchReservedEnum877 = 909, 
-    opennslswitchReservedEnum878 = 910, 
-    opennslswitchReservedEnum879 = 911, 
-    opennslswitchReservedEnum880 = 912, 
-    opennslswitchReservedEnum881 = 913, 
-    opennslswitchReservedEnum882 = 914, 
-    opennslswitchReservedEnum883 = 915, 
-    opennslswitchReservedEnum884 = 916 
+    opennslswitchReservedEnum736 = 783, 
+    opennslswitchReservedEnum737 = 784, 
+    opennslswitchReservedEnum738 = 785, 
+    opennslswitchReservedEnum739 = 786, 
+    opennslswitchReservedEnum740 = 787, 
+    opennslswitchReservedEnum741 = 788, 
+    opennslswitchReservedEnum742 = 789, 
+    opennslswitchReservedEnum743 = 790, 
+    opennslswitchReservedEnum744 = 791, 
+    opennslswitchReservedEnum745 = 792, 
+    opennslswitchReservedEnum746 = 793, 
+    opennslswitchReservedEnum747 = 794, 
+    opennslswitchReservedEnum748 = 795, 
+    opennslswitchReservedEnum749 = 796, 
+    opennslswitchReservedEnum750 = 797, 
+    opennslswitchReservedEnum751 = 798, 
+    opennslswitchReservedEnum752 = 799, 
+    opennslswitchReservedEnum753 = 800, 
+    opennslswitchReservedEnum754 = 801, 
+    opennslswitchReservedEnum755 = 802, 
+    opennslswitchReservedEnum756 = 803, 
+    opennslswitchReservedEnum757 = 804, 
+    opennslswitchReservedEnum758 = 805, 
+    opennslswitchReservedEnum759 = 806, 
+    opennslswitchReservedEnum760 = 807, 
+    opennslswitchReservedEnum761 = 808, 
+    opennslswitchReservedEnum762 = 809, 
+    opennslswitchReservedEnum763 = 810, 
+    opennslswitchReservedEnum764 = 811, 
+    opennslswitchReservedEnum765 = 812, 
+    opennslswitchReservedEnum766 = 813, 
+    opennslswitchReservedEnum767 = 814, 
+    opennslswitchReservedEnum768 = 815, 
+    opennslswitchReservedEnum769 = 816, 
+    opennslswitchReservedEnum770 = 817, 
+    opennslswitchReservedEnum771 = 818, 
+    opennslswitchReservedEnum772 = 819, 
+    opennslswitchReservedEnum773 = 820, 
+    opennslswitchReservedEnum774 = 821, 
+    opennslswitchReservedEnum775 = 822, 
+    opennslswitchReservedEnum776 = 823, 
+    opennslswitchReservedEnum777 = 824, 
+    opennslswitchReservedEnum778 = 825, 
+    opennslswitchReservedEnum779 = 826, 
+    opennslswitchReservedEnum780 = 827, 
+    opennslswitchReservedEnum781 = 828, 
+    opennslswitchReservedEnum782 = 829, 
+    opennslswitchReservedEnum783 = 830, 
+    opennslswitchReservedEnum784 = 831, 
+    opennslswitchReservedEnum785 = 832, 
+    opennslswitchReservedEnum786 = 833, 
+    opennslswitchReservedEnum787 = 834, 
+    opennslswitchReservedEnum788 = 835, 
+    opennslswitchReservedEnum789 = 836, 
+    opennslswitchReservedEnum790 = 837, 
+    opennslswitchReservedEnum791 = 838, 
+    opennslswitchReservedEnum792 = 839, 
+    opennslswitchReservedEnum793 = 840, 
+    opennslswitchReservedEnum794 = 841, 
+    opennslswitchReservedEnum795 = 842, 
+    opennslswitchReservedEnum796 = 843, 
+    opennslswitchReservedEnum797 = 844, 
+    opennslswitchReservedEnum798 = 845, 
+    opennslswitchReservedEnum799 = 846, 
+    opennslswitchReservedEnum800 = 847, 
+    opennslswitchReservedEnum801 = 848, 
+    opennslswitchReservedEnum802 = 849, 
+    opennslswitchReservedEnum803 = 850, 
+    opennslswitchReservedEnum804 = 851, 
+    opennslswitchReservedEnum805 = 852, 
+    opennslswitchReservedEnum806 = 853, 
+    opennslswitchReservedEnum807 = 854, 
+    opennslswitchReservedEnum808 = 855, 
+    opennslswitchReservedEnum809 = 856, 
+    opennslswitchReservedEnum810 = 857, 
+    opennslswitchReservedEnum811 = 858, 
+    opennslswitchReservedEnum812 = 859, 
+    opennslswitchReservedEnum813 = 860, 
+    opennslswitchReservedEnum814 = 861, 
+    opennslswitchReservedEnum815 = 862, 
+    opennslswitchReservedEnum816 = 863, 
+    opennslswitchReservedEnum817 = 864, 
+    opennslswitchReservedEnum818 = 865, 
+    opennslswitchReservedEnum819 = 866, 
+    opennslswitchReservedEnum820 = 867, 
+    opennslswitchReservedEnum821 = 868, 
+    opennslswitchReservedEnum822 = 869, 
+    opennslswitchReservedEnum823 = 870, 
+    opennslswitchReservedEnum824 = 871, 
+    opennslswitchReservedEnum825 = 872, 
+    opennslswitchReservedEnum826 = 873, 
+    opennslswitchReservedEnum827 = 874, 
+    opennslswitchReservedEnum828 = 875, 
+    opennslswitchReservedEnum829 = 876, 
+    opennslswitchReservedEnum830 = 877, 
+    opennslswitchReservedEnum831 = 878, 
+    opennslswitchReservedEnum832 = 879, 
+    opennslswitchReservedEnum833 = 880, 
+    opennslswitchReservedEnum834 = 881, 
+    opennslswitchReservedEnum835 = 882, 
+    opennslswitchReservedEnum836 = 883, 
+    opennslswitchReservedEnum837 = 884, 
+    opennslswitchReservedEnum838 = 885, 
+    opennslswitchReservedEnum839 = 886, 
+    opennslswitchReservedEnum840 = 887, 
+    opennslswitchReservedEnum841 = 888, 
+    opennslswitchReservedEnum842 = 889, 
+    opennslswitchReservedEnum843 = 890, 
+    opennslswitchReservedEnum844 = 891, 
+    opennslswitchReservedEnum845 = 892, 
+    opennslswitchReservedEnum846 = 893, 
+    opennslswitchReservedEnum847 = 894, 
+    opennslswitchReservedEnum848 = 895, 
+    opennslswitchReservedEnum849 = 896, 
+    opennslswitchReservedEnum850 = 897, 
+    opennslswitchReservedEnum851 = 898, 
+    opennslswitchReservedEnum852 = 899, 
+    opennslswitchReservedEnum853 = 900, 
+    opennslswitchReservedEnum854 = 901, 
+    opennslswitchReservedEnum855 = 902, 
+    opennslswitchReservedEnum856 = 903, 
+    opennslswitchReservedEnum857 = 904, 
+    opennslswitchReservedEnum858 = 905, 
+    opennslswitchReservedEnum859 = 906, 
+    opennslswitchReservedEnum860 = 907, 
+    opennslswitchReservedEnum861 = 908, 
+    opennslswitchReservedEnum862 = 909, 
+    opennslswitchReservedEnum863 = 910, 
+    opennslswitchReservedEnum864 = 911, 
+    opennslswitchReservedEnum865 = 912, 
+    opennslswitchReservedEnum866 = 913, 
+    opennslswitchReservedEnum867 = 914, 
+    opennslswitchReservedEnum868 = 915, 
+    opennslswitchReservedEnum869 = 916, 
+    opennslswitchReservedEnum870 = 917, 
+    opennslswitchReservedEnum871 = 918, 
+    opennslswitchReservedEnum872 = 919, 
+    opennslswitchReservedEnum873 = 920, 
+    opennslswitchReservedEnum874 = 921, 
+    opennslswitchReservedEnum875 = 922, 
+    opennslswitchReservedEnum876 = 923, 
+    opennslswitchReservedEnum877 = 924, 
+    opennslswitchReservedEnum878 = 925, 
+    opennslswitchReservedEnum879 = 926, 
+    opennslswitchReservedEnum880 = 927, 
+    opennslswitchReservedEnum881 = 928, 
+    opennslswitchReservedEnum882 = 929, 
+    opennslswitchReservedEnum883 = 930, 
+    opennslswitchReservedEnum884 = 931, 
+    opennslswitchReservedEnum885 = 932, 
+    opennslswitchReservedEnum886 = 933, 
+    opennslswitchReservedEnum887 = 934, 
+    opennslswitchReservedEnum888 = 935, 
+    opennslswitchReservedEnum889 = 936, 
+    opennslswitchReservedEnum890 = 937, 
+    opennslswitchReservedEnum891 = 938, 
+    opennslswitchReservedEnum892 = 939, 
+    opennslswitchReservedEnum893 = 940, 
+    opennslswitchReservedEnum894 = 941, 
+    opennslswitchReservedEnum895 = 942, 
+    opennslswitchReservedEnum896 = 943, 
+    opennslswitchReservedEnum897 = 944, 
+    opennslswitchReservedEnum898 = 945, 
+    opennslswitchReservedEnum899 = 946, 
+    opennslswitchReservedEnum900 = 947, 
+    opennslswitchReservedEnum901 = 948, 
+    opennslswitchReservedEnum902 = 949, 
+    opennslswitchReservedEnum903 = 950, 
+    opennslswitchReservedEnum904 = 951, 
+    opennslswitchReservedEnum905 = 952, 
+    opennslswitchReservedEnum906 = 953, 
+    opennslswitchReservedEnum907 = 954, 
+    opennslswitchReservedEnum908 = 955, 
+    opennslswitchReservedEnum909 = 956, 
+    opennslswitchReservedEnum910 = 957, 
+    opennslswitchReservedEnum911 = 958, 
+    opennslswitchReservedEnum912 = 959, 
+    opennslswitchReservedEnum913 = 960 
 } opennsl_switch_control_t;
 
 #define OPENNSL_SWITCH_CONTROL_STR \
@@ -989,6 +1045,7 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum24", \
     "opennslswitchReservedEnum25", \
     "opennslswitchReservedEnum26", \
+    "UnknownL3DestToCpu", \
     "opennslswitchReservedEnum27", \
     "opennslswitchReservedEnum28", \
     "opennslswitchReservedEnum29", \
@@ -1002,12 +1059,15 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum37", \
     "opennslswitchReservedEnum38", \
     "opennslswitchReservedEnum39", \
+    "V6L3DstMissToCpu", \
     "opennslswitchReservedEnum40", \
     "opennslswitchReservedEnum41", \
+    "V4L3DstMissToCpu", \
     "opennslswitchReservedEnum42", \
     "opennslswitchReservedEnum43", \
     "opennslswitchReservedEnum44", \
     "opennslswitchReservedEnum45", \
+    "L3SlowpathToCpu", \
     "opennslswitchReservedEnum46", \
     "opennslswitchReservedEnum47", \
     "opennslswitchReservedEnum48", \
@@ -1043,21 +1103,23 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum78", \
     "opennslswitchReservedEnum79", \
     "opennslswitchReservedEnum80", \
+    "ArpReplyToCpu", \
     "opennslswitchReservedEnum81", \
+    "ArpRequestToCpu", \
     "opennslswitchReservedEnum82", \
     "opennslswitchReservedEnum83", \
-    "opennslswitchReservedEnum84", \
-    "ArpReplyToCpu", \
-    "opennslswitchReservedEnum85", \
-    "ArpRequestToCpu", \
-    "opennslswitchReservedEnum86", \
-    "opennslswitchReservedEnum87", \
     "NdPktToCpu", \
-    "opennslswitchReservedEnum88", \
-    "opennslswitchReservedEnum89", \
+    "opennslswitchReservedEnum84", \
+    "opennslswitchReservedEnum85", \
     "IgmpPktToCpu", \
-    "opennslswitchReservedEnum90", \
+    "opennslswitchReservedEnum86", \
     "DhcpPktToCpu", \
+    "DhcpPktDrop", \
+    "opennslswitchReservedEnum87", \
+    "opennslswitchReservedEnum88", \
+    "V4ResvdMcPktToCpu", \
+    "opennslswitchReservedEnum89", \
+    "opennslswitchReservedEnum90", \
     "opennslswitchReservedEnum91", \
     "opennslswitchReservedEnum92", \
     "opennslswitchReservedEnum93", \
@@ -1093,23 +1155,17 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum123", \
     "opennslswitchReservedEnum124", \
     "opennslswitchReservedEnum125", \
+    "HashControl", \
     "opennslswitchReservedEnum126", \
     "opennslswitchReservedEnum127", \
     "opennslswitchReservedEnum128", \
     "opennslswitchReservedEnum129", \
     "opennslswitchReservedEnum130", \
     "opennslswitchReservedEnum131", \
-    "HashControl", \
     "opennslswitchReservedEnum132", \
     "opennslswitchReservedEnum133", \
     "opennslswitchReservedEnum134", \
     "opennslswitchReservedEnum135", \
-    "opennslswitchReservedEnum136", \
-    "opennslswitchReservedEnum137", \
-    "opennslswitchReservedEnum138", \
-    "opennslswitchReservedEnum139", \
-    "opennslswitchReservedEnum140", \
-    "opennslswitchReservedEnum141", \
     "HashSeed0", \
     "HashSeed1", \
     "HashField0PreProcessEnable", \
@@ -1118,7 +1174,7 @@ typedef enum opennsl_switch_control_e {
     "HashField0Config1", \
     "HashField1Config", \
     "HashField1Config1", \
-    "opennslswitchReservedEnum142", \
+    "opennslswitchReservedEnum136", \
     "HashSelectControl", \
     "HashIP4Field0", \
     "HashIP4Field1", \
@@ -1132,6 +1188,12 @@ typedef enum opennsl_switch_control_e {
     "HashIP6TcpUdpField1", \
     "HashIP6TcpUdpPortsEqualField0", \
     "HashIP6TcpUdpPortsEqualField1", \
+    "opennslswitchReservedEnum137", \
+    "opennslswitchReservedEnum138", \
+    "opennslswitchReservedEnum139", \
+    "opennslswitchReservedEnum140", \
+    "opennslswitchReservedEnum141", \
+    "opennslswitchReservedEnum142", \
     "opennslswitchReservedEnum143", \
     "opennslswitchReservedEnum144", \
     "opennslswitchReservedEnum145", \
@@ -1167,14 +1229,14 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum175", \
     "opennslswitchReservedEnum176", \
     "opennslswitchReservedEnum177", \
+    "ECMPHashSet0Offset", \
+    "ECMPHashSet1Offset", \
     "opennslswitchReservedEnum178", \
     "opennslswitchReservedEnum179", \
     "opennslswitchReservedEnum180", \
     "opennslswitchReservedEnum181", \
     "opennslswitchReservedEnum182", \
     "opennslswitchReservedEnum183", \
-    "ECMPHashSet0Offset", \
-    "ECMPHashSet1Offset", \
     "opennslswitchReservedEnum184", \
     "opennslswitchReservedEnum185", \
     "opennslswitchReservedEnum186", \
@@ -1187,18 +1249,27 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum193", \
     "opennslswitchReservedEnum194", \
     "opennslswitchReservedEnum195", \
+    "L3EgressMode", \
     "opennslswitchReservedEnum196", \
+    "L3IngressMode", \
     "opennslswitchReservedEnum197", \
     "opennslswitchReservedEnum198", \
     "opennslswitchReservedEnum199", \
     "opennslswitchReservedEnum200", \
     "opennslswitchReservedEnum201", \
-    "L3EgressMode", \
+    "WarmBoot", \
+    "StableSelect", \
+    "StableSize", \
+    "StableUsed", \
+    "StableConsistent", \
+    "ControlSync", \
+    "ControlAutoSync", \
     "opennslswitchReservedEnum202", \
     "opennslswitchReservedEnum203", \
     "opennslswitchReservedEnum204", \
     "opennslswitchReservedEnum205", \
     "opennslswitchReservedEnum206", \
+    "L3UcastTtl1ToCpu", \
     "opennslswitchReservedEnum207", \
     "opennslswitchReservedEnum208", \
     "opennslswitchReservedEnum209", \
@@ -1206,7 +1277,6 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum211", \
     "opennslswitchReservedEnum212", \
     "opennslswitchReservedEnum213", \
-    "ControlSync", \
     "opennslswitchReservedEnum214", \
     "opennslswitchReservedEnum215", \
     "opennslswitchReservedEnum216", \
@@ -1666,6 +1736,8 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum670", \
     "opennslswitchReservedEnum671", \
     "opennslswitchReservedEnum672", \
+    "BstEnable", \
+    "BstTrackingMode", \
     "opennslswitchReservedEnum673", \
     "opennslswitchReservedEnum674", \
     "opennslswitchReservedEnum675", \
@@ -1680,8 +1752,6 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum684", \
     "opennslswitchReservedEnum685", \
     "opennslswitchReservedEnum686", \
-    "BstEnable", \
-    "BstTrackingMode", \
     "opennslswitchReservedEnum687", \
     "opennslswitchReservedEnum688", \
     "opennslswitchReservedEnum689", \
@@ -1731,6 +1801,7 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum733", \
     "opennslswitchReservedEnum734", \
     "opennslswitchReservedEnum735", \
+    "EcmpMacroFlowHashEnable", \
     "opennslswitchReservedEnum736", \
     "opennslswitchReservedEnum737", \
     "opennslswitchReservedEnum738", \
@@ -1745,7 +1816,6 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum747", \
     "opennslswitchReservedEnum748", \
     "opennslswitchReservedEnum749", \
-    "EcmpMacroFlowHashEnable", \
     "opennslswitchReservedEnum750", \
     "opennslswitchReservedEnum751", \
     "opennslswitchReservedEnum752", \
@@ -1878,7 +1948,37 @@ typedef enum opennsl_switch_control_e {
     "opennslswitchReservedEnum879", \
     "opennslswitchReservedEnum880", \
     "opennslswitchReservedEnum881", \
-    "opennslswitchReservedEnum882" 
+    "opennslswitchReservedEnum882", \
+    "opennslswitchReservedEnum883", \
+    "opennslswitchReservedEnum884", \
+    "opennslswitchReservedEnum885", \
+    "opennslswitchReservedEnum886", \
+    "opennslswitchReservedEnum887", \
+    "opennslswitchReservedEnum888", \
+    "opennslswitchReservedEnum889", \
+    "opennslswitchReservedEnum890", \
+    "opennslswitchReservedEnum891", \
+    "opennslswitchReservedEnum892", \
+    "opennslswitchReservedEnum893", \
+    "opennslswitchReservedEnum894", \
+    "opennslswitchReservedEnum895", \
+    "opennslswitchReservedEnum896", \
+    "opennslswitchReservedEnum897", \
+    "opennslswitchReservedEnum898", \
+    "opennslswitchReservedEnum899", \
+    "opennslswitchReservedEnum900", \
+    "opennslswitchReservedEnum901", \
+    "opennslswitchReservedEnum902", \
+    "opennslswitchReservedEnum903", \
+    "opennslswitchReservedEnum904", \
+    "opennslswitchReservedEnum905", \
+    "opennslswitchReservedEnum906", \
+    "opennslswitchReservedEnum907", \
+    "opennslswitchReservedEnum908", \
+    "opennslswitchReservedEnum909", \
+    "opennslswitchReservedEnum910", \
+    "opennslswitchReservedEnum911", \
+    "opennslswitchReservedEnum912" 
 
 #define OPENNSL_SWITCH_STABLE_APPLICATION   (_SHR_SWITCH_STABLE_APPLICATION) 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -1946,6 +2046,32 @@ extern int opennsl_switch_control_set(
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
  *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
+ *\param    arg [OUT]   (for _set) Argument whose meaning is dependent on type
+ *
+ *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
+ *\retval    OPENNSL_E_XXX		Other error
+ ******************************************************************************/
+extern int opennsl_switch_control_port_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_switch_control_t type, 
+    int *arg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure port-specific and device-wide operating modes. Device wide
+ *       operating modes are configured on all ports, except the stack ports.
+ *
+ *\description These APIs set parameters related to general device operation such
+ *          as controlling whether certain types of packets should be sent to
+ *          the local CPU, or setting the priority to be used when such
+ *          packets are forwarded to the CPU.  The port specific operations
+ *          affect only the indicated port (where possible) while the general
+ *          APIs affect all ports.  Not all operations can be carried out on
+ *          individual ports on all devices.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
  *\param    arg [IN]   (for _set) Argument whose meaning is dependent on type
  *
  *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
@@ -1970,13 +2096,25 @@ typedef void (*opennsl_switch_event_cb_t)(
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Registers/Unregisters a callback function for switch critical events.
  *
+ *\description These APIs allow to register a callback function which will be
+ *          called upon a critical event on the chip.  By registering a
+ *          callback function application can be notified upon critical errors
+ *          described in table below. If such callback been called, it is
+ *          strongly recommend to log all the information provided in arg1,
+ *          arg2 and arg3 and reboot the chip.
+ *          Call back function is defined as following .
  *
  *\param    unit [IN]   Unit number.
- *\param    cb [IN]
- *\param    userdata [IN]
+ *\param    cb [IN]   A callback function to be called upon critical event
+ *\param    userdata [IN]   Pointer to any provided user data to be called with a
+ *          callback
  *
- *\retval   OPENNSL_E_xxx
+ *\retval    OPENNSL_E_NONE - Success
+ *\retval    OPENNSL_E_UNIT - Invalid unit provided
+ *\retval    OPENNSL_E_PARAM - Invalid callback function provided.
+ *\retval    OPENNSL_E_MEMORY - Not enough memory to register callback
  ******************************************************************************/
 extern int opennsl_switch_event_register(
     int unit, 
@@ -1984,13 +2122,25 @@ extern int opennsl_switch_event_register(
     void *userdata) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Registers/Unregisters a callback function for switch critical events.
  *
+ *\description These APIs allow to register a callback function which will be
+ *          called upon a critical event on the chip.  By registering a
+ *          callback function application can be notified upon critical errors
+ *          described in table below. If such callback been called, it is
+ *          strongly recommend to log all the information provided in arg1,
+ *          arg2 and arg3 and reboot the chip.
+ *          Call back function is defined as following .
  *
  *\param    unit [IN]   Unit number.
- *\param    cb [IN]
- *\param    userdata [IN]
+ *\param    cb [IN]   A callback function to be called upon critical event
+ *\param    userdata [IN]   Pointer to any provided user data to be called with a
+ *          callback
  *
- *\retval   OPENNSL_E_xxx
+ *\retval    OPENNSL_E_NONE - Success
+ *\retval    OPENNSL_E_UNIT - Invalid unit provided
+ *\retval    OPENNSL_E_PARAM - Invalid callback function provided.
+ *\retval    OPENNSL_E_MEMORY - Not enough memory to register callback
  ******************************************************************************/
 extern int opennsl_switch_event_unregister(
     int unit, 
@@ -2021,5 +2171,140 @@ extern int opennsl_switch_event_unregister(
                                                       address lower 16 bits. */
 #define OPENNSL_HASH_FIELD_IP6SRC_HI    0x00008000 /**< IPv6 collapsed source
                                                       address upper 16 bits. */
+/** packet trace lookup result enums */
+typedef enum opennsl_switch_pkt_trace_lookup_e {
+    opennslswitchReservedEnum914 = 0, 
+    opennslswitchReservedEnum915 = 1, 
+    opennslswitchReservedEnum916 = 2, 
+    opennslswitchReservedEnum917 = 3, 
+    opennslswitchReservedEnum918 = 6, 
+    opennslswitchReservedEnum919 = 7, 
+    opennslswitchReservedEnum920 = 8, 
+    opennslswitchReservedEnum921 = 9, 
+    opennslswitchReservedEnum922 = 10, 
+    opennslswitchReservedEnum923 = 11, 
+    opennslswitchReservedEnum924 = 12, 
+    opennslswitchReservedEnum925 = 13, 
+    opennslswitchReservedEnum926 = 14, 
+    opennslswitchReservedEnum927 = 15, 
+    opennslswitchReservedEnum928 = 16, 
+    opennslswitchReservedEnum929 = 17, 
+    opennslswitchReservedEnum930 = 18, 
+    opennslswitchReservedEnum931 = 19, 
+    opennslSwitchPktTraceLookupCount = 20 
+} opennsl_switch_pkt_trace_lookup_t;
+
+/** lookup result set bit map */
+typedef struct opennsl_switch_pkt_trace_lookup_result_s {
+    SHR_BITDCL pkt_trace_status_bitmap[_SHR_BITDCLSIZE(opennslSwitchPktTraceLookupCount)]; /**< bit map for packet trace lookup
+                                           result set */
+} opennsl_switch_pkt_trace_lookup_result_t;
+
+/** packet trace resolution enums */
+typedef enum opennsl_switch_pkt_trace_resolution_e {
+    opennslswitchReservedEnum932, 
+    opennslswitchReservedEnum933, 
+    opennslswitchReservedEnum934, 
+    opennslswitchReservedEnum935, 
+    opennslswitchReservedEnum936, 
+    opennslswitchReservedEnum937, 
+    opennslswitchReservedEnum938, 
+    opennslswitchReservedEnum939, 
+    opennslswitchReservedEnum940, 
+    opennslswitchReservedEnum941, 
+    opennslswitchReservedEnum942, 
+    opennslswitchReservedEnum943, 
+    opennslswitchReservedEnum944, 
+    opennslswitchReservedEnum945, 
+    opennslswitchReservedEnum946, 
+    opennslswitchReservedEnum947, 
+    opennslswitchReservedEnum948, 
+    opennslswitchReservedEnum949, 
+    opennslswitchReservedEnum950, 
+    opennslswitchReservedEnum951, 
+    opennslswitchReservedEnum952, 
+    opennslswitchReservedEnum953, 
+    opennslswitchReservedEnum954, 
+    opennslswitchReservedEnum955, 
+    opennslswitchReservedEnum956, 
+    opennslswitchReservedEnum957, 
+    opennslswitchReservedEnum958, 
+    opennslswitchReservedEnum959 
+} opennsl_switch_pkt_trace_resolution_t;
+
+#define OPENNSL_SWITCH_PKT_TRACE_ECMP_1     0x0001     /**< level 1 ecmp hashing
+                                                          resolution done */
+#define OPENNSL_SWITCH_PKT_TRACE_ECMP_2     0x0002     /**< level 2 ecmp hashing
+                                                          resolution done */
+#define OPENNSL_SWITCH_PKT_TRACE_TRUNK      0x0004     /**< trunk hashing
+                                                          resolution done */
+#define OPENNSL_SWITCH_PKT_TRACE_FABRIC_TRUNK 0x0008     /**< hg trunk hashing
+                                                          resolution done */
+/** packet hashing resolution information */
+typedef struct opennsl_switch_pkt_trace_hashing_info_s {
+    uint32 flags;                       /**< flag containing
+                                           OPENNSL_SWITCH_PKT_TRACE_ECMP/TRUNK/FABRIC_TRUNK,
+                                           0 == no hashing resolution done */
+    opennsl_if_t ecmp_1_group;          /**< multipath egress forwarding object. */
+    opennsl_if_t ecmp_1_egress;         /**< ecmp destination interface */
+    opennsl_if_t ecmp_2_group;          /**< multipath egress forwarding object. */
+    opennsl_if_t ecmp_2_egress;         /**< ecmp destination interface */
+    opennsl_gport_t trunk;              /**< destination trunk group */
+    opennsl_gport_t trunk_member;       /**< destination member port which packet
+                                           egress. */
+    opennsl_gport_t fabric_trunk;       /**< destination hg trunk group */
+    opennsl_gport_t fabric_trunk_member; /**< destination member hg port which
+                                           packet will egress. */
+} opennsl_switch_pkt_trace_hashing_info_t;
+
+#define OPENNSL_SWITCH_PKT_TRACE_RAW_DATA_MAX 112        /**< max bytes of
+                                                          pkt_trace_info.raw_data */
+/** packet trace ingress process data */
+typedef struct opennsl_switch_pkt_trace_info_s {
+    opennsl_switch_pkt_trace_lookup_result_t pkt_trace_lookup_status; /**< packet trace lookup status set */
+    opennsl_switch_pkt_trace_resolution_t pkt_trace_resolution; /**< packet trace resolution result */
+    opennsl_switch_pkt_trace_hashing_info_t pkt_trace_hash_info; /**< packet trace hashing information */
+    opennsl_stg_stp_t pkt_trace_stp_state; /**< packet trace ingress stp state */
+    uint32 dest_pipe_num;               /**< ingress pipeline number of the pkt
+                                           trace packet */
+    uint32 raw_data_length;             /**< number of bytes returned as raw_data */
+    uint8 raw_data[OPENNSL_SWITCH_PKT_TRACE_RAW_DATA_MAX]; /**< packet trace process result data in
+                                           raw format */
+} opennsl_switch_pkt_trace_info_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Generate a visibility trace packet and then read the result of the
+ *       packets ingress processing information.
+ *
+ *\description Generate a visibility packet. Read visibility packet process data
+ *          from PTR_RESULTS_BUFFER_IVP, ISW1, and ISW2 then store the raw
+ *          data into opennsl_pkt_trace_info_t*  Last, convert the raw data
+ *          into abstracted format and store into opennsl_pkt_trace_info_t*
+ *          These profile options are used to set loopback headers
+ *          cpu_pkt_profile field.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    options [IN]   FLAGS to select pre-configured cpu_pkt_profile register
+ *          values
+ *\param    port [IN]
+ *\param    len [IN]   Number of bytes to copy from data
+ *\param    data [IN]   Source packet buffer to copy from
+ *\param    pkt_trace_info [IN,OUT]   visibility packet process information in
+ *          opennsl_pkt_trace_info_s format
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_switch_pkt_trace_info_get(
+    int unit, 
+    uint32 options, 
+    uint8 port, 
+    int len, 
+    uint8 *data, 
+    opennsl_switch_pkt_trace_info_t *pkt_trace_info) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #endif /* __OPENNSL_SWITCH_H__ */
 /*@}*/

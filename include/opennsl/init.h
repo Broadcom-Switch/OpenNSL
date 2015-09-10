@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2014
+ * (C) Copyright Broadcom Corporation 2013-2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,8 @@ typedef struct opennsl_info_s {
  *          appropriate dispatch driver.
  *
  *\param    unit [IN]   Unit number.
+ *\param    type [IN]   Type of OPENNSL API dispatch driver
+ *\param    subtype [IN]   Argument to dispatch driver
  *\param    remunit [IN]   Underlying remote unit
  *
  *\retval    unit			the attached non-negative unit number (if successful)
@@ -56,8 +58,8 @@ typedef struct opennsl_info_s {
  ******************************************************************************/
 extern int opennsl_attach(
     int unit, 
-    char *reserved1, 
-    char *reserved2, 
+    char *type, 
+    char *subtype, 
     int remunit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
