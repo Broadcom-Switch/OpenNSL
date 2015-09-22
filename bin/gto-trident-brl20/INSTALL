@@ -52,7 +52,7 @@ Alternatively, you can write the Linux kernel/rootfs to the persistent flash:
 Once Linux starts, a login prompt will be displayed. Following username and
 password should be used to login:
 User: root
-Password: lvl7dbg
+Password: broadcom
 
 Building OpenNSL
 ================

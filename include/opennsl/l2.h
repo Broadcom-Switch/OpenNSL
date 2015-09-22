@@ -30,6 +30,10 @@
 #define OPENNSL_L2_DISCARD_DST  0x00000004 
 #define OPENNSL_L2_L3LOOKUP     0x00000010 
 #define OPENNSL_L2_STATIC       0x00000020 
+#define OPENNSL_L2_MOVE_PORT    0x00100000 
+#define OPENNSL_L2_CALLBACK_DELETE      0          
+#define OPENNSL_L2_CALLBACK_ADD         1          
+#define OPENNSL_L2_CALLBACK_MOVE_EVENT  5          
 /** Device-independent L2 address structure. */
 typedef struct opennsl_l2_addr_s {
     uint32 flags;                       /**< OPENNSL_L2_xxx flags. */
@@ -133,7 +137,38 @@ extern int opennsl_l2_addr_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/** 
+ * Callback function used for receiving notification about insertions
+ * into and deletions from the L2 table dynamically as they occur. Valid
+ * operations are: delete, add, and report. A report with l2addr=NULL
+ * indicates a scan completion of the L2 table.
+ */
+typedef void (*opennsl_l2_addr_callback_t)(
+    int unit, 
+    opennsl_l2_addr_t *l2addr, 
+    int operation, 
+    void *userdata);
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Register/Unregister a callback routine for OPENNSL L2 subsystem.
+ *
+ *\description Register/Unregister a callback routine that will be called
+ *          whenever an entry is  added into or deleted from the L2 address
+ *          table. Both callback and userdata  must match for register and
+ *          unregister calls.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    callback [IN]   Callback function of type opennsl_l2_addr_callback_t
+ *\param    userdata [IN]   Arbitrary value passed to callback along with messages
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_register(
+    int unit, 
+    opennsl_l2_addr_callback_t callback, 
+    void *userdata) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Set/Get the age timer.

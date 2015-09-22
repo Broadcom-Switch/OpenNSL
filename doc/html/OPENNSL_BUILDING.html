@@ -93,6 +93,20 @@ Celestica Redstone-XP switch - x86/Trident2</h3>
 <li>Kernel version: Linux version 3.16.0-29-generic (Pre-installed) </li>
 <li>Root file system: Pre-installed on Celestica Redstone-XP switch</li>
 </ul>
+<h2><a class="anchor" id="OPENNSL_GPL"></a>
+GPL Linux Kernel modules</h2>
+<p>OpenNSL includes source code for Linux kernel modules that handle low-level configuration of Broadcom network switch silicon. For the supported platforms, pre-compiled binaries of the kernel modules are included in the OpenNSL package. Note that the kernel modules are compiled for a specific Linux kernel version as mentioned in the above section.</p>
+<p>To re-compile the Linux kernel modules:</p>
+<ul>
+<li>Identify the Linux kernel version being used on the target platform. </li>
+<li>Identify the path for Linux header files associated with the kernel. </li>
+<li>Identify the path for tool chain used for the target platform. </li>
+<li>Update the KERNDIR, LINUX_INCLUDE, CROSS_COMPILE variables in the platform specific Makefile. </li>
+<li>For GTO based Broadcom reference platforms, use the "sdk-x.y.z-gpl-modules/make/Makefile.linux-gto-2_6" file. </li>
+<li>Invoke 'make' from the platform specific target folder 'sdk-x.y.z-gpl-modules/systems/linux/user/{PLATFORM}'. </li>
+<li>For GTO based Broadcom reference platforms, invoke 'make' from 'sdk-x.y.z-gpl-modules/systems/linux/user/gto-2_6' folder. </li>
+<li>The compiled kernel modules are available in 'sdk-x.y.z-gpl-modules/build/linux/user/{PLATFORM}' folder.</li>
+</ul>
 <h2><a class="anchor" id="OPENNSL_BUILD_VARIABLES"></a>
 Build Variables</h2>
 <p>The environment variables are set in the Makefile available in the opennsl_root/example directory.</p>
