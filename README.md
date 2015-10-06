@@ -13,7 +13,7 @@ software based on Broadcom network switch architecture based platforms.
 Documentation
 =============
 
-Detailed documentation can be found at `http://Broadcom-Switch.github.io/OpenNSL/doc/html/index.html`.
+Detailed documentation can be found at http://Broadcom-Switch.github.io/OpenNSL/doc/html/index.html.
 
 Legal
 =====
