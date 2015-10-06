@@ -1,6 +1,6 @@
 OpenNSL
 ======
-OpenNSL 6.4.6.x Switch Specification and Software
+OpenNSL 2.0.0.x Switch Specification and Software
 
 Overview
 ========
@@ -13,7 +13,7 @@ software based on Broadcom network switch architecture based platforms.
 Documentation
 =============
 
-Detailed documentation can be found at `doc/html/index.html`.
+Detailed documentation can be found at `http://Broadcom-Switch.github.io/OpenNSL/doc/html/index.html`.
 
 Legal
 =====

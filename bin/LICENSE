@@ -206,14 +206,13 @@ Switch System
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP
-Switch System
+bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/wedge-trident        - Wedge
+bin/wedge-trident        - Wedge Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2

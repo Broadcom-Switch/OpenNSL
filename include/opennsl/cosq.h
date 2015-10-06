@@ -1,4 +1,4 @@
-/** \addtogroup cosq Class of Service Queue Configuration
+/** \addtogroup  
  *  @{
  */
 /*****************************************************************************

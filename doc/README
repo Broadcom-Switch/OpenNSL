@@ -1,12 +1,16 @@
 OpenNSL
 =======
 
-For documentation, please open html/index.html.  This contains documentation for:
+For documentation, please open http://Broadcom-Switch.github.io/OpenNSL/doc/html/index.html.
+
+This contains documentation for:
 
  o Overview of OpenNSL with information necessary for installing and configuring the environment.
- 
+
  o Information on the OpenNSL API including a reference of the OpenNSL API
    functions, a list of example Client Applications and how they use the OpenNSL API.
+
+Note: Opening the files in the html directory directly from github.com will display HTML, use the github.io to view rendered HTML.
 
 Broadcom Corporation
 5300 California Avenue
