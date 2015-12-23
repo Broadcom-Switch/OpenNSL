@@ -217,3 +217,9 @@ bin/wedge-trident        - Wedge Switch System
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/as5712               - AS5712 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2

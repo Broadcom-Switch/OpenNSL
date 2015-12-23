@@ -61,6 +61,7 @@ typedef struct opennsl_port_config_s {
                                            pipes per device can be obtained via
                                            num_pipes field of opennsl_info_t. */
     opennsl_pbmp_t nif;                 /**< Mask of Network Interfaces ports. */
+    opennsl_pbmp_t control;             /**< Mask of hot swap controlling ports. */
 } opennsl_port_config_t;
 
 /** Port ability */
@@ -123,6 +124,8 @@ typedef _shr_port_ability_t opennsl_port_ability_t;
                                                           having PAUSE_TX be
                                                           different than
                                                           PAUSE_RX. */
+#define OPENNSL_PORT_ABILITY_FEC            _SHR_PA_FEC /**< FEC ability support. */
+#define OPENNSL_PORT_ABILITY_FEC_REQUEST    _SHR_PA_FEC_REQUEST /**< FEC ability request. */
 #define OPENNSL_PORT_ABILITY_EEE_100MB_BASETX _SHR_PA_EEE_100MB_BASETX /**< EEE ability at
                                                           100M-BaseTX. */
 #define OPENNSL_PORT_ABILITY_EEE_1GB_BASET  _SHR_PA_EEE_1GB_BASET /**< EEE ability at
@@ -561,22 +564,37 @@ typedef _shr_port_if_t opennsl_port_if_t;
 
 #define OPENNSL_PORT_IF_NOCXN       _SHR_PORT_IF_NOCXN 
 #define OPENNSL_PORT_IF_NULL        _SHR_PORT_IF_NULL 
-#define OPENNSL_PORT_IF_MII         _SHR_PORT_IF_MII 
-#define OPENNSL_PORT_IF_GMII        _SHR_PORT_IF_GMII 
+#define OPENNSL_PORT_IF_MII         _SHR_PORT_IF_MII /**< MII Operating mode, not
+                                                  supported on all ports */
+#define OPENNSL_PORT_IF_GMII        _SHR_PORT_IF_GMII /**< GMII Operating mode, not
+                                                  supported on all ports */
 #define OPENNSL_PORT_IF_SGMII       _SHR_PORT_IF_SGMII 
-#define OPENNSL_PORT_IF_TBI         _SHR_PORT_IF_TBI 
-#define OPENNSL_PORT_IF_XGMII       _SHR_PORT_IF_XGMII 
-#define OPENNSL_PORT_IF_RGMII       _SHR_PORT_IF_RGMII 
-#define OPENNSL_PORT_IF_SFI         _SHR_PORT_IF_SFI 
-#define OPENNSL_PORT_IF_XFI         _SHR_PORT_IF_XFI 
-#define OPENNSL_PORT_IF_KR          _SHR_PORT_IF_KR 
-#define OPENNSL_PORT_IF_KR2         _SHR_PORT_IF_KR2 
-#define OPENNSL_PORT_IF_KR4         _SHR_PORT_IF_KR4 
-#define OPENNSL_PORT_IF_CR          _SHR_PORT_IF_CR 
-#define OPENNSL_PORT_IF_CR2         _SHR_PORT_IF_CR2 
-#define OPENNSL_PORT_IF_CR4         _SHR_PORT_IF_CR4 
-#define OPENNSL_PORT_IF_XLAUI       _SHR_PORT_IF_XLAUI 
-#define OPENNSL_PORT_IF_XLAUI2      _SHR_PORT_IF_XLAUI2 
+#define OPENNSL_PORT_IF_TBI         _SHR_PORT_IF_TBI /**< TBI interface supported on
+                                                  Gigabit Ethernet ports
+                                                  operating at gigabit speeds */
+#define OPENNSL_PORT_IF_XGMII       _SHR_PORT_IF_XGMII /**< 10-Gigabit interface */
+#define OPENNSL_PORT_IF_RGMII       _SHR_PORT_IF_RGMII /**< Reduced Gigabit Media
+                                                  Independent Interface */
+#define OPENNSL_PORT_IF_SFI         _SHR_PORT_IF_SFI /**< SFI 10-Gigabit serial
+                                                  electrical interface */
+#define OPENNSL_PORT_IF_XFI         _SHR_PORT_IF_XFI /**< XFI 10-Gigabit serial
+                                                  electrical interface */
+#define OPENNSL_PORT_IF_KR          _SHR_PORT_IF_KR /**< Backplane 10 GbE 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_KR2         _SHR_PORT_IF_KR2 /**< Backplane 2x10GbE 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_KR4         _SHR_PORT_IF_KR4 /**< Backplane 4x10 GbE 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_CR          _SHR_PORT_IF_CR /**< Copper 10 GbE 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_CR2         _SHR_PORT_IF_CR2 /**< Copper 2x10GbE 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_CR4         _SHR_PORT_IF_CR4 /**< Copper 4x10 GbE 64B/66B
+                                                  interface. */
+#define OPENNSL_PORT_IF_XLAUI       _SHR_PORT_IF_XLAUI /**< 40 Gigabit Attachment Unit
+                                                  Interface */
+#define OPENNSL_PORT_IF_XLAUI2      _SHR_PORT_IF_XLAUI2 /**< 40 Gigabit Attachment Unit
+                                                  Interface over 2 lanes */
 #define OPENNSL_PORT_IF_RXAUI       _SHR_PORT_IF_RXAUI 
 #define OPENNSL_PORT_IF_XAUI        _SHR_PORT_IF_XAUI 
 #define OPENNSL_PORT_IF_SPAUI       _SHR_PORT_IF_SPAUI 
@@ -584,17 +602,36 @@ typedef _shr_port_if_t opennsl_port_if_t;
 #define OPENNSL_PORT_IF_ILKN        _SHR_PORT_IF_ILKN 
 #define OPENNSL_PORT_IF_RCY         _SHR_PORT_IF_RCY 
 #define OPENNSL_PORT_IF_FAT_PIPE    _SHR_PORT_IF_FAT_PIPE 
-#define OPENNSL_PORT_IF_SR          _SHR_PORT_IF_SR 
-#define OPENNSL_PORT_IF_SR2         _SHR_PORT_IF_SR2 
+#define OPENNSL_PORT_IF_SR          _SHR_PORT_IF_SR /**< Fiber SR/LR 64B/66B interface */
+#define OPENNSL_PORT_IF_SR2         _SHR_PORT_IF_SR2 /**< Fiber 2x10GbE 64B/66B
+                                                  interface. */
 #define OPENNSL_PORT_IF_CAUI        _SHR_PORT_IF_CAUI 
-#define OPENNSL_PORT_IF_LR          _SHR_PORT_IF_LR 
-#define OPENNSL_PORT_IF_LR4         _SHR_PORT_IF_LR4 
-#define OPENNSL_PORT_IF_SR4         _SHR_PORT_IF_SR4 
+#define OPENNSL_PORT_IF_LR          _SHR_PORT_IF_LR /**< Fiber LR 64B/66B interface */
+#define OPENNSL_PORT_IF_LR4         _SHR_PORT_IF_LR4 /**< Fiber LR4 64B/66B interface */
+#define OPENNSL_PORT_IF_SR4         _SHR_PORT_IF_SR4 /**< Fiber SR4 64B/66B interface */
 #define OPENNSL_PORT_IF_KX          _SHR_PORT_IF_KX 
-#define OPENNSL_PORT_IF_ZR          _SHR_PORT_IF_ZR 
-#define OPENNSL_PORT_IF_SR10        _SHR_PORT_IF_SR10 
-#define OPENNSL_PORT_IF_OTL         _SHR_PORT_IF_OTL 
+#define OPENNSL_PORT_IF_ZR          _SHR_PORT_IF_ZR /**< Fiber ZR 64B/66B interface */
+#define OPENNSL_PORT_IF_SR10        _SHR_PORT_IF_SR10 /**< Fiber SR10 64B/66B interface. */
+#define OPENNSL_PORT_IF_OTL         _SHR_PORT_IF_OTL /**< Fiber 4x25 GbE OTL interface */
 #define OPENNSL_PORT_IF_CPU         _SHR_PORT_IF_CPU 
+#define OPENNSL_PORT_IF_ER          _SHR_PORT_IF_ER /**< Fiber ER 64B/66B interface */
+#define OPENNSL_PORT_IF_ER2         _SHR_PORT_IF_ER2 /**< Fiber ER2 2x10G 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_ER4         _SHR_PORT_IF_ER4 /**< Fiber ER4 4x10G 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_CX          _SHR_PORT_IF_CX /**< Copper 10G 10B/8B interface */
+#define OPENNSL_PORT_IF_CX2         _SHR_PORT_IF_CX2 /**< Copper 2x10G 10B/8B interface. */
+#define OPENNSL_PORT_IF_CX4         _SHR_PORT_IF_CX4 /**< Copper 4x10G 10B/8B interface */
+#define OPENNSL_PORT_IF_CAUI_C2C    _SHR_PORT_IF_CAUI_C2C /**< CAUI 100G C2C interface */
+#define OPENNSL_PORT_IF_CAUI_C2M    _SHR_PORT_IF_CAUI_C2M /**< CAUI 100G C2M interface */
+#define OPENNSL_PORT_IF_VSR         _SHR_PORT_IF_VSR /**< Fiber VSR 10G 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_LR2         _SHR_PORT_IF_LR2 /**< Fiber 2x10Gbe LR 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_LRM         _SHR_PORT_IF_LRM /**< Fiber LRM multipoint 64B/66B
+                                                  interface */
+#define OPENNSL_PORT_IF_XLPPI       _SHR_PORT_IF_XLPPI /**< 40G parallel physical
+                                                  interface */
 #define OPENNSL_PORT_IF_COUNT       _SHR_PORT_IF_COUNT 
 #define OPENNSL_PORT_IF_10B     OPENNSL_PORT_IF_TBI /**< Deprecated */
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -909,6 +946,17 @@ extern int opennsl_port_link_status_get(
  *          packet. It may however be dropped for other reasons such as
  *          spanning tree state, head of line blocking etc. For switch
  *          family?III, ingress filtering is also applied.
+ *          Virtual Port(VP) will be assigned to a VP group or removed from a
+ *          VP group through this API when filtering is enabled or disabled if
+ *          flag OPENNSL_PORT_VLAN_MEMBER_VP_VLAN_MEMBERSHIP is not set.  So
+ *          if user uses un-managed VP group mechanism, API
+ *          =opennsl_port_control_set() with 
+ *          opennslPortControlVlanVpGroupEgress/opennslPortControlVlanVpGroupIngress
+ *          type should be called before =opennsl_port_vlan_member_set(). And
+ *          if user use managed VP group mechanism,
+ *          =opennsl_port_vlan_member_set should be called before API
+ *          =opennsl_vlan_gport_add . Please refer to the DESCRIPTION of
+ *          =opennsl_vlan_gport_add for more detail about VP group .
  *          This function supersedes =opennsl_port_ifilter_get . Valid
  *          settings for flags are described in
  *          =OPENNSL_PORT_VLAN_MEMBER_FLAGS_table .
@@ -937,6 +985,17 @@ extern int opennsl_port_vlan_member_set(
  *          packet. It may however be dropped for other reasons such as
  *          spanning tree state, head of line blocking etc. For switch
  *          family?III, ingress filtering is also applied.
+ *          Virtual Port(VP) will be assigned to a VP group or removed from a
+ *          VP group through this API when filtering is enabled or disabled if
+ *          flag OPENNSL_PORT_VLAN_MEMBER_VP_VLAN_MEMBERSHIP is not set.  So
+ *          if user uses un-managed VP group mechanism, API
+ *          =opennsl_port_control_set() with 
+ *          opennslPortControlVlanVpGroupEgress/opennslPortControlVlanVpGroupIngress
+ *          type should be called before =opennsl_port_vlan_member_set(). And
+ *          if user use managed VP group mechanism,
+ *          =opennsl_port_vlan_member_set should be called before API
+ *          =opennsl_vlan_gport_add . Please refer to the DESCRIPTION of
+ *          =opennsl_vlan_gport_add for more detail about VP group .
  *          This function supersedes =opennsl_port_ifilter_get . Valid
  *          settings for flags are described in
  *          =OPENNSL_PORT_VLAN_MEMBER_FLAGS_table .
@@ -981,6 +1040,66 @@ extern int opennsl_port_queued_count_get(
     int unit, 
     opennsl_port_t port, 
     uint32 *count) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Control the sampling of packets ingressing or egressing a port.
+ *
+ *\description The Packet Sampling APIs are building blocks that can be used to
+ *          implement the sFlow specification (RFC 3176).  switch family?III
+ *          chips can select a random sampling of ingressing or egressing
+ *          packets and send them to the CPU for profiling purposes.
+ *          There are also three related switch control parameters to support
+ *          the implementation of sFlow; see =opennsl_switch_control_set and.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    ingress_rate [IN]   Every 1/ingress_rate ingressing packets will be
+ *          sampled; 0 indicates no sampling while 1 indicates sampling all
+ *          packets
+ *\param    egress_rate [IN]   Every 1/egress_rate egressing packets will be
+ *          sampled; 0 indicates no sampling while 1 indicates sampling all
+ *          packets
+ *
+ *\retval    OPENNSL_E_UNAVAIL Feature not supported by hardware
+ *\retval    OPENNSL_E_XXX Other error
+ ******************************************************************************/
+extern int opennsl_port_sample_rate_set(
+    int unit, 
+    opennsl_port_t port, 
+    int ingress_rate, 
+    int egress_rate) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Control the sampling of packets ingressing or egressing a port.
+ *
+ *\description The Packet Sampling APIs are building blocks that can be used to
+ *          implement the sFlow specification (RFC 3176).  switch family?III
+ *          chips can select a random sampling of ingressing or egressing
+ *          packets and send them to the CPU for profiling purposes.
+ *          There are also three related switch control parameters to support
+ *          the implementation of sFlow; see =opennsl_switch_control_set and.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    ingress_rate [OUT]   Every 1/ingress_rate ingressing packets will be
+ *          sampled; 0 indicates no sampling while 1 indicates sampling all
+ *          packets
+ *\param    egress_rate [OUT]   Every 1/egress_rate egressing packets will be
+ *          sampled; 0 indicates no sampling while 1 indicates sampling all
+ *          packets
+ *
+ *\retval    OPENNSL_E_UNAVAIL Feature not supported by hardware
+ *\retval    OPENNSL_E_XXX Other error
+ ******************************************************************************/
+extern int opennsl_port_sample_rate_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *ingress_rate, 
+    int *egress_rate) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
@@ -1194,28 +1313,8 @@ extern int opennsl_port_selective_set(
 
 /** Features that can be controlled on a per-port basis. */
 typedef enum opennsl_port_control_e {
-    opennslportReservedEnum1 = 0, 
-    opennslportReservedEnum2 = 1, 
-    opennslportReservedEnum3 = 2, 
-    opennslportReservedEnum4 = 3, 
-    opennslportReservedEnum5 = 4, 
-    opennslportReservedEnum6 = 5, 
-    opennslportReservedEnum7 = 6, 
-    opennslportReservedEnum8 = 7, 
     opennslPortControlIP4 = 8,          /**< Enable IPv4 Routing on port. */
     opennslPortControlIP6 = 9,          /**< Enable IPv6 Routing on port. */
-    opennslportReservedEnum9 = 10, 
-    opennslportReservedEnum10 = 11, 
-    opennslportReservedEnum11 = 12, 
-    opennslportReservedEnum12 = 13, 
-    opennslportReservedEnum13 = 14, 
-    opennslportReservedEnum14 = 15, 
-    opennslportReservedEnum15 = 16, 
-    opennslportReservedEnum16 = 17, 
-    opennslportReservedEnum17 = 18, 
-    opennslportReservedEnum18 = 19, 
-    opennslportReservedEnum19 = 20, 
-    opennslportReservedEnum20 = 21, 
     opennslPortControlTrustIncomingVlan = 22, /**< Trust incoming packet's Vlan tag */
     opennslPortControlDoNotCheckVlan = 23, /**< Enable/disable spanning tree and Vlan
                                            membership checks on ingress ethernet
@@ -1225,45 +1324,9 @@ typedef enum opennsl_port_control_e {
                                            settings for ethernet packets
                                            opennslPortControlDoNotCheckVlanFromCpu
                                            port control can be used. */
-    opennslportReservedEnum21 = 24, 
-    opennslportReservedEnum22 = 25, 
-    opennslportReservedEnum23 = 26, 
-    opennslportReservedEnum24 = 27, 
-    opennslportReservedEnum25 = 28, 
-    opennslportReservedEnum26 = 29, 
-    opennslportReservedEnum27 = 30, 
-    opennslportReservedEnum28 = 31, 
-    opennslportReservedEnum29 = 32, 
-    opennslportReservedEnum30 = 33, 
-    opennslportReservedEnum31 = 34, 
-    opennslportReservedEnum32 = 35, 
-    opennslportReservedEnum33 = 36, 
-    opennslportReservedEnum34 = 37, 
-    opennslportReservedEnum35 = 38, 
-    opennslportReservedEnum36 = 39, 
-    opennslportReservedEnum37 = 40, 
-    opennslportReservedEnum38 = 41, 
-    opennslportReservedEnum39 = 42, 
-    opennslportReservedEnum40 = 43, 
-    opennslportReservedEnum41 = 44, 
-    opennslportReservedEnum42 = 45, 
-    opennslportReservedEnum43 = 46, 
-    opennslportReservedEnum44 = 47, 
-    opennslportReservedEnum45 = 48, 
-    opennslportReservedEnum46 = 49, 
-    opennslportReservedEnum47 = 50, 
-    opennslportReservedEnum48 = 51, 
-    opennslportReservedEnum49 = 52, 
-    opennslportReservedEnum50 = 53, 
-    opennslportReservedEnum51 = 54, 
     opennslPortControlLanes = 55,       /**< Sets the number of active lanes for a
                                            port that can be dynamically
-                                           hot-swapped between one 12G port
-                                           (value = 1) or four 1G ports (value =
-                                           4). */
-    opennslportReservedEnum52 = 56, 
-    opennslportReservedEnum53 = 57, 
-    opennslportReservedEnum54 = 58, 
+                                           hot-swapped. */
     opennslPortControlPFCReceive = 59,  /**< Priority Flow Control packet receive
                                            enable */
     opennslPortControlPFCTransmit = 60, /**< Priority Flow Control packet transmit
@@ -1272,265 +1335,12 @@ typedef enum opennsl_port_control_e {
                                            classes */
     opennslPortControlPFCPassFrames = 62, /**< Allow Priority Flow Control packets
                                            into switch device */
-    opennslportReservedEnum55 = 63, 
-    opennslportReservedEnum56 = 64, 
-    opennslportReservedEnum57 = 65, 
-    opennslportReservedEnum58 = 66, 
-    opennslportReservedEnum59 = 67, 
-    opennslportReservedEnum60 = 68, 
-    opennslportReservedEnum61 = 69, 
     opennslPortControlL2Move = 70,      /**< Configure L2 station movement
                                            behavior using OPENNSL_PORT_LEARN_xxx
                                            flags */
-    opennslportReservedEnum62 = 71, 
-    opennslportReservedEnum63 = 72, 
-    opennslportReservedEnum64 = 73, 
-    opennslportReservedEnum65 = 74, 
-    opennslportReservedEnum66 = 75, 
-    opennslportReservedEnum67 = 76, 
-    opennslportReservedEnum68 = 77, 
-    opennslportReservedEnum69 = 78, 
-    opennslportReservedEnum70 = 79, 
-    opennslportReservedEnum71 = 80, 
-    opennslportReservedEnum72 = 81, 
-    opennslportReservedEnum73 = 82, 
-    opennslportReservedEnum74 = 83, 
-    opennslportReservedEnum75 = 84, 
-    opennslportReservedEnum76 = 85, 
-    opennslportReservedEnum77 = 86, 
-    opennslportReservedEnum78 = 87, 
-    opennslportReservedEnum79 = 88, 
-    opennslportReservedEnum80 = 89, 
-    opennslportReservedEnum81 = 90, 
-    opennslportReservedEnum82 = 91, 
     opennslPortControlStatOversize = 92, /**< Threshold above which packet will be
                                            counted as oversized */
-    opennslportReservedEnum83 = 93, 
-    opennslportReservedEnum84 = 94, 
-    opennslportReservedEnum85 = 95, 
-    opennslportReservedEnum86 = 96, 
-    opennslportReservedEnum87 = 97, 
-    opennslportReservedEnum88 = 98, 
-    opennslportReservedEnum89 = 99, 
-    opennslportReservedEnum90 = 100, 
-    opennslportReservedEnum91 = 101, 
-    opennslportReservedEnum92 = 102, 
-    opennslportReservedEnum93 = 103, 
-    opennslportReservedEnum94 = 104, 
-    opennslportReservedEnum95 = 105, 
-    opennslportReservedEnum96 = 106, 
-    opennslportReservedEnum97 = 107, 
-    opennslportReservedEnum98 = 108, 
-    opennslportReservedEnum99 = 109, 
-    opennslportReservedEnum100 = 110, 
-    opennslportReservedEnum101 = 111, 
-    opennslportReservedEnum102 = 112, 
-    opennslportReservedEnum103 = 113, 
-    opennslportReservedEnum104 = 114, 
-    opennslportReservedEnum105 = 115, 
-    opennslportReservedEnum106 = 116, 
-    opennslportReservedEnum107 = 117, 
-    opennslportReservedEnum108 = 118, 
-    opennslportReservedEnum109 = 119, 
-    opennslportReservedEnum110 = 120, 
-    opennslportReservedEnum111 = 121, 
-    opennslportReservedEnum112 = 122, 
-    opennslportReservedEnum113 = 123, 
-    opennslportReservedEnum114 = 124, 
-    opennslportReservedEnum115 = 125, 
-    opennslportReservedEnum116 = 126, 
-    opennslportReservedEnum117 = 127, 
-    opennslportReservedEnum118 = 128, 
-    opennslportReservedEnum119 = 129, 
-    opennslportReservedEnum120 = 130, 
-    opennslportReservedEnum121 = 131, 
-    opennslportReservedEnum122 = 132, 
-    opennslportReservedEnum123 = 133, 
-    opennslportReservedEnum124 = 134, 
-    opennslportReservedEnum125 = 135, 
-    opennslportReservedEnum126 = 136, 
-    opennslportReservedEnum127 = 137, 
-    opennslportReservedEnum128 = 138, 
-    opennslportReservedEnum129 = 139, 
-    opennslportReservedEnum130 = 140, 
-    opennslportReservedEnum131 = 141, 
-    opennslportReservedEnum132 = 142, 
-    opennslportReservedEnum133 = 143, 
-    opennslportReservedEnum134 = 144, 
-    opennslportReservedEnum135 = 145, 
-    opennslportReservedEnum136 = 146, 
-    opennslportReservedEnum137 = 147, 
-    opennslportReservedEnum138 = 148, 
-    opennslportReservedEnum139 = 149, 
-    opennslportReservedEnum140 = 150, 
-    opennslportReservedEnum141 = 151, 
-    opennslportReservedEnum142 = 152, 
-    opennslportReservedEnum143 = 153, 
-    opennslportReservedEnum144 = 154, 
-    opennslportReservedEnum145 = 155, 
-    opennslportReservedEnum146 = 156, 
-    opennslportReservedEnum147 = 157, 
-    opennslportReservedEnum148 = 158, 
-    opennslportReservedEnum149 = 159, 
-    opennslportReservedEnum150 = 160, 
-    opennslportReservedEnum151 = 161, 
-    opennslportReservedEnum152, 
-    opennslportReservedEnum153 = 162, 
-    opennslportReservedEnum154 = 163, 
-    opennslportReservedEnum155 = 164, 
-    opennslportReservedEnum156 = 165, 
-    opennslportReservedEnum157 = 166, 
-    opennslportReservedEnum158 = 167, 
-    opennslportReservedEnum159 = 168, 
-    opennslportReservedEnum160 = 169, 
-    opennslportReservedEnum161 = 170, 
-    opennslportReservedEnum162 = 171, 
-    opennslportReservedEnum163 = 172, 
-    opennslportReservedEnum164 = 173, 
-    opennslportReservedEnum165 = 174, 
-    opennslportReservedEnum166 = 175, 
-    opennslportReservedEnum167 = 176, 
-    opennslportReservedEnum168 = 177, 
-    opennslportReservedEnum169 = 178, 
-    opennslportReservedEnum170 = 179, 
-    opennslportReservedEnum171 = 180, 
-    opennslportReservedEnum172 = 181, 
-    opennslportReservedEnum173 = 182, 
-    opennslportReservedEnum174 = 183, 
-    opennslportReservedEnum175 = 184, 
-    opennslportReservedEnum176 = 185, 
-    opennslportReservedEnum177 = 186, 
-    opennslportReservedEnum178 = 187, 
-    opennslportReservedEnum179 = 188, 
-    opennslportReservedEnum180 = 189, 
-    opennslportReservedEnum181 = 190, 
-    opennslportReservedEnum182 = 191, 
-    opennslportReservedEnum183 = 192, 
-    opennslportReservedEnum184 = 193, 
-    opennslportReservedEnum185 = 194, 
-    opennslportReservedEnum186 = 195, 
-    opennslportReservedEnum187 = 196, 
-    opennslportReservedEnum188 = 197, 
-    opennslportReservedEnum189 = 198, 
-    opennslportReservedEnum190 = 199, 
-    opennslportReservedEnum191 = 200, 
-    opennslportReservedEnum192 = 201, 
-    opennslportReservedEnum193 = 202, 
-    opennslportReservedEnum194 = 203, 
-    opennslportReservedEnum195 = 204, 
-    opennslportReservedEnum196 = 205, 
-    opennslportReservedEnum197 = 206, 
-    opennslportReservedEnum198 = 207, 
-    opennslportReservedEnum199 = 208, 
-    opennslportReservedEnum200 = 209, 
-    opennslportReservedEnum201 = 210, 
-    opennslportReservedEnum202 = 211, 
-    opennslportReservedEnum203 = 212, 
-    opennslportReservedEnum204 = 213, 
-    opennslportReservedEnum205 = 214, 
-    opennslportReservedEnum206 = 215, 
-    opennslportReservedEnum207 = 216, 
-    opennslportReservedEnum208 = 217, 
-    opennslportReservedEnum209 = 218, 
-    opennslportReservedEnum210 = 219, 
-    opennslportReservedEnum211 = 220, 
-    opennslportReservedEnum212 = 221, 
-    opennslportReservedEnum213 = 222, 
-    opennslportReservedEnum214 = 223, 
-    opennslportReservedEnum215 = 224, 
-    opennslportReservedEnum216 = 225, 
-    opennslportReservedEnum217 = 226, 
-    opennslportReservedEnum218 = 227, 
-    opennslportReservedEnum219 = 228, 
-    opennslportReservedEnum220 = 229, 
-    opennslportReservedEnum221 = 230, 
-    opennslportReservedEnum222 = 231, 
-    opennslportReservedEnum223 = 232, 
-    opennslportReservedEnum224 = 233, 
-    opennslportReservedEnum225 = 234, 
-    opennslportReservedEnum226 = 235, 
-    opennslportReservedEnum227 = 236, 
-    opennslportReservedEnum228 = 237, 
-    opennslportReservedEnum229 = 238, 
-    opennslportReservedEnum230 = 239, 
-    opennslportReservedEnum231 = 240, 
-    opennslportReservedEnum232 = 241, 
-    opennslportReservedEnum233 = 242, 
-    opennslportReservedEnum234 = 243, 
-    opennslportReservedEnum235 = 244, 
-    opennslportReservedEnum236 = 245, 
-    opennslportReservedEnum237 = 246, 
-    opennslportReservedEnum238 = 247, 
-    opennslportReservedEnum239 = 248, 
-    opennslportReservedEnum240 = 249, 
-    opennslportReservedEnum241 = 250, 
-    opennslportReservedEnum242 = 251, 
-    opennslportReservedEnum243 = 252, 
-    opennslportReservedEnum244 = 253, 
-    opennslportReservedEnum245 = 254, 
-    opennslportReservedEnum246 = 255, 
-    opennslportReservedEnum247 = 256, 
-    opennslportReservedEnum248 = 257, 
-    opennslportReservedEnum249 = 258, 
-    opennslportReservedEnum250 = 259, 
-    opennslportReservedEnum251 = 260, 
-    opennslportReservedEnum252 = 261, 
-    opennslportReservedEnum253 = 262, 
-    opennslportReservedEnum254 = 263, 
-    opennslportReservedEnum255 = 264, 
-    opennslportReservedEnum256 = 265, 
-    opennslportReservedEnum257 = 266, 
-    opennslportReservedEnum258 = 267, 
-    opennslportReservedEnum259 = 268, 
-    opennslportReservedEnum260 = 269, 
-    opennslportReservedEnum261 = 270, 
-    opennslportReservedEnum262 = 271, 
-    opennslportReservedEnum263 = 272, 
-    opennslportReservedEnum264 = 273, 
-    opennslportReservedEnum265 = 274, 
-    opennslportReservedEnum266 = 275, 
-    opennslportReservedEnum267, 
-    opennslportReservedEnum268, 
-    opennslportReservedEnum269, 
-    opennslportReservedEnum270 = 276, 
-    opennslportReservedEnum271 = 277, 
-    opennslportReservedEnum272 = 278, 
-    opennslportReservedEnum273 = 279, 
-    opennslportReservedEnum274 = 280, 
-    opennslportReservedEnum275 = 281, 
-    opennslportReservedEnum276 = 282, 
-    opennslportReservedEnum277 = 283, 
-    opennslportReservedEnum278 = 284, 
-    opennslportReservedEnum279 = 285, 
-    opennslportReservedEnum280 = 286, 
-    opennslportReservedEnum281 = 287, 
-    opennslportReservedEnum282 = 288, 
-    opennslportReservedEnum283 = 289, 
-    opennslportReservedEnum284 = 290, 
-    opennslportReservedEnum285 = 291, 
-    opennslportReservedEnum286 = 292, 
-    opennslportReservedEnum287 = 293, 
-    opennslportReservedEnum288 = 294, 
-    opennslportReservedEnum289 = 295, 
-    opennslportReservedEnum290 = 296, 
-    opennslportReservedEnum291 = 297, 
-    opennslportReservedEnum292 = 298, 
-    opennslportReservedEnum293 = 299, 
-    opennslportReservedEnum294 = 300, 
-    opennslportReservedEnum295 = 301, 
-    opennslportReservedEnum296 = 302, 
-    opennslportReservedEnum297 = 303, 
-    opennslportReservedEnum298 = 304, 
-    opennslportReservedEnum299 = 305, 
-    opennslportReservedEnum300 = 306, 
-    opennslportReservedEnum301 = 307, 
-    opennslportReservedEnum302 = 308, 
-    opennslportReservedEnum303 = 309, 
-    opennslportReservedEnum304 = 310, 
-    opennslportReservedEnum305 = 311, 
-    opennslportReservedEnum306 = 312, 
-    opennslportReservedEnum307 = 313, 
-    opennslportReservedEnum308 = 314 
+    opennslPortControlSampleIngressDest = 304, /**< Set Ingress sFlow sample destination */
 } opennsl_port_control_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -1697,6 +1507,8 @@ extern int opennsl_port_stat_enable_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU 0x1        /**< Copy packet samples to
+                                                          CPU */
 #if defined(INCLUDE_CES)
 #endif
 #endif /* __OPENNSL_PORT_H__ */

@@ -72,99 +72,12 @@ typedef struct opennsl_pkt_blk_s {
 /** Set of 'reasons' (see opennslRxReason*) why a packet came to the CPU. */
 typedef _shr_rx_reasons_t opennsl_rx_reasons_t;
 
-/** Stacking header packet forwarding options. */
-typedef enum opennsl_pkt_stk_forward_e {
-    pktReservedEnum1, 
-    pktReservedEnum2, 
-    pktReservedEnum3, 
-    pktReservedEnum4, 
-    pktReservedEnum5, 
-    pktReservedEnum6, 
-    pktReservedEnum7, 
-    pktReservedEnum8, 
-    pktReservedEnum9, 
-    pktReservedEnum10, 
-    pktReservedEnum11, 
-    pktReservedEnum12, 
-    pktReservedEnum13, 
-    pktReservedEnum14, 
-    pktReservedEnum15 
-} opennsl_pkt_stk_forward_t;
-
-/** Decap Tunnel Types */
-typedef enum opennsl_rx_decap_tunnel_e {
-    opennslpktReservedEnum16, 
-    opennslpktReservedEnum17, 
-    opennslpktReservedEnum18, 
-    opennslpktReservedEnum19, 
-    opennslpktReservedEnum20, 
-    opennslpktReservedEnum21, 
-    opennslpktReservedEnum22, 
-    opennslpktReservedEnum23, 
-    opennslpktReservedEnum24, 
-    opennslpktReservedEnum25, 
-    opennslpktReservedEnum26, 
-    opennslpktReservedEnum27, 
-    opennslpktReservedEnum28, 
-    opennslpktReservedEnum29, 
-    opennslpktReservedEnum30, 
-    opennslpktReservedEnum31, 
-    opennslpktReservedEnum32, 
-    opennslpktReservedEnum33, 
-    opennslpktReservedEnum34 
-} opennsl_rx_decap_tunnel_t;
-
-/** OAM DM timestamp options. */
-typedef enum opennsl_pkt_timestamp_mode_e {
-    pktReservedEnum35, 
-    pktReservedEnum36, 
-    pktReservedEnum37, 
-    pktReservedEnum38 
-} opennsl_pkt_timestamp_mode_t;
-
-/** OAM LM counter options. */
-typedef enum opennsl_pkt_oam_lm_counter_mode_e {
-    pktReservedEnum39, 
-    pktReservedEnum40, 
-    pktReservedEnum41, 
-    pktReservedEnum42 
-} opennsl_pkt_oam_lm_counter_mode_t;
-
-/** OAM Pkt Type */
-typedef enum opennsl_pkt_rx_oam_type_e {
-    pktReservedEnum43, 
-    pktReservedEnum44, 
-    pktReservedEnum45, 
-    pktReservedEnum46, 
-    pktReservedEnum47, 
-    pktReservedEnum48, 
-    pktReservedEnum49, 
-    pktReservedEnum50, 
-    pktReservedEnum51, 
-    pktReservedEnum52, 
-    pktReservedEnum53, 
-    pktReservedEnum54, 
-    pktReservedEnum55, 
-    pktReservedEnum56, 
-    pktReservedEnum57, 
-    pktReservedEnum58, 
-    pktReservedEnum59, 
-    pktReservedEnum60 
-} opennsl_pkt_rx_oam_type_t;
-
-/** OAM counter object ID */
-typedef enum opennsl_pkt_oam_counter_object_e {
-    pktReservedEnum61, 
-    pktReservedEnum62, 
-    pktReservedEnum63 
-} opennsl_pkt_oam_counter_object_t;
-
 /** OAM counter */
 typedef struct opennsl_pkt_oam_counter_s {
-    opennsl_pkt_oam_counter_object_t reserved1; 
+    opennsl_reserved_enum_t reserved1; 
     uint32 reserved2; 
     uint32 reserved3; 
-    opennsl_pkt_oam_lm_counter_mode_t reserved4; 
+    opennsl_reserved_enum_t reserved4; 
     uint32 reserved5; 
     uint32 reserved6; 
     uint32 reserved7; 
@@ -172,274 +85,7 @@ typedef struct opennsl_pkt_oam_counter_s {
 
 #define OPENNSL_PKT_OAM_COUNTER_MAX 3          
 #define OPENNSL_PKT_NOF_DNX_HEADERS 9          
-/** Pkt DNX types. */
-typedef enum opennsl_pkt_dnx_type_e {
-    opennslpktReservedEnum64 = 0, 
-    opennslpktReservedEnum65 = 1, 
-    opennslpktReservedEnum66 = 2, 
-    opennslpktReservedEnum67 = 3, 
-    opennslpktReservedEnum68 = 4, 
-    opennslpktReservedEnum69 = 5, 
-    opennslpktReservedEnum70 = 6, 
-    opennslpktReservedEnum71 = 7 
-} opennsl_pkt_dnx_type_t;
-
-/** PTCH1 */
-typedef struct opennsl_pkt_dnx_ptch1_s {
-    opennsl_gport_t reserved1; 
-    uint32 reserved2; 
-    uint8 reserved3; 
-} opennsl_pkt_dnx_ptch1_t;
-
-/** PTCH2 */
-typedef struct opennsl_pkt_dnx_ptch2_s {
-    opennsl_gport_t reserved1; 
-    uint32 reserved2; 
-    uint8 reserved3; 
-} opennsl_pkt_dnx_ptch2_t;
-
-/** itmh dest type. */
-typedef enum opennsl_pkt_dnx_itmh_dest_type_e {
-    opennslpktReservedEnum72 = 0, 
-    opennslpktReservedEnum73 = 1, 
-    opennslpktReservedEnum74 = 2, 
-    opennslpktReservedEnum75 = 3, 
-    opennslpktReservedEnum76 = 4 
-} opennsl_pkt_dnx_itmh_dest_type_t;
-
-/** Itmh destination. */
-typedef struct opennsl_pkt_dnx_itmh_dest_s {
-    opennsl_pkt_dnx_itmh_dest_type_t reserved1; 
-    opennsl_pkt_dnx_itmh_dest_type_t reserved2; 
-    opennsl_gport_t reserved3; 
-    opennsl_multicast_t reserved4; 
-    opennsl_gport_t reserved5; 
-} opennsl_pkt_dnx_itmh_dest_t;
-
-/** Itmh */
-typedef struct opennsl_pkt_dnx_itmh_s {
-    uint8 reserved1; 
-    uint32 reserved2; 
-    uint32 reserved3; 
-    opennsl_color_t reserved4; 
-    opennsl_pkt_dnx_itmh_dest_t reserved5; 
-} opennsl_pkt_dnx_itmh_t;
-
-/** ftmh action type. */
-typedef enum opennsl_pkt_dnx_ftmh_action_type_e {
-    opennslpktReservedEnum77 = 0, 
-    opennslpktReservedEnum78 = 1, 
-    opennslpktReservedEnum79 = 2, 
-    opennslpktReservedEnum80 = 3 
-} opennsl_pkt_dnx_ftmh_action_type_t;
-
-/** ftmh lb extension. */
-typedef struct opennsl_pkt_dnx_ftmh_lb_extension_s {
-    uint8 reserved1; 
-    uint32 reserved2; 
-} opennsl_pkt_dnx_ftmh_lb_extension_t;
-
-/** ftmh dest extension. */
-typedef struct opennsl_pkt_dnx_ftmh_dest_extension_s {
-    uint8 reserved1; 
-    opennsl_gport_t reserved2; 
-} opennsl_pkt_dnx_ftmh_dest_extension_t;
-
-/** ftmh stack extension. */
-typedef struct opennsl_pkt_dnx_ftmh_stack_extension_s {
-    uint8 reserved1; 
-    uint32 reserved2; 
-} opennsl_pkt_dnx_ftmh_stack_extension_t;
-
-/** ftmh */
-typedef struct opennsl_pkt_dnx_ftmh_s {
-    uint32 reserved1; 
-    uint32 reserved2; 
-    opennsl_gport_t reserved3; 
-    opennsl_gport_t reserved4; 
-    opennsl_color_t reserved5; 
-    opennsl_pkt_dnx_ftmh_action_type_t reserved6; 
-    uint8 reserved7; 
-    uint8 reserved8; 
-    opennsl_multicast_t reserved9; 
-    opennsl_gport_t reserved10; 
-    uint32 reserved11; 
-    opennsl_pkt_dnx_ftmh_lb_extension_t reserved12; 
-    opennsl_pkt_dnx_ftmh_dest_extension_t reserved13; 
-    opennsl_pkt_dnx_ftmh_stack_extension_t reserved14; 
-} opennsl_pkt_dnx_ftmh_t;
-
-/** pph eei extension */
-typedef struct opennsl_pkt_dnx_pph_eei_extension_s {
-    uint8 reserved1; 
-    uint8 reserved2; 
-    uint32 reserved3; 
-    uint32 reserved4; 
-    uint32 reserved5; 
-} opennsl_pkt_dnx_pph_eei_extension_t;
-
-/** pph learn extension */
-typedef struct opennsl_pkt_dnx_pph_learn_extension_s {
-    uint8 reserved1; 
-    opennsl_port_t reserved2; 
-    uint8 reserved3; 
-    opennsl_pkt_dnx_pph_eei_extension_t reserved4; 
-    uint8 reserved5; 
-    int reserved6; 
-    uint64 reserved7; 
-} opennsl_pkt_dnx_pph_learn_extension_t;
-
-/** pph fhei type */
-typedef enum opennsl_pkt_dnx_pph_fhei_type_e {
-    opennslpktReservedEnum81 = 0, 
-    opennslpktReservedEnum82 = 1, 
-    opennslpktReservedEnum83 = 2, 
-    opennslpktReservedEnum84 = 3, 
-    opennslpktReservedEnum85 = 4 
-} opennsl_pkt_dnx_pph_fhei_type_t;
-
-/** pph fhei bridge extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_bridge_extension_s {
-    uint8 reserved1; 
-    uint8 reserved2; 
-    uint8 reserved3; 
-    opennsl_vlan_t reserved4; 
-    uint8 reserved5; 
-    uint8 reserved6; 
-    opennsl_vlan_t reserved7; 
-} opennsl_pkt_dnx_pph_fhei_bridge_extension_t;
-
-/** pph fhei trap extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_trap_extension_s {
-    uint32 reserved1; 
-    opennsl_gport_t reserved2; 
-} opennsl_pkt_dnx_pph_fhei_trap_extension_t;
-
-/** pph fhei ip extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_ip_extension_s {
-    uint32 reserved1; 
-    uint8 reserved2; 
-    uint8 reserved3; 
-} opennsl_pkt_dnx_pph_fhei_ip_extension_t;
-
-/** pph fhei mpls extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_mpls_extension_s {
-    uint32 reserved1; 
-    uint32 reserved2; 
-    opennsl_forwarding_type_t reserved3; 
-    uint8 reserved4; 
-    uint32 reserved5; 
-    uint32 reserved6; 
-    uint8 reserved7; 
-    uint8 reserved8; 
-} opennsl_pkt_dnx_pph_fhei_mpls_extension_t;
-
-/** pph fhei trill extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_trill_extension_s {
-    uint8 reserved1; 
-} opennsl_pkt_dnx_pph_fhei_trill_extension_t;
-
-/** pph fhei extension */
-typedef struct opennsl_pkt_dnx_pph_fhei_extension_s {
-    opennsl_pkt_dnx_pph_fhei_type_t reserved1; 
-    opennsl_pkt_dnx_pph_fhei_bridge_extension_t reserved2; 
-    opennsl_pkt_dnx_pph_fhei_trap_extension_t reserved3; 
-    opennsl_pkt_dnx_pph_fhei_ip_extension_t reserved4; 
-    opennsl_pkt_dnx_pph_fhei_mpls_extension_t reserved5; 
-    opennsl_pkt_dnx_pph_fhei_trill_extension_t reserved6; 
-} opennsl_pkt_dnx_pph_fhei_extension_t;
-
-/** pph fhei extension */
-typedef struct opennsl_pkt_dnx_pph_s {
-    uint32 reserved1; 
-    opennsl_forwarding_type_t reserved2; 
-    uint32 reserved3; 
-    uint32 reserved4; 
-    uint32 reserved5; 
-    uint32 reserved6; 
-    uint8 reserved7; 
-    uint8 reserved8; 
-    uint32 reserved9; 
-    uint32 reserved10; 
-    opennsl_gport_t reserved11; 
-    opennsl_pkt_dnx_pph_fhei_extension_t reserved12; 
-    opennsl_pkt_dnx_pph_eei_extension_t reserved13; 
-    opennsl_pkt_dnx_pph_learn_extension_t reserved14; 
-} opennsl_pkt_dnx_pph_t;
-
-/** otsh type */
-typedef enum opennsl_pkt_dnx_otsh_type_e {
-    opennslpktReservedEnum86 = 0, 
-    opennslpktReservedEnum87 = 1, 
-    opennslpktReservedEnum88 = 2 
-} opennsl_pkt_dnx_otsh_type_t;
-
-/** otsh oam sutype */
-typedef enum opennsl_pkt_dnx_otsh_oam_subtype_e {
-    opennslpktReservedEnum89 = 0, 
-    opennslpktReservedEnum90 = 1, 
-    opennslpktReservedEnum91 = 2, 
-    opennslpktReservedEnum92 = 3, 
-    opennslpktReservedEnum93 = 4, 
-    opennslpktReservedEnum94 = 5, 
-    opennslpktReservedEnum95 = 7 
-} opennsl_pkt_dnx_otsh_oam_subtype_t;
-
-/** otsh */
-typedef struct opennsl_pkt_dnx_otsh_s {
-    opennsl_pkt_dnx_otsh_type_t reserved1; 
-    opennsl_pkt_dnx_otsh_oam_subtype_t reserved2; 
-    uint32 reserved3; 
-    uint32 reserved4; 
-    uint8 reserved5; 
-    uint64 reserved6; 
-    uint32 reserved7; 
-    uint32 reserved8; 
-} opennsl_pkt_dnx_otsh_t;
-
-/** otmh src sysport extension */
-typedef struct opennsl_pkt_dnx_otmh_src_sysport_extension_s {
-    uint8 reserved1; 
-    opennsl_gport_t reserved2; 
-} opennsl_pkt_dnx_otmh_src_sysport_extension_t;
-
-/** otmh vport extension */
-typedef struct opennsl_pkt_dnx_otmh_vport_extension_s {
-    uint8 reserved1; 
-    opennsl_gport_t reserved2; 
-} opennsl_pkt_dnx_otmh_vport_extension_t;
-
-/** otmh */
-typedef struct opennsl_pkt_dnx_otmh_s {
-    opennsl_pkt_dnx_ftmh_action_type_t reserved1; 
-    opennsl_color_t reserved2; 
-    uint8 reserved3; 
-    uint32 reserved4; 
-    opennsl_gport_t reserved5; 
-    opennsl_pkt_dnx_otmh_src_sysport_extension_t reserved6; 
-    opennsl_pkt_dnx_otmh_vport_extension_t reserved7; 
-} opennsl_pkt_dnx_otmh_t;
-
 #define OPENNSL_PKT_DNX_RAW_SIZE_MAX    20         
-/** raw */
-typedef struct opennsl_pkt_dnx_raw_s {
-    uint8 reserved1[OPENNSL_PKT_DNX_RAW_SIZE_MAX]; 
-    int reserved2; 
-} opennsl_pkt_dnx_raw_t;
-
-/** dnx packet */
-typedef struct opennsl_pkt_dnx_s {
-    opennsl_pkt_dnx_type_t reserved1; 
-    opennsl_pkt_dnx_ptch1_t reserved2; 
-    opennsl_pkt_dnx_ptch2_t reserved3; 
-    opennsl_pkt_dnx_itmh_t reserved4; 
-    opennsl_pkt_dnx_ftmh_t reserved5; 
-    opennsl_pkt_dnx_pph_t reserved6; 
-    opennsl_pkt_dnx_otsh_t reserved7; 
-    opennsl_pkt_dnx_otmh_t reserved8; 
-    opennsl_pkt_dnx_raw_t reserved9; 
-} opennsl_pkt_dnx_t;
-
 /** Initialize a OPENNSL packet structure. */
 struct opennsl_pkt_s { 
     opennsl_pkt_blk_t *pkt_data;        /**< Pointer to array of data blocks. */
@@ -453,7 +99,7 @@ struct opennsl_pkt_s {
     opennsl_vlan_t reserved4; 
     uint8 reserved5; 
     uint8 reserved6; 
-    opennsl_color_t reserved7; 
+    opennsl_reserved_enum_t reserved7; 
     int8 src_port;                      /**< Source port used in header/tag. */
     opennsl_trunk_t reserved8; 
     uint16 reserved9; 
@@ -464,7 +110,7 @@ struct opennsl_pkt_s {
     opennsl_gport_t reserved13; 
     opennsl_multicast_t reserved14; 
     uint32 reserved15; 
-    opennsl_pkt_stk_forward_t reserved16; 
+    opennsl_reserved_enum_t reserved16; 
     uint32 reserved17; 
     uint32 reserved18; 
     uint32 reserved19; 
@@ -488,8 +134,8 @@ struct opennsl_pkt_s {
     uint32 reserved29; 
     uint32 reserved30; 
     opennsl_if_t reserved31; 
-    opennsl_vlan_action_t reserved32; 
-    opennsl_vlan_action_t reserved33; 
+    opennsl_reserved_enum_t reserved32; 
+    opennsl_reserved_enum_t reserved33; 
     uint32 reserved34; 
     uint32 reserved35; 
     uint32 reserved36; 
@@ -527,11 +173,11 @@ struct opennsl_pkt_s {
     void *reserved63; 
     uint16 reserved64; 
     uint16 reserved65; 
-    opennsl_pkt_timestamp_mode_t reserved66; 
-    opennsl_pkt_oam_lm_counter_mode_t reserved67; 
-    opennsl_pkt_oam_lm_counter_mode_t reserved68; 
+    opennsl_reserved_enum_t reserved66; 
+    opennsl_reserved_enum_t reserved67; 
+    opennsl_reserved_enum_t reserved68; 
     uint8 reserved69; 
-    opennsl_rx_decap_tunnel_t reserved70; 
+    opennsl_reserved_enum_t reserved70; 
     opennsl_gport_t reserved71; 
     opennsl_gport_t reserved72; 
     uint32 reserved73; 
@@ -540,12 +186,11 @@ struct opennsl_pkt_s {
     uint32 reserved76; 
     uint32 reserved77; 
     uint8 reserved78; 
-    opennsl_pkt_rx_oam_type_t reserved79; 
+    opennsl_reserved_enum_t reserved79; 
     opennsl_pkt_oam_counter_t reserved80[OPENNSL_PKT_OAM_COUNTER_MAX]; 
     uint32 reserved81; 
     uint8 reserved82[20]; 
-    opennsl_pkt_dnx_t reserved83[OPENNSL_PKT_NOF_DNX_HEADERS]; 
-    uint8 reserved84; 
+    uint8 reserved83; 
 };
 
 #define OPENNSL_PKT_F_NO_VTAG   0x4        /**< Packet does not contain VLAN tag. */

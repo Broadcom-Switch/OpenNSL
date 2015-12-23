@@ -43,6 +43,16 @@
 int example_switch_default_vlan_config(int unit);
 
 /**************************************************************************//**
+ * \brief   Read a string from user.
+ *
+ * \param   buf            [IN/OUT] Buffer to store the string
+ * \param   buflen         [IN]     Buffer length
+ *
+ * \return  Valid string if there are no errors. Otherwise, it returns 0
+ *****************************************************************************/
+ char *example_read_user_string(char *buf, size_t buflen);
+
+/**************************************************************************//**
  * \brief   Read numeric menu choice from user.
  *
  * \param   choice         [IN/OUT] choice
@@ -95,5 +105,15 @@ void print_ip_addr(char *str, unsigned int host);
  * \return      unsigned int    Boot flags
  *****************************************************************************/
 unsigned int opennsl_boot_flags_get(void);
+
+/**************************************************************************//**
+ * \brief To get the number of front panel ports
+ *
+ * \param    unit [IN]    unit number
+ * \param    int  [OUT]   Number of front panel ports
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ *****************************************************************************/
+int example_max_port_count_get(int unit, int *count);
 
 #endif /* _OPENNSL_EXAMPLE_UTIL_H */

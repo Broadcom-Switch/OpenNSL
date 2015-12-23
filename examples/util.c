@@ -67,6 +67,33 @@ int example_switch_default_vlan_config(int unit)
 }
 
 /**************************************************************************//**
+ * \brief   Read a string from user.
+ *
+ * \param   buf            [IN/OUT] Buffer to store the string
+ * \param   buflen         [IN]     Buffer length
+ *
+ * \return  Valid string if there are no errors. Otherwise, it returns 0
+ *****************************************************************************/
+char *example_read_user_string(char *buf, size_t buflen)
+{
+  int ch;
+
+  if (fgets(buf, buflen, stdin) != 0)
+  {
+    size_t len = strlen(buf);
+    if (len > 0 && buf[len-1] == '\n')
+    {
+      buf[len-1] = '\0';
+    }
+    else
+    {
+      while ((ch = getc(stdin)) != EOF && ch != '\n');
+    }
+    return buf;
+  }
+  return 0;
+}
+/**************************************************************************//**
  * \brief   Read numeric menu choice from user.
  *
  * \param   choice         [IN/OUT] choice
@@ -321,4 +348,34 @@ unsigned int opennsl_boot_flags_get(void)
   }
 
   return boot_flags;
+}
+
+/**************************************************************************//**
+ * \brief To get the number of front panel ports
+ *
+ * \param    unit [IN]    unit number
+ * \param    int  [OUT]   Number of front panel ports
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ *****************************************************************************/
+int example_max_port_count_get(int unit, int *count)
+{
+  int rc;
+  opennsl_port_config_t pcfg;
+  int num_ports;
+  int num_front_panel_ports;
+
+  rc = opennsl_port_config_get(unit, &pcfg);
+  if (rc != OPENNSL_E_NONE) {
+    printf("Failed to get port configuration. Error %s\n", opennsl_errmsg(rc));
+    return rc;
+  }
+
+  OPENNSL_PBMP_COUNT(pcfg.ge, num_ports);
+  num_front_panel_ports = num_ports;
+  OPENNSL_PBMP_COUNT(pcfg.xe, num_ports);
+  num_front_panel_ports += num_ports;
+
+  *count = num_front_panel_ports;
+  return rc;
 }

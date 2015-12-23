@@ -28,14 +28,6 @@
 #include <opennsl/vlan.h>
 #include <opennsl/switch.h>
 
-/** MPLS label egress actions. */
-typedef enum opennsl_mpls_egress_action_e {
-    mplsReservedEnum1,  
-    mplsReservedEnum2,  
-    mplsReservedEnum3,  
-    mplsReservedEnum4   
-} opennsl_mpls_egress_action_t;
-
 #if defined(INCLUDE_L3)
 #endif
 #if defined(INCLUDE_L3)

@@ -65,15 +65,6 @@
                                                       shuffle. */
 #define OPENNSL_L3_INGRESS_REPLACE  (1 << 1)   /**< Replace existing L3 Ingress
                                                   entry. */
-/** L3 Interface QOS setting. */
-typedef struct opennsl_l3_intf_qos_s {
-    uint32 reserved1; 
-    int reserved2; 
-    uint8 reserved3; 
-    uint8 reserved4; 
-    int reserved5; 
-} opennsl_l3_intf_qos_t;
-
 /** 
  * L3 Interface Structure.
  * 
@@ -85,22 +76,8 @@ typedef struct opennsl_l3_intf_s {
     opennsl_if_t l3a_intf_id;           /**< Interface ID. */
     opennsl_mac_t l3a_mac_addr;         /**< MAC address. */
     opennsl_vlan_t l3a_vid;             /**< VLAN ID. */
-    opennsl_vlan_t reserved1; 
-    int reserved2; 
     int l3a_ttl;                        /**< TTL threshold. */
     int l3a_mtu;                        /**< MTU. */
-    int reserved3; 
-    opennsl_if_group_t reserved4; 
-    opennsl_l3_intf_qos_t reserved5; 
-    opennsl_l3_intf_qos_t reserved6; 
-    opennsl_l3_intf_qos_t reserved7; 
-    int reserved8; 
-    int reserved9; 
-    int reserved10; 
-    uint16 reserved11; 
-    uint32 reserved12; 
-    uint8 reserved13; 
-    opennsl_gport_t reserved14; 
 } opennsl_l3_intf_t;
 
 /** 
@@ -122,7 +99,7 @@ typedef struct opennsl_l3_egress_s {
                                            OPENNSL_L3_TGID). */
     uint32 reserved2; 
     opennsl_mpls_label_t reserved3; 
-    opennsl_mpls_egress_action_t reserved4; 
+    opennsl_reserved_enum_t reserved4; 
     int reserved5; 
     int reserved6; 
     uint8 reserved7; 
@@ -130,7 +107,7 @@ typedef struct opennsl_l3_egress_s {
     uint8 reserved9; 
     int reserved10; 
     opennsl_if_t reserved11; 
-    int reserved12; 
+    opennsl_failover_t reserved12; 
     opennsl_if_t reserved13; 
     opennsl_multicast_t reserved14; 
     int reserved15; 
@@ -138,12 +115,40 @@ typedef struct opennsl_l3_egress_s {
     int reserved17; 
     uint32 reserved18; 
     uint16 reserved19; 
+    opennsl_vntag_t reserved20; 
+    opennsl_reserved_enum_t reserved21; 
+    opennsl_etag_t reserved22; 
+    opennsl_reserved_enum_t reserved23; 
 } opennsl_l3_egress_t;
 
 #define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for
                                                           dynamic_scaling_factor. */
 #define OPENNSL_L3_ECMP_DYNAMIC_LOAD_WEIGHT_INVALID -1         /**< Invalid value for
                                                           dynamic_load_weight. */
+/** L3 Ingress Interface URPF Mode setting. */
+typedef enum opennsl_l3_ingress_urpf_mode_e {
+    opennslL3IngressUrpfDisable = 0,    /**< Disable unicast RPF. */
+    opennslL3IngressUrpfLoose = 1,      /**< Loose mode Unicast RPF. */
+    opennslL3IngressUrpfStrict = 2      /**< Strict mode Unicast RPF. */
+} opennsl_l3_ingress_urpf_mode_t;
+
+/** 
+ * L3 Ingress Structure.
+ * 
+ * Description of an L3 Ingress interface.
+ */
+typedef struct opennsl_l3_ingress_s {
+    uint32 flags;                       /**< Interface flags. */
+    opennsl_vrf_t vrf;                  /**< Virtual router id. */
+    opennsl_l3_ingress_urpf_mode_t urpf_mode; /**< URPF mode setting for L3 Ingress
+                                           Interface. */
+    int intf_class;                     /**< Classification class ID. */
+    opennsl_vlan_t ipmc_intf_id;        /**< IPMC L2 distribution Vlan. */
+    int qos_map_id;                     /**< QoS DSCP priority map. */
+    int ip4_options_profile_id;         /**< IP4 Options handling Profile ID */
+    int nat_realm_id;                   /**< Realm id of the interface for NAT */
+} opennsl_l3_ingress_t;
+
 /** 
  * L3 Host Structure.
  * 
@@ -201,6 +206,7 @@ typedef struct opennsl_l3_route_s {
     opennsl_if_t reserved12; 
     int reserved13; 
     opennsl_multicast_t reserved14; 
+    opennsl_gport_t reserved15; 
 } opennsl_l3_route_t;
 
 /** 
@@ -211,31 +217,10 @@ typedef struct opennsl_l3_route_s {
  * 
  */
 typedef struct opennsl_l3_info_s {
-    int reserved1; 
-    int reserved2; 
     int l3info_max_intf;    /**< Maximum L3 interfaces the chip supports. */
-    int reserved3; 
     int l3info_max_host;    /**< L3 host table size(unit is IPv4 unicast). */
     int l3info_max_route;   /**< L3 route table size (unit is IPv4 route). */
-    int reserved4; 
-    int reserved5; 
     int l3info_used_intf;   /**< L3 interfaces used. */
-    int reserved6; 
-    int reserved7; 
-    int reserved8; 
-    int reserved9; 
-    int reserved10; 
-    int reserved11; 
-    int reserved12; 
-    int reserved13; 
-    int reserved14; 
-    int reserved15; 
-    int reserved16; 
-    int reserved17; 
-    int reserved18; 
-    int reserved19; 
-    int reserved20; 
-    int reserved21; 
 } opennsl_l3_info_t;
 
 /** L3 ECMP structure */
@@ -247,11 +232,13 @@ typedef struct opennsl_l3_egress_ecmp_s {
                                the API opennsl_l3_route_max_ecmp_set will be
                                picked. */
     uint32 reserved1; 
+    uint32 dynamic_mode;    /**< Dynamic load balancing mode. See
+                               OPENNSL_L3_ECMP_DYNAMIC_MODE_xxx definitions. */
+    uint32 dynamic_size;    /**< Number of flows for dynamic load balancing. Valid
+                               values are 512, 1k, doubling up to 32k */
     uint32 reserved2; 
     uint32 reserved3; 
     uint32 reserved4; 
-    uint32 reserved5; 
-    uint32 reserved6; 
 } opennsl_l3_egress_ecmp_t;
 
 /** L3 ECMP member structure */
@@ -847,6 +834,27 @@ extern int opennsl_l3_egress_ecmp_traverse(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Create L3 Ingress Interface object.
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    ing_intf [IN]   Egress forwarding destination.
+ *\param    intf_id [IN,OUT]   L3 Ingress Interface ID pointing to L3 IIF object.
+ *          This is an IN argument if either OPENNSL_L3_INGRESS_REPLACE or
+ *          OPENNSL_L3_INGRESS_WITH_ID are given in flags.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_ingress_create(
+    int unit, 
+    opennsl_l3_ingress_t *ing_intf, 
+    opennsl_if_t *intf_id) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /***************************************************************************//** 
  *\brief Initialize a opennsl_l3_host_t structure.
  *
@@ -1180,6 +1188,106 @@ extern int opennsl_l3_route_max_ecmp_get(
  ******************************************************************************/
 extern void opennsl_l3_info_t_init(
     opennsl_l3_info_t *info) LIB_DLL_EXPORTED ;
+
+/** Types of counters per L3 object. */
+typedef enum opennsl_l3_stat_e {
+    opennslL3StatOutPackets = 0,    
+    opennslL3StatOutBytes = 1,      
+    opennslL3StatDropPackets = 2,   
+    opennslL3StatDropBytes = 3,     
+    opennslL3StatInPackets = 4,     
+    opennslL3StatInBytes = 5        
+} opennsl_l3_stat_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Attach counters entries to the given L3 Egress interface.
+ *
+ *\description This API will attach counters entries to the given L3 Egress
+ *          interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a egress L3 object
+ *\param    stat_counter_id [IN]   Stat Counter ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_egress_stat_attach(
+    int unit, 
+    opennsl_if_t intf_id, 
+    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the specified counter statistic for a L3 egress interface.
+ *
+ *\description This API will retrieve set of counter statistic values for the
+ *          specified L3  egress.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a egress L3 object.
+ *\param    stat [IN]   Type of the counter to retrieve that is, ingress/egress
+ *          byte/packet
+ *\param    num_entries [IN]   Number of counter Entries
+ *\param    counter_indexes [IN]   Pointer to Counter indexes entries
+ *\param    counter_values [OUT]   Pointer to counter values
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_egress_stat_counter_get(
+    int unit, 
+    opennsl_if_t intf_id, 
+    opennsl_l3_stat_t stat, 
+    uint32 num_entries, 
+    uint32 *counter_indexes, 
+    opennsl_stat_value_t *counter_values) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Attach counters entries to the given L3 ingress interface.
+ *
+ *\description This API will attach counters entries to the given L3 ingress
+ *          Interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a L3 ingress object or a valid VLAN
+ *\param    stat_counter_id [IN]   Stat Counter ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_ingress_stat_attach(
+    int unit, 
+    opennsl_if_t intf_id, 
+    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get counter statistic values for a l3 interface object.
+ *
+ *\description This API will retrieve set of counter statistic values for a l3
+ *          interface  object.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a L3 ingress object or a valid VLAN
+ *\param    stat [IN]   Type of the counter to retrieve that is, ingress/egress
+ *          byte/packet
+ *\param    num_entries [IN]   Number of counter Entries
+ *\param    counter_indexes [IN]   Pointer to Counter indexes entries
+ *\param    counter_values [OUT]   Pointer to counter values
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_ingress_stat_counter_get(
+    int unit, 
+    opennsl_if_t intf_id, 
+    opennsl_l3_stat_t stat, 
+    uint32 num_entries, 
+    uint32 *counter_indexes, 
+    opennsl_stat_value_t *counter_values) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #endif /* defined(INCLUDE_L3) */
 

@@ -39,16 +39,10 @@
                                                           be hashed. */
 /** Trunk group attributes structure. */
 typedef struct opennsl_trunk_info_s {
-    uint32 reserved1; 
     int psc;            /**< Port selection criteria. */
-    int reserved2; 
     int dlf_index;      /**< DLF/broadcast port for trunk group. */
     int mc_index;       /**< Multicast port for trunk group. */
     int ipmc_index;     /**< IPMC port for trunk group. */
-    int reserved3; 
-    int reserved4; 
-    int reserved5; 
-    int reserved6; 
 } opennsl_trunk_info_t;
 
 /** Initialize a trunk chip information structure. */

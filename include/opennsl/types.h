@@ -29,6 +29,7 @@
 #include <shared/bitop.h>
 #include <shared/pbmp.h>
 #include <shared/gport.h>
+#include <shared/types.h>
 #include <shared/util.h>
 
 /** opennsl_multicast_t */
@@ -88,6 +89,9 @@ typedef uint32 opennsl_mpls_label_t;
 /** opennsl_vlan_t */
 typedef uint16 opennsl_vlan_t;
 
+/** opennsl_ethertype_t */
+typedef uint16 opennsl_ethertype_t;
+
 /** opennsl_cos_t */
 typedef int opennsl_cos_t;
 
@@ -123,17 +127,6 @@ typedef int opennsl_failover_t;
 /** opennsl_stg_t */
 typedef int opennsl_stg_t;
 
-/** opennsl_color_t */
-typedef enum opennsl_color_e {
-    opennsltypesReservedEnum1,  
-    opennsltypesReservedEnum2,  
-    opennsltypesReservedEnum3,  
-    opennsltypesReservedEnum4,  
-    opennsltypesReservedEnum5,  
-    opennsltypesReservedEnum6,  
-    opennsltypesReservedEnum7   
-} opennsl_color_t;
-
 #if defined(LE_HOST)
 #else
 #define opennsl_htonl(_l)       (_l)       
@@ -163,56 +156,26 @@ extern int opennsl_ip6_mask_create(
 extern opennsl_ip_t opennsl_ip_mask_create(
     int len) LIB_DLL_EXPORTED ;
 
-/** VLAN Action definitions. */
-typedef enum opennsl_vlan_action_e {
-    opennsltypesReservedEnum8, 
-    opennsltypesReservedEnum9, 
-    opennsltypesReservedEnum10, 
-    opennsltypesReservedEnum11, 
-    opennsltypesReservedEnum12, 
-    opennsltypesReservedEnum13, 
-    opennsltypesReservedEnum14, 
-    opennsltypesReservedEnum15, 
-    opennsltypesReservedEnum16, 
-    opennsltypesReservedEnum17, 
-    opennsltypesReservedEnum18, 
-    opennsltypesReservedEnum19 
-} opennsl_vlan_action_t;
+typedef enum opennsl_reserved_enum_e {
+    opennsl_enum_reserved = 0   /**< Reserved value */
+} opennsl_reserved_enum_t;
 
-/** Qualifier Forwarding Type (for opennsl_forwarding_type). */
-typedef enum opennsl_forwarding_type_e {
-    opennslForwardingTypeL2 = 0,        /**< L2 switching forwarding. */
-    opennslForwardingTypeIp4Ucast = 1,  /**< IPv4 Unicast Routing forwarding. */
-    opennslForwardingTypeIp4Mcast = 2,  /**< IPv4 Multicast Routing forwarding. */
-    opennslForwardingTypeIp6Ucast = 3,  /**< IPv6 Unicast Routing forwarding. */
-    opennslForwardingTypeIp6Mcast = 4,  /**< IPv6 Multicast Routing forwarding. */
-    opennslForwardingTypeMpls = 5,      /**< MPLS Switching forwarding. */
-    opennslForwardingTypeTrill = 6,     /**< Trill forwarding. */
-    opennslForwardingTypeRxReason = 7,  /**< Forwarding according to a RxReason. */
-    opennslForwardingTypeTrafficManagement = 8, /**< Traffic Management forwarding, when
-                                           an external Packet Processor sets the
-                                           forwarding decision. */
-    opennslForwardingTypeSnoop = 9,     /**< Snooped packet. */
-    opennslForwardingTypeFCoE = 10,     /**< Fiber Channel over Ethernet
-                                           forwarding. */
-    opennslForwardingTypeCount = 11     /**< Always Last. Not a usable value. */
-} opennsl_forwarding_type_t;
+/** VNTAG structure. */
+typedef struct opennsl_vntag_s {
+    uint8 reserved1; 
+    uint8 reserved2; 
+    uint16 reserved3; 
+    uint8 reserved4; 
+    uint16 reserved5; 
+} opennsl_vntag_t;
 
-#define OPENNSL_FORWARDINGTYPE_STRINGS \
-{ \
-    "L2", \
-    "Ip4Ucast", \
-    "Ip4Mcast", \
-    "Ip6Ucast", \
-    "Ip6Mcast", \
-    "Mpls", \
-    "Trill", \
-    "RxReason", \
-    "TrafficManagement", \
-    "Snoop", \
-    "FCoE", \
-    "Count"  \
-}
+/** ETAG structure. */
+typedef struct opennsl_etag_s {
+    uint8 reserved1; 
+    uint8 reserved2; 
+    uint16 reserved3; 
+    uint16 reserved4; 
+} opennsl_etag_t;
 
 #endif /* __OPENNSL_TYPES_H__ */
 /*@}*/

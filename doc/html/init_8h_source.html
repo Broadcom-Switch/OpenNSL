@@ -74,47 +74,44 @@
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="opennsl_2types_8h.html">opennsl/types.h</a>&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html">   30</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structopennsl__info__s.html" title="OPENNSL Information structure.">opennsl_info_s</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#aef1367ac74435b2a94d82218461777ec">   31</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#aef1367ac74435b2a94d82218461777ec">reserved1</a>; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#aae207acb2f24ca559828a25160fccaca">   32</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#aae207acb2f24ca559828a25160fccaca" title="PCI values used usually.">device</a>;      </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#ae1bdbe8003561c9d2c335664b1273b98">   33</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#ae1bdbe8003561c9d2c335664b1273b98" title="PCI values used usually.">revision</a>;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#a0497cd0b0fa9b2acecff1d145bf21c0a">   34</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#a0497cd0b0fa9b2acecff1d145bf21c0a">reserved2</a>; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#a14717b335ecc13d6ba8950e4cf8e94e5">   35</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structopennsl__info__s.html#a14717b335ecc13d6ba8950e4cf8e94e5">reserved3</a>; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <a class="code" href="group__init.html#gaf0fbd3c58f628d089486a8e9ab6a51e3" title="OPENNSL Information structure.">opennsl_info_t</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/***************************************************************************/</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gae0ff8508b014643d0f596aeb0b5c1b9f" title="Attach a device as a OPENNSL unit.">opennsl_attach</a>(</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> unit, </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">char</span> *type, </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">char</span> *subtype, </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">int</span> remunit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/***************************************************************************/</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gae6cf06649cbea3bc6874fb73bacdab8b" title="Detach a device as a OPENNSL unit.">opennsl_detach</a>(</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> unit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/***************************************************************************/</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gaaaa37e99ea864347c759bf9b19aab2fb" title="Determine if a OPENNSL unit is attached.">opennsl_attach_check</a>(</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> unit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/***************************************************************************/</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gaf510b5bc4ae4a230de2f620bdd196e9d" title="Determine the highest OPENNSL unit currently attached.">opennsl_attach_max</a>(</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">int</span> *max_units) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#ifndef OPENNSL_HIDE_DISPATCHABLE</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/***************************************************************************/</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#ga64691ef7b923460206cd9abb675807c0" title="Get information about a OPENNSL unit.">opennsl_info_get</a>(</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">int</span> unit, </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="structopennsl__info__s.html" title="OPENNSL Information structure.">opennsl_info_t</a> *info) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* OPENNSL_HIDE_DISPATCHABLE */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#if !defined(OPENNSL_WARM_BOOT_SUPPORT)</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="code" href="group__init.html#gad18b547879ca2457c7423dbb2b96a5f1">  131</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _opennsl_shutdown(unit)  OPENNSL_E_NONE </span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* __OPENNSL_INIT_H__ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#aae207acb2f24ca559828a25160fccaca">   31</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#aae207acb2f24ca559828a25160fccaca" title="PCI values used usually.">device</a>;      </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="structopennsl__info__s.html#ae1bdbe8003561c9d2c335664b1273b98">   32</a></span>&#160;    <a class="code" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structopennsl__info__s.html#ae1bdbe8003561c9d2c335664b1273b98" title="PCI values used usually.">revision</a>;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <a class="code" href="group__init.html#gaf0fbd3c58f628d089486a8e9ab6a51e3" title="OPENNSL Information structure.">opennsl_info_t</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/***************************************************************************/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gae0ff8508b014643d0f596aeb0b5c1b9f" title="Attach a device as a OPENNSL unit.">opennsl_attach</a>(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> unit, </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">char</span> *type, </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">char</span> *subtype, </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> remunit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/***************************************************************************/</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gae6cf06649cbea3bc6874fb73bacdab8b" title="Detach a device as a OPENNSL unit.">opennsl_detach</a>(</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">int</span> unit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/***************************************************************************/</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gaaaa37e99ea864347c759bf9b19aab2fb" title="Determine if a OPENNSL unit is attached.">opennsl_attach_check</a>(</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> unit) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/***************************************************************************/</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#gaf510b5bc4ae4a230de2f620bdd196e9d" title="Determine the highest OPENNSL unit currently attached.">opennsl_attach_max</a>(</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">int</span> *max_units) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#ifndef OPENNSL_HIDE_DISPATCHABLE</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">/***************************************************************************/</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="group__init.html#ga64691ef7b923460206cd9abb675807c0" title="Get information about a OPENNSL unit.">opennsl_info_get</a>(</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">int</span> unit, </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="structopennsl__info__s.html" title="OPENNSL Information structure.">opennsl_info_t</a> *info) <a class="code" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a> ;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* OPENNSL_HIDE_DISPATCHABLE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#if !defined(OPENNSL_WARM_BOOT_SUPPORT)</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="code" href="group__init.html#gad18b547879ca2457c7423dbb2b96a5f1">  128</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _opennsl_shutdown(unit)  OPENNSL_E_NONE </span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* __OPENNSL_INIT_H__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.5-->
 <!-- start footer part -->

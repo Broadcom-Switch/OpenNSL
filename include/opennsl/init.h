@@ -28,11 +28,8 @@
 
 /** OPENNSL Information structure. */
 typedef struct opennsl_info_s {
-    uint32 reserved1; 
     uint32 device;      /**< PCI values used usually. */
     uint32 revision;    /**< PCI values used usually. */
-    uint32 reserved2; 
-    int reserved3; 
 } opennsl_info_t;
 
 /***************************************************************************//** 

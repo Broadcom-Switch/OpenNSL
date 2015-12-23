@@ -313,229 +313,6 @@ typedef enum opennsl_stat_val_e {
     opennsl_spl_snmpValCount = 219      
 } opennsl_stat_val_t;
 
-#define OPENNSL_STAT_NAME_INITIALIZER \
-{ \
-    "opennsl_spl_snmpIfInOctets", \
-    "opennsl_spl_snmpIfInUcastPkts", \
-    "opennsl_spl_snmpIfInNUcastPkts", \
-    "opennsl_spl_snmpIfInDiscards", \
-    "opennsl_spl_snmpIfInErrors", \
-    "opennsl_spl_snmpIfInUnknownProtos", \
-    "opennsl_spl_snmpIfOutOctets", \
-    "opennsl_spl_snmpIfOutUcastPkts", \
-    "opennsl_spl_snmpIfOutNUcastPkts", \
-    "opennsl_spl_snmpIfOutDiscards", \
-    "opennsl_spl_snmpIfOutErrors", \
-    "opennsl_spl_snmpIfOutQLen", \
-    "opennsl_spl_snmpIpInReceives", \
-    "opennsl_spl_snmpIpInHdrErrors", \
-    "opennsl_spl_snmpIpForwDatagrams", \
-    "opennsl_spl_snmpIpInDiscards", \
-    "opennsl_spl_snmpDot1dBasePortDelayExceededDiscards", \
-    "opennsl_spl_snmpDot1dBasePortMtuExceededDiscards", \
-    "opennsl_spl_snmpDot1dTpPortInFrames", \
-    "opennsl_spl_snmpDot1dTpPortOutFrames", \
-    "opennsl_spl_snmpDot1dPortInDiscards", \
-    "opennsl_spl_snmpEtherStatsDropEvents", \
-    "opennsl_spl_snmpEtherStatsMulticastPkts", \
-    "opennsl_spl_snmpEtherStatsBroadcastPkts", \
-    "opennsl_spl_snmpEtherStatsUndersizePkts", \
-    "opennsl_spl_snmpEtherStatsFragments", \
-    "opennsl_spl_snmpEtherStatsPkts64Octets", \
-    "opennsl_spl_snmpEtherStatsPkts65to127Octets", \
-    "opennsl_spl_snmpEtherStatsPkts128to255Octets", \
-    "opennsl_spl_snmpEtherStatsPkts256to511Octets", \
-    "opennsl_spl_snmpEtherStatsPkts512to1023Octets", \
-    "opennsl_spl_snmpEtherStatsPkts1024to1518Octets", \
-    "opennsl_spl_snmpEtherStatsOversizePkts", \
-    "opennsl_spl_snmpEtherRxOversizePkts", \
-    "opennsl_spl_snmpEtherTxOversizePkts", \
-    "opennsl_spl_snmpEtherStatsJabbers", \
-    "opennsl_spl_snmpEtherStatsOctets", \
-    "opennsl_spl_snmpEtherStatsPkts", \
-    "opennsl_spl_snmpEtherStatsCollisions", \
-    "opennsl_spl_snmpEtherStatsCRCAlignErrors", \
-    "opennsl_spl_snmpEtherStatsTXNoErrors", \
-    "opennsl_spl_snmpEtherStatsRXNoErrors", \
-    "opennsl_spl_snmpDot3StatsAlignmentErrors", \
-    "opennsl_spl_snmpDot3StatsFCSErrors", \
-    "opennsl_spl_snmpDot3StatsSingleCollisionFrames", \
-    "opennsl_spl_snmpDot3StatsMultipleCollisionFrames", \
-    "opennsl_spl_snmpDot3StatsSQETTestErrors", \
-    "opennsl_spl_snmpDot3StatsDeferredTransmissions", \
-    "opennsl_spl_snmpDot3StatsLateCollisions", \
-    "opennsl_spl_snmpDot3StatsExcessiveCollisions", \
-    "opennsl_spl_snmpDot3StatsInternalMacTransmitErrors", \
-    "opennsl_spl_snmpDot3StatsCarrierSenseErrors", \
-    "opennsl_spl_snmpDot3StatsFrameTooLongs", \
-    "opennsl_spl_snmpDot3StatsInternalMacReceiveErrors", \
-    "opennsl_spl_snmpDot3StatsSymbolErrors", \
-    "opennsl_spl_snmpDot3ControlInUnknownOpcodes", \
-    "opennsl_spl_snmpDot3InPauseFrames", \
-    "opennsl_spl_snmpDot3OutPauseFrames", \
-    "opennsl_spl_snmpIfHCInOctets", \
-    "opennsl_spl_snmpIfHCInUcastPkts", \
-    "opennsl_spl_snmpIfHCInMulticastPkts", \
-    "opennsl_spl_snmpIfHCInBroadcastPkts", \
-    "opennsl_spl_snmpIfHCOutOctets", \
-    "opennsl_spl_snmpIfHCOutUcastPkts", \
-    "opennsl_spl_snmpIfHCOutMulticastPkts", \
-    "opennsl_spl_snmpIfHCOutBroadcastPckts", \
-    "opennsl_spl_snmpIpv6IfStatsInReceives", \
-    "opennsl_spl_snmpIpv6IfStatsInHdrErrors", \
-    "opennsl_spl_snmpIpv6IfStatsInAddrErrors", \
-    "opennsl_spl_snmpIpv6IfStatsInDiscards", \
-    "opennsl_spl_snmpIpv6IfStatsOutForwDatagrams", \
-    "opennsl_spl_snmpIpv6IfStatsOutDiscards", \
-    "opennsl_spl_snmpIpv6IfStatsInMcastPkts", \
-    "opennsl_spl_snmpIpv6IfStatsOutMcastPkts", \
-    "opennsl_spl_snmpIfInBroadcastPkts", \
-    "opennsl_spl_snmpIfInMulticastPkts", \
-    "opennsl_spl_snmpIfOutBroadcastPkts", \
-    "opennsl_spl_snmpIfOutMulticastPkts", \
-    "opennsl_spl_snmpIeee8021PfcRequests", \
-    "opennsl_spl_snmpIeee8021PfcIndications", \
-    "snmpOpenNSLReceivedUndersizePkts", \
-    "snmpOpenNSLTransmittedUndersizePkts", \
-    "snmpOpenNSLIPMCBridgedPckts", \
-    "snmpOpenNSLIPMCRoutedPckts", \
-    "snmpOpenNSLIPMCInDroppedPckts", \
-    "snmpOpenNSLIPMCOutDroppedPckts", \
-    "snmpOpenNSLEtherStatsPkts1519to1522Octets", \
-    "snmpOpenNSLEtherStatsPkts1522to2047Octets", \
-    "snmpOpenNSLEtherStatsPkts2048to4095Octets", \
-    "snmpOpenNSLEtherStatsPkts4095to9216Octets", \
-    "snmpOpenNSLReceivedPkts64Octets", \
-    "snmpOpenNSLReceivedPkts65to127Octets", \
-    "snmpOpenNSLReceivedPkts128to255Octets", \
-    "snmpOpenNSLReceivedPkts256to511Octets", \
-    "snmpOpenNSLReceivedPkts512to1023Octets", \
-    "snmpOpenNSLReceivedPkts1024to1518Octets", \
-    "snmpOpenNSLReceivedPkts1519to2047Octets", \
-    "snmpOpenNSLReceivedPkts2048to4095Octets", \
-    "snmpOpenNSLReceivedPkts4095to9216Octets", \
-    "snmpOpenNSLTransmittedPkts64Octets", \
-    "snmpOpenNSLTransmittedPkts65to127Octets", \
-    "snmpOpenNSLTransmittedPkts128to255Octets", \
-    "snmpOpenNSLTransmittedPkts256to511Octets", \
-    "snmpOpenNSLTransmittedPkts512to1023Octets", \
-    "snmpOpenNSLTransmittedPkts1024to1518Octets", \
-    "snmpOpenNSLTransmittedPkts1519to2047Octets", \
-    "snmpOpenNSLTransmittedPkts2048to4095Octets", \
-    "snmpOpenNSLTransmittedPkts4095to9216Octets", \
-    "snmpOpenNSLTxControlCells", \
-    "snmpOpenNSLTxDataCells", \
-    "snmpOpenNSLTxDataBytes", \
-    "snmpOpenNSLRxCrcErrors", \
-    "snmpOpenNSLRxFecCorrectable", \
-    "snmpOpenNSLRxBecCrcErrors", \
-    "snmpOpenNSLRxDisparityErrors", \
-    "snmpOpenNSLRxControlCells", \
-    "snmpOpenNSLRxDataCells", \
-    "snmpOpenNSLRxDataBytes", \
-    "snmpOpenNSLRxDroppedRetransmittedControl", \
-    "snmpOpenNSLTxBecRetransmit", \
-    "snmpOpenNSLRxBecRetransmit", \
-    "snmpOpenNSLTxAsynFifoRate", \
-    "snmpOpenNSLRxAsynFifoRate", \
-    "snmpOpenNSLRxFecUncorrectable", \
-    "snmpOpenNSLRxBecRxFault", \
-    "snmpOpenNSLRxCodeErrors", \
-    "snmpOpenNSLRxLlfcPrimary", \
-    "snmpOpenNSLRxLlfcSecondary", \
-    "snmpOpenNSLCustomReceive0", \
-    "snmpOpenNSLCustomReceive1", \
-    "snmpOpenNSLCustomReceive2", \
-    "snmpOpenNSLCustomReceive3", \
-    "snmpOpenNSLCustomReceive4", \
-    "snmpOpenNSLCustomReceive5", \
-    "snmpOpenNSLCustomReceive6", \
-    "snmpOpenNSLCustomReceive7", \
-    "snmpOpenNSLCustomReceive8", \
-    "snmpOpenNSLCustomTransmit0", \
-    "snmpOpenNSLCustomTransmit1", \
-    "snmpOpenNSLCustomTransmit2", \
-    "snmpOpenNSLCustomTransmit3", \
-    "snmpOpenNSLCustomTransmit4", \
-    "snmpOpenNSLCustomTransmit5", \
-    "snmpOpenNSLCustomTransmit6", \
-    "snmpOpenNSLCustomTransmit7", \
-    "snmpOpenNSLCustomTransmit8", \
-    "snmpOpenNSLCustomTransmit9", \
-    "snmpOpenNSLCustomTransmit10", \
-    "snmpOpenNSLCustomTransmit11", \
-    "snmpOpenNSLCustomTransmit12", \
-    "snmpOpenNSLCustomTransmit13", \
-    "snmpOpenNSLCustomTransmit14", \
-    "opennsl_spl_snmpDot3StatsInRangeLengthError", \
-    "opennsl_spl_snmpDot3OmpEmulationCRC8Errors", \
-    "opennsl_spl_snmpDot3MpcpRxGate", \
-    "opennsl_spl_snmpDot3MpcpRxRegister", \
-    "opennsl_spl_snmpDot3MpcpTxRegRequest", \
-    "opennsl_spl_snmpDot3MpcpTxRegAck", \
-    "opennsl_spl_snmpDot3MpcpTxReport", \
-    "opennsl_spl_snmpDot3EponFecCorrectedBlocks", \
-    "opennsl_spl_snmpDot3EponFecUncorrectableBlocks", \
-    "snmpOpenNSLPonInDroppedOctets", \
-    "snmpOpenNSLPonOutDroppedOctets", \
-    "snmpOpenNSLPonInDelayedOctets", \
-    "snmpOpenNSLPonOutDelayedOctets", \
-    "snmpOpenNSLPonInDelayedHundredUs", \
-    "snmpOpenNSLPonOutDelayedHundredUs", \
-    "snmpOpenNSLPonInFrameErrors", \
-    "snmpOpenNSLPonInOamFrames", \
-    "snmpOpenNSLPonOutOamFrames", \
-    "snmpOpenNSLPonOutUnusedOctets", \
-    "snmpOpenNSLEtherStatsPkts9217to16383Octets", \
-    "snmpOpenNSLReceivedPkts9217to16383Octets", \
-    "snmpOpenNSLTransmittedPkts9217to16383Octets", \
-    "snmpOpenNSLRxVlanTagFrame", \
-    "snmpOpenNSLRxDoubleVlanTagFrame", \
-    "snmpOpenNSLTxVlanTagFrame", \
-    "snmpOpenNSLTxDoubleVlanTagFrame", \
-    "snmpOpenNSLRxPFCControlFrame", \
-    "snmpOpenNSLTxPFCControlFrame", \
-    "snmpOpenNSLRxPFCFrameXonPriority0", \
-    "snmpOpenNSLRxPFCFrameXonPriority1", \
-    "snmpOpenNSLRxPFCFrameXonPriority2", \
-    "snmpOpenNSLRxPFCFrameXonPriority3", \
-    "snmpOpenNSLRxPFCFrameXonPriority4", \
-    "snmpOpenNSLRxPFCFrameXonPriority5", \
-    "snmpOpenNSLRxPFCFrameXonPriority6", \
-    "snmpOpenNSLRxPFCFrameXonPriority7", \
-    "snmpOpenNSLRxPFCFramePriority0", \
-    "snmpOpenNSLRxPFCFramePriority1", \
-    "snmpOpenNSLRxPFCFramePriority2", \
-    "snmpOpenNSLRxPFCFramePriority3", \
-    "snmpOpenNSLRxPFCFramePriority4", \
-    "snmpOpenNSLRxPFCFramePriority5", \
-    "snmpOpenNSLRxPFCFramePriority6", \
-    "snmpOpenNSLRxPFCFramePriority7", \
-    "snmpOpenNSLTxPFCFramePriority0", \
-    "snmpOpenNSLTxPFCFramePriority1", \
-    "snmpOpenNSLTxPFCFramePriority2", \
-    "snmpOpenNSLTxPFCFramePriority3", \
-    "snmpOpenNSLTxPFCFramePriority4", \
-    "snmpOpenNSLTxPFCFramePriority5", \
-    "snmpOpenNSLTxPFCFramePriority6", \
-    "snmpOpenNSLTxPFCFramePriority7", \
-    "opennsl_spl_snmpFcmPortClass3RxFrames", \
-    "opennsl_spl_snmpFcmPortClass3TxFrames", \
-    "opennsl_spl_snmpFcmPortClass3Discards", \
-    "opennsl_spl_snmpFcmPortClass2RxFrames", \
-    "opennsl_spl_snmpFcmPortClass2TxFrames", \
-    "opennsl_spl_snmpFcmPortClass2Discards", \
-    "opennsl_spl_snmpFcmPortInvalidCRCs", \
-    "opennsl_spl_snmpFcmPortDelimiterErrors", \
-    "snmpOpenNSLSampleIngressPkts", \
-    "snmpOpenNSLSampleIngressSnapshotPkts", \
-    "snmpOpenNSLSampleIngressSampledPkts", \
-    "snmpOpenNSLSampleFlexPkts", \
-    "snmpOpenNSLSampleFlexSnapshotPkts", \
-    "snmpOpenNSLSampleFlexSampledPkts", \
-    "snmpOpenNSLEgressProtectionDataDrop"  \
-}
-
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -606,6 +383,51 @@ extern int opennsl_stat_multi_get(
     int nstat, 
     opennsl_stat_val_t *stat_arr, 
     uint64 *value_arr) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/** Ingress and Egress Statistics Accounting Objects */
+typedef enum opennsl_stat_object_e {
+    opennslStatObjectIngL3Intf = 4,     /**< Ingress L3 Interface Object */
+    opennslStatObjectEgrL3Intf = 13,    /**< Egress L3 Interface Object */
+} opennsl_stat_object_t;
+
+/** Counter Statistics Values */
+typedef struct opennsl_stat_value_s {
+    uint32 packets;     /**< packets value */
+    uint64 bytes;       /**< bytes value */
+    uint64 packets64;   /**< 64-bit accumulated packets value */
+} opennsl_stat_value_t;
+
+/** Statistics Group Modes */
+typedef enum opennsl_stat_group_mode_e {
+    opennslStatGroupModeSingle = 0, /**< A single counter used for all traffic
+                                       types */
+} opennsl_stat_group_mode_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Create Counter Entries group for given accounting object.
+ *
+ *\description This API will reserve HW counter resources as per given group mode
+ *          and  Accounting object and make system ready for further stat
+ *          collection action based on stat counter ID.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    object [IN]   Accounting Object
+ *\param    group_mode [IN]
+ *\param    stat_counter_id [OUT]
+ *\param    num_entries [OUT]   Number of Counter entries created
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_stat_group_create(
+    int unit, 
+    opennsl_stat_object_t object, 
+    opennsl_stat_group_mode_t group_mode, 
+    uint32 *stat_counter_id, 
+    uint32 *num_entries) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

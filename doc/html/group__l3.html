@@ -41,6 +41,7 @@
 <a href="#files">Files</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Layer 3 Management</div>  </div>
@@ -64,8 +65,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l3__info__s.html">opennsl_l3_info_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Information Structure.  <a href="structopennsl__l3__info__s.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l3__intf__qos__s.html">opennsl_l3_intf_qos_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Interface QOS setting.  <a href="structopennsl__l3__intf__qos__s.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l3__ingress__s.html">opennsl_l3_ingress_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Ingress Structure.  <a href="structopennsl__l3__ingress__s.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l3__intf__s.html">opennsl_l3_intf_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Interface Structure.  <a href="structopennsl__l3__intf__s.html#details">More...</a><br/></td></tr>
@@ -186,10 +187,13 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gab1b3e8f35a51eb5f9d945fa04cdc34a5"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l3__info__s.html">opennsl_l3_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gab1b3e8f35a51eb5f9d945fa04cdc34a5">opennsl_l3_info_t</a></td></tr>
 <tr class="memdesc:gab1b3e8f35a51eb5f9d945fa04cdc34a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Information Structure.  <a href="#gab1b3e8f35a51eb5f9d945fa04cdc34a5"></a><br/></td></tr>
 <tr class="separator:gab1b3e8f35a51eb5f9d945fa04cdc34a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8c581b908cb6fc7b9fe15247c678bbb9"><td class="memItemLeft" align="right" valign="top">typedef struct <br class="typebreak"/>
-<a class="el" href="structopennsl__l3__intf__qos__s.html">opennsl_l3_intf_qos_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga8c581b908cb6fc7b9fe15247c678bbb9">opennsl_l3_intf_qos_t</a></td></tr>
-<tr class="memdesc:ga8c581b908cb6fc7b9fe15247c678bbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Interface QOS setting.  <a href="#ga8c581b908cb6fc7b9fe15247c678bbb9"></a><br/></td></tr>
-<tr class="separator:ga8c581b908cb6fc7b9fe15247c678bbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga20104c4fe7425903cdef8698bc6e527a"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l3__ingress__s.html">opennsl_l3_ingress_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga20104c4fe7425903cdef8698bc6e527a">opennsl_l3_ingress_t</a></td></tr>
+<tr class="memdesc:ga20104c4fe7425903cdef8698bc6e527a"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Ingress Structure.  <a href="#ga20104c4fe7425903cdef8698bc6e527a"></a><br/></td></tr>
+<tr class="separator:ga20104c4fe7425903cdef8698bc6e527a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad1547c994e10f0c6d8dc7b4fc1e3fb35"><td class="memItemLeft" align="right" valign="top">typedef enum <br class="typebreak"/>
+<a class="el" href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">opennsl_l3_ingress_urpf_mode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gad1547c994e10f0c6d8dc7b4fc1e3fb35">opennsl_l3_ingress_urpf_mode_t</a></td></tr>
+<tr class="memdesc:gad1547c994e10f0c6d8dc7b4fc1e3fb35"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Ingress Interface URPF Mode setting.  <a href="#gad1547c994e10f0c6d8dc7b4fc1e3fb35"></a><br/></td></tr>
+<tr class="separator:gad1547c994e10f0c6d8dc7b4fc1e3fb35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l3__intf__s.html">opennsl_l3_intf_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga2a48bc43f2c63aa867b6ba88dd46795e">opennsl_l3_intf_t</a></td></tr>
 <tr class="memdesc:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Interface Structure.  <a href="#ga2a48bc43f2c63aa867b6ba88dd46795e"></a><br/></td></tr>
 <tr class="separator:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,6 +202,38 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga9395dab5143018452f69fbe885e86b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga34d5d6b9739093c6fb4e9ea7978d76bf"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga34d5d6b9739093c6fb4e9ea7978d76bf">opennsl_l3_route_traverse_cb</a> )(int unit, int index, <a class="el" href="group__l3.html#ga9395dab5143018452f69fbe885e86b39">opennsl_l3_route_t</a> *info, void *user_data)</td></tr>
 <tr class="separator:ga34d5d6b9739093c6fb4e9ea7978d76bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga659f69a4df47e18747fbee9480c4e27a"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">opennsl_l3_stat_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a></td></tr>
+<tr class="memdesc:ga659f69a4df47e18747fbee9480c4e27a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of counters per L3 object.  <a href="#ga659f69a4df47e18747fbee9480c4e27a"></a><br/></td></tr>
+<tr class="separator:ga659f69a4df47e18747fbee9480c4e27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga9ffd39434b904a446d9ad109a8eef08a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">opennsl_l3_ingress_urpf_mode_e</a> { <br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga9ffd39434b904a446d9ad109a8eef08aa2034af75a4846d03b59e2bb7ac32f133">opennslL3IngressUrpfDisable</a> = 0, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga9ffd39434b904a446d9ad109a8eef08aa1fc8e92f79a37237478ce3cb4fb07648">opennslL3IngressUrpfLoose</a> = 1, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga9ffd39434b904a446d9ad109a8eef08aab9a8578c3384004d1bae061e83d48bb4">opennslL3IngressUrpfStrict</a> = 2
+<br/>
+ }</td></tr>
+<tr class="memdesc:ga9ffd39434b904a446d9ad109a8eef08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Ingress Interface URPF Mode setting.  <a href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">More...</a><br/></td></tr>
+<tr class="separator:ga9ffd39434b904a446d9ad109a8eef08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6390acbf8dd851a1c53f3c2eb75772eb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">opennsl_l3_stat_e</a> { <br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772eba3b421f1008232c5890fc102129f8fb65">opennslL3StatOutPackets</a> = 0, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772ebaf6da6df648b61d809780bff163038113">opennslL3StatOutBytes</a> = 1, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772eba385be3f8be801031792ebb9be853f5c4">opennslL3StatDropPackets</a> = 2, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772ebaa2bdbb366de735d34c1e2312d5e417a5">opennslL3StatDropBytes</a> = 3, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772ebae292c447aef7e12bf5fefe4ae4ae610e">opennslL3StatInPackets</a> = 4, 
+<br/>
+&#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772eba6dbc26b38fa1e6ec79d13e4f4f3d33b5">opennslL3StatInBytes</a> = 5
+<br/>
+ }</td></tr>
+<tr class="memdesc:ga6390acbf8dd851a1c53f3c2eb75772eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of counters per L3 object.  <a href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">More...</a><br/></td></tr>
+<tr class="separator:ga6390acbf8dd851a1c53f3c2eb75772eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -258,6 +294,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga05106d4dfbb1539073c92fdbddd52542"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga05106d4dfbb1539073c92fdbddd52542">opennsl_l3_egress_multipath_traverse</a> (int unit, <a class="el" href="group__l3.html#ga6fcdb3d29828769208103d22d4c46e8b">opennsl_l3_egress_multipath_traverse_cb</a> trav_fn, void *user_data) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga05106d4dfbb1539073c92fdbddd52542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse through the multipath egress object table and run callback at each valid entry.  <a href="#ga05106d4dfbb1539073c92fdbddd52542"></a><br/></td></tr>
 <tr class="separator:ga05106d4dfbb1539073c92fdbddd52542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03de35f678b7f05c89ce5cddea33a86b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga03de35f678b7f05c89ce5cddea33a86b">opennsl_l3_egress_stat_attach</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> stat_counter_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga03de35f678b7f05c89ce5cddea33a86b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach counters entries to the given L3 Egress interface.  <a href="#ga03de35f678b7f05c89ce5cddea33a86b"></a><br/></td></tr>
+<tr class="separator:ga03de35f678b7f05c89ce5cddea33a86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga47c9daec8f8f9a3e5e20c72ea3733271">opennsl_l3_egress_stat_counter_get</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a> stat, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> num_entries, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *counter_indexes, <a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *counter_values) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified counter statistic for a L3 egress interface.  <a href="#ga47c9daec8f8f9a3e5e20c72ea3733271"></a><br/></td></tr>
+<tr class="separator:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga10b5ea766149d2bfdcd9d453939057e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga10b5ea766149d2bfdcd9d453939057e5">opennsl_l3_egress_t_init</a> (<a class="el" href="group__l3.html#gaf8c0ee66bb6126f9f946f1d4d87b77a0">opennsl_l3_egress_t</a> *egr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga10b5ea766149d2bfdcd9d453939057e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a opennsl_l3_egress_t structure.  <a href="#ga10b5ea766149d2bfdcd9d453939057e5"></a><br/></td></tr>
 <tr class="separator:ga10b5ea766149d2bfdcd9d453939057e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,6 +333,15 @@ Functions</h2></td></tr>
 <tr class="memitem:gae3d9077e324d177d53e528bdac41257d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gae3d9077e324d177d53e528bdac41257d">opennsl_l3_info_t_init</a> (<a class="el" href="group__l3.html#gab1b3e8f35a51eb5f9d945fa04cdc34a5">opennsl_l3_info_t</a> *info) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gae3d9077e324d177d53e528bdac41257d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a opennsl_l3_info_t_init structure.  <a href="#gae3d9077e324d177d53e528bdac41257d"></a><br/></td></tr>
 <tr class="separator:gae3d9077e324d177d53e528bdac41257d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3687e6ad79ebc4e99820655e6b4f55b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga3687e6ad79ebc4e99820655e6b4f55b4">opennsl_l3_ingress_create</a> (int unit, <a class="el" href="group__l3.html#ga20104c4fe7425903cdef8698bc6e527a">opennsl_l3_ingress_t</a> *ing_intf, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> *intf_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga3687e6ad79ebc4e99820655e6b4f55b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create L3 Ingress Interface object.  <a href="#ga3687e6ad79ebc4e99820655e6b4f55b4"></a><br/></td></tr>
+<tr class="separator:ga3687e6ad79ebc4e99820655e6b4f55b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5d394ad7d557759ae9f1d37bfa8f0f53"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga5d394ad7d557759ae9f1d37bfa8f0f53">opennsl_l3_ingress_stat_attach</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> stat_counter_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga5d394ad7d557759ae9f1d37bfa8f0f53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach counters entries to the given L3 ingress interface.  <a href="#ga5d394ad7d557759ae9f1d37bfa8f0f53"></a><br/></td></tr>
+<tr class="separator:ga5d394ad7d557759ae9f1d37bfa8f0f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga7c3e597df7a8743ca3327169f5be3c8c">opennsl_l3_ingress_stat_counter_get</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a> stat, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> num_entries, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *counter_indexes, <a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *counter_values) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get counter statistic values for a l3 interface object.  <a href="#ga7c3e597df7a8743ca3327169f5be3c8c"></a><br/></td></tr>
+<tr class="separator:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gac3aa55e5394c363b7e8bb13079cdf37d">opennsl_l3_init</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the OPENNSL L3 subsystem.  <a href="#gac3aa55e5394c363b7e8bb13079cdf37d"></a><br/></td></tr>
 <tr class="separator:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -469,7 +520,7 @@ Functions</h2></td></tr>
 
 <p>Invalid value for dynamic_load_weight. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00148">148</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00128">128</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -485,7 +536,7 @@ Functions</h2></td></tr>
 
 <p>ECMP resilient load balancing mode: minimize reassignment of flows to members. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00275">275</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00263">263</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -501,7 +552,7 @@ Functions</h2></td></tr>
 
 <p>Invalid value for dynamic_scaling_factor. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00146">146</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00126">126</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -798,7 +849,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00304">304</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00292">292</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -812,7 +863,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00297">297</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00285">285</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -841,7 +892,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00291">291</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00279">279</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +922,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00279">279</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00267">267</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -890,17 +941,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga8c581b908cb6fc7b9fe15247c678bbb9"></a>
+<a class="anchor" id="ga20104c4fe7425903cdef8698bc6e527a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structopennsl__l3__intf__qos__s.html">opennsl_l3_intf_qos_s</a>  <a class="el" href="group__l3.html#ga8c581b908cb6fc7b9fe15247c678bbb9">opennsl_l3_intf_qos_t</a></td>
+          <td class="memname">typedef struct <a class="el" href="structopennsl__l3__ingress__s.html">opennsl_l3_ingress_s</a>  <a class="el" href="group__l3.html#ga20104c4fe7425903cdef8698bc6e527a">opennsl_l3_ingress_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>L3 Interface QOS setting. </p>
+<p>L3 Ingress Structure. </p>
+<p>Description of an L3 Ingress interface. </p>
+
+</div>
+</div>
+<a class="anchor" id="gad1547c994e10f0c6d8dc7b4fc1e3fb35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">opennsl_l3_ingress_urpf_mode_e</a>  <a class="el" href="group__l3.html#gad1547c994e10f0c6d8dc7b4fc1e3fb35">opennsl_l3_ingress_urpf_mode_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>L3 Ingress Interface URPF Mode setting. </p>
 
 </div>
 </div>
@@ -945,7 +1011,83 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00285">285</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00273">273</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga659f69a4df47e18747fbee9480c4e27a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">opennsl_l3_stat_e</a>  <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Types of counters per L3 object. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ga9ffd39434b904a446d9ad109a8eef08a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">opennsl_l3_ingress_urpf_mode_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>L3 Ingress Interface URPF Mode setting. </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="gga9ffd39434b904a446d9ad109a8eef08aa2034af75a4846d03b59e2bb7ac32f133"></a>opennslL3IngressUrpfDisable</em>&nbsp;</td><td>
+<p>Disable unicast RPF. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga9ffd39434b904a446d9ad109a8eef08aa1fc8e92f79a37237478ce3cb4fb07648"></a>opennslL3IngressUrpfLoose</em>&nbsp;</td><td>
+<p>Loose mode Unicast RPF. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga9ffd39434b904a446d9ad109a8eef08aab9a8578c3384004d1bae061e83d48bb4"></a>opennslL3IngressUrpfStrict</em>&nbsp;</td><td>
+<p>Strict mode Unicast RPF. </p>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00131">131</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga6390acbf8dd851a1c53f3c2eb75772eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">opennsl_l3_stat_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Types of counters per L3 object. </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772eba3b421f1008232c5890fc102129f8fb65"></a>opennslL3StatOutPackets</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772ebaf6da6df648b61d809780bff163038113"></a>opennslL3StatOutBytes</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772eba385be3f8be801031792ebb9be853f5c4"></a>opennslL3StatDropPackets</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772ebaa2bdbb366de735d34c1e2312d5e417a5"></a>opennslL3StatDropBytes</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772ebae292c447aef7e12bf5fefe4ae4ae610e"></a>opennslL3StatInPackets</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga6390acbf8dd851a1c53f3c2eb75772eba6dbc26b38fa1e6ec79d13e4f4f3d33b5"></a>opennslL3StatInBytes</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="l3_8h_source.html#l01202">1202</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -1914,6 +2056,125 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga03de35f678b7f05c89ce5cddea33a86b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_egress_stat_attach </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>stat_counter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attach counters entries to the given L3 Egress interface. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will attach counters entries to the given L3 Egress interface. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a egress L3 object </td></tr>
+    <tr><td class="paramname">stat_counter_id</td><td>[IN] Stat Counter ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga47c9daec8f8f9a3e5e20c72ea3733271"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_egress_stat_counter_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a>&#160;</td>
+          <td class="paramname"><em>stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>num_entries</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *&#160;</td>
+          <td class="paramname"><em>counter_indexes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *&#160;</td>
+          <td class="paramname"><em>counter_values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the specified counter statistic for a L3 egress interface. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will retrieve set of counter statistic values for the specified L3 egress. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a egress L3 object. </td></tr>
+    <tr><td class="paramname">stat</td><td>[IN] Type of the counter to retrieve that is, ingress/egress byte/packet </td></tr>
+    <tr><td class="paramname">num_entries</td><td>[IN] Number of counter Entries </td></tr>
+    <tr><td class="paramname">counter_indexes</td><td>[IN] Pointer to Counter indexes entries </td></tr>
+    <tr><td class="paramname">counter_values</td><td>[OUT] Pointer to counter values</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ga10b5ea766149d2bfdcd9d453939057e5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2384,6 +2645,173 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">Nothing</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3687e6ad79ebc4e99820655e6b4f55b4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ingress_create </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga20104c4fe7425903cdef8698bc6e527a">opennsl_l3_ingress_t</a> *&#160;</td>
+          <td class="paramname"><em>ing_intf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> *&#160;</td>
+          <td class="paramname"><em>intf_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create L3 Ingress Interface object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">ing_intf</td><td>[IN] Egress forwarding destination. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN,OUT] L3 Ingress Interface ID pointing to L3 IIF object. This is an IN argument if either OPENNSL_L3_INGRESS_REPLACE or OPENNSL_L3_INGRESS_WITH_ID are given in flags.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5d394ad7d557759ae9f1d37bfa8f0f53"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ingress_stat_attach </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>stat_counter_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attach counters entries to the given L3 ingress interface. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will attach counters entries to the given L3 ingress Interface. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a L3 ingress object or a valid VLAN </td></tr>
+    <tr><td class="paramname">stat_counter_id</td><td>[IN] Stat Counter ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga7c3e597df7a8743ca3327169f5be3c8c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ingress_stat_counter_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a>&#160;</td>
+          <td class="paramname"><em>stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>num_entries</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *&#160;</td>
+          <td class="paramname"><em>counter_indexes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *&#160;</td>
+          <td class="paramname"><em>counter_values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get counter statistic values for a l3 interface object. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will retrieve set of counter statistic values for a l3 interface object. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a L3 ingress object or a valid VLAN </td></tr>
+    <tr><td class="paramname">stat</td><td>[IN] Type of the counter to retrieve that is, ingress/egress byte/packet </td></tr>
+    <tr><td class="paramname">num_entries</td><td>[IN] Number of counter Entries </td></tr>
+    <tr><td class="paramname">counter_indexes</td><td>[IN] Pointer to Counter indexes entries </td></tr>
+    <tr><td class="paramname">counter_values</td><td>[OUT] Pointer to counter values</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
   </table>
   </dd>
 </dl>

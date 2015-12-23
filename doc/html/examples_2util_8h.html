@@ -69,9 +69,15 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#a0ec5a9523868f063b9ebfe4cfc05cdb1">example_max_port_count_get</a> (int unit, int *count)</td></tr>
+<tr class="memdesc:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">To get the number of front panel ports.  <a href="#a0ec5a9523868f063b9ebfe4cfc05cdb1"></a><br/></td></tr>
+<tr class="separator:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0173c952d5a8af01c14eebabc05b5df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a> (int *choice)</td></tr>
 <tr class="memdesc:ad0173c952d5a8af01c14eebabc05b5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read numeric menu choice from user.  <a href="#ad0173c952d5a8af01c14eebabc05b5df"></a><br/></td></tr>
 <tr class="separator:ad0173c952d5a8af01c14eebabc05b5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf82384f15fd6b2295de85ad6529ecc"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#aaaf82384f15fd6b2295de85ad6529ecc">example_read_user_string</a> (char *buf, size_t buflen)</td></tr>
+<tr class="memdesc:aaaf82384f15fd6b2295de85ad6529ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a string from user.  <a href="#aaaf82384f15fd6b2295de85ad6529ecc"></a><br/></td></tr>
+<tr class="separator:aaaf82384f15fd6b2295de85ad6529ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d14e4de1f4a7192ac7e378f8f7c63ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#a2d14e4de1f4a7192ac7e378f8f7c63ff">example_switch_default_vlan_config</a> (int unit)</td></tr>
 <tr class="memdesc:a2d14e4de1f4a7192ac7e378f8f7c63ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add all ports to default vlan.  <a href="#a2d14e4de1f4a7192ac7e378f8f7c63ff"></a><br/></td></tr>
 <tr class="separator:a2d14e4de1f4a7192ac7e378f8f7c63ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +131,48 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a0ec5a9523868f063b9ebfe4cfc05cdb1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int example_max_port_count_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To get the number of front panel ports. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] unit number </td></tr>
+    <tr><td class="paramname">int</td><td>[OUT] Number of front panel ports</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
+
+<p>Definition at line <a class="el" href="util_8c_source.html#l00370">370</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+
+<p>References <a class="el" href="structopennsl__port__config__s.html#a6a0d55ca5f29547cfcc5c3c1a6149e81">opennsl_port_config_s::ge</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, <a class="el" href="group__error.html#ga6d47e9cb22df965b977f3810bdc0ce3e">opennsl_errmsg</a>, <a class="el" href="group__types.html#gaced1b7d5db61f5d7d2262da91bdb6887">OPENNSL_PBMP_COUNT</a>, <a class="el" href="group__port.html#ga9f95e3f27b53970914dccc70ffbe7010">opennsl_port_config_get()</a>, and <a class="el" href="structopennsl__port__config__s.html#a796873998a7d8b698aa878cf51883ef8">opennsl_port_config_s::xe</a>.</p>
+
+<p>Referenced by <a class="el" href="example__bst_8c.html#ab09e0ef72430423530fa3a3c8434d47e">example_bst_default_profile_set()</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad0173c952d5a8af01c14eebabc05b5df"></a>
 <div class="memitem">
 <div class="memproto">
@@ -148,11 +196,51 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_xxx OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00077">77</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00105">105</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="sal_2types_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>, <a class="el" href="util_8c.html#a068278b0838b6670ab0ab0a93ed77484">MAX_DIGITS_IN_CHOICE</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, and <a class="el" href="sal_2types_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>.</p>
 
 <p>Referenced by <a class="el" href="example__knet_8c.html#a55c45cb01dca0a1b336efccb6130cb14">example_knet_intf_create()</a>, and <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaaf82384f15fd6b2295de85ad6529ecc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* example_read_user_string </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>buflen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a string from user. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>[IN/OUT] Buffer to store the string </td></tr>
+    <tr><td class="paramname">buflen</td><td>[IN] Buffer length</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Valid string if there are no errors. Otherwise, it returns 0 </dd></dl>
+
+<p>Definition at line <a class="el" href="util_8c_source.html#l00078">78</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+
+<p>Referenced by <a class="el" href="example__knet_8c.html#a55c45cb01dca0a1b336efccb6130cb14">example_knet_intf_create()</a>, and <a class="el" href="example__knet_8c.html#a3c9f9a94f61c9adb5228fd241d913d99">example_knet_intf_delete()</a>.</p>
 
 </div>
 </div>
@@ -214,7 +302,7 @@ Functions</h2></td></tr>
 <p>To print the MAC address. </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00183">183</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00211">211</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="example__routing_8c.html#a04eabb557cecbe6d7f8f9aa84a5fa74d">example_create_l3_intf()</a>.</p>
 
@@ -237,7 +325,7 @@ Functions</h2></td></tr>
 <p>To get boot flags fetched from environment. </p>
 <dl class="section return"><dt>Returns</dt><dd>unsigned int Boot flags </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00318">318</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00346">346</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="examples_2util_8h.html#ae5663908f678511e204b9449e46fa4ef">OPENNSL_BOOT_F_DEFAULT</a>, and <a class="el" href="util_8c.html#a462b5d7ced1a3a5e35f45c6243d1b257">opennsl_ctoi()</a>.</p>
 
@@ -279,7 +367,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00207">207</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00235">235</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>.</p>
 
@@ -319,7 +407,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00118">118</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00146">146</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="util_8c.html#a60cf9af36f952be0feb59d1f49d5edff">MAC_ADDR_LEN</a>, <a class="el" href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>, and <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>.</p>
 
@@ -359,7 +447,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00250">250</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00278">278</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="example__routing_8c.html#aac2edc87c4397b83513067ac545599ea">example_add_host()</a>, and <a class="el" href="example__routing_8c.html#abce61c2dc135d7be41729d8dc9f5cf31">example_set_default_route()</a>.</p>
 

@@ -228,32 +228,10 @@ extern int opennsl_vlan_default_set(
 
 /** opennsl_vlan_control_port_t */
 typedef enum opennsl_vlan_control_port_e {
-    opennslvlanReservedEnum1,           
-    opennslvlanReservedEnum2,           
     opennslVlanTranslateIngressEnable = 2, 
-    opennslvlanReservedEnum3,           
     opennslVlanTranslateIngressMissDrop = 4, 
     opennslVlanTranslateEgressEnable = 5, 
     opennslVlanTranslateEgressMissDrop = 6, 
-    opennslvlanReservedEnum4,           
-    opennslvlanReservedEnum5,           
-    opennslvlanReservedEnum6,           
-    opennslvlanReservedEnum7,           
-    opennslvlanReservedEnum8,           
-    opennslvlanReservedEnum9,           
-    opennslvlanReservedEnum10,          
-    opennslvlanReservedEnum11,          
-    opennslvlanReservedEnum12,          
-    opennslvlanReservedEnum13,          
-    opennslvlanReservedEnum14,          
-    opennslvlanReservedEnum15,          
-    opennslvlanReservedEnum16,          
-    opennslvlanReservedEnum17,          
-    opennslvlanReservedEnum18,          
-    opennslvlanReservedEnum19,          
-    opennslvlanReservedEnum20,          
-    opennslvlanReservedEnum21,          
-    opennslvlanReservedEnum22           
 } opennsl_vlan_control_port_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -282,5 +260,9 @@ extern int opennsl_vlan_control_port_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#if defined(INCLUDE_L3)
+#endif
+#if defined(INCLUDE_L3)
+#endif
 #endif /* __OPENNSL_VLAN_H__ */
 /*@}*/

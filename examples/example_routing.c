@@ -286,6 +286,7 @@ int example_add_host(int unit, unsigned int addr, int intf) {
   if (rc != OPENNSL_E_NONE) {
     printf ("opennsl_l3_host_add failed. Return Code: %s \n",
         opennsl_errmsg(rc));
+    return rc;
   }
 
   if(verbose >= 1) {
@@ -329,6 +330,7 @@ int example_set_default_route(int unit, int subnet, int mask,
   if (rc != OPENNSL_E_NONE) {
     printf ("opennsl_l3_route_add failed. Return Code: %s \n",
         opennsl_errmsg(rc));
+    return rc;
   }
 
   if(verbose >= 1) {
@@ -407,6 +409,7 @@ int main(int argc, char *argv[])
     if (rv != OPENNSL_E_NONE) {
       printf("Error, create ingress interface-1, in_sysport=%d, in unit %d \n",
           in_sysport, unit);
+      return rv;
     }
 
     /*** create egress router interface ***/
@@ -415,6 +418,7 @@ int main(int argc, char *argv[])
     if (rv != OPENNSL_E_NONE) {
       printf("Error, create egress interface-1, out_sysport=%d, in unit %d \n",
           out_sysport, unit);
+      return rv;
     }
 
     /*** Make the address learn on a VLAN and port */
@@ -437,14 +441,16 @@ int main(int argc, char *argv[])
     if (rv != OPENNSL_E_NONE) {
       printf("Error, create egress object, out_sysport=%d, in unit %d\n",
           out_sysport, unit);
+      return rv;
     }
 
     /*** add host point ***/
     host = HOST1;
     rv = example_add_host(unit, host, l3egid);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, create egress object, in_sysport=%d, in unit %d \n",
-          in_sysport, unit);
+      printf("Error, host add, in unit %d \n",
+          unit);
+      return rv;
     }
 
 
@@ -453,8 +459,9 @@ int main(int argc, char *argv[])
     mask   = DEFAULT_SUBNET_MASK;
     rv = example_set_default_route(unit, subnet, mask, l3egid, 0);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, create egress object, in_sysport=%d, in unit %d \n",
-          in_sysport, unit);
+      printf("Error, default route add, in unit %d \n",
+          unit);
+      return rv;
     }
   }
 

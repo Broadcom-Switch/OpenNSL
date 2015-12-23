@@ -204,7 +204,9 @@ typedef enum _shr_rx_reason_e {
     _SHR_RX_BHH_OAM_PACKET              = 153, /* BHH OAM Packet                      */
     _SHR_RX_RESERVED_0                  = 154, /* Broadcom Reserved                   */
     _SHR_RX_OAM_MPLS_LMDM               = 155, /* MPLS LM/DM (RFC 6374) packet        */
-    _SHR_RX_REASON_COUNT                = 156  /* MUST BE LAST                        */
+    _SHR_RX_SAT                         = 156, /* OAM SAT pkt                         */
+    _SHR_RX_SAMPLE_SOURCE_FLEX          = 157, /* Flexible sampled packets to CPU     */
+    _SHR_RX_REASON_COUNT                = 158  /* MUST BE LAST                        */
 } _shr_rx_reason_t;
 
 #define _SHR_RX_REASON_NAMES_INITIALIZER { \
@@ -363,7 +365,9 @@ typedef enum _shr_rx_reason_e {
     "OAMIncompleteOpcode",      \
     "OAMCCMpacket",             \
     "Reserved0",                \
-    "OAMMplsLmDM"               \
+    "OAMMplsLmDM",              \
+    "SAT",                      \
+    "SampleSourceFlex"          \
 }
 
 /*

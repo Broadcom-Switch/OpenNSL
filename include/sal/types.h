@@ -46,10 +46,6 @@
 
 #define VOL            volatile
 
-#define sal_memset     memset
-#define sal_memcpy     memcpy
-#define sal_memcmp     memcmp
-
 /*
  * Define unsigned and signed integers with guaranteed sizes.
  * Adjust if your compiler uses different sizes for short or int.
@@ -111,12 +107,6 @@ typedef uint32  sal_ip_addr_t;          /* IP Address */
 /* sal_mac_addr_t mac;  Just generate a list of the macs for display */
 #define SAL_MAC_ADDR_LIST(mac) \
     mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]
-
-/* sal_mac_addr_t m1, m2;  True if equal */
-#define SAL_MAC_ADDR_EQUAL(m1, m2) (!sal_memcmp(m1, m2, sizeof(sal_mac_addr_t)))
-
-/* sal_mac_addr_t m1, m2;  like memcmp, returns -1, 0, or 1 */
-#define SAL_MAC_ADDR_CMP(m1, m2) sal_memcmp(m1, m2, sizeof(sal_mac_addr_t))
 
 #define SAL_MACADDR_STR_LEN     18              /* Formatted MAC address */
 #define SAL_IPADDR_STR_LEN      16              /* Formatted IP address */

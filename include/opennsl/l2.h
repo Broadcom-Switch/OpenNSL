@@ -103,7 +103,12 @@ extern int opennsl_l2_addr_add(
  *\brief Delete an L2 address entry from the specified device.
  *
  *\description Delete the given MAC address with the specified VLAN ID from the
- *          device.
+ *          device. If users want to know which entries are deleted, they
+ *          should register  callback routines by API
+ *          opennsl_l2_addr_register(). If L2_MOD_FIFO is used,  but the
+ *          thread opennslL2MOD.x is stopped, users can not know which entries
+ *          are deleted, even though they already had registered callback
+ *          routines.
  *
  *\param    unit [IN]   Unit number.
  *\param    mac [IN]   802.3 MAC address
@@ -157,7 +162,9 @@ typedef void (*opennsl_l2_addr_callback_t)(
  *\description Register/Unregister a callback routine that will be called
  *          whenever an entry is  added into or deleted from the L2 address
  *          table. Both callback and userdata  must match for register and
- *          unregister calls.
+ *          unregister calls. If there is l2xmsg_mode=1 in file
+ *          config.opennsl, the thread opennslL2MOD.x may be triggered/stopped
+ *          when register/unregister  a callback routine.
  *
  *\param    unit [IN]   Unit number.
  *\param    callback [IN]   Callback function of type opennsl_l2_addr_callback_t
@@ -250,13 +257,8 @@ extern int opennsl_l2_traverse(
 /** L2 Station address info. */
 typedef struct opennsl_l2_station_s {
     uint32 flags;               /**< OPENNSL_L2_STATION_xxx flags. */
-    int reserved1; 
     opennsl_mac_t dst_mac;      /**< Destination MAC address to match. */
     opennsl_mac_t dst_mac_mask; /**< Destination MAC address mask value. */
-    opennsl_vlan_t reserved2; 
-    opennsl_vlan_t reserved3; 
-    opennsl_port_t reserved4; 
-    opennsl_port_t reserved5; 
 } opennsl_l2_station_t;
 
 #define OPENNSL_L2_STATION_WITH_ID  (1 << 0)   /**< Use the specified Station ID. */

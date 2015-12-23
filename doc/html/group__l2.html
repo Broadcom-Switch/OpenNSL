@@ -279,7 +279,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to ARP/RARP processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00269">269</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00271">271</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to L3 processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00265">265</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00267">267</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -311,7 +311,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to L3 processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00267">267</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00269">269</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -327,7 +327,7 @@ Functions</h2></td></tr>
 
 <p>Use the specified Station ID. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00264">264</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00266">266</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -345,7 +345,7 @@ Functions</h2></td></tr>
 <p>Callback function used for receiving notification about insertions into and deletions from the L2 table dynamically as they occur. </p>
 <p>Valid operations are: delete, add, and report. A report with l2addr=NULL indicates a scan completion of the L2 table. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00147">147</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00152">152</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -387,7 +387,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00222">222</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00229">229</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -467,7 +467,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Delete an L2 address entry from the specified device. </p>
-<dl class="section user"><dt>Description</dt><dd>Delete the given MAC address with the specified VLAN ID from the device.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Delete the given MAC address with the specified VLAN ID from the device. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem.">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -576,7 +576,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Register/Unregister a callback routine for OPENNSL L2 subsystem. </p>
-<dl class="section user"><dt>Description</dt><dd>Register/Unregister a callback routine that will be called whenever an entry is added into or deleted from the L2 address table. Both callback and userdata must match for register and unregister calls.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Register/Unregister a callback routine that will be called whenever an entry is added into or deleted from the L2 address table. Both callback and userdata must match for register and unregister calls. If there is l2xmsg_mode=1 in file config.opennsl, the thread opennslL2MOD.x may be triggered/stopped when register/unregister a callback routine.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>

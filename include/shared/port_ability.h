@@ -38,6 +38,7 @@ typedef struct _shr_port_ability_s {
     _shr_port_mode_t eee;
     _shr_port_mode_t fcmap;
     _shr_pa_encap_t  encap;
+    _shr_port_mode_t fec;
 } _shr_port_ability_t;
 
 #define _SHR_PA_ABILITY_ALL     (0xffffffff)
@@ -122,6 +123,24 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_PAUSE_TX        (1 << 0)       /* TX pause capable */
 #define _SHR_PA_PAUSE_RX        (1 << 1)       /* RX pause capable */
 #define _SHR_PA_PAUSE_ASYMM     (1 << 2)       /* Asymm pause capable (R/O) */
+
+#define _SHR_PA_PAUSE_STRING    {"PAUSE_TX", \
+                                 "PAUSE_RX", \
+                                 "PAUSE_ASYMM"}
+
+/*
+ * Defines:
+ *      _SHR_PA_FEC_*
+ * Purpose:
+ *      Defines for FEC abilities.
+ */
+
+#define _SHR_PA_FEC              (1 << 0)       /* FEC ability support */
+#define _SHR_PA_FEC_REQUEST      (1 << 1)       /* FEC ability request */
+#define _SHR_PA_FEC_STRING       {"FEC", \
+                                  "FEC_REQUEST"}
+
+
 /*
  * Defines:
  *      _SHR_PA_INTF_*
@@ -136,6 +155,16 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_INTF_XGMII      (1 << 5)       /* XGMII mode supported */
 #define _SHR_PA_INTF_QSGMII     (1 << 6)       /* QSGMII mode supported */
 #define _SHR_PA_INTF_CGMII      (1 << 7)       /* CGMII mode supported */
+
+#define _SHR_PA_INTF_STRING     {"TBI", \
+                                 "MII", \
+                                 "GMII", \
+                                 "RGMII", \
+                                 "SGMII", \
+                                 "XGMII", \
+                                 "QSGMII", \
+                                 "CGMII"}
+
 /*
  * Defines:
  *      _SHR_PA_MEDIUM_*
@@ -144,6 +173,9 @@ typedef struct _shr_port_ability_s {
  */
 #define _SHR_PA_MEDIUM_COPPER   (1 << 0)
 #define _SHR_PA_MEDIUM_FIBER    (1 << 1)
+
+#define _SHR_PA_MEDIUM_STRING   {"COPPER", \
+                                 "FIBER"}
 /*
  * Defines:
  *      _SHR_PA_LOOPBACK_*
@@ -154,6 +186,12 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_LB_MAC          (1 << 1)       /* MAC loopback supported */
 #define _SHR_PA_LB_PHY          (1 << 2)       /* PHY loopback supported */
 #define _SHR_PA_LB_LINE         (1 << 3)       /* PHY lineside loopback */
+
+#define _SHR_PA_LB_STRING       {"LB_NONE", \
+                                 "LB_MAC", \
+                                 "LB_PHY", \
+                                 "LB_LINE"}
+
 /*
  * Defines:
  *      _SHR_PA_FLAGS_*
@@ -163,6 +201,9 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_AUTONEG         (1 << 0)       /* Auto-negotiation */
 #define _SHR_PA_COMBO           (1 << 1)       /* COMBO ports support both
                                                 * copper and fiber interfaces */
+#define _SHR_PA_FLAGS_STRING    {"AUTONEG", \
+                                 "COMBO"}
+
 #define _SHR_PA_PAUSE           (_SHR_PA_PAUSE_TX  | _SHR_PA_PAUSE_RX)
 
 #define _SHR_PA_SPEED_ALL    (_SHR_PA_SPEED_127GB |        \
@@ -227,6 +268,40 @@ typedef struct _shr_port_ability_s {
                               ((m) & _SHR_PA_SPEED_1000MB)   ? 1000 : \
                               ((m) & _SHR_PA_SPEED_100MB)    ? 100 : \
                               ((m) & _SHR_PA_SPEED_10MB)     ? 10 : 0)
+
+
+#define _SHR_PA_SPEED(s)     ((127000 == (s)) ? _SHR_PA_SPEED_127GB : \
+                              (120000 == (s)) ? _SHR_PA_SPEED_120GB : \
+                              (106000 == (s)) ? _SHR_PA_SPEED_106GB : \
+                              (100000 == (s)) ? _SHR_PA_SPEED_100GB : \
+                              (53000 == (s)) ? _SHR_PA_SPEED_53GB : \
+                              (50000 == (s)) ? _SHR_PA_SPEED_50GB : \
+                              (42000 == (s)) ? _SHR_PA_SPEED_42GB : \
+                              (40000 == (s)) ? _SHR_PA_SPEED_40GB : \
+                              (32000 == (s)) ? _SHR_PA_SPEED_32GB : \
+                              (30000 == (s)) ? _SHR_PA_SPEED_30GB : \
+                              (27000 == (s)) ? _SHR_PA_SPEED_27GB : \
+                              (25000 == (s)) ? _SHR_PA_SPEED_25GB : \
+                              (24000 == (s)) ? _SHR_PA_SPEED_24GB : \
+                              (23000 == (s)) ? _SHR_PA_SPEED_23GB : \
+                              (21000 == (s)) ? _SHR_PA_SPEED_21GB : \
+                              (20000 == (s)) ? _SHR_PA_SPEED_20GB : \
+                              (16000 == (s)) ? _SHR_PA_SPEED_16GB : \
+                              (15000 == (s)) ? _SHR_PA_SPEED_15GB : \
+                              (13000 == (s)) ? _SHR_PA_SPEED_13GB : \
+                              (12500 == (s)) ? _SHR_PA_SPEED_12P5GB : \
+                              (12000 == (s)) ? _SHR_PA_SPEED_12GB : \
+                              (11000 == (s)) ? _SHR_PA_SPEED_11GB : \
+                              (10000 == (s)) ? _SHR_PA_SPEED_10GB : \
+                              (6000  == (s)) ? _SHR_PA_SPEED_6000MB : \
+                              (5000  == (s)) ? _SHR_PA_SPEED_5000MB : \
+                              (3000  == (s)) ? _SHR_PA_SPEED_3000MB : \
+                              (2500  == (s)) ? _SHR_PA_SPEED_2500MB : \
+                              (1000  == (s)) ? _SHR_PA_SPEED_1000MB : \
+                              (100   == (s)) ? _SHR_PA_SPEED_100MB : \
+                              (10    == (s)) ? _SHR_PA_SPEED_10MB : 0)
+
+
 /*
  * Defines:
  *      _SHR_PA_EEE_*
@@ -239,6 +314,15 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_EEE_10GB_KX            (1 << 3)    /* EEE for 10G-KX */
 #define _SHR_PA_EEE_10GB_KX4           (1 << 4)    /* EEE for 10G-KX4 */
 #define _SHR_PA_EEE_10GB_KR            (1 << 5)    /* EEE for 10G-KR */
+
+#define _SHR_PA_EEE_STRING       {"100M-BaseTX", \
+                                 "1G-BaseT", \
+                                 "10G-BaseT", \
+                                 "10G-KX", \
+                                 "10G-KX4", \
+                                 "10G-KR"}
+
+
 #define _SHR_PA_FCMAP                  (1 << 0)
 #define _SHR_PA_FCMAP_FCMAC_LOOPBACK   (1 << 1)
 #define _SHR_PA_FCMAP_AUTONEG          (1 << 2)
@@ -246,4 +330,13 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_FCMAP_4GB              (1 << 4)
 #define _SHR_PA_FCMAP_8GB              (1 << 5)
 #define _SHR_PA_FCMAP_16GB             (1 << 6)
+
+#define _SHR_PA_FCMAP_STRING       {"NONE", \
+                                 "FCMAC_LOOPBACK", \
+                                 "AUTONEG", \
+                                 "2GB", \
+                                 "4GB", \
+                                 "8GB", \
+                                 "16GB"}
+
 #endif  /* !_SHR_PORTABILITY_H */

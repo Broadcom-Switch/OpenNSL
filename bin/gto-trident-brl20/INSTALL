@@ -8,19 +8,19 @@ CFE:
 ====
 The Linux kernel provided with this package requires CFE bootloader
 to be upgraded. These are the instructions to upgrade the CFE on
-the switch:
+the Switch:
 
- * Boot the switch and stop at CFE> prompt. If the switch does not
-   present a CFE> prompt on bootup, reset the switch and interrupt
+ * Boot the Switch and stop at CFE> prompt. If the Switch does not
+   present a CFE> prompt on bootup, reset the Switch and interrupt
    the boot sequence by entering ^C before CFE starts the application.
 
  * Upgrade the CFE:
      - Copy the cfe.flash.bcm98548xmc file to a tftp server
-       that the switch can access.
+       that the Switch can access.
      - Enter the following at the CFE> prompt:
        CFE> ifconfig eth0 -auto
        CFE> flash <tftp_server_ip>:<file_path>/cfe.flash.bcm98548xmc flash0.boot
-     - Reset the switch:
+     - Reset the Switch:
        CFE> reset -sysreset
 
  * Setup CFE partitions: Enter the following at the CFE> prompt:
@@ -56,7 +56,7 @@ Password: broadcom
 
 Building OpenNSL
 ================
-Source code for OpenNSL sample applications may be built on the switch. Use the
+Source code for OpenNSL sample applications may be built on the Switch. Use the
 following steps to compile OpenNSL including sample applications.
 
 1) Extract the code tarball into the destination directory say opennsl_root.
@@ -64,7 +64,7 @@ following steps to compile OpenNSL including sample applications.
 2) Go to output directory. For Broadcom reference platforms, it is
    opennsl_root/opennsl/output/gto-trident-brl20
 
-3) Issue "make" to create an OpenNSL shared library object, linux kernel modules.
+3) Issue "make" to create an OpenNSL shared library object, Linux kernel modules.
 
 Note: OpenNSL requires MAKE version 3.82. MAKE version 4.0 is not supported.
 To force the MAKE version, set the following variable.
@@ -96,17 +96,19 @@ Downloading and running OpenNSL
 * cd to target directory. To write to persistent flash storage, write to
   /mnt/opennsl.
 
-* Download the SDK kernel modules and configuration files on to the switch:
+* Download the SDK kernel modules and configuration files on to the Switch:
   # tftp -g -r <file_path>/linux-kernel-bde.ko <tftp_server_ip>
   # tftp -g -r <file_path>/linux-user-bde.ko <tftp_server_ip>
   # tftp -g -r <file_path>/linux-bcm-knet.ko <tftp_server_ip>
 
-* Download the Shared objects and OpenNSL sample application on the switch:
+* Download the Shared objects and OpenNSL sample application on the Switch.
+  Install the library files in a location included in the system's library search path.
 
-  # tftp -g -r <file_path>/*.so <tftp_server_ip>
-  # cp *.so /lib/
+  # tftp -g -r <file_path>/libopennsl.so.1 <tftp_server_ip>
+  # mv libopennsl.so.1 /lib/
+  # ln -sf /lib/libopennsl.so.1 /lib/libopennsl.so
   # tftp -g -r <file_path>/sample_application <tftp_server_ip>
-  # chmod 755 sample_application
+  # chmod +x sample_application
 
 * Install kernel modules. Please ensure that the modules are removed 
   before inserting it using 'rmmod' command.

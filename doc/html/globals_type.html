@@ -136,9 +136,6 @@
 <li>opennsl_bst_stat_id_t
 : <a class="el" href="cosq_8h.html#a24cdfbab33b9fe855b3887ae58ee05b8">cosq.h</a>
 </li>
-<li>opennsl_color_t
-: <a class="el" href="group__types.html#gac94ae8f7ffe8590dd41a9c7168208c30">types.h</a>
-</li>
 <li>opennsl_cos_queue_t
 : <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">types.h</a>
 </li>
@@ -151,14 +148,17 @@
 <li>opennsl_error_t
 : <a class="el" href="group__error.html#gac798c5c818a3213c27d2900d47add7f9">error.h</a>
 </li>
+<li>opennsl_etag_t
+: <a class="el" href="group__types.html#gaf9da6017f6f10483edc0c74a35d52dae">types.h</a>
+</li>
+<li>opennsl_ethertype_t
+: <a class="el" href="group__types.html#ga989a5f187450cfc918cd05b991079b1b">types.h</a>
+</li>
 <li>opennsl_fabric_distribution_t
 : <a class="el" href="group__types.html#ga3693e900526399abf12f0783b63bafa2">types.h</a>
 </li>
 <li>opennsl_failover_t
 : <a class="el" href="group__types.html#gae2d871790e8825a9bf2ae6360f4930ef">types.h</a>
-</li>
-<li>opennsl_forwarding_type_t
-: <a class="el" href="group__types.html#ga635f23fd2d5cfe443c21d18bdeea3949">types.h</a>
 </li>
 <li>opennsl_gport_t
 : <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">types.h</a>
@@ -229,8 +229,11 @@
 <li>opennsl_l3_info_t
 : <a class="el" href="group__l3.html#gab1b3e8f35a51eb5f9d945fa04cdc34a5">l3.h</a>
 </li>
-<li>opennsl_l3_intf_qos_t
-: <a class="el" href="group__l3.html#ga8c581b908cb6fc7b9fe15247c678bbb9">l3.h</a>
+<li>opennsl_l3_ingress_t
+: <a class="el" href="group__l3.html#ga20104c4fe7425903cdef8698bc6e527a">l3.h</a>
+</li>
+<li>opennsl_l3_ingress_urpf_mode_t
+: <a class="el" href="group__l3.html#gad1547c994e10f0c6d8dc7b4fc1e3fb35">l3.h</a>
 </li>
 <li>opennsl_l3_intf_t
 : <a class="el" href="group__l3.html#ga2a48bc43f2c63aa867b6ba88dd46795e">l3.h</a>
@@ -240,6 +243,9 @@
 </li>
 <li>opennsl_l3_route_traverse_cb
 : <a class="el" href="group__l3.html#ga34d5d6b9739093c6fb4e9ea7978d76bf">l3.h</a>
+</li>
+<li>opennsl_l3_stat_t
+: <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">l3.h</a>
 </li>
 <li>opennsl_linkscan_handler_t
 : <a class="el" href="group__link.html#ga6fb64b7732d1ead678d47faf67065f75">link.h</a>
@@ -252,9 +258,6 @@
 </li>
 <li>opennsl_module_t
 : <a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">types.h</a>
-</li>
-<li>opennsl_mpls_egress_action_t
-: <a class="el" href="mpls_8h.html#a765862bd8da8bdb514f9960237f65b80">mpls.h</a>
 </li>
 <li>opennsl_mpls_label_t
 : <a class="el" href="group__types.html#ga4009256492b8bbffbe77626b7a5838be">types.h</a>
@@ -271,113 +274,11 @@
 <li>opennsl_pkt_cb_f
 : <a class="el" href="group__pkt.html#gacefead04a0d2010d7da573839d9ab569">pkt.h</a>
 </li>
-<li>opennsl_pkt_dnx_ftmh_action_type_t
-: <a class="el" href="group__pkt.html#ga8c8c6a9fba377e8ba8da1c5065e29edf">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ftmh_dest_extension_t
-: <a class="el" href="group__pkt.html#ga261ab7ec7405233cf034001cd39d13c0">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ftmh_lb_extension_t
-: <a class="el" href="group__pkt.html#ga93f693179c9d191a4ef76d14440d2286">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ftmh_stack_extension_t
-: <a class="el" href="group__pkt.html#gaba435160c71097479ee4141b024c9275">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ftmh_t
-: <a class="el" href="group__pkt.html#ga498dfad03e83e5e3453a105f599b7dd7">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_itmh_dest_t
-: <a class="el" href="group__pkt.html#ga7f86995c8c4972083d1b22db11ebe2e1">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_itmh_dest_type_t
-: <a class="el" href="group__pkt.html#ga27adbd9e67e52d5f11657869d53e8df4">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_itmh_t
-: <a class="el" href="group__pkt.html#ga8480bad87be8ea534a0b7e5634f95d34">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otmh_src_sysport_extension_t
-: <a class="el" href="group__pkt.html#ga2575b8fbc838bab0ac134972d77b0eb7">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otmh_t
-: <a class="el" href="group__pkt.html#ga8c73813bf0fe0d55970a7da13cbc6733">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otmh_vport_extension_t
-: <a class="el" href="group__pkt.html#ga2e0be06de1a504b4e961d232b44b3818">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otsh_oam_subtype_t
-: <a class="el" href="group__pkt.html#ga5de03364d22e332d66b6980c193b7af5">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otsh_t
-: <a class="el" href="group__pkt.html#ga4de2a65cf6125796ef799f6e4bc0d46b">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_otsh_type_t
-: <a class="el" href="group__pkt.html#gafce1ebccb6730a597aa0c0f736e46cc0">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_eei_extension_t
-: <a class="el" href="group__pkt.html#ga7082226bd881cd4e9df445d041c7c10b">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_bridge_extension_t
-: <a class="el" href="group__pkt.html#gafd566eeab20016a4b340aa04b8b4786d">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_extension_t
-: <a class="el" href="group__pkt.html#ga42a6ac8881ecc7c9ff18b10ab182dffa">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_ip_extension_t
-: <a class="el" href="group__pkt.html#ga4db58cc61c343af1420ac0736fae2262">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_mpls_extension_t
-: <a class="el" href="group__pkt.html#ga198d6c56a7a7706a614ae83b1e296e9a">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_trap_extension_t
-: <a class="el" href="group__pkt.html#ga30ed0cbc439f0e7227816b7e0e7b7bf0">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_trill_extension_t
-: <a class="el" href="group__pkt.html#ga56cc9b06f60832d633596830771261df">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_fhei_type_t
-: <a class="el" href="group__pkt.html#gaceeb606c4d34f30d4ffe0d41c89a6fdd">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_learn_extension_t
-: <a class="el" href="group__pkt.html#ga3b92615ac74425b6a1ef7d2acb0e5a6a">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_pph_t
-: <a class="el" href="group__pkt.html#ga0b106631ce89dc661c61fe914747cb2a">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ptch1_t
-: <a class="el" href="group__pkt.html#ga26fc255728879d32faf7b35818678e7d">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_ptch2_t
-: <a class="el" href="group__pkt.html#ga9c487975b5edcef2228d6cd01466337a">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_raw_t
-: <a class="el" href="group__pkt.html#ga5eadcafe58863d765d6f383388e8225a">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_t
-: <a class="el" href="group__pkt.html#ga86186c05ec5f58e9b2efff8125394f3c">pkt.h</a>
-</li>
-<li>opennsl_pkt_dnx_type_t
-: <a class="el" href="group__pkt.html#ga2f0ca11961c572e3ffdbb264b116781a">pkt.h</a>
-</li>
-<li>opennsl_pkt_oam_counter_object_t
-: <a class="el" href="group__pkt.html#ga92e3c7cf3ddea89f2661ac91b9d1fd90">pkt.h</a>
-</li>
 <li>opennsl_pkt_oam_counter_t
 : <a class="el" href="group__pkt.html#ga731ce3733928ff54d96d2860fc35b889">pkt.h</a>
 </li>
-<li>opennsl_pkt_oam_lm_counter_mode_t
-: <a class="el" href="group__pkt.html#ga01a97bffaf354be7b74b8fc959c8cb01">pkt.h</a>
-</li>
-<li>opennsl_pkt_rx_oam_type_t
-: <a class="el" href="group__pkt.html#gaabd286349324fc32f41e2174b550868d">pkt.h</a>
-</li>
-<li>opennsl_pkt_stk_forward_t
-: <a class="el" href="group__pkt.html#ga11ce3a451340dec62193b1631b119dee">pkt.h</a>
-</li>
 <li>opennsl_pkt_t
 : <a class="el" href="group__pkt.html#gab520296e05329a89c35b981804159e5e">pkt.h</a>
-</li>
-<li>opennsl_pkt_timestamp_mode_t
-: <a class="el" href="group__pkt.html#ga6e241057ebb25becfc1931c156c2b0be">pkt.h</a>
 </li>
 <li>opennsl_port_abil_t
 : <a class="el" href="group__port.html#ga70cfeb6b77d42773320193de3f0c4cb3">port.h</a>
@@ -412,6 +313,9 @@
 <li>opennsl_port_t
 : <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">types.h</a>
 </li>
+<li>opennsl_reserved_enum_t
+: <a class="el" href="group__types.html#ga6361f1385187f51243a11a4f09c0f54f">types.h</a>
+</li>
 <li>opennsl_rx_alloc_f
 : <a class="el" href="group__pkt.html#ga6ed2d4235a7e5482445e0635ac446941">rx.h</a>
 </li>
@@ -427,9 +331,6 @@
 <li>opennsl_rx_control_t
 : <a class="el" href="group__pkt.html#ga59e618fd44429b3a9d9838c0b9fc040e">rx.h</a>
 </li>
-<li>opennsl_rx_decap_tunnel_t
-: <a class="el" href="group__pkt.html#gae427167241e0761c70c169f73014f7b7">pkt.h</a>
-</li>
 <li>opennsl_rx_free_f
 : <a class="el" href="group__pkt.html#ga8b255eb2d2d540302c930b63252ff971">rx.h</a>
 </li>
@@ -442,8 +343,17 @@
 <li>opennsl_rx_t
 : <a class="el" href="group__pkt.html#gad0ff17308c631605f5b442ce263f46da">rx.h</a>
 </li>
+<li>opennsl_stat_group_mode_t
+: <a class="el" href="group__stat.html#ga020274e9d156256be27464b5d57ec30c">stat.h</a>
+</li>
+<li>opennsl_stat_object_t
+: <a class="el" href="group__stat.html#gab4a8a190361bbd0fcf108d2267c0e0bd">stat.h</a>
+</li>
 <li>opennsl_stat_val_t
 : <a class="el" href="group__stat.html#ga477326d25d4844a3d50c67f0dad26577">stat.h</a>
+</li>
+<li>opennsl_stat_value_t
+: <a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">stat.h</a>
 </li>
 <li>opennsl_stg_stp_t
 : <a class="el" href="group__stg.html#ga45d03cbb32873e6663951da163c6a576">stg.h</a>
@@ -460,6 +370,12 @@
 <li>opennsl_switch_event_t
 : <a class="el" href="group__error.html#ga5f011dc99e86e654876271415d140e8d">error.h</a>
 </li>
+<li>opennsl_switch_pkt_hash_info_fwd_reason_t
+: <a class="el" href="group__switch.html#ga21b630a850b93788946353b213701bb6">switch.h</a>
+</li>
+<li>opennsl_switch_pkt_info_t
+: <a class="el" href="group__switch.html#gaf5576ddd48438cf2c297ea816bde8fc8">switch.h</a>
+</li>
 <li>opennsl_switch_pkt_trace_hashing_info_t
 : <a class="el" href="group__switch.html#gafbbe42ed4281a8e6bafd37b1c9f515ce">switch.h</a>
 </li>
@@ -471,9 +387,6 @@
 </li>
 <li>opennsl_switch_pkt_trace_lookup_t
 : <a class="el" href="group__switch.html#gacfdf876fd53ec8f13ff25e2746cec3a3">switch.h</a>
-</li>
-<li>opennsl_switch_pkt_trace_resolution_t
-: <a class="el" href="group__switch.html#ga1b76fc5981814e8dba21e0acccba9f72">switch.h</a>
 </li>
 <li>opennsl_trunk_chip_info_t
 : <a class="el" href="group__trunk.html#ga45a52671f5a6f50c35fa722998e65185">trunk.h</a>
@@ -487,9 +400,6 @@
 <li>opennsl_trunk_t
 : <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">types.h</a>
 </li>
-<li>opennsl_vlan_action_t
-: <a class="el" href="group__types.html#gaf4382ae57206d054629d1ac88a8bb024">types.h</a>
-</li>
 <li>opennsl_vlan_control_port_t
 : <a class="el" href="group__vlan.html#ga1b8a0fa7d849b861fb723a8e8f8ab877">vlan.h</a>
 </li>
@@ -498,6 +408,9 @@
 </li>
 <li>opennsl_vlan_t
 : <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">types.h</a>
+</li>
+<li>opennsl_vntag_t
+: <a class="el" href="group__types.html#ga13850e6eea809682b709ca04809145f6">types.h</a>
 </li>
 <li>opennsl_vrf_t
 : <a class="el" href="group__types.html#gaf443516b18737c19246e3ba130cc2a6f">types.h</a>

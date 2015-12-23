@@ -224,6 +224,7 @@ int example_linux_interface_create(int unit, int port, char *ifName)
   {
     printf("rv  = %d Error creating filter for interface \"%s\" \n",
         rv, ifName);
+    return rv;
   }
 
   /* Update the database */
@@ -247,13 +248,22 @@ void example_ip_config(char *ifName, char* ip, char* netmask)
   char cmd[100];
 
   memset(cmd, 0, sizeof(cmd));
-  sprintf(cmd, "ifconfig %s %s netmask %s up", ifName, ip, netmask);
+
+  sprintf(cmd, "ifconfig %s %s netmask %s", ifName, ip, netmask);
   if(system(cmd) == -1)
   {
     printf("Failed to configure interface \"%s\" with IP: %s Netmask: %s\n",
         ifName, ip, netmask);
     return;
   };
+
+  sprintf(cmd, "ifconfig %s up > /dev/null", ifName);
+  if(system(cmd) == -1)
+  {
+    printf("Failed to bringup interface \"%s\"\n", ifName);
+    return;
+  };
+
   printf("Configured interface \"%s\" with IP: %s Netmask: %s\n",
       ifName, ip, netmask);
 }
@@ -287,19 +297,19 @@ void example_knet_intf_create(int unit)
     return;
   }
   printf("\n\rEnter knet interface name: ");
-  if(gets(ifName) == NULL)
+  if(example_read_user_string(ifName, sizeof(ifName)) == NULL)
   {
     printf("\n\rInvalid KNET interface is entered.\n\r");
     return;
   }
   printf("\n\rEnter IP address in dotted decimal format: ");
-  if(gets(ip) == NULL)
+  if(example_read_user_string(ip, sizeof(ip)) == NULL)
   {
     printf("\n\rInvalid IP address is entered.\n\r");
     return;
   }
   printf("\n\rEnter IP netmask in dotted decimal format: ");
-  if(gets(netmask) == NULL)
+  if(example_read_user_string(netmask, sizeof(netmask)) == NULL)
   {
     printf("\n\rInvalid IP netmask is entered.\n\r");
     return;
@@ -307,14 +317,14 @@ void example_knet_intf_create(int unit)
 
   /* Create Linux interface. */
   rv = example_linux_interface_create(unit, port, ifName);
-  if(rv >= 0) {
-    printf("Created Linux interface \"%s\" successfully.\r\n", ifName);
-  }
-  else {
+  if(rv < 0) {
     printf("Failed to create Linux interface \"%s\". rv: %d\r\n", ifName, rv);
+    return;
   }
 
+  printf("Created Linux interface \"%s\" successfully.\r\n", ifName);
   example_ip_config(ifName, ip, netmask);
+  return;
 }
 
 /******************************************************************************
@@ -336,7 +346,7 @@ void example_knet_intf_delete(int unit)
     printf("\n\rThere are no KNET interfaces present in the system.\n\r");
   }
   printf("\n\rEnter KNET interface name: ");
-  if(gets(ifName) == NULL)
+  if(example_read_user_string(ifName, sizeof(ifName)) == NULL)
   {
     printf("\n\rInvalid KNET interface is entered.\n\r");
     return;
@@ -409,6 +419,7 @@ int main(int argc, char *argv[])
   if(rv != OPENNSL_E_NONE) {
     printf("\r\nFailed to add ports to default VLAN %d. rv: %d\r\n",
         DEFAULT_VLAN,  rv);
+    return rv;
   }
 
   while(1) {
