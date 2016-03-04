@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -98,13 +98,6 @@ int opennsl_ip_parse(char *ip_str, unsigned int *ip_val);
  * \return      void
  *****************************************************************************/
 void print_ip_addr(char *str, unsigned int host);
-
-/**************************************************************************//**
- * \brief To get boot flags fetched from environment
- *
- * \return      unsigned int    Boot flags
- *****************************************************************************/
-unsigned int opennsl_boot_flags_get(void);
 
 /**************************************************************************//**
  * \brief To get the number of front panel ports

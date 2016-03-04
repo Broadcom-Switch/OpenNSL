@@ -1,6 +1,6 @@
 /*********************************************************************
 *
-* (C) Copyright Broadcom Corporation 2013-2015
+* (C) Copyright Broadcom Corporation 2013-2016
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -24,12 +24,46 @@
 #ifndef DRIVER_H
 #define DRIVER_H
 
-#include <sal/commdefs.h>
+typedef struct opennsl_config_s
+{
+  char         *cfg_fname;  /* Configuration file name along with the path */
+  unsigned int flags;       /* OpenNSL boot up flags */
+} opennsl_init_t;
 
-extern int opennsl_driver_init(void) LIB_DLL_EXPORTED ;
+/*****************************************************************//**
+* \brief Function to initialize the switch.
+*
+* \param init       [IN]   pointer to structure that contains path to
+*                          platform customization config file, boot flags.
+*
+* \return OPENNSL_E_XXX     OpenNSL API return code
+********************************************************************/
+extern int opennsl_driver_init(opennsl_init_t *init);
+
+/**************************************************************************//**
+ * \brief To get platform boot flags
+ *
+ * \return      unsigned int    Boot flags
+ *****************************************************************************/
+extern unsigned int opennsl_driver_boot_flags_get(void);
+
 #ifndef CDP_EXCLUDE
-extern int opennsl_driver_shell() LIB_DLL_EXPORTED;
-#endif
-extern int opennsl_driver_process_command(char *commandBuf) LIB_DLL_EXPORTED;
+/*****************************************************************//**
+* \brief Bringup diagnostic shell prompt and process the input commands.
+*
+* \return OPENNSL_E_XXX     OpenNSL API return code
+********************************************************************/
+extern int opennsl_driver_shell();
 
+/*****************************************************************//**
+* \brief Process diagnostic shell command.
+*
+* \param commandBuf    [IN]    pointer to hold the diagnostic shell command
+*
+* \return OPENNSL_E_XXX     OpenNSL API return code
+********************************************************************/
+extern int opennsl_driver_process_command(char *commandBuf);
+#endif
+
+extern char *readline(const char *prompt);
 #endif  /* DRIVER_H */

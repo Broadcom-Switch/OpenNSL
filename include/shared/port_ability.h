@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -83,37 +83,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_SPEED_48GB         (1 << 30)
 #define _SHR_PA_SPEED_32GB         (1 << 31)
 
-#define _SHR_PA_SPEED_STRING       {"10MB", \
-                                 "100MB", \
-                                 "1000MB", \
-                                 "2500MB", \
-                                 "3000MB", \
-                                 "5000MB", \
-                                 "6000MB", \
-                                 "10GB", \
-                                 "11GB", \
-                                 "12GB", \
-                                 "12P5GB", \
-                                 "13GB", \
-                                 "15GB", \
-                                 "16GB", \
-                                 "20GB", \
-                                 "21GB", \
-                                 "23GB", \
-                                 "24GB", \
-                                 "25GB", \
-                                 "27GB", \
-                                 "30GB", \
-                                 "40GB", \
-                                 "42GB", \
-                                 "50GB", \
-                                 "53GB", \
-                                 "100GB", \
-                                 "120GB", \
-                                 "127GB", \
-                                 "106GB", \
-                                 "48GB", \
-                                 "32GB" }
 /*
  * Defines:
  *      _SHR_PA_PAUSE_*
@@ -124,10 +93,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_PAUSE_RX        (1 << 1)       /* RX pause capable */
 #define _SHR_PA_PAUSE_ASYMM     (1 << 2)       /* Asymm pause capable (R/O) */
 
-#define _SHR_PA_PAUSE_STRING    {"PAUSE_TX", \
-                                 "PAUSE_RX", \
-                                 "PAUSE_ASYMM"}
-
 /*
  * Defines:
  *      _SHR_PA_FEC_*
@@ -137,9 +102,6 @@ typedef struct _shr_port_ability_s {
 
 #define _SHR_PA_FEC              (1 << 0)       /* FEC ability support */
 #define _SHR_PA_FEC_REQUEST      (1 << 1)       /* FEC ability request */
-#define _SHR_PA_FEC_STRING       {"FEC", \
-                                  "FEC_REQUEST"}
-
 
 /*
  * Defines:
@@ -156,15 +118,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_INTF_QSGMII     (1 << 6)       /* QSGMII mode supported */
 #define _SHR_PA_INTF_CGMII      (1 << 7)       /* CGMII mode supported */
 
-#define _SHR_PA_INTF_STRING     {"TBI", \
-                                 "MII", \
-                                 "GMII", \
-                                 "RGMII", \
-                                 "SGMII", \
-                                 "XGMII", \
-                                 "QSGMII", \
-                                 "CGMII"}
-
 /*
  * Defines:
  *      _SHR_PA_MEDIUM_*
@@ -174,8 +127,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_MEDIUM_COPPER   (1 << 0)
 #define _SHR_PA_MEDIUM_FIBER    (1 << 1)
 
-#define _SHR_PA_MEDIUM_STRING   {"COPPER", \
-                                 "FIBER"}
 /*
  * Defines:
  *      _SHR_PA_LOOPBACK_*
@@ -187,11 +138,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_LB_PHY          (1 << 2)       /* PHY loopback supported */
 #define _SHR_PA_LB_LINE         (1 << 3)       /* PHY lineside loopback */
 
-#define _SHR_PA_LB_STRING       {"LB_NONE", \
-                                 "LB_MAC", \
-                                 "LB_PHY", \
-                                 "LB_LINE"}
-
 /*
  * Defines:
  *      _SHR_PA_FLAGS_*
@@ -201,9 +147,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_AUTONEG         (1 << 0)       /* Auto-negotiation */
 #define _SHR_PA_COMBO           (1 << 1)       /* COMBO ports support both
                                                 * copper and fiber interfaces */
-#define _SHR_PA_FLAGS_STRING    {"AUTONEG", \
-                                 "COMBO"}
-
 #define _SHR_PA_PAUSE           (_SHR_PA_PAUSE_TX  | _SHR_PA_PAUSE_RX)
 
 #define _SHR_PA_SPEED_ALL    (_SHR_PA_SPEED_127GB |        \
@@ -315,14 +258,6 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_EEE_10GB_KX4           (1 << 4)    /* EEE for 10G-KX4 */
 #define _SHR_PA_EEE_10GB_KR            (1 << 5)    /* EEE for 10G-KR */
 
-#define _SHR_PA_EEE_STRING       {"100M-BaseTX", \
-                                 "1G-BaseT", \
-                                 "10G-BaseT", \
-                                 "10G-KX", \
-                                 "10G-KX4", \
-                                 "10G-KR"}
-
-
 #define _SHR_PA_FCMAP                  (1 << 0)
 #define _SHR_PA_FCMAP_FCMAC_LOOPBACK   (1 << 1)
 #define _SHR_PA_FCMAP_AUTONEG          (1 << 2)
@@ -330,13 +265,5 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_FCMAP_4GB              (1 << 4)
 #define _SHR_PA_FCMAP_8GB              (1 << 5)
 #define _SHR_PA_FCMAP_16GB             (1 << 6)
-
-#define _SHR_PA_FCMAP_STRING       {"NONE", \
-                                 "FCMAC_LOOPBACK", \
-                                 "AUTONEG", \
-                                 "2GB", \
-                                 "4GB", \
-                                 "8GB", \
-                                 "16GB"}
 
 #endif  /* !_SHR_PORTABILITY_H */

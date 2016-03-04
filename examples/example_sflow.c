@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@
  * the hardware is running without interrupting the dataplane.
  *
  * Setup the following envinonment variable before running the application.
- * For Cold boot mode, use "export SOC_BOOT_FLAGS = 0x000000".
- * For Warm boot mode, use "export SOC_BOOT_FLAGS = 0x200000".
+ * For Cold boot mode, use "export OPENNSL_BOOT_FLAGS = 0x000000".
+ * For Warm boot mode, use "export OPENNSL_BOOT_FLAGS = 0x200000".
  *
  **********************************************************************/
 #include <stdio.h>
@@ -150,15 +150,15 @@ int main(int argc, char *argv[])
     return OPENNSL_E_PARAM;
   }
 
-  warm_boot = opennsl_boot_flags_get() & OPENNSL_BOOT_F_WARM_BOOT;
-
   /* Initialize the system */
-  rv = opennsl_driver_init();
+  rv = opennsl_driver_init((opennsl_init_t *) NULL);
 
   if(rv != 0) {
     printf("\r\nFailed to initialize the system.\r\n");
     return rv;
   }
+
+  warm_boot = opennsl_driver_boot_flags_get() & OPENNSL_BOOT_F_WARM_BOOT;
 
   if(!warm_boot)
   {

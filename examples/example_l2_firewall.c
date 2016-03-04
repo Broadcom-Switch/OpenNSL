@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@
  * running without interrupting the dataplane.
  *
  * Setup the following envinonment variable before running the application.
- * For Cold boot mode, use "export SOC_BOOT_FLAGS = 0x000000".
- * For Warm boot mode, use "export SOC_BOOT_FLAGS = 0x200000".
+ * For Cold boot mode, use "export OPENNSL_BOOT_FLAGS = 0x000000".
+ * For Warm boot mode, use "export OPENNSL_BOOT_FLAGS = 0x200000".
  *
  ************************************************************************/
 
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
   opennsl_vlan_t vlan = 1;
   int choice;
   int unit = DEFAULT_UNIT;
-  void *user_data;
+  void *user_data = NULL;
   unsigned int warm_boot;
   int index = 0;
 
@@ -155,8 +155,6 @@ int main(int argc, char *argv[])
   {
     index = 1;
   }
-
-  warm_boot = opennsl_boot_flags_get() & OPENNSL_BOOT_F_WARM_BOOT;
 
   /* Example MAC address of stations A, B, C and D */
   opennsl_mac_t station_a = {0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
@@ -169,13 +167,15 @@ int main(int argc, char *argv[])
 
   /* Initialize the system. */
   printf("Initializing the system.\r\n");
-  rv = opennsl_driver_init();
+  rv = opennsl_driver_init((opennsl_init_t *) NULL);
 
   if(rv != OPENNSL_E_NONE) {
     printf("\r\nFailed to initialize the system. Error %s\r\n",
         opennsl_errmsg(rv));
     return rv;
   }
+
+  warm_boot = opennsl_driver_boot_flags_get() & OPENNSL_BOOT_F_WARM_BOOT;
 
   if (!warm_boot)
   {

@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sal/commdefs.h>
 #include <opennsl/error.h>
 #include <opennsl/cosq.h>
 #include <opennsl/vlan.h>
@@ -96,7 +95,7 @@ int example_bst_default_profile_set (int unit)
   opennsl_cosq_bst_profile_t profile;
 
   /* Get maximum number of front panel ports available */
-  if((rc != example_max_port_count_get(unit, &max_ports)) != OPENNSL_E_NONE)
+  if((rc = example_max_port_count_get(unit, &max_ports)) != OPENNSL_E_NONE)
   {
     printf("\r\nFailed to get number of front panel ports, rc = %d (%s).\r\n",
         rc, opennsl_errmsg(rc));
@@ -214,7 +213,7 @@ int example_bst_default_profile_set (int unit)
  * \return None
  ********************************************************************/
 void example_bst_trigger_callback (int unit, opennsl_switch_event_t event,
-    int bid, int port, int cosq, void *cookie)
+    uint32 bid, uint32 port, uint32 cosq, void *cookie)
 {
   printf("BST trigger kicked in, event %d port %d bid %d cosq %d\n", event, port, bid, cosq);
   printf("BST feature is disabled.\n");
@@ -239,7 +238,7 @@ int main(int argc, char *argv[])
   opennsl_port_t port;
   opennsl_cos_queue_t cosq;
   uint32 options = 0;
-  int cookie;
+  void *user_data = NULL;
 
   example_bst_counter_t id_list[MAX_COUNTERS] = {
     {opennslBstStatIdUcast,            "opennslBstStatIdUcast"},
@@ -263,7 +262,7 @@ int main(int argc, char *argv[])
 
   /* Initialize the system. */
   printf("Initializing the system.\r\n");
-  rc = opennsl_driver_init();
+  rc = opennsl_driver_init((opennsl_init_t *) NULL);
 
   if (rc != OPENNSL_E_NONE) {
     printf("\r\nFailed to initialize the system, rc = %d (%s).\r\n",
@@ -290,7 +289,7 @@ int main(int argc, char *argv[])
   /* Register Hw trigger callback*/
   rc = opennsl_switch_event_register (unit,
       example_bst_trigger_callback,
-      &cookie);
+      user_data);
   if (rc != OPENNSL_E_NONE)
   {
     printf("\r\nFailed to register BST callback, rc = %d (%s).\r\n",

@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
   }
 
   /* Initialize the system */
-  rv = opennsl_driver_init();
+  rv = opennsl_driver_init((opennsl_init_t *) NULL);
 
   if(rv != OPENNSL_E_NONE) {
     printf("\r\nFailed to initialize the system.\r\n");

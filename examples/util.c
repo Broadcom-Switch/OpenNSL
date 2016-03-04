@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -327,27 +327,6 @@ int opennsl_ctoi(const char *s, char **end)
   }
 
   return (int) (neg ? -n : n);
-}
-
-
-/**************************************************************************//**
- * \brief To get boot flags fetched from environment
- *
- * \return      unsigned int    Boot flags
- *****************************************************************************/
-unsigned int opennsl_boot_flags_get(void)
-{
-  unsigned int boot_flags = 0;
-
-  char *s = getenv("SOC_BOOT_FLAGS");
-
-  if (s == NULL) {
-    boot_flags = OPENNSL_BOOT_F_DEFAULT;
-  } else {
-    boot_flags = opennsl_ctoi(s, NULL);
-  }
-
-  return boot_flags;
 }
 
 /**************************************************************************//**

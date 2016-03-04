@@ -56,24 +56,12 @@ typedef enum opennsl_error_e {
 
 /** Switch event types */
 typedef enum opennsl_switch_event_e {
-    errorReservedEnum1,                 
     OPENNSL_SWITCH_EVENT_PARITY_ERROR          =   _SHR_SWITCH_EVENT_PARITY_ERROR, 
-    errorReservedEnum2,                 
-    errorReservedEnum3,                 
-    errorReservedEnum4,                 
-    errorReservedEnum5,                 
-    errorReservedEnum6,                 
     OPENNSL_SWITCH_EVENT_STABLE_FULL           =   _SHR_SWITCH_EVENT_STABLE_FULL, 
     OPENNSL_SWITCH_EVENT_STABLE_ERROR          =   _SHR_SWITCH_EVENT_STABLE_ERROR, 
     OPENNSL_SWITCH_EVENT_UNCONTROLLED_SHUTDOWN =   _SHR_SWITCH_EVENT_UNCONTROLLED_SHUTDOWN, 
     OPENNSL_SWITCH_EVENT_WARM_BOOT_DOWNGRADE   =   _SHR_SWITCH_EVENT_WARM_BOOT_DOWNGRADE, 
-    errorReservedEnum7,                 
-    errorReservedEnum8,                 
-    errorReservedEnum9,                 
     OPENNSL_SWITCH_EVENT_MMU_BST_TRIGGER       =   _SHR_SWITCH_EVENT_MMU_BST_TRIGGER, 
-    errorReservedEnum10,                
-    errorReservedEnum11,                
-    errorReservedEnum12                 
 } opennsl_switch_event_t;
 
 #define OPENNSL_SUCCESS(rv)     \
