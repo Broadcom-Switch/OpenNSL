@@ -51,5 +51,6 @@ extern int opennsl_stk_my_modid_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/stackX.h>
 #endif /* __OPENNSL_STACK_H__ */
 /*@}*/

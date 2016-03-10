@@ -62,12 +62,18 @@ Files</h2></td></tr>
 <tr class="memitem:knet_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="knet_8h.html">knet.h</a></td></tr>
 <tr class="memdesc:knet_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:knetX_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="knetX_8h.html">knetX.h</a></td></tr>
+<tr class="memdesc:knetX_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga07bf6691393cb4585b1399a34acc0d63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__knet.html#ga07bf6691393cb4585b1399a34acc0d63">OPENNSL_KNET_DEST_T_NETIF</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:ga07bf6691393cb4585b1399a34acc0d63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send packet to virtual network interface.  <a href="#ga07bf6691393cb4585b1399a34acc0d63">More...</a><br /></td></tr>
 <tr class="separator:ga07bf6691393cb4585b1399a34acc0d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae17cff7db397b81a9179824fb52654cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__knet.html#gae17cff7db397b81a9179824fb52654cc">OPENNSL_KNET_DEST_T_OPENNSL_RX_API</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:gae17cff7db397b81a9179824fb52654cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send packet to OPENNSL Rx API.  <a href="#gae17cff7db397b81a9179824fb52654cc">More...</a><br /></td></tr>
+<tr class="separator:gae17cff7db397b81a9179824fb52654cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4c8fe4ab41bafb132b280347ca818713"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__knet.html#ga4c8fe4ab41bafb132b280347ca818713">OPENNSL_KNET_FILTER_DESC_MAX</a>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:ga4c8fe4ab41bafb132b280347ca818713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga44d002d65e254c6ebec2f7c87d616ed4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__knet.html#ga44d002d65e254c6ebec2f7c87d616ed4">OPENNSL_KNET_FILTER_F_STRIP_TAG</a>&#160;&#160;&#160;0x00000001</td></tr>
@@ -165,6 +171,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gae17cff7db397b81a9179824fb52654cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_KNET_DEST_T_OPENNSL_RX_API&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send packet to OPENNSL Rx API. </p>
+
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00069">69</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga4c8fe4ab41bafb132b280347ca818713"></a>
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +197,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00074">74</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00077">77</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -191,7 +213,7 @@ Functions</h2></td></tr>
 
 <p>Strip VLAN tag from packets sent to vitual network interfaces. </p>
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00069">69</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00072">72</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 <p>Referenced by <a class="el" href="example__knet_8c.html#a64fa5b0034bf5b81aaaf6d4ddac925fe">example_linux_interface_create()</a>.</p>
 
@@ -209,7 +231,7 @@ Functions</h2></td></tr>
 
 <p>Match local ingress port. </p>
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00078">78</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00081">81</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 <p>Referenced by <a class="el" href="example__knet_8c.html#a64fa5b0034bf5b81aaaf6d4ddac925fe">example_linux_interface_create()</a>.</p>
 
@@ -227,7 +249,7 @@ Functions</h2></td></tr>
 
 <p>Match raw packet data. </p>
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00076">76</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00079">79</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -243,7 +265,7 @@ Functions</h2></td></tr>
 
 <p>Match copy-to-CPU reason code. </p>
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00079">79</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00082">82</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +281,7 @@ Functions</h2></td></tr>
 
 <p>Match VLAN ID. </p>
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00077">77</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00080">80</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +295,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00075">75</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00078">78</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -386,7 +408,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00283">283</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00286">286</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>
@@ -414,7 +436,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="knet_8h_source.html#l00208">208</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
+<p>Definition at line <a class="el" href="knet_8h_source.html#l00211">211</a> of file <a class="el" href="knet_8h_source.html">knet.h</a>.</p>
 
 </div>
 </div>

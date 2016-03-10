@@ -386,11 +386,33 @@ extern int opennsl_stat_multi_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/** Packet type related flex attributes values */
+typedef enum opennsl_stat_group_mode_attr_pkt_type_e {
+    opennslStatGroupModeAttrPktTypeKnownL3UC = 14, /**< Known L3 Unicast Packet */
+    opennslStatGroupModeAttrPktTypeUnknownL3UC = 15, /**< Unknown L3 Unicast Packet */
+    opennslStatGroupModeAttrPktTypeKnownIPMC = 16, /**< Known IPMC Packet */
+    opennslStatGroupModeAttrPktTypeUnknownIPMC = 17, /**< Unknown IPMC Packet */
+} opennsl_stat_group_mode_attr_pkt_type_t;
+
+/** Stat Group Mode Attribute Selectors */
+typedef enum opennsl_stat_group_mode_attr_e {
+    opennslStatGroupModeAttrPktType = 10, /**< Packet Type Selector: Possible
+                                           Values:<opennslStatGroupModeAttrPktType*> */
+} opennsl_stat_group_mode_attr_t;
+
+#define OPENNSL_STAT_GROUP_MODE_INGRESS 0x00000001 /**< Stat Group Mode Ingress */
 /** Ingress and Egress Statistics Accounting Objects */
 typedef enum opennsl_stat_object_e {
     opennslStatObjectIngL3Intf = 4,     /**< Ingress L3 Interface Object */
     opennslStatObjectEgrL3Intf = 13,    /**< Egress L3 Interface Object */
 } opennsl_stat_object_t;
+
+/** Stat Flex Group Attribute Selector */
+typedef struct opennsl_stat_group_mode_attr_selector_s {
+    uint32 counter_offset;              /**< Counter Offset */
+    opennsl_stat_group_mode_attr_t attr; /**< Attribute Selector */
+    uint32 attr_value;                  /**< Attribute Values */
+} opennsl_stat_group_mode_attr_selector_t;
 
 /** Counter Statistics Values */
 typedef struct opennsl_stat_value_s {
@@ -401,9 +423,42 @@ typedef struct opennsl_stat_value_s {
 
 /** Statistics Group Modes */
 typedef enum opennsl_stat_group_mode_e {
-    opennslStatGroupModeSingle = 0, /**< A single counter used for all traffic
-                                       types */
+    opennslStatGroupModeSingle = 0,     /**< A single counter used for all traffic
+                                           types */
+    opennslStatGroupModeTrafficType = 1, /**< A dedicated counter per traffic type
+                                           Unicast, multicast, broadcast */
 } opennsl_stat_group_mode_t;
+
+/***************************************************************************//** 
+ *\brief Initialize a opennsl_stat_value_t data structure.
+ *
+ *\description This API initializes the opennsl_stat_value_t data structure.
+ *
+ *\param    stat_value [IN,OUT]   pointer to the opennsl_stat_value_t data to be
+ *          initialized.
+ *
+ *\retval    NONE
+ ******************************************************************************/
+extern void opennsl_stat_value_t_init(
+    opennsl_stat_value_t *stat_value) LIB_DLL_EXPORTED ;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Destroys Customized Group mode.
+ *
+ *\description This API Destroys created Customized Group mode.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mode_id [IN]   Created Mode Identifier for Stat Flex Group Mode
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_stat_group_mode_id_destroy(
+    int unit, 
+    uint32 mode_id) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
@@ -429,7 +484,25 @@ extern int opennsl_stat_group_create(
     uint32 *stat_counter_id, 
     uint32 *num_entries) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Destroy counter Entries group.
+ *
+ *\description This API will release HW counter resources as per given counter ID
+ *          and makes  system unavailable for any further stat collection
+ *          action based on stat counter id.
+ *          Tomahawk supports stat_counter_id range from 1 to 0x26000.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    stat_counter_id [IN]   Counter Mode ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_stat_group_destroy(
+    int unit, 
+    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/statX.h>
 #endif /* __OPENNSL_STAT_H__ */
 /*@}*/

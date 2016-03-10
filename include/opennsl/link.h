@@ -120,6 +120,10 @@ typedef enum opennsl_linkscan_mode_e {
  *
  *\description Get or set the current link scanning mode for a port. The possible
  *          modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e .
+ *          When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does
+ *          not process any link change on a port.  This mode is only
+ *          recommended if the application do not want to use the port (i.e.
+ *          port is disabled).
  *          opennsl_linkscan_mode_set operates on one port while
  *          opennsl_linkscan_mode_set_pbm operates on all ports specified in
  *          the port bit map. When operating on a port bit map, a failure on
@@ -149,6 +153,10 @@ extern int opennsl_linkscan_mode_set(
  *
  *\description Get or set the current link scanning mode for a port. The possible
  *          modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e .
+ *          When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does
+ *          not process any link change on a port.  This mode is only
+ *          recommended if the application do not want to use the port (i.e.
+ *          port is disabled).
  *          opennsl_linkscan_mode_set operates on one port while
  *          opennsl_linkscan_mode_set_pbm operates on all ports specified in
  *          the port bit map. When operating on a port bit map, a failure on
@@ -178,6 +186,10 @@ extern int opennsl_linkscan_mode_set_pbm(
  *
  *\description Get or set the current link scanning mode for a port. The possible
  *          modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e .
+ *          When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does
+ *          not process any link change on a port.  This mode is only
+ *          recommended if the application do not want to use the port (i.e.
+ *          port is disabled).
  *          opennsl_linkscan_mode_set operates on one port while
  *          opennsl_linkscan_mode_set_pbm operates on all ports specified in
  *          the port bit map. When operating on a port bit map, a failure on
@@ -250,5 +262,6 @@ extern int opennsl_linkscan_unregister(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/linkX.h>
 #endif /* __OPENNSL_LINK_H__ */
 /*@}*/

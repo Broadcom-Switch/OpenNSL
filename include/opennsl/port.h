@@ -456,6 +456,114 @@ extern int opennsl_port_untagged_vlan_get(
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Control mapping of Differentiated Services Code Points (DSCP).
+ *
+ *\description Incoming IPv4 format packets have Differentiated Services Code
+ *          Points in their type of service (ToS) header field.  DSCP values
+ *          are small integers from 0 to 63.
+ *          Some switch devices have the capability of rewriting incoming code
+ *          points into other mapped code points for use within the switching
+ *          domain.  Some switch devices also have the capability of setting
+ *          the internal priority and drop precedence based on the source
+ *          DSCP.
+ *          The allowable values for the input parameters may be limited by
+ *          the device's underlying hardware capabilities.
+ *          switch family?and switch familySwitch switches allow a limited
+ *          number of DSCP mapping possibilities: for these devices srccp can
+ *          be -1 or 0 only. These devices do not perform DSCP-based priority
+ *          mapping.
+ *          The network switch family of switches use the
+ *          OPENNSL_PRIO_RED(DP=3), OPENNSL_PRIO_YELLOW(DP=2),
+ *          OPENNSL_PRIO_GREEN(DP=1),  OPENNSL_PRIO_PRESERVE /
+ *          OPENNSL_PRIO_DROP_LAST(DP=0) ored with prio to configure  the drop
+ *          precedence (DP) value. For network switch B0 family that supports
+ *          ECN mapping, OPENNSL_DSCP_ECN can be ored with srccp to the
+ *          designated {DSCP(7:2):ECN(1:0)}.
+ *          A port value of -1 or gport type for system configuration will
+ *          configure all ports.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number or -1 to setup global
+ *          mapping table.
+ *\param    srccp [IN]   Source code point. -1 indicates operation applies to all
+ *          code points if being configured or a random code point if being
+ *          retrieved.
+ *\param    mapcp [IN]   The new code point to map srccp to if setting the
+ *          mapping; the currently configured mapping for the port if retrieving
+ *          settings.
+ *\param    prio [IN]   Priority of packets mapped for the code point, if
+ *          available. Priority is 0 to 7 and can have the value
+ *          (OPENNSL_PRIO_RED/OPENNSL_PRIO_YELLOW/OPENNSL_PRIO_GREEN/OPENNSL_PRIO_PRESERVE)
+ *          ored in. -1 on get means priority mapping is unavailable.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Source or mapped code point values are invalid.
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device, or
+ *          mapping resources depleted.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_dscp_map_set(
+    int unit, 
+    opennsl_port_t port, 
+    int srccp, 
+    int mapcp, 
+    int prio) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Control mapping of Differentiated Services Code Points (DSCP).
+ *
+ *\description Incoming IPv4 format packets have Differentiated Services Code
+ *          Points in their type of service (ToS) header field.  DSCP values
+ *          are small integers from 0 to 63.
+ *          Some switch devices have the capability of rewriting incoming code
+ *          points into other mapped code points for use within the switching
+ *          domain.  Some switch devices also have the capability of setting
+ *          the internal priority and drop precedence based on the source
+ *          DSCP.
+ *          The allowable values for the input parameters may be limited by
+ *          the device's underlying hardware capabilities.
+ *          switch family?and switch familySwitch switches allow a limited
+ *          number of DSCP mapping possibilities: for these devices srccp can
+ *          be -1 or 0 only. These devices do not perform DSCP-based priority
+ *          mapping.
+ *          The network switch family of switches use the
+ *          OPENNSL_PRIO_RED(DP=3), OPENNSL_PRIO_YELLOW(DP=2),
+ *          OPENNSL_PRIO_GREEN(DP=1),  OPENNSL_PRIO_PRESERVE /
+ *          OPENNSL_PRIO_DROP_LAST(DP=0) ored with prio to configure  the drop
+ *          precedence (DP) value. For network switch B0 family that supports
+ *          ECN mapping, OPENNSL_DSCP_ECN can be ored with srccp to the
+ *          designated {DSCP(7:2):ECN(1:0)}.
+ *          A port value of -1 or gport type for system configuration will
+ *          configure all ports.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number or -1 to setup global
+ *          mapping table.
+ *\param    srccp [IN]   Source code point. -1 indicates operation applies to all
+ *          code points if being configured or a random code point if being
+ *          retrieved.
+ *\param    mapcp [OUT]   The new code point to map srccp to if setting the
+ *          mapping; the currently configured mapping for the port if retrieving
+ *          settings.
+ *\param    prio [OUT]   Priority of packets mapped for the code point, if
+ *          available. Priority is 0 to 7 and can have the value
+ *          (OPENNSL_PRIO_RED/OPENNSL_PRIO_YELLOW/OPENNSL_PRIO_GREEN/OPENNSL_PRIO_PRESERVE)
+ *          ored in. -1 on get means priority mapping is unavailable.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Source or mapped code point values are invalid.
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device, or
+ *          mapping resources depleted.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_dscp_map_get(
+    int unit, 
+    opennsl_port_t port, 
+    int srccp, 
+    int *mapcp, 
+    int *prio) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Get or set the current operating speed of a port.
  *
  *\description Set or get the speed of the specified port. opennsl_port_speed_set
@@ -827,6 +935,76 @@ typedef _shr_port_medium_t opennsl_port_medium_t;
 #define OPENNSL_PORT_MEDIUM_COPPER  _SHR_PORT_MEDIUM_COPPER 
 #define OPENNSL_PORT_MEDIUM_FIBER   _SHR_PORT_MEDIUM_FIBER 
 #define OPENNSL_PORT_MEDIUM_COUNT   _SHR_PORT_MEDIUM_COUNT 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set the spanning tree state for a port (single instance spanning tree
+ *       only).
+ *
+ *\description Used only if there is a single instance of spanning tree running,
+ *          these functions get and set the spanning tree state for a port.
+ *          These routines do not interoperate with the multiple spanning tree
+ *          support defined in =stg . The application must use either
+ *          opennsl_port_stp_set and opennsl_port_spt_get or the multiple
+ *          spanning tree support routines exclusively.
+ *          No check is made for using both methods simultaneously and the
+ *          results are undefined.
+ *          On many switch devices, no distinction is made between the
+ *          BLOCKING and LISTENING states. For this reason
+ *          OPENNSL_STG_STP_BLOCK and OPENNSL_STG_STP_LISTEN should be
+ *          considered equivalent when calling these APIs. For example,
+ *          setting a port in BLOCKING state using:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port
+ *\param    state [IN]   Spanning tree state, for valid values see
+ *          =OPENNSL_STG_STP_e .
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device. This
+ *          occurs on fabric devices.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_stp_set(
+    int unit, 
+    opennsl_port_t port, 
+    int state) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set the spanning tree state for a port (single instance spanning tree
+ *       only).
+ *
+ *\description Used only if there is a single instance of spanning tree running,
+ *          these functions get and set the spanning tree state for a port.
+ *          These routines do not interoperate with the multiple spanning tree
+ *          support defined in =stg . The application must use either
+ *          opennsl_port_stp_set and opennsl_port_spt_get or the multiple
+ *          spanning tree support routines exclusively.
+ *          No check is made for using both methods simultaneously and the
+ *          results are undefined.
+ *          On many switch devices, no distinction is made between the
+ *          BLOCKING and LISTENING states. For this reason
+ *          OPENNSL_STG_STP_BLOCK and OPENNSL_STG_STP_LISTEN should be
+ *          considered equivalent when calling these APIs. For example,
+ *          setting a port in BLOCKING state using:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port
+ *\param    state [OUT]   Spanning tree state, for valid values see
+ *          =OPENNSL_STG_STP_e .
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device. This
+ *          occurs on fabric devices.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_stp_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *state) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #define OPENNSL_PORT_LEARN_ARL      0x01       /**< Learn SLF address. */
 #define OPENNSL_PORT_LEARN_CPU      0x02       /**< Copy SLF packet to CPU. */
 #define OPENNSL_PORT_LEARN_FWD      0x04       /**< Forward SLF packet */
@@ -1040,6 +1218,38 @@ extern int opennsl_port_queued_count_get(
     int unit, 
     opennsl_port_t port, 
     uint32 *count) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Configure ports to block or allow packets from a given ingress port.
+ *
+ *\description This API controls the ability of a specific ingress port on a
+ *          specific module to send packets to a local egress port.
+ *          The specified modid is derived from the modid of port.
+ *          For opennsl_port_egress_set, if port is -1 or gport type for
+ *          system configuration, the configuration is applied to all source
+ *          ports on the specified module.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical source port number.
+ *\param    modid [IN]   Module ID of the source port.
+ *\param    pbmp [IN]   Port bitmap indicating all local ports allowed to egress
+ *          traffic from specified port/modid.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully.
+ *\retval    OPENNSL_E_UNAVAIL The specified port does not support the requested
+ *          block option.
+ *\retval    OPENNSL_E_PARAM Invalid port, module ID or bitmap.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_egress_set(
+    int unit, 
+    opennsl_port_t port, 
+    int modid, 
+    opennsl_pbmp_t pbmp) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
@@ -1340,6 +1550,12 @@ typedef enum opennsl_port_control_e {
                                            flags */
     opennslPortControlStatOversize = 92, /**< Threshold above which packet will be
                                            counted as oversized */
+    opennslPortControlVxlanEnable = 187, /**< Set per port enable for VXLAN
+                                           (Value=TRUE/FALSE) */
+    opennslPortControlVxlanTunnelbasedVnId = 188, /**< Set per port VNID lookup key
+                                           (Value=TRUE/FALSE) */
+    opennslPortControlVxlanDefaultTunnelEnable = 189, /**< Set per port dafult-SVP for Tunnel
+                                           lookup failure(Value=TRUE/FALSE) */
     opennslPortControlSampleIngressDest = 304, /**< Set Ingress sFlow sample destination */
 } opennsl_port_control_t;
 
@@ -1432,6 +1648,25 @@ extern void opennsl_port_info_t_init(
 extern void opennsl_port_ability_t_init(
     opennsl_port_ability_t *ability) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Initialize a Port Configuration structure.
+ *
+ *\description Initializes a port configuration structure to default values. This
+ *          function should be used to initialize any Port Configuration
+ *          structure prior to filling it out and passing it to an API
+ *          function. This ensures that subsequent API releases may add new
+ *          structure members to the opennsl_port_config_t structure, and
+ *          opennsl_port_config_t_init will initialize the new members to
+ *          correct default values.
+ *
+ *\param    pconfig [IN,OUT]   Pointer to Port Configuration structure to
+ *          initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_port_config_t_init(
+    opennsl_port_config_t *pconfig) LIB_DLL_EXPORTED ;
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -1511,5 +1746,6 @@ extern int opennsl_port_stat_enable_set(
                                                           CPU */
 #if defined(INCLUDE_CES)
 #endif
+#include <opennsl/portX.h>
 #endif /* __OPENNSL_PORT_H__ */
 /*@}*/

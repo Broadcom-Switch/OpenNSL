@@ -39,6 +39,7 @@
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#files">Files</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
@@ -63,6 +64,12 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">lookup result set bit map  <a href="structopennsl__switch__pkt__trace__lookup__result__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:switchX_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="switchX_8h.html">switchX.h</a></td></tr>
+<tr class="memdesc:switchX_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga4bdb712cd0bf2aeb552cfe33fa04d1d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga4bdb712cd0bf2aeb552cfe33fa04d1d3">OPENNSL_HASH_CONTROL_ECMP_ENHANCE</a>&#160;&#160;&#160;0x0080</td></tr>
@@ -71,6 +78,12 @@ Macros</h2></td></tr>
 <tr class="memitem:ga22e48d07cfb8c4e71e02fb739b72d37c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga22e48d07cfb8c4e71e02fb739b72d37c">OPENNSL_HASH_FIELD_CONFIG_CRC16CCITT</a>&#160;&#160;&#160;0x00000007</td></tr>
 <tr class="memdesc:ga22e48d07cfb8c4e71e02fb739b72d37c"><td class="mdescLeft">&#160;</td><td class="mdescRight">16-bit CRC using CCITT polynomial.  <a href="#ga22e48d07cfb8c4e71e02fb739b72d37c">More...</a><br /></td></tr>
 <tr class="separator:ga22e48d07cfb8c4e71e02fb739b72d37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac15b86914ecfc4036e1dc76d1015b25c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#gac15b86914ecfc4036e1dc76d1015b25c">OPENNSL_HASH_FIELD_CONFIG_CRC32HI</a>&#160;&#160;&#160;0x00000009</td></tr>
+<tr class="memdesc:gac15b86914ecfc4036e1dc76d1015b25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Higher 16-bit of CRC32.  <a href="#gac15b86914ecfc4036e1dc76d1015b25c">More...</a><br /></td></tr>
+<tr class="separator:gac15b86914ecfc4036e1dc76d1015b25c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee98ffdf000f3a1bb063607811c20ce9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#gaee98ffdf000f3a1bb063607811c20ce9">OPENNSL_HASH_FIELD_CONFIG_CRC32LO</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:gaee98ffdf000f3a1bb063607811c20ce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower 16-bit of CRC32.  <a href="#gaee98ffdf000f3a1bb063607811c20ce9">More...</a><br /></td></tr>
+<tr class="separator:gaee98ffdf000f3a1bb063607811c20ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga68786a6b4b43f0fab03afcb61dad3f41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga68786a6b4b43f0fab03afcb61dad3f41">OPENNSL_HASH_FIELD_DSTL4</a>&#160;&#160;&#160;0x00000020</td></tr>
 <tr class="memdesc:ga68786a6b4b43f0fab03afcb61dad3f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destination L4 port.  <a href="#ga68786a6b4b43f0fab03afcb61dad3f41">More...</a><br /></td></tr>
 <tr class="separator:ga68786a6b4b43f0fab03afcb61dad3f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,9 +111,30 @@ Macros</h2></td></tr>
 <tr class="memitem:ga8eabf1f916b04dee7babc18d566535ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga8eabf1f916b04dee7babc18d566535ed">OPENNSL_HASH_FIELD_IP6SRC_LO</a>&#160;&#160;&#160;0x00004000</td></tr>
 <tr class="memdesc:ga8eabf1f916b04dee7babc18d566535ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">IPv6 collapsed source address lower 16 bits.  <a href="#ga8eabf1f916b04dee7babc18d566535ed">More...</a><br /></td></tr>
 <tr class="separator:ga8eabf1f916b04dee7babc18d566535ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0fee0446c60d3e02d216416e1bbecfc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga0fee0446c60d3e02d216416e1bbecfc9">OPENNSL_HASH_FIELD_MACDA_HI</a>&#160;&#160;&#160;0x00100000</td></tr>
+<tr class="memdesc:ga0fee0446c60d3e02d216416e1bbecfc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC destination address upper 16 bits.  <a href="#ga0fee0446c60d3e02d216416e1bbecfc9">More...</a><br /></td></tr>
+<tr class="separator:ga0fee0446c60d3e02d216416e1bbecfc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae5ed03094efea59de92ffb9b1d287de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#gaae5ed03094efea59de92ffb9b1d287de">OPENNSL_HASH_FIELD_MACDA_LO</a>&#160;&#160;&#160;0x00040000</td></tr>
+<tr class="memdesc:gaae5ed03094efea59de92ffb9b1d287de"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC destination address lower 16 bits.  <a href="#gaae5ed03094efea59de92ffb9b1d287de">More...</a><br /></td></tr>
+<tr class="separator:gaae5ed03094efea59de92ffb9b1d287de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga12daa1914a73277196426496e3329071"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga12daa1914a73277196426496e3329071">OPENNSL_HASH_FIELD_MACDA_MI</a>&#160;&#160;&#160;0x00080000</td></tr>
+<tr class="memdesc:ga12daa1914a73277196426496e3329071"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC destination address middle 16 bits.  <a href="#ga12daa1914a73277196426496e3329071">More...</a><br /></td></tr>
+<tr class="separator:ga12daa1914a73277196426496e3329071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5d0a9cfe5022b12e81f6655a60f7baa9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga5d0a9cfe5022b12e81f6655a60f7baa9">OPENNSL_HASH_FIELD_MACSA_HI</a>&#160;&#160;&#160;0x00800000</td></tr>
+<tr class="memdesc:ga5d0a9cfe5022b12e81f6655a60f7baa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC source address upper 16 bits.  <a href="#ga5d0a9cfe5022b12e81f6655a60f7baa9">More...</a><br /></td></tr>
+<tr class="separator:ga5d0a9cfe5022b12e81f6655a60f7baa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8a14dec2cc47e98f920b6b8379646486"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga8a14dec2cc47e98f920b6b8379646486">OPENNSL_HASH_FIELD_MACSA_LO</a>&#160;&#160;&#160;0x00200000</td></tr>
+<tr class="memdesc:ga8a14dec2cc47e98f920b6b8379646486"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC source address lower 16 bits.  <a href="#ga8a14dec2cc47e98f920b6b8379646486">More...</a><br /></td></tr>
+<tr class="separator:ga8a14dec2cc47e98f920b6b8379646486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga906aec1e6ac7945b8ec736f4cf83712b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga906aec1e6ac7945b8ec736f4cf83712b">OPENNSL_HASH_FIELD_MACSA_MI</a>&#160;&#160;&#160;0x00400000</td></tr>
+<tr class="memdesc:ga906aec1e6ac7945b8ec736f4cf83712b"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC source address middle 16 bits.  <a href="#ga906aec1e6ac7945b8ec736f4cf83712b">More...</a><br /></td></tr>
+<tr class="separator:ga906aec1e6ac7945b8ec736f4cf83712b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafa62f4894bc95c6543209c514e493025"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#gafa62f4894bc95c6543209c514e493025">OPENNSL_HASH_FIELD_SRCL4</a>&#160;&#160;&#160;0x00000040</td></tr>
 <tr class="memdesc:gafa62f4894bc95c6543209c514e493025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source L4 port.  <a href="#gafa62f4894bc95c6543209c514e493025">More...</a><br /></td></tr>
 <tr class="separator:gafa62f4894bc95c6543209c514e493025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74329a832b652f77748f67b13164da45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga74329a832b652f77748f67b13164da45">OPENNSL_HASH_FIELD_VLAN</a>&#160;&#160;&#160;0x00000080</td></tr>
+<tr class="memdesc:ga74329a832b652f77748f67b13164da45"><td class="mdescLeft">&#160;</td><td class="mdescRight">VLAN ID.  <a href="#ga74329a832b652f77748f67b13164da45">More...</a><br /></td></tr>
+<tr class="separator:ga74329a832b652f77748f67b13164da45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5ac89712329c98141be380b5d53d4dcf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch.html#ga5ac89712329c98141be380b5d53d4dcf">OPENNSL_SWITCH_PKT_INFO_DST_IP</a>&#160;&#160;&#160;(1 &lt;&lt; 6)</td></tr>
 <tr class="memdesc:ga5ac89712329c98141be380b5d53d4dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destination IPv4 address field valid.  <a href="#ga5ac89712329c98141be380b5d53d4dcf">More...</a><br /></td></tr>
 <tr class="separator:ga5ac89712329c98141be380b5d53d4dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,7 +263,11 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33cac773ed900b36825c250716e9e8ffb9bf">opennslSwitchV4ResvdMcPktToCpu</a> = 98, 
 <br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca6b4e294118210656cec5dfaabf3ece61">opennslSwitchDirectedMirroring</a> = 125, 
+<br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca36d01604ce348590374aa21ed604e737">opennslSwitchHashControl</a> = 136, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca844326cef91e2b40b90e3b7559a14a86">opennslSwitchMirrorUnmarked</a> = 141, 
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca3c36bf0c56bed628a4a421886197370d">opennslSwitchHashSeed0</a> = 147, 
 <br />
@@ -273,9 +311,17 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33cad663f6d6abd1418bee5d75a99e4bb386">opennslSwitchHashIP6TcpUdpPortsEqualField1</a> = 168, 
 <br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca991fdcae56e575ae8dcbed453de02201">opennslSwitchHashL2Field0</a> = 169, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33cae8930dcf05e18a35f60bee2c2e919a66">opennslSwitchHashL2Field1</a> = 170, 
+<br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca1b5cff8179dc98e3a016432b61342924">opennslSwitchECMPHashSet0Offset</a> = 210, 
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33caa30fb1d5da039b248d666dc8d3a84953">opennslSwitchECMPHashSet1Offset</a> = 211, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33caf4b4d73c1f9ad3d70c690a284b515922">opennslSwitchMirrorInvalidVlanDrop</a> = 221, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33cabcdb187d663a47405de3a77383a7d1cd">opennslSwitchMirrorPktChecksEnable</a> = 222, 
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca99cbe7dac9fc5a734a46fdcf66b2e291">opennslSwitchL3EgressMode</a> = 230, 
 <br />
@@ -295,13 +341,25 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca9dd75b96bd51cd75de5adc3a678077cc">opennslSwitchControlAutoSync</a> = 244, 
 <br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca8e1ff91a062bfc56b7c1faab9e301903">opennslSwitchIpmcTtl1ToCpu</a> = 249, 
+<br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca8aaf833b52d1413f5da11c5d087118b3">opennslSwitchL3UcastTtl1ToCpu</a> = 250, 
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca6cef28f8214d21d47749799eeb840ff2">opennslSwitchBstEnable</a> = 717, 
 <br />
 &#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca66f2cde526743ef900da4a7deb8a0864">opennslSwitchBstTrackingMode</a> = 718, 
 <br />
-&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca2150855bfa91c9e9aa9dab59fad31a1e">opennslSwitchEcmpMacroFlowHashEnable</a> = 782
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca2bd885f05e90af619d58cb5c41fab717">opennslSwitchVxlanUdpDestPortSet</a> = 729, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca368d941467ad3d8e3476e409f34669a4">opennslSwitchVxlanEntropyEnable</a> = 730, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca3f37229fc8e28cdfad6e23be2fcb809b">opennslSwitchVxlanVnIdMissToCpu</a> = 731, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33caed08e670fbc6f4756bfaea6703937f2e">opennslSwitchVxlanTunnelMissToCpu</a> = 732, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca2150855bfa91c9e9aa9dab59fad31a1e">opennslSwitchEcmpMacroFlowHashEnable</a> = 782, 
+<br />
+&#160;&#160;<a class="el" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33cacd8a4ccd148ff5a97aa53baf81d6e152">opennslSwitchMirrorExclusive</a> = 912
 <br />
  }<tr class="memdesc:ga8465f9bee535c4a0c8e4360bcc21e33c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch controls.  <a href="group__switch.html#ga8465f9bee535c4a0c8e4360bcc21e33c">More...</a><br /></td></tr>
 <tr class="separator:ga8465f9bee535c4a0c8e4360bcc21e33c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -369,7 +427,7 @@ Functions</h2></td></tr>
 
 <p>Use enhanced ECMP hashing. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00415">415</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00434">434</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +443,39 @@ Functions</h2></td></tr>
 
 <p>16-bit CRC using CCITT polynomial. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00418">418</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00437">437</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gac15b86914ecfc4036e1dc76d1015b25c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_CONFIG_CRC32HI&#160;&#160;&#160;0x00000009</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Higher 16-bit of CRC32. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00441">441</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaee98ffdf000f3a1bb063607811c20ce9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_CONFIG_CRC32LO&#160;&#160;&#160;0x00000008</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lower 16-bit of CRC32. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00440">440</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -401,7 +491,7 @@ Functions</h2></td></tr>
 
 <p>Destination L4 port. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00421">421</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00444">444</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -417,7 +507,7 @@ Functions</h2></td></tr>
 
 <p>IPv4 destination address upper 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00426">426</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00450">450</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +523,7 @@ Functions</h2></td></tr>
 
 <p>IPv4 destination address lower 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00423">423</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00447">447</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -449,7 +539,7 @@ Functions</h2></td></tr>
 
 <p>IPv4 source address upper 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00432">432</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00456">456</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +555,7 @@ Functions</h2></td></tr>
 
 <p>IPv4 source address lower 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00429">429</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00453">453</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -481,7 +571,7 @@ Functions</h2></td></tr>
 
 <p>IPv6 collapsed destination address upper 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00438">438</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00462">462</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -497,7 +587,7 @@ Functions</h2></td></tr>
 
 <p>IPv6 collapsed destination address lower 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00435">435</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00459">459</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -513,7 +603,7 @@ Functions</h2></td></tr>
 
 <p>IPv6 collapsed source address upper 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00444">444</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00468">468</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -529,7 +619,103 @@ Functions</h2></td></tr>
 
 <p>IPv6 collapsed source address lower 16 bits. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00441">441</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00465">465</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga0fee0446c60d3e02d216416e1bbecfc9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACDA_HI&#160;&#160;&#160;0x00100000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC destination address upper 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00477">477</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaae5ed03094efea59de92ffb9b1d287de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACDA_LO&#160;&#160;&#160;0x00040000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC destination address lower 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00471">471</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga12daa1914a73277196426496e3329071"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACDA_MI&#160;&#160;&#160;0x00080000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC destination address middle 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00474">474</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga5d0a9cfe5022b12e81f6655a60f7baa9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACSA_HI&#160;&#160;&#160;0x00800000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC source address upper 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00486">486</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga8a14dec2cc47e98f920b6b8379646486"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACSA_LO&#160;&#160;&#160;0x00200000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC source address lower 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00480">480</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga906aec1e6ac7945b8ec736f4cf83712b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_MACSA_MI&#160;&#160;&#160;0x00400000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MAC source address middle 16 bits. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00483">483</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -545,7 +731,23 @@ Functions</h2></td></tr>
 
 <p>Source L4 port. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00422">422</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00445">445</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga74329a832b652f77748f67b13164da45"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_HASH_FIELD_VLAN&#160;&#160;&#160;0x00000080</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>VLAN ID. </p>
+
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00446">446</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -561,7 +763,7 @@ Functions</h2></td></tr>
 
 <p>Destination IPv4 address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00233">233</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00252">252</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +779,7 @@ Functions</h2></td></tr>
 
 <p>Destination IPv6 address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00239">239</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00258">258</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -593,7 +795,7 @@ Functions</h2></td></tr>
 
 <p>Destination L4 port field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00248">248</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00267">267</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -609,7 +811,7 @@ Functions</h2></td></tr>
 
 <p>Destination MAC address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00227">227</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00246">246</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -625,7 +827,7 @@ Functions</h2></td></tr>
 
 <p>Ethertype field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00223">223</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00242">242</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -641,7 +843,7 @@ Functions</h2></td></tr>
 
 <p>Retrieve LBID. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00260">260</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00279">279</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -657,7 +859,7 @@ Functions</h2></td></tr>
 
 <p>Retrieve ECMP hash result. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00254">254</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00273">273</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -673,7 +875,7 @@ Functions</h2></td></tr>
 
 <p>Retrieve ECMP hash result for overlay layer. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00261">261</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00280">280</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -689,7 +891,7 @@ Functions</h2></td></tr>
 
 <p>Retrieve trunk hash result. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00251">251</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00270">270</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -705,7 +907,7 @@ Functions</h2></td></tr>
 
 <p>Retrieve Entropy Value of VXLan packet. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00257">257</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00276">276</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -721,7 +923,7 @@ Functions</h2></td></tr>
 
 <p>IP protocol field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00242">242</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00261">261</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -737,7 +939,7 @@ Functions</h2></td></tr>
 
 <p>Source gport (module, port) field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00217">217</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00236">236</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -753,7 +955,7 @@ Functions</h2></td></tr>
 
 <p>Source IPv4 address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00230">230</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00249">249</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -769,7 +971,7 @@ Functions</h2></td></tr>
 
 <p>Source IPv6 address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00236">236</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00255">255</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -785,7 +987,7 @@ Functions</h2></td></tr>
 
 <p>Source L4 port field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00245">245</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00264">264</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -801,7 +1003,7 @@ Functions</h2></td></tr>
 
 <p>Source MAC address field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00224">224</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00243">243</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -817,7 +1019,7 @@ Functions</h2></td></tr>
 
 <p>VLAN identifier field valid. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00220">220</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00239">239</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -833,7 +1035,7 @@ Functions</h2></td></tr>
 
 <p>level 1 ecmp hashing resolution done </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00460">460</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00502">502</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -849,7 +1051,7 @@ Functions</h2></td></tr>
 
 <p>level 2 ecmp hashing resolution done </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00463">463</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00505">505</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -865,7 +1067,7 @@ Functions</h2></td></tr>
 
 <p>hg trunk hashing resolution done </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00469">469</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00511">511</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -881,7 +1083,7 @@ Functions</h2></td></tr>
 
 <p>max bytes of pkt_trace_info.raw_data </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00490">490</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00532">532</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -897,7 +1099,7 @@ Functions</h2></td></tr>
 
 <p>trunk hashing resolution done </p>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00466">466</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00508">508</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -911,7 +1113,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00112">112</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00131">131</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -940,7 +1142,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00351">351</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00370">370</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -1087,8 +1289,14 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33cac773ed900b36825c250716e9e8ffb9bf"></a>opennslSwitchV4ResvdMcPktToCpu&#160;</td><td class="fielddoc">
 <p>IPv4 reserved MC packets to CPU. </p>
 </td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca6b4e294118210656cec5dfaabf3ece61"></a>opennslSwitchDirectedMirroring&#160;</td><td class="fielddoc">
+<p>Enable directed mirroring mode. </p>
+</td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca36d01604ce348590374aa21ed604e737"></a>opennslSwitchHashControl&#160;</td><td class="fielddoc">
 <p>Hash Control of fields. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca844326cef91e2b40b90e3b7559a14a86"></a>opennslSwitchMirrorUnmarked&#160;</td><td class="fielddoc">
+<p>Send mirror packets as simple unicast. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca3c36bf0c56bed628a4a421886197370d"></a>opennslSwitchHashSeed0&#160;</td><td class="fielddoc">
 <p>network switch hash seeds. </p>
@@ -1153,11 +1361,23 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33cad663f6d6abd1418bee5d75a99e4bb386"></a>opennslSwitchHashIP6TcpUdpPortsEqualField1&#160;</td><td class="fielddoc">
 <p>Selections for IPv6 TCP/UDP packets with source L4 port equals to destination L4 port. </p>
 </td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca991fdcae56e575ae8dcbed453de02201"></a>opennslSwitchHashL2Field0&#160;</td><td class="fielddoc">
+<p>network switch enhanced hash field. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33cae8930dcf05e18a35f60bee2c2e919a66"></a>opennslSwitchHashL2Field1&#160;</td><td class="fielddoc">
+<p>Selections for L2 packets. </p>
+</td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca1b5cff8179dc98e3a016432b61342924"></a>opennslSwitchECMPHashSet0Offset&#160;</td><td class="fielddoc">
 <p>network switch enhanced hash bits. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33caa30fb1d5da039b248d666dc8d3a84953"></a>opennslSwitchECMPHashSet1Offset&#160;</td><td class="fielddoc">
 <p>Selections for ECMP. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33caf4b4d73c1f9ad3d70c690a284b515922"></a>opennslSwitchMirrorInvalidVlanDrop&#160;</td><td class="fielddoc">
+<p>Mirror-to-port packets are dropped upon invalid VLAN. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33cabcdb187d663a47405de3a77383a7d1cd"></a>opennslSwitchMirrorPktChecksEnable&#160;</td><td class="fielddoc">
+<p>Enable/Disable all packet checks for mirror packets. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca99cbe7dac9fc5a734a46fdcf66b2e291"></a>opennslSwitchL3EgressMode&#160;</td><td class="fielddoc">
 <p>Enable advanced egress management. </p>
@@ -1186,6 +1406,9 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca9dd75b96bd51cd75de5adc3a678077cc"></a>opennslSwitchControlAutoSync&#160;</td><td class="fielddoc">
 <p>Perform a sync of the Level 2 warm boot state after every API. </p>
 </td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca8e1ff91a062bfc56b7c1faab9e301903"></a>opennslSwitchIpmcTtl1ToCpu&#160;</td><td class="fielddoc">
+<p>Copy L3 Mcast with TTL 1 to CPU. </p>
+</td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca8aaf833b52d1413f5da11c5d087118b3"></a>opennslSwitchL3UcastTtl1ToCpu&#160;</td><td class="fielddoc">
 <p>Copy L3 Ucast with TTL 1 to CPU. </p>
 </td></tr>
@@ -1195,8 +1418,23 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca66f2cde526743ef900da4a7deb8a0864"></a>opennslSwitchBstTrackingMode&#160;</td><td class="fielddoc">
 <p>BST resource usage tracking mode. </p>
 </td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca2bd885f05e90af619d58cb5c41fab717"></a>opennslSwitchVxlanUdpDestPortSet&#160;</td><td class="fielddoc">
+<p>Set UDP Destination port for VXLAN. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca368d941467ad3d8e3476e409f34669a4"></a>opennslSwitchVxlanEntropyEnable&#160;</td><td class="fielddoc">
+<p>Set UDP Source port for VXLAN Tunnel Entropy(Value = TRUE/FALSE) </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca3f37229fc8e28cdfad6e23be2fcb809b"></a>opennslSwitchVxlanVnIdMissToCpu&#160;</td><td class="fielddoc">
+<p>Set VXLAN VN_ID lookup failure Copy to Cpu. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33caed08e670fbc6f4756bfaea6703937f2e"></a>opennslSwitchVxlanTunnelMissToCpu&#160;</td><td class="fielddoc">
+<p>If set, send a copy of VXLAN packet to CPU if VXLAN Tunnel lookup fails. </p>
+</td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33ca2150855bfa91c9e9aa9dab59fad31a1e"></a>opennslSwitchEcmpMacroFlowHashEnable&#160;</td><td class="fielddoc">
 <p>Enable ECMP macro-flow hashing. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8465f9bee535c4a0c8e4360bcc21e33cacd8a4ccd148ff5a97aa53baf81d6e152"></a>opennslSwitchMirrorExclusive&#160;</td><td class="fielddoc">
+<p>Set Mirror exclusive behaviour between FP and Port. </p>
 </td></tr>
 </table>
 
@@ -1233,7 +1471,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00267">267</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00286">286</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>
@@ -1253,7 +1491,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00448">448</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2switch_8h_source.html#l00490">490</a> of file <a class="el" href="opennsl_2switch_8h_source.html">switch.h</a>.</p>
 
 </div>
 </div>

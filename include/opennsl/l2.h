@@ -33,6 +33,9 @@
 #define OPENNSL_L2_MOVE_PORT    0x00100000 
 #define OPENNSL_L2_CALLBACK_DELETE      0          
 #define OPENNSL_L2_CALLBACK_ADD         1          
+#define OPENNSL_L2_CALLBACK_REPORT      2          
+#define OPENNSL_L2_CALLBACK_LEARN_EVENT 3          
+#define OPENNSL_L2_CALLBACK_AGE_EVENT   4          
 #define OPENNSL_L2_CALLBACK_MOVE_EVENT  5          
 /** Device-independent L2 address structure. */
 typedef struct opennsl_l2_addr_s {
@@ -53,6 +56,35 @@ typedef struct opennsl_l2_addr_s {
     int reserved9; 
     int reserved10; 
 } opennsl_l2_addr_t;
+
+#define OPENNSL_L2_CACHE_CPU        0x00000001 /**< Packet is copied to CPU. */
+#define OPENNSL_L2_CACHE_DISCARD    0x00000002 /**< Packet is not switched. */
+#define OPENNSL_L2_CACHE_BPDU       0x00000010 /**< Packet is BPDU. */
+/** Device-independent L2 cache address structure. */
+typedef struct opennsl_l2_cache_addr_s {
+    uint32 flags;                       /**< OPENNSL_L2_CACHE_xxx flags. */
+    uint32 station_flags;               /**< OPENNSL_L2_STATION_xxx flags. */
+    opennsl_mac_t mac;                  /**< Destination MAC address to match. */
+    opennsl_mac_t mac_mask;             /**< MAC address mask. */
+    opennsl_vlan_t vlan;                /**< VLAN to match. */
+    opennsl_vlan_t vlan_mask;           /**< VLAN mask. */
+    opennsl_port_t src_port;            /**< Ingress port to match (network
+                                           switch). */
+    opennsl_port_t src_port_mask;       /**< Ingress port mask (must be 0 if not
+                                           network switch). */
+    opennsl_module_t dest_modid;        /**< Switch destination module ID. */
+    opennsl_port_t dest_port;           /**< Switch destination port. */
+    opennsl_trunk_t dest_trunk;         /**< Switch destination trunk ID. */
+    int prio;                           /**< Internal priority, use -1 to not set. */
+    opennsl_pbmp_t dest_ports;          /**< Destination ports for Multiport L2
+                                           address forwarding. */
+    int lookup_class;                   /**< Classification class ID. */
+    uint8 subtype;                      /**< Slow protocol subtype to match. */
+    opennsl_if_t encap_id;              /**< Encapsulation index. */
+    opennsl_multicast_t group;          /**< Flood domain for L2CP. */
+    opennsl_ethertype_t ethertype;      /**< Ethertype to match. */
+    opennsl_ethertype_t ethertype_mask; /**< Mask. */
+} opennsl_l2_cache_addr_t;
 
 /***************************************************************************//** 
  *\brief Initialize an L2 address structure to a specified MAC address and VLAN
@@ -97,6 +129,9 @@ extern int opennsl_l2_addr_add(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_L2_DELETE_STATIC        0x00000001 
+#define OPENNSL_L2_DELETE_PENDING       0x00000002 
+#define OPENNSL_L2_DELETE_NO_CALLBACKS  0x00000004 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -120,6 +155,280 @@ extern int opennsl_l2_addr_delete(
     int unit, 
     opennsl_mac_t mac, 
     opennsl_vlan_t vid) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a destination module/port.
+ *
+ *\description Delete L2 addresses associated with a destination module/port.
+ *          Static entries are  removed only if OPENNSL_L2_DELETE_STATIC flag
+ *          is used and L2 aging and learning are  disabled during this
+ *          operation. For switch family II and switch family I chips, mcast
+ *          L2 entries associated with the destination module/port are removed
+ *          if OPENNSL_L2_DELETE_STATIC flag is used.  On the other hand, for
+ *          switch family III chips, mcast L2 entries associated with the
+ *          destination module/port are not removed if
+ *          OPENNSL_L2_DELETE_STATIC flag is used. On switch family III
+ *          devices which support an L2 pending cache (see
+ *          =opennsl_port_learn_set), pending entries can be removed if the
+ *          OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and
+ *          optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used.
+ *           By setting this flag, no registered callbacks will be called
+ *          during L2 entry deletions.  If users want to know which entries
+ *          are deleted, they should register  callback routines by API
+ *          opennsl_l2_addr_register(). If L2_MOD_FIFO is used,  but the
+ *          thread opennslL2MOD.x is stopped, users can not know which entries
+ *          are deleted, even though they already had registered callback
+ *          routines and  use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *          The port parameter can also be an MPLS, MiM or WLAN Gport ID.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mod [IN]   Module ID (or -1 for local unit)
+ *\param    port [IN]   Device or logical port number
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_port(
+    int unit, 
+    opennsl_module_t mod, 
+    opennsl_port_t port, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a MAC address.
+ *
+ *\description Delete L2 entries associated with a MAC address. Static entries
+ *          are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2
+ *          aging and learning are disabled during  this operation.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mac [IN]   MAC address
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries  ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_mac(
+    int unit, 
+    opennsl_mac_t mac, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a VLAN.
+ *
+ *\description Delete L2 entries associated with a VLAN ID. Static entries are
+ *          removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging
+ *          and learning are disabled during  this operation. For switch
+ *          family II and switch family I chips, mcast L2 entries associated
+ *          with  a VLAN ID are removed if OPENNSL_L2_DELETE_STATIC flag is
+ *          used.  Conversely,  for switch family III chips, mcast L2 entries
+ *          associated with a VLAN ID are not removed if 
+ *          OPENNSL_L2_DELETE_STATIC flag is used.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vid [IN]   VLAN ID
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries  ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_vlan(
+    int unit, 
+    opennsl_vlan_t vid, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a trunk.
+ *
+ *\description Delete L2 entries associated with a trunk ID. Static entries are
+ *          removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging
+ *          and learning are disabled during     this operation. For switch
+ *          family II and switch family I chips, mcast L2 entries associated
+ *          with  a trunk ID are removed if OPENNSL_L2_DELETE_STATIC flag is
+ *          used.  Conversely,  for switch family III chips, mcast L2 entries
+ *          associated with a trunk ID are not removed if 
+ *          OPENNSL_L2_DELETE_STATIC flag is used.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    tid [IN]   Trunk ID
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_trunk(
+    int unit, 
+    opennsl_trunk_t tid, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a MAC address and a destination
+ *       module/port.
+ *
+ *\description Delete L2 entries associated with a MAC address and a destination
+ *          module/port. Static entries are removed only if
+ *          OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning
+ *          are disabled during this operation.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mac [IN]   MAC address
+ *\param    mod [IN]   Module ID
+ *\param    port [IN]   Device or logical port number
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_mac_port(
+    int unit, 
+    opennsl_mac_t mac, 
+    opennsl_module_t mod, 
+    opennsl_port_t port, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a VLAN and a destination module/port.
+ *
+ *\description Delete L2 entries associated with a VLAN ID and a destination
+ *          module/port. Static entries are removed only if
+ *          OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning
+ *          are disabled during this operation. For switch family II and
+ *          switch family I chips, mcast L2 entries associated with a VLAN ID
+ *          and a destination module/port  are removed if
+ *          OPENNSL_L2_DELETE_STATIC flag is used.  Conversely, for switch
+ *          family III chips, mcast L2 entries associated with a VLAN ID  and
+ *          a destination module/port are not removed if
+ *          OPENNSL_L2_DELETE_STATIC flag is used.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vid [IN]   VLAN ID
+ *\param    mod [IN]   Module ID
+ *\param    port [IN]   Device or logical port number
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_vlan_port(
+    int unit, 
+    opennsl_vlan_t vid, 
+    opennsl_module_t mod, 
+    opennsl_port_t port, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete L2 entries associated with a VLAN and a destination module/port.
+ *
+ *\description Delete L2 entries associated with a VLAN ID and a destination
+ *          trunk. Static entries are removed only if OPENNSL_L2_DELETE_STATIC
+ *          flag is used and L2 aging and learning are disabled during this
+ *          operation. For switch family II and switch family I chips, mcast
+ *          L2 entries associated with a VLAN ID and a destination trunk  are
+ *          removed if OPENNSL_L2_DELETE_STATIC flag is used.  Conversely, for
+ *          switch family III chips, mcast L2 entries associated with a VLAN
+ *          ID  and a destination trunk are not removed if
+ *          OPENNSL_L2_DELETE_STATIC flag is used.
+ *          On switch family III devices which support an L2 pending cache
+ *          (see =opennsl_port_learn_set), pending entries can be removed if
+ *          the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions
+ *          and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be
+ *          used.  By setting this flag, no registered callbacks will be
+ *          called during L2 entry deletions.
+ *          If users want to know which entries are deleted, they should
+ *          register  callback routines by API opennsl_l2_addr_register(). If
+ *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
+ *          users can not know which entries are deleted, even though they
+ *          already had registered callback routines and  use this API without
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vid [IN]   VLAN ID
+ *\param    tid [IN]   Trunk ID
+ *\param    flags [IN]   OPENNSL_L2_DELETE_STATIC for removing static entries ;
+ *          OPENNSL_L2_DELETE_PENDING for removing pending entries ;
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without
+ *          registered callbacks being called
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_delete_by_vlan_trunk(
+    int unit, 
+    opennsl_vlan_t vid, 
+    opennsl_trunk_t tid, 
+    uint32 flags) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Check if an L2 entry is present in the L2 table.
@@ -178,6 +487,27 @@ extern int opennsl_l2_addr_register(
     void *userdata) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Register/Unregister a callback routine for OPENNSL L2 subsystem.
+ *
+ *\description Register/Unregister a callback routine that will be called
+ *          whenever an entry is  added into or deleted from the L2 address
+ *          table. Both callback and userdata  must match for register and
+ *          unregister calls. If there is l2xmsg_mode=1 in file
+ *          config.opennsl, the thread opennslL2MOD.x may be triggered/stopped
+ *          when register/unregister  a callback routine.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    callback [IN]   Callback function of type opennsl_l2_addr_callback_t
+ *\param    userdata [IN]   Arbitrary value passed to callback along with messages
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_unregister(
+    int unit, 
+    opennsl_l2_addr_callback_t callback, 
+    void *userdata) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Set/Get the age timer.
  *
  *\description Set/Get the age timer of the specified switch unit. Setting the
@@ -222,6 +552,129 @@ extern int opennsl_l2_age_timer_set(
 extern int opennsl_l2_age_timer_get(
     int unit, 
     int *age_seconds) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Initialize the L2 cache.
+ *
+ *\description Clear all entries and preload a few entries to match previous
+ *          generation of devices.
+ *          The preloaded entries are shown in the table below.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_init(
+    int unit) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/***************************************************************************//** 
+ *\brief Initialize an L2 cache address structure.
+ *
+ *\description Initialize an L2 cache address structure. All masks in the
+ *          structure are cleared.
+ *
+ *\param    addr [IN,OUT]   L2 cache address to initialize
+ *
+ *\retval    Nothing.
+ ******************************************************************************/
+extern void opennsl_l2_cache_addr_t_init(
+    opennsl_l2_cache_addr_t *addr) LIB_DLL_EXPORTED ;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Get number of L2 cache entries.
+ *
+ *\description Get number of L2 cache entries.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    size [OUT]   Number of entries in cache
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_size_get(
+    int unit, 
+    int *size) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set an L2 cache entry.
+ *
+ *\description Insert an L2 cache entry at the specified index. If -1 is given
+ *          then the entry used will be the first available entry if the l2
+ *          cache address mac_mask field is all ones or the last available
+ *          entry if the mac_mask field has some zeros. Cache entries are
+ *          matched from lowest entry to highest entry. For ROBO devices, the
+ *          OPENNSL_L2_CACHE_BPDU is used  to set the BPDU addresses on device
+ *          and the zero BPDU address is used  for the special process to
+ *          indicate a BPDU address delete process.
+ *          Take note of the preloaded entries as defined in.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    index [IN]   L2 cache entry number (or -1)
+ *\param    addr [IN]   L2 cache address
+ *\param    index_used [OUT]   l2 cache entry number actually used
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_set(
+    int unit, 
+    int index, 
+    opennsl_l2_cache_addr_t *addr, 
+    int *index_used) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get an L2 cache entry.
+ *
+ *\description Get the L2 cache entry at the specified index. For ROBO devices,
+ *          the  OPENNSL_L2_CACHE_BPDU is used to get the BPDU addresses on
+ *          device.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    index [IN]   L2 cache entry index
+ *\param    addr [OUT]   L2 cache address
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_get(
+    int unit, 
+    int index, 
+    opennsl_l2_cache_addr_t *addr) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Clear an L2 cache entry.
+ *
+ *\description Clear the L2 cache entry at the specified index.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    index [IN]   L2 cache entry index
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_delete(
+    int unit, 
+    int index) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Clear all L2 cache entries.
+ *
+ *\description Clear all L2 cache entries including the preloaded entries.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_cache_delete_all(
+    int unit) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
@@ -354,5 +807,6 @@ extern int opennsl_l2_station_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/l2X.h>
 #endif /* __OPENNSL_L2_H__ */
 /*@}*/

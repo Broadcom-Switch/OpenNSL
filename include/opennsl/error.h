@@ -74,5 +74,6 @@ typedef enum opennsl_switch_event_e {
     _SHR_E_IF_ERROR_NOT_UNAVAIL_RETURN(op) 
 #define opennsl_errmsg(rv)      \
     _SHR_ERRMSG(rv) 
+#include <opennsl/errorX.h>
 #endif /* __OPENNSL_ERROR_H__ */
 /*@}*/

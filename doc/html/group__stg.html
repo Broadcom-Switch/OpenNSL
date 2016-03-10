@@ -52,6 +52,9 @@ Files</h2></td></tr>
 <tr class="memitem:stg_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stg_8h.html">stg.h</a></td></tr>
 <tr class="memdesc:stg_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:stgX_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stgX_8h.html">stgX.h</a></td></tr>
+<tr class="memdesc:stgX_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -80,6 +83,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:gabef0a646baef3487591377159cc947d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gabef0a646baef3487591377159cc947d9">opennsl_stg_clear</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabef0a646baef3487591377159cc947d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all STGs and initialize the Spanning Tree Group (STG) module to its initial configuration.  <a href="#gabef0a646baef3487591377159cc947d9">More...</a><br /></td></tr>
+<tr class="separator:gabef0a646baef3487591377159cc947d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga100aa7747f06a14a2d56991d314e034d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#ga100aa7747f06a14a2d56991d314e034d">opennsl_stg_count_get</a> (int unit, int *max_stg) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga100aa7747f06a14a2d56991d314e034d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum number of STGs that the underlying hardware can support.  <a href="#ga100aa7747f06a14a2d56991d314e034d">More...</a><br /></td></tr>
+<tr class="separator:ga100aa7747f06a14a2d56991d314e034d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6bd8189c2f152a58e392a155415c675f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#ga6bd8189c2f152a58e392a155415c675f">opennsl_stg_create</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> *stg_ptr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga6bd8189c2f152a58e392a155415c675f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new STG, using a new STG ID.  <a href="#ga6bd8189c2f152a58e392a155415c675f">More...</a><br /></td></tr>
 <tr class="separator:ga6bd8189c2f152a58e392a155415c675f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,6 +101,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae640e96550b5bf103f4deb6fcc07758b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gae640e96550b5bf103f4deb6fcc07758b">opennsl_stg_destroy</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gae640e96550b5bf103f4deb6fcc07758b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the specified STG.  <a href="#gae640e96550b5bf103f4deb6fcc07758b">More...</a><br /></td></tr>
 <tr class="separator:gae640e96550b5bf103f4deb6fcc07758b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafcaeb8ac684784967f1d99ccd19740ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gafcaeb8ac684784967f1d99ccd19740ea">opennsl_stg_init</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gafcaeb8ac684784967f1d99ccd19740ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Spanning Tree Group (STG) module to its initial configuration.  <a href="#gafcaeb8ac684784967f1d99ccd19740ea">More...</a><br /></td></tr>
+<tr class="separator:gafcaeb8ac684784967f1d99ccd19740ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9c05de95b24c776d21462dc407594479"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#ga9c05de95b24c776d21462dc407594479">opennsl_stg_list</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> **list, int *count) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga9c05de95b24c776d21462dc407594479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a list of IDs for currently defined STGs.  <a href="#ga9c05de95b24c776d21462dc407594479">More...</a><br /></td></tr>
 <tr class="separator:ga9c05de95b24c776d21462dc407594479"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,11 +114,23 @@ Functions</h2></td></tr>
 <tr class="memdesc:gad8ff9d87107967336829219b02d1ec3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Spanning Tree Protocol state of a port in the specified STG.  <a href="#gad8ff9d87107967336829219b02d1ec3f">More...</a><br /></td></tr>
 <tr class="separator:gad8ff9d87107967336829219b02d1ec3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac4824e77e2d0cd577a9962d63e5b53ac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gac4824e77e2d0cd577a9962d63e5b53ac">opennsl_stg_stp_set</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, int stp_state) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:gac4824e77e2d0cd577a9962d63e5b53ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Spanning Tree Protocol state of a port in the specified STG.  <a href="#gac4824e77e2d0cd577a9962d63e5b53ac">More...</a><br /></td></tr>
+<tr class="memdesc:gac4824e77e2d0cd577a9962d63e5b53ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Spanning Tree Protocol state of a port/VP in the specified STG.  <a href="#gac4824e77e2d0cd577a9962d63e5b53ac">More...</a><br /></td></tr>
 <tr class="separator:gac4824e77e2d0cd577a9962d63e5b53ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7a9bcd2314c8a2dd1d9de9f362ab0f42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#ga7a9bcd2314c8a2dd1d9de9f362ab0f42">opennsl_stg_vlan_add</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga7a9bcd2314c8a2dd1d9de9f362ab0f42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a VLAN to a specified STG.  <a href="#ga7a9bcd2314c8a2dd1d9de9f362ab0f42">More...</a><br /></td></tr>
 <tr class="separator:ga7a9bcd2314c8a2dd1d9de9f362ab0f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe947ce2158ce53b09d3f722244e8d16"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gabe947ce2158ce53b09d3f722244e8d16">opennsl_stg_vlan_list</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> **list, int *count) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabe947ce2158ce53b09d3f722244e8d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a list of VLANs in a specified STG.  <a href="#gabe947ce2158ce53b09d3f722244e8d16">More...</a><br /></td></tr>
+<tr class="separator:gabe947ce2158ce53b09d3f722244e8d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf9c99f1309e369e2032c74d71dd5c0c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gaf9c99f1309e369e2032c74d71dd5c0c2">opennsl_stg_vlan_list_destroy</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> *list, int count) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaf9c99f1309e369e2032c74d71dd5c0c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a list returned by =opennsl_stg_vlan_list .  <a href="#gaf9c99f1309e369e2032c74d71dd5c0c2">More...</a><br /></td></tr>
+<tr class="separator:gaf9c99f1309e369e2032c74d71dd5c0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3d558961c1d185088a19935d6e83d1b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#gab3d558961c1d185088a19935d6e83d1b">opennsl_stg_vlan_remove</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gab3d558961c1d185088a19935d6e83d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a VLAN from a Spanning Tree Group.  <a href="#gab3d558961c1d185088a19935d6e83d1b">More...</a><br /></td></tr>
+<tr class="separator:gab3d558961c1d185088a19935d6e83d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5eddb1e80d591c58cf9a4d8b55d4a8e4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stg.html#ga5eddb1e80d591c58cf9a4d8b55d4a8e4">opennsl_stg_vlan_remove_all</a> (int unit, <a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a> stg) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga5eddb1e80d591c58cf9a4d8b55d4a8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all VLANs from a Spanning Tree Group.  <a href="#ga5eddb1e80d591c58cf9a4d8b55d4a8e4">More...</a><br /></td></tr>
+<tr class="separator:ga5eddb1e80d591c58cf9a4d8b55d4a8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -161,6 +185,83 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="gabef0a646baef3487591377159cc947d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_clear </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy all STGs and initialize the Spanning Tree Group (STG) module to its initial configuration. </p>
+<dl class="section user"><dt>Description</dt><dd>Destroys any current STGs and initializes the STG module to its initial configuration as described in =opennsl_stg_init . .</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNIT</td><td>Invalid device ID </td></tr>
+    <tr><td class="paramname">OPENNSL_E_INIT</td><td>STG module is not currently initialized. </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Other possible errors; for details, see </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga100aa7747f06a14a2d56991d314e034d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_count_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>max_stg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the maximum number of STGs that the underlying hardware can support. </p>
+<dl class="section user"><dt>Description</dt><dd>Returns the maximum total number of STGs that the underlying hardware can support. The returned number is chip specific, and is not dependent upon the number of currently defined STGs.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">max_stg</td><td>[OUT] Pointer to the returned max allowable STGs</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_INIT</td><td>STG module is not currently initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ga6bd8189c2f152a58e392a155415c675f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -341,6 +442,39 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Referenced by <a class="el" href="example__stp_8c.html#afdd1bc23e6d6ae6ca5ce66a9adff1657">revert_stg()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gafcaeb8ac684784967f1d99ccd19740ea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_init </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the Spanning Tree Group (STG) module to its initial configuration. </p>
+<dl class="section user"><dt>Description</dt><dd>Initializes the STG module. A default STG is then created, with all its ports in the OPENNSL_STG_STP_DISABLE state. Any previously existing STG information is lost. .</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNIT</td><td>Invalid device ID </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Other possible errors; for details, see </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -543,7 +677,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the Spanning Tree Protocol state of a port in the specified STG. </p>
+<p>Set the Spanning Tree Protocol state of a port/VP in the specified STG. </p>
+<p>VP GROUP STP state need to be setted per direction, Please use =opennsl_vlan_gport_add for this.</p>
 <dl class="section user"><dt>Description</dt><dd>Sets the specified local port to the indicated Spanning TreeProtocol (STP) state. The indicated STG must be currently defined. On some switches the LISTENING state can be indistinguishable from the BLOCKING state.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -622,6 +757,214 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Referenced by <a class="el" href="example__stp_8c.html#af4e9d5c2526280fcdd0327946b5a303d">example_stg_create()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gabe947ce2158ce53b09d3f722244e8d16"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_vlan_list </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a>&#160;</td>
+          <td class="paramname"><em>stg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> **&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates a list of VLANs in a specified STG. </p>
+<dl class="section user"><dt>Description</dt><dd>Returns a pointer to a sorted list of VLANs belonging to the specified STG. If the STG currently contains no VLANs, *list is NULL and *count is 0. Otherwise, *list points to an array of the *count VLAN IDs in the indicated STG. The indicated STG must be currently defined. The caller is responsible for freeing the memory allocated for the returned list, that is, calling =opennsl_stg_vlan_list_destroy .</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">stg</td><td>[IN] STG ID </td></tr>
+    <tr><td class="paramname">list</td><td>[OUT] Pointer to returned pointer-to-array of VLAN IDs </td></tr>
+    <tr><td class="paramname">count</td><td>[OUT] Pointer to returned count of VLAN IDs</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_INIT</td><td>STG module is not currently initialized. </td></tr>
+    <tr><td class="paramname">OPENNSL_E_BADID</td><td>Invalid STG ID or VLAN ID </td></tr>
+    <tr><td class="paramname">OPENNSL_E_NOT_FOUND</td><td>STG ID is not currently defined </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Other possible errors; for details, see </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf9c99f1309e369e2032c74d71dd5c0c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_vlan_list_destroy </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a list returned by =opennsl_stg_vlan_list . </p>
+<dl class="section user"><dt>Description</dt><dd>Destroys a list of VLAN IDs previously returned by =opennsl_stg_vlan_list , freeing the memory previously allocated by =opennsl_stg_vlan_list for the list of VLANs. The status of each VLAN in the list is not affected.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">list</td><td>[IN] Pointer to array of VLAN IDs </td></tr>
+    <tr><td class="paramname">count</td><td>[IN] Count of VLAN IDs in the array</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gab3d558961c1d185088a19935d6e83d1b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_vlan_remove </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a>&#160;</td>
+          <td class="paramname"><em>stg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a VLAN from a Spanning Tree Group. </p>
+<dl class="section user"><dt>Description</dt><dd>Removes the specified VLAN from the specified STG and assigns it to the default STG. Both VLAN and STG must be currently defined.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">stg</td><td>[IN] STG ID </td></tr>
+    <tr><td class="paramname">vid</td><td>[IN] VLAN ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_INIT</td><td>STG module is not currently initialized. </td></tr>
+    <tr><td class="paramname">OPENNSL_E_BADID</td><td>Invalid STG ID or VLAN ID </td></tr>
+    <tr><td class="paramname">OPENNSL_E_NOT_FOUND</td><td>STG ID is not currently defined </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Other possible errors; for details, see </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5eddb1e80d591c58cf9a4d8b55d4a8e4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_stg_vlan_remove_all </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gad111ca9d6deb73308b07bc0b4d761b17">opennsl_stg_t</a>&#160;</td>
+          <td class="paramname"><em>stg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove all VLANs from a Spanning Tree Group. </p>
+<dl class="section user"><dt>Description</dt><dd>Removes all VLANs from the specified STG and assigns them to the default STG. The STG must be currently defined.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">stg</td><td>[IN] STG ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_INIT</td><td>STG module is not currently initialized. </td></tr>
+    <tr><td class="paramname">OPENNSL_E_BADID</td><td>Invalid STG ID or VLAN ID </td></tr>
+    <tr><td class="paramname">OPENNSL_E_NOT_FOUND</td><td>STG ID is not currently defined </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Other possible errors; for details, see </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

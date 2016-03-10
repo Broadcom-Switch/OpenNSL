@@ -53,6 +53,12 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l2__addr__s.html">opennsl_l2_addr_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device-independent L2 address structure.  <a href="structopennsl__l2__addr__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l2__cache__addr__s.html">opennsl_l2_cache_addr_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device-independent L2 cache address structure.  <a href="structopennsl__l2__cache__addr__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l2__learn__limit__s.html">opennsl_l2_learn_limit_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L2 learn limit structure.  <a href="structopennsl__l2__learn__limit__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__l2__station__s.html">opennsl_l2_station_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">L2 Station address info.  <a href="structopennsl__l2__station__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -62,21 +68,48 @@ Files</h2></td></tr>
 <tr class="memitem:l2_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="l2_8h.html">l2.h</a></td></tr>
 <tr class="memdesc:l2_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:l2X_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="l2X_8h.html">l2X.h</a></td></tr>
+<tr class="memdesc:l2X_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:gae3cd1c1ca0a3ac2dd35e1da6eb642737"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gae3cd1c1ca0a3ac2dd35e1da6eb642737">OPENNSL_L2_CACHE_BPDU</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gae3cd1c1ca0a3ac2dd35e1da6eb642737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet is BPDU.  <a href="#gae3cd1c1ca0a3ac2dd35e1da6eb642737">More...</a><br /></td></tr>
+<tr class="separator:gae3cd1c1ca0a3ac2dd35e1da6eb642737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e9f39746eff312e0345103116deb13e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga3e9f39746eff312e0345103116deb13e">OPENNSL_L2_CACHE_CPU</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:ga3e9f39746eff312e0345103116deb13e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet is copied to CPU.  <a href="#ga3e9f39746eff312e0345103116deb13e">More...</a><br /></td></tr>
+<tr class="separator:ga3e9f39746eff312e0345103116deb13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a5165778a256e5ee047ef4d49231e56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga0a5165778a256e5ee047ef4d49231e56">OPENNSL_L2_CACHE_DISCARD</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:ga0a5165778a256e5ee047ef4d49231e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet is not switched.  <a href="#ga0a5165778a256e5ee047ef4d49231e56">More...</a><br /></td></tr>
+<tr class="separator:ga0a5165778a256e5ee047ef4d49231e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7125ad4054291814a7570e147f2d0ed3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga7125ad4054291814a7570e147f2d0ed3">OPENNSL_L2_CALLBACK_ADD</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ga7125ad4054291814a7570e147f2d0ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e73b9f48676e33cc4051dbdbca80b44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga6e73b9f48676e33cc4051dbdbca80b44">OPENNSL_L2_CALLBACK_AGE_EVENT</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ga6e73b9f48676e33cc4051dbdbca80b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6043b3c1990a8f610c164e7478749471"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga6043b3c1990a8f610c164e7478749471">OPENNSL_L2_CALLBACK_DELETE</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:ga6043b3c1990a8f610c164e7478749471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga95ca5cef85fc0c6a93198e3a1cf10085"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga95ca5cef85fc0c6a93198e3a1cf10085">OPENNSL_L2_CALLBACK_LEARN_EVENT</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ga95ca5cef85fc0c6a93198e3a1cf10085"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae7c03998330150827e94be814dd95abf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gae7c03998330150827e94be814dd95abf">OPENNSL_L2_CALLBACK_MOVE_EVENT</a>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:gae7c03998330150827e94be814dd95abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace8f27115df696dd50320b563a293888"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gace8f27115df696dd50320b563a293888">OPENNSL_L2_CALLBACK_REPORT</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:gace8f27115df696dd50320b563a293888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac58d872b93d9e8580338a2ad046291b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gac58d872b93d9e8580338a2ad046291b0">OPENNSL_L2_DELETE_NO_CALLBACKS</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="separator:gac58d872b93d9e8580338a2ad046291b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadebcd9f7f88a8ab133574578a37db2fc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gadebcd9f7f88a8ab133574578a37db2fc">OPENNSL_L2_DELETE_PENDING</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="separator:gadebcd9f7f88a8ab133574578a37db2fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7f5bfc118407488858e193f6c156c138"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga7f5bfc118407488858e193f6c156c138">OPENNSL_L2_DELETE_STATIC</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="separator:ga7f5bfc118407488858e193f6c156c138"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab7d426a93bd4d18707fec17663ec8588"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gab7d426a93bd4d18707fec17663ec8588">OPENNSL_L2_DISCARD_DST</a>&#160;&#160;&#160;0x00000004</td></tr>
 <tr class="separator:gab7d426a93bd4d18707fec17663ec8588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa8fd8f76e972baba09166919ce64d69c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaa8fd8f76e972baba09166919ce64d69c">OPENNSL_L2_DISCARD_SRC</a>&#160;&#160;&#160;0x00000002</td></tr>
 <tr class="separator:gaa8fd8f76e972baba09166919ce64d69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga63e21bad2bb28702ea2ba636f548e35c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga63e21bad2bb28702ea2ba636f548e35c">OPENNSL_L2_L3LOOKUP</a>&#160;&#160;&#160;0x00000010</td></tr>
 <tr class="separator:ga63e21bad2bb28702ea2ba636f548e35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf9428658416d9baf54548d5a3a31bc8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaf9428658416d9baf54548d5a3a31bc8d">OPENNSL_L2_LEARN_LIMIT_SYSTEM</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:gaf9428658416d9baf54548d5a3a31bc8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit is system wide.  <a href="#gaf9428658416d9baf54548d5a3a31bc8d">More...</a><br /></td></tr>
+<tr class="separator:gaf9428658416d9baf54548d5a3a31bc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5f74902685766fee4ee8fab350bb79b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga5f74902685766fee4ee8fab350bb79b7">OPENNSL_L2_MOVE_PORT</a>&#160;&#160;&#160;0x00100000</td></tr>
 <tr class="separator:ga5f74902685766fee4ee8fab350bb79b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga838d2e1cee40e3ae41cd4a59599dd333"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga838d2e1cee40e3ae41cd4a59599dd333">OPENNSL_L2_STATIC</a>&#160;&#160;&#160;0x00000020</td></tr>
@@ -102,6 +135,12 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga02b9862eda2d166ac16e718c323685d4"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l2__addr__s.html">opennsl_l2_addr_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga02b9862eda2d166ac16e718c323685d4">opennsl_l2_addr_t</a></td></tr>
 <tr class="memdesc:ga02b9862eda2d166ac16e718c323685d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device-independent L2 address structure.  <a href="#ga02b9862eda2d166ac16e718c323685d4">More...</a><br /></td></tr>
 <tr class="separator:ga02b9862eda2d166ac16e718c323685d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90aae8c8033995dd61319d2d03957306"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l2__cache__addr__s.html">opennsl_l2_cache_addr_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a></td></tr>
+<tr class="memdesc:ga90aae8c8033995dd61319d2d03957306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device-independent L2 cache address structure.  <a href="#ga90aae8c8033995dd61319d2d03957306">More...</a><br /></td></tr>
+<tr class="separator:ga90aae8c8033995dd61319d2d03957306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa72880fb68ad0992ebf025dc8b4c99eb"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l2__learn__limit__s.html">opennsl_l2_learn_limit_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a></td></tr>
+<tr class="memdesc:gaa72880fb68ad0992ebf025dc8b4c99eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">L2 learn limit structure.  <a href="#gaa72880fb68ad0992ebf025dc8b4c99eb">More...</a><br /></td></tr>
+<tr class="separator:gaa72880fb68ad0992ebf025dc8b4c99eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga920409fd8a72a56c78cf377101536aa9"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l2__station__s.html">opennsl_l2_station_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga920409fd8a72a56c78cf377101536aa9">opennsl_l2_station_t</a></td></tr>
 <tr class="memdesc:ga920409fd8a72a56c78cf377101536aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">L2 Station address info.  <a href="#ga920409fd8a72a56c78cf377101536aa9">More...</a><br /></td></tr>
 <tr class="separator:ga920409fd8a72a56c78cf377101536aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +155,27 @@ Functions</h2></td></tr>
 <tr class="memitem:gaa6330abc7fef65456cbf94282356fa1c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaa6330abc7fef65456cbf94282356fa1c">opennsl_l2_addr_delete</a> (int unit, <a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a> mac, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gaa6330abc7fef65456cbf94282356fa1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an L2 address entry from the specified device.  <a href="#gaa6330abc7fef65456cbf94282356fa1c">More...</a><br /></td></tr>
 <tr class="separator:gaa6330abc7fef65456cbf94282356fa1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga83baa4f6c6e5c02c7fc3344d5d8c3a72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga83baa4f6c6e5c02c7fc3344d5d8c3a72">opennsl_l2_addr_delete_by_mac</a> (int unit, <a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a> mac, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga83baa4f6c6e5c02c7fc3344d5d8c3a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a MAC address.  <a href="#ga83baa4f6c6e5c02c7fc3344d5d8c3a72">More...</a><br /></td></tr>
+<tr class="separator:ga83baa4f6c6e5c02c7fc3344d5d8c3a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3077bab0b474199b8c9d6d42af1c4554"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga3077bab0b474199b8c9d6d42af1c4554">opennsl_l2_addr_delete_by_mac_port</a> (int unit, <a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a> mac, <a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a> mod, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga3077bab0b474199b8c9d6d42af1c4554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a MAC address and a destination module/port.  <a href="#ga3077bab0b474199b8c9d6d42af1c4554">More...</a><br /></td></tr>
+<tr class="separator:ga3077bab0b474199b8c9d6d42af1c4554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac274aa7e31085a723a66a6c2ada0043f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gac274aa7e31085a723a66a6c2ada0043f">opennsl_l2_addr_delete_by_port</a> (int unit, <a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a> mod, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gac274aa7e31085a723a66a6c2ada0043f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a destination module/port.  <a href="#gac274aa7e31085a723a66a6c2ada0043f">More...</a><br /></td></tr>
+<tr class="separator:gac274aa7e31085a723a66a6c2ada0043f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03b21b6920627b90ff476ee5c7b6bff7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga03b21b6920627b90ff476ee5c7b6bff7">opennsl_l2_addr_delete_by_trunk</a> (int unit, <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a> tid, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga03b21b6920627b90ff476ee5c7b6bff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a trunk.  <a href="#ga03b21b6920627b90ff476ee5c7b6bff7">More...</a><br /></td></tr>
+<tr class="separator:ga03b21b6920627b90ff476ee5c7b6bff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad318d4e6d575d7e4b10090ada9a3ad72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gad318d4e6d575d7e4b10090ada9a3ad72">opennsl_l2_addr_delete_by_vlan</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gad318d4e6d575d7e4b10090ada9a3ad72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a VLAN.  <a href="#gad318d4e6d575d7e4b10090ada9a3ad72">More...</a><br /></td></tr>
+<tr class="separator:gad318d4e6d575d7e4b10090ada9a3ad72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa9694c31ba39046f1ecb282059cfb7d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaa9694c31ba39046f1ecb282059cfb7d7">opennsl_l2_addr_delete_by_vlan_port</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid, <a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a> mod, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaa9694c31ba39046f1ecb282059cfb7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a VLAN and a destination module/port.  <a href="#gaa9694c31ba39046f1ecb282059cfb7d7">More...</a><br /></td></tr>
+<tr class="separator:gaa9694c31ba39046f1ecb282059cfb7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe6a4cff9024f4bbc8b313ed9a8088ab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gabe6a4cff9024f4bbc8b313ed9a8088ab">opennsl_l2_addr_delete_by_vlan_trunk</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid, <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a> tid, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabe6a4cff9024f4bbc8b313ed9a8088ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete L2 entries associated with a VLAN and a destination module/port.  <a href="#gabe6a4cff9024f4bbc8b313ed9a8088ab">More...</a><br /></td></tr>
+<tr class="separator:gabe6a4cff9024f4bbc8b313ed9a8088ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1c92ed0757564763c9cb6c787a407e81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga1c92ed0757564763c9cb6c787a407e81">opennsl_l2_addr_get</a> (int unit, <a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a> mac_addr, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid, <a class="el" href="group__l2.html#ga02b9862eda2d166ac16e718c323685d4">opennsl_l2_addr_t</a> *l2addr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga1c92ed0757564763c9cb6c787a407e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an L2 entry is present in the L2 table.  <a href="#ga1c92ed0757564763c9cb6c787a407e81">More...</a><br /></td></tr>
 <tr class="separator:ga1c92ed0757564763c9cb6c787a407e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,12 +185,45 @@ Functions</h2></td></tr>
 <tr class="memitem:ga47e819cf5939a8e643ad09505df52071"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga47e819cf5939a8e643ad09505df52071">opennsl_l2_addr_t_init</a> (<a class="el" href="group__l2.html#ga02b9862eda2d166ac16e718c323685d4">opennsl_l2_addr_t</a> *l2addr, const <a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a> mac_addr, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga47e819cf5939a8e643ad09505df52071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an L2 address structure to a specified MAC address and VLAN ID.  <a href="#ga47e819cf5939a8e643ad09505df52071">More...</a><br /></td></tr>
 <tr class="separator:ga47e819cf5939a8e643ad09505df52071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa5b0d286f2d6e32f436f811ac26f92c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gafa5b0d286f2d6e32f436f811ac26f92c">opennsl_l2_addr_unregister</a> (int unit, <a class="el" href="group__l2.html#gaf0b7efc30aff8eadc6a0a6fa3f0d089e">opennsl_l2_addr_callback_t</a> callback, void *userdata) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gafa5b0d286f2d6e32f436f811ac26f92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register/Unregister a callback routine for OPENNSL L2 subsystem.  <a href="#gafa5b0d286f2d6e32f436f811ac26f92c">More...</a><br /></td></tr>
+<tr class="separator:gafa5b0d286f2d6e32f436f811ac26f92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadf6c9ab7e72155d6d040efb2d2c58a58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gadf6c9ab7e72155d6d040efb2d2c58a58">opennsl_l2_age_timer_get</a> (int unit, int *age_seconds) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gadf6c9ab7e72155d6d040efb2d2c58a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/Get the age timer.  <a href="#gadf6c9ab7e72155d6d040efb2d2c58a58">More...</a><br /></td></tr>
 <tr class="separator:gadf6c9ab7e72155d6d040efb2d2c58a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga57b0ef0f4ebb9c07cc3395ffab5688a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga57b0ef0f4ebb9c07cc3395ffab5688a5">opennsl_l2_age_timer_set</a> (int unit, int age_seconds) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga57b0ef0f4ebb9c07cc3395ffab5688a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/Get the age timer.  <a href="#ga57b0ef0f4ebb9c07cc3395ffab5688a5">More...</a><br /></td></tr>
 <tr class="separator:ga57b0ef0f4ebb9c07cc3395ffab5688a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2dc2c95ef7372f798588541733dcaa16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga2dc2c95ef7372f798588541733dcaa16">opennsl_l2_cache_addr_t_init</a> (<a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *addr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga2dc2c95ef7372f798588541733dcaa16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an L2 cache address structure.  <a href="#ga2dc2c95ef7372f798588541733dcaa16">More...</a><br /></td></tr>
+<tr class="separator:ga2dc2c95ef7372f798588541733dcaa16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4a55eeec8670184d4ca838b9690c3ded"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga4a55eeec8670184d4ca838b9690c3ded">opennsl_l2_cache_delete</a> (int unit, int index) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga4a55eeec8670184d4ca838b9690c3ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear an L2 cache entry.  <a href="#ga4a55eeec8670184d4ca838b9690c3ded">More...</a><br /></td></tr>
+<tr class="separator:ga4a55eeec8670184d4ca838b9690c3ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfc43afcd9abf3e17ba60a70c635c5f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gacfc43afcd9abf3e17ba60a70c635c5f8">opennsl_l2_cache_delete_all</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gacfc43afcd9abf3e17ba60a70c635c5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all L2 cache entries.  <a href="#gacfc43afcd9abf3e17ba60a70c635c5f8">More...</a><br /></td></tr>
+<tr class="separator:gacfc43afcd9abf3e17ba60a70c635c5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacc577919af2a7ad08927f06d817c6f32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gacc577919af2a7ad08927f06d817c6f32">opennsl_l2_cache_get</a> (int unit, int index, <a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *addr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gacc577919af2a7ad08927f06d817c6f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an L2 cache entry.  <a href="#gacc577919af2a7ad08927f06d817c6f32">More...</a><br /></td></tr>
+<tr class="separator:gacc577919af2a7ad08927f06d817c6f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga126b8e8801447d4aa0a5ece60615e75a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga126b8e8801447d4aa0a5ece60615e75a">opennsl_l2_cache_init</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga126b8e8801447d4aa0a5ece60615e75a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the L2 cache.  <a href="#ga126b8e8801447d4aa0a5ece60615e75a">More...</a><br /></td></tr>
+<tr class="separator:ga126b8e8801447d4aa0a5ece60615e75a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaba13cc1d79d843463d76f1f65ad36308"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaba13cc1d79d843463d76f1f65ad36308">opennsl_l2_cache_set</a> (int unit, int index, <a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *addr, int *index_used) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaba13cc1d79d843463d76f1f65ad36308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an L2 cache entry.  <a href="#gaba13cc1d79d843463d76f1f65ad36308">More...</a><br /></td></tr>
+<tr class="separator:gaba13cc1d79d843463d76f1f65ad36308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4bfae8e746535ddf1943aab374d2034"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaa4bfae8e746535ddf1943aab374d2034">opennsl_l2_cache_size_get</a> (int unit, int *size) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaa4bfae8e746535ddf1943aab374d2034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of L2 cache entries.  <a href="#gaa4bfae8e746535ddf1943aab374d2034">More...</a><br /></td></tr>
+<tr class="separator:gaa4bfae8e746535ddf1943aab374d2034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf9bc593fb78f7c7e89d3e4dfb5809e2b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#gaf9bc593fb78f7c7e89d3e4dfb5809e2b">opennsl_l2_learn_limit_get</a> (int unit, <a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *limit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaf9bc593fb78f7c7e89d3e4dfb5809e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/Get L2 addresses learn limit.  <a href="#gaf9bc593fb78f7c7e89d3e4dfb5809e2b">More...</a><br /></td></tr>
+<tr class="separator:gaf9bc593fb78f7c7e89d3e4dfb5809e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9f4bdec18827c69ffd22f33e5258b901"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga9f4bdec18827c69ffd22f33e5258b901">opennsl_l2_learn_limit_set</a> (int unit, <a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *limit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga9f4bdec18827c69ffd22f33e5258b901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/Get L2 addresses learn limit.  <a href="#ga9f4bdec18827c69ffd22f33e5258b901">More...</a><br /></td></tr>
+<tr class="separator:ga9f4bdec18827c69ffd22f33e5258b901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b1399eb02adb21f08a2d9aed8b86e3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga2b1399eb02adb21f08a2d9aed8b86e3e">opennsl_l2_learn_limit_t_init</a> (<a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *limit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga2b1399eb02adb21f08a2d9aed8b86e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an L2 learn limit structure.  <a href="#ga2b1399eb02adb21f08a2d9aed8b86e3e">More...</a><br /></td></tr>
+<tr class="separator:ga2b1399eb02adb21f08a2d9aed8b86e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8b8c76a2dd59776079dba4e8e25b681c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l2.html#ga8b8c76a2dd59776079dba4e8e25b681c">opennsl_l2_station_add</a> (int unit, int *station_id, <a class="el" href="group__l2.html#ga920409fd8a72a56c78cf377101536aa9">opennsl_l2_station_t</a> *station) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga8b8c76a2dd59776079dba4e8e25b681c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an entry to L2 Station table.  <a href="#ga8b8c76a2dd59776079dba4e8e25b681c">More...</a><br /></td></tr>
 <tr class="separator:ga8b8c76a2dd59776079dba4e8e25b681c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +242,54 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="gae3cd1c1ca0a3ac2dd35e1da6eb642737"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CACHE_BPDU&#160;&#160;&#160;0x00000010</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Packet is BPDU. </p>
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00063">63</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga3e9f39746eff312e0345103116deb13e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CACHE_CPU&#160;&#160;&#160;0x00000001</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Packet is copied to CPU. </p>
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00061">61</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga0a5165778a256e5ee047ef4d49231e56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CACHE_DISCARD&#160;&#160;&#160;0x00000002</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Packet is not switched. </p>
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00062">62</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga7125ad4054291814a7570e147f2d0ed3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -160,6 +301,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="l2_8h_source.html#l00035">35</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga6e73b9f48676e33cc4051dbdbca80b44"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CALLBACK_AGE_EVENT&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00038">38</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -177,6 +332,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga95ca5cef85fc0c6a93198e3a1cf10085"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CALLBACK_LEARN_EVENT&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00037">37</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gae7c03998330150827e94be814dd95abf"></a>
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +356,63 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00039">39</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gace8f27115df696dd50320b563a293888"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_CALLBACK_REPORT&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p>Definition at line <a class="el" href="l2_8h_source.html#l00036">36</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gac58d872b93d9e8580338a2ad046291b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_DELETE_NO_CALLBACKS&#160;&#160;&#160;0x00000004</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00136">136</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gadebcd9f7f88a8ab133574578a37db2fc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_DELETE_PENDING&#160;&#160;&#160;0x00000002</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00135">135</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga7f5bfc118407488858e193f6c156c138"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_DELETE_STATIC&#160;&#160;&#160;0x00000001</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00134">134</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -239,6 +464,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gaf9428658416d9baf54548d5a3a31bc8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L2_LEARN_LIMIT_SYSTEM&#160;&#160;&#160;0x00000001</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Limit is system wide. </p>
+
+<p>Definition at line <a class="el" href="l2X_8h_source.html#l00021">21</a> of file <a class="el" href="l2X_8h_source.html">l2X.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga5f74902685766fee4ee8fab350bb79b7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +522,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to ARP/RARP processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00273">273</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00727">727</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -297,7 +538,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to L3 processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00267">267</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00721">721</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +554,7 @@ Functions</h2></td></tr>
 
 <p>Subject packets matching this entry to L3 processing. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00270">270</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00724">724</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -329,7 +570,7 @@ Functions</h2></td></tr>
 
 <p>Use the specified Station ID. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00266">266</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00720">720</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -347,7 +588,7 @@ Functions</h2></td></tr>
 <p>Callback function used for receiving notification about insertions into and deletions from the L2 table dynamically as they occur. </p>
 <p>Valid operations are: delete, add, and report. A report with l2addr=NULL indicates a scan completion of the L2 table. </p>
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00152">152</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00462">462</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -362,6 +603,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Device-independent L2 address structure. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga90aae8c8033995dd61319d2d03957306"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structopennsl__l2__cache__addr__s.html">opennsl_l2_cache_addr_s</a>  <a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Device-independent L2 cache address structure. </p>
+
+</div>
+</div>
+<a class="anchor" id="gaa72880fb68ad0992ebf025dc8b4c99eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structopennsl__l2__learn__limit__s.html">opennsl_l2_learn_limit_s</a>  <a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>L2 learn limit structure. </p>
 
 </div>
 </div>
@@ -389,7 +658,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l2_8h_source.html#l00229">229</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
+<p>Definition at line <a class="el" href="l2_8h_source.html#l00683">683</a> of file <a class="el" href="l2_8h_source.html">l2.h</a>.</p>
 
 </div>
 </div>
@@ -486,6 +755,391 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Referenced by <a class="el" href="example__l2__firewall_8c.html#ac751294a3c5688deaf848c1e3cb2e27d">example_l2_firewall_allow_station()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga83baa4f6c6e5c02c7fc3344d5d8c3a72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_mac </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a>&#160;</td>
+          <td class="paramname"><em>mac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a MAC address. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a MAC address. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">mac</td><td>[IN] MAC address </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3077bab0b474199b8c9d6d42af1c4554"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_mac_port </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a>&#160;</td>
+          <td class="paramname"><em>mac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a>&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a MAC address and a destination module/port. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a MAC address and a destination module/port. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">mac</td><td>[IN] MAC address </td></tr>
+    <tr><td class="paramname">mod</td><td>[IN] Module ID </td></tr>
+    <tr><td class="paramname">port</td><td>[IN] Device or logical port number </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gac274aa7e31085a723a66a6c2ada0043f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_port </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a>&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a destination module/port. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 addresses associated with a destination module/port. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. For switch family II and switch family I chips, mcast L2 entries associated with the destination module/port are removed if OPENNSL_L2_DELETE_STATIC flag is used. On the other hand, for switch family III chips, mcast L2 entries associated with the destination module/port are not removed if OPENNSL_L2_DELETE_STATIC flag is used. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS. The port parameter can also be an MPLS, MiM or WLAN Gport ID.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">mod</td><td>[IN] Module ID (or -1 for local unit) </td></tr>
+    <tr><td class="paramname">port</td><td>[IN] Device or logical port number </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga03b21b6920627b90ff476ee5c7b6bff7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_trunk </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a>&#160;</td>
+          <td class="paramname"><em>tid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a trunk. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a trunk ID. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. For switch family II and switch family I chips, mcast L2 entries associated with a trunk ID are removed if OPENNSL_L2_DELETE_STATIC flag is used. Conversely, for switch family III chips, mcast L2 entries associated with a trunk ID are not removed if OPENNSL_L2_DELETE_STATIC flag is used. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">tid</td><td>[IN] Trunk ID </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gad318d4e6d575d7e4b10090ada9a3ad72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_vlan </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a VLAN. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a VLAN ID. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. For switch family II and switch family I chips, mcast L2 entries associated with a VLAN ID are removed if OPENNSL_L2_DELETE_STATIC flag is used. Conversely, for switch family III chips, mcast L2 entries associated with a VLAN ID are not removed if OPENNSL_L2_DELETE_STATIC flag is used. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vid</td><td>[IN] VLAN ID </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa9694c31ba39046f1ecb282059cfb7d7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_vlan_port </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a>&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a VLAN and a destination module/port. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a VLAN ID and a destination module/port. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. For switch family II and switch family I chips, mcast L2 entries associated with a VLAN ID and a destination module/port are removed if OPENNSL_L2_DELETE_STATIC flag is used. Conversely, for switch family III chips, mcast L2 entries associated with a VLAN ID and a destination module/port are not removed if OPENNSL_L2_DELETE_STATIC flag is used. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vid</td><td>[IN] VLAN ID </td></tr>
+    <tr><td class="paramname">mod</td><td>[IN] Module ID </td></tr>
+    <tr><td class="paramname">port</td><td>[IN] Device or logical port number </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gabe6a4cff9024f4bbc8b313ed9a8088ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_delete_by_vlan_trunk </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a>&#160;</td>
+          <td class="paramname"><em>tid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete L2 entries associated with a VLAN and a destination module/port. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete L2 entries associated with a VLAN ID and a destination trunk. Static entries are removed only if OPENNSL_L2_DELETE_STATIC flag is used and L2 aging and learning are disabled during this operation. For switch family II and switch family I chips, mcast L2 entries associated with a VLAN ID and a destination trunk are removed if OPENNSL_L2_DELETE_STATIC flag is used. Conversely, for switch family III chips, mcast L2 entries associated with a VLAN ID and a destination trunk are not removed if OPENNSL_L2_DELETE_STATIC flag is used. On switch family III devices which support an L2 pending cache (see =opennsl_port_learn_set), pending entries can be removed if the OPENNSL_L2_DELETE_PENDING flags is used. For quick deletions and optimum performance OPENNSL_L2_DELETE_NO_CALLBACKS should be used. By setting this flag, no registered callbacks will be called during L2 entry deletions. If users want to know which entries are deleted, they should register callback routines by API <a class="el" href="group__l2.html#ga182dda28f8490d91a08c81c06773ef74" title="Register/Unregister a callback routine for OPENNSL L2 subsystem. ">opennsl_l2_addr_register()</a>. If L2_MOD_FIFO is used, but the thread opennslL2MOD.x is stopped, users can not know which entries are deleted, even though they already had registered callback routines and use this API without OPENNSL_L2_DELETE_NO_CALLBACKS. .</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vid</td><td>[IN] VLAN ID </td></tr>
+    <tr><td class="paramname">tid</td><td>[IN] Trunk ID </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_L2_DELETE_STATIC for removing static entries ; OPENNSL_L2_DELETE_PENDING for removing pending entries ; OPENNSL_L2_DELETE_NO_CALLBACKS for removing entries faster without registered callbacks being called</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -647,6 +1301,55 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gafa5b0d286f2d6e32f436f811ac26f92c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_addr_unregister </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l2.html#gaf0b7efc30aff8eadc6a0a6fa3f0d089e">opennsl_l2_addr_callback_t</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register/Unregister a callback routine for OPENNSL L2 subsystem. </p>
+<dl class="section user"><dt>Description</dt><dd>Register/Unregister a callback routine that will be called whenever an entry is added into or deleted from the L2 address table. Both callback and userdata must match for register and unregister calls. If there is l2xmsg_mode=1 in file config.opennsl, the thread opennslL2MOD.x may be triggered/stopped when register/unregister a callback routine.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">callback</td><td>[IN] Callback function of type opennsl_l2_addr_callback_t </td></tr>
+    <tr><td class="paramname">userdata</td><td>[IN] Arbitrary value passed to callback along with messages</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="gadf6c9ab7e72155d6d040efb2d2c58a58"></a>
 <div class="memitem">
 <div class="memproto">
@@ -725,6 +1428,403 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga2dc2c95ef7372f798588541733dcaa16"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opennsl_l2_cache_addr_t_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *&#160;</td>
+          <td class="paramname"><em>addr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize an L2 cache address structure. </p>
+<dl class="section user"><dt>Description</dt><dd>Initialize an L2 cache address structure. All masks in the structure are cleared.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>[IN,OUT] L2 cache address to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Nothing.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4a55eeec8670184d4ca838b9690c3ded"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_delete </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear an L2 cache entry. </p>
+<dl class="section user"><dt>Description</dt><dd>Clear the L2 cache entry at the specified index.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">index</td><td>[IN] L2 cache entry index</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gacfc43afcd9abf3e17ba60a70c635c5f8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_delete_all </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear all L2 cache entries. </p>
+<dl class="section user"><dt>Description</dt><dd>Clear all L2 cache entries including the preloaded entries.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gacc577919af2a7ad08927f06d817c6f32"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *&#160;</td>
+          <td class="paramname"><em>addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get an L2 cache entry. </p>
+<dl class="section user"><dt>Description</dt><dd>Get the L2 cache entry at the specified index. For ROBO devices, the OPENNSL_L2_CACHE_BPDU is used to get the BPDU addresses on device.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">index</td><td>[IN] L2 cache entry index </td></tr>
+    <tr><td class="paramname">addr</td><td>[OUT] L2 cache address</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga126b8e8801447d4aa0a5ece60615e75a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_init </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the L2 cache. </p>
+<dl class="section user"><dt>Description</dt><dd>Clear all entries and preload a few entries to match previous generation of devices. The preloaded entries are shown in the table below.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaba13cc1d79d843463d76f1f65ad36308"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l2.html#ga90aae8c8033995dd61319d2d03957306">opennsl_l2_cache_addr_t</a> *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>index_used</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set an L2 cache entry. </p>
+<dl class="section user"><dt>Description</dt><dd>Insert an L2 cache entry at the specified index. If -1 is given then the entry used will be the first available entry if the l2 cache address mac_mask field is all ones or the last available entry if the mac_mask field has some zeros. Cache entries are matched from lowest entry to highest entry. For ROBO devices, the OPENNSL_L2_CACHE_BPDU is used to set the BPDU addresses on device and the zero BPDU address is used for the special process to indicate a BPDU address delete process. Take note of the preloaded entries as defined in.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">index</td><td>[IN] L2 cache entry number (or -1) </td></tr>
+    <tr><td class="paramname">addr</td><td>[IN] L2 cache address </td></tr>
+    <tr><td class="paramname">index_used</td><td>[OUT] l2 cache entry number actually used</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa4bfae8e746535ddf1943aab374d2034"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_cache_size_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get number of L2 cache entries. </p>
+<dl class="section user"><dt>Description</dt><dd>Get number of L2 cache entries.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">size</td><td>[OUT] Number of entries in cache</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf9bc593fb78f7c7e89d3e4dfb5809e2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_learn_limit_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *&#160;</td>
+          <td class="paramname"><em>limit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set/Get L2 addresses learn limit. </p>
+<dl class="section user"><dt>Description</dt><dd>Set/Get L2 learned address limit. Use OPENNSL_L2_LEARN_LIMIT_SYSTEM or combination of OPENNSL_L2_LEARN_LIMIT_VLAN, OPENNSL_L2_LEARN_LIMIT_PORT, and OPENNSL_L2_LEARN_LIMIT_TRUNK in flags of opennsl_l2_learn_limit_t structure to indicate whether the limit is applied to system wide, per-VLAN, per-port, or per-trunk. For devices which do not support per-VLAN learn limits, only the system wide, per-port, and per-trunk can be configured. Use flags to specify the action to be taken if learned L2 address exceeds the specified limit. OPENNSL_L2_LEARN_LIMIT_ACTION_PREFER flag indicates that system wide limit actions should be used when both system wide and a non-system wide limit is exceeded. This flag is not longer supported starting form network switch device To remove a configured learn limit, specify the appropriate flags along with a negative value for the limit field of the opennsl_l2_learn_limit_t structure. For the feature to function properly, following requirements must be fulfilled: When port moves to trunk, all MAC addresses previously learned on that port should be deleted. When port moves out of a trunk and it is last port or trunk is destroyed, all MAC addresses previously learned on that trunk should be deleted. It is recommended that all MAC addresses deletion will be done using the following sequence: a. Setting the limit on the resource to 0, to disable further learning b. Delete all associated MAC addresses by calling opennsl_l2_addr_delete_by_port or opennsl_l2_addr_delete_by_trunk.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">limit</td><td>[IN,OUT] (for _set) Pointer to L2 address learn limit info structure</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga9f4bdec18827c69ffd22f33e5258b901"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l2_learn_limit_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *&#160;</td>
+          <td class="paramname"><em>limit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set/Get L2 addresses learn limit. </p>
+<dl class="section user"><dt>Description</dt><dd>Set/Get L2 learned address limit. Use OPENNSL_L2_LEARN_LIMIT_SYSTEM or combination of OPENNSL_L2_LEARN_LIMIT_VLAN, OPENNSL_L2_LEARN_LIMIT_PORT, and OPENNSL_L2_LEARN_LIMIT_TRUNK in flags of opennsl_l2_learn_limit_t structure to indicate whether the limit is applied to system wide, per-VLAN, per-port, or per-trunk. For devices which do not support per-VLAN learn limits, only the system wide, per-port, and per-trunk can be configured. Use flags to specify the action to be taken if learned L2 address exceeds the specified limit. OPENNSL_L2_LEARN_LIMIT_ACTION_PREFER flag indicates that system wide limit actions should be used when both system wide and a non-system wide limit is exceeded. This flag is not longer supported starting form network switch device To remove a configured learn limit, specify the appropriate flags along with a negative value for the limit field of the opennsl_l2_learn_limit_t structure. For the feature to function properly, following requirements must be fulfilled: When port moves to trunk, all MAC addresses previously learned on that port should be deleted. When port moves out of a trunk and it is last port or trunk is destroyed, all MAC addresses previously learned on that trunk should be deleted. It is recommended that all MAC addresses deletion will be done using the following sequence: a. Setting the limit on the resource to 0, to disable further learning b. Delete all associated MAC addresses by calling opennsl_l2_addr_delete_by_port or opennsl_l2_addr_delete_by_trunk.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">limit</td><td>[IN] (for _set) Pointer to L2 address learn limit info structure</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga2b1399eb02adb21f08a2d9aed8b86e3e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opennsl_l2_learn_limit_t_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__l2.html#gaa72880fb68ad0992ebf025dc8b4c99eb">opennsl_l2_learn_limit_t</a> *&#160;</td>
+          <td class="paramname"><em>limit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize an L2 learn limit structure. </p>
+<dl class="section user"><dt>Description</dt><dd>Initialize an L2 learn limit structure opennsl_l2_learn_limit_t zeroing all fields.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">limit</td><td>[IN,OUT] Pointer to L2 learn limit structure to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Nothing</td><td></td></tr>
   </table>
   </dd>
 </dl>

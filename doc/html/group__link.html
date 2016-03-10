@@ -52,6 +52,9 @@ Files</h2></td></tr>
 <tr class="memitem:link_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8h.html">link.h</a></td></tr>
 <tr class="memdesc:link_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:linkX_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linkX_8h.html">linkX.h</a></td></tr>
+<tr class="memdesc:linkX_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -312,7 +315,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get or set the link scanning mode for a port. </p>
-<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does not process any link change on a port. This mode is only recommended if the application do not want to use the port (i.e. port is disabled). opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -365,7 +368,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get or set the link scanning mode for a port. </p>
-<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does not process any link change on a port. This mode is only recommended if the application do not want to use the port (i.e. port is disabled). opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -418,7 +421,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get or set the link scanning mode for a port. </p>
-<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Get or set the current link scanning mode for a port. The possible modes for a port are described in table =OPENNSL_LINKSCAN_MODE_e . When a port is set to OPENNSL_LINKSCAN_MODE_NONE, linkscan does not process any link change on a port. This mode is only recommended if the application do not want to use the port (i.e. port is disabled). opennsl_linkscan_mode_set operates on one port while opennsl_linkscan_mode_set_pbm operates on all ports specified in the port bit map. When operating on a port bit map, a failure on any one port aborts the processing of the request and the link scan mode of all the ports specified is undefined. Ports not in the port bit map are unaffected. The use of opennsl_linkscan_mode_set_pbm is not recommended.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>

@@ -76,6 +76,12 @@ typedef uint8 opennsl_ip6_t[16];
 /** opennsl_if_t */
 typedef int opennsl_if_t;
 
+/** opennsl_trill_name_t */
+typedef int opennsl_trill_name_t;
+
+/** opennsl_l4_port_t */
+typedef int opennsl_l4_port_t;
+
 /** opennsl_if_group_t */
 typedef int opennsl_if_group_t;
 
@@ -92,17 +98,33 @@ typedef uint16 opennsl_vlan_t;
 /** opennsl_ethertype_t */
 typedef uint16 opennsl_ethertype_t;
 
+/** opennsl_vpn_t */
+typedef opennsl_vlan_t opennsl_vpn_t;
+
+/** opennsl_policer_t */
+typedef int opennsl_policer_t;
+
+#define OPENNSL_VLAN_MIN        0          
+#define OPENNSL_VLAN_MAX        4095       
+#define OPENNSL_VLAN_COUNT      (OPENNSL_VLAN_MAX - OPENNSL_VLAN_MIN + 1) 
+/** opennsl_vlan_vector_t */
+typedef uint32 opennsl_vlan_vector_t[_SHR_BITDCLSIZE(OPENNSL_VLAN_COUNT)];
+
 /** opennsl_cos_t */
 typedef int opennsl_cos_t;
 
 /** opennsl_cos_queue_t */
 typedef int opennsl_cos_queue_t;
 
+#define OPENNSL_COS_COUNT       8          
 /** opennsl_module_t */
 typedef int opennsl_module_t;
 
 /** opennsl_trunk_t */
 typedef int opennsl_trunk_t;
+
+/** Split Horizon Network Group */
+typedef int opennsl_switch_network_group_t;
 
 /** 
  * GPORT (generic port) definitions.
@@ -110,6 +132,14 @@ typedef int opennsl_trunk_t;
  */
 typedef int opennsl_gport_t;
 
+#define OPENNSL_GPORT_TYPE_NONE             _SHR_GPORT_NONE 
+#define OPENNSL_GPORT_INVALID               _SHR_GPORT_INVALID 
+#define OPENNSL_GPORT_TYPE_MODPORT          _SHR_GPORT_TYPE_MODPORT 
+#define OPENNSL_GPORT_TYPE_UCAST_QUEUE_GROUP _SHR_GPORT_TYPE_UCAST_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_EGRESS_GROUP     _SHR_GPORT_TYPE_EGRESS_GROUP 
+#define OPENNSL_GPORT_TYPE_EGRESS_CHILD     _SHR_GPORT_TYPE_EGRESS_CHILD 
+#define OPENNSL_GPORT_TYPE_EGRESS_MODPORT   _SHR_GPORT_TYPE_EGRESS_MODPORT 
+#define OPENNSL_GPORT_IS_TRUNK(_gport)  _SHR_GPORT_IS_TRUNK(_gport) 
 #define OPENNSL_GPORT_MODPORT_SET(_gport, _module, _port)  \
     _SHR_GPORT_MODPORT_SET(_gport, _module, _port) 
 #define OPENNSL_GPORT_MODPORT_MODID_GET(_gport)  \
@@ -118,12 +148,18 @@ typedef int opennsl_gport_t;
 #define OPENNSL_GPORT_MODPORT_PORT_GET(_gport)  \
     (!_SHR_GPORT_IS_MODPORT(_gport) ? -1 : \
     _SHR_GPORT_MODPORT_PORT_GET(_gport)) 
+#define OPENNSL_GPORT_TRUNK_SET(_gport, _trunk_id)  \
+    _SHR_GPORT_TRUNK_SET(_gport, _trunk_id) 
+#define OPENNSL_GPORT_TRUNK_GET(_gport)  \
+    (!_SHR_GPORT_IS_TRUNK(_gport) ? OPENNSL_TRUNK_INVALID : \
+    _SHR_GPORT_TRUNK_GET(_gport)) 
 /** Multicast distribution set */
 typedef int opennsl_fabric_distribution_t;
 
 /** Failover Object */
 typedef int opennsl_failover_t;
 
+#define OPENNSL_GPORT_LOCAL_CPU _SHR_GPORT_LOCAL_CPU 
 /** opennsl_stg_t */
 typedef int opennsl_stg_t;
 
@@ -177,5 +213,6 @@ typedef struct opennsl_etag_s {
     uint16 reserved4; 
 } opennsl_etag_t;
 
+#include <opennsl/typesX.h>
 #endif /* __OPENNSL_TYPES_H__ */
 /*@}*/

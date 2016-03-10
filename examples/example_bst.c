@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@
  *               statistics of a given interface.
  *
  **********************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -447,4 +448,3 @@ int main(int argc, char *argv[])
 
   return 0;
 }
-

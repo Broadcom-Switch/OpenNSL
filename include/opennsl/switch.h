@@ -49,7 +49,10 @@ typedef enum opennsl_switch_control_e {
     opennslSwitchDhcpPktToCpu = 94,     /**< DHCP packets to CPU. */
     opennslSwitchDhcpPktDrop = 95,      /**< DHCP packets dropped. */
     opennslSwitchV4ResvdMcPktToCpu = 98, /**< IPv4 reserved MC packets to CPU. */
+    opennslSwitchDirectedMirroring = 125, /**< Enable directed mirroring mode. */
     opennslSwitchHashControl = 136,     /**< Hash Control of fields. */
+    opennslSwitchMirrorUnmarked = 141,  /**< Send mirror packets as simple
+                                           unicast. */
     opennslSwitchHashSeed0 = 147,       /**< network switch hash seeds. */
     opennslSwitchHashSeed1 = 148,       /**< For enhanced hashing algoithm. */
     opennslSwitchHashField0PreProcessEnable = 149, /**< Enable pre-processing for enhanced
@@ -82,8 +85,14 @@ typedef enum opennsl_switch_control_e {
     opennslSwitchHashIP6TcpUdpPortsEqualField1 = 168, /**< Selections for IPv6 TCP/UDP packets
                                            with source L4 port equals to
                                            destination L4 port. */
+    opennslSwitchHashL2Field0 = 169,    /**< network switch enhanced hash field. */
+    opennslSwitchHashL2Field1 = 170,    /**< Selections for L2 packets. */
     opennslSwitchECMPHashSet0Offset = 210, /**< network switch enhanced hash bits. */
     opennslSwitchECMPHashSet1Offset = 211, /**< Selections for ECMP. */
+    opennslSwitchMirrorInvalidVlanDrop = 221, /**< Mirror-to-port packets are dropped
+                                           upon invalid VLAN. */
+    opennslSwitchMirrorPktChecksEnable = 222, /**< Enable/Disable all packet checks for
+                                           mirror packets. */
     opennslSwitchL3EgressMode = 230,    /**< Enable advanced egress management. */
     opennslSwitchL3IngressMode = 232,   /**< Enable advanced Ingress-interface
                                            management. */
@@ -102,10 +111,20 @@ typedef enum opennsl_switch_control_e {
                                            state on demand. */
     opennslSwitchControlAutoSync = 244, /**< Perform a sync of the Level 2 warm
                                            boot state after every API. */
+    opennslSwitchIpmcTtl1ToCpu = 249,   /**< Copy L3 Mcast with TTL 1 to CPU. */
     opennslSwitchL3UcastTtl1ToCpu = 250, /**< Copy L3 Ucast with TTL 1 to CPU. */
     opennslSwitchBstEnable = 717,       /**< Enable BST tracking. */
     opennslSwitchBstTrackingMode = 718, /**< BST resource usage tracking mode. */
+    opennslSwitchVxlanUdpDestPortSet = 729, /**< Set UDP Destination port for VXLAN */
+    opennslSwitchVxlanEntropyEnable = 730, /**< Set UDP Source port for VXLAN Tunnel
+                                           Entropy(Value = TRUE/FALSE) */
+    opennslSwitchVxlanVnIdMissToCpu = 731, /**< Set VXLAN VN_ID lookup failure Copy
+                                           to Cpu */
+    opennslSwitchVxlanTunnelMissToCpu = 732, /**< If set, send a copy of VXLAN packet
+                                           to CPU if VXLAN Tunnel lookup fails. */
     opennslSwitchEcmpMacroFlowHashEnable = 782, /**< Enable ECMP macro-flow hashing. */
+    opennslSwitchMirrorExclusive = 912, /**< Set Mirror exclusive behaviour
+                                           between FP and Port */
 } opennsl_switch_control_t;
 
 #define OPENNSL_SWITCH_STABLE_APPLICATION   (_SHR_SWITCH_STABLE_APPLICATION) 
@@ -397,8 +416,12 @@ extern int opennsl_switch_event_unregister(
                                                           hashing. */
 #define OPENNSL_HASH_FIELD_CONFIG_CRC16CCITT 0x00000007 /**< 16-bit CRC using CCITT
                                                           polynomial. */
+#define OPENNSL_HASH_FIELD_CONFIG_CRC32LO   0x00000008 /**< Lower 16-bit of CRC32. */
+#define OPENNSL_HASH_FIELD_CONFIG_CRC32HI   0x00000009 /**< Higher 16-bit of
+                                                          CRC32. */
 #define OPENNSL_HASH_FIELD_DSTL4        0x00000020 /**< Destination L4 port. */
 #define OPENNSL_HASH_FIELD_SRCL4        0x00000040 /**< Source L4 port. */
+#define OPENNSL_HASH_FIELD_VLAN         0x00000080 /**< VLAN ID. */
 #define OPENNSL_HASH_FIELD_IP4DST_LO    0x00000100 /**< IPv4 destination address
                                                       lower 16 bits. */
 #define OPENNSL_HASH_FIELD_IP4DST_HI    0x00000200 /**< IPv4 destination address
@@ -415,6 +438,18 @@ extern int opennsl_switch_event_unregister(
                                                       address lower 16 bits. */
 #define OPENNSL_HASH_FIELD_IP6SRC_HI    0x00008000 /**< IPv6 collapsed source
                                                       address upper 16 bits. */
+#define OPENNSL_HASH_FIELD_MACDA_LO     0x00040000 /**< MAC destination address
+                                                      lower 16 bits. */
+#define OPENNSL_HASH_FIELD_MACDA_MI     0x00080000 /**< MAC destination address
+                                                      middle 16 bits. */
+#define OPENNSL_HASH_FIELD_MACDA_HI     0x00100000 /**< MAC destination address
+                                                      upper 16 bits. */
+#define OPENNSL_HASH_FIELD_MACSA_LO     0x00200000 /**< MAC source address lower
+                                                      16 bits. */
+#define OPENNSL_HASH_FIELD_MACSA_MI     0x00400000 /**< MAC source address middle
+                                                      16 bits. */
+#define OPENNSL_HASH_FIELD_MACSA_HI     0x00800000 /**< MAC source address upper
+                                                      16 bits. */
 /** packet trace lookup result enums */
 typedef enum opennsl_switch_pkt_trace_lookup_e {
     opennslSwitchPktTraceLookupCount = 20 
@@ -499,5 +534,6 @@ extern int opennsl_switch_pkt_trace_info_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/switchX.h>
 #endif /* __OPENNSL_SWITCH_H__ */
 /*@}*/

@@ -1,6 +1,17 @@
 OpenNSL
 ======
-OpenNSL 3.0.0.x Switch Specification and Software
+OpenNSL 3.1.0.x Switch Specification and Software
+
+Release Candidate Status and Support
+====================================
+This release of OpenNSL is a release candidate. It is not GA code and has not
+gone through the full QA cycle.  Serious defects may exist in this release.
+It is being provided to the community as a preview of the OpenNSL 3.1 release.
+
+Broadcom provides this release candidate package "AS IS" and grant no warranty
+and/or support. For more information, please review OpenNSL legal terms.
+
+For a GA version of OpenNSL, please use version 3.0.
 
 Overview
 ========

@@ -31,8 +31,21 @@
 #define OPENNSL_TRUNK_UNSPEC_INDEX  -1         /**< Let software set DLF/MC/IPMC. */
 #define OPENNSL_TRUNK_PSC_SRCDSTMAC 3          /**< Source+dest MAC address. */
 #define OPENNSL_TRUNK_PSC_SRCDSTIP  6          /**< Source+dest IP address. */
-#define OPENNSL_TRUNK_FLAG_WITH_ID  0x0010     /**< Use the trunk ID supplied by
-                                                  user. */
+#define OPENNSL_TRUNK_PSC_PORTFLOW  9          /**< Enhanced hashing. */
+#define OPENNSL_TRUNK_FLAG_FAILOVER_NEXT    0x0001     /**< Failover port defaults
+                                                          to the next port in
+                                                          the trunk port list. */
+#define OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL 0x0002     /**< Failover port defaults
+                                                          to the next local port
+                                                          in the trunk port
+                                                          list, if any. */
+#define OPENNSL_TRUNK_FLAG_FAILOVER         OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL /**< Enable trunk failover
+                                                          support (deprecated). */
+#define OPENNSL_TRUNK_FLAG_WITH_ID          0x0010     /**< Use the trunk ID
+                                                          supplied by user. */
+#define OPENNSL_TRUNK_FLAG_IPMC_CLEAVE      0x0020     /**< Disable trunk
+                                                          resolution for IPMC
+                                                          packets in hardware. */
 #define OPENNSL_TRUNK_MEMBER_EGRESS_DISABLE 0x0002     /**< Member will not be a
                                                           part of the
                                                           distributor members to
@@ -303,6 +316,78 @@ extern int opennsl_trunk_find(
     opennsl_trunk_t *tid) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Assign the failover port list for a specific trunk port.
+ *
+ *\description Configure the set of failover ports for a specific port in the
+ *          indicated trunk group.  For fabric trunks, all of the ports in the
+ *          list must be HiGig ports on the local device.  For non-fabric
+ *          trunks, the failover ports may be on remote devices.  If a flag is
+ *          provided, then the count and fail_to_array argument are ignored;
+ *          the failover port list is constructed from the trunk port
+ *          membership according to the selected failover description.  (If a
+ *          OPENNSL_TRUNK_FLAG_FAILOVER_XXX flag is provided to
+ *          =opennsl_trunk_set in the trunk_info structure, all of the local
+ *          ports in the trunk will be configured for failover in the selected
+ *          method.) If the flags argument is zero, then the port list from
+ *          count and fail_to_array is used.  This arbitrary list may include
+ *          ports outside of the trunk.  A count of zero indicates that
+ *          failover should be disabled on failport.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    tid [IN]   Trunk ID.
+ *\param    failport [IN]   Port in trunk for which to specify failover port list.
+ *\param    psc [IN]   Port selection criteria for failover port list.
+ *\param    flags [IN]   OPENNSL_TRUNK_FLAG_FAILOVER_xxx.
+ *\param    count [IN]   Number of ports in failover port list.
+ *\param    fail_to_array [IN]   Failover port list.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_trunk_failover_set(
+    int unit, 
+    opennsl_trunk_t tid, 
+    opennsl_gport_t failport, 
+    int psc, 
+    uint32 flags, 
+    int count, 
+    opennsl_gport_t *fail_to_array) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Retrieve the failover port list for a specific trunk port.
+ *
+ *\description Retrieve the configured set of failover ports for a specific port
+ *          in the indicated trunk group. If a flag was provided to configure
+ *          the failover list, then only the flag and psc return values are
+ *          valid.  If the returned flags argument is zero, then fail_to_array
+ *          is filled with the port list up to a maximum list length of
+ *          array_size.  array_count contains the actual length of the
+ *          returned list.  If array_count is zero in addition to flags, trunk
+ *          failover is not enabled on failport.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    tid [IN]   Trunk ID.
+ *\param    failport [IN]   Port in trunk for which to retrieve failover port
+ *          list.
+ *\param    psc [OUT]   Port selection criteria for failover port list.
+ *\param    flags [OUT]   OPENNSL_TRUNK_FLAG_FAILOVER_xxx.
+ *\param    array_size [IN]   Maximum number of ports in provided failover port
+ *          list.
+ *\param    fail_to_array [OUT]   Failover port list.
+ *\param    array_count [OUT]   Number of ports in returned failover port list.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_trunk_failover_get(
+    int unit, 
+    opennsl_trunk_t tid, 
+    opennsl_gport_t failport, 
+    int *psc, 
+    uint32 *flags, 
+    int array_size, 
+    opennsl_gport_t *fail_to_array, 
+    int *array_count) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Add a member to a trunk group.
  *
  *\description This API is used to add a member to a trunk group. The specified
@@ -341,5 +426,6 @@ extern int opennsl_trunk_member_delete(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/trunkX.h>
 #endif /* __OPENNSL_TRUNK_H__ */
 /*@}*/

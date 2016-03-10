@@ -55,8 +55,10 @@ typedef struct opennsl_knet_netif_s {
 } opennsl_knet_netif_t;
 
 #define OPENNSL_KNET_FILTER_T_RX_PKT    1          /**< Rx packet filter. */
-#define OPENNSL_KNET_DEST_T_NETIF   1          /**< Send packet to virtual network
-                                                  interface. */
+#define OPENNSL_KNET_DEST_T_NETIF           1          /**< Send packet to virtual
+                                                          network interface. */
+#define OPENNSL_KNET_DEST_T_OPENNSL_RX_API  2          /**< Send packet to OPENNSL
+                                                          Rx API. */
 #define OPENNSL_KNET_FILTER_F_STRIP_TAG 0x00000001 /**< Strip VLAN tag from
                                                       packets sent to vitual
                                                       network interfaces. */
@@ -303,5 +305,6 @@ extern int opennsl_knet_filter_traverse(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/knetX.h>
 #endif /* __OPENNSL_KNET_H__ */
 /*@}*/

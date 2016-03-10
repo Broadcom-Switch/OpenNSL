@@ -137,6 +137,71 @@ extern int opennsl_vlan_port_remove(
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Add a virtual or physical port to the specified VLAN.
+ *
+ *\description Adds the given port to the VLAN. For network switch and network
+ *          switch, the port can be either a WLAN virtual port or a regular
+ *          physical port. For network switch, the port can be a layer 2
+ *          logical port or a regular physical port. WLAN virtual ports or
+ *          layer 2 logical ports that are members of a VLAN will receive
+ *          broadcast, multicast and unknown unicast packets that are flooded
+ *          to the VLAN. For applications that require different recipients
+ *          for broadcast, unknown multicast and unknown unicast, the
+ *          different multicast groups can be set using the
+ *          =opennsl_vlan_control_vlan_set API.
+ *          Virtual Port(VP) can be added to the vlan through this API to
+ *          obtain the vlan  membership. Due to the large amount of virtual
+ *          port number, unlike physical port,  switch hardware can not uses a
+ *          port bitmap in the vlan table entry to represent  the vlan
+ *          membership. Instead the hardware uses two different methods: VP
+ *          group  and hash table to provide VP vlan membership. The hash
+ *          table method is only  available on opennsl56850 and later switch
+ *          devices.
+ *          The VP group referring as indirect vlan membership method is to
+ *          associate a group of virtual port with a VP group and then the VP
+ *          group establishes the membership  with the vlan. The hardware uses
+ *          the VLAN_MEMBERSHIP_PROFILE field in the SOURCE_VP table to
+ *          associate a virtual port with the VP group, and use the
+ *          VP_GROUP_BITMAP  field in the vlan table to establish the vlan
+ *          membership with the VP group.   This method works well when a
+ *          group of VPs belong to the same number of vlans such as in the
+ *          following case:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN ID
+ *\param    port [IN]   Virtual or physical port to be added to the VLAN
+ *\param    flags [IN]   Control flags. See =OPENNSL_VLAN_PORT_t
+ *
+ *\retval    OPENNSL_E_NOT_FOUND VLAN ID not in use
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_gport_add(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_gport_t port, 
+    int flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Remove a virtual or physical port from the specified VLAN.
+ *
+ *\description Removes the given port to the VLAN. For network switch and network
+ *          switch, the port can be either a WLAN virtual port or a regular
+ *          physical port. For network switch, the port can be a layer 2
+ *          logical port or a regular physical port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN ID
+ *\param    port [IN]   Virtual or physical port to be removed from the VLAN
+ *
+ *\retval    OPENNSL_E_NOT_FOUND VLAN ID not in use
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_gport_delete(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_gport_t port) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Removes all virtual and physical port from the specified VLAN.
  *
  *\description Removes all virtual and physical ports from the specified VLAN.
@@ -226,6 +291,42 @@ extern int opennsl_vlan_default_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/** opennsl_vlan_control_t */
+typedef enum opennsl_vlan_control_e {
+    opennslVlanDropUnknown = 0,         /**< Drop unknown/FFF VLAN pkts or send to
+                                           CPU. */
+    opennslVlanShared = 3,              /**< Shared vs. Independent VLAN Learning. */
+    opennslVlanSharedID = 4,            /**< Shared Learning VLAN ID. */
+    opennslVlanIgnorePktTag = 6,        /**< Ignore Packet VLAN tag. Treat packet
+                                           as untagged. */
+    opennslVlanMemberMismatchToCpu = 21 /**< Packets' incoming port is not the
+                                           member of the VLAN are sent to CPU
+                                           when set to 1. */
+} opennsl_vlan_control_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/get miscellaneous VLAN-specific chip options.
+ *
+ *\description Sets/gets miscellaneous VLAN-specific chip options. The options
+ *          are from the VLAN Control selection =vlan_ctrl.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    type [IN]   A value from the opennsl_vlan_control_t enumerated list
+ *\param    arg [IN]   (for _set) A parameter whose meaning is  dependent on
+ *          'type'
+ *
+ *\retval    OPENNSL_E_UNAVAIL Feature not supported.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_control_set(
+    int unit, 
+    opennsl_vlan_control_t type, 
+    int arg) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /** opennsl_vlan_control_port_t */
 typedef enum opennsl_vlan_control_port_e {
     opennslVlanTranslateIngressEnable = 2, 
@@ -264,5 +365,6 @@ extern int opennsl_vlan_control_port_set(
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#include <opennsl/vlanX.h>
 #endif /* __OPENNSL_VLAN_H__ */
 /*@}*/

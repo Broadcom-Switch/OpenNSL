@@ -60,6 +60,7 @@
 <p><pre class="fragment"></pre>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="cosqX_8h_source.html">opennsl/cosqX.h</a>&gt;</code><br />
 </div>
 <p><a href="cosq_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -137,12 +138,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a16395745326578895d5d025000030a07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cosq_8h.html#a16395745326578895d5d025000030a07">opennsl_cosq_bst_stat_sync</a> (int unit, <a class="el" href="cosq_8h.html#a24cdfbab33b9fe855b3887ae58ee05b8">opennsl_bst_stat_id_t</a> bid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:a16395745326578895d5d025000030a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sync the HW stats value to SW copy for all or given BST resource.  <a href="#a16395745326578895d5d025000030a07">More...</a><br /></td></tr>
 <tr class="separator:a16395745326578895d5d025000030a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40e78d195e1c177dcc34afc1ea216cf0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cosq_8h.html#a40e78d195e1c177dcc34afc1ea216cf0">opennsl_cosq_mapping_get</a> (int unit, <a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a> priority, <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> *cosq) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:a40e78d195e1c177dcc34afc1ea216cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#a40e78d195e1c177dcc34afc1ea216cf0">More...</a><br /></td></tr>
-<tr class="separator:a40e78d195e1c177dcc34afc1ea216cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42d1bede94eae15cd10c8903dba1f521"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cosq_8h.html#a42d1bede94eae15cd10c8903dba1f521">opennsl_cosq_mapping_set</a> (int unit, <a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a> priority, <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> cosq) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:a42d1bede94eae15cd10c8903dba1f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#a42d1bede94eae15cd10c8903dba1f521">More...</a><br /></td></tr>
-<tr class="separator:a42d1bede94eae15cd10c8903dba1f521"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment"></pre> 
@@ -241,7 +236,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="cosq_8h_source.html#l00108">108</a> of file <a class="el" href="cosq_8h_source.html">cosq.h</a>.</p>
+<p>Definition at line <a class="el" href="cosq_8h_source.html#l00070">70</a> of file <a class="el" href="cosq_8h_source.html">cosq.h</a>.</p>
 
 </div>
 </div>
@@ -628,108 +623,6 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a40e78d195e1c177dcc34afc1ea216cf0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int opennsl_cosq_mapping_get </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>unit</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a>&#160;</td>
-          <td class="paramname"><em>priority</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> *&#160;</td>
-          <td class="paramname"><em>cosq</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get or set the mapping from internal priority to CoS queue. </p>
-<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping from the internal priority value to Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
-    <tr><td class="paramname">priority</td><td>[IN] internal priority to map </td></tr>
-    <tr><td class="paramname">cosq</td><td>[OUT] Cos queue to which to map the chosen priority</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">OPENNSL_E_NONE</td><td></td></tr>
-    <tr><td class="paramname">OPENNSL_E_PARAM</td><td>Invalid priority, or device not configured for the number of CoS queues specified. </td></tr>
-    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a42d1bede94eae15cd10c8903dba1f521"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int opennsl_cosq_mapping_set </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>unit</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a>&#160;</td>
-          <td class="paramname"><em>priority</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a>&#160;</td>
-          <td class="paramname"><em>cosq</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get or set the mapping from internal priority to CoS queue. </p>
-<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping from the internal priority value to Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
-    <tr><td class="paramname">priority</td><td>[IN] internal priority to map </td></tr>
-    <tr><td class="paramname">cosq</td><td>[IN] Cos queue to which to map the chosen priority</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">OPENNSL_E_NONE</td><td></td></tr>
-    <tr><td class="paramname">OPENNSL_E_PARAM</td><td>Invalid priority, or device not configured for the number of CoS queues specified. </td></tr>
-    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

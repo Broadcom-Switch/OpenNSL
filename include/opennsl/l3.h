@@ -45,6 +45,8 @@
 #define OPENNSL_L3_TGID                 (1 << 9)   /**< Port belongs to trunk. */
 #define OPENNSL_L3_RPE                  (1 << 10)  /**< Pick up new priority
                                                       (COS). */
+#define OPENNSL_L3_IPMC                 (1 << 11)  /**< Set IPMC for real IPMC
+                                                      entry. */
 #define OPENNSL_L3_L2TOCPU              (1 << 12)  /**< Packet to CPU unrouted,
                                                       XGS12: Set IPMC for UC
                                                       address. */
@@ -63,6 +65,7 @@
 #define OPENNSL_L3_ECMP_RH_REPLACE      OPENNSL_L3_DEREFERENCED_NEXTHOP /**< Replace ECMP member
                                                       without RH flowset table
                                                       shuffle. */
+#define OPENNSL_L3_VXLAN_ONLY           (1 << 31)  /**< Specific for VXLAN Nexthop */
 #define OPENNSL_L3_INGRESS_REPLACE  (1 << 1)   /**< Replace existing L3 Ingress
                                                   entry. */
 /** 
@@ -78,6 +81,7 @@ typedef struct opennsl_l3_intf_s {
     opennsl_vlan_t l3a_vid;             /**< VLAN ID. */
     int l3a_ttl;                        /**< TTL threshold. */
     int l3a_mtu;                        /**< MTU. */
+    int l3a_ip4_options_profile_id;     /**< IP4 Options handling Profile ID */
 } opennsl_l3_intf_t;
 
 /** 
@@ -1202,24 +1206,6 @@ typedef enum opennsl_l3_stat_e {
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
- *\brief Attach counters entries to the given L3 Egress interface.
- *
- *\description This API will attach counters entries to the given L3 Egress
- *          interface.
- *          (Ref: =FLEXIBLE_COUNTER_s).
- *
- *\param    unit [IN]   Unit number.
- *\param    intf_id [IN]   Interface ID of a egress L3 object
- *\param    stat_counter_id [IN]   Stat Counter ID
- *
- *\retval    OPENNSL_E_xxx
- ******************************************************************************/
-extern int opennsl_l3_egress_stat_attach(
-    int unit, 
-    opennsl_if_t intf_id, 
-    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
-
-/***************************************************************************//** 
  *\brief Get the specified counter statistic for a L3 egress interface.
  *
  *\description This API will retrieve set of counter statistic values for the
@@ -1243,24 +1229,6 @@ extern int opennsl_l3_egress_stat_counter_get(
     uint32 num_entries, 
     uint32 *counter_indexes, 
     opennsl_stat_value_t *counter_values) LIB_DLL_EXPORTED ;
-
-/***************************************************************************//** 
- *\brief Attach counters entries to the given L3 ingress interface.
- *
- *\description This API will attach counters entries to the given L3 ingress
- *          Interface.
- *          (Ref: =FLEXIBLE_COUNTER_s).
- *
- *\param    unit [IN]   Unit number.
- *\param    intf_id [IN]   Interface ID of a L3 ingress object or a valid VLAN
- *\param    stat_counter_id [IN]   Stat Counter ID
- *
- *\retval    OPENNSL_E_xxx
- ******************************************************************************/
-extern int opennsl_l3_ingress_stat_attach(
-    int unit, 
-    opennsl_if_t intf_id, 
-    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Get counter statistic values for a l3 interface object.
@@ -1289,7 +1257,12 @@ extern int opennsl_l3_ingress_stat_counter_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
 #endif /* defined(INCLUDE_L3) */
 
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#include <opennsl/l3X.h>
 #endif /* __OPENNSL_L3_H__ */
 /*@}*/
