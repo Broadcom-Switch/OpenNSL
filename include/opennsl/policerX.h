@@ -99,5 +99,21 @@ extern int opennsl_policer_set(
     opennsl_policer_t policer_id, 
     opennsl_policer_config_t *pol_cfg) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Get the config settings for a policer entry.
+ *
+ *\description Get the config settings for a policer entry.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    policer_id [IN]   Policer ID.
+ *\param    pol_cfg [OUT]   Policer configuration.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_policer_get(
+    int unit, 
+    opennsl_policer_t policer_id, 
+    opennsl_policer_config_t *pol_cfg) LIB_DLL_EXPORTED ;
+
 #endif /* __OPENNSL_POLICERX_H__ */
 /*@}*/

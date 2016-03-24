@@ -29,9 +29,6 @@
 #include <opennsl/port.h>
 #include <opennsl/rx.h>
 
-/** Opaque handle to a field range. */
-typedef uint32 opennsl_field_range_t;
-
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */

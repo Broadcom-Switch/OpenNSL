@@ -104,6 +104,9 @@ typedef opennsl_vlan_t opennsl_vpn_t;
 /** opennsl_policer_t */
 typedef int opennsl_policer_t;
 
+/** opennsl_tunnel_id_t */
+typedef uint32 opennsl_tunnel_id_t;
+
 #define OPENNSL_VLAN_MIN        0          
 #define OPENNSL_VLAN_MAX        4095       
 #define OPENNSL_VLAN_COUNT      (OPENNSL_VLAN_MAX - OPENNSL_VLAN_MIN + 1) 
@@ -117,6 +120,20 @@ typedef int opennsl_cos_t;
 typedef int opennsl_cos_queue_t;
 
 #define OPENNSL_COS_COUNT       8          
+#define OPENNSL_PRIO_MIN        0          
+#define OPENNSL_PRIO_MAX        7          
+#define OPENNSL_PRIO_RED        0x100      
+#define OPENNSL_PRIO_YELLOW     0x200      
+#define OPENNSL_PRIO_DROP_FIRST OPENNSL_PRIO_RED 
+#define OPENNSL_PRIO_MASK       0xff       
+#define OPENNSL_PRIO_GREEN      0x400      
+#define OPENNSL_PRIO_DROP_LAST  0x800      
+#define OPENNSL_PRIO_PRESERVE   OPENNSL_PRIO_DROP_LAST 
+#define OPENNSL_PRIO_STAG       0x100      
+#define OPENNSL_PRIO_CTAG       0x200      
+#define OPENNSL_DSCP_ECN        0x100      
+#define OPENNSL_PRIO_BLACK      0x1000     
+#define OPENNSL_PRIO_SECONDARY  0x2000     
 /** opennsl_module_t */
 typedef int opennsl_module_t;
 
@@ -134,12 +151,26 @@ typedef int opennsl_gport_t;
 
 #define OPENNSL_GPORT_TYPE_NONE             _SHR_GPORT_NONE 
 #define OPENNSL_GPORT_INVALID               _SHR_GPORT_INVALID 
+#define OPENNSL_GPORT_TYPE_LOCAL            _SHR_GPORT_TYPE_LOCAL 
 #define OPENNSL_GPORT_TYPE_MODPORT          _SHR_GPORT_TYPE_MODPORT 
 #define OPENNSL_GPORT_TYPE_UCAST_QUEUE_GROUP _SHR_GPORT_TYPE_UCAST_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_DESTMOD_QUEUE_GROUP _SHR_GPORT_TYPE_DESTMOD_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_MCAST            _SHR_GPORT_TYPE_MCAST 
+#define OPENNSL_GPORT_TYPE_MCAST_QUEUE_GROUP _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_SCHEDULER        _SHR_GPORT_TYPE_SCHEDULER 
+#define OPENNSL_GPORT_TYPE_CHILD            _SHR_GPORT_TYPE_CHILD 
 #define OPENNSL_GPORT_TYPE_EGRESS_GROUP     _SHR_GPORT_TYPE_EGRESS_GROUP 
 #define OPENNSL_GPORT_TYPE_EGRESS_CHILD     _SHR_GPORT_TYPE_EGRESS_CHILD 
 #define OPENNSL_GPORT_TYPE_EGRESS_MODPORT   _SHR_GPORT_TYPE_EGRESS_MODPORT 
-#define OPENNSL_GPORT_IS_TRUNK(_gport)  _SHR_GPORT_IS_TRUNK(_gport) 
+#define OPENNSL_GPORT_TYPE_UCAST_SUBSCRIBER_QUEUE_GROUP _SHR_GPORT_TYPE_UCAST_SUBSCRIBER_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_MCAST_SUBSCRIBER_QUEUE_GROUP _SHR_GPORT_TYPE_MCAST_SUBSCRIBER_QUEUE_GROUP 
+#define OPENNSL_GPORT_TYPE_COSQ             _SHR_GPORT_TYPE_COSQ 
+#define OPENNSL_GPORT_TYPE_PROFILE          _SHR_GPORT_TYPE_PROFILE 
+#define OPENNSL_GPORT_IS_TRUNK(_gport)      _SHR_GPORT_IS_TRUNK(_gport) 
+#define OPENNSL_GPORT_IS_UCAST_QUEUE_GROUP(_gport)  _SHR_GPORT_IS_UCAST_QUEUE_GROUP(_gport) 
+#define OPENNSL_GPORT_IS_MCAST_QUEUE_GROUP(_gport)  _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) 
+#define OPENNSL_GPORT_IS_SCHEDULER(_gport)  _SHR_GPORT_IS_SCHEDULER(_gport) 
+#define OPENNSL_GPORT_IS_COSQ(_gport)       _SHR_GPORT_IS_COSQ(_gport) 
 #define OPENNSL_GPORT_MODPORT_SET(_gport, _module, _port)  \
     _SHR_GPORT_MODPORT_SET(_gport, _module, _port) 
 #define OPENNSL_GPORT_MODPORT_MODID_GET(_gport)  \
@@ -153,6 +184,25 @@ typedef int opennsl_gport_t;
 #define OPENNSL_GPORT_TRUNK_GET(_gport)  \
     (!_SHR_GPORT_IS_TRUNK(_gport) ? OPENNSL_TRUNK_INVALID : \
     _SHR_GPORT_TRUNK_GET(_gport)) 
+#define OPENNSL_GPORT_UCAST_QUEUE_GROUP_SET(_gport, _qid)  \
+         _SHR_GPORT_UCAST_QUEUE_GROUP_SET(_gport, _qid) 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_SET(_gport, _qid)  \
+         _SHR_GPORT_MCAST_QUEUE_GROUP_SET(_gport, _qid)
+ 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_GET(_gport)  \
+            (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 :  \
+        _SHR_GPORT_MCAST_QUEUE_GROUP_GET(_gport))
+ 
+#define OPENNSL_GPORT_SCHEDULER_SET(_gport, _scheduler_id)  \
+    _SHR_GPORT_SCHEDULER_SET(_gport, _scheduler_id) 
+#define OPENNSL_GPORT_SCHEDULER_NODE_SET(_gport, _scheduler_level, _scheduler_id)  \
+    _SHR_GPORT_SCHEDULER_NODE_SET(_gport, _scheduler_level,_scheduler_id) 
+#define OPENNSL_GPORT_SCHEDULER_GET(_gport)  \
+    _SHR_GPORT_SCHEDULER_GET(_gport) 
+#define OPENNSL_GPORT_SCHEDULER_CORE_GET(_gport)  \
+    _SHR_GPORT_SCHEDULER_CORE_GET(_gport) 
+#define OPENNSL_GPORT_SCHEDULER_CORE_SET(_gport, _scheduler_id, _core_id)  \
+    _SHR_GPORT_SCHEDULER_CORE_SET(_gport, _scheduler_id, _core_id) 
 /** Multicast distribution set */
 typedef int opennsl_fabric_distribution_t;
 
@@ -162,6 +212,27 @@ typedef int opennsl_failover_t;
 #define OPENNSL_GPORT_LOCAL_CPU _SHR_GPORT_LOCAL_CPU 
 /** opennsl_stg_t */
 typedef int opennsl_stg_t;
+
+/** opennsl_color_t */
+typedef enum opennsl_color_e {
+    opennslColorGreen = _SHR_COLOR_GREEN, 
+    opennslColorYellow = _SHR_COLOR_YELLOW, 
+    opennslColorRed = _SHR_COLOR_RED,   
+    opennslColorDropFirst = opennslColorRed, 
+    opennslColorBlack = _SHR_COLOR_BLACK, 
+    opennslColorPreserve = _SHR_COLOR_PRESERVE, 
+    opennslColorCount = _SHR_COLOR_COUNT 
+} opennsl_color_t;
+
+typedef struct opennsl_priority_mapping_s {
+    int internal_pri;               /**< Internal priority */
+    opennsl_color_t color;          /**< (internal) color or drop precedence */
+    int remark_internal_pri;        /**< (internal) remarking priority */
+    opennsl_color_t remark_color;   /**< (internal) remarking color or drop
+                                       precedence */
+    int policer_offset;             /**< Offset based on pri/cos to fetch a
+                                       policer */
+} opennsl_priority_mapping_t;
 
 #if defined(LE_HOST)
 #else

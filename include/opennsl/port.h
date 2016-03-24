@@ -218,6 +218,109 @@ typedef _shr_port_mode_t opennsl_port_abil_t;
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Initialize the port subsystem.
+ *
+ *\description In initializes the port API subsystem. Initialization includes
+ *          probing the types of ports on the unit, as well as any external
+ *          phys. Internally PHY drivers are attached for the known found
+ *          devices.  The initial configuration of the port and PHY state can
+ *          be controlled through driver run-time configuration properties
+ *          (see opennsl_port_settings_init).
+ *          All port specific operating modes are placed in a known good
+ *          state. Port initialization performs the following actions, but not
+ *          all actions are supported on all chips:.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_init(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Initialize the port subsystem without affecting the current state of
+ *       stack ports.
+ *
+ *\description Clear the current port subsystem state for the specified device,
+ *          without changing the state of stack link ports.  This function
+ *          used in conjunction with the corresponding opennsl_xxx_clear APIs
+ *          in other modules can be used to re-initialize a unit without
+ *          causing a link status change on known stack ports.  This API can
+ *          be used in conjunction with the Broadcom Stacking software to
+ *          reset a unit into a known state after it has joined an existing
+ *          stack.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_port_clear(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Probe the port to determine the proper MAC and PHY drivers.
+ *
+ *\description Under normal conditions this routine should not be called.
+ *          =opennsl_port_init performs this function during initialization.
+ *          When used in conjunction with =opennsl_port_detach, systems that
+ *          supports adding and removing external PHY devices must use this
+ *          routine to probe and attached newly added PHYs. On successful
+ *          probe, the port subsystem installs internal drivers for the PHYs
+ *          allowing the rest of the configuration to be completed using the
+ *          opennsl_port_xxx APIs.
+ *          Calls made to the OPENNSL API on ports that have not been
+ *          successfully probed are undefined and may have catastrophic
+ *          results.
+ *          All port state is undefined after an attach, and should be
+ *          explicitly programmed.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    pbmp [IN]   Port bit map indicating the ports to probe
+ *\param    okay_pbmp [OUT]   Return value indicating the ports successfully
+ *          probed
+ *
+ *\retval    OPENNSL_E_NONE All ports successfully probed. The value okay_pbmp
+ *          contains a map of ports that may be enabled.
+ *\retval    OPENNSL_E_INIT The Port module not initialized. See .
+ *\retval    OPENNSL_E_XXX Failed to probe ports, the contents of okay_pbmp are
+ *          undefined.
+ ******************************************************************************/
+extern int opennsl_port_probe(
+    int unit, 
+    opennsl_pbmp_t pbmp, 
+    opennsl_pbmp_t *okay_pbmp) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Detach ports from the OPENNSL API.
+ *
+ *\description Detach a port from the port subsystem, configuring it such that
+ *          the link state and other configuration routines behave as if the
+ *          link is permanently down.
+ *          This routine may be used to allow hot swapping of external PHY
+ *          devices. If the external PHY is being swapped, the port must be
+ *          detached to ensure OPENNSL API operations that query or change
+ *          port state operate properly. When a new external PHY is installed,
+ *          the port must be probed using =opennsl_port_probe to query the
+ *          device and install the correct internal drivers for the device.
+ *          It is the responsibility of the application to make the necessary
+ *          changes to all other configuration settings  such as VLANS,
+ *          multicast groups, and trunk configuration.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    pbmp [IN]   Port bit map of ports to be detached
+ *\param    detached [OUT]   Port bit map of ports successfully detached.
+ *
+ *\retval    OPENNSL_E_OK Port successfully detached.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Port detach failed, considered a catastrophic error.
+ ******************************************************************************/
+extern int opennsl_port_detach(
+    int unit, 
+    opennsl_pbmp_t pbmp, 
+    opennsl_pbmp_t *detached) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Retrieved the port configuration for the specified device.
  *
  *\description opennsl_port_config_get returns all known ports configured on the
@@ -297,6 +400,20 @@ extern int opennsl_port_enable_get(
     int *enable) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    ability_mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_advert_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_abil_t ability_mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Set or retrieve auto-negotiation abilities for a port.
  *
  *\description Set or retrieve the current auto-negotiation abilities for the
@@ -325,6 +442,20 @@ extern int opennsl_port_ability_advert_set(
     opennsl_port_ability_t *ability_mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    ability_mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_advert_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_abil_t *ability_mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Set or retrieve auto-negotiation abilities for a port.
  *
  *\description Set or retrieve the current auto-negotiation abilities for the
@@ -351,6 +482,52 @@ extern int opennsl_port_ability_advert_get(
     int unit, 
     opennsl_port_t port, 
     opennsl_port_ability_t *ability_mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    ability_mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_advert_remote_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_abil_t *ability_mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Retrieve the valid abilities of a remote port.
+ *
+ *\description Retrieve the abilities of the specified remote port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Physical or logical port to query or set information on.
+ *\param    ability_mask [OUT]
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_XXX Operation failed, the return value local_ability_mask is
+ *          undefined.
+ ******************************************************************************/
+extern int opennsl_port_ability_remote_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_ability_t *ability_mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    local_ability_mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_ability_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_abil_t *local_ability_mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Retrieve the valid abilities of a local port.
@@ -451,9 +628,102 @@ extern int opennsl_port_untagged_vlan_get(
     opennsl_port_t port, 
     opennsl_vlan_t *vid_ptr) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Get or set the default priority for packets that ingress untagged.
+ *
+ *\description All packets that ingress a port untagged are treated as if they
+ *          were tagged with the value specified by
+ *          opennsl_port_untagged_priority_set. This priority is used
+ *          regardless of any ARL entry match.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port number or logical device
+ *\param    priority [IN]   Priority to assign to packets that ingress the port
+ *          untagged. A negative value here has special meaning to certain SoC
+ *          devices.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL The specified port cannot have an untagged priority.
+ *\retval    OPENNSL_E_PARAM Invalid port or priority.
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_port_untagged_priority_set(
+    int unit, 
+    opennsl_port_t port, 
+    int priority) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the default priority for packets that ingress untagged.
+ *
+ *\description All packets that ingress a port untagged are treated as if they
+ *          were tagged with the value specified by
+ *          opennsl_port_untagged_priority_set. This priority is used
+ *          regardless of any ARL entry match.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port number or logical device
+ *\param    priority [OUT]   Priority to assign to packets that ingress the port
+ *          untagged. A negative value here has special meaning to certain SoC
+ *          devices.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL The specified port cannot have an untagged priority.
+ *\retval    OPENNSL_E_PARAM Invalid port or priority.
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_port_untagged_priority_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *priority) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_PORT_DSCP_MAP_NONE          0          /**< Disable DSCP mapping */
+#define OPENNSL_PORT_DSCP_MAP_ZERO          1          /**< Map only if incoming
+                                                          DSCP = 0. */
+#define OPENNSL_PORT_DSCP_MAP_ALL           2          /**< Map all. */
+#define OPENNSL_PORT_DSCP_MAP_UNTAGGED_ONLY 3          /**< Map only when packet
+                                                          is untagged. */
+#define OPENNSL_PORT_DSCP_MAP_DEFAULT       4          /**< Map according to
+                                                          default mapping,Not
+                                                          looking at PCP or TOS. */
 #ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Control mapping of Differentiated Services Code Points (DSCP).
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    mode [IN]   DSCP map mode.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Invalid mapping mode
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_dscp_map_mode_set(
+    int unit, 
+    opennsl_port_t port, 
+    int mode) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Control mapping of Differentiated Services Code Points (DSCP).
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    mode [OUT]   DSCP map mode.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Invalid mapping mode
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_dscp_map_mode_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *mode) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Control mapping of Differentiated Services Code Points (DSCP).
@@ -562,6 +832,98 @@ extern int opennsl_port_dscp_map_get(
     int srccp, 
     int *mapcp, 
     int *prio) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the current linkscan mode for the specified port.
+ *
+ *\description Link scanning is performed by the linkscan task ( =linkscan). For
+ *          the OPENNSL interface, these functions are equivalent to functions
+ *          =opennsl_linkscan_mode_set and =opennsl_linkscan_mode_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    linkscan [IN]   Linkscan mode, see table =OPENNSL_LINKSCAN_MODE_e
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Invalid linkscan mode specified
+ *\retval    OPENNSL_E_UNAVAIL Requested operating mode is not supported.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_linkscan_set(
+    int unit, 
+    opennsl_port_t port, 
+    int linkscan) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the current linkscan mode for the specified port.
+ *
+ *\description Link scanning is performed by the linkscan task ( =linkscan). For
+ *          the OPENNSL interface, these functions are equivalent to functions
+ *          =opennsl_linkscan_mode_set and =opennsl_linkscan_mode_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    linkscan [OUT]   Linkscan mode, see table =OPENNSL_LINKSCAN_MODE_e
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_PARAM Invalid linkscan mode specified
+ *\retval    OPENNSL_E_UNAVAIL Requested operating mode is not supported.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_linkscan_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *linkscan) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure or retrieve the current auto-negotiation settings for a port,
+ *       or restart auto-negotiation if already enabled.
+ *
+ *\description Enable, disable, or recover the current auto-negotiation state for
+ *          a port. If auto-negotiation is already enabled, re-enabling it
+ *          will restart auto-negotiation.
+ *          Before enabling auto-negotiation, the desired advertised modes
+ *          must be configured using =opennsl_port_advert_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    autoneg [IN]   0 for disable, 1 for enabled
+ *
+ *\retval    OPENNSL_E_NONE Operation performed. If retrieving current
+ *          auto-negotiation mode, autoneg is set to the current state.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation fail, if retrieving current operating mode,
+ *          autoneg is undefined.
+ ******************************************************************************/
+extern int opennsl_port_autoneg_set(
+    int unit, 
+    opennsl_port_t port, 
+    int autoneg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure or retrieve the current auto-negotiation settings for a port,
+ *       or restart auto-negotiation if already enabled.
+ *
+ *\description Enable, disable, or recover the current auto-negotiation state for
+ *          a port. If auto-negotiation is already enabled, re-enabling it
+ *          will restart auto-negotiation.
+ *          Before enabling auto-negotiation, the desired advertised modes
+ *          must be configured using =opennsl_port_advert_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    autoneg [OUT]   0 for disable, 1 for enabled
+ *
+ *\retval    OPENNSL_E_NONE Operation performed. If retrieving current
+ *          auto-negotiation mode, autoneg is set to the current state.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation fail, if retrieving current operating mode,
+ *          autoneg is undefined.
+ ******************************************************************************/
+extern int opennsl_port_autoneg_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *autoneg) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Get or set the current operating speed of a port.
@@ -804,6 +1166,275 @@ typedef _shr_port_duplex_t opennsl_port_duplex_t;
 #define OPENNSL_PORT_DUPLEX_HALF    _SHR_PORT_DUPLEX_HALF 
 #define OPENNSL_PORT_DUPLEX_FULL    _SHR_PORT_DUPLEX_FULL 
 #define OPENNSL_PORT_DUPLEX_COUNT   _SHR_PORT_DUPLEX_COUNT 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Get or set the current duplex mode of a port.
+ *
+ *\description Set or get the duplex of the specified port.
+ *          opennsl_port_duplex_set disables auto-negotiation if it is
+ *          enabled. When setting duplicity, if an error is returned the PHY
+ *          and the MAC may not be properly set for operation. For correct
+ *          operation following an error, a valid duplex and speed must be
+ *          set.
+ *          When retrieving the current duplicity of a port, if
+ *          auto-negotiation is enabled the current negotiated duplicity is
+ *          returned. If auto-negotiation is in progress or there is no link,
+ *          duplex is returned as OPENNSL_PORT_DUPLEX_HALF. If
+ *          auto-negotiation is disabled, the forced speed of the port is
+ *          returned regardless of the link state.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    duplex [IN]   Returned or requested duplex setting, must be one of
+ *          OPENNSL_PORT_DUPLEX_HALF or OPENNSL_PORT_DUPLEX_FULL.
+ *
+ *\retval    OPENNSL_E_NONE Port duplex retrieved or configured as requested.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_UNAVAIL The specified port does not support the requested
+ *          mode.
+ *\retval    OPENNSL_E_XXX Request failed, if configuring duplex mode the port
+ *          state is undefined. If retrieving the current operating mode, the
+ *          returned duplex value is undefined.
+ ******************************************************************************/
+extern int opennsl_port_duplex_set(
+    int unit, 
+    opennsl_port_t port, 
+    int duplex) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the current duplex mode of a port.
+ *
+ *\description Set or get the duplex of the specified port.
+ *          opennsl_port_duplex_set disables auto-negotiation if it is
+ *          enabled. When setting duplicity, if an error is returned the PHY
+ *          and the MAC may not be properly set for operation. For correct
+ *          operation following an error, a valid duplex and speed must be
+ *          set.
+ *          When retrieving the current duplicity of a port, if
+ *          auto-negotiation is enabled the current negotiated duplicity is
+ *          returned. If auto-negotiation is in progress or there is no link,
+ *          duplex is returned as OPENNSL_PORT_DUPLEX_HALF. If
+ *          auto-negotiation is disabled, the forced speed of the port is
+ *          returned regardless of the link state.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    duplex [OUT]   Returned or requested duplex setting, must be one of
+ *          OPENNSL_PORT_DUPLEX_HALF or OPENNSL_PORT_DUPLEX_FULL.
+ *
+ *\retval    OPENNSL_E_NONE Port duplex retrieved or configured as requested.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_UNAVAIL The specified port does not support the requested
+ *          mode.
+ *\retval    OPENNSL_E_XXX Request failed, if configuring duplex mode the port
+ *          state is undefined. If retrieving the current operating mode, the
+ *          returned duplex value is undefined.
+ ******************************************************************************/
+extern int opennsl_port_duplex_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *duplex) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Enable or disable transmission of pause frames and honoring received
+ *       pause frames on a port.
+ *
+ *\description Depending on the port type, transmissions of pause frames and
+ *          honoring received pause frames may be configured independently. If
+ *          configuring independently (also known as asymmetric flow control)
+ *          pause_tx and pause_rx need not be the same value. The API call
+ *          =opennsl_port_ability_get can be used to determine if asymmetric
+ *          pause is supported.  Symmetric flow control, where both
+ *          transmission of pause frames and honoring them on reception can be
+ *          enable or disable by passing 1 or 0 for both pause_tx and
+ *          pause_rx, respectively.
+ *          Generally asymmetric flow control is used to limit data flow from
+ *          end stations toward the device, however if the underlying hardware
+ *          supports it, opennsl_port_pause_set will allow configuring the
+ *          device for asymmetric flow control in either direction.
+ *          The current settings of pause-based flow control can be determined
+ *          using opennsl_port_pause_get.
+ *          Configuration of asymmetric flow control may also be accomplished
+ *          using the API call =opennsl_port_pause_sym_set .
+ *          Code samples demonstrating two methods to configure the same flow
+ *          control settings can be found in the description of
+ *          =opennsl_port_pause_sym_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port or logical port number
+ *\param    pause_tx [IN]   0 to disable transmission of pauseframes, 1 to enable.
+ *\param    pause_rx [IN]   0 to ignore received pause frames, 1 to honor received
+ *          pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation performed successfully.
+ *\retval    OPENNSL_E_INIT Port module not initialized ( must be called).
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current pause settings,
+ *          pause_tx and pause_rx are undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_set(
+    int unit, 
+    opennsl_port_t port, 
+    int pause_tx, 
+    int pause_rx) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Enable or disable transmission of pause frames and honoring received
+ *       pause frames on a port.
+ *
+ *\description Depending on the port type, transmissions of pause frames and
+ *          honoring received pause frames may be configured independently. If
+ *          configuring independently (also known as asymmetric flow control)
+ *          pause_tx and pause_rx need not be the same value. The API call
+ *          =opennsl_port_ability_get can be used to determine if asymmetric
+ *          pause is supported.  Symmetric flow control, where both
+ *          transmission of pause frames and honoring them on reception can be
+ *          enable or disable by passing 1 or 0 for both pause_tx and
+ *          pause_rx, respectively.
+ *          Generally asymmetric flow control is used to limit data flow from
+ *          end stations toward the device, however if the underlying hardware
+ *          supports it, opennsl_port_pause_set will allow configuring the
+ *          device for asymmetric flow control in either direction.
+ *          The current settings of pause-based flow control can be determined
+ *          using opennsl_port_pause_get.
+ *          Configuration of asymmetric flow control may also be accomplished
+ *          using the API call =opennsl_port_pause_sym_set .
+ *          Code samples demonstrating two methods to configure the same flow
+ *          control settings can be found in the description of
+ *          =opennsl_port_pause_sym_set .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device port or logical port number
+ *\param    pause_tx [OUT]   0 to disable transmission of pauseframes, 1 to
+ *          enable.
+ *\param    pause_rx [OUT]   0 to ignore received pause frames, 1 to honor
+ *          received pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation performed successfully.
+ *\retval    OPENNSL_E_INIT Port module not initialized ( must be called).
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current pause settings,
+ *          pause_tx and pause_rx are undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *pause_tx, 
+    int *pause_rx) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the source MAC address transmitted in MAC control pause
+ *       frames.
+ *
+ *\description MAC control pause frames are transmitted with a well known
+ *          destination address (01:80:c2:00:00:01) that is not controllable.
+ *          However, the source address can be set and retrieved using the
+ *          opennsl_port_pause_addr_xxx calls. On switch initialization, the
+ *          application software should set the pause frame source address for
+ *          all ports. These values are persistent across calls that enable or
+ *          disable the transmission of pause frames and need only be set
+ *          once.
+ *          Only MAC control pause frames generated by the MACs in the switch
+ *          device will contain the specified source address. The CPU is able
+ *          to generate MAC control packets with any source address that will
+ *          be transmitted unchanged.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number.
+ *\param    mac [IN]   MAC address to transmit as the source address in MAC
+ *          control pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving the previously set
+ *          values the returned MAC address is undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_addr_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_mac_t mac) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the source MAC address transmitted in MAC control pause
+ *       frames.
+ *
+ *\description MAC control pause frames are transmitted with a well known
+ *          destination address (01:80:c2:00:00:01) that is not controllable.
+ *          However, the source address can be set and retrieved using the
+ *          opennsl_port_pause_addr_xxx calls. On switch initialization, the
+ *          application software should set the pause frame source address for
+ *          all ports. These values are persistent across calls that enable or
+ *          disable the transmission of pause frames and need only be set
+ *          once.
+ *          Only MAC control pause frames generated by the MACs in the switch
+ *          device will contain the specified source address. The CPU is able
+ *          to generate MAC control packets with any source address that will
+ *          be transmitted unchanged.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number.
+ *\param    mac [OUT]   MAC address to transmit as the source address in MAC
+ *          control pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully.
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving the previously set
+ *          values the returned MAC address is undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_addr_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_mac_t mac) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure or retrieve asymmetric pause setting for a port.
+ *
+ *\description For complete description, see.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    pause [IN]   Requested or current pause settings, one of
+ *          OPENNSL_PORT_PAUSE_SYM for symmetric pause, OPENNSL_PORT_PAUSE_ASYM_RX
+ *          for asymmetric pause to honor received MAC control pause frames but
+ *          not transmit, OPENNSL_PORT_PAUSE_ASYM_TX to ignore received pause
+ *          frames but transmit, and OPENNSL_PORT_PAUSE_NONE to neither honor or
+ *          transmit pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current mode the
+ *          returned pause value is undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_sym_set(
+    int unit, 
+    opennsl_port_t port, 
+    int pause) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure or retrieve asymmetric pause setting for a port.
+ *
+ *\description For complete description, see.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    pause [OUT]   Requested or current pause settings, one of
+ *          OPENNSL_PORT_PAUSE_SYM for symmetric pause, OPENNSL_PORT_PAUSE_ASYM_RX
+ *          for asymmetric pause to honor received MAC control pause frames but
+ *          not transmit, OPENNSL_PORT_PAUSE_ASYM_TX to ignore received pause
+ *          frames but transmit, and OPENNSL_PORT_PAUSE_NONE to neither honor or
+ *          transmit pause frames.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current mode the
+ *          returned pause value is undefined.
+ ******************************************************************************/
+extern int opennsl_port_pause_sym_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *pause) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -1107,6 +1738,28 @@ extern int opennsl_port_link_status_get(
     opennsl_port_t port, 
     int *status) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Clear failed link status from a port which has undergone LAG failover.
+ *
+ *\description This function clears the OPENNSL_PORT_LINK_STATUS_FAILED state
+ *          from a port which has transitioned into LAG failover.  The port is
+ *          moved to the OPENNSL_PORT_LINK_STATUS_DOWN state.  The application
+ *          is responsible for removing the port from trunk membership before
+ *          calling this function.  Linkscan (see =linkscan) must be running
+ *          to use LAG failover.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *
+ *\retval    OPENNSL_E_NONE The failed state of the port is cleared.
+ *\retval    OPENNSL_E_INIT Linkscan module not initialized
+ *\retval    OPENNSL_E_PORT The port is not valid, not in failed state, or still in
+ *          the trunk.
+ ******************************************************************************/
+extern int opennsl_port_link_failed_clear(
+    int unit, 
+    opennsl_port_t port) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #define OPENNSL_PORT_VLAN_MEMBER_INGRESS    0x00000001 
@@ -1253,7 +1906,66 @@ extern int opennsl_port_egress_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_PORT_FLOOD_BLOCK_BCAST      0x1        
+#define OPENNSL_PORT_FLOOD_BLOCK_UNKNOWN_UCAST 0x2        
+#define OPENNSL_PORT_FLOOD_BLOCK_UNKNOWN_MCAST 0x4        
+#define OPENNSL_PORT_FLOOD_BLOCK_ALL        0x8        
+#define OPENNSL_PORT_FLOOD_BLOCK_UNKNOWN_IP_MCAST 0x10       
+#define OPENNSL_PORT_FLOOD_BLOCK_UNKNOWN_NONIP_MCAST 0x20       
+#define OPENNSL_PORT_FLOOD_BLOCK_KNOWN_MCAST 0x40       
 #ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Selectively block flooding traffic.
+ *
+ *\description Selectively block VLAN flooding traffic ingressing on ingress_port
+ *          from egressing on egress_port. The types of flooding traffic that
+ *          can be selectively blocked are described in table.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    ingress_port [IN]   Device or logical port number of the ingress port
+ *\param    egress_port [IN]   Device or logical port number of the egress port
+ *\param    flags [IN]
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on specified device
+ *\retval    OPENNSL_E_PARAM ingress_port and egress_port are not on the same
+ *          device
+ *\retval    OPENNSL_E_PORT Operation not supported on the specified ingress_port,
+ *          or egress_port is invalid
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_port_flood_block_set(
+    int unit, 
+    opennsl_port_t ingress_port, 
+    opennsl_port_t egress_port, 
+    uint32 flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Selectively block flooding traffic.
+ *
+ *\description Selectively block VLAN flooding traffic ingressing on ingress_port
+ *          from egressing on egress_port. The types of flooding traffic that
+ *          can be selectively blocked are described in table.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    ingress_port [IN]   Device or logical port number of the ingress port
+ *\param    egress_port [IN]   Device or logical port number of the egress port
+ *\param    flags [OUT]
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on specified device
+ *\retval    OPENNSL_E_PARAM ingress_port and egress_port are not on the same
+ *          device
+ *\retval    OPENNSL_E_PORT Operation not supported on the specified ingress_port,
+ *          or egress_port is invalid
+ *\retval    OPENNSL_E_XXX Operation failed
+ ******************************************************************************/
+extern int opennsl_port_flood_block_get(
+    int unit, 
+    opennsl_port_t ingress_port, 
+    opennsl_port_t egress_port, 
+    uint32 *flags) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Control the sampling of packets ingressing or egressing a port.
@@ -1521,6 +2233,122 @@ extern int opennsl_port_selective_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set or retrieve color assignment for a given port and priority.
+ *
+ *\description Assign or examine the color with which packets are marked when
+ *          they arrive on the given port with the specified priority in the
+ *          VLAN control index.
+ *          The network switch family of switches assign the color to
+ *          configure the drop precedence (DP) value.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    prio [IN]   VLAN priority (aka 802.1p CoS)
+ *\param    color [IN]   One of the OPENNSL color selections: opennslColorGreen,
+ *          opennslColorYellow, opennslColorRed, opennslColorDropFirst,
+ *          opennslColorPreserve
+ *
+ *\retval    OPENNSL_E_UNAVAIL Not supported.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_port_priority_color_set(
+    int unit, 
+    opennsl_port_t port, 
+    int prio, 
+    opennsl_color_t color) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or retrieve color assignment for a given port and priority.
+ *
+ *\description Assign or examine the color with which packets are marked when
+ *          they arrive on the given port with the specified priority in the
+ *          VLAN control index.
+ *          The network switch family of switches assign the color to
+ *          configure the drop precedence (DP) value.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    prio [IN]   VLAN priority (aka 802.1p CoS)
+ *\param    color [OUT]   One of the OPENNSL color selections: opennslColorGreen,
+ *          opennslColorYellow, opennslColorRed, opennslColorDropFirst,
+ *          opennslColorPreserve
+ *
+ *\retval    OPENNSL_E_UNAVAIL Not supported.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_port_priority_color_get(
+    int unit, 
+    opennsl_port_t port, 
+    int prio, 
+    opennsl_color_t *color) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/** opennsl_port_class_e */
+typedef enum opennsl_port_class_e {
+    opennslPortClassFieldLookup = 0,    /**< Class for field stage Lookup */
+    opennslPortClassFieldIngress = 1,   /**< Class for field stage Ingress */
+    opennslPortClassEgress = 14,        /**< EGR_PORT class ID field for field
+                                           stage Egress */
+} opennsl_port_class_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set or get port classification ID to aggregate a group of ports for
+ *       further processing such as VLAN translation and field processing.
+ *
+ *\description Set or get port classification ID to aggregate a group of ports
+ *          for further processing such as VLAN translation and field
+ *          processing.
+ *          The class types are shown in opennsl_port_class_t:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    pclass [IN]
+ *\param    class_id [IN]   (for _set) Device Class ID.
+ *
+ *\retval    OPENNSL_E_NONE No Error
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_PORT Invalid Port number specified
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_class_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_class_t pclass, 
+    uint32 class_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or get port classification ID to aggregate a group of ports for
+ *       further processing such as VLAN translation and field processing.
+ *
+ *\description Set or get port classification ID to aggregate a group of ports
+ *          for further processing such as VLAN translation and field
+ *          processing.
+ *          The class types are shown in opennsl_port_class_t:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    pclass [IN]
+ *\param    class_id [OUT]   (for _set) Device Class ID.
+ *
+ *\retval    OPENNSL_E_NONE No Error
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_PORT Invalid Port number specified
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_class_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_class_t pclass, 
+    uint32 *class_id) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /** Features that can be controlled on a per-port basis. */
 typedef enum opennsl_port_control_e {
     opennslPortControlIP4 = 8,          /**< Enable IPv4 Routing on port. */
@@ -1534,6 +2362,8 @@ typedef enum opennsl_port_control_e {
                                            settings for ethernet packets
                                            opennslPortControlDoNotCheckVlanFromCpu
                                            port control can be used. */
+    opennslPortControlEgressVlanPriUsesPktPri = 43, /**< If set, outgoing packets derive their
+                                           priority from the incoming priority */
     opennslPortControlLanes = 55,       /**< Sets the number of active lanes for a
                                            port that can be dynamically
                                            hot-swapped. */
@@ -1744,6 +2574,11 @@ extern int opennsl_port_stat_enable_set(
 
 #define OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU 0x1        /**< Copy packet samples to
                                                           CPU */
+/** Parameter for opennslPortControlFieldEgressClassSelect */
+typedef enum opennsl_port_field_egress_class_select_e {
+    opennslPortEgressClassSelectPort = 1, /**< Class Id from Port Interface. */
+} opennsl_port_field_egress_class_select_t;
+
 #if defined(INCLUDE_CES)
 #endif
 #include <opennsl/portX.h>

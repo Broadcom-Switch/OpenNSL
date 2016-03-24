@@ -70,7 +70,6 @@
 #include <linux/etherdevice.h>
 #include <linux/random.h>
 #include <linux/seq_file.h>
-#include <linux/if_vlan.h>
 
 
 MODULE_AUTHOR("Broadcom Corporation");
@@ -361,14 +360,6 @@ static inline struct sk_buff *skb_padto(struct sk_buff *skb, unsigned int len)
         return skb_pad(skb, len-size);
 }
 #endif /* KERNEL_VERSION(2,4,21) */
-
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
-#define bkn_vlan_hwaccel_put_tag(_skb, _proto, _tci) \
-    __vlan_hwaccel_put_tag(_skb, _tci)
-#else
-#define bkn_vlan_hwaccel_put_tag(_skb, _proto, _tci) \
-    __vlan_hwaccel_put_tag(_skb, htons(_proto), _tci)
-#endif
 
 #ifdef LINUX_BDE_DMA_DEVICE_SUPPORT
 #define DMA_DEV                         device
@@ -2100,15 +2091,7 @@ bkn_do_api_rx(bkn_switch_info_t *sinfo, int chan, int budget)
                         }
                         pktlen -= 4;
                         pkt += 4;
-                    } else {
-                        /*
-                         * Mark packet as VLAN-tagged, otherwise newer
-                         * kernels will strip the tag.
-                         */
-                        uint16_t tci = (pkt[14] << 8) | pkt[15];
-                        bkn_vlan_hwaccel_put_tag(skb, ETH_P_8021Q, tci);
                     }
-
                     skb_copy_to_linear_data(skb, pkt, pktlen);
                     skb_put(skb, pktlen - 4); /* Strip CRC */
                     priv->stats.rx_packets++;
@@ -2270,15 +2253,7 @@ bkn_do_skb_rx(bkn_switch_info_t *sinfo, int chan, int budget)
                         ((u32*)skb->data)[1] = ((u32*)skb->data)[0];
                         skb_pull(skb, 4);
                         pktlen -= 4;
-                    }  else {
-                        /*
-                         * Mark packet as VLAN-tagged, otherwise newer
-                         * kernels will strip the tag.
-                         */
-                        uint16_t tci = (skb->data[14] << 8) | skb->data[15];
-                        bkn_vlan_hwaccel_put_tag(skb, ETH_P_8021Q, tci);
                      }
-
                     priv->stats.rx_packets++;
                     priv->stats.rx_bytes += pktlen;
                     skb->dev = priv->dev;

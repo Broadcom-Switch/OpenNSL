@@ -98,7 +98,7 @@ struct opennsl_pkt_s {
     opennsl_vlan_t reserved4; 
     uint8 reserved5; 
     uint8 reserved6; 
-    opennsl_reserved_enum_t reserved7; 
+    opennsl_color_t reserved7; 
     int16 src_port;                     /**< Source port used in header/tag. */
     opennsl_trunk_t reserved8; 
     uint16 reserved9; 

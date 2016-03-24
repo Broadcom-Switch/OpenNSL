@@ -316,6 +316,23 @@ typedef enum opennsl_stat_val_e {
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Initialize the OPENNSL statistics module.
+ *
+ *\description Initialize all counters to zero and start the counter collection.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_INTERNAL Device access failure
+ ******************************************************************************/
+extern int opennsl_stat_init(
+    int unit) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
  *\brief Clear the port-based statistics for the indicated device port.
  *
  *\description Set all counters to zero to the specified port.
@@ -329,6 +346,23 @@ typedef enum opennsl_stat_val_e {
 extern int opennsl_stat_clear(
     int unit, 
     opennsl_port_t port) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Synchronize software counters with hardware.
+ *
+ *\description Force an immediate counter update. Ensures that all hardware
+ *          counter  activity prior  to the call to opennsl_stat_sync() is
+ *          reflected in all opennsl_stat_get() calls that come after the call
+ *          to opennsl_stat_sync().
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_TIMEOUT Device response time exceeds limit
+ *\retval    OPENNSL_E_DISABLED Unit's counter disabled
+ ******************************************************************************/
+extern int opennsl_stat_sync(
+    int unit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Get the specified statistics from the device.
@@ -394,25 +428,12 @@ typedef enum opennsl_stat_group_mode_attr_pkt_type_e {
     opennslStatGroupModeAttrPktTypeUnknownIPMC = 17, /**< Unknown IPMC Packet */
 } opennsl_stat_group_mode_attr_pkt_type_t;
 
-/** Stat Group Mode Attribute Selectors */
-typedef enum opennsl_stat_group_mode_attr_e {
-    opennslStatGroupModeAttrPktType = 10, /**< Packet Type Selector: Possible
-                                           Values:<opennslStatGroupModeAttrPktType*> */
-} opennsl_stat_group_mode_attr_t;
-
 #define OPENNSL_STAT_GROUP_MODE_INGRESS 0x00000001 /**< Stat Group Mode Ingress */
 /** Ingress and Egress Statistics Accounting Objects */
 typedef enum opennsl_stat_object_e {
     opennslStatObjectIngL3Intf = 4,     /**< Ingress L3 Interface Object */
     opennslStatObjectEgrL3Intf = 13,    /**< Egress L3 Interface Object */
 } opennsl_stat_object_t;
-
-/** Stat Flex Group Attribute Selector */
-typedef struct opennsl_stat_group_mode_attr_selector_s {
-    uint32 counter_offset;              /**< Counter Offset */
-    opennsl_stat_group_mode_attr_t attr; /**< Attribute Selector */
-    uint32 attr_value;                  /**< Attribute Values */
-} opennsl_stat_group_mode_attr_selector_t;
 
 /** Counter Statistics Values */
 typedef struct opennsl_stat_value_s {

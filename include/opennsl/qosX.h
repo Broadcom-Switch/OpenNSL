@@ -44,26 +44,25 @@
 #define OPENNSL_QOS_MAP_L3_L2           0x800000   
 /** QoS Map structure */
 typedef struct opennsl_qos_map_s {
-    uint8 pkt_pri;                      /**< Packet priority */
-    uint8 pkt_cfi;                      /**< Packet CFI */
-    int dscp;                           /**< Packet DSCP */
-    int exp;                            /**< Packet EXP */
-    int int_pri;                        /**< Internal priority */
-    opennsl_reserved_enum_t color;      /**< Color */
-    int remark_int_pri;                 /**< (internal) remarking priority */
-    opennsl_reserved_enum_t remark_color; /**< (internal) remark color */
-    int policer_offset;                 /**< Offset based on pri/cos to fetch a
-                                           policer */
-    int queue_offset;                   /**< Offset based on int_pri to fetch cosq
-                                           for subscriber ports */
-    int port_offset;                    /**< Offset based on port connection for
-                                           indexing into the action table */
-    uint8 etag_pcp;                     /**< ETAG PCP field */
-    uint8 etag_de;                      /**< ETAG DE field */
-    int counter_offset;                 /**< Offset based on priority for indexing
-                                           into the loss measurement counter
-                                           table */
-    int inherited_dscp_exp;             /**< Inherited DSCP EXP value */
+    uint8 pkt_pri;                  /**< Packet priority */
+    uint8 pkt_cfi;                  /**< Packet CFI */
+    int dscp;                       /**< Packet DSCP */
+    int exp;                        /**< Packet EXP */
+    int int_pri;                    /**< Internal priority */
+    opennsl_color_t color;          /**< Color */
+    int remark_int_pri;             /**< (internal) remarking priority */
+    opennsl_color_t remark_color;   /**< (internal) remark color */
+    int policer_offset;             /**< Offset based on pri/cos to fetch a
+                                       policer */
+    int queue_offset;               /**< Offset based on int_pri to fetch cosq for
+                                       subscriber ports */
+    int port_offset;                /**< Offset based on port connection for
+                                       indexing into the action table */
+    uint8 etag_pcp;                 /**< ETAG PCP field */
+    uint8 etag_de;                  /**< ETAG DE field */
+    int counter_offset;             /**< Offset based on priority for indexing
+                                       into the loss measurement counter table */
+    int inherited_dscp_exp;         /**< Inherited DSCP EXP value */
 } opennsl_qos_map_t;
 
 /***************************************************************************//** 
@@ -185,6 +184,32 @@ extern int opennsl_qos_map_add(
     int map_id) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get an entire QoS mapping for the given QoS Map ID.
+ *
+ *\description Get an entire QoS mapping for the given QoS Map ID.  If zero is
+ *          passed array_size, the API will set array_count to the number of
+ *          elements required to satisfy the request.  Otherwise, the API will
+ *          fill in the requested mapping, and set array_count to the number
+ *          of elements set.  Exactly one map may be retrieved per call. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    flags [IN]   Configuration flags
+ *\param    map_id [IN]   QoS map ID
+ *\param    array_size [IN]   Number of elements in array parameter; 0 to query
+ *\param    array [OUT]   Number of elements in array parameter; 0 to query
+ *\param    array_count [OUT]   Number of mappings retrieved
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_qos_map_multi_get(
+    int unit, 
+    uint32 flags, 
+    int map_id, 
+    int array_size, 
+    opennsl_qos_map_t *array, 
+    int *array_count) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Deletes a specific mapping entry from a QoS map.
  *
  *\description The opennsl_qos_map_delete API deletes a specific mapping entry
@@ -224,6 +249,27 @@ extern int opennsl_qos_port_map_set(
     int egr_map) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Retrieves the configured QoS mapping matching a type for the given
+ *       GPORT.
+ *
+ *\description Given some profile type, the configured QoS mapping for that GPORT
+ *          matching the type will be returned. Useful when given gport has
+ *          more than one QOS profile that can be associated to.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   GPORT identifier
+ *\param    flags [IN]   Flags to specify the type
+ *\param    map_id [OUT]   Ingress QoS map ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_qos_port_map_type_get(
+    int unit, 
+    opennsl_gport_t port, 
+    uint32 flags, 
+    int *map_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Retrieves the configured QoS mapping for the given GPORT.
  *
  *\description Retrieves the configured QoS mapping for the given GPORT.
@@ -240,6 +286,73 @@ extern int opennsl_qos_port_map_get(
     opennsl_gport_t port, 
     int *ing_map, 
     int *egr_map) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Associate a port, vid with an ingress and egress QoS mapping.
+ *
+ *\description Associate a port, vid with an ingress and egress QoS mapping. A
+ *          map ID of zero  will clear the existing QoS map and a map ID of -1
+ *          will leave the existing map unchanged.   Values of vid cause the
+ *          following behaviors:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port number
+ *\param    vid [IN]   VLAN Identifier
+ *\param    ing_map [IN]   Ingress QoS map ID.  0 to clear, -1 to preserve
+ *\param    egr_map [IN]   Egress QoS map ID.  0 to clear, -1 to preserve
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_qos_port_vlan_map_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_vlan_t vid, 
+    int ing_map, 
+    int egr_map) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the QoS map ID for a port, vid.
+ *
+ *\description Get the QoS map ID for a port, vid. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port number
+ *\param    vid [IN]   VLAN Identifier
+ *\param    ing_map [OUT]   Ingress QoS map ID
+ *\param    egr_map [OUT]   Egress QoS map ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_qos_port_vlan_map_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_vlan_t vid, 
+    int *ing_map, 
+    int *egr_map) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the list of all QoS Map IDs.
+ *
+ *\description Get the list of all QoS Map IDs. If zero is passed as array_size, 
+ *          the API will set array_count to the number of all the map IDs.
+ *          Otherwise, the API will fill in the map IDs and set array_count 
+ *          to the number of map IDs whose info has been filled in.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    array_size [IN]   Number of elements in array parameter; 0 to query
+ *\param    map_ids_array [OUT]   Storage location for map ids
+ *\param    flags_array [OUT]   Storage location for flags associated with the
+ *          maps
+ *\param    array_count [OUT]   Number of mappings retrieved
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_qos_multi_get(
+    int unit, 
+    int array_size, 
+    int *map_ids_array, 
+    int *flags_array, 
+    int *array_count) LIB_DLL_EXPORTED ;
 
 #endif /* __OPENNSL_QOSX_H__ */
 /*@}*/

@@ -171,6 +171,7 @@ typedef enum opennsl_field_qualify_e {
                                            stage. */
     opennslFieldQualifyStageEgress = 72, /**<  Field Processor pipeline egress
                                            stage. */
+    opennslFieldQualifyInterfaceClassPort = 81, /**<  Port Class Id. */
     opennslFieldQualifyL3Ingress = 85,  /**<  L3 ingress interface. */
     opennslFieldQualifyOutPort = 86,    /**<  Single Output Port. */
     opennslFieldQualifyIp4 = 87,        /**<  Qualify IpType == IPv4Any. */
@@ -217,6 +218,9 @@ typedef enum opennsl_field_IpProtocolCommon_e {
 #define OPENNSL_FIELD_RANGE_DSTPORT 0x00000002 /**< Check dest port range */
 #define OPENNSL_FIELD_RANGE_TCP     0x00000004 /**< Check TCP port range */
 #define OPENNSL_FIELD_RANGE_UDP     0x00000008 /**< Check UDP port range */
+/** Opaque handle to a field range. */
+typedef uint32 opennsl_field_range_t;
+
 /** Field qset defines the set of fields used for lookup. */
 typedef struct opennsl_field_qset_s {
     SHR_BITDCL w[_SHR_BITDCLSIZE(OPENNSL_FIELD_QUALIFY_MAX)]; 
@@ -1002,6 +1006,24 @@ extern int opennsl_field_entry_policer_detach(
     int level) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get the policer(s) attached to a field entry.
+ *
+ *\description Get the policer(s) attached to a field entry.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry_id [IN]   Field entry ID.
+ *\param    level [IN]   Policer level.
+ *\param    policer_id [OUT]   Policer ID.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_field_entry_policer_get(
+    int unit, 
+    opennsl_field_entry_t entry_id, 
+    int level, 
+    opennsl_policer_t *policer_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Get/Set the priority for an entry within a group.
  *
  *\description Sets or gets the priority class of an entry within a group.
@@ -1556,6 +1578,22 @@ extern int opennsl_field_qualify_IpType(
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_InterfaceClassPort(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 data, 
+    uint32 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
  *\param    protocol [IN]
  *
  *\retval   OPENNSL_E_xxx
@@ -1984,6 +2022,22 @@ extern int opennsl_field_qualify_IpType_get(
     int unit, 
     opennsl_field_entry_t entry, 
     opennsl_field_IpType_t *type) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_InterfaceClassPort_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 *data, 
+    uint32 *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *

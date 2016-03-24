@@ -17,6 +17,34 @@
 #define __OPENNSL_COSQX_H__
 
 #include <opennsl/types.h>
+#include <opennsl/switch.h>
+
+/***************************************************************************//** 
+ *\brief Initialize the CoSQ subsystem.
+ *
+ *\description Initialize the CoSQ configuration and scheduling module.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_init(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief De-initialize the CoSQ subsystem.
+ *
+ *\description De-initialize the CoSQ and scheduling for the specified unit. Any
+ *          held resources associated with the module are released.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_detach(
+    int unit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Configure the number of Class of Service Queues (COSQs).
@@ -164,10 +192,180 @@ extern int opennsl_cosq_mapping_get(
     opennsl_cos_t priority, 
     opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Get or set the mapping from internal priority to CoS queue.
+ *
+ *\description Configure or retrieve the mapping from the internal priority value
+ *          to Cos Queue. The internal priority is usually initialized from
+ *          the packet priority.  For tagged packets the priority is extracted
+ *          from the PRI field of the tag. For untagged packets, the priority
+ *          is specified using the API =opennsl_port_untagged_priority_set .
+ *          On some devices, the mapping tables may be shared among several
+ *          ports, so setting one port's mappings may affect other ports'.
+ *          On some devices, packets directed to the CPU interface port may
+ *          have their priority assigned independent of this setting. For more
+ *          information see =opennsl_switch_control_set .
+ *          On some devices, a port value of -1 or gport type for system
+ *          configuration will configure all ports.
+ *          Some devices support Enhanced Transmission Selection (ETS) which
+ *          requires to use GPORT ID for the port argument. When the ETS mode
+ *          is enabled, they configure and retrive the mapping from the
+ *          internal priority to the offset (which is equal to the value of
+ *          cosq) of the unicast queues and multicast queues attached to the
+ *          egress port.
+ *          Most devices have 8 internal priorities (0 to 7).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port or GPORT ID
+ *\param    priority [IN]   internal priority to map
+ *\param    cosq [IN]   Cos queue to which to map the chosen priority
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
+ *          number of CoS queues specified.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_port_mapping_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_cos_t priority, 
+    opennsl_cos_queue_t cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the mapping from internal priority to CoS queue.
+ *
+ *\description Configure or retrieve the mapping from the internal priority value
+ *          to Cos Queue. The internal priority is usually initialized from
+ *          the packet priority.  For tagged packets the priority is extracted
+ *          from the PRI field of the tag. For untagged packets, the priority
+ *          is specified using the API =opennsl_port_untagged_priority_set .
+ *          On some devices, the mapping tables may be shared among several
+ *          ports, so setting one port's mappings may affect other ports'.
+ *          On some devices, packets directed to the CPU interface port may
+ *          have their priority assigned independent of this setting. For more
+ *          information see =opennsl_switch_control_set .
+ *          On some devices, a port value of -1 or gport type for system
+ *          configuration will configure all ports.
+ *          Some devices support Enhanced Transmission Selection (ETS) which
+ *          requires to use GPORT ID for the port argument. When the ETS mode
+ *          is enabled, they configure and retrive the mapping from the
+ *          internal priority to the offset (which is equal to the value of
+ *          cosq) of the unicast queues and multicast queues attached to the
+ *          egress port.
+ *          Most devices have 8 internal priorities (0 to 7).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port or GPORT ID
+ *\param    priority [IN]   internal priority to map
+ *\param    cosq [OUT]   Cos queue to which to map the chosen priority
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
+ *          number of CoS queues specified.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_port_mapping_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_cos_t priority, 
+    opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the mapping from internal priority to CoS queue.
+ *
+ *\description Configure or retrieve the mapping from the internal priority value
+ *          to Cos Queue. The internal priority is usually initialized from
+ *          the packet priority.  For tagged packets the priority is extracted
+ *          from the PRI field of the tag. For untagged packets, the priority
+ *          is specified using the API =opennsl_port_untagged_priority_set .
+ *          On some devices, the mapping tables may be shared among several
+ *          ports, so setting one port's mappings may affect other ports'.
+ *          On some devices, packets directed to the CPU interface port may
+ *          have their priority assigned independent of this setting. For more
+ *          information see =opennsl_switch_control_set .
+ *          On some devices, a port value of -1 or gport type for system
+ *          configuration will configure all ports.
+ *          Some devices support Enhanced Transmission Selection (ETS) which
+ *          requires to use GPORT ID for the port argument. When the ETS mode
+ *          is enabled, they configure and retrive the mapping from the
+ *          internal priority to the offset (which is equal to the value of
+ *          cosq) of the unicast queues and multicast queues attached to the
+ *          egress port.
+ *          Most devices have 8 internal priorities (0 to 7).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port or GPORT ID
+ *\param    count [IN]   number of elements in priority array and cosq array in
+ *          case of multi get or set
+ *\param    priority_array [IN]
+ *\param    cosq_array [IN]
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
+ *          number of CoS queues specified.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_port_mapping_multi_set(
+    int unit, 
+    opennsl_port_t port, 
+    int count, 
+    opennsl_cos_t *priority_array, 
+    opennsl_cos_queue_t *cosq_array) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the mapping from internal priority to CoS queue.
+ *
+ *\description Configure or retrieve the mapping from the internal priority value
+ *          to Cos Queue. The internal priority is usually initialized from
+ *          the packet priority.  For tagged packets the priority is extracted
+ *          from the PRI field of the tag. For untagged packets, the priority
+ *          is specified using the API =opennsl_port_untagged_priority_set .
+ *          On some devices, the mapping tables may be shared among several
+ *          ports, so setting one port's mappings may affect other ports'.
+ *          On some devices, packets directed to the CPU interface port may
+ *          have their priority assigned independent of this setting. For more
+ *          information see =opennsl_switch_control_set .
+ *          On some devices, a port value of -1 or gport type for system
+ *          configuration will configure all ports.
+ *          Some devices support Enhanced Transmission Selection (ETS) which
+ *          requires to use GPORT ID for the port argument. When the ETS mode
+ *          is enabled, they configure and retrive the mapping from the
+ *          internal priority to the offset (which is equal to the value of
+ *          cosq) of the unicast queues and multicast queues attached to the
+ *          egress port.
+ *          Most devices have 8 internal priorities (0 to 7).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port or GPORT ID
+ *\param    count [IN]   number of elements in priority array and cosq array in
+ *          case of multi get or set
+ *\param    priority_array [IN]
+ *\param    cosq_array [OUT]
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
+ *          number of CoS queues specified.
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_port_mapping_multi_get(
+    int unit, 
+    opennsl_port_t port, 
+    int count, 
+    opennsl_cos_t *priority_array, 
+    opennsl_cos_queue_t *cosq_array) LIB_DLL_EXPORTED ;
+
+#define OPENNSL_COSQ_NONE                   0x0        /**< Pass through. */
 #define OPENNSL_COSQ_STRICT                 0x01       /**< Weights are ignored. */
 #define OPENNSL_COSQ_ROUND_ROBIN            0x02       /**< Weights are ignored. */
 #define OPENNSL_COSQ_WEIGHTED_ROUND_ROBIN   0x03       
+#define OPENNSL_COSQ_WEIGHTED_FAIR_QUEUING  0x04       
 #define OPENNSL_COSQ_DEFICIT_ROUND_ROBIN    0x05       /**< XGS3 only. */
+#define OPENNSL_COSQ_WEIGHT_UNLIMITED   -1         
+#define OPENNSL_COSQ_WEIGHT_STRICT      0          
+#define OPENNSL_COSQ_WEIGHT_MIN         1          
+#define OPENNSL_COSQ_PRIO_VALID(prio)  ((prio) >= 0 && (prio < 8)) 
+#define OPENNSL_COSQ_QUEUE_VALID(unit, numq)  \
+    ((numq) >= 0 && (numq) < NUM_COS(unit)) 
 /***************************************************************************//** 
  *\brief Get or set Class of Service policy, weights and delay.
  *
@@ -345,6 +543,25 @@ extern int opennsl_cosq_port_sched_get(
     int *delay) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Retrieve maximum weights for given CoS policy.
+ *
+ *\description Retrieve the maximum allowed weight value for the weights array
+ *          in.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mode [IN]   Scheduling mode, see table =OPENNSL_COSQ_table
+ *\param    weight_max [OUT]   Maximum weight value for opennsl_cosq_sched_set.
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_cosq_sched_weight_max_get(
+    int unit, 
+    int mode, 
+    int *weight_max) LIB_DLL_EXPORTED ;
+
+#define OPENNSL_COSQ_ALL        0x00000001 
+#define OPENNSL_COSQ_BW_LLFC    0x00000010 /**< Link Level Flow Control setting */
+/***************************************************************************//** 
  *\brief Configure a port's bandwidth distribution among CoS queues.
  *
  *\description On some devices, the bandwidth allocated to each CoS queue may be
@@ -412,6 +629,25 @@ extern int opennsl_cosq_port_bandwidth_get(
     uint32 *kbits_sec_max, 
     uint32 *flags) LIB_DLL_EXPORTED ;
 
+#define OPENNSL_COSQ_DISCARD_ENABLE         0x0001     
+#define OPENNSL_COSQ_DISCARD_NONTCP         0x0004     
+#define OPENNSL_COSQ_DISCARD_COLOR_GREEN    0x0100     
+#define OPENNSL_COSQ_DISCARD_COLOR_YELLOW   0x0200     
+#define OPENNSL_COSQ_DISCARD_COLOR_RED      0x0400     
+#define OPENNSL_COSQ_DISCARD_COLOR_BLACK    0x0800     
+#define OPENNSL_COSQ_DISCARD_COLOR_ALL      0x0F00     
+#define OPENNSL_COSQ_DISCARD_DROP_FIRST     OPENNSL_COSQ_DISCARD_COLOR_RED 
+#define OPENNSL_COSQ_DISCARD_PACKETS        0x1000     
+#define OPENNSL_COSQ_DISCARD_BYTES          0x2000     
+#define OPENNSL_COSQ_DISCARD_MARK_CONGESTION 0x4000     
+#define OPENNSL_COSQ_DISCARD_PORT           0x8000     
+#define OPENNSL_COSQ_DISCARD_DEVICE         0x10000    
+#define OPENNSL_COSQ_DISCARD_TCP            0x40000    
+#define OPENNSL_COSQ_DISCARD_SYSTEM         0x80000    
+#define OPENNSL_COSQ_DISCARD_PROBABILITY1   0x100000   
+#define OPENNSL_COSQ_DISCARD_PROBABILITY2   0x200000   
+#define OPENNSL_COSQ_DISCARD_IFP            0x400000   
+#define OPENNSL_COSQ_DISCARD_OUTER_CFI      0x800000   
 /***************************************************************************//** 
  *\brief Configure Weighted Random Early Discard (WRED).
  *
@@ -688,6 +924,7 @@ typedef enum opennsl_cosq_gport_stats_e {
     opennslCosqGportStatCount = 88      /**< Must be the last entry ! */
 } opennsl_cosq_gport_stats_t;
 
+#define OPENNSL_COSQ_GPORT_STATS_SHARED 0x00000001 
 /** Statistics Profile */
 typedef struct opennsl_cosq_gport_stat_profile_s {
     SHR_BITDCL stats[_SHR_BITDCLSIZE(opennslCosqGportOutBytes)]; /**< Use Gport Stats Enumeration */
@@ -731,6 +968,240 @@ extern int opennsl_cosq_priority_get(
     int start_queue, 
     int end_queue, 
     int *pri_profile_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Allocate/Retrieve unicast queue group and scheduler queue group
+ *       configuration.
+ *
+ *\description These APIs are used to allocate/retrieve unicast or multicast
+ *          queue group or a scheduler queue group configuration. Scheduler
+ *          queue groups are used to implement H-QoS. The set of CoS queues
+ *          are uniquely identified with a GPORT ID, which represents the base
+ *          CoS queue in the set. The GPORT ID is allocated from the next
+ *          available queue in group of queues for the port or specified by
+ *          the  input when the OPENNSL_COSQ_GPORT_WITH_ID flag is set. But
+ *          the  flag OPENNSL_COSQ_GPORT_WITH_ID is only supported for a few
+ *          devices. OPENNSL_GPORT_TYPE_UCAST_QUEUE_GROUP,
+ *          OPENNSL_GPORT_TYPE_MCAST_QUEUE_GROUP, or
+ *          OPENNSL_GPORT_TYPE_SCHEDULER type of GPORT can be added for
+ *          hierarchical queuing (see also, =opennsl_cosq_gport_attach API).
+ *          Depending on the functionality physical_port parameter can have
+ *          one of the following values       unicast queue group   =>
+ *          OPENNSL_GPORT_MODPORT_SET()            multicast queue group =>
+ *          OPENNSL_GPORT_MODPORT_SET()            scheduler queue group =>
+ *          OPENNSL_GPORT_NULL
+ *          When allocating a queue group the req_gport parameter direction
+ *          depends on the flags. If OPENNSL_COSQ_GPORT_WITH_ID is specified
+ *          the input direction is valid. Depending on the functionality the
+ *          following macros can be used to create the req_gport.      
+ *          unicast queue group   => OPENNSL_GPORT_UCAST_QUEUE_GROUP_SET()    
+ *                 multicast queue group =>
+ *          OPENNSL_GPORT_MCAST_QUEUE_GROUP_SET()            scheduler queue
+ *          group => OPENNSL_GPORT_SCHEDULER_SET()      req_gport parameter is
+ *          always updated and should be subsequently used by the user.
+ *          When the OPENNSL_COSQ_GPORT_WITH_ID flag is set, the value
+ *          provided in the gport parameter is used as the GPORT ID, otherwise
+ *          a unique GPORT ID will be allocated and returned. The feature
+ *          using OPENNSL_COSQ_GPORT_WITH_ID to allocate a queue group is only
+ *          supported for a few devices.
+ *          For some devices that may not have the ability to shape every port
+ *          or queue, the application can control whether the gport must be
+ *          allocated from a shapeable or non-shapeable area.  This can be
+ *          done by specifying the flags OPENNSL_COSQ_GPORT_WITH_SHAPING or
+ *          OPENNSL_COSQ_GPORT_WITHOUT_SHAPING, respectively.  If neither flag
+ *          is specified, the API will allocate a gport without paying any
+ *          attention to whether it would be possible to configure a shaper on
+ *          such port later.
+ *          When the OPENNSL_COSQ_GPORT_OVERLAY flag is set, it allows overlay
+ *          of queues that were previously allocated.
+ *          When the OPENNSL_COSQ_GPORT_SUBSCRIBER flag is set, scheduling for
+ *          the queue group will be done locally and will not involve the
+ *          central arbiter. A local gport should be added only for ports
+ *          which are local to that device.
+ *          When the OPENNSL_COSQ_GPORT_MULTIPATH flag is set, a multipath
+ *          shaper gport is created. Scheduler nodes  on the same level could
+ *          be added to the multipath shaper gport. The aggregated traffic
+ *          from all nodes is shaped by the multipath shaper. The shaping rate
+ *          of multipath shaper is controlled by calling
+ *          =opennsl_cosq_gport_bandwidth_set API with the multipath shaper
+ *          gport
+ *          When the config.opennsl variable fabric_egress_setup=0 is set,
+ *          FIFO-level egress support becomes available.  The
+ *          OPENNSL_COSQ_GPORT_EGRESS_GROUP flag is used to enable egress
+ *          group support. Egress Group gports are similar to egress child
+ *          gports in all other aspects. The egress group  gport connects a
+ *          number of fifos to a subport and allows access at the FIFO-level.
+ *          Multiple egress groups can be connected to the same subport up to
+ *          sixteen fifos. In the case of egress gports, the num_cos_levels
+ *          field is used to indicate the number of fifos to be associated
+ *          with that egress gport.
+ *          When the OPENNSL_COSQ_GPORT_DESTMOD_UCAST_QUEUE_GROUP flag is set,
+ *          a set of virtual queue group (DMVOQ)  is allocated.
+ *          On network switch chips, When the
+ *          OPENNSL_COSQ_GPORT_DESTMOD_UCAST_QUEUE_GROUP flag is used with the
+ *          combination of OPENNSL_COSQ_GPORT_WITH_ID,          the value
+ *          provided in gport parameters is used as the GPORT_ID.          
+ *          But scheduling mode need to programmed again as per the scheduling
+ *          hierarcy.  API opennsl_cosq_port_sched_set() can be used to set
+ *          the scheduling mode to be Strict/WRR.
+ *          When the OPENNSL_COSQ_GPORT_VLAN_UCAST_QUEUE_GROUP flag is set, a
+ *          queue to support service based queuing is allocated
+ *          When a parent node is created by using opennsl_cosq_gport_add API
+ *          call by passing num_cos_levels = -1 then that node can have any
+ *          number of child nodes.
+ *          On the chips network switch, the first call to the API
+ *          opennsl_cosq_gport_add will destroy the default schedule
+ *          hierarchies for all of ports and traffic will not flow on those
+ *          ports until new schedule hierarchies for those ports are built.
+ *          On the chip network switch API opennsl_cosq_gport_add return
+ *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
+ *          during init. On the chip network switch because of fixed hierarchy
+ *          scheduler the scope of COSQ GPORT is not global but it is local to
+ *          per unit. So we should not modify the MODID dynamically.
+ *          Some device configuration support multiple queue groups on a
+ *          physical port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   (for _get) GPORT ID for a queue group
+ *\param    physical_port [OUT]   (for _get) GPORT ID for physical port
+ *\param    num_cos_levels [OUT]   (for _add) number of cos levels
+ *\param    flags [OUT]   (for _add) Specifies configuration. Valid flags listed
+ *          at =OPENNSL_COSQ_GPORT_FLAGS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_gport_t *physical_port, 
+    int *num_cos_levels, 
+    uint32 *flags) LIB_DLL_EXPORTED ;
+
+typedef int (*opennsl_cosq_gport_traverse_cb)(
+    int unit, 
+    opennsl_gport_t port, 
+    int numq, 
+    uint32 flags, 
+    opennsl_gport_t gport, 
+    void *user_data);
+
+/***************************************************************************//** 
+ *\brief Traverse all added CoS queue GPORTs and call the supplied callback
+ *       routine for each one.
+ *
+ *\description Traverse all added CoS queue GPORTs and call the supplied callback
+ *           routine for each one.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cb [IN]   User-supplied callback function
+ *\param    user_data [IN]   User-supplied data passed back in callback function
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_cosq_gport_traverse(
+    int unit, 
+    opennsl_cosq_gport_traverse_cb cb, 
+    void *user_data) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure/Retrieve enable/disable state of a cos level in a queue group.
+ *       OPENNSL88230 only: Also configure/Retrieve enable/disable state of a
+ *       FIFO in an egress group.
+ *
+ *\description Configure/Retrieve enable/disable state of a cos level in a queue
+ *          group. To enable/disable entire queue group, set cosq to -1. For
+ *          OPENNSL88230, this API also supports enable and disable of an
+ *          Egress Fifo. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID for a queue group
+ *\param    cosq [IN]   CoS Queue, -1 for Queue Group (set only)
+ *\param    enable [IN]   (for _set) TRUE to enable, FALSE to disable
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_enable_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_queue_t cosq, 
+    int enable) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Force an immediate counter update and retrieve statistics.
+ *
+ *\description Similar to opennsl_cosq_gport_stat_get(), value returned is
+ *          software accumulated  counter synced with the hardware counter.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID for a queue group
+ *\param    cosq [IN]   CoS Queue
+ *\param    stat [IN]   statistic to be retrieved. see table
+ *          =OPENNSL_COSQ_GPORT_STATISTICS_table .
+ *\param    value [OUT]   (for _get) statistic value
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_stat_sync_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_queue_t cosq, 
+    opennsl_cosq_gport_stats_t stat, 
+    uint64 *value) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure/Retrieve enable/disable state of a cos level in a queue group.
+ *       OPENNSL88230 only: Also configure/Retrieve enable/disable state of a
+ *       FIFO in an egress group.
+ *
+ *\description Configure/Retrieve enable/disable state of a cos level in a queue
+ *          group. To enable/disable entire queue group, set cosq to -1. For
+ *          OPENNSL88230, this API also supports enable and disable of an
+ *          Egress Fifo. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID for a queue group
+ *\param    cosq [IN]   CoS Queue, -1 for Queue Group (set only)
+ *\param    enable [OUT]   (for _set) TRUE to enable, FALSE to disable
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_enable_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_queue_t cosq, 
+    int *enable) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Enable/Disable statistics for queue group.
+ *
+ *\description Enables or disables statistics for a queue group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID for a queue group
+ *\param    enable [IN]   TRUE to enable, FALSE to disable
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_stat_enable_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    int enable) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Retrieve queue group statistic setting.
+ *
+ *\description Retrieve queue group statistic setting.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID for a queue group
+ *\param    enable [OUT]   TRUE for enable, FALSE for disable
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_stat_enable_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    int *enable) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Retrieve/Set Statistics.
@@ -964,6 +1435,146 @@ extern int opennsl_cosq_gport_statistic_set(
     uint32 flags, 
     opennsl_cosq_gport_stats_t stat, 
     uint64 value) LIB_DLL_EXPORTED ;
+
+#define OPENNSL_COSQ_GPORT_WITH_ID          0x00000001 
+#define OPENNSL_COSQ_GPORT_SCHEDULER        0x00000002 
+#define OPENNSL_COSQ_GPORT_OVERLAY          0x00000004 
+#define OPENNSL_COSQ_GPORT_UCAST_QUEUE_GROUP 0x00000008 
+#define OPENNSL_COSQ_GPORT_DESTMOD_UCAST_QUEUE_GROUP 0x00000010 
+#define OPENNSL_COSQ_GPORT_MCAST_QUEUE      0x00000010 
+#define OPENNSL_COSQ_GPORT_MCAST_QUEUE_GROUP 0x00000020 
+#define OPENNSL_COSQ_GPORT_SUBSCRIBER       0x00000040 
+#define OPENNSL_COSQ_GPORT_EGRESS_GROUP     0x00000080 
+#define OPENNSL_COSQ_GPORT_DISABLE          0x00000100 /**< Disable queue, used
+                                                          for
+                                                          OPENNSL_COSQ_GPORT_CALENDAR
+                                                          scheduling discipline */
+/***************************************************************************//** 
+ *\brief Allocate/Retrieve unicast queue group and scheduler queue group
+ *       configuration.
+ *
+ *\description These APIs are used to allocate/retrieve unicast or multicast
+ *          queue group or a scheduler queue group configuration. Scheduler
+ *          queue groups are used to implement H-QoS. The set of CoS queues
+ *          are uniquely identified with a GPORT ID, which represents the base
+ *          CoS queue in the set. The GPORT ID is allocated from the next
+ *          available queue in group of queues for the port or specified by
+ *          the  input when the OPENNSL_COSQ_GPORT_WITH_ID flag is set. But
+ *          the  flag OPENNSL_COSQ_GPORT_WITH_ID is only supported for a few
+ *          devices. OPENNSL_GPORT_TYPE_UCAST_QUEUE_GROUP,
+ *          OPENNSL_GPORT_TYPE_MCAST_QUEUE_GROUP, or
+ *          OPENNSL_GPORT_TYPE_SCHEDULER type of GPORT can be added for
+ *          hierarchical queuing (see also, =opennsl_cosq_gport_attach API).
+ *          Depending on the functionality physical_port parameter can have
+ *          one of the following values       unicast queue group   =>
+ *          OPENNSL_GPORT_MODPORT_SET()            multicast queue group =>
+ *          OPENNSL_GPORT_MODPORT_SET()            scheduler queue group =>
+ *          OPENNSL_GPORT_NULL
+ *          When allocating a queue group the req_gport parameter direction
+ *          depends on the flags. If OPENNSL_COSQ_GPORT_WITH_ID is specified
+ *          the input direction is valid. Depending on the functionality the
+ *          following macros can be used to create the req_gport.      
+ *          unicast queue group   => OPENNSL_GPORT_UCAST_QUEUE_GROUP_SET()    
+ *                 multicast queue group =>
+ *          OPENNSL_GPORT_MCAST_QUEUE_GROUP_SET()            scheduler queue
+ *          group => OPENNSL_GPORT_SCHEDULER_SET()      req_gport parameter is
+ *          always updated and should be subsequently used by the user.
+ *          When the OPENNSL_COSQ_GPORT_WITH_ID flag is set, the value
+ *          provided in the gport parameter is used as the GPORT ID, otherwise
+ *          a unique GPORT ID will be allocated and returned. The feature
+ *          using OPENNSL_COSQ_GPORT_WITH_ID to allocate a queue group is only
+ *          supported for a few devices.
+ *          For some devices that may not have the ability to shape every port
+ *          or queue, the application can control whether the gport must be
+ *          allocated from a shapeable or non-shapeable area.  This can be
+ *          done by specifying the flags OPENNSL_COSQ_GPORT_WITH_SHAPING or
+ *          OPENNSL_COSQ_GPORT_WITHOUT_SHAPING, respectively.  If neither flag
+ *          is specified, the API will allocate a gport without paying any
+ *          attention to whether it would be possible to configure a shaper on
+ *          such port later.
+ *          When the OPENNSL_COSQ_GPORT_OVERLAY flag is set, it allows overlay
+ *          of queues that were previously allocated.
+ *          When the OPENNSL_COSQ_GPORT_SUBSCRIBER flag is set, scheduling for
+ *          the queue group will be done locally and will not involve the
+ *          central arbiter. A local gport should be added only for ports
+ *          which are local to that device.
+ *          When the OPENNSL_COSQ_GPORT_MULTIPATH flag is set, a multipath
+ *          shaper gport is created. Scheduler nodes  on the same level could
+ *          be added to the multipath shaper gport. The aggregated traffic
+ *          from all nodes is shaped by the multipath shaper. The shaping rate
+ *          of multipath shaper is controlled by calling
+ *          =opennsl_cosq_gport_bandwidth_set API with the multipath shaper
+ *          gport
+ *          When the config.opennsl variable fabric_egress_setup=0 is set,
+ *          FIFO-level egress support becomes available.  The
+ *          OPENNSL_COSQ_GPORT_EGRESS_GROUP flag is used to enable egress
+ *          group support. Egress Group gports are similar to egress child
+ *          gports in all other aspects. The egress group  gport connects a
+ *          number of fifos to a subport and allows access at the FIFO-level.
+ *          Multiple egress groups can be connected to the same subport up to
+ *          sixteen fifos. In the case of egress gports, the num_cos_levels
+ *          field is used to indicate the number of fifos to be associated
+ *          with that egress gport.
+ *          When the OPENNSL_COSQ_GPORT_DESTMOD_UCAST_QUEUE_GROUP flag is set,
+ *          a set of virtual queue group (DMVOQ)  is allocated.
+ *          On network switch chips, When the
+ *          OPENNSL_COSQ_GPORT_DESTMOD_UCAST_QUEUE_GROUP flag is used with the
+ *          combination of OPENNSL_COSQ_GPORT_WITH_ID,          the value
+ *          provided in gport parameters is used as the GPORT_ID.          
+ *          But scheduling mode need to programmed again as per the scheduling
+ *          hierarcy.  API opennsl_cosq_port_sched_set() can be used to set
+ *          the scheduling mode to be Strict/WRR.
+ *          When the OPENNSL_COSQ_GPORT_VLAN_UCAST_QUEUE_GROUP flag is set, a
+ *          queue to support service based queuing is allocated
+ *          When a parent node is created by using opennsl_cosq_gport_add API
+ *          call by passing num_cos_levels = -1 then that node can have any
+ *          number of child nodes.
+ *          On the chips network switch, the first call to the API
+ *          opennsl_cosq_gport_add will destroy the default schedule
+ *          hierarchies for all of ports and traffic will not flow on those
+ *          ports until new schedule hierarchies for those ports are built.
+ *          On the chip network switch API opennsl_cosq_gport_add return
+ *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
+ *          during init. On the chip network switch because of fixed hierarchy
+ *          scheduler the scope of COSQ GPORT is not global but it is local to
+ *          per unit. So we should not modify the MODID dynamically.
+ *          Some device configuration support multiple queue groups on a
+ *          physical port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   (for _add) GPORT ID physical port (For DNX, this should be
+ *          local port)
+ *\param    numq [IN]
+ *\param    flags [IN]   (for _add) Specifies configuration. Valid flags listed at
+ *          =OPENNSL_COSQ_GPORT_FLAGS_table
+ *\param    gport [IN,OUT]   (for _get) GPORT ID for a queue group
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_add(
+    int unit, 
+    opennsl_gport_t port, 
+    int numq, 
+    uint32 flags, 
+    opennsl_gport_t *gport) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Deletes queue group.
+ *
+ *\description Deletes queue group. It could be a unicast, scheduler or a
+ *          multicast queue group.
+ *          On the chip network switch API opennsl_cosq_gport_delete return
+ *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
+ *          during init.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID of the queue group that has to be deleted
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_delete(
+    int unit, 
+    opennsl_gport_t gport) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Get or set the mapping from internal priority to CoS queue.
@@ -1245,6 +1856,155 @@ extern int opennsl_cosq_gport_sched_config_get(
     int int_pri, 
     uint32 *flags) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Attach/Detach the output of a GPORT to the input of a scheduler GPORT.
+ *
+ *\description These APIs can be used to attach/detach a sched GPORT (sched_port)
+ *          to the  parent GPORT (input_port) to form a queuing hierarchy. The
+ *          connect is done at the specified CoS queue of the parent GPORT. A
+ *          cosq value of -1 will attach the sched GPORT to the first unused
+ *          CoS queue of the parent GPORT (going from higher to lower CoS
+ *          queue priority).
+ *          On the chip network switch: opennsl_cosq_gport_attach_get can be
+ *          used to get the parent node gport and cosq value will represent
+ *          the CoS queue value of the parent node i.e. the index at which
+ *          parent is attached.
+ *          opennsl_cosq_gport_attach and opennsl_cosq_gport_detach APIs are
+ *          only supported for CPU port.
+ *          CPU Queues needed to be mapped to CMC0 Channel 0 should be
+ *          attached to 3rd index of L0 level scheduler node of CPU port. CPU
+ *          Queues needed to be mapped to CMC0 Channel 1 should be attached to
+ *          0th index of L0 level scheduler node of CPU port. CPU Queues
+ *          needed to be mapped to CMC0 Channel 2 should be attached to 1st
+ *          index of L0 level scheduler node of CPU port. CPU Queues needed to
+ *          be mapped to CMC0 Channel 3 should be attached to 2nd index of L0
+ *          level scheduler node of CPU port. CPU Queues needed to be mapped
+ *          to CMC1 Channel 1 should be attached to 7th index of L0 level
+ *          scheduler node of CPU port. CPU Queues needed to be mapped to CMC2
+ *          Channel 1 should be attached to 8th index of L0 level scheduler
+ *          node of CPU port. And CPU Queues after detach using
+ *          opennsl_cosq_gport_detach API will get attached to 9th index of L0
+ *          level scheduler node CPU port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    sched_port [IN]   GPORT ID that gets attached to input_port
+ *\param    input_port [IN]   GPORT ID to which sched_port gets attached
+ *\param    cosq [IN]   CoS queue to attach to
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_cosq_gport_attach(
+    int unit, 
+    opennsl_gport_t sched_port, 
+    opennsl_gport_t input_port, 
+    opennsl_cos_queue_t cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Attach/Detach the output of a GPORT to the input of a scheduler GPORT.
+ *
+ *\description These APIs can be used to attach/detach a sched GPORT (sched_port)
+ *          to the  parent GPORT (input_port) to form a queuing hierarchy. The
+ *          connect is done at the specified CoS queue of the parent GPORT. A
+ *          cosq value of -1 will attach the sched GPORT to the first unused
+ *          CoS queue of the parent GPORT (going from higher to lower CoS
+ *          queue priority).
+ *          On the chip network switch: opennsl_cosq_gport_attach_get can be
+ *          used to get the parent node gport and cosq value will represent
+ *          the CoS queue value of the parent node i.e. the index at which
+ *          parent is attached.
+ *          opennsl_cosq_gport_attach and opennsl_cosq_gport_detach APIs are
+ *          only supported for CPU port.
+ *          CPU Queues needed to be mapped to CMC0 Channel 0 should be
+ *          attached to 3rd index of L0 level scheduler node of CPU port. CPU
+ *          Queues needed to be mapped to CMC0 Channel 1 should be attached to
+ *          0th index of L0 level scheduler node of CPU port. CPU Queues
+ *          needed to be mapped to CMC0 Channel 2 should be attached to 1st
+ *          index of L0 level scheduler node of CPU port. CPU Queues needed to
+ *          be mapped to CMC0 Channel 3 should be attached to 2nd index of L0
+ *          level scheduler node of CPU port. CPU Queues needed to be mapped
+ *          to CMC1 Channel 1 should be attached to 7th index of L0 level
+ *          scheduler node of CPU port. CPU Queues needed to be mapped to CMC2
+ *          Channel 1 should be attached to 8th index of L0 level scheduler
+ *          node of CPU port. And CPU Queues after detach using
+ *          opennsl_cosq_gport_detach API will get attached to 9th index of L0
+ *          level scheduler node CPU port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    sched_port [IN]   GPORT ID that gets attached to input_port
+ *\param    input_port [IN]   GPORT ID to which sched_port gets attached
+ *\param    cosq [IN]   CoS queue to attach to
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_cosq_gport_detach(
+    int unit, 
+    opennsl_gport_t sched_port, 
+    opennsl_gport_t input_port, 
+    opennsl_cos_queue_t cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Attach/Detach the output of a GPORT to the input of a scheduler GPORT.
+ *
+ *\description These APIs can be used to attach/detach a sched GPORT (sched_port)
+ *          to the  parent GPORT (input_port) to form a queuing hierarchy. The
+ *          connect is done at the specified CoS queue of the parent GPORT. A
+ *          cosq value of -1 will attach the sched GPORT to the first unused
+ *          CoS queue of the parent GPORT (going from higher to lower CoS
+ *          queue priority).
+ *          On the chip network switch: opennsl_cosq_gport_attach_get can be
+ *          used to get the parent node gport and cosq value will represent
+ *          the CoS queue value of the parent node i.e. the index at which
+ *          parent is attached.
+ *          opennsl_cosq_gport_attach and opennsl_cosq_gport_detach APIs are
+ *          only supported for CPU port.
+ *          CPU Queues needed to be mapped to CMC0 Channel 0 should be
+ *          attached to 3rd index of L0 level scheduler node of CPU port. CPU
+ *          Queues needed to be mapped to CMC0 Channel 1 should be attached to
+ *          0th index of L0 level scheduler node of CPU port. CPU Queues
+ *          needed to be mapped to CMC0 Channel 2 should be attached to 1st
+ *          index of L0 level scheduler node of CPU port. CPU Queues needed to
+ *          be mapped to CMC0 Channel 3 should be attached to 2nd index of L0
+ *          level scheduler node of CPU port. CPU Queues needed to be mapped
+ *          to CMC1 Channel 1 should be attached to 7th index of L0 level
+ *          scheduler node of CPU port. CPU Queues needed to be mapped to CMC2
+ *          Channel 1 should be attached to 8th index of L0 level scheduler
+ *          node of CPU port. And CPU Queues after detach using
+ *          opennsl_cosq_gport_detach API will get attached to 9th index of L0
+ *          level scheduler node CPU port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    sched_port [IN]   GPORT ID that gets attached to input_port
+ *\param    input_port [OUT]   GPORT ID to which sched_port gets attached
+ *\param    cosq [OUT]   CoS queue to attach to
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_cosq_gport_attach_get(
+    int unit, 
+    opennsl_gport_t sched_port, 
+    opennsl_gport_t *input_port, 
+    opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the child node GPORT atatched to N-th index (cosq) of the scheduler
+ *       GPORT.
+ *
+ *\description This API can be used to get child node GPORT atatched to N-th
+ *          index (cosq) of the scheduler GPORT.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    in_gport [IN]   Scheduler GPORT ID
+ *\param    cosq [IN]   COS queue attached to.
+ *\param    out_gport [OUT]   Child GPORT ID.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_child_get(
+    int unit, 
+    opennsl_gport_t in_gport, 
+    opennsl_cos_queue_t cosq, 
+    opennsl_gport_t *out_gport) LIB_DLL_EXPORTED ;
+
 /** XGS3 cosq counters */
 typedef enum opennsl_cosq_stat_e {
     opennslCosqStatDroppedPackets = 0,  /**< Dropped packet count. */
@@ -1286,6 +2046,36 @@ typedef enum opennsl_cosq_stat_e {
  *\retval    OPENNSL_E_XXX
  ******************************************************************************/
 extern int opennsl_cosq_stat_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_queue_t cosq, 
+    opennsl_cosq_stat_t stat, 
+    uint64 *value) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Force an immediate counter update and retrieve various MMU statistics.
+ *
+ *\description Similar to opennsl_cosq_stat_get(), value returned is software
+ *          accumulated  counter synced with the hardware counter.
+ *          On the chip network switch, for stat
+ *          opennslCosqStatOutPackets/opennslCosqStatOutBytes because of clear
+ *          on read implementation in hardware, opennsl_cosq_stat_sync_get on
+ *          OutPackets will have impact on OutBytes counters and vice-versa.
+ *          Hence recommendation is to use  opennsl_stat_sync(unit) api before
+ *          the opennsl_cosq_stat_get API instead of using 
+ *          opennsl_cosq_stat_sync_get API.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   GPORT ID.
+ *\param    cosq [IN]   CoS Queue.
+ *\param    stat [IN]   Statistic to be retrieved. See table
+ *          =OPENNSL_COSQ_STAT_table .
+ *\param    value [OUT]   (for _get) statistic value.
+ *
+ *\retval    OPENNSL_E_NONE
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_stat_sync_get(
     int unit, 
     opennsl_gport_t gport, 
     opennsl_cos_queue_t cosq, 

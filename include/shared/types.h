@@ -22,6 +22,15 @@
 #define   _SHR_TYPES_H_
 
 typedef enum  {
+    _SHR_COLOR_GREEN = 0,
+    _SHR_COLOR_YELLOW = 1,
+    _SHR_COLOR_RED = 2,
+    _SHR_COLOR_BLACK = 3,
+    _SHR_COLOR_PRESERVE = 4,
+    _SHR_COLOR_COUNT = 5
+} _shr_color_t;
+
+typedef enum  {
     _SHR_FORWARDING_TYPE_L2 = 0,            /* L2 switching forwarding. */
     _SHR_FORWARDING_TYPE_IP4UCAST = 1,      /* IPv4 Unicast Routing forwarding. */
     _SHR_FORWARDING_TYPE_IP4MCAST = 2,      /* IPv4 Multicast Routing forwarding. */

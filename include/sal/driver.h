@@ -1,6 +1,6 @@
 /*********************************************************************
 *
-* (C) Copyright Broadcom Corporation 2013-2015
+* (C) Copyright Broadcom Corporation 2013-2016
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -28,6 +28,8 @@ typedef struct opennsl_config_s
 {
   char         *cfg_fname;  /* Configuration file name along with the path */
   unsigned int flags;       /* OpenNSL boot up flags */
+  char         *wb_fname;   /* File to store warmboot configuration *
+                            * along with the path */
 } opennsl_init_t;
 
 /*****************************************************************//**

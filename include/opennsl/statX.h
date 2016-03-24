@@ -18,6 +18,58 @@
 
 #include <opennsl/types.h>
 
+/** Stat Group Mode Attribute Selectors */
+typedef enum opennsl_stat_group_mode_attr_e {
+    opennslStatGroupModeAttrColor = 1,  /**< Color Selector: Possible
+                                           Value:opennslColorGreen|Yellow|REd or
+                                           oxFFFFFFFF */
+    opennslStatGroupModeAttrFieldIngressColor = 2, /**< Field Ingress Color Selector:
+                                           Possible
+                                           Values:opennslColorGreen|Yellow|REd
+                                           or STAT_GROUP_MODE_ATTR_ALL_VALUES
+                                           for all */
+    opennslStatGroupModeAttrIntPri = 3, /**< Internal Priority Selector: Possible
+                                           Values: 0 to 15 or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrVlan = 4,   /**< Vlan Type Selector: Possible Values:
+                                           opennslStatGroupModeVlanAttr */
+    opennslStatGroupModeAttrOuterPri = 5, /**< Outer Vlan Priority Selector:
+                                           Possible Values: 0 to 7 or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrInnerPri = 6, /**< Inner Vlan Priority Selector:
+                                           Possible Values: 0 to 7 or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrPort = 7,   /**< Logical Port Selector: Possible
+                                           Values:<MaxLogicalPort> or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrTosDscp = 8, /**< Type Of Service Selector(DSCP :
+                                           Differentiated services Code Point):
+                                           Possible Values:<6b:TOS Val> or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrPktType = 10, /**< Packet Type Selector: Possible
+                                           Values:<opennslStatGroupModeAttrPktType*> */
+    opennslStatGroupModeAttrIngNetworkGroup = 11, /**< Ingress Network Group Selector:
+                                           Possible Values:<Value> or
+                                           STAT_GROUP_MODE_ATTR_ALL_VALUES for
+                                           all */
+    opennslStatGroupModeAttrDrop = 13,  /**< Drop Selector: Possible Values:<0 or
+                                           1> */
+    opennslStatGroupModeAttrPacketTypeIp = 14 /**< Ip Packet Selector: Possible
+                                           Values:<0 or 1> */
+} opennsl_stat_group_mode_attr_t;
+
+/** Stat Flex Group Attribute Selector */
+typedef struct opennsl_stat_group_mode_attr_selector_s {
+    uint32 counter_offset;              /**< Counter Offset */
+    opennsl_stat_group_mode_attr_t attr; /**< Attribute Selector */
+    uint32 attr_value;                  /**< Attribute Values */
+} opennsl_stat_group_mode_attr_selector_t;
+
 /***************************************************************************//** 
  *\brief Initialize an attribute selector of Stat Flex Group Mode.
  *

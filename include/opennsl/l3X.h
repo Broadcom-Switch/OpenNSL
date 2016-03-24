@@ -28,6 +28,74 @@
                                                           lapsed, use optimal
                                                           member, else use
                                                           assigned member. */
+/***************************************************************************//** 
+ *\brief Attach counters entries to the given L3 Egress interface.
+ *
+ *\description This API will attach counters entries to the given L3 Egress
+ *          interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a egress L3 object
+ *\param    stat_counter_id [IN]   Stat Counter ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_egress_stat_attach(
+    int unit, 
+    opennsl_if_t intf_id, 
+    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Detach counters entries to the given L3 Egress interface.
+ *
+ *\description This API will detach counters entries to the given L3 Egress
+ *          interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a egress L3 object.
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_egress_stat_detach(
+    int unit, 
+    opennsl_if_t intf_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Attach counters entries to the given L3 ingress interface.
+ *
+ *\description This API will attach counters entries to the given L3 ingress
+ *          Interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a L3 ingress object or a valid VLAN
+ *\param    stat_counter_id [IN]   Stat Counter ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_ingress_stat_attach(
+    int unit, 
+    opennsl_if_t intf_id, 
+    uint32 stat_counter_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Detach counters entries to the given L3 ingress interface.
+ *
+ *\description This API will detach counters entries to the given L3 ingress
+ *          Interface.
+ *          (Ref: =FLEXIBLE_COUNTER_s).
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf_id [IN]   Interface ID of a L3 ingress object or a valid VLAN
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_l3_ingress_stat_detach(
+    int unit, 
+    opennsl_if_t intf_id) LIB_DLL_EXPORTED ;
+
 #define OPENNSL_L3_IP4_OPTIONS_WITH_ID  0x00000001 /**< With ID option creation */
 #define OPENNSL_L3_IP4_OPTIONS_REPLACE  0x00000002 /**< Replace existing entry */
 /** L3 IP options handing actions. */

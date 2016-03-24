@@ -19,6 +19,29 @@
 #include <opennsl/types.h>
 
 /***************************************************************************//** 
+ *\brief Get the multicast encapsulation ID for VXLAN replication.
+ *
+ *\description Get the multicast encapsulation ID for VXLAN replication. The
+ *          encapsulation ID is an opaque object passed in to
+ *          opennsl_multicast_egress_* APIs when adding/removing ports to a
+ *          multicast group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *\param    port [IN]   Physical GPORT ID
+ *\param    vxlan_port_id [IN]   VXLAN GPORT ID
+ *\param    encap_id [OUT]   Encapsulation ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_multicast_vxlan_encap_get(
+    int unit, 
+    opennsl_multicast_t group, 
+    opennsl_gport_t port, 
+    opennsl_gport_t vxlan_port_id, 
+    opennsl_if_t *encap_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Set/get miscellaneous per multicast group controls.
  *
  *\description Sets/gets miscellaneous per multicast group parameters.

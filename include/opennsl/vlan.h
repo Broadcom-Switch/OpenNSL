@@ -297,6 +297,7 @@ typedef enum opennsl_vlan_control_e {
                                            CPU. */
     opennslVlanShared = 3,              /**< Shared vs. Independent VLAN Learning. */
     opennslVlanSharedID = 4,            /**< Shared Learning VLAN ID. */
+    opennslVlanTranslate = 5,           /**< Chip is in VLAN translate mode. */
     opennslVlanIgnorePktTag = 6,        /**< Ignore Packet VLAN tag. Treat packet
                                            as untagged. */
     opennslVlanMemberMismatchToCpu = 21 /**< Packets' incoming port is not the

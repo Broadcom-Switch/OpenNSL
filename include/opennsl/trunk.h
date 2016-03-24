@@ -30,6 +30,7 @@
                                                   trunk group */
 #define OPENNSL_TRUNK_UNSPEC_INDEX  -1         /**< Let software set DLF/MC/IPMC. */
 #define OPENNSL_TRUNK_PSC_SRCDSTMAC 3          /**< Source+dest MAC address. */
+#define OPENNSL_TRUNK_PSC_DSTIP     5          /**< Destination IP address. */
 #define OPENNSL_TRUNK_PSC_SRCDSTIP  6          /**< Source+dest IP address. */
 #define OPENNSL_TRUNK_PSC_PORTFLOW  9          /**< Enhanced hashing. */
 #define OPENNSL_TRUNK_FLAG_FAILOVER_NEXT    0x0001     /**< Failover port defaults

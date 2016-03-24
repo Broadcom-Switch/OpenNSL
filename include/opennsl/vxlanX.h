@@ -24,9 +24,12 @@
 #include <opennsl/vlan.h>
 
 #if defined(INCLUDE_L3)
-#define OPENNSL_VXLAN_VPN_ELAN          0x00000002 
-#define OPENNSL_VXLAN_VPN_WITH_ID       0x00000004 
-#define OPENNSL_VXLAN_VPN_WITH_VPNID    0x00000008 
+#define OPENNSL_VXLAN_VPN_ELINE             0x00000001 
+#define OPENNSL_VXLAN_VPN_ELAN              0x00000002 
+#define OPENNSL_VXLAN_VPN_WITH_ID           0x00000004 
+#define OPENNSL_VXLAN_VPN_WITH_VPNID        0x00000008 
+#define OPENNSL_VXLAN_VPN_SERVICE_TAGGED    0x00000010 
+#define OPENNSL_VXLAN_VPN_SERVICE_VLAN_DELETE 0x00000080 
 #endif
 #if defined(INCLUDE_L3)
 #endif
@@ -178,8 +181,10 @@ extern int opennsl_vxlan_vpn_traverse(
 #if defined(INCLUDE_L3)
 /** VXLAN port match criteria. */
 typedef enum opennsl_vxlan_port_match_e {
+    OPENNSL_VXLAN_PORT_MATCH_INVALID = 0, /**< Illegal. */
     OPENNSL_VXLAN_PORT_MATCH_NONE = 1,  /**< No source match criteria. */
     OPENNSL_VXLAN_PORT_MATCH_PORT = 2,  /**< {Module, Port} or Trunk. */
+    OPENNSL_VXLAN_PORT_MATCH_PORT_VLAN = 3, /**< Mod/port/trunk + outer VLAN. */
     OPENNSL_VXLAN_PORT_MATCH_VN_ID = 7, /**< Match VXLAN VN_ID */
 } opennsl_vxlan_port_match_t;
 #endif

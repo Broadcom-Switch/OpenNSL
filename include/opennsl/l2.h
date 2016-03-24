@@ -558,6 +558,36 @@ extern int opennsl_l2_age_timer_get(
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Temporarily stop/restore L2 table from changing.
+ *
+ *\description Use opennsl_l2_addr_freeze() to temporarily stop the L2 table from
+ *          being modified by any activity including learning, aging, or
+ *          software modifications by another task. Use opennsl_l2_addr_thaw()
+ *          to restore normal L2 table activity.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_freeze(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Temporarily stop/restore L2 table from changing.
+ *
+ *\description Use opennsl_l2_addr_freeze() to temporarily stop the L2 table from
+ *          being modified by any activity including learning, aging, or
+ *          software modifications by another task. Use opennsl_l2_addr_thaw()
+ *          to restore normal L2 table activity.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_addr_thaw(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Initialize the L2 cache.
  *
  *\description Clear all entries and preload a few entries to match previous
@@ -676,6 +706,28 @@ extern int opennsl_l2_cache_delete_all(
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
+/***************************************************************************//** 
+ *\brief Add a destination L2 address to trigger tunnel processing.
+ *
+ *\description Add a destination L2 address (MAC, VLAN) to initiate tunnel/MPLS
+ *          processing. Frames received with this destination L2 address will
+ *          be checked for tunnel and MPLS processing.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    mac [IN]   MAC address
+ *\param    vlan [IN]   VLAN ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_tunnel_add(
+    int unit, 
+    opennsl_mac_t mac, 
+    opennsl_vlan_t vlan) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 typedef int (*opennsl_l2_traverse_cb)(
@@ -712,6 +764,8 @@ typedef struct opennsl_l2_station_s {
     uint32 flags;               /**< OPENNSL_L2_STATION_xxx flags. */
     opennsl_mac_t dst_mac;      /**< Destination MAC address to match. */
     opennsl_mac_t dst_mac_mask; /**< Destination MAC address mask value. */
+    opennsl_vlan_t vlan;        /**< VLAN to match. */
+    opennsl_vlan_t vlan_mask;   /**< VLAN mask value. */
 } opennsl_l2_station_t;
 
 #define OPENNSL_L2_STATION_WITH_ID  (1 << 0)   /**< Use the specified Station ID. */

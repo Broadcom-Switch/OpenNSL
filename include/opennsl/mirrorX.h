@@ -126,6 +126,12 @@ typedef struct opennsl_mirror_destination_s {
                                            values for DNX are 0, 256. */
 } opennsl_mirror_destination_t;
 
+/** opennsl_mirror_pkt_header_updates_t_init. */
+typedef int (*opennsl_mirror_destination_traverse_cb)(
+    int unit, 
+    opennsl_mirror_destination_t *mirror_dest, 
+    void *user_data);
+
 /***************************************************************************//** 
  *\brief Initialize a mirror destination structure.
  *
@@ -197,6 +203,23 @@ extern int opennsl_mirror_destination_get(
 extern int opennsl_mirror_destination_destroy(
     int unit, 
     opennsl_gport_t mirror_dest_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Traverse over all installed mirror destination descriptors.
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cb [IN]   Traverse callback.
+ *\param    user_data [IN]   User provided cookie.
+ *
+ *\retval    OPENNSL_E_XXX Traverse over all installed mirror destination
+ *          descriptors. For each valid destination user callback is called with
+ *          user_data provided in function call.
+ ******************************************************************************/
+extern int opennsl_mirror_destination_traverse(
+    int unit, 
+    opennsl_mirror_destination_traverse_cb cb, 
+    void *user_data) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Set the mirror-to port bitmap for the device.
