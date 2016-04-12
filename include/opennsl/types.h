@@ -137,6 +137,7 @@ typedef int opennsl_cos_queue_t;
 /** opennsl_module_t */
 typedef int opennsl_module_t;
 
+#define OPENNSL_TRUNK_INVALID   ((opennsl_trunk_t) -1) 
 /** opennsl_trunk_t */
 typedef int opennsl_trunk_t;
 

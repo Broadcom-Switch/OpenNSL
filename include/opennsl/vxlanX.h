@@ -205,6 +205,7 @@ typedef enum opennsl_vxlan_port_match_e {
 typedef struct opennsl_vxlan_port_s {
     opennsl_gport_t vxlan_port_id;      /**< GPORT identifier. */
     uint32 flags;                       /**< OPENNSL_VXLAN_PORT_xxx. */
+    uint32 reserved1; 
     uint16 int_pri;                     /**< Internal Priority */
     uint8 pkt_pri;                      /**< Packet Priority */
     uint8 pkt_cfi;                      /**< Packet CFI */
@@ -218,6 +219,7 @@ typedef struct opennsl_vxlan_port_s {
     opennsl_gport_t egress_tunnel_id;   /**< Tunnel Initiator ID */
     opennsl_gport_t match_tunnel_id;    /**< Tunnel Terminator ID */
     opennsl_if_t egress_if;             /**< VXLAN egress object. */
+    opennsl_switch_network_group_t reserved2; 
 } opennsl_vxlan_port_t;
 #endif
 

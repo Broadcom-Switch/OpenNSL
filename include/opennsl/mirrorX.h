@@ -107,12 +107,17 @@ typedef struct opennsl_mirror_destination_s {
                                            only if
                                            OPENNSL_MIRROR_DEST_TUNNEL_IP_GRE is
                                            set */
+    uint16 reserved1; 
     uint8 pkt_prio;                     /**< L2 header PCP */
+    uint32 reserved2; 
+    uint32 reserved3; 
     uint8 int_pri;                      /**< Internal Priority */
     uint16 etag_src_vid;                /**< Extended (source) port vlan id */
     uint16 etag_dst_vid;                /**< Extended (destination) port vlan id */
     uint16 udp_src_port;                /**< UDP source port */
     uint16 udp_dst_port;                /**< UDP destination port */
+    uint32 reserved4; 
+    uint32 reserved5; 
     uint8 recycle_context;              /**< recycle context of egress originating
                                            packets */
     uint16 packet_copy_size;            /**<  If non zero, the copied packet will

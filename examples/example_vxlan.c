@@ -389,7 +389,7 @@ static int tunnel_terminator_setup(int unit, opennsl_ip_t rip, opennsl_ip_t lip,
  *   Access Port2 --> Segment 2 (VPN 2) /
  */
 
-static int example_vxlan()
+static void example_vxlan()
 {
   int unit = DEFAULT_UNIT;
 

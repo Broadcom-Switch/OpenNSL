@@ -206,6 +206,36 @@ struct opennsl_pkt_s {
         (pkt)->blk_count = 1; \
     } while (0) 
 /***************************************************************************//** 
+ *\brief Initialize and set up a opennsl_pkt_t structure.
+ *
+ *\description If pkt is NULL, a new packet structure is allocated using
+ *          sal_alloc .  The packet structure is set up with the indicated
+ *          data blocks.  If the total number of bytes is less than the
+ *          minimum permitted, the routine fails.  If no data blocks are
+ *          provided, the function still succeeds, and a single data block can
+ *          be attached using the OPENNSL_PKT_ONE_BUF_SETUP macro.
+ *          This routine calls =opennsl_pkt_flags_len_setup before returning.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    pkt [IN]   Pointer to packet to setup; may be NULL
+ *\param    blks [IN]   Pointer to array of gather blocks for the packet
+ *\param    blk_count [IN]   Number of elements in blks array
+ *\param    flags [IN]   See =pkt_flags_table for TX related flags
+ *\param    pkt_buf [OUT]   Pointer to a cleared packet or NULL if failed to
+ *          allocate packet
+ *
+ *\retval    OPENNSL_E_NONE On success
+ *\retval    OPENNSL_E_MEMORY Otherwise
+ ******************************************************************************/
+extern int opennsl_pkt_clear(
+    int unit, 
+    opennsl_pkt_t *pkt, 
+    opennsl_pkt_blk_t *blks, 
+    int blk_count, 
+    uint32 flags, 
+    opennsl_pkt_t **pkt_buf) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Initialize packet flags based on the type of device.
  *
  *\description Based on the device type of unit, initializes the flags for
@@ -221,6 +251,31 @@ extern int opennsl_pkt_flags_init(
     int unit, 
     opennsl_pkt_t *pkt, 
     uint32 init_flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Copy data into the data blocks of a packet structure.
+ *
+ *\description Copies len bytes of data from src to the packet's data starting at
+ *          offset dest_byte.  This takes into account the block structure of
+ *          the packet.  dest_byte is an absolute offset from the first data
+ *          byte of the first data block of the packet. This routine does not
+ *          update the packets data length, hence if number  of bytes copied
+ *          is different from pkt_data.len member then Macro 
+ *          OPENNSL_PKT_TX_LEN_SET should be used to adjust it.
+ *
+ *\param    pkt [IN]   Structure to be updated
+ *\param    dest_byte [IN]   Byte offset in the packet's data buffer
+ *\param    src [IN]   Pointer to source data to copy
+ *\param    len [IN]   Number of bytes to copy
+ *
+ *\retval    The number of bytes copied. If there is not sufficient space in the
+ *\retval    packet's data buffer, this may be less than len.
+ ******************************************************************************/
+extern int opennsl_pkt_memcpy(
+    opennsl_pkt_t *pkt, 
+    int dest_byte, 
+    uint8 *src, 
+    int len) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Allocate or deallocate a packet structure and packet data.
@@ -271,6 +326,42 @@ extern int opennsl_pkt_alloc(
 extern int opennsl_pkt_free(
     int unit, 
     opennsl_pkt_t *pkt) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL packet structure.
+ *
+ *\description Initializes a OPENNSL packet structure to default values. This
+ *          function should be used to initialize any OPENNSL packet structure
+ *          prior to filling it out and passing it to an API function. This
+ *          ensures that subsequent API releases may add new structure members
+ *          to the opennsl_pkt_t structure, and opennsl_pkt_t_init will
+ *          initialize the new members to correct default values.
+ *
+ *\param    pkt [IN,OUT]   Pointer to OPENNSL packet structure to initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_pkt_t_init(
+    opennsl_pkt_t *pkt) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL packet block structure.
+ *
+ *\description Initializes a OPENNSL packet block structure to default values.
+ *          This function should be used to initialize any OPENNSL packet
+ *          block structure prior to filling it out and passing it to an API
+ *          function. This ensures that subsequent API releases may add new
+ *          structure members to the opennsl_pkt_blk_t structure, and
+ *          opennsl_pkt_blk_t_init will initialize the new members to correct
+ *          default values.
+ *
+ *\param    pkt_blk [IN,OUT]   Pointer to OPENNSL packet block structure to
+ *          initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_pkt_blk_t_init(
+    opennsl_pkt_blk_t *pkt_blk) LIB_DLL_EXPORTED ;
 
 #include <opennsl/pktX.h>
 #endif /* __OPENNSL_PKT_H__ */

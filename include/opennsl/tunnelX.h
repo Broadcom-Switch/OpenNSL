@@ -50,7 +50,13 @@ typedef struct opennsl_tunnel_terminator_s {
                                        tunnel */
     opennsl_gport_t remote_port;    /**< Remote termination */
     opennsl_gport_t tunnel_id;      /**< Tunnel id */
+    int reserved1; 
+    opennsl_multicast_t reserved2; 
+    opennsl_failover_t reserved3; 
+    opennsl_failover_t reserved4; 
+    opennsl_gport_t reserved5; 
     opennsl_if_t tunnel_if;         /**< hierarchical interface. */
+    int reserved6; 
     int qos_map_id;                 /**< QoS DSCP map this tunnel. */
     int inlif_counting_profile;     /**< In LIF counting profile */
 } opennsl_tunnel_terminator_t;

@@ -161,6 +161,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyTtl = 32,        /**<  Time To Live/Hop Limit. */
     opennslFieldQualifyIp6HopLimit = opennslFieldQualifyTtl, /**<  IPv6 Hop Limit. */
     opennslFieldQualifyDstPort = 40,    /**<  Destination Module ID and Port . */
+    opennslFieldQualifyDstTrunk = 41,   /**<  Destination Trunk Group ID . */
     opennslFieldQualifyPacketRes = 43,  /**<  Pkt resolution
                                            (OPENNSL_FIELD_PKT_RES_xxx). */
     opennslFieldQualifyIpProtocolCommon = 52, /**<  3: Common IP protocols. */
@@ -172,6 +173,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyStageEgress = 72, /**<  Field Processor pipeline egress
                                            stage. */
     opennslFieldQualifyInterfaceClassPort = 81, /**<  Port Class Id. */
+    opennslFieldQualifyL3Routable = 82, /**<  L3 routable bit for FB2. */
     opennslFieldQualifyL3Ingress = 85,  /**<  L3 ingress interface. */
     opennslFieldQualifyOutPort = 86,    /**<  Single Output Port. */
     opennslFieldQualifyIp4 = 87,        /**<  Qualify IpType == IPv4Any. */
@@ -247,6 +249,8 @@ typedef enum opennsl_field_action_e {
     opennslFieldActionRedirectPort = 29, /**< Redirect Packet to single port;
                                            param0: Destination modid; param1:
                                            Destination port. */
+    opennslFieldActionRedirectTrunk = 30, /**< Redirect Packet to a trunk; param0:
+                                           Destination trunk ID. */
     opennslFieldActionDrop = 39,        /**< Drop. */
     opennslFieldActionDropCancel = 40,  /**< Override another rule. */
     opennslFieldActionMirrorOverride = 41, /**< Override any mirroring for packet. */
@@ -1267,6 +1271,22 @@ extern int opennsl_field_qualify_DstPort(
  *
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
+extern int opennsl_field_qualify_DstTrunk(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_trunk_t data, 
+    opennsl_trunk_t mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
 extern int opennsl_field_qualify_L4SrcPort(
     int unit, 
     opennsl_field_entry_t entry, 
@@ -1613,6 +1633,22 @@ extern int opennsl_field_qualify_IpProtocolCommon(
  *
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
+extern int opennsl_field_qualify_L3Routable(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 data, 
+    uint8 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
 extern int opennsl_field_qualify_Vrf(
     int unit, 
     opennsl_field_entry_t entry, 
@@ -1732,6 +1768,22 @@ extern int opennsl_field_qualify_DstPort_get(
     opennsl_module_t *mask_modid, 
     opennsl_port_t *data_port, 
     opennsl_port_t *mask_port) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_DstTrunk_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_trunk_t *data, 
+    opennsl_trunk_t *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
@@ -2052,6 +2104,22 @@ extern int opennsl_field_qualify_IpProtocolCommon_get(
     int unit, 
     opennsl_field_entry_t entry, 
     opennsl_field_IpProtocolCommon_t *protocol) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_L3Routable_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 *data, 
+    uint8 *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
