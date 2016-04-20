@@ -45,7 +45,9 @@
 <div class="title">Switch Control APIs </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Some operating modes within switching devices can be set a few ways, but are usually not changed after device initialization. These often are properties that do not fit well into other parts of the OpenNSL APIs. They have been collected into one set of control APIs. </p>
+<div class="textblock"><p>Some operating modes within switching devices can be set a few ways, but are usually not changed after device initialization. These often are properties that do not fit well into other parts of the OpenNSL APIs. They have been collected into one set of control APIs.</p>
+<p>These APIs set parameters related to general device operation such as controlling whether certain types of packets should be sent to the local CPU, or setting the priority to be used when such packets are forwarded to the CPU. The port specific operations affect only the indicated port (where possible) while the general APIs affect all ports. Not all operations can be carried out on individual ports on all devices.</p>
+<p>The various switch controls can be found in &lt;<a class="el" href="opennsl_2switch_8h.html">opennsl/switch.h</a>&gt;. </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.5-->
 <!-- start footer part -->

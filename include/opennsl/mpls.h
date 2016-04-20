@@ -1,4 +1,4 @@
-/** \addtogroup  
+/** \addtogroup mpls MPLS Management
  *  @{
  */
 /*****************************************************************************
@@ -44,5 +44,6 @@
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#include <opennsl/mplsX.h>
 #endif /* __OPENNSL_MPLS_H__ */
 /*@}*/

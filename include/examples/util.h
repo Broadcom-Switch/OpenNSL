@@ -109,4 +109,14 @@ void print_ip_addr(char *str, unsigned int host);
  *****************************************************************************/
 int example_max_port_count_get(int unit, int *count);
 
+/**************************************************************************//**
+* \brief To print the integer array in Hex format
+*
+* \param    array [IN]   Integer array
+* \param    size  [IN]   Array size
+*
+* \return  void
+*****************************************************************************/
+void print_int_array_in_hex(int *array, int size);
+
 #endif /* _OPENNSL_EXAMPLE_UTIL_H */

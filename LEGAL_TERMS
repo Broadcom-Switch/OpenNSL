@@ -1,134 +1,16 @@
-Broadcom Switch Service Terms and Conditions
+The software content under this Broadcom Switch / OpenNSL is divided into two
+parts, and each part has its respective license.
 
-This Broadcom Switch Service Terms and Conditions (the "Agreement") is a legal
-agreement between you, Company and Broadcom Corporation, a California
-corporation with its principal office at 5300 California Avenue, Irvine,
-California 92617 ("Broadcom"). As used in this Agreement, "you" and "Company"
-mean the company, entity or individual that is accessing the links and materials
-available on https://github.com/Broadcom-Switch/ or any successor thereto
-("Broadcom Switch Service Page").
+One portion of the software is Broadcom Switch APIs is governed by the
+Apache 2.0 license. It is located at
+https://github.com/Broadcom-Switch/OpenNSL/Legal/LICENSE-Apache2.
+Such open source software will also expressly reference the Apache 2.0
+license at the beginning of the software file.
 
-By accessing the Broadcom Switch Service Page you are agreeing that you will be
-bound by and are becoming a party to this Agreement. If you are an entity, and
-an individual is entering into this Agreement on your behalf, then you will be
-bound by this Agreement when that individual accesses the Broadcom Switch
-Service Page. When they do so, it will also constitute a representation by the
-individual that s/he is authorized to bind you as a party to this Agreement.
+The other portion of the software is called Broadcom Advanced Switch APIs.
+This software is governed by the Broadcom Advanced Switch APIs license.
+This license is set out in the
+https://github.com/Broadcom-Switch/OpenNSL/Legal/LICENSE-Adv file. 
 
-1. Authorization. Subject to the terms and conditions of this Agreement,
-Broadcom authorizes Company to access the Broadcom Switch Service Page and
-download software subject to the applicable licenses depending on the software
-("Service").  Broadcom may, without prior notice, change the Service, stop
-providing the Service or features of the Service to you or to users generally,
-or create usage limits for the Service in its sole discretion.  Broadcom
-reserves the right in its discretion to suspend or terminate your account at any
-time and remove any Content provided by you on the Service.
+Copyright 2015-2016 Broadcom Corporation. All rights reserved.
 
-2. Restrictions.  All right, title, and interest in and to all intellectual
-property and proprietary rights relating to the Service shall remain vested in
-Broadcom or its licensors.  Company acknowledges it has no rights in the Service
-except for the authorization explicitly granted in Section 1 above. Company
-shall not disclose, modify, reproduce, transfer, or distribute any information
-available on or through the Service in any form for any purpose, and shall not
-use the Service except as expressly permitted in Section 1 above.
-
-3. Your Content.
-
-3.1. By submitting, posting, displaying, or otherwise making available any
-information, materials, code or software uploaded, downloaded or appearing on
-the Service ("Content"), you grant Broadcom a worldwide, perpetual, irrevocable,
-non-exclusive, royalty-free, fully-paid up, sublicenseable (with the right to
-sublicense through multiple tiers) license to access, use, copy, reproduce,
-process, adapt, modify, publish, transmit, display and distribute such Content
-in any and all media or distribution methods (now known or later developed).
-3.2. You retain ownership of any Content you submit, post, display, or otherwise
-make available on the Service.  By providing Content on the Service you
-represent, warrant and covenant that all Content contributed (i) does not
-infringe, violate, misappropriate or otherwise interfere with any intellectual
-property right (including, without limitation) any copyright, patent, trademark
-or trade secret, (ii) you have the authority and right to disclose to Broadcom,
-(iii) is correct and accurate representation, and not deceptive, incorrect,
-misleading or fraudulent, (iv) does not contain links to a virus, Trojan horse,
-worm, time bomb or other computer programming routine or engine that is intended
-to damage, detrimentally interfere with, surreptitiously intercept or
-expropriate any system, data, or information,  (v) does not infringe on the
-privacy rights of another, and (vi) is not libelous, defamatory, abusive,
-threatening, harassing, hateful or offensive or otherwise violates any law or
-right of any party.
-
-4. Term and Termination.  This Agreement shall continue from the Effective Date
-until termination. Broadcom may immediately terminate this Agreement if Company
-materially breaches any provision of this Agreement. Sections 2, 3, 4, 5, 6, 7,
-8, 9 and 10 shall survive any termination or expiration of this Agreement.
-
-5. Updates & Feedback. Company has no obligation to give Broadcom any
-suggestions, comments or other feedback regarding the Service (collectively,
-"Feedback").  However, any Feedback Company voluntarily provides may be used
-with respect to the Service, Broadcom products and related specifications or
-other documentation.  Accordingly, if Company does give Broadcom Feedback on any
-version of the Materials, Company expressly grants Broadcom a limited,
-non-exclusive right to use, disclose, reproduce, further license, distribute and
-otherwise commercialize the Feedback in any Broadcom product, technology,
-service, specification or other documentation.
-
-6. Indemnification.  You agree to defend, indemnify, and hold Broadcom, its
-affiliates, partners, agents, and each of their officers, directors, employees,
-consultants, contractors, agents, customers and any other associated individuals
-harmless from and against all damages, loss, claims, liabilities, fines,
-expenses and costs of whatever kind or nature, including, without limitation,
-attorney's fees and litigation costs arising out of or related to this
-Agreement, including, without limitation any breach by you of any
-representations, warranties and/or obligations under Agreement.  You and Company
-hereby represent, warrant and covenant that you will not make or assert any
-claims against Broadcom or Github, Inc. (i) with respect to any content which is
-made available on the Broadcom Switch Service Page and (ii)  that the software
-or derivative works created by or for Broadcom infringe any intellectual
-property right owned or controlled by you or Company.
-
-7. No Warranty. BROADCOM PROVIDES THE SERVICE "AS IS" ON AN "AS AVAILABLE" BASIS
-AND GRANTS NO WARRANTY, EXPRESS OR IMPLIED, BY STATUTE, CONDUCT OR OTHERWISE,
-AND BROADCOM EXPRESSLY DISCLAIMS THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  WITHOUT LIMITATION,
-BROADCOM MAKES NO WARRANTY THAT THE SERVICE IS ERROR-FREE.  NO PERSON OR ENTITY
-IS AUTHORIZED TO MAKE ANY OTHER WARRANTY OR REPRESENTATION CONCERNING THE
-SERVICE.  YOUR USE OF THE SERVICE AND RELIANCE ON ANY INFORMATION,
-COMMUNICATIONS OR OTHER INFORMATION AVAILABLE ON THE SERVICE IS DONE AT YOUR OWN
-RISK.
-
-8. Consequential Damages Waiver. COMPANY AGREES BROADCOM, ITS AFFILIATES,
-OFFICERS, EMPLOYEES, AGENTS, AND PARTNERS WILL NOT BE LIABLE FOR ANY LOSS OF
-USE, INTERRUPTION OF BUSINESS, OR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
-PUNITIVE OR CONSEQUENTIAL DAMAGES OF ANY KIND (INCLUDING LOST PROFITS)
-REGARDLESS OF THE FORM OF ACTION WHETHER IN CONTRACT, TORT (INCLUDING
-NEGLIGENCE), STRICT PRODUCT LIABILITY, OR OTHERWISE, EVEN IF BROADCOM HAS BEEN
-ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  COMPANY FURTHER ACKNOWLEGES AND
-AGREES THAT BROADCOM SHALL HAVE NO LIABILITY UNDER THIS AGREEMENT.
-
-9. Marks.  All product and service names, slogans and logos are trademarks,
-service marks, or trade names ("Marks") of Broadcom. The use of any of our Marks
-without our express written consent is strictly prohibited. Your access to this
-web site should not be construed as granting, by implication, estopppel or
-otherwise, any license or right to use any Marks appearing on the web site
-without the prior written consent of Broadcom or the third party that owns the
-Mark.
-
-10. Miscellaneous. This Agreement shall constitute the final, binding and entire
-agreement of the parties, and supersedes all prior agreements or representations
-oral or written regarding the subject matter hereof. This Agreement may not be
-changed, terminated or amended except in writing signed by both parties. The
-failure of either party to exercise any of its rights will not constitute a
-waiver of such rights unless expressly agreed in writing. Neither party may
-assign its rights or obligations under this Agreement. In the event any
-provision of this Agreement is held to be invalid or unenforceable, the valid or
-enforceable portion thereof and the remaining provisions of this Agreement will
-remain in full force and effect. Company and Broadcom are independent
-contractors and nothing contained in this Agreement is intended or shall be
-construed as creating a relationship of principal and agent, employer and
-employee, or joint venture between the parties. Company is not an agent of
-Broadcom for any purpose and has no power or authority, whether apparent,
-actual, ostensible, or otherwise to bind or commit Broadcom to any obligations
-in any way.  This Agreement will be interpreted in accordance with the laws of
-the State of California except those relating to conflict of laws. Any suit
-hereunder will be brought solely in federal or state courts in the County of
-Orange, California and Company hereby submits to the personal jurisdiction
-hereof. The official language of this Agreement is English.

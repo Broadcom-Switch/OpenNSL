@@ -50,69 +50,27 @@
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">stack.h File Reference</div>  </div>
+<div class="title">stack.h File Reference<div class="ingroups"><a class="el" href="group__stack.html">Stack control</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><pre class="fragment"></pre>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="stackX_8h_source.html">opennsl/stackX.h</a>&gt;</code><br />
 </div>
 <p><a href="stack_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stack_8h.html#ac812f8ee5d6b3dd06eeea25cbc271b9d">opennsl_stk_my_modid_get</a> (int unit, int *my_modid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:ac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the module ID of the local device.  <a href="#ac812f8ee5d6b3dd06eeea25cbc271b9d">More...</a><br /></td></tr>
-<tr class="separator:ac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#gac812f8ee5d6b3dd06eeea25cbc271b9d">opennsl_stk_my_modid_get</a> (int unit, int *my_modid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the module ID of the local device.  <a href="group__stack.html#gac812f8ee5d6b3dd06eeea25cbc271b9d">More...</a><br /></td></tr>
+<tr class="separator:gac812f8ee5d6b3dd06eeea25cbc271b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment"></pre> 
 <p>Definition in file <a class="el" href="stack_8h_source.html">stack.h</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ac812f8ee5d6b3dd06eeea25cbc271b9d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int opennsl_stk_my_modid_get </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>unit</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>my_modid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get or set the module ID of the local device. </p>
-<dl class="section user"><dt>Description</dt><dd>Set or get the device's module identifier. Each device in a system must have a unique module number. Some devices, such as switch family fabric switches, do not have a module identifier, and will return OPENNSL_E_UNAVAIL. opennsl_stk_modid_set and opennsl_stk_modid_get will do module mapping by calling =opennsl_stk_modmap_map . opennsl_stk_my_modid_set and opennsl_stk_my_modid_get control the non mapped module identifier for the device.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
-    <tr><td class="paramname">my_modid</td><td>[OUT]</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.5-->
 <!-- start footer part -->
 <!--BEGIN GENERATE_TREEVIEW -->

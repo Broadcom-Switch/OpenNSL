@@ -60,6 +60,7 @@
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="pkt_8h_source.html">opennsl/pkt.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="tx_8h_source.html">opennsl/tx.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="rxX_8h_source.html">opennsl/rxX.h</a>&gt;</code><br />
 </div>
 <p><a href="opennsl_2rx_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -83,6 +84,8 @@ Macros</h2></td></tr>
 <tr class="separator:ga547afd18236e18bbb764128beb621bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga48edf7c3ce9231edfaec1996abb45a6b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#ga48edf7c3ce9231edfaec1996abb45a6b">OPENNSL_RX_REASON_CLEAR_ALL</a>(_reasons)&#160;&#160;&#160;<a class="el" href="shared_2rx_8h.html#a0d1200d96cf6233be8873a67b12b7d5d">_SHR_RX_REASON_CLEAR_ALL</a>(_reasons)</td></tr>
 <tr class="separator:ga48edf7c3ce9231edfaec1996abb45a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga117f41967c74c306162d3fa52d4628c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#ga117f41967c74c306162d3fa52d4628c0">OPENNSL_RX_REASON_GET</a>(_reasons,  _reason)&#160;&#160;&#160;<a class="el" href="shared_2rx_8h.html#a4500530f61141763f77ec685f2df4c32">_SHR_RX_REASON_GET</a>(_reasons, _reason)</td></tr>
+<tr class="separator:ga117f41967c74c306162d3fa52d4628c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga46345aeb4cbf45c9c21507021e18d33f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#ga46345aeb4cbf45c9c21507021e18d33f">OPENNSL_RX_REASON_SET</a>(_reasons,  _reason)&#160;&#160;&#160;<a class="el" href="shared_2rx_8h.html#a7ba4e2fb85f840b171fad241fae3fb97">_SHR_RX_REASON_SET</a>(_reasons, _reason)</td></tr>
 <tr class="separator:ga46345aeb4cbf45c9c21507021e18d33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -455,6 +458,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gabae3a675550ca9a1ab09d59da78b4192"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#gabae3a675550ca9a1ab09d59da78b4192">opennsl_rx_free</a> (int unit, void *pkt_data) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gabae3a675550ca9a1ab09d59da78b4192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate or deallocate a packet buffer as configured.  <a href="group__pkt.html#gabae3a675550ca9a1ab09d59da78b4192">More...</a><br /></td></tr>
 <tr class="separator:gabae3a675550ca9a1ab09d59da78b4192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga43c68f34259cb92a65375771b1b68c88"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#ga43c68f34259cb92a65375771b1b68c88">opennsl_rx_reasons_get</a> (int unit, <a class="el" href="group__pkt.html#ga28f49d13806bfdebcab709d96d875ec1">opennsl_rx_reasons_t</a> *reasons) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga43c68f34259cb92a65375771b1b68c88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the CPU RX reasons supported on the specified device.  <a href="group__pkt.html#ga43c68f34259cb92a65375771b1b68c88">More...</a><br /></td></tr>
+<tr class="separator:ga43c68f34259cb92a65375771b1b68c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga34923de9f3cc0b360d07eb278a5bcb3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pkt.html#ga34923de9f3cc0b360d07eb278a5bcb3e">opennsl_rx_register</a> (int unit, const char *name, <a class="el" href="group__pkt.html#ga0971cb5ae3e3c8e422f69db81a60994b">opennsl_rx_cb_f</a> callback, <a class="el" href="sal_2types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> priority, void *cookie, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga34923de9f3cc0b360d07eb278a5bcb3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register or unregister to receive callbacks for received packets.  <a href="group__pkt.html#ga34923de9f3cc0b360d07eb278a5bcb3e">More...</a><br /></td></tr>
 <tr class="separator:ga34923de9f3cc0b360d07eb278a5bcb3e"><td class="memSeparator" colspan="2">&#160;</td></tr>

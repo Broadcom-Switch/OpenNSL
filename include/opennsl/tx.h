@@ -59,5 +59,6 @@ extern int opennsl_tx(
 
 #if defined(OPENNSL_RPC_SUPPORT)
 #endif
+#include <opennsl/txX.h>
 #endif /* __OPENNSL_TX_H__ */
 /*@}*/

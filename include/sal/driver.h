@@ -28,6 +28,9 @@ typedef struct opennsl_config_s
 {
   char         *cfg_fname;  /* Configuration file name along with the path */
   unsigned int flags;       /* OpenNSL boot up flags */
+  char         *wb_fname;   /* File to store warmboot configuration *
+                            * along with the path */
+  char         *rmcfg_fname; /* RM config file name along with the path */
 } opennsl_init_t;
 
 /*****************************************************************//**

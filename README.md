@@ -1,6 +1,6 @@
 OpenNSL
 ======
-OpenNSL 3.0.0.x Switch Specification and Software
+OpenNSL 3.1.0.x Switch Specification and Software
 
 Overview
 ========

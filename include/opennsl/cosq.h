@@ -1,4 +1,4 @@
-/** \addtogroup  
+/** \addtogroup cosq Class of Service Queue Configuration
  *  @{
  */
 /*****************************************************************************
@@ -25,82 +25,65 @@
 #define __OPENNSL_COSQ_H__
 
 #include <opennsl/types.h>
+#include <opennsl/switch.h>
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
-/***************************************************************************//** 
- *\brief Get or set the mapping from internal priority to CoS queue.
- *
- *\description Configure or retrieve the mapping from the internal priority value
- *          to Cos Queue. The internal priority is usually initialized from
- *          the packet priority.  For tagged packets the priority is extracted
- *          from the PRI field of the tag. For untagged packets, the priority
- *          is specified using the API =opennsl_port_untagged_priority_set .
- *          On some devices, the mapping tables may be shared among several
- *          ports, so setting one port's mappings may affect other ports'.
- *          On some devices, packets directed to the CPU interface port may
- *          have their priority assigned independent of this setting. For more
- *          information see =opennsl_switch_control_set .
- *          On some devices, a port value of -1 or gport type for system
- *          configuration will configure all ports.
- *          Some devices support Enhanced Transmission Selection (ETS) which
- *          requires to use GPORT ID for the port argument. When the ETS mode
- *          is enabled, they configure and retrive the mapping from the
- *          internal priority to the offset (which is equal to the value of
- *          cosq) of the unicast queues and multicast queues attached to the
- *          egress port.
- *          Most devices have 8 internal priorities (0 to 7).
- *
- *\param    unit [IN]   Unit number.
- *\param    priority [IN]   internal priority to map
- *\param    cosq [IN]   Cos queue to which to map the chosen priority
- *
- *\retval    OPENNSL_E_NONE
- *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
- *          number of CoS queues specified.
- *\retval    OPENNSL_E_XXX
- ******************************************************************************/
-extern int opennsl_cosq_mapping_set(
-    int unit, 
-    opennsl_cos_t priority, 
-    opennsl_cos_queue_t cosq) LIB_DLL_EXPORTED ;
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
 
-/***************************************************************************//** 
- *\brief Get or set the mapping from internal priority to CoS queue.
- *
- *\description Configure or retrieve the mapping from the internal priority value
- *          to Cos Queue. The internal priority is usually initialized from
- *          the packet priority.  For tagged packets the priority is extracted
- *          from the PRI field of the tag. For untagged packets, the priority
- *          is specified using the API =opennsl_port_untagged_priority_set .
- *          On some devices, the mapping tables may be shared among several
- *          ports, so setting one port's mappings may affect other ports'.
- *          On some devices, packets directed to the CPU interface port may
- *          have their priority assigned independent of this setting. For more
- *          information see =opennsl_switch_control_set .
- *          On some devices, a port value of -1 or gport type for system
- *          configuration will configure all ports.
- *          Some devices support Enhanced Transmission Selection (ETS) which
- *          requires to use GPORT ID for the port argument. When the ETS mode
- *          is enabled, they configure and retrive the mapping from the
- *          internal priority to the offset (which is equal to the value of
- *          cosq) of the unicast queues and multicast queues attached to the
- *          egress port.
- *          Most devices have 8 internal priorities (0 to 7).
- *
- *\param    unit [IN]   Unit number.
- *\param    priority [IN]   internal priority to map
- *\param    cosq [OUT]   Cos queue to which to map the chosen priority
- *
- *\retval    OPENNSL_E_NONE
- *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
- *          number of CoS queues specified.
- *\retval    OPENNSL_E_XXX
- ******************************************************************************/
-extern int opennsl_cosq_mapping_get(
-    int unit, 
-    opennsl_cos_t priority, 
-    opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
@@ -320,5 +303,6 @@ extern int opennsl_cosq_bst_stat_multi_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/cosqX.h>
 #endif /* __OPENNSL_COSQ_H__ */
 /*@}*/

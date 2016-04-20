@@ -64,19 +64,58 @@
 <li><b>OPENNSL_E_NONE</b> <code>[Ok]</code> The routine completed successfully.</li>
 </ul>
 <ul>
+<li><b>OPENNSL_E_INTERNAL</b> <code>[Internal error]</code> Some internal operations failed in an unexpected way. This usually indicates that an access to some hardware resource failed.</li>
+</ul>
+<ul>
 <li><b>OPENNSL_E_MEMORY</b> <code>[Out of memory]</code> Dynamically allocated memory was not available to complete the operation.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_UNIT</b> <code>[Invalid unit]</code> The first argument of any OpenNSL API routine is a unit number. This error occurs if that number does not refer to a currently attached unit.</li>
 </ul>
 <ul>
 <li><b>OPENNSL_E_PARAM</b> <code>[Invalid parameter]</code> A parameter to a OpenNSL API routines was invalid. A null pointer value may have been passed to the routine, or an integer parameter may be outside of its allowed range.</li>
 </ul>
 <ul>
+<li><b>OPENNSL_E_EMPTY</b> <code>[Table empty]</code> The routine expected a table not to be empty.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_FULL</b> <code>[Table full]</code> The routine could not add an entry to the table</li>
+</ul>
+<ul>
 <li><b>OPENNSL_E_NOT_FOUND</b> <code>[Entry not found]</code> The specific entry in a table could not be found.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_EXISTS</b> <code>[Entry exists]</code> The specific entry was already in a table</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_TIMEOUT</b> <code>[Operation timed out]</code> The routine started an operation that did not complete.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_BUSY</b> <code>[Operation still running]</code> The routine tried to start an operation, but a previous operation was still running.</li>
 </ul>
 <ul>
 <li><b>OPENNSL_E_FAIL</b> <code>[Operation failed]</code> The routine attempted an operation that could not be completed. This may be because of a hardware failure or a configuration failure.</li>
 </ul>
 <ul>
-<li><b>OPENNSL_E_UNAVAIL</b> <code>[Feature unavailable]</code> The hardware does not support the requested routine. </li>
+<li><b>OPENNSL_E_DISABLED</b> <code>[Operation disabled]</code> The routine could not complete because a required feature was temporarily disabled. This often relates to auto-negotiation.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_BADID</b> <code>[Invalid identifier]</code> An identifier was not valid.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_RESOURCE</b> <code>[No resources for operation]</code> The routine needed more hardware resources than were available.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_CONFIG</b> <code>[Invalid configuration]</code> The hardware does not support the requested configuration.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_UNAVAIL</b> <code>[Feature unavailable]</code> The hardware does not support the requested routine.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_INIT</b> <code>[Feature not initialized]</code> The routine used a part of the API that was not yet initialized.</li>
+</ul>
+<ul>
+<li><b>OPENNSL_E_PORT</b> <code>[Invalid port]</code> A port parameter was given that is not valid. </li>
 </ul>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.5-->

@@ -85,7 +85,6 @@ typedef struct opennsl_pkt_oam_counter_s {
 
 #define OPENNSL_PKT_OAM_COUNTER_MAX 3          
 #define OPENNSL_PKT_NOF_DNX_HEADERS 9          
-#define OPENNSL_PKT_DNX_RAW_SIZE_MAX    20         
 /** Initialize a OPENNSL packet structure. */
 struct opennsl_pkt_s { 
     opennsl_pkt_blk_t *pkt_data;        /**< Pointer to array of data blocks. */
@@ -99,11 +98,11 @@ struct opennsl_pkt_s {
     opennsl_vlan_t reserved4; 
     uint8 reserved5; 
     uint8 reserved6; 
-    opennsl_reserved_enum_t reserved7; 
-    int8 src_port;                      /**< Source port used in header/tag. */
+    opennsl_color_t reserved7; 
+    int16 src_port;                     /**< Source port used in header/tag. */
     opennsl_trunk_t reserved8; 
     uint16 reserved9; 
-    uint8 dest_port;                    /**< Destination port used in header/tag. */
+    uint16 dest_port;                   /**< Destination port used in header/tag. */
     uint16 reserved10; 
     uint8 reserved11; 
     opennsl_gport_t reserved12; 
@@ -125,72 +124,72 @@ struct opennsl_pkt_s {
     opennsl_port_t reserved23; 
     uint8 reserved24; 
     uint32 rx_reason;                   /**< Opcode from packet. */
-    opennsl_rx_reasons_t reserved25; 
-    uint32 reserved26; 
-    uint8 reserved27; 
+    opennsl_rx_reasons_t rx_reasons;    /**< Set of packet "reasons". */
+    uint32 reserved25; 
+    uint8 reserved26; 
     uint8 rx_port;                      /**< Local rx port; not in HG hdr. */
-    uint8 reserved28; 
+    uint8 reserved27; 
     uint8 rx_untagged;                  /**< The packet was untagged on ingress. */
+    uint32 reserved28; 
     uint32 reserved29; 
-    uint32 reserved30; 
-    opennsl_if_t reserved31; 
+    opennsl_if_t reserved30; 
+    opennsl_reserved_enum_t reserved31; 
     opennsl_reserved_enum_t reserved32; 
-    opennsl_reserved_enum_t reserved33; 
+    uint32 reserved33; 
     uint32 reserved34; 
     uint32 reserved35; 
-    uint32 reserved36; 
+    void *reserved36; 
     void *reserved37; 
-    void *reserved38; 
     opennsl_pkt_cb_f call_back;         /**< Callback function. */
     uint32 flags;                       /**< OPENNSL_PKT_F_xxx flags. */
-    void *reserved39; 
-    int8 reserved40; 
+    void *reserved38; 
+    int8 reserved39; 
     opennsl_pkt_blk_t _pkt_data;        /**< For single block packets (internal). */
-    opennsl_pkt_t *reserved41; 
-    void *reserved42; 
-    int8 reserved43; 
-    opennsl_pkt_t *reserved44; 
+    opennsl_pkt_t *reserved40; 
+    void *reserved41; 
+    int8 reserved42; 
+    opennsl_pkt_t *reserved43; 
+    void *reserved44; 
     void *reserved45; 
-    void *reserved46; 
-    uint8 reserved47[16]; 
-    uint8 reserved48[12]; 
-    uint8 reserved49[4]; 
+    uint8 reserved46[16]; 
+    uint8 reserved47[12]; 
+    uint8 reserved48[4]; 
     uint8 _vtag[4];                     /**< VLAN tag if not in packet (network
                                            byte order). */
-    uint8 reserved50[16]; 
-    uint8 reserved51; 
-    uint8 reserved52[10]; 
+    uint8 reserved49[16]; 
+    uint8 reserved50; 
+    uint8 reserved51[10]; 
+    int reserved52; 
     int reserved53; 
-    int reserved54; 
-    uint32 reserved55; 
+    uint32 reserved54; 
+    opennsl_pbmp_t reserved55; 
     opennsl_pbmp_t reserved56; 
-    opennsl_pbmp_t reserved57; 
-    uint32 reserved58; 
+    uint32 reserved57; 
+    uint8 reserved58; 
     uint8 reserved59; 
-    uint8 reserved60; 
-    uint16 reserved61; 
-    uint32 reserved62; 
-    void *reserved63; 
+    uint16 reserved60; 
+    uint32 reserved61; 
+    void *reserved62; 
+    uint16 reserved63; 
     uint16 reserved64; 
-    uint16 reserved65; 
+    opennsl_reserved_enum_t reserved65; 
     opennsl_reserved_enum_t reserved66; 
     opennsl_reserved_enum_t reserved67; 
-    opennsl_reserved_enum_t reserved68; 
-    uint8 reserved69; 
-    opennsl_reserved_enum_t reserved70; 
+    uint8 reserved68; 
+    opennsl_reserved_enum_t reserved69; 
+    opennsl_gport_t reserved70; 
     opennsl_gport_t reserved71; 
-    opennsl_gport_t reserved72; 
-    uint32 reserved73; 
-    int reserved74; 
-    opennsl_gport_t reserved75; 
+    uint32 reserved72; 
+    int reserved73; 
+    opennsl_gport_t reserved74; 
+    uint32 reserved75; 
     uint32 reserved76; 
-    uint32 reserved77; 
-    uint8 reserved78; 
-    opennsl_reserved_enum_t reserved79; 
-    opennsl_pkt_oam_counter_t reserved80[OPENNSL_PKT_OAM_COUNTER_MAX]; 
-    uint32 reserved81; 
-    uint8 reserved82[20]; 
-    uint8 reserved83; 
+    uint8 reserved77; 
+    opennsl_reserved_enum_t reserved78; 
+    opennsl_pkt_oam_counter_t reserved79[OPENNSL_PKT_OAM_COUNTER_MAX]; 
+    uint32 reserved80; 
+    uint8 reserved81[20]; 
+    uint8 reserved82; 
 };
 
 #define OPENNSL_PKT_F_NO_VTAG   0x4        /**< Packet does not contain VLAN tag. */
@@ -207,6 +206,36 @@ struct opennsl_pkt_s {
         (pkt)->blk_count = 1; \
     } while (0) 
 /***************************************************************************//** 
+ *\brief Initialize and set up a opennsl_pkt_t structure.
+ *
+ *\description If pkt is NULL, a new packet structure is allocated using
+ *          sal_alloc .  The packet structure is set up with the indicated
+ *          data blocks.  If the total number of bytes is less than the
+ *          minimum permitted, the routine fails.  If no data blocks are
+ *          provided, the function still succeeds, and a single data block can
+ *          be attached using the OPENNSL_PKT_ONE_BUF_SETUP macro.
+ *          This routine calls =opennsl_pkt_flags_len_setup before returning.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    pkt [IN]   Pointer to packet to setup; may be NULL
+ *\param    blks [IN]   Pointer to array of gather blocks for the packet
+ *\param    blk_count [IN]   Number of elements in blks array
+ *\param    flags [IN]   See =pkt_flags_table for TX related flags
+ *\param    pkt_buf [OUT]   Pointer to a cleared packet or NULL if failed to
+ *          allocate packet
+ *
+ *\retval    OPENNSL_E_NONE On success
+ *\retval    OPENNSL_E_MEMORY Otherwise
+ ******************************************************************************/
+extern int opennsl_pkt_clear(
+    int unit, 
+    opennsl_pkt_t *pkt, 
+    opennsl_pkt_blk_t *blks, 
+    int blk_count, 
+    uint32 flags, 
+    opennsl_pkt_t **pkt_buf) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Initialize packet flags based on the type of device.
  *
  *\description Based on the device type of unit, initializes the flags for
@@ -222,6 +251,31 @@ extern int opennsl_pkt_flags_init(
     int unit, 
     opennsl_pkt_t *pkt, 
     uint32 init_flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Copy data into the data blocks of a packet structure.
+ *
+ *\description Copies len bytes of data from src to the packet's data starting at
+ *          offset dest_byte.  This takes into account the block structure of
+ *          the packet.  dest_byte is an absolute offset from the first data
+ *          byte of the first data block of the packet. This routine does not
+ *          update the packets data length, hence if number  of bytes copied
+ *          is different from pkt_data.len member then Macro 
+ *          OPENNSL_PKT_TX_LEN_SET should be used to adjust it.
+ *
+ *\param    pkt [IN]   Structure to be updated
+ *\param    dest_byte [IN]   Byte offset in the packet's data buffer
+ *\param    src [IN]   Pointer to source data to copy
+ *\param    len [IN]   Number of bytes to copy
+ *
+ *\retval    The number of bytes copied. If there is not sufficient space in the
+ *\retval    packet's data buffer, this may be less than len.
+ ******************************************************************************/
+extern int opennsl_pkt_memcpy(
+    opennsl_pkt_t *pkt, 
+    int dest_byte, 
+    uint8 *src, 
+    int len) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Allocate or deallocate a packet structure and packet data.
@@ -273,5 +327,42 @@ extern int opennsl_pkt_free(
     int unit, 
     opennsl_pkt_t *pkt) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL packet structure.
+ *
+ *\description Initializes a OPENNSL packet structure to default values. This
+ *          function should be used to initialize any OPENNSL packet structure
+ *          prior to filling it out and passing it to an API function. This
+ *          ensures that subsequent API releases may add new structure members
+ *          to the opennsl_pkt_t structure, and opennsl_pkt_t_init will
+ *          initialize the new members to correct default values.
+ *
+ *\param    pkt [IN,OUT]   Pointer to OPENNSL packet structure to initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_pkt_t_init(
+    opennsl_pkt_t *pkt) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL packet block structure.
+ *
+ *\description Initializes a OPENNSL packet block structure to default values.
+ *          This function should be used to initialize any OPENNSL packet
+ *          block structure prior to filling it out and passing it to an API
+ *          function. This ensures that subsequent API releases may add new
+ *          structure members to the opennsl_pkt_blk_t structure, and
+ *          opennsl_pkt_blk_t_init will initialize the new members to correct
+ *          default values.
+ *
+ *\param    pkt_blk [IN,OUT]   Pointer to OPENNSL packet block structure to
+ *          initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_pkt_blk_t_init(
+    opennsl_pkt_blk_t *pkt_blk) LIB_DLL_EXPORTED ;
+
+#include <opennsl/pktX.h>
 #endif /* __OPENNSL_PKT_H__ */
 /*@}*/

@@ -65,9 +65,24 @@ Files</h2></td></tr>
 <tr class="memitem:trunk_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trunk_8h.html">trunk.h</a></td></tr>
 <tr class="memdesc:trunk_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:trunkX_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trunkX_8h.html">trunkX.h</a></td></tr>
+<tr class="memdesc:trunkX_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga667693fc33822fb6e24f02a051375006"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga667693fc33822fb6e24f02a051375006">OPENNSL_TRUNK_FLAG_FAILOVER</a>&#160;&#160;&#160;<a class="el" href="group__trunk.html#ga3a2157ed04c28fde46e9d9cbbcdfde4e">OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL</a></td></tr>
+<tr class="memdesc:ga667693fc33822fb6e24f02a051375006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable trunk failover support (deprecated).  <a href="#ga667693fc33822fb6e24f02a051375006">More...</a><br /></td></tr>
+<tr class="separator:ga667693fc33822fb6e24f02a051375006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff4a3eae57bfa2879e9734ba178726c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#gaff4a3eae57bfa2879e9734ba178726c3">OPENNSL_TRUNK_FLAG_FAILOVER_NEXT</a>&#160;&#160;&#160;0x0001</td></tr>
+<tr class="memdesc:gaff4a3eae57bfa2879e9734ba178726c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Failover port defaults to the next port in the trunk port list.  <a href="#gaff4a3eae57bfa2879e9734ba178726c3">More...</a><br /></td></tr>
+<tr class="separator:gaff4a3eae57bfa2879e9734ba178726c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3a2157ed04c28fde46e9d9cbbcdfde4e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga3a2157ed04c28fde46e9d9cbbcdfde4e">OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL</a>&#160;&#160;&#160;0x0002</td></tr>
+<tr class="memdesc:ga3a2157ed04c28fde46e9d9cbbcdfde4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Failover port defaults to the next local port in the trunk port list, if any.  <a href="#ga3a2157ed04c28fde46e9d9cbbcdfde4e">More...</a><br /></td></tr>
+<tr class="separator:ga3a2157ed04c28fde46e9d9cbbcdfde4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa421dd78bdbf993f7ec8bc66a4db10bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#gaa421dd78bdbf993f7ec8bc66a4db10bc">OPENNSL_TRUNK_FLAG_IPMC_CLEAVE</a>&#160;&#160;&#160;0x0020</td></tr>
+<tr class="memdesc:gaa421dd78bdbf993f7ec8bc66a4db10bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable trunk resolution for IPMC packets in hardware.  <a href="#gaa421dd78bdbf993f7ec8bc66a4db10bc">More...</a><br /></td></tr>
+<tr class="separator:gaa421dd78bdbf993f7ec8bc66a4db10bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaac6bf0f2145d609badb2ba1caa222216"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#gaac6bf0f2145d609badb2ba1caa222216">OPENNSL_TRUNK_FLAG_WITH_ID</a>&#160;&#160;&#160;0x0010</td></tr>
 <tr class="memdesc:gaac6bf0f2145d609badb2ba1caa222216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the trunk ID supplied by user.  <a href="#gaac6bf0f2145d609badb2ba1caa222216">More...</a><br /></td></tr>
 <tr class="separator:gaac6bf0f2145d609badb2ba1caa222216"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -77,6 +92,12 @@ Macros</h2></td></tr>
 <tr class="memitem:ga3fb444259cc156e0ade8518c8c7efc4e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga3fb444259cc156e0ade8518c8c7efc4e">OPENNSL_TRUNK_MEMBER_EGRESS_DISABLE</a>&#160;&#160;&#160;0x0002</td></tr>
 <tr class="memdesc:ga3fb444259cc156e0ade8518c8c7efc4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Member will not be a part of the distributor members to be hashed.  <a href="#ga3fb444259cc156e0ade8518c8c7efc4e">More...</a><br /></td></tr>
 <tr class="separator:ga3fb444259cc156e0ade8518c8c7efc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4d6e867dd2f841dece21e14510594e88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga4d6e867dd2f841dece21e14510594e88">OPENNSL_TRUNK_PSC_DSTIP</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:ga4d6e867dd2f841dece21e14510594e88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destination IP address.  <a href="#ga4d6e867dd2f841dece21e14510594e88">More...</a><br /></td></tr>
+<tr class="separator:ga4d6e867dd2f841dece21e14510594e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga45f9adc168439e8bf282c958233d657e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga45f9adc168439e8bf282c958233d657e">OPENNSL_TRUNK_PSC_PORTFLOW</a>&#160;&#160;&#160;9</td></tr>
+<tr class="memdesc:ga45f9adc168439e8bf282c958233d657e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enhanced hashing.  <a href="#ga45f9adc168439e8bf282c958233d657e">More...</a><br /></td></tr>
+<tr class="separator:ga45f9adc168439e8bf282c958233d657e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad9253b0ab6adf844f80be567c8e139e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#gad9253b0ab6adf844f80be567c8e139e0">OPENNSL_TRUNK_PSC_SRCDSTIP</a>&#160;&#160;&#160;6</td></tr>
 <tr class="memdesc:gad9253b0ab6adf844f80be567c8e139e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source+dest IP address.  <a href="#gad9253b0ab6adf844f80be567c8e139e0">More...</a><br /></td></tr>
 <tr class="separator:gad9253b0ab6adf844f80be567c8e139e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,6 +134,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga45ec2f555aa6b57d51936941044b6741"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga45ec2f555aa6b57d51936941044b6741">opennsl_trunk_detach</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga45ec2f555aa6b57d51936941044b6741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shut down (uninitialize) the trunk module.  <a href="#ga45ec2f555aa6b57d51936941044b6741">More...</a><br /></td></tr>
 <tr class="separator:ga45ec2f555aa6b57d51936941044b6741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c258c5716fa74dbe2c26659447b98f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga2c258c5716fa74dbe2c26659447b98f2">opennsl_trunk_failover_get</a> (int unit, <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a> tid, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> failport, int *psc, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *flags, int array_size, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> *fail_to_array, int *array_count) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga2c258c5716fa74dbe2c26659447b98f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the failover port list for a specific trunk port.  <a href="#ga2c258c5716fa74dbe2c26659447b98f2">More...</a><br /></td></tr>
+<tr class="separator:ga2c258c5716fa74dbe2c26659447b98f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga632993b618682659e13e28b454476425"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga632993b618682659e13e28b454476425">opennsl_trunk_failover_set</a> (int unit, <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a> tid, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> failport, int psc, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags, int count, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> *fail_to_array) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga632993b618682659e13e28b454476425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the failover port list for a specific trunk port.  <a href="#ga632993b618682659e13e28b454476425">More...</a><br /></td></tr>
+<tr class="separator:ga632993b618682659e13e28b454476425"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0b556d499ae7b1c0e7a61a3d5ca950c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__trunk.html#ga0b556d499ae7b1c0e7a61a3d5ca950c4">opennsl_trunk_find</a> (int unit, <a class="el" href="group__types.html#gade44ac59b44a2b7acfcefc4ff68a610d">opennsl_module_t</a> modid, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, <a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a> *tid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga0b556d499ae7b1c0e7a61a3d5ca950c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the trunk group ID for a given system port, specified by Module ID and Port number.  <a href="#ga0b556d499ae7b1c0e7a61a3d5ca950c4">More...</a><br /></td></tr>
 <tr class="separator:ga0b556d499ae7b1c0e7a61a3d5ca950c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +170,70 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ga667693fc33822fb6e24f02a051375006"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_FLAG_FAILOVER&#160;&#160;&#160;<a class="el" href="group__trunk.html#ga3a2157ed04c28fde46e9d9cbbcdfde4e">OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable trunk failover support (deprecated). </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00049">49</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaff4a3eae57bfa2879e9734ba178726c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_FLAG_FAILOVER_NEXT&#160;&#160;&#160;0x0001</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Failover port defaults to the next port in the trunk port list. </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00037">37</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga3a2157ed04c28fde46e9d9cbbcdfde4e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_FLAG_FAILOVER_NEXT_LOCAL&#160;&#160;&#160;0x0002</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Failover port defaults to the next local port in the trunk port list, if any. </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00042">42</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaa421dd78bdbf993f7ec8bc66a4db10bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_FLAG_IPMC_CLEAVE&#160;&#160;&#160;0x0020</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disable trunk resolution for IPMC packets in hardware. </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00055">55</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gaac6bf0f2145d609badb2ba1caa222216"></a>
 <div class="memitem">
 <div class="memproto">
@@ -155,7 +246,7 @@ Functions</h2></td></tr>
 
 <p>Use the trunk ID supplied by user. </p>
 
-<p>Definition at line <a class="el" href="trunk_8h_source.html#l00035">35</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00052">52</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +278,39 @@ Functions</h2></td></tr>
 
 <p>Member will not be a part of the distributor members to be hashed. </p>
 
-<p>Definition at line <a class="el" href="trunk_8h_source.html#l00038">38</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00060">60</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga4d6e867dd2f841dece21e14510594e88"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_PSC_DSTIP&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destination IP address. </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00034">34</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga45f9adc168439e8bf282c958233d657e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_TRUNK_PSC_PORTFLOW&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enhanced hashing. </p>
+
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00036">36</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +326,7 @@ Functions</h2></td></tr>
 
 <p>Source+dest IP address. </p>
 
-<p>Definition at line <a class="el" href="trunk_8h_source.html#l00034">34</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
+<p>Definition at line <a class="el" href="trunk_8h_source.html#l00035">35</a> of file <a class="el" href="trunk_8h_source.html">trunk.h</a>.</p>
 
 </div>
 </div>
@@ -455,6 +578,167 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga2c258c5716fa74dbe2c26659447b98f2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_trunk_failover_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a>&#160;</td>
+          <td class="paramname"><em>tid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>failport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>psc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>array_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> *&#160;</td>
+          <td class="paramname"><em>fail_to_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>array_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the failover port list for a specific trunk port. </p>
+<dl class="section user"><dt>Description</dt><dd>Retrieve the configured set of failover ports for a specific port in the indicated trunk group. If a flag was provided to configure the failover list, then only the flag and psc return values are valid. If the returned flags argument is zero, then fail_to_array is filled with the port list up to a maximum list length of array_size. array_count contains the actual length of the returned list. If array_count is zero in addition to flags, trunk failover is not enabled on failport.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">tid</td><td>[IN] Trunk ID. </td></tr>
+    <tr><td class="paramname">failport</td><td>[IN] Port in trunk for which to retrieve failover port list. </td></tr>
+    <tr><td class="paramname">psc</td><td>[OUT] Port selection criteria for failover port list. </td></tr>
+    <tr><td class="paramname">flags</td><td>[OUT] OPENNSL_TRUNK_FLAG_FAILOVER_xxx. </td></tr>
+    <tr><td class="paramname">array_size</td><td>[IN] Maximum number of ports in provided failover port list. </td></tr>
+    <tr><td class="paramname">fail_to_array</td><td>[OUT] Failover port list. </td></tr>
+    <tr><td class="paramname">array_count</td><td>[OUT] Number of ports in returned failover port list.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga632993b618682659e13e28b454476425"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_trunk_failover_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gab4a7b5b8761421414b682166c368249c">opennsl_trunk_t</a>&#160;</td>
+          <td class="paramname"><em>tid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>failport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>psc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> *&#160;</td>
+          <td class="paramname"><em>fail_to_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assign the failover port list for a specific trunk port. </p>
+<dl class="section user"><dt>Description</dt><dd>Configure the set of failover ports for a specific port in the indicated trunk group. For fabric trunks, all of the ports in the list must be HiGig ports on the local device. For non-fabric trunks, the failover ports may be on remote devices. If a flag is provided, then the count and fail_to_array argument are ignored; the failover port list is constructed from the trunk port membership according to the selected failover description. (If a OPENNSL_TRUNK_FLAG_FAILOVER_XXX flag is provided to =opennsl_trunk_set in the trunk_info structure, all of the local ports in the trunk will be configured for failover in the selected method.) If the flags argument is zero, then the port list from count and fail_to_array is used. This arbitrary list may include ports outside of the trunk. A count of zero indicates that failover should be disabled on failport.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">tid</td><td>[IN] Trunk ID. </td></tr>
+    <tr><td class="paramname">failport</td><td>[IN] Port in trunk for which to specify failover port list. </td></tr>
+    <tr><td class="paramname">psc</td><td>[IN] Port selection criteria for failover port list. </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] OPENNSL_TRUNK_FLAG_FAILOVER_xxx. </td></tr>
+    <tr><td class="paramname">count</td><td>[IN] Number of ports in failover port list. </td></tr>
+    <tr><td class="paramname">fail_to_array</td><td>[IN] Failover port list.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
   </table>
   </dd>
 </dl>

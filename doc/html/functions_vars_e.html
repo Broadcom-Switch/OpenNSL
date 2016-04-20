@@ -62,6 +62,7 @@
       <li><a href="functions_vars_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_vars_m.html#index_m"><span>m</span></a></li>
       <li><a href="functions_vars_n.html#index_n"><span>n</span></a></li>
+      <li><a href="functions_vars_o.html#index_o"><span>o</span></a></li>
       <li><a href="functions_vars_p.html#index_p"><span>p</span></a></li>
       <li><a href="functions_vars_q.html#index_q"><span>q</span></a></li>
       <li><a href="functions_vars_r.html#index_r"><span>r</span></a></li>
@@ -69,6 +70,7 @@
       <li><a href="functions_vars_t.html#index_t"><span>t</span></a></li>
       <li><a href="functions_vars_u.html#index_u"><span>u</span></a></li>
       <li><a href="functions_vars_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_vars_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_vars_x.html#index_x"><span>x</span></a></li>
     </ul>
   </div>
@@ -100,6 +102,21 @@
 </li>
 <li>egress_if
 : <a class="el" href="structopennsl__l3__ecmp__member__s.html#a8a92105571c72058f4f23eeecf17f398">opennsl_l3_ecmp_member_s</a>
+, <a class="el" href="structopennsl__vxlan__port__s.html#abede24b43e4492ea401abe937bc24b47">opennsl_vxlan_port_s</a>
+</li>
+<li>egress_packet_copy_size
+: <a class="el" href="structopennsl__mirror__destination__s.html#a57a54d60b71c4a86a0cea22a9350bcd4">opennsl_mirror_destination_s</a>
+</li>
+<li>egress_service_tpid
+: <a class="el" href="structopennsl__vxlan__port__s.html#ade82f855d75e318caf71a79d604d34e1">opennsl_vxlan_port_s</a>
+, <a class="el" href="structopennsl__vxlan__vpn__config__s.html#a971031aec96da4d2ad34f582ffdb8d24">opennsl_vxlan_vpn_config_s</a>
+</li>
+<li>egress_service_vlan
+: <a class="el" href="structopennsl__vxlan__port__s.html#a4b1cdb94f0978093537d3d2619f74a84">opennsl_vxlan_port_s</a>
+, <a class="el" href="structopennsl__vxlan__vpn__config__s.html#a2bb84a52244ac960be7ffffd65239a4d">opennsl_vxlan_vpn_config_s</a>
+</li>
+<li>egress_tunnel_id
+: <a class="el" href="structopennsl__vxlan__port__s.html#a66bd0455a644c92731efa6997b53d709">opennsl_vxlan_port_s</a>
 </li>
 <li>enable
 : <a class="el" href="struct__shr__phy__config__s.html#a059c61f67a668daa72a856cea2a3c0c5">_shr_phy_config_s</a>
@@ -108,11 +125,43 @@
 <li>encap
 : <a class="el" href="struct__shr__port__ability__s.html#ada363d7a2a9562d0dfc1cbe0d8b49ab1">_shr_port_ability_s</a>
 </li>
+<li>encap_id
+: <a class="el" href="structopennsl__l2__cache__addr__s.html#a22d8ac4bedddf3a1032a2d81e73a1e9b">opennsl_l2_cache_addr_s</a>
+, <a class="el" href="structopennsl__mirror__destination__s.html#a9bfa450ebefcc06e887ec3ba3521ba90">opennsl_mirror_destination_s</a>
+</li>
 <li>encap_mode
 : <a class="el" href="structopennsl__port__info__s.html#a4f30947554b62407c2f8611a13edbbc4">opennsl_port_info_s</a>
 </li>
+<li>entries_free
+: <a class="el" href="structopennsl__field__group__status__s.html#a0143dd81cd33d2706f023234b9002d9b">opennsl_field_group_status_s</a>
+</li>
+<li>entries_total
+: <a class="el" href="structopennsl__field__group__status__s.html#ad6d59f8a6e9b7f8a2b7e2e557babb5ee">opennsl_field_group_status_s</a>
+</li>
+<li>entry_count
+: <a class="el" href="structopennsl__field__group__status__s.html#a06ae188cc021da6473dea5244db43739">opennsl_field_group_status_s</a>
+</li>
+<li>etag_de
+: <a class="el" href="structopennsl__qos__map__s.html#a0693bc2d2c94cbe5ccc966ddb5481c8e">opennsl_qos_map_s</a>
+</li>
+<li>etag_dst_vid
+: <a class="el" href="structopennsl__mirror__destination__s.html#a5fb2deb0ab262abab931984881d1b49e">opennsl_mirror_destination_s</a>
+</li>
+<li>etag_pcp
+: <a class="el" href="structopennsl__qos__map__s.html#a57d7f078578d22319f4a284fade9999f">opennsl_qos_map_s</a>
+</li>
+<li>etag_src_vid
+: <a class="el" href="structopennsl__mirror__destination__s.html#a598f0c96674b11e516af41fdffbf4470">opennsl_mirror_destination_s</a>
+</li>
 <li>ethertype
-: <a class="el" href="structopennsl__switch__pkt__info__s.html#a2714beed7d46859ca05b32b9df9190c8">opennsl_switch_pkt_info_s</a>
+: <a class="el" href="structopennsl__l2__cache__addr__s.html#a886532230a2ff7f56eba30ceda28eef7">opennsl_l2_cache_addr_s</a>
+, <a class="el" href="structopennsl__switch__pkt__info__s.html#a2714beed7d46859ca05b32b9df9190c8">opennsl_switch_pkt_info_s</a>
+</li>
+<li>ethertype_mask
+: <a class="el" href="structopennsl__l2__cache__addr__s.html#ac4f20a03384905448b518a14c4965010">opennsl_l2_cache_addr_s</a>
+</li>
+<li>exp
+: <a class="el" href="structopennsl__qos__map__s.html#ad3391fa00af648c961aa5934b241f45e">opennsl_qos_map_s</a>
 </li>
 </ul>
 </div><!-- contents -->

@@ -258,6 +258,8 @@ typedef enum opennsl_rx_reason_e {
     opennslRxReasonCount = _SHR_RX_REASON_COUNT 
 } opennsl_rx_reason_t;
 
+#define OPENNSL_RX_REASON_GET(_reasons, _reason)  \
+   _SHR_RX_REASON_GET(_reasons, _reason) 
 #define OPENNSL_RX_REASON_SET(_reasons, _reason)  \
    _SHR_RX_REASON_SET(_reasons, _reason) 
 #define OPENNSL_RX_REASON_CLEAR_ALL(_reasons)  \
@@ -406,6 +408,26 @@ extern int opennsl_rx_unregister(
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Get all the CPU RX reasons supported on the specified device.
+ *
+ *\description Get all the CPU RX reasons supported on the specified device. This
+ *          may be different than the set of CPU CoS queue mapping reasons
+ *          (see opennsl_rx_cosq_mapping_reasons_get). For example, some 
+ *          devices have a many-to-one mapping of CPU COS queue mapping
+ *          reasons to RX reason in the RX packet structure.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    reasons [OUT]   Set of packet reasons
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_PARAM Invalid parameter(s)
+ *\retval    OPENNSL_E_UNAVAIL Not available on the specified unit
+ ******************************************************************************/
+extern int opennsl_rx_reasons_get(
+    int unit, 
+    opennsl_rx_reasons_t *reasons) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Allocate or deallocate a packet buffer as configured.
  *
  *\description The RX module is configured with the =opennsl_rx_cfg_t structure
@@ -482,5 +504,6 @@ extern int opennsl_rx_control_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#include <opennsl/rxX.h>
 #endif /* __OPENNSL_RX_H__ */
 /*@}*/

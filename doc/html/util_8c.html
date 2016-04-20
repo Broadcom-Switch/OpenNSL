@@ -73,6 +73,8 @@ Macros</h2></td></tr>
 <tr class="separator:a60cf9af36f952be0feb59d1f49d5edff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a068278b0838b6670ab0ab0a93ed77484"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8c.html#a068278b0838b6670ab0ab0a93ed77484">MAX_DIGITS_IN_CHOICE</a>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a068278b0838b6670ab0ab0a93ed77484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7eb3725bb62c8b42a0eee825376cb99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:ac7eb3725bb62c8b42a0eee825376cb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -100,6 +102,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abdc906039b3b47e6213585346a0ad1e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8c.html#abdc906039b3b47e6213585346a0ad1e6">opennsl_mac_parse</a> (char *buf, unsigned char *macp)</td></tr>
 <tr class="memdesc:abdc906039b3b47e6213585346a0ad1e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse MAC address string.  <a href="#abdc906039b3b47e6213585346a0ad1e6">More...</a><br /></td></tr>
 <tr class="separator:abdc906039b3b47e6213585346a0ad1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37f126ad16c8ba3173601285a9d1642"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8c.html#ad37f126ad16c8ba3173601285a9d1642">print_int_array_in_hex</a> (int *array, int size)</td></tr>
+<tr class="memdesc:ad37f126ad16c8ba3173601285a9d1642"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print the integer array in Hex format.  <a href="#ad37f126ad16c8ba3173601285a9d1642">More...</a><br /></td></tr>
+<tr class="separator:ad37f126ad16c8ba3173601285a9d1642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8af6968664b72ffda55645d67cb908be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8c.html#a8af6968664b72ffda55645d67cb908be">print_ip_addr</a> (char *str, unsigned int host)</td></tr>
 <tr class="memdesc:a8af6968664b72ffda55645d67cb908be"><td class="mdescLeft">&#160;</td><td class="mdescRight">To print IP address in dotted decimal format.  <a href="#a8af6968664b72ffda55645d67cb908be">More...</a><br /></td></tr>
 <tr class="separator:a8af6968664b72ffda55645d67cb908be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,6 +153,20 @@ Functions</h2></td></tr>
 <p>Definition at line <a class="el" href="util_8c_source.html#l00036">36</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="util_8c.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac7eb3725bb62c8b42a0eee825376cb99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_COLUMNS&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="util_8c.html#ad37f126ad16c8ba3173601285a9d1642">print_int_array_in_hex()</a>.</p>
 
 </div>
 </div>
@@ -447,6 +466,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad37f126ad16c8ba3173601285a9d1642"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_int_array_in_hex </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To print the integer array in Hex format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">array</td><td>[IN] Integer array </td></tr>
+    <tr><td class="paramname">size</td><td>[IN] Array size</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p>Definition at line <a class="el" href="util_8c_source.html#l00379">379</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+
+<p>References <a class="el" href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a8af6968664b72ffda55645d67cb908be"></a>
 <div class="memitem">
 <div class="memproto">
@@ -483,7 +542,7 @@ Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="util_8c_source.html#l00278">278</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
-<p>Referenced by <a class="el" href="example__routing_8c.html#aac2edc87c4397b83513067ac545599ea">example_add_host()</a>, and <a class="el" href="example__routing_8c.html#abce61c2dc135d7be41729d8dc9f5cf31">example_set_default_route()</a>.</p>
+<p>Referenced by <a class="el" href="example__routing_8c.html#aac2edc87c4397b83513067ac545599ea">example_add_host()</a>, <a class="el" href="example__field__ip__block_8c.html#af1005fa40860866c4a2e9283ee0539c7">example_fp_ip_block()</a>, and <a class="el" href="example__routing_8c.html#abce61c2dc135d7be41729d8dc9f5cf31">example_set_default_route()</a>.</p>
 
 </div>
 </div>

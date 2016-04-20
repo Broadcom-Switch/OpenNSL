@@ -126,5 +126,6 @@ extern int opennsl_info_get(
 #if !defined(OPENNSL_WARM_BOOT_SUPPORT)
 #define _opennsl_shutdown(unit)  OPENNSL_E_NONE 
 #endif
+#include <opennsl/initX.h>
 #endif /* __OPENNSL_INIT_H__ */
 /*@}*/

@@ -61,6 +61,7 @@
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="opennsl_2port_8h_source.html">opennsl/port.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="vlanX_8h_source.html">opennsl/vlanX.h</a>&gt;</code><br />
 </div>
 <p><a href="vlan_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -75,12 +76,31 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga1b8a0fa7d849b861fb723a8e8f8ab877"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__vlan.html#ga8592cfd5b9d3e4074def8ede5dbaf4b2">opennsl_vlan_control_port_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga1b8a0fa7d849b861fb723a8e8f8ab877">opennsl_vlan_control_port_t</a></td></tr>
 <tr class="memdesc:ga1b8a0fa7d849b861fb723a8e8f8ab877"><td class="mdescLeft">&#160;</td><td class="mdescRight">opennsl_vlan_control_port_t  <a href="group__vlan.html#ga1b8a0fa7d849b861fb723a8e8f8ab877">More...</a><br /></td></tr>
 <tr class="separator:ga1b8a0fa7d849b861fb723a8e8f8ab877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae11ae0c70e9b4378ce8a5256b775df89"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__vlan.html#ga2c2faca7a7fee163ce2efdf0e74d44ef">opennsl_vlan_control_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#gae11ae0c70e9b4378ce8a5256b775df89">opennsl_vlan_control_t</a></td></tr>
+<tr class="memdesc:gae11ae0c70e9b4378ce8a5256b775df89"><td class="mdescLeft">&#160;</td><td class="mdescRight">opennsl_vlan_control_t  <a href="group__vlan.html#gae11ae0c70e9b4378ce8a5256b775df89">More...</a><br /></td></tr>
+<tr class="separator:gae11ae0c70e9b4378ce8a5256b775df89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga27d3ebbf6a43e5695373140b0f031d78"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__vlan__data__s.html">opennsl_vlan_data_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga27d3ebbf6a43e5695373140b0f031d78">opennsl_vlan_data_t</a></td></tr>
 <tr class="memdesc:ga27d3ebbf6a43e5695373140b0f031d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a VLAN data information structure.  <a href="group__vlan.html#ga27d3ebbf6a43e5695373140b0f031d78">More...</a><br /></td></tr>
 <tr class="separator:ga27d3ebbf6a43e5695373140b0f031d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:ga2c2faca7a7fee163ce2efdf0e74d44ef"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga2c2faca7a7fee163ce2efdf0e74d44ef">opennsl_vlan_control_e</a> { <br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efaeecc355fbecdfe827f9307d787845cf1">opennslVlanDropUnknown</a> = 0, 
+<br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efa1c0a775957862059ea367ca344aa7dfc">opennslVlanShared</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efae37cc5d44510140b63f9c65da3f5fc31">opennslVlanSharedID</a> = 4, 
+<br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efad3d63a7b7b26994677b9e27d0dbd1d11">opennslVlanTranslate</a> = 5, 
+<br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efaae97a13dadec16a5c0fe95a45de57580">opennslVlanIgnorePktTag</a> = 6, 
+<br />
+&#160;&#160;<a class="el" href="group__vlan.html#gga2c2faca7a7fee163ce2efdf0e74d44efa89c41a51f131454cfe281ab471911da4">opennslVlanMemberMismatchToCpu</a> = 21
+<br />
+ }<tr class="memdesc:ga2c2faca7a7fee163ce2efdf0e74d44ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">opennsl_vlan_control_t  <a href="group__vlan.html#ga2c2faca7a7fee163ce2efdf0e74d44ef">More...</a><br /></td></tr>
+<tr class="separator:ga2c2faca7a7fee163ce2efdf0e74d44ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
 <tr class="memitem:ga8592cfd5b9d3e4074def8ede5dbaf4b2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga8592cfd5b9d3e4074def8ede5dbaf4b2">opennsl_vlan_control_port_e</a> { <br />
 &#160;&#160;<a class="el" href="group__vlan.html#gga8592cfd5b9d3e4074def8ede5dbaf4b2a66d35d09abbba38376cac5c619920f00">opennslVlanTranslateIngressEnable</a> = 2, 
 <br />
@@ -99,6 +119,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4429b4528c1852d3dcafadab63bc754c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga4429b4528c1852d3dcafadab63bc754c">opennsl_vlan_control_port_set</a> (int unit, int port, <a class="el" href="group__vlan.html#ga1b8a0fa7d849b861fb723a8e8f8ab877">opennsl_vlan_control_port_t</a> type, int arg) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga4429b4528c1852d3dcafadab63bc754c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/get miscellaneous port-specific VLAN options.  <a href="group__vlan.html#ga4429b4528c1852d3dcafadab63bc754c">More...</a><br /></td></tr>
 <tr class="separator:ga4429b4528c1852d3dcafadab63bc754c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafd2c2b34fb525b94d5cb2e14fb75044b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#gafd2c2b34fb525b94d5cb2e14fb75044b">opennsl_vlan_control_set</a> (int unit, <a class="el" href="group__vlan.html#gae11ae0c70e9b4378ce8a5256b775df89">opennsl_vlan_control_t</a> type, int arg) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gafd2c2b34fb525b94d5cb2e14fb75044b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/get miscellaneous VLAN-specific chip options.  <a href="group__vlan.html#gafd2c2b34fb525b94d5cb2e14fb75044b">More...</a><br /></td></tr>
+<tr class="separator:gafd2c2b34fb525b94d5cb2e14fb75044b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4db9e633ba9c276064768d1718c3062c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga4db9e633ba9c276064768d1718c3062c">opennsl_vlan_create</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga4db9e633ba9c276064768d1718c3062c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and configure a VLAN on the OPENNSL device.  <a href="group__vlan.html#ga4db9e633ba9c276064768d1718c3062c">More...</a><br /></td></tr>
 <tr class="separator:ga4db9e633ba9c276064768d1718c3062c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,6 +137,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga75f08d03f1bc89170a123ed9751b2470"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga75f08d03f1bc89170a123ed9751b2470">opennsl_vlan_destroy_all</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga75f08d03f1bc89170a123ed9751b2470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all VLANs except the default VLAN.  <a href="group__vlan.html#ga75f08d03f1bc89170a123ed9751b2470">More...</a><br /></td></tr>
 <tr class="separator:ga75f08d03f1bc89170a123ed9751b2470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga56e2dc3c7cf8dd9dd7985c4980393645"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga56e2dc3c7cf8dd9dd7985c4980393645">opennsl_vlan_gport_add</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> port, int flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga56e2dc3c7cf8dd9dd7985c4980393645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a virtual or physical port to the specified VLAN.  <a href="group__vlan.html#ga56e2dc3c7cf8dd9dd7985c4980393645">More...</a><br /></td></tr>
+<tr class="separator:ga56e2dc3c7cf8dd9dd7985c4980393645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae138dd6e2483ae4bd3214ae1d4343404"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#gae138dd6e2483ae4bd3214ae1d4343404">opennsl_vlan_gport_delete</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> port) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gae138dd6e2483ae4bd3214ae1d4343404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a virtual or physical port from the specified VLAN.  <a href="group__vlan.html#gae138dd6e2483ae4bd3214ae1d4343404">More...</a><br /></td></tr>
+<tr class="separator:gae138dd6e2483ae4bd3214ae1d4343404"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9379df39b7aea7e5e1784cac13445f1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga9379df39b7aea7e5e1784cac13445f1e">opennsl_vlan_gport_delete_all</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga9379df39b7aea7e5e1784cac13445f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all virtual and physical port from the specified VLAN.  <a href="group__vlan.html#ga9379df39b7aea7e5e1784cac13445f1e">More...</a><br /></td></tr>
 <tr class="separator:ga9379df39b7aea7e5e1784cac13445f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>

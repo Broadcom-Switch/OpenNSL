@@ -49,6 +49,7 @@
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -60,6 +61,7 @@
 <p><pre class="fragment"></pre>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="statX_8h_source.html">opennsl/statX.h</a>&gt;</code><br />
 </div>
 <p><a href="stat_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -69,8 +71,17 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter Statistics Values.  <a href="structopennsl__stat__value__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gadc3133928862b6a970178287a5f9a71f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gadc3133928862b6a970178287a5f9a71f">OPENNSL_STAT_GROUP_MODE_INGRESS</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:gadc3133928862b6a970178287a5f9a71f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stat Group Mode Ingress.  <a href="group__stat.html#gadc3133928862b6a970178287a5f9a71f">More...</a><br /></td></tr>
+<tr class="separator:gadc3133928862b6a970178287a5f9a71f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:gabeb49330f56b463dd813bd276b96ccef"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__stat.html#ga05b927e7acefd2f57dd84a481f49f4c8">opennsl_stat_group_mode_attr_pkt_type_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gabeb49330f56b463dd813bd276b96ccef">opennsl_stat_group_mode_attr_pkt_type_t</a></td></tr>
+<tr class="memdesc:gabeb49330f56b463dd813bd276b96ccef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet type related flex attributes values.  <a href="group__stat.html#gabeb49330f56b463dd813bd276b96ccef">More...</a><br /></td></tr>
+<tr class="separator:gabeb49330f56b463dd813bd276b96ccef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga020274e9d156256be27464b5d57ec30c"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__stat.html#ga955dbcec93b6af99b9c3bc43242d069e">opennsl_stat_group_mode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga020274e9d156256be27464b5d57ec30c">opennsl_stat_group_mode_t</a></td></tr>
 <tr class="memdesc:ga020274e9d156256be27464b5d57ec30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics Group Modes.  <a href="group__stat.html#ga020274e9d156256be27464b5d57ec30c">More...</a><br /></td></tr>
 <tr class="separator:ga020274e9d156256be27464b5d57ec30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -86,7 +97,23 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga955dbcec93b6af99b9c3bc43242d069e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga955dbcec93b6af99b9c3bc43242d069e">opennsl_stat_group_mode_e</a> { <a class="el" href="group__stat.html#gga955dbcec93b6af99b9c3bc43242d069eab1f1f127d9fda715e3e34b333578d05f">opennslStatGroupModeSingle</a> = 0
+<tr class="memitem:ga05b927e7acefd2f57dd84a481f49f4c8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga05b927e7acefd2f57dd84a481f49f4c8">opennsl_stat_group_mode_attr_pkt_type_e</a> { <br />
+&#160;&#160;<a class="el" href="group__stat.html#gga05b927e7acefd2f57dd84a481f49f4c8abd1cde44a3521271299a4a72502d0496">opennslStatGroupModeAttrPktTypeKnownL3UC</a> = 14, 
+<br />
+&#160;&#160;<a class="el" href="group__stat.html#gga05b927e7acefd2f57dd84a481f49f4c8ae051dc1c63e80f610dc13365d47e0762">opennslStatGroupModeAttrPktTypeUnknownL3UC</a> = 15, 
+<br />
+&#160;&#160;<a class="el" href="group__stat.html#gga05b927e7acefd2f57dd84a481f49f4c8a76036b907a2927b376fce127b84bffa9">opennslStatGroupModeAttrPktTypeKnownIPMC</a> = 16, 
+<br />
+&#160;&#160;<a class="el" href="group__stat.html#gga05b927e7acefd2f57dd84a481f49f4c8aa90be463a63ffe1eaab7796d2a602ed4">opennslStatGroupModeAttrPktTypeUnknownIPMC</a> = 17
+<br />
+ }<tr class="memdesc:ga05b927e7acefd2f57dd84a481f49f4c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet type related flex attributes values.  <a href="group__stat.html#ga05b927e7acefd2f57dd84a481f49f4c8">More...</a><br /></td></tr>
+<tr class="separator:ga05b927e7acefd2f57dd84a481f49f4c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
+<tr class="memitem:ga955dbcec93b6af99b9c3bc43242d069e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga955dbcec93b6af99b9c3bc43242d069e">opennsl_stat_group_mode_e</a> { <br />
+&#160;&#160;<a class="el" href="group__stat.html#gga955dbcec93b6af99b9c3bc43242d069eab1f1f127d9fda715e3e34b333578d05f">opennslStatGroupModeSingle</a> = 0, 
+<br />
+&#160;&#160;<a class="el" href="group__stat.html#gga955dbcec93b6af99b9c3bc43242d069ea5a2ed5132ebf7b9c66d23b4e98e04ebf">opennslStatGroupModeTrafficType</a> = 1
+<br />
  }<tr class="memdesc:ga955dbcec93b6af99b9c3bc43242d069e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics Group Modes.  <a href="group__stat.html#ga955dbcec93b6af99b9c3bc43242d069e">More...</a><br /></td></tr>
 <tr class="separator:ga955dbcec93b6af99b9c3bc43242d069e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
@@ -554,9 +581,24 @@ Functions</h2></td></tr>
 <tr class="memitem:gaa2ab25d30e3206a15e136693a6018fa9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gaa2ab25d30e3206a15e136693a6018fa9">opennsl_stat_group_create</a> (int unit, <a class="el" href="group__stat.html#gab4a8a190361bbd0fcf108d2267c0e0bd">opennsl_stat_object_t</a> object, <a class="el" href="group__stat.html#ga020274e9d156256be27464b5d57ec30c">opennsl_stat_group_mode_t</a> group_mode, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *stat_counter_id, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *num_entries) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gaa2ab25d30e3206a15e136693a6018fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Counter Entries group for given accounting object.  <a href="group__stat.html#gaa2ab25d30e3206a15e136693a6018fa9">More...</a><br /></td></tr>
 <tr class="separator:gaa2ab25d30e3206a15e136693a6018fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga961662652b06c59508c4a5b4035c81b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga961662652b06c59508c4a5b4035c81b8">opennsl_stat_group_destroy</a> (int unit, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> stat_counter_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga961662652b06c59508c4a5b4035c81b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy counter Entries group.  <a href="group__stat.html#ga961662652b06c59508c4a5b4035c81b8">More...</a><br /></td></tr>
+<tr class="separator:ga961662652b06c59508c4a5b4035c81b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe0033c57a08150b1bf0e36ba34386ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gabe0033c57a08150b1bf0e36ba34386ce">opennsl_stat_group_mode_id_destroy</a> (int unit, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> mode_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabe0033c57a08150b1bf0e36ba34386ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys Customized Group mode.  <a href="group__stat.html#gabe0033c57a08150b1bf0e36ba34386ce">More...</a><br /></td></tr>
+<tr class="separator:gabe0033c57a08150b1bf0e36ba34386ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae16d66ca83bbe4770b5f1e70f5442099"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gae16d66ca83bbe4770b5f1e70f5442099">opennsl_stat_init</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gae16d66ca83bbe4770b5f1e70f5442099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the OPENNSL statistics module.  <a href="group__stat.html#gae16d66ca83bbe4770b5f1e70f5442099">More...</a><br /></td></tr>
+<tr class="separator:gae16d66ca83bbe4770b5f1e70f5442099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga09bf081d74a2182e6005405f80815931"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#ga09bf081d74a2182e6005405f80815931">opennsl_stat_multi_get</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> port, int nstat, <a class="el" href="group__stat.html#ga477326d25d4844a3d50c67f0dad26577">opennsl_stat_val_t</a> *stat_arr, <a class="el" href="sal_2types_8h.html#aa3ad64cf41ec3a042bd92550cc6ed308">uint64</a> *value_arr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga09bf081d74a2182e6005405f80815931"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified statistics from the device.  <a href="group__stat.html#ga09bf081d74a2182e6005405f80815931">More...</a><br /></td></tr>
 <tr class="separator:ga09bf081d74a2182e6005405f80815931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabd03e9b669f1833cb21ea97472afc0b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gabd03e9b669f1833cb21ea97472afc0b2">opennsl_stat_sync</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabd03e9b669f1833cb21ea97472afc0b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize software counters with hardware.  <a href="group__stat.html#gabd03e9b669f1833cb21ea97472afc0b2">More...</a><br /></td></tr>
+<tr class="separator:gabd03e9b669f1833cb21ea97472afc0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeecb03e24e6f74da4e53324ca5f86536"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stat.html#gaeecb03e24e6f74da4e53324ca5f86536">opennsl_stat_value_t_init</a> (<a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *stat_value) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaeecb03e24e6f74da4e53324ca5f86536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a opennsl_stat_value_t data structure.  <a href="group__stat.html#gaeecb03e24e6f74da4e53324ca5f86536">More...</a><br /></td></tr>
+<tr class="separator:gaeecb03e24e6f74da4e53324ca5f86536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment"></pre> 

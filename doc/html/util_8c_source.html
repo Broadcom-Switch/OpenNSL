@@ -360,7 +360,44 @@
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <span class="keywordflow">return</span> rc;</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;}</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">/**************************************************************************/</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno"><a class="line" href="util_8c.html#ad37f126ad16c8ba3173601285a9d1642">  379</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="util_8c.html#ad37f126ad16c8ba3173601285a9d1642">print_int_array_in_hex</a>(<span class="keywordtype">int</span> *array, <span class="keywordtype">int</span> size)</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;{</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  <span class="keywordtype">int</span> entries, row_count, row, column;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  <span class="keywordtype">char</span>  buf[100];</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;  <span class="keywordtype">char</span>  tbuf[100];</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor">#define NUM_COLUMNS 8</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  entries = size;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  row_count = size / <a class="code" href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a>;</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  <span class="keywordflow">if</span> (size % <a class="code" href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a>)</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;  {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    row_count++;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;  }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;  <span class="keywordflow">for</span> (row = 0; row &lt; row_count; row++)</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;  {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    snprintf(buf, <span class="keyword">sizeof</span>(buf), <span class="stringliteral">&quot;%04x &quot;</span>, row * NUM_COLUMNS);</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordflow">for</span> (column = 0; (column &lt; <a class="code" href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a>)</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        &amp;&amp; ((row * NUM_COLUMNS + column) &lt; entries); column++)</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    {</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      snprintf(tbuf, <span class="keyword">sizeof</span>(buf), <span class="stringliteral">&quot;%8.8x &quot;</span>, array[row * NUM_COLUMNS + column]);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;      strncat(buf, tbuf, strlen(tbuf));</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    snprintf(tbuf, <span class="keyword">sizeof</span>(tbuf), <span class="stringliteral">&quot;   &quot;</span>);</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    strncat(buf, tbuf, strlen(tbuf));</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    snprintf(tbuf, <span class="keyword">sizeof</span>(tbuf), <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    strncat(buf, tbuf, strlen(tbuf));</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    printf(<span class="stringliteral">&quot;%s&quot;</span>, buf);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;}</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="util_8c_html_a60cf9af36f952be0feb59d1f49d5edff"><div class="ttname"><a href="util_8c.html#a60cf9af36f952be0feb59d1f49d5edff">MAC_ADDR_LEN</a></div><div class="ttdeci">#define MAC_ADDR_LEN</div></div>
+<div class="ttc" id="util_8c_html_ad37f126ad16c8ba3173601285a9d1642"><div class="ttname"><a href="util_8c.html#ad37f126ad16c8ba3173601285a9d1642">print_int_array_in_hex</a></div><div class="ttdeci">void print_int_array_in_hex(int *array, int size)</div><div class="ttdoc">To print the integer array in Hex format. </div><div class="ttdef"><b>Definition:</b> <a href="util_8c_source.html#l00379">util.c:379</a></div></div>
 <div class="ttc" id="group__types_html_ga016605921f5a8bd7ed96bb1b6195178a"><div class="ttname"><a href="group__types.html#ga016605921f5a8bd7ed96bb1b6195178a">opennsl_mac_t</a></div><div class="ttdeci">uint8 opennsl_mac_t[6]</div><div class="ttdoc">opennsl_mac_t </div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2types_8h_source.html#l00068">types.h:68</a></div></div>
 <div class="ttc" id="sal_2types_8h_html_aa8cecfc5c5c054d2875c03e77b7be15d"><div class="ttname"><a href="sal_2types_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a></div><div class="ttdeci">#define TRUE</div><div class="ttdef"><b>Definition:</b> <a href="sal_2types_8h_source.html#l00032">types.h:32</a></div></div>
 <div class="ttc" id="structopennsl__port__config__s_html_a6a0d55ca5f29547cfcc5c3c1a6149e81"><div class="ttname"><a href="structopennsl__port__config__s.html#a6a0d55ca5f29547cfcc5c3c1a6149e81">opennsl_port_config_s::ge</a></div><div class="ttdeci">opennsl_pbmp_t ge</div><div class="ttdoc">Mask of GE ports. </div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2port_8h_source.html#l00040">port.h:40</a></div></div>
@@ -374,6 +411,7 @@
 <div class="ttc" id="l2_8h_html"><div class="ttname"><a href="l2_8h.html">l2.h</a></div><div class="ttdoc"> </div></div>
 <div class="ttc" id="util_8c_html_a3262fde70495cd6e0f3afd6baf9ae95c"><div class="ttname"><a href="util_8c.html#a3262fde70495cd6e0f3afd6baf9ae95c">l2_print_mac</a></div><div class="ttdeci">void l2_print_mac(char *str, opennsl_mac_t mac_address)</div><div class="ttdoc">To print the MAC address. </div><div class="ttdef"><b>Definition:</b> <a href="util_8c_source.html#l00211">util.c:211</a></div></div>
 <div class="ttc" id="sal_2types_8h_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="sal_2types_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition:</b> <a href="sal_2types_8h_source.html#l00036">types.h:36</a></div></div>
+<div class="ttc" id="util_8c_html_ac7eb3725bb62c8b42a0eee825376cb99"><div class="ttname"><a href="util_8c.html#ac7eb3725bb62c8b42a0eee825376cb99">NUM_COLUMNS</a></div><div class="ttdeci">#define NUM_COLUMNS</div></div>
 <div class="ttc" id="util_8c_html_a91668ed1245d073a2ac84e6121205d28"><div class="ttname"><a href="util_8c.html#a91668ed1245d073a2ac84e6121205d28">DEFAULT_VLAN</a></div><div class="ttdeci">#define DEFAULT_VLAN</div><div class="ttdef"><b>Definition:</b> <a href="util_8c_source.html#l00035">util.c:35</a></div></div>
 <div class="ttc" id="group__port_html_ga9f95e3f27b53970914dccc70ffbe7010"><div class="ttname"><a href="group__port.html#ga9f95e3f27b53970914dccc70ffbe7010">opennsl_port_config_get</a></div><div class="ttdeci">int opennsl_port_config_get(int unit, opennsl_port_config_t *config) LIB_DLL_EXPORTED</div><div class="ttdoc">Retrieved the port configuration for the specified device. </div></div>
 <div class="ttc" id="group__types_html_gaced1b7d5db61f5d7d2262da91bdb6887"><div class="ttname"><a href="group__types.html#gaced1b7d5db61f5d7d2262da91bdb6887">OPENNSL_PBMP_COUNT</a></div><div class="ttdeci">#define OPENNSL_PBMP_COUNT(pbm, count)</div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2types_8h_source.html#l00046">types.h:46</a></div></div>

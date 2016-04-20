@@ -81,6 +81,9 @@ Files</h2></td></tr>
 <tr class="memitem:l3_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="l3_8h.html">l3.h</a></td></tr>
 <tr class="memdesc:l3_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:l3X_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="l3X_8h.html">l3X.h</a></td></tr>
+<tr class="memdesc:l3X_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment"></pre> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -108,6 +111,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ga3a1c0f979789efaf885820678581e8aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga3a1c0f979789efaf885820678581e8aa">OPENNSL_L3_ECMP_DYNAMIC_LOAD_WEIGHT_INVALID</a>&#160;&#160;&#160;-1</td></tr>
 <tr class="memdesc:ga3a1c0f979789efaf885820678581e8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalid value for dynamic_load_weight.  <a href="#ga3a1c0f979789efaf885820678581e8aa">More...</a><br /></td></tr>
 <tr class="separator:ga3a1c0f979789efaf885820678581e8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga931c78c8d062e14111691f0292d67ecb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga931c78c8d062e14111691f0292d67ecb">OPENNSL_L3_ECMP_DYNAMIC_MODE_NORMAL</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga931c78c8d062e14111691f0292d67ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">ECMP dynamic load balancing normal mode: if inactivity duration lapsed, use optimal member, else use assigned member.  <a href="#ga931c78c8d062e14111691f0292d67ecb">More...</a><br /></td></tr>
+<tr class="separator:ga931c78c8d062e14111691f0292d67ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacca434223caabb0c096a65b185361e6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gacca434223caabb0c096a65b185361e6c">OPENNSL_L3_ECMP_DYNAMIC_MODE_RESILIENT</a>&#160;&#160;&#160;4</td></tr>
 <tr class="memdesc:gacca434223caabb0c096a65b185361e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ECMP resilient load balancing mode: minimize reassignment of flows to members.  <a href="#gacca434223caabb0c096a65b185361e6c">More...</a><br /></td></tr>
 <tr class="separator:gacca434223caabb0c096a65b185361e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,9 +137,18 @@ Macros</h2></td></tr>
 <tr class="memitem:gab8e8793f6f846e5cb030d92d6cf848f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gab8e8793f6f846e5cb030d92d6cf848f9">OPENNSL_L3_INGRESS_REPLACE</a>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
 <tr class="memdesc:gab8e8793f6f846e5cb030d92d6cf848f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace existing L3 Ingress entry.  <a href="#gab8e8793f6f846e5cb030d92d6cf848f9">More...</a><br /></td></tr>
 <tr class="separator:gab8e8793f6f846e5cb030d92d6cf848f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad37e2bae5bd6e78d227ed6afa77f2dd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gad37e2bae5bd6e78d227ed6afa77f2dd9">OPENNSL_L3_IP4_OPTIONS_REPLACE</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:gad37e2bae5bd6e78d227ed6afa77f2dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace existing entry.  <a href="#gad37e2bae5bd6e78d227ed6afa77f2dd9">More...</a><br /></td></tr>
+<tr class="separator:gad37e2bae5bd6e78d227ed6afa77f2dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d947889560d5df1d13b72f93635cf98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga6d947889560d5df1d13b72f93635cf98">OPENNSL_L3_IP4_OPTIONS_WITH_ID</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:ga6d947889560d5df1d13b72f93635cf98"><td class="mdescLeft">&#160;</td><td class="mdescRight">With ID option creation.  <a href="#ga6d947889560d5df1d13b72f93635cf98">More...</a><br /></td></tr>
+<tr class="separator:ga6d947889560d5df1d13b72f93635cf98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9d9a88d850579f1de6b577ef49e30bb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga9d9a88d850579f1de6b577ef49e30bb6">OPENNSL_L3_IP6</a>&#160;&#160;&#160;(1 &lt;&lt; 17)</td></tr>
 <tr class="memdesc:ga9d9a88d850579f1de6b577ef49e30bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">IPv6.  <a href="#ga9d9a88d850579f1de6b577ef49e30bb6">More...</a><br /></td></tr>
 <tr class="separator:ga9d9a88d850579f1de6b577ef49e30bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11efb97e21f394668a625073a16ba8e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga11efb97e21f394668a625073a16ba8e6">OPENNSL_L3_IPMC</a>&#160;&#160;&#160;(1 &lt;&lt; 11)</td></tr>
+<tr class="memdesc:ga11efb97e21f394668a625073a16ba8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set IPMC for real IPMC entry.  <a href="#ga11efb97e21f394668a625073a16ba8e6">More...</a><br /></td></tr>
+<tr class="separator:ga11efb97e21f394668a625073a16ba8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae4981557f550e4f80dfd6578dcf16fc8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gae4981557f550e4f80dfd6578dcf16fc8">OPENNSL_L3_L2ONLY</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
 <tr class="memdesc:gae4981557f550e4f80dfd6578dcf16fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">L2 switch only on interface.  <a href="#gae4981557f550e4f80dfd6578dcf16fc8">More...</a><br /></td></tr>
 <tr class="separator:gae4981557f550e4f80dfd6578dcf16fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +173,9 @@ Macros</h2></td></tr>
 <tr class="memitem:gadbcd10a551131d356e931adc1d31fe71"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gadbcd10a551131d356e931adc1d31fe71">OPENNSL_L3_UNTAG</a>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
 <tr class="memdesc:gadbcd10a551131d356e931adc1d31fe71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packet goes out untagged.  <a href="#gadbcd10a551131d356e931adc1d31fe71">More...</a><br /></td></tr>
 <tr class="separator:gadbcd10a551131d356e931adc1d31fe71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2311f752b9726433b9a9fe2eee8bc5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gaa2311f752b9726433b9a9fe2eee8bc5c">OPENNSL_L3_VXLAN_ONLY</a>&#160;&#160;&#160;(1 &lt;&lt; 31)</td></tr>
+<tr class="memdesc:gaa2311f752b9726433b9a9fe2eee8bc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific for VXLAN Nexthop.  <a href="#gaa2311f752b9726433b9a9fe2eee8bc5c">More...</a><br /></td></tr>
+<tr class="separator:gaa2311f752b9726433b9a9fe2eee8bc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabf1c04c5421531f00540beca29a95cf5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gabf1c04c5421531f00540beca29a95cf5">OPENNSL_L3_WITH_ID</a>&#160;&#160;&#160;(1 &lt;&lt; 6)</td></tr>
 <tr class="memdesc:gabf1c04c5421531f00540beca29a95cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID is provided.  <a href="#gabf1c04c5421531f00540beca29a95cf5">More...</a><br /></td></tr>
 <tr class="separator:gabf1c04c5421531f00540beca29a95cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,6 +214,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l3__intf__s.html">opennsl_l3_intf_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga2a48bc43f2c63aa867b6ba88dd46795e">opennsl_l3_intf_t</a></td></tr>
 <tr class="memdesc:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Interface Structure.  <a href="#ga2a48bc43f2c63aa867b6ba88dd46795e">More...</a><br /></td></tr>
 <tr class="separator:ga2a48bc43f2c63aa867b6ba88dd46795e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga42af21054c9ee8e1710fb96e0d5e6747"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__l3.html#gabb86f17a72dc0e89b3cd8beea82addf1">opennsl_l3_ip4_options_action_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a></td></tr>
+<tr class="memdesc:ga42af21054c9ee8e1710fb96e0d5e6747"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 IP options handing actions.  <a href="#ga42af21054c9ee8e1710fb96e0d5e6747">More...</a><br /></td></tr>
+<tr class="separator:ga42af21054c9ee8e1710fb96e0d5e6747"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9395dab5143018452f69fbe885e86b39"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__l3__route__s.html">opennsl_l3_route_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga9395dab5143018452f69fbe885e86b39">opennsl_l3_route_t</a></td></tr>
 <tr class="memdesc:ga9395dab5143018452f69fbe885e86b39"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Route Structure.  <a href="#ga9395dab5143018452f69fbe885e86b39">More...</a><br /></td></tr>
 <tr class="separator:ga9395dab5143018452f69fbe885e86b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,6 +237,18 @@ Enumerations</h2></td></tr>
 <br />
  }<tr class="memdesc:ga9ffd39434b904a446d9ad109a8eef08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 Ingress Interface URPF Mode setting.  <a href="group__l3.html#ga9ffd39434b904a446d9ad109a8eef08a">More...</a><br /></td></tr>
 <tr class="separator:ga9ffd39434b904a446d9ad109a8eef08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
+<tr class="memitem:gabb86f17a72dc0e89b3cd8beea82addf1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gabb86f17a72dc0e89b3cd8beea82addf1">opennsl_l3_ip4_options_action_e</a> { <br />
+&#160;&#160;<a class="el" href="group__l3.html#ggabb86f17a72dc0e89b3cd8beea82addf1ac0257e99083b9b16edb35c173a95f9fb">opennslIntfIPOptionActionNone</a> = 0, 
+<br />
+&#160;&#160;<a class="el" href="group__l3.html#ggabb86f17a72dc0e89b3cd8beea82addf1ad250cef140d55ac66a13f377fd489c1a">opennslIntfIPOptionActionCopyToCPU</a> = 1, 
+<br />
+&#160;&#160;<a class="el" href="group__l3.html#ggabb86f17a72dc0e89b3cd8beea82addf1ab92cfd6c1c351d677d792d174b9fa8b0">opennslIntfIPOptionActionDrop</a> = 2, 
+<br />
+&#160;&#160;<a class="el" href="group__l3.html#ggabb86f17a72dc0e89b3cd8beea82addf1a3669d16c6f97dc817ed61ba470fa0b1d">opennslIntfIPOptionActionCopyCPUAndDrop</a> = 3
+<br />
+ }<tr class="memdesc:gabb86f17a72dc0e89b3cd8beea82addf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">L3 IP options handing actions.  <a href="group__l3.html#gabb86f17a72dc0e89b3cd8beea82addf1">More...</a><br /></td></tr>
+<tr class="separator:gabb86f17a72dc0e89b3cd8beea82addf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 <tr class="memitem:ga6390acbf8dd851a1c53f3c2eb75772eb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga6390acbf8dd851a1c53f3c2eb75772eb">opennsl_l3_stat_e</a> { <br />
 &#160;&#160;<a class="el" href="group__l3.html#gga6390acbf8dd851a1c53f3c2eb75772eba3b421f1008232c5890fc102129f8fb65">opennslL3StatOutPackets</a> = 0, 
@@ -299,6 +332,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga47c9daec8f8f9a3e5e20c72ea3733271">opennsl_l3_egress_stat_counter_get</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a> stat, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> num_entries, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *counter_indexes, <a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *counter_values) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified counter statistic for a L3 egress interface.  <a href="#ga47c9daec8f8f9a3e5e20c72ea3733271">More...</a><br /></td></tr>
 <tr class="separator:ga47c9daec8f8f9a3e5e20c72ea3733271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga32e146cb7a6f951c9fe88c2bfe8b2987"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga32e146cb7a6f951c9fe88c2bfe8b2987">opennsl_l3_egress_stat_detach</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga32e146cb7a6f951c9fe88c2bfe8b2987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach counters entries to the given L3 Egress interface.  <a href="#ga32e146cb7a6f951c9fe88c2bfe8b2987">More...</a><br /></td></tr>
+<tr class="separator:ga32e146cb7a6f951c9fe88c2bfe8b2987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga10b5ea766149d2bfdcd9d453939057e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga10b5ea766149d2bfdcd9d453939057e5">opennsl_l3_egress_t_init</a> (<a class="el" href="group__l3.html#gaf8c0ee66bb6126f9f946f1d4d87b77a0">opennsl_l3_egress_t</a> *egr) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga10b5ea766149d2bfdcd9d453939057e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a opennsl_l3_egress_t structure.  <a href="#ga10b5ea766149d2bfdcd9d453939057e5">More...</a><br /></td></tr>
 <tr class="separator:ga10b5ea766149d2bfdcd9d453939057e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -341,6 +377,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga7c3e597df7a8743ca3327169f5be3c8c">opennsl_l3_ingress_stat_counter_get</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id, <a class="el" href="group__l3.html#ga659f69a4df47e18747fbee9480c4e27a">opennsl_l3_stat_t</a> stat, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> num_entries, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *counter_indexes, <a class="el" href="group__stat.html#ga13d44cf58112380486e774dda98a5a73">opennsl_stat_value_t</a> *counter_values) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get counter statistic values for a l3 interface object.  <a href="#ga7c3e597df7a8743ca3327169f5be3c8c">More...</a><br /></td></tr>
 <tr class="separator:ga7c3e597df7a8743ca3327169f5be3c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga42a114339fc209ce85a79f383737f7bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga42a114339fc209ce85a79f383737f7bc">opennsl_l3_ingress_stat_detach</a> (int unit, <a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a> intf_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga42a114339fc209ce85a79f383737f7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach counters entries to the given L3 ingress interface.  <a href="#ga42a114339fc209ce85a79f383737f7bc">More...</a><br /></td></tr>
+<tr class="separator:ga42a114339fc209ce85a79f383737f7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gac3aa55e5394c363b7e8bb13079cdf37d">opennsl_l3_init</a> (int unit) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the OPENNSL L3 subsystem.  <a href="#gac3aa55e5394c363b7e8bb13079cdf37d">More...</a><br /></td></tr>
 <tr class="separator:gac3aa55e5394c363b7e8bb13079cdf37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -362,6 +401,18 @@ Functions</h2></td></tr>
 <tr class="memitem:gaa92edab97138caed29fe11f4f9b35fa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gaa92edab97138caed29fe11f4f9b35fa7">opennsl_l3_intf_t_init</a> (<a class="el" href="group__l3.html#ga2a48bc43f2c63aa867b6ba88dd46795e">opennsl_l3_intf_t</a> *intf) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gaa92edab97138caed29fe11f4f9b35fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a opennsl_l3_intf_t structure.  <a href="#gaa92edab97138caed29fe11f4f9b35fa7">More...</a><br /></td></tr>
 <tr class="separator:gaa92edab97138caed29fe11f4f9b35fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga08bc60139fbaea53071b183ec856a51e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga08bc60139fbaea53071b183ec856a51e">opennsl_l3_ip4_options_action_get</a> (int unit, int ip4_options_profile_id, int ip4_option, <a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a> *action) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga08bc60139fbaea53071b183ec856a51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Individual IP options action for a given IP option profile.  <a href="#ga08bc60139fbaea53071b183ec856a51e">More...</a><br /></td></tr>
+<tr class="separator:ga08bc60139fbaea53071b183ec856a51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga197375090c53e2626402786f043864ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga197375090c53e2626402786f043864ad">opennsl_l3_ip4_options_action_set</a> (int unit, int ip4_options_profile_id, int ip4_option, <a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a> action) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga197375090c53e2626402786f043864ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Individual IP options action for a given IP option profile.  <a href="#ga197375090c53e2626402786f043864ad">More...</a><br /></td></tr>
+<tr class="separator:ga197375090c53e2626402786f043864ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabac10d99c1323c93e9f45f4ec2569a45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gabac10d99c1323c93e9f45f4ec2569a45">opennsl_l3_ip4_options_profile_create</a> (int unit, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags, <a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a> default_action, int *ip4_options_profile_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gabac10d99c1323c93e9f45f4ec2569a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new L3 IP options handling profile.  <a href="#gabac10d99c1323c93e9f45f4ec2569a45">More...</a><br /></td></tr>
+<tr class="separator:gabac10d99c1323c93e9f45f4ec2569a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeda30fe999d98f9b3e0a198081f39df3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gaeda30fe999d98f9b3e0a198081f39df3">opennsl_l3_ip4_options_profile_destroy</a> (int unit, int ip4_options_profile_id) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaeda30fe999d98f9b3e0a198081f39df3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an L3 IP options Profile.  <a href="#gaeda30fe999d98f9b3e0a198081f39df3">More...</a><br /></td></tr>
+<tr class="separator:gaeda30fe999d98f9b3e0a198081f39df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafc35f6809a98707e3c54610512094a1d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gafc35f6809a98707e3c54610512094a1d">opennsl_l3_route_add</a> (int unit, <a class="el" href="group__l3.html#ga9395dab5143018452f69fbe885e86b39">opennsl_l3_route_t</a> *info) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gafc35f6809a98707e3c54610512094a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an IP route to the L3 route table.  <a href="#gafc35f6809a98707e3c54610512094a1d">More...</a><br /></td></tr>
 <tr class="separator:gafc35f6809a98707e3c54610512094a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -423,7 +474,7 @@ Functions</h2></td></tr>
 
 <p>Send a copy to CPU. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00068">68</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00071">71</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -455,7 +506,7 @@ Functions</h2></td></tr>
 
 <p>switch family: DEFIP CPU bit set. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00057">57</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00060">60</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -471,7 +522,7 @@ Functions</h2></td></tr>
 
 <p>XGS: Local DEFIP route. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00060">60</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00063">63</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -487,7 +538,7 @@ Functions</h2></td></tr>
 
 <p>Indicates this is a wider L3 entry. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00069">69</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00072">72</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -503,7 +554,7 @@ Functions</h2></td></tr>
 
 <p>Destination match discard. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00067">67</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00070">70</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -519,7 +570,23 @@ Functions</h2></td></tr>
 
 <p>Invalid value for dynamic_load_weight. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00141">141</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00146">146</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga931c78c8d062e14111691f0292d67ecb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L3_ECMP_DYNAMIC_MODE_NORMAL&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ECMP dynamic load balancing normal mode: if inactivity duration lapsed, use optimal member, else use assigned member. </p>
+
+<p>Definition at line <a class="el" href="l3X_8h_source.html#l00025">25</a> of file <a class="el" href="l3X_8h_source.html">l3X.h</a>.</p>
 
 </div>
 </div>
@@ -535,7 +602,7 @@ Functions</h2></td></tr>
 
 <p>ECMP resilient load balancing mode: minimize reassignment of flows to members. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00277">277</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00282">282</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -551,7 +618,7 @@ Functions</h2></td></tr>
 
 <p>Invalid value for dynamic_scaling_factor. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00138">138</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00143">143</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -567,7 +634,7 @@ Functions</h2></td></tr>
 
 <p>Replace ECMP member without RH flowset table shuffle. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00072">72</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00075">75</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -613,7 +680,7 @@ Functions</h2></td></tr>
 
 <p>Use LPM if host table full. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00063">63</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00066">66</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -629,7 +696,7 @@ Functions</h2></td></tr>
 
 <p>Packet to local IP stack. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00062">62</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00065">65</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +712,39 @@ Functions</h2></td></tr>
 
 <p>Replace existing L3 Ingress entry. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00077">77</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00081">81</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gad37e2bae5bd6e78d227ed6afa77f2dd9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L3_IP4_OPTIONS_REPLACE&#160;&#160;&#160;0x00000002</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replace existing entry. </p>
+
+<p>Definition at line <a class="el" href="l3X_8h_source.html#l00105">105</a> of file <a class="el" href="l3X_8h_source.html">l3X.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga6d947889560d5df1d13b72f93635cf98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L3_IP4_OPTIONS_WITH_ID&#160;&#160;&#160;0x00000001</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>With ID option creation. </p>
+
+<p>Definition at line <a class="el" href="l3X_8h_source.html#l00104">104</a> of file <a class="el" href="l3X_8h_source.html">l3X.h</a>.</p>
 
 </div>
 </div>
@@ -661,7 +760,23 @@ Functions</h2></td></tr>
 
 <p>IPv6. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00066">66</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00069">69</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga11efb97e21f394668a625073a16ba8e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L3_IPMC&#160;&#160;&#160;(1 &lt;&lt; 11)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set IPMC for real IPMC entry. </p>
+
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00052">52</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -693,7 +808,7 @@ Functions</h2></td></tr>
 
 <p>Packet to CPU unrouted, XGS12: Set IPMC for UC address. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00052">52</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00055">55</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +824,7 @@ Functions</h2></td></tr>
 
 <p>Specify ECMP treatment. </p>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00061">61</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00064">64</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -793,6 +908,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gaa2311f752b9726433b9a9fe2eee8bc5c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OPENNSL_L3_VXLAN_ONLY&#160;&#160;&#160;(1 &lt;&lt; 31)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specific for VXLAN Nexthop. </p>
+
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00080">80</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="gabf1c04c5421531f00540beca29a95cf5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -848,7 +979,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00309">309</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00314">314</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -862,7 +993,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00302">302</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00307">307</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -891,7 +1022,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00296">296</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00301">301</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -921,7 +1052,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00284">284</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00289">289</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -984,6 +1115,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga42af21054c9ee8e1710fb96e0d5e6747"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__l3.html#gabb86f17a72dc0e89b3cd8beea82addf1">opennsl_l3_ip4_options_action_e</a>  <a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>L3 IP options handing actions. </p>
+
+</div>
+</div>
 <a class="anchor" id="ga9395dab5143018452f69fbe885e86b39"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1010,7 +1155,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00290">290</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00295">295</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -1052,7 +1197,37 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l00145">145</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l00150">150</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gabb86f17a72dc0e89b3cd8beea82addf1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__l3.html#gabb86f17a72dc0e89b3cd8beea82addf1">opennsl_l3_ip4_options_action_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>L3 IP options handing actions. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ggabb86f17a72dc0e89b3cd8beea82addf1ac0257e99083b9b16edb35c173a95f9fb"></a>opennslIntfIPOptionActionNone&#160;</td><td class="fielddoc">
+<p>No action. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ggabb86f17a72dc0e89b3cd8beea82addf1ad250cef140d55ac66a13f377fd489c1a"></a>opennslIntfIPOptionActionCopyToCPU&#160;</td><td class="fielddoc">
+<p>Copy to CPU action. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ggabb86f17a72dc0e89b3cd8beea82addf1ab92cfd6c1c351d677d792d174b9fa8b0"></a>opennslIntfIPOptionActionDrop&#160;</td><td class="fielddoc">
+<p>Drop action. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ggabb86f17a72dc0e89b3cd8beea82addf1a3669d16c6f97dc817ed61ba470fa0b1d"></a>opennslIntfIPOptionActionCopyCPUAndDrop&#160;</td><td class="fielddoc">
+<p>Copy to CPU and Drop action. </p>
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="l3X_8h_source.html#l00107">107</a> of file <a class="el" href="l3X_8h_source.html">l3X.h</a>.</p>
 
 </div>
 </div>
@@ -1082,7 +1257,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="l3_8h_source.html#l01219">1219</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
+<p>Definition at line <a class="el" href="l3_8h_source.html#l01224">1224</a> of file <a class="el" href="l3_8h_source.html">l3.h</a>.</p>
 
 </div>
 </div>
@@ -2170,6 +2345,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga32e146cb7a6f951c9fe88c2bfe8b2987"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_egress_stat_detach </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detach counters entries to the given L3 Egress interface. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will detach counters entries to the given L3 Egress interface. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a egress L3 object.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ga10b5ea766149d2bfdcd9d453939057e5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2813,6 +3030,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga42a114339fc209ce85a79f383737f7bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ingress_stat_detach </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaca0e18617c36271957788ac01ba44c2e">opennsl_if_t</a>&#160;</td>
+          <td class="paramname"><em>intf_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detach counters entries to the given L3 ingress interface. </p>
+<dl class="section user"><dt>Description</dt><dd>This API will detach counters entries to the given L3 ingress Interface. (Ref: =FLEXIBLE_COUNTER_s).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">intf_id</td><td>[IN] Interface ID of a L3 ingress object or a valid VLAN</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_xxx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="gac3aa55e5394c363b7e8bb13079cdf37d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -3088,6 +3347,216 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Referenced by <a class="el" href="example__routing_8c.html#a04eabb557cecbe6d7f8f9aa84a5fa74d">example_create_l3_intf()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga08bc60139fbaea53071b183ec856a51e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ip4_options_action_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ip4_options_profile_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ip4_option</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a> *&#160;</td>
+          <td class="paramname"><em>action</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get Individual IP options action for a given IP option profile. </p>
+<dl class="section user"><dt>Description</dt><dd>Retrieve the action for the specified IP option for a given IP option profile.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">ip4_options_profile_id</td><td>[IN] ID of IP options profile </td></tr>
+    <tr><td class="paramname">ip4_option</td><td>[IN] ID of IP options profile </td></tr>
+    <tr><td class="paramname">action</td><td>[OUT] Retrieved action for the IP option specified in ip4_option</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga197375090c53e2626402786f043864ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ip4_options_action_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ip4_options_profile_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ip4_option</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a>&#160;</td>
+          <td class="paramname"><em>action</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set Individual IP options action for a given IP option profile. </p>
+<dl class="section user"><dt>Description</dt><dd>Update the action for the specified IP option for a given IP option profile.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">ip4_options_profile_id</td><td>[IN] ID of IP options profile. ID 0 is reserved and cannot be Modified. </td></tr>
+    <tr><td class="paramname">ip4_option</td><td>[IN] ID of IP options profile. ID 0 is reserved and cannot be Modified. </td></tr>
+    <tr><td class="paramname">action</td><td>[IN] new action for the IP option specified in ip4_option</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gabac10d99c1323c93e9f45f4ec2569a45"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ip4_options_profile_create </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__l3.html#ga42af21054c9ee8e1710fb96e0d5e6747">opennsl_l3_ip4_options_action_t</a>&#160;</td>
+          <td class="paramname"><em>default_action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>ip4_options_profile_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new L3 IP options handling profile. </p>
+<dl class="section user"><dt>Description</dt><dd>Creates a new L3 IP option handling profile. The specified default action will be applied to all the IP options in the profile that is being created. The valid flags are as follows:.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">flags</td><td>[IN] Flags </td></tr>
+    <tr><td class="paramname">default_action</td><td>[IN] default action to apply for all IP options in the profile. </td></tr>
+    <tr><td class="paramname">ip4_options_profile_id</td><td>[IN,OUT] Created Profile ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaeda30fe999d98f9b3e0a198081f39df3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_ip4_options_profile_destroy </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ip4_options_profile_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete an L3 IP options Profile. </p>
+<dl class="section user"><dt>Description</dt><dd>Deletes an IP options profile.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">ip4_options_profile_id</td><td>[OUT] ID of IP options profile. ID 0 is reserved and cannot be deleted.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
