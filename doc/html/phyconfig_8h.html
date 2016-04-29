@@ -69,9 +69,9 @@ Data Structures</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a1b5e436ade98bf3cd1b444561adcc8ee"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__shr__phy__config__s.html">_shr_phy_config_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="phyconfig_8h.html#a1b5e436ade98bf3cd1b444561adcc8ee">_shr_phy_config_t</a></td></tr>
 <tr class="separator:a1b5e436ade98bf3cd1b444561adcc8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77260d93a47b15eb99f1bf4fe5094cf"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="phyconfig_8h.html#af77260d93a47b15eb99f1bf4fe5094cf">_shr_port_medium_status_cb_t</a>) (int unit, int port, <a class="el" href="shared_2port_8h.html#a31b56f595ec0709f41157b687e3c4c8a">_shr_port_medium_t</a> medium, void *user_arg)</td></tr>
+<tr class="memitem:af77260d93a47b15eb99f1bf4fe5094cf"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="phyconfig_8h.html#af77260d93a47b15eb99f1bf4fe5094cf">_shr_port_medium_status_cb_t</a>) (int unit, int <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, <a class="el" href="shared_2port_8h.html#a31b56f595ec0709f41157b687e3c4c8a">_shr_port_medium_t</a> medium, void *user_arg)</td></tr>
 <tr class="separator:af77260d93a47b15eb99f1bf4fe5094cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa780d30b73be518d4c67a95d9e67704b"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="phyconfig_8h.html#aa780d30b73be518d4c67a95d9e67704b">_shr_port_phy_reset_cb_t</a>) (int unit, <a class="el" href="shared_2port_8h.html#a647e7d73871b8fa46d9c97a1b504bfd6">_shr_port_t</a> port, void *user_data)</td></tr>
+<tr class="memitem:aa780d30b73be518d4c67a95d9e67704b"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="phyconfig_8h.html#aa780d30b73be518d4c67a95d9e67704b">_shr_port_phy_reset_cb_t</a>) (int unit, <a class="el" href="shared_2port_8h.html#a647e7d73871b8fa46d9c97a1b504bfd6">_shr_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, void *user_data)</td></tr>
 <tr class="separator:aa780d30b73be518d4c67a95d9e67704b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -92,7 +92,7 @@ Typedefs</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* _shr_port_medium_status_cb_t) (int unit, int port, <a class="el" href="shared_2port_8h.html#a31b56f595ec0709f41157b687e3c4c8a">_shr_port_medium_t</a> medium, void *user_arg)</td>
+          <td class="memname">typedef void(* _shr_port_medium_status_cb_t) (int unit, int <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, <a class="el" href="shared_2port_8h.html#a31b56f595ec0709f41157b687e3c4c8a">_shr_port_medium_t</a> medium, void *user_arg)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -106,7 +106,7 @@ Typedefs</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int(* _shr_port_phy_reset_cb_t) (int unit, <a class="el" href="shared_2port_8h.html#a647e7d73871b8fa46d9c97a1b504bfd6">_shr_port_t</a> port, void *user_data)</td>
+          <td class="memname">typedef int(* _shr_port_phy_reset_cb_t) (int unit, <a class="el" href="shared_2port_8h.html#a647e7d73871b8fa46d9c97a1b504bfd6">_shr_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, void *user_data)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -125,7 +125,7 @@ Typedefs</h2></td></tr>
 <table class="footer-brcm">
 	<tr>
 		<td class="footer-brcm"><img src="BRCM_Red+Black_noTag_RGB.png" align=left></td>
-		<td class="footer-brcm"><small><b>&copy;  2015 by Broadcom Corporation. All rights reserved.</b></small>
+		<td class="footer-brcm"><small><b>&copy;  2016 by Broadcom Corporation. All rights reserved.</b></small>
 			<div class="footer-brcm"><small>Broadcom Corporation reserves the right to make changes without further notice to any products or data herein to improve reliability, function, or design. 
 Information furnished by Broadcom Corporation is believed to be accurate and reliable. However, Broadcom Corporation does not assume any liability arising 
 out of the application or use of this information, nor the application or use of any product or circuit described herein, neither does it convey any license 

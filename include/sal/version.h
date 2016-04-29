@@ -1,4 +1,4 @@
-/*********************************************************************
+/**************************************************************************
 *
 * (C) Copyright Broadcom Corporation 2013-2016
 *
@@ -14,23 +14,25 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 *
-**********************************************************************
-*
-* \file         version.h
-*
-* \brief        This file contains functions to get the build details
-*
-**********************************************************************/
+**************************************************************************/
+
+/*****************************************************************//**
+ *
+ *\file         version.h
+ *
+ *\brief        This file contains functions to get the build details
+ *
+ ********************************************************************/
 #ifndef _OPENNSL_VERSION_H
 #define _OPENNSL_VERSION_H
 
 #include "sal/commdefs.h"
 
 /*****************************************************************//**
-* \brief To get the OpenNSL version.
-*
-* \return char*  OpenNSL version
-********************************************************************/
+ *\brief   To get the OpenNSL version.
+ *
+ *\retval  char*  OpenNSL version
+ ********************************************************************/
 extern char* opennsl_version_get() LIB_DLL_EXPORTED;
 #endif  /* _OPENNSL_VERSION_H */
 

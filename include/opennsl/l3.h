@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -167,16 +167,16 @@ typedef struct opennsl_l3_host_s {
     opennsl_vrf_t l3a_vrf;          /**< Virtual router instance. */
     opennsl_ip_t l3a_ip_addr;       /**< Destination host IP address (IPv4). */
     opennsl_ip6_t l3a_ip6_addr;     /**< Destination host IP address (IPv6). */
-    opennsl_cos_t reserved2; 
+    opennsl_cos_t l3a_pri;          /**< New priority in packet. */
     opennsl_if_t l3a_intf;          /**< L3 intf associated with this address. */
-    opennsl_mac_t reserved3; 
-    opennsl_module_t reserved4; 
+    opennsl_mac_t reserved2; 
+    opennsl_module_t reserved3; 
     opennsl_port_t l3a_port_tgid;   /**< Port/TGID packet is switched to. */
-    opennsl_port_t reserved5; 
+    opennsl_port_t reserved4; 
+    int reserved5; 
     int reserved6; 
-    int reserved7; 
+    opennsl_if_t reserved7; 
     opennsl_if_t reserved8; 
-    opennsl_if_t reserved9; 
 } opennsl_l3_host_t;
 
 /** 
@@ -188,29 +188,29 @@ typedef struct opennsl_l3_host_s {
  * the IPv4 or IPv6 addresses are valid.
  */
 typedef struct opennsl_l3_route_s {
-    uint32 l3a_flags;                   /**< See OPENNSL_L3_xxx flag definitions. */
+    uint32 l3a_flags;               /**< See OPENNSL_L3_xxx flag definitions. */
     uint32 reserved1; 
     uint32 reserved2; 
-    opennsl_vrf_t l3a_vrf;              /**< Virtual router instance. */
-    opennsl_ip_t l3a_subnet;            /**< IP subnet address (IPv4). */
-    opennsl_ip6_t l3a_ip6_net;          /**< IP subnet address (IPv6). */
-    opennsl_ip_t l3a_ip_mask;           /**< IP subnet mask (IPv4). */
-    opennsl_ip6_t l3a_ip6_mask;         /**< IP subnet mask (IPv6). */
-    opennsl_if_t l3a_intf;              /**< L3 interface associated with route. */
+    opennsl_vrf_t l3a_vrf;          /**< Virtual router instance. */
+    opennsl_ip_t l3a_subnet;        /**< IP subnet address (IPv4). */
+    opennsl_ip6_t l3a_ip6_net;      /**< IP subnet address (IPv6). */
+    opennsl_ip_t l3a_ip_mask;       /**< IP subnet mask (IPv4). */
+    opennsl_ip6_t l3a_ip6_mask;     /**< IP subnet mask (IPv6). */
+    opennsl_if_t l3a_intf;          /**< L3 interface associated with route. */
     opennsl_ip_t reserved3; 
     opennsl_mac_t reserved4; 
     opennsl_module_t reserved5; 
-    opennsl_port_t l3a_port_tgid;       /**< Port or trunk group ID. */
+    opennsl_port_t l3a_port_tgid;   /**< Port or trunk group ID. */
     opennsl_port_t reserved6; 
     opennsl_vlan_t reserved7; 
-    opennsl_cos_t reserved8; 
-    uint32 reserved9; 
-    opennsl_mpls_label_t reserved10; 
-    int reserved11; 
-    opennsl_if_t reserved12; 
-    int reserved13; 
-    opennsl_multicast_t reserved14; 
-    opennsl_gport_t reserved15; 
+    opennsl_cos_t l3a_pri;          /**< Priority (COS). */
+    uint32 reserved8; 
+    opennsl_mpls_label_t reserved9; 
+    int reserved10; 
+    opennsl_if_t reserved11; 
+    int reserved12; 
+    opennsl_multicast_t reserved13; 
+    opennsl_gport_t reserved14; 
 } opennsl_l3_route_t;
 
 /** 

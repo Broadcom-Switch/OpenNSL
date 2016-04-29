@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,65 +131,65 @@ struct opennsl_pkt_s {
     uint8 reserved27; 
     uint8 rx_untagged;                  /**< The packet was untagged on ingress. */
     uint32 reserved28; 
-    uint32 reserved29; 
-    opennsl_if_t reserved30; 
+    uint32 rx_matched;                  /**< Field processor matched rule. */
+    opennsl_if_t reserved29; 
+    opennsl_reserved_enum_t reserved30; 
     opennsl_reserved_enum_t reserved31; 
-    opennsl_reserved_enum_t reserved32; 
+    uint32 reserved32; 
     uint32 reserved33; 
     uint32 reserved34; 
-    uint32 reserved35; 
+    void *reserved35; 
     void *reserved36; 
-    void *reserved37; 
     opennsl_pkt_cb_f call_back;         /**< Callback function. */
     uint32 flags;                       /**< OPENNSL_PKT_F_xxx flags. */
-    void *reserved38; 
-    int8 reserved39; 
+    void *reserved37; 
+    int8 reserved38; 
     opennsl_pkt_blk_t _pkt_data;        /**< For single block packets (internal). */
-    opennsl_pkt_t *reserved40; 
-    void *reserved41; 
-    int8 reserved42; 
-    opennsl_pkt_t *reserved43; 
+    opennsl_pkt_t *reserved39; 
+    void *reserved40; 
+    int8 reserved41; 
+    opennsl_pkt_t *reserved42; 
+    void *reserved43; 
     void *reserved44; 
-    void *reserved45; 
-    uint8 reserved46[16]; 
-    uint8 reserved47[12]; 
-    uint8 reserved48[4]; 
+    uint8 reserved45[16]; 
+    uint8 reserved46[12]; 
+    uint8 reserved47[4]; 
     uint8 _vtag[4];                     /**< VLAN tag if not in packet (network
                                            byte order). */
-    uint8 reserved49[16]; 
-    uint8 reserved50; 
-    uint8 reserved51[10]; 
+    uint8 reserved48[16]; 
+    uint8 reserved49; 
+    uint8 reserved50[10]; 
+    int reserved51; 
     int reserved52; 
-    int reserved53; 
-    uint32 reserved54; 
+    uint32 reserved53; 
+    opennsl_pbmp_t reserved54; 
     opennsl_pbmp_t reserved55; 
-    opennsl_pbmp_t reserved56; 
-    uint32 reserved57; 
+    uint32 reserved56; 
+    uint8 reserved57; 
     uint8 reserved58; 
-    uint8 reserved59; 
-    uint16 reserved60; 
-    uint32 reserved61; 
-    void *reserved62; 
+    uint16 reserved59; 
+    uint32 reserved60; 
+    void *reserved61; 
+    uint16 reserved62; 
     uint16 reserved63; 
-    uint16 reserved64; 
+    opennsl_reserved_enum_t reserved64; 
     opennsl_reserved_enum_t reserved65; 
     opennsl_reserved_enum_t reserved66; 
-    opennsl_reserved_enum_t reserved67; 
-    uint8 reserved68; 
-    opennsl_reserved_enum_t reserved69; 
+    uint8 reserved67; 
+    opennsl_reserved_enum_t reserved68; 
+    opennsl_gport_t reserved69; 
     opennsl_gport_t reserved70; 
-    opennsl_gport_t reserved71; 
-    uint32 reserved72; 
-    int reserved73; 
-    opennsl_gport_t reserved74; 
+    uint32 reserved71; 
+    int reserved72; 
+    opennsl_gport_t reserved73; 
+    uint32 reserved74; 
     uint32 reserved75; 
-    uint32 reserved76; 
-    uint8 reserved77; 
-    opennsl_reserved_enum_t reserved78; 
-    opennsl_pkt_oam_counter_t reserved79[OPENNSL_PKT_OAM_COUNTER_MAX]; 
-    uint32 reserved80; 
-    uint8 reserved81[20]; 
-    uint8 reserved82; 
+    uint8 reserved76; 
+    opennsl_reserved_enum_t reserved77; 
+    opennsl_pkt_oam_counter_t reserved78[OPENNSL_PKT_OAM_COUNTER_MAX]; 
+    uint32 reserved79; 
+    uint8 reserved80[20]; 
+    uint8 reserved81; 
 };
 
 #define OPENNSL_PKT_F_NO_VTAG   0x4        /**< Packet does not contain VLAN tag. */

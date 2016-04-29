@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1903,6 +1903,34 @@ extern int opennsl_port_egress_set(
     opennsl_port_t port, 
     int modid, 
     opennsl_pbmp_t pbmp) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure ports to block or allow packets from a given ingress port.
+ *
+ *\description This API controls the ability of a specific ingress port on a
+ *          specific module to send packets to a local egress port.
+ *          The specified modid is derived from the modid of port.
+ *          For opennsl_port_egress_set, if port is -1 or gport type for
+ *          system configuration, the configuration is applied to all source
+ *          ports on the specified module.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical source port number.
+ *\param    modid [IN]   Module ID of the source port.
+ *\param    pbmp [OUT]   Port bitmap indicating all local ports allowed to egress
+ *          traffic from specified port/modid.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully.
+ *\retval    OPENNSL_E_UNAVAIL The specified port does not support the requested
+ *          block option.
+ *\retval    OPENNSL_E_PARAM Invalid port, module ID or bitmap.
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_port_egress_get(
+    int unit, 
+    opennsl_port_t port, 
+    int modid, 
+    opennsl_pbmp_t *pbmp) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

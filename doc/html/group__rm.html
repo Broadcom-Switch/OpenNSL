@@ -123,7 +123,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gacf875909a24bfabfdfb923caa6a3d14a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rm.html#gacf875909a24bfabfdfb923caa6a3d14a">opennsl_rm_profile_get</a> (<a class="el" href="sal_2types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> client_id, <a class="el" href="group__rm.html#gad06718bf968f9a75f6f92e466701ff45">opennsl_rm_profile_t</a> *profile) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gacf875909a24bfabfdfb923caa6a3d14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to get the resource profile registered with Resource Manager.  <a href="#gacf875909a24bfabfdfb923caa6a3d14a">More...</a><br /></td></tr>
 <tr class="separator:gacf875909a24bfabfdfb923caa6a3d14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3fd27403b5f0edb2a39a9903dfe151f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rm.html#ga3fd27403b5f0edb2a39a9903dfe151f3">opennsl_rm_profile_ports_update</a> (<a class="el" href="sal_2types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> client_id, int unit, <a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> ports) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memitem:ga3fd27403b5f0edb2a39a9903dfe151f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rm.html#ga3fd27403b5f0edb2a39a9903dfe151f3">opennsl_rm_profile_ports_update</a> (<a class="el" href="sal_2types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> client_id, int unit, <a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> <a class="el" href="opennsl__api_8dox.html#af9d2702e21ab86e9074894ba172b114d">ports</a>) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga3fd27403b5f0edb2a39a9903dfe151f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to update the registered ports with the Resource Manager for a given client.  <a href="#ga3fd27403b5f0edb2a39a9903dfe151f3">More...</a><br /></td></tr>
 <tr class="separator:ga3fd27403b5f0edb2a39a9903dfe151f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaac3ce974e47e7b73e8c16bc1dea7a66e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rm.html#gaac3ce974e47e7b73e8c16bc1dea7a66e">opennsl_rm_profile_vlans_update</a> (<a class="el" href="sal_2types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> client_id, <a class="el" href="group__types.html#gaa5a7fa81270e4837e539ccd3100835b0">opennsl_vlan_vector_t</a> vlans) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
@@ -174,6 +174,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="rmapi_8h_source.html#l00029">29</a> of file <a class="el" href="rmapi_8h_source.html">rmapi.h</a>.</p>
+
+<p>Referenced by <a class="el" href="example__rm_8c.html#a56a25ba652ff9b25f300799585f0b275">example_rm_show_profile()</a>.</p>
 
 </div>
 </div>
@@ -378,6 +380,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p>Referenced by <a class="el" href="example__rm_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ga3fd27403b5f0edb2a39a9903dfe151f3"></a>
@@ -427,6 +431,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p>Referenced by <a class="el" href="example__rm_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="gaac3ce974e47e7b73e8c16bc1dea7a66e"></a>
@@ -468,6 +474,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Referenced by <a class="el" href="example__rm_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
 
 </div>
 </div>
@@ -523,7 +531,7 @@ Functions</h2></td></tr>
 <table class="footer-brcm">
 	<tr>
 		<td class="footer-brcm"><img src="BRCM_Red+Black_noTag_RGB.png" align=left></td>
-		<td class="footer-brcm"><small><b>&copy;  2015 by Broadcom Corporation. All rights reserved.</b></small>
+		<td class="footer-brcm"><small><b>&copy;  2016 by Broadcom Corporation. All rights reserved.</b></small>
 			<div class="footer-brcm"><small>Broadcom Corporation reserves the right to make changes without further notice to any products or data herein to improve reliability, function, or design. 
 Information furnished by Broadcom Corporation is believed to be accurate and reliable. However, Broadcom Corporation does not assume any liability arising 
 out of the application or use of this information, nor the application or use of any product or circuit described herein, neither does it convey any license 

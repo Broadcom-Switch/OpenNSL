@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,8 @@ typedef struct opennsl_knet_netif_s {
 #define OPENNSL_KNET_FILTER_M_INGPORT   0x00000004 /**< Match local ingress port */
 #define OPENNSL_KNET_FILTER_M_REASON    0x00000020 /**< Match copy-to-CPU reason
                                                       code */
+#define OPENNSL_KNET_FILTER_M_FP_RULE   0x00000040 /**< Match filter processor
+                                                      rule number */
 /** Kernel packet filter structure. */
 typedef struct opennsl_knet_filter_s {
     int id;                             /**< Filter ID. */

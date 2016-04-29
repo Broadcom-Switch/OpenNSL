@@ -51,7 +51,7 @@
 <p>Access to the error definitions is through the include file &lt;<a class="el" href="opennsl_2error_8h.html">opennsl/error.h</a>&gt;.</p>
 <p>Checking for the failure of an API call can be done by testing if its return value is negative or by using OPENNSL_FAILURE macro:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> rv;</div>
-<div class="line">rv = <a class="code" href="group__port.html#ga8c28714f03d8bfaaadb2789c3d5b8cd3">opennsl_port_speed_set</a>(unit, port, 1000);</div>
+<div class="line">rv = <a class="code" href="group__port.html#ga8c28714f03d8bfaaadb2789c3d5b8cd3">opennsl_port_speed_set</a>(unit, <a class="code" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, 1000);</div>
 <div class="line"><span class="keywordflow">if</span> (rv &lt; 0) {</div>
 <div class="line">    <span class="comment">/* failure */</span></div>
 <div class="line">}</div>
@@ -127,7 +127,7 @@
 <table class="footer-brcm">
 	<tr>
 		<td class="footer-brcm"><img src="BRCM_Red+Black_noTag_RGB.png" align=left></td>
-		<td class="footer-brcm"><small><b>&copy;  2015 by Broadcom Corporation. All rights reserved.</b></small>
+		<td class="footer-brcm"><small><b>&copy;  2016 by Broadcom Corporation. All rights reserved.</b></small>
 			<div class="footer-brcm"><small>Broadcom Corporation reserves the right to make changes without further notice to any products or data herein to improve reliability, function, or design. 
 Information furnished by Broadcom Corporation is believed to be accurate and reliable. However, Broadcom Corporation does not assume any liability arising 
 out of the application or use of this information, nor the application or use of any product or circuit described herein, neither does it convey any license 

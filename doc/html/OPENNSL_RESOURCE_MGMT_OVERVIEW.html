@@ -35,22 +35,18 @@
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="OPENNSL_API_OVERVIEW.html">API Overview</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Resource Management </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Resource Manager is used for partitioning switch resources and ensuring traffic/resource isolation among control plane applications. It mediates access to the hardware resources from multiple logical switch pipelines. The main responsibilities of resource manager (RM) are:</p>
+<div class="textblock"><p>Resource Manager(RM) is used for partitioning switch resources and ensuring traffic/resource isolation among control plane applications. It mediates access to the hardware resources from multiple logical switch pipelines. The main responsibilities of resource manager (RM) are:</p>
 <ul>
-<li>Provides a mechanism to define and create a switch resource profile (SRP) that allocates/reserves switch resources for a given control plane application. The shared switch resources that can be reserved/allocated via the profile are: Port table VLAN table L2 FDB table L3 unicast tables, VRFs, Routes, Hosts, ECMP etc L3 Multicast tables Policy table QoS mapping table</li>
+<li>Provides a mechanism to define and create a switch resource profile (SRP) that allocates/reserves switch resources for a given control plane application. The shared switch resources that can be reserved/allocated via the profile are: Port table VLAN table L2 FDB table L3 unicast tables, VRFs, Routes, Hosts, ECMP etc. L3 Multicast tables Policy table QoS mapping table</li>
 </ul>
 <ul>
-<li>Provides a mechanism to associate an application with an existing resource profile. Maintains a one-to-one mapping between application and the profile to ensure that resources allocated for the profile can only be used by one application.</li>
+<li>Maintains a one-to-one mapping between application and the profile to ensure that resources allocated for the profile can only be used by one application.</li>
 </ul>
 <ul>
 <li>Ensures that the overall resources do not exceed the capacity of the underlying switch devices.</li>
@@ -67,6 +63,12 @@
 <ul>
 <li>Provides filtering mechanism to isolate asynchronous switch events like Packet RX, Link event, L2 learn/age callbacks. Even though these are not resources, RM prevents notifying every switch event to every application.</li>
 </ul>
+<p>The RM API is a layer in the OpenNSL library above the SDK API. Currently this covers only a subset of modules in the SDK. This is illustrated in the below diagram:</p>
+<div class="image">
+<img src="OpenNSLRMLayer.jpg" alt="OpenNSLRMLayer.jpg"/>
+<div class="caption">
+Figure 1</div></div>
+<p> For an application to use the RM functionality, it should first register its resource requirements with the Resource Manager using <a class="el" href="group__rm.html#ga26321248f110b621bcbfc326d51a6d43" title="Used to register with Resource Manager. ">opennsl_rm_register()</a> API. This registration returns the application a client-ID handle, which needs to be passed in all the RM provided APIs. The Network OS is considered as the default RM client and will not explicitly register with RM. It can however specify its resource requirements in multiple ways as explained in the next section. Currently, the RM APIs of the SDK modules can only be invoked from the proposed OFDPA driver layer which will be part of the OpenNSL library. If OFDPA driver layer does not register with RM and if the Network OS does not explicitly specify its resource requirements to RM, then all the switch resources will be owned by the Network OS. This is same as the behavior without RM functionality.</p>
 <h1><a class="anchor" id="OPENNSL_RM_CUSTOMIZATION"></a>
 RM customization</h1>
 <p>OpenNSL provides a mechanism to customize the default RM profile, by accepting a set of properties through a configuration file. The properties are mainly used to customize RM default profile without having to re-compile the OpenNSL. OpenNSL accepts the RM configuration from a file. During initialization, OpenNSL checks for the presence of configuration file. If the file exists, the configuration from the file is applied. Run-time modifications to the configuration file do not take effect until OpenNSL is re-initialized.</p>
@@ -99,7 +101,7 @@ Config properties</h1>
 <table class="footer-brcm">
 	<tr>
 		<td class="footer-brcm"><img src="BRCM_Red+Black_noTag_RGB.png" align=left></td>
-		<td class="footer-brcm"><small><b>&copy;  2015 by Broadcom Corporation. All rights reserved.</b></small>
+		<td class="footer-brcm"><small><b>&copy;  2016 by Broadcom Corporation. All rights reserved.</b></small>
 			<div class="footer-brcm"><small>Broadcom Corporation reserves the right to make changes without further notice to any products or data herein to improve reliability, function, or design. 
 Information furnished by Broadcom Corporation is believed to be accurate and reliable. However, Broadcom Corporation does not assume any liability arising 
 out of the application or use of this information, nor the application or use of any product or circuit described herein, neither does it convey any license 

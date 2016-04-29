@@ -3,7 +3,7 @@
  */
 /*****************************************************************************
  * 
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -756,6 +756,71 @@ extern int opennsl_l2_traverse(
     int unit, 
     opennsl_l2_traverse_cb trav_fn, 
     void *user_data) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#define OPENNSL_L2_REPLACE_MATCH_STATIC 0x00000001 /**< Replace L2 static entries. */
+#define OPENNSL_L2_REPLACE_MATCH_MAC    0x00000002 /**< Replace all L2 entries
+                                                      matching given MAC address */
+#define OPENNSL_L2_REPLACE_MATCH_VLAN   0x00000004 /**< Replace all L2 entries
+                                                      matching given VLAN id */
+#define OPENNSL_L2_REPLACE_MATCH_DEST   0x00000008 /**< Replace all L2 entries
+                                                      matching given modid
+                                                      port/tgid */
+#define OPENNSL_L2_REPLACE_DELETE       0x00000100 /**< L2 replace will perform
+                                                      delete operation instead
+                                                      of replace on matching
+                                                      entries */
+#define OPENNSL_L2_REPLACE_NO_CALLBACKS 0x00000800 /**< Replace L2 entries without
+                                                      callbacks. */
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Replace destination (or delete) multiple L2 entries.
+ *
+ *\description Replace destination (or delete) multiple L2 entries. Matching is
+ *          done by setting fields in the match_addr and setting
+ *          OPENNSL_L2_REPLACE_* flags to match entries with those fields.
+ *          If L2_MOD_FIFO is used, and users want to know which l2 entries
+ *          are replaced,  they should not only confirm opennslL2MOD.x thread
+ *          is running,  but also call-back functions have been registered.
+ *          Normal action for each matching entry is to replace the
+ *          destination of that entry with a new mod/port specified in
+ *          new_module and new_port. Using the OPENNSL_L2_REPLACE_NEW_TRUNK
+ *          flag will replace the destination with the trunk specified in
+ *          new_trunk. Using the OPENNSL_L2_REPLACE_DELETE flag will delete
+ *          the matching entries and  parameters new_module, new_port and
+ *          new_trunk will be ignored. Using the OPENNSL_L2_REPLACE_DELETE
+ *          flag and matching_addr as NULL will  delete all addresses from the
+ *          L2 table and parameters new_module, new_port and  new_trunk will
+ *          be ignored. Using the OPENNSL_L2_REPLACE_DELETE flag and
+ *          matching_addr as NULL and with flag OPENNSL_L2_REPLACE_MATCH_MC,
+ *          OPENNSL_L2_REPLACE_MATCH_UC or both to delete all Unicast entries,
+ *          Multicast entries or both respectively, and parameters new_module,
+ *          new_port and new_trunk will be ignored.
+ *          SDK releases supporting opennsl_gport_t can simply set new_port to
+ *          the new destination gport. Once new destination gport is used,
+ *          new_module and new_trunk parameters will be ignored and
+ *          information encoded in gprot will be used.
+ *          Valid L2 replace flags are described in table
+ *          =OPENNSL_L2_REPLACE_FLAGS_table .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    flags [IN]   Replace/delete flags OPENNSL_L2_REPLACE_*
+ *\param    match_addr [IN]   L2 parameters to match on delete/replace
+ *\param    new_module [IN]   New module ID for a replace
+ *\param    new_port [IN]   New port for a replace
+ *\param    new_trunk [IN]   New trunk ID for a replace
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l2_replace(
+    int unit, 
+    uint32 flags, 
+    opennsl_l2_addr_t *match_addr, 
+    opennsl_module_t new_module, 
+    opennsl_port_t new_port, 
+    opennsl_trunk_t new_trunk) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

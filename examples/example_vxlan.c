@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2015
+ * (C) Copyright Broadcom Corporation 2013-2016
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
  * between Virtual Machines (VM) assigned to the same customer(Tenant) that are 
  * distributed in various racks in the Data-Center. L2VPN over IP/UDP tunnels can provide 
  * E-LAN (similar to VPLS) and E-LINE (similar to VPWS) service. With VXLAN the ethernet 
- * packets are encapsulated in UDP tunnels over an IP network. VXLAN uses UDP.Source_Port
+ * packets are encapsulated in UDP tunnels over an IP network. VXLAN uses UDP Source_Port
  * as multiplexing field for multiplexing multiple VPNs into the same UDP Tunnel.
  * E-LINE is point-to-point service without support for Multicast traffic. In E-LINE, Ethernet
  * frames are mapped into a VXLAN Tunnel based on incoming port plus packet header information. 
@@ -86,7 +86,13 @@ int verbose = 3;
 #define FALSE 0
 #define VXLAN_UDP_DEST_PORT 4789
 
-/* Apply global VXLAN settings for the switch device */
+/*****************************************************************//**
+ * \brief Apply global VXLAN settings for the switch device
+ *
+ * \param unit      [IN]    Unit number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int do_vxlan_global_setting(int unit)
 {
   /* Enable L3 Egress Mode */
@@ -113,7 +119,14 @@ static int do_vxlan_global_setting(int unit)
   return OPENNSL_E_NONE;
 }
 
-/* Access port should have the following settings */
+/*****************************************************************//**
+ * \brief Setup configuration on access port
+ *
+ * \param unit      [IN]    Unit number
+ * \param a_port    [IN]    Port number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int do_vxlan_access_port_settings(int unit, opennsl_port_t a_port)
 {
   /* Should disable Vxlan Processing on access port. VXLAN encapsulated packets are  
@@ -128,10 +141,18 @@ static int do_vxlan_access_port_settings(int unit, opennsl_port_t a_port)
 
   /* Should Enable VLAN translation if access port uses 802.1Q or QinQ */
   opennsl_vlan_control_set(unit, opennslVlanTranslate, TRUE);
+
   return OPENNSL_E_NONE;
 }
 
-/* Network port should have the following settings */
+/*****************************************************************//**
+ * \brief Setup configuration on network port
+ *
+ * \param unit      [IN]    Unit number
+ * \param n_port    [IN]    Port number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int do_vxlan_net_port_settings(int unit, opennsl_port_t n_port)
 {
   /* Enable VXLAN Processing on network port */
@@ -149,7 +170,18 @@ static int do_vxlan_net_port_settings(int unit, opennsl_port_t n_port)
   return OPENNSL_E_NONE;
 }
 
-/* Create the ELAN VPN based on the given VPN ID and VN_ID */
+/*****************************************************************//**
+ * \brief Create the ELAN VPN based on the given VPN ID and VN_ID
+ *
+ * \param unit      [IN]    Unit number
+ * \param vpnd_id   [IN]    VPN Identifier
+ * \param vnid      [IN]    VxLAN network Identifier
+ * \param bc        [IN]    Broadcast group Identifier
+ * \param mc        [IN]    Multicast group Identifier
+ * \param uuc       [IN]    Unknown Unicast group Identifier
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int create_vxlan_vpn(int unit, int vpn_id, int vnid, opennsl_multicast_t bc,
                             opennsl_multicast_t mc, opennsl_multicast_t uuc)
 {
@@ -174,7 +206,21 @@ static int create_vxlan_vpn(int unit, int vpn_id, int vnid, opennsl_multicast_t 
 }
 
 
-/* Create an access virtual port based on the physical port, egress nexthop and VPN ID */
+/*****************************************************************//**
+ * \brief Create an access virtual port based on the physical port,
+ *        egress nexthop and VPN ID
+ *
+ * \param unit      [IN]    Unit number
+ * \param vpn       [IN]    VPN Identifier
+ * \param flags     [IN]    Flags
+ * \param port      [IN]    Port number
+ * \param criteria  [IN]    Match Criteria
+ * \param egr_obj   [IN]    Egress object information
+ * \param vid       [IN]    VLAN identifier
+ * \param vp        [OUT]   To store virtual port handle
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int create_vxlan_acc_vp(int unit, opennsl_vpn_t vpn, uint32 flags, 
                                opennsl_gport_t port,
                                opennsl_vxlan_port_match_t criteria,
@@ -201,7 +247,22 @@ static int create_vxlan_acc_vp(int unit, opennsl_vpn_t vpn, uint32 flags,
   return rv;
 }
 
-/* Create a network virtual port based on the physical port, VPN ID, egress nextop, tunnel info */
+/*****************************************************************//**
+ * \brief Create a network virtual port based on the physical port, VPN ID,
+ *        egress nextop, tunnel info
+ *
+ * \param unit      [IN]    Unit number
+ * \param vpn       [IN]    VPN Identifier
+ * \param flags     [IN]    Flags
+ * \param port      [IN]    Port number
+ * \param criteria  [IN]    Match Criteria
+ * \param egr_obj   [IN]    Egress object information
+ * \param tun_init  [IN]    Tunnel initiator ID
+ * \param tun_term  [IN]    Tunnel terminator ID
+ * \param vp        [OUT]   To store virtual port handle
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int create_vxlan_net_vp(int unit, opennsl_vpn_t vpn, uint32 flags, opennsl_gport_t port,
                                opennsl_vxlan_port_match_t criteria, opennsl_if_t egr_obj,
                                opennsl_gport_t tun_init, opennsl_gport_t tun_term, 
@@ -230,7 +291,16 @@ static int create_vxlan_net_vp(int unit, opennsl_vpn_t vpn, uint32 flags, openns
   return rv;
 }
 
-/* Add L2 station entry based on the given MAC and VLAN ID to terminate IPv4 packets*/
+/*****************************************************************//**
+ * \brief Add L2 station entry based on the given MAC and VLAN ID to
+ *        terminate IPv4 packets
+ *
+ * \param unit      [IN]    Unit number
+ * \param mac       [IN]    802.3 MAC address
+ * \param vlan      [IN]    VLAN ID
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int add_to_l2_station(int unit, opennsl_mac_t mac, opennsl_vlan_t vid)
 {
   opennsl_l2_station_t l2_station;
@@ -254,7 +324,16 @@ static int add_to_l2_station(int unit, opennsl_mac_t mac, opennsl_vlan_t vid)
   return rv;
 }
 
-/* Add L2 entry based on the MAC, VPN and physical port */
+/*****************************************************************//**
+ * \brief Add L2 entry based on the MAC, VPN and physical port
+ *
+ * \param unit      [IN]    Unit number
+ * \param mac       [IN]    802.3 MAC address
+ * \param vpn_id    [IN]    VPN Identifier
+ * \param port      [IN]    Port number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 int add_to_l2_table(int unit, opennsl_mac_t mac, opennsl_vpn_t vpn_id, int port)
 {
   int rv;
@@ -271,6 +350,15 @@ int add_to_l2_table(int unit, opennsl_mac_t mac, opennsl_vpn_t vpn_id, int port)
   return rv;
 }
 
+/*****************************************************************//**
+ * \brief Create VLAN and add a port to it
+ *
+ * \param unit      [IN]    Unit number
+ * \param vid       [IN]    VLAN Identifier
+ * \param port      [IN]    Port number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 int vlan_create_add_port(int unit, int vid, int port)
 {
   opennsl_pbmp_t pbmp, upbmp;
@@ -282,7 +370,16 @@ int vlan_create_add_port(int unit, int vid, int port)
   return opennsl_vlan_port_add(unit, vid, pbmp, upbmp);
 }
 
-/* Create an L3 interface based on the incoming VLAN ID and MAC address */
+/*****************************************************************//**
+ * \brief Create an L3 interface based on the incoming VLAN ID and MAC address
+ *
+ * \param unit      [IN]    Unit number
+ * \param mac       [IN]    802.3 MAC address
+ * \param vid       [IN]    VLAN Identifier
+ * \param intf_id   [OUT]   L3 interface identifier
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int create_l3_interface(int unit, opennsl_mac_t local_mac, int vid,
                                opennsl_if_t *intf_id)
 {
@@ -304,7 +401,19 @@ static int create_l3_interface(int unit, opennsl_mac_t local_mac, int vid,
   return rv;
 }
 
-/* Create an VXLAN L3 egress object */
+/*****************************************************************//**
+ * \brief Create an VXLAN L3 egress object
+ *
+ * \param unit       [IN]    Unit number
+ * \param flag       [IN]    Flags
+ * \param l3_if      [IN]    L3 interface ID
+ * \param nh_mac     [IN]    Next HOP mac address
+ * \param port       [IN]    Port number
+ * \param vid        [IN]    VLAN ID
+ * \param egr_obj_id [OUT]   Egress object identifier
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int create_egr_obj(int unit, uint32 flag, int l3_if, opennsl_mac_t nh_mac,
                           opennsl_gport_t gport, int vid, opennsl_if_t *egr_obj_id)
 {
@@ -327,7 +436,19 @@ static int create_egr_obj(int unit, uint32 flag, int l3_if, opennsl_mac_t nh_mac
   return rv;
 }
 
-/* Create tunnel initiator of VXLAN type to encapsulate VXLAN header */
+/*****************************************************************//**
+ * \brief Create tunnel initiator of VXLAN type to encapsulate VXLAN header
+ *
+ * \param unit       [IN]    Unit number
+ * \param lip        [IN]    Local IP address
+ * \param rip        [IN]    Remote IP address
+ * \param dp         [IN]    Destination UDP port
+ * \param sp         [IN]    Source UDP port
+ * \param tt;        [IN]    TTL value
+ * \param tid        [OUT]   Tunnel identifier
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int tunnel_initiator_setup(int unit, opennsl_ip_t lip, opennsl_ip_t rip,
                                   int dp, int sp, int ttl, int *tid)
 {
@@ -354,9 +475,21 @@ static int tunnel_initiator_setup(int unit, opennsl_ip_t lip, opennsl_ip_t rip,
   return rv;
 }
 
-/* Create a tunnel terminator of VXLAN type to terminate VXLAN encapsulated packets */
+/*****************************************************************//**
+ * \brief Create a tunnel terminator of VXLAN type to terminate VXLAN
+ *        encapsulated packets
+ *
+ * \param unit           [IN]    Unit number
+ * \param rip            [IN]    Remote IP address
+ * \param lip            [IN]    Local IP address
+ * \param net_vid        [IN]    Destination UDP port
+ * \param tunnel_init_id [IN]    Tunnel initiator ID
+ * \param term_id        [OUT]   Tunnel terminator identifier
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
 static int tunnel_terminator_setup(int unit, opennsl_ip_t rip, opennsl_ip_t lip,
-                                   opennsl_vlan_t net_vid, int tunnel_init_id, int *term_id)
+    opennsl_vlan_t net_vid, int tunnel_init_id, int *term_id)
 {
   opennsl_tunnel_terminator_t tnl_term;
   opennsl_error_t rv = OPENNSL_E_NONE;
@@ -381,15 +514,18 @@ static int tunnel_terminator_setup(int unit, opennsl_ip_t rip, opennsl_ip_t lip,
   return rv;
 }
 
-/*
- * Create 2 VxLAN segments, and two access ports:
+
+/*****************************************************************//**
+ * \brief Create 2 VxLAN segments, and two access ports:
  *
  *   Access Port1 --> Segment 1 (VPN 1) \
  *                                       +-> share 1 network UDP tunnel
  *   Access Port2 --> Segment 2 (VPN 2) /
- */
-
-static void example_vxlan()
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
+static void example_vxlan(opennsl_port_t a_port1, opennsl_port_t a_port2,
+    opennsl_port_t n_port)
 {
   int unit = DEFAULT_UNIT;
 
@@ -406,26 +542,26 @@ static void example_vxlan()
   /* Access side MAC addresses are not really used */
   opennsl_mac_t acc_dummy_mac = {0x00, 0x00, 0x01, 0x00, 0x00, 0x01};
 
-  opennsl_port_t acc_port_1 = 1;          /* access 1 */
+  opennsl_port_t acc_port_1 = a_port1;          /* access 1 */
   opennsl_vlan_t acc_vid_1 = 21;
-  opennsl_if_t acc_intf_id_1 = 1;
+  opennsl_if_t acc_intf_id_1 = a_port1;
   opennsl_gport_t acc_gport_1 = OPENNSL_GPORT_INVALID;
   opennsl_if_t acc_egr_obj_1;
   int acc_vxlan_port_1;
   opennsl_if_t acc_encap_id_1;
 
-  opennsl_port_t acc_port_2 = 2;          /* access 2 */
+  opennsl_port_t acc_port_2 = a_port2;          /* access 2 */
   opennsl_vlan_t acc_vid_2 = 20;
-  opennsl_if_t acc_intf_id_2 = 2;
+  opennsl_if_t acc_intf_id_2 = a_port2;
   opennsl_gport_t acc_gport_2 = OPENNSL_GPORT_INVALID;
   opennsl_if_t acc_egr_obj_2;
   int acc_vxlan_port_2;
   opennsl_if_t acc_encap_id_2;
 
   /* Network side */
-  opennsl_port_t net_port = 3;
+  opennsl_port_t net_port = n_port;
   opennsl_vlan_t net_vid = 22;
-  opennsl_if_t net_intf_id = 3;
+  opennsl_if_t net_intf_id = n_port;
   opennsl_gport_t net_gport = OPENNSL_GPORT_INVALID;
   opennsl_if_t net_egr_obj;
   int net_vxlan_port;
@@ -600,6 +736,9 @@ int main(int argc, char *argv[])
   opennsl_error_t   rv;
   int choice;
   int index = 0;
+  opennsl_port_t a_port1;
+  opennsl_port_t a_port2;
+  opennsl_port_t n_port;
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -621,8 +760,38 @@ int main(int argc, char *argv[])
     return rv;
   }
 
+  /* Input access and network port numbers */
+  do
+  {
+    printf("\r\nEnter first access port number.\r\n");
+    if(example_read_user_choice(&a_port1) != OPENNSL_E_NONE)
+    {
+      printf("Invalid option entered. Please re-enter.\n");
+      continue;
+    }
+
+    printf("\r\nEnter second access port number.\r\n");
+    if(example_read_user_choice(&a_port2) != OPENNSL_E_NONE)
+    {
+      printf("Invalid option entered. Please re-enter.\n");
+      continue;
+    }
+
+    printf("\r\nEnter network port number.\r\n");
+    if(example_read_user_choice(&n_port) != OPENNSL_E_NONE)
+    {
+      printf("Invalid option entered. Please re-enter.\n");
+      continue;
+    }
+    break;
+  } while(1);
+
+  printf("\r\nVxLAN Access ports: %d, %d Network port: %d\n",
+      a_port1, a_port2, n_port);
   /* Configure VXLAN settings for access and network ports */
-  example_vxlan();
+  example_vxlan(a_port1, a_port2, n_port);
+
+  printf("\r\nVxLAN configuration is done successfully\n");
 
   while (1) {
     printf("\r\nUser menu: Select one of the following options\r\n");
