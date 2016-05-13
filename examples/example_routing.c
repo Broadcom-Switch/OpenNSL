@@ -134,7 +134,8 @@ int example_vlan_port_add(int unit, int open_vlan,
   if(open_vlan) {
     rc = opennsl_vlan_create(unit, vlan);
     if (rc != OPENNSL_E_NONE) {
-      printf("failed to create vlan(%d)", vlan);
+      printf("failed to create vlan(%d). Return code %s",
+          vlan, opennsl_errmsg(rc));
       return rc;
     }
     if(verbose >= 3) {
@@ -248,7 +249,6 @@ int example_create_l3_egress(int unit, unsigned int flags, int out_port, int vla
 
   rc = opennsl_l3_egress_create(unit, flags, &l3eg, &l3egid);
   if (rc != OPENNSL_E_NONE) {
-    printf("Error, create egress object, out_port=%d, \n", out_port);
     return rc;
   }
 
@@ -407,8 +407,8 @@ int main(int argc, char *argv[])
     rv = example_create_l3_intf(unit, open_vlan, in_sysport, in_vlan,
         my_mac, &ing_intf_in);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, create ingress interface-1, in_sysport=%d, in unit %d \n",
-          in_sysport, unit);
+      printf("Error, create ingress interface-1, in_sysport=%d. "
+          "Return code %s \n", in_sysport, opennsl_errmsg(rv));
       return rv;
     }
 
@@ -416,8 +416,8 @@ int main(int argc, char *argv[])
     rv = example_create_l3_intf(unit, open_vlan, out_sysport, out_vlan,
         my_mac, &ing_intf_out);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, create egress interface-1, out_sysport=%d, in unit %d \n",
-          out_sysport, unit);
+      printf("Error, create egress interface-1, out_sysport=%d. "
+          "Return code %s \n", out_sysport, opennsl_errmsg(rv));
       return rv;
     }
 
@@ -439,8 +439,8 @@ int main(int argc, char *argv[])
     rv = example_create_l3_egress(unit, flags, out_sysport, out_vlan, ing_intf_out,
         next_hop_mac, &l3egid);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, create egress object, out_sysport=%d, in unit %d\n",
-          out_sysport, unit);
+      printf("Error, create egress object, out_sysport=%d. Return code %s \n",
+          out_sysport, opennsl_errmsg(rv));
       return rv;
     }
 
@@ -448,19 +448,30 @@ int main(int argc, char *argv[])
     host = HOST1;
     rv = example_add_host(unit, host, l3egid);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, host add, in unit %d \n",
-          unit);
+      printf("Error, host add. Return code %s\n",
+          opennsl_errmsg(rv));
       return rv;
     }
 
+
+    /* With ALPM enabled, switch expects a default route to be 
+     installed before adding a LPM route */
+    subnet = 0x00000000;
+    mask   = 0x00000000;
+    rv = example_set_default_route(unit, subnet, mask, l3egid, 0);
+    if (rv != OPENNSL_E_NONE) {
+      printf("Error, default route add. Return code %s \n",
+          opennsl_errmsg(rv));
+      return rv;
+    }
 
     /*** add default route ***/
     subnet = DEFAULT_SUBNET_IP;
     mask   = DEFAULT_SUBNET_MASK;
     rv = example_set_default_route(unit, subnet, mask, l3egid, 0);
     if (rv != OPENNSL_E_NONE) {
-      printf("Error, default route add, in unit %d \n",
-          unit);
+      printf("Error, default route add. Return code %s\n",
+          opennsl_errmsg(rv));
       return rv;
     }
   }

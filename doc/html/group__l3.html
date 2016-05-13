@@ -443,6 +443,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ga1ce0c19b4fc0d87f1b79b9aa2ff895b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#ga1ce0c19b4fc0d87f1b79b9aa2ff895b4">opennsl_l3_route_traverse</a> (int unit, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> flags, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> start, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> end, <a class="el" href="group__l3.html#gaf65680649af7f26770f34f42e7456ec5">opennsl_l3_route_traverse_cb</a> trav_fn, void *user_data) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga1ce0c19b4fc0d87f1b79b9aa2ff895b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse through the routing table and run callback at each route.  <a href="#ga1ce0c19b4fc0d87f1b79b9aa2ff895b4">More...</a><br /></td></tr>
 <tr class="separator:ga1ce0c19b4fc0d87f1b79b9aa2ff895b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafed5c7e39c19bcafa995b294e142cbc5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gafed5c7e39c19bcafa995b294e142cbc5">opennsl_l3_vrrp_add</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> vrid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gafed5c7e39c19bcafa995b294e142cbc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add VRID for the given VSI.  <a href="#gafed5c7e39c19bcafa995b294e142cbc5">More...</a><br /></td></tr>
+<tr class="separator:gafed5c7e39c19bcafa995b294e142cbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaab7f44e751d2ce2315726e0955eb899"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gaaab7f44e751d2ce2315726e0955eb899">opennsl_l3_vrrp_delete</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, <a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> vrid) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gaaab7f44e751d2ce2315726e0955eb899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete VRID for a particular VLAN/VSI.  <a href="#gaaab7f44e751d2ce2315726e0955eb899">More...</a><br /></td></tr>
+<tr class="separator:gaaab7f44e751d2ce2315726e0955eb899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad8573aae198bc0c3ce524cb4acd8851b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gad8573aae198bc0c3ce524cb4acd8851b">opennsl_l3_vrrp_delete_all</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gad8573aae198bc0c3ce524cb4acd8851b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all the VRIDs for a particular VLAN/VSI.  <a href="#gad8573aae198bc0c3ce524cb4acd8851b">More...</a><br /></td></tr>
+<tr class="separator:gad8573aae198bc0c3ce524cb4acd8851b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae28695057d89c66fd288117efd1ddc73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__l3.html#gae28695057d89c66fd288117efd1ddc73">opennsl_l3_vrrp_get</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, int alloc_size, int *vrid_array, int *count) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gae28695057d89c66fd288117efd1ddc73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the VRIDs for which the physical node is master for the virtual routers on the given VLAN/VSI.  <a href="#gae28695057d89c66fd288117efd1ddc73">More...</a><br /></td></tr>
+<tr class="separator:gae28695057d89c66fd288117efd1ddc73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -4011,6 +4023,210 @@ Functions</h2></td></tr>
     <tr><td class="paramname">end</td><td>[IN] The last route number to be traversed </td></tr>
     <tr><td class="paramname">trav_fn</td><td>[IN] Callback function </td></tr>
     <tr><td class="paramname">user_data</td><td>[IN] User data to be passed to callback routine</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gafed5c7e39c19bcafa995b294e142cbc5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_vrrp_add </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vlan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>vrid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add VRID for the given VSI. </p>
+<p>Adding a VRID using this API means the physical node has become the master for the virtual router.</p>
+<dl class="section user"><dt>Description</dt><dd>Configure an active VRID (Virtual Router ID) for the given VSI or VLAN. OPENNSL8802x devices support a maximum of 4 active VR IDs on a given VLAN.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vlan</td><td>[IN] VLAN/VSI/VPN Identifier </td></tr>
+    <tr><td class="paramname">vrid</td><td>[IN] VRID - Virtual router ID to be added</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gaaab7f44e751d2ce2315726e0955eb899"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_vrrp_delete </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vlan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sal_2types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&#160;</td>
+          <td class="paramname"><em>vrid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete VRID for a particular VLAN/VSI. </p>
+<dl class="section user"><dt>Description</dt><dd>Remove a VRID from the configured list of active VRIDs for a given VLAN.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vlan</td><td>[IN] VLAN/VSI </td></tr>
+    <tr><td class="paramname">vrid</td><td>[IN] VRID - Virtual router ID to be deleted</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gad8573aae198bc0c3ce524cb4acd8851b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_vrrp_delete_all </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vlan</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete all the VRIDs for a particular VLAN/VSI. </p>
+<dl class="section user"><dt>Description</dt><dd>Delete all the VRIDs for a particular VLAN/VSI.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vlan</td><td>[IN] VLAN/VSI</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gae28695057d89c66fd288117efd1ddc73"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_l3_vrrp_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vlan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>alloc_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>vrid_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get all the VRIDs for which the physical node is master for the virtual routers on the given VLAN/VSI. </p>
+<dl class="section user"><dt>Description</dt><dd>Get all the VRIDs for which the physical node is master for the virtual routers on the given VLAN/VSI.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vlan</td><td>[IN] VLAN/VSI </td></tr>
+    <tr><td class="paramname">alloc_size</td><td>[IN] Number of vrid_array elements </td></tr>
+    <tr><td class="paramname">vrid_array</td><td>[OUT] Pointer to the array to which the VRIDs will be copied </td></tr>
+    <tr><td class="paramname">count</td><td>[OUT] Number of VRIDs copied</td></tr>
   </table>
   </dd>
 </dl>

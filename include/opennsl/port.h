@@ -2473,6 +2473,29 @@ extern int opennsl_port_control_get(
     opennsl_port_control_t type, 
     int *value) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Get the list of ancilliary/flex ports belonging to the same port block
+ *       as the controlling port.
+ *
+ *\description Given a controlling port, this API returns the set of
+ *          ancilliary/flex ports  belonging to the group (port block) that
+ *          can be created by performing  Flex-IO operation on the controlling
+ *          port using API opennsl_port_control_set(unit,  port,
+ *          opennslPortControlLanes, lanes). If the input port is not a
+ *          controlling port,  OPENNSL_E_PORT error will be returned.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Controlling port
+ *\param    pbmp [OUT]   List of subsidiary ports in the same block as the
+ *          controlling port
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_port_subsidiary_ports_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_pbmp_t *pbmp) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 /***************************************************************************//** 

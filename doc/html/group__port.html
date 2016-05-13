@@ -858,6 +858,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga7f63acce7fb29580c7a6e90464263969"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga7f63acce7fb29580c7a6e90464263969">opennsl_port_stp_set</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int state) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga7f63acce7fb29580c7a6e90464263969"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the spanning tree state for a port (single instance spanning tree only).  <a href="#ga7f63acce7fb29580c7a6e90464263969">More...</a><br /></td></tr>
 <tr class="separator:ga7f63acce7fb29580c7a6e90464263969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4d5180b064e73ed321f202b66ea2a03e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga4d5180b064e73ed321f202b66ea2a03e">opennsl_port_subsidiary_ports_get</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, <a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> *pbmp) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga4d5180b064e73ed321f202b66ea2a03e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of ancilliary/flex ports belonging to the same port block as the controlling port.  <a href="#ga4d5180b064e73ed321f202b66ea2a03e">More...</a><br /></td></tr>
+<tr class="separator:ga4d5180b064e73ed321f202b66ea2a03e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga46fcd21c4a9229808d4662d5e1866b5b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga46fcd21c4a9229808d4662d5e1866b5b">opennsl_port_untagged_priority_get</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int *priority) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga46fcd21c4a9229808d4662d5e1866b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the default priority for packets that ingress untagged.  <a href="#ga46fcd21c4a9229808d4662d5e1866b5b">More...</a><br /></td></tr>
 <tr class="separator:ga46fcd21c4a9229808d4662d5e1866b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2661,7 +2664,7 @@ Functions</h2></td></tr>
 
 <p>Copy packet samples to CPU. </p>
 
-<p>Definition at line <a class="el" href="opennsl_2port_8h_source.html#l02658">2658</a> of file <a class="el" href="opennsl_2port_8h_source.html">port.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2port_8h_source.html#l02681">2681</a> of file <a class="el" href="opennsl_2port_8h_source.html">port.h</a>.</p>
 
 </div>
 </div>
@@ -4317,7 +4320,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="opennsl_2port_8h_source.html#l02662">2662</a> of file <a class="el" href="opennsl_2port_8h_source.html">port.h</a>.</p>
+<p>Definition at line <a class="el" href="opennsl_2port_8h_source.html#l02685">2685</a> of file <a class="el" href="opennsl_2port_8h_source.html">port.h</a>.</p>
 
 </div>
 </div>
@@ -7858,6 +7861,55 @@ Functions</h2></td></tr>
     <tr><td class="paramname">OPENNSL_E_NONE</td><td>Operation completed successfully </td></tr>
     <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Operation not supported on underlying device. This occurs on fabric devices. </td></tr>
     <tr><td class="paramname">OPENNSL_E_XXX</td><td>Operation failed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4d5180b064e73ed321f202b66ea2a03e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_port_subsidiary_ports_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> *&#160;</td>
+          <td class="paramname"><em>pbmp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the list of ancilliary/flex ports belonging to the same port block as the controlling port. </p>
+<dl class="section user"><dt>Description</dt><dd>Given a controlling port, this API returns the set of ancilliary/flex ports belonging to the group (port block) that can be created by performing Flex-IO operation on the controlling port using API opennsl_port_control_set(unit, port, opennslPortControlLanes, lanes). If the input port is not a controlling port, OPENNSL_E_PORT error will be returned.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">port</td><td>[IN] Controlling port </td></tr>
+    <tr><td class="paramname">pbmp</td><td>[OUT] List of subsidiary ports in the same block as the controlling port</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
   </table>
   </dd>
 </dl>

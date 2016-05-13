@@ -736,9 +736,6 @@ int main(int argc, char *argv[])
   opennsl_error_t   rv;
   int choice;
   int index = 0;
-  opennsl_port_t a_port1;
-  opennsl_port_t a_port2;
-  opennsl_port_t n_port;
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -760,36 +757,8 @@ int main(int argc, char *argv[])
     return rv;
   }
 
-  /* Input access and network port numbers */
-  do
-  {
-    printf("\r\nEnter first access port number.\r\n");
-    if(example_read_user_choice(&a_port1) != OPENNSL_E_NONE)
-    {
-      printf("Invalid option entered. Please re-enter.\n");
-      continue;
-    }
-
-    printf("\r\nEnter second access port number.\r\n");
-    if(example_read_user_choice(&a_port2) != OPENNSL_E_NONE)
-    {
-      printf("Invalid option entered. Please re-enter.\n");
-      continue;
-    }
-
-    printf("\r\nEnter network port number.\r\n");
-    if(example_read_user_choice(&n_port) != OPENNSL_E_NONE)
-    {
-      printf("Invalid option entered. Please re-enter.\n");
-      continue;
-    }
-    break;
-  } while(1);
-
-  printf("\r\nVxLAN Access ports: %d, %d Network port: %d\n",
-      a_port1, a_port2, n_port);
   /* Configure VXLAN settings for access and network ports */
-  example_vxlan(a_port1, a_port2, n_port);
+  example_vxlan(1, 2, 3);
 
   printf("\r\nVxLAN configuration is done successfully\n");
 

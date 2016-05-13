@@ -1206,6 +1206,79 @@ typedef enum opennsl_l3_stat_e {
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Add VRID for the given VSI. Adding a VRID using this API means the
+ *       physical node has become the master for the virtual router.
+ *
+ *\description Configure an active VRID (Virtual Router ID) for the given VSI  or
+ *          VLAN. OPENNSL8802x devices support a maximum of 4 active VR IDs on
+ *          a given VLAN.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN/VSI/VPN Identifier
+ *\param    vrid [IN]   VRID - Virtual router ID to be added
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_vrrp_add(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    uint32 vrid) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete VRID for a particular VLAN/VSI.
+ *
+ *\description Remove a VRID from the configured list of active VRIDs for a given
+ *          VLAN.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN/VSI
+ *\param    vrid [IN]   VRID - Virtual router ID to be deleted
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_vrrp_delete(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    uint32 vrid) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete all the VRIDs for a particular VLAN/VSI.
+ *
+ *\description Delete all the VRIDs for a particular VLAN/VSI.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN/VSI
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_vrrp_delete_all(
+    int unit, 
+    opennsl_vlan_t vlan) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get all the VRIDs for which the physical node is master for the virtual
+ *       routers on the given VLAN/VSI.
+ *
+ *\description Get all the VRIDs for which the physical node is master for the
+ *          virtual routers on the given VLAN/VSI.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN/VSI
+ *\param    alloc_size [IN]   Number of vrid_array elements
+ *\param    vrid_array [OUT]   Pointer to the array to which the VRIDs will be
+ *          copied
+ *\param    count [OUT]   Number of VRIDs copied
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_vrrp_get(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    int alloc_size, 
+    int *vrid_array, 
+    int *count) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Get the specified counter statistic for a L3 egress interface.
  *
  *\description This API will retrieve set of counter statistic values for the
