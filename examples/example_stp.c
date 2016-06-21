@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
     printf("Interactive User Menu:\n");
     printf("1. Configure STP state of a port\n");
     printf("2. Display the STP state of ports\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application\n");
@@ -221,7 +221,7 @@ int main(int argc, char *argv[])
         break;
       }
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

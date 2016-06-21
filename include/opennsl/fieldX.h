@@ -266,7 +266,7 @@ typedef enum opennsl_field_action_e {
                                            opennsl_field_entry_stat_attach and
                                            related APIs. */
     opennslFieldActionStat = opennslFieldActionStat0, /**< Alias for opennslFieldActionStat0 */
-    opennslFieldActionCount = 434       /**< Always Last. Not a usable value. */
+    opennslFieldActionCount = 437       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
 
 /** 
@@ -932,6 +932,19 @@ extern int opennsl_field_entry_install(
  *          be used to change the actions associated with an entry that is
  *          already installed in the hardware table.  It avoids the need to
  *          completely delete and re-add the entry.
+ *          Hitless entry install: Hitless entry install provides the
+ *          capability to apply existing rules of the already installed entry
+ *          to the incoming traffic while updating new modifications on the
+ *          entry in the hardware tables. For achieving entry hitless update,
+ *          it is recommended that the entries created in a group should have
+ *          unique priority. Eventhough entry installation might not result in
+ *          hitless update in the following cases 1. Entry hitless update
+ *          can't be achieved if all the slices are full with entries. 2.
+ *          Entry installation might not result in hitless update if
+ *          non-global counters/flex stats or non-global meters    are
+ *          attached to the entry.
+ *          In the above two cases entry installation might result in error,
+ *          if config property field_atomic_update is set.
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]   Field entry ID

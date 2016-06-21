@@ -267,6 +267,24 @@ typedef enum opennsl_rx_reason_e {
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
+ *\brief Re-initialize the user level configuration for the RX module.
+ *
+ *\description The default configuration is copied to the RX module's
+ *          configuration for the given device.
+ *          The device must not be active (started without being stopped).
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_BUSY Device has been started
+ *\retval    OPENNSL_E_PARAM Invalid device
+ *\retval    OPENNSL_E_MEMORY Unable to allocate necessary objects for
+ *          initialization
+ ******************************************************************************/
+extern int opennsl_rx_cfg_init(
+    int unit) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Start packet reception for the given device.
  *
  *\description If cfg is non-NULL, that configuration is copied to the device's
@@ -328,6 +346,18 @@ extern int opennsl_rx_stop(
 extern int opennsl_rx_cfg_get(
     int unit, 
     opennsl_rx_cfg_t *cfg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Boolean indication of whether RX is running on this device.
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    TRUE The RX module is initialized and running on this device
+ *\retval    FALSE The RX module is not running on this device
+ ******************************************************************************/
+extern int opennsl_rx_active(
+    int unit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Register or unregister to receive callbacks for received packets.

@@ -144,6 +144,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga9379df39b7aea7e5e1784cac13445f1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga9379df39b7aea7e5e1784cac13445f1e">opennsl_vlan_gport_delete_all</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga9379df39b7aea7e5e1784cac13445f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all virtual and physical port from the specified VLAN.  <a href="#ga9379df39b7aea7e5e1784cac13445f1e">More...</a><br /></td></tr>
 <tr class="separator:ga9379df39b7aea7e5e1784cac13445f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga854a32504becef335eb95c2828dae3df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga854a32504becef335eb95c2828dae3df">opennsl_vlan_gport_get</a> (int unit, <a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a> vlan, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int *flags) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga854a32504becef335eb95c2828dae3df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a virtual or physical port from the specified VLAN.  <a href="#ga854a32504becef335eb95c2828dae3df">More...</a><br /></td></tr>
+<tr class="separator:ga854a32504becef335eb95c2828dae3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga490de9c3c255579de8655179016b3cac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vlan.html#ga490de9c3c255579de8655179016b3cac">opennsl_vlan_list</a> (int unit, <a class="el" href="group__vlan.html#ga27d3ebbf6a43e5695373140b0f031d78">opennsl_vlan_data_t</a> **listp, int *countp) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga490de9c3c255579de8655179016b3cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of defined VLANs and their port bitmaps.  <a href="#ga490de9c3c255579de8655179016b3cac">More...</a><br /></td></tr>
 <tr class="separator:ga490de9c3c255579de8655179016b3cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,7 +254,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="vlan_8h_source.html#l00296">296</a> of file <a class="el" href="vlan_8h_source.html">vlan.h</a>.</p>
+<p>Definition at line <a class="el" href="vlan_8h_source.html#l00318">318</a> of file <a class="el" href="vlan_8h_source.html">vlan.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +280,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="vlan_8h_source.html#l00334">334</a> of file <a class="el" href="vlan_8h_source.html">vlan.h</a>.</p>
+<p>Definition at line <a class="el" href="vlan_8h_source.html#l00356">356</a> of file <a class="el" href="vlan_8h_source.html">vlan.h</a>.</p>
 
 </div>
 </div>
@@ -740,6 +743,63 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">OPENNSL_E_NOT_FOUND</td><td>VLAN ID not in use </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga854a32504becef335eb95c2828dae3df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_vlan_gport_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#gaff94709d1708a51eb9aadb2e9fa03875">opennsl_vlan_t</a>&#160;</td>
+          <td class="paramname"><em>vlan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a virtual or physical port from the specified VLAN. </p>
+<dl class="section user"><dt>Description</dt><dd>Checks whether the given port is a member of the VLAN. For network switch and network switch, the port can be either a WLAN virtual port or a regular physical port. For network switch, the port can be a layer 2 logical port or a regular physical port.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">vlan</td><td>[IN] VLAN ID </td></tr>
+    <tr><td class="paramname">port</td><td>[IN] Virtual or physical port to get VLAN information </td></tr>
+    <tr><td class="paramname">flags</td><td>[OUT] Control flags. See =OPENNSL_VLAN_PORT_t</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NOT_FOUND</td><td>VLAN ID not in use or port is not a member </td></tr>
     <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
   </table>
   </dd>

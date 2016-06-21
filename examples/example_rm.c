@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
     printf(" 4. Show L2 table\n");
     printf(" 5. Update the Ports of the default client\n");
     printf(" 6. Update the VLANs of the default client\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf(" 9. Launch diagnostic shell\n");
 #endif
     printf(" 0. Quit the application\n");
@@ -354,7 +354,7 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 6 */
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

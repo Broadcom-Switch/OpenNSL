@@ -165,7 +165,8 @@ int main(int argc, char *argv[])
     /* Add ports to default vlan. */
     printf("Adding ports to default vlan.\r\n");
     rv = example_switch_default_vlan_config(unit);
-    if(rv != OPENNSL_E_NONE) {
+    if(rv != OPENNSL_E_NONE)
+    {
       printf("\r\nFailed to add default ports. rv: %s\r\n", opennsl_errmsg(rv));
       return rv;
     }
@@ -193,7 +194,7 @@ int main(int argc, char *argv[])
     printf("2. Disable sFlow\n");
     printf("3. Display sFlow configuration\n");
     printf("4. Save the configuration to scache\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application.\r\n");
@@ -286,7 +287,7 @@ int main(int argc, char *argv[])
           break;
         } /* End of case 1 */
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
         {
           opennsl_driver_shell();

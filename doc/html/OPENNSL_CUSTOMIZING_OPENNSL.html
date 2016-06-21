@@ -135,6 +135,11 @@ Config properties</h1>
 <p class="endtd"></p>
 </td></tr>
 <tr>
+<td>scache_filename=&lt;filename&gt; </td><td><p class="starttd">Specify the file to which the warmboot cache data is written during warmboot operations. This is used to use the SDK system defaults for stable location and size, when stable_filename and stable_location are not specified explicitly. <br />
+ Example: To use "/tmp/scache_file" for scache data, use "scache_filename=/tmp/scache_file"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
 <td>xgxs_rx_lane_map_&lt;port&gt;=&lt;val&gt; </td><td><p class="starttd">Remap XGXS RX lanes to desired mapping. Four bits were used for specifying each lane in the format of Lane 0 (bit 15-12), Lane 1 (bit 11-8), lane 2 (bit 7-4), and lane 3 (bit 3-0). For example, to reverse the rx lane mapping in 3, 2, 1, 0 order, set xgxs_rx_lane_map=0x3210. However for Warpcore serdes device, the format is in reversed order, that is, Lane 3 (bit 15-12), Lane 2 (bit 11-8),lane 1 (bit 7-4), and lane 0 (bit 3-0). The example above will be: xgxs_rx_lane_map=0x0123. <br />
  Example: To set RX lane map for port 1 to a value of 0x213, use "xgxs_rx_lane_map_1=0x213"  </p>
 <p class="endtd"></p>
@@ -142,6 +147,181 @@ Config properties</h1>
 <tr>
 <td>xgxs_tx_lane_map_&lt;port&gt;=&lt;val&gt; </td><td><p class="starttd">Remap XGXS TX lanes to desired mapping. See xgxs_rx_lane_map for values. <br />
  Example: To set TX lane map for port 29 to a value of 0x3021, use "xgxs_tx_lane_map_29=0x3021"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>pbmp_xport_xe=&lt;pbmp&gt; </td><td><p class="starttd">Select the XE ports by specifying the port bitmap.<br />
+ Example: To have 72 XE ports on a platform, use "pbmp_xport_xe=0x1fffffffffffffffffe"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>pbmp_oversubscribe=&lt;pbmp&gt; </td><td><p class="starttd">Port bitmap for ports in oversubscription mode.<br />
+ Example: To set oversubsciption mode for all 72 XE ports on a platform, use "pbmp_oversubscribe=0x1fffffffffffffffffe"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>serdes_rx_los_&lt;port&gt;=&lt;val&gt; </td><td><p class="starttd">To control serdes Loss Of Signal(LOS) function. Possible values for &lt;val&gt; are: 0-disable, 1-enable.<br />
+ Example: To enable serdes LOS on port 29, use "serdes_rx_los_29=1"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>rate_ext_mdio_divisor=&lt;val&gt; </td><td><p class="starttd">The frequency of the MDIO clock is a function of the core clock. This property is used to select external MDIO clock rate divisor.<br />
+ Example: rate_ext_mdio_divisor=0x80  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>bcm_num_cos=&lt;val&gt; </td><td><p class="starttd">Initial number of CoS queues the driver configures the switch for.<br />
+ Example: To set the number of COS queues to 8, use "bcm_num_cos=8"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>bcm_stat_interval=&lt;val&gt; </td><td><p class="starttd">Set statistics collection interval in microseconds. Setting this to 0 will prevent counters from being started.<br />
+ Example: bcm_stat_interval=2000000  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>cdma_timeout_usec=&lt;val&gt; </td><td><p class="starttd">Counter DMA collection pass timeout in microseconds.<br />
+ Example: cdma_timeout_usec=3000000  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>tdma_timeout_usec=&lt;val&gt; </td><td><p class="starttd">Table DMA operation timeout in microseconds.<br />
+ Example: tdma_timeout_usec=3000000  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>phy_an_c37_&lt;port&gt;=&lt;val&gt; </td><td><p class="starttd">This controls the clause 37 auto-negotiation. <br />
+ Use value of 0 to disable and 3 to use clause 37 auto negotiation. <br />
+ Example: To set the C37 auto-negotiation on all xe ports, use "phy_an_c37_xe=3"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>phy_an_c73_&lt;port&gt;=&lt;val&gt; </td><td><p class="starttd">This controls the clause 73 auto-negotiation. <br />
+ Use value of 0 to disable clause 73 auto negotiation. <br />
+ Example: To disable C73 auto-negotiation on all xe ports, use "phy_an_c73_xe=0"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>miim_intr_enable=&lt;val&gt; </td><td><p class="starttd">This variable controls the interrupt mode for MII operations. <br />
+ Possible value for &lt;val&gt; are: <br />
+ 1 - Use interrupts for MII operations <br />
+ 0 - Use polling mode for MII operations <br />
+ Example: To use polling mode for MII operations, use "miim_intr_enable=0"  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>tdma_intr_enable=&lt;val&gt; </td><td><p class="starttd">This variable controls the interrupt mode for Table DMA operations. <br />
+ Possible value for &lt;val&gt; are: <br />
+ 1 - Use interrupts for Table DMA operations <br />
+ 0 - Use polling mode for Table DMA operations <br />
+ Example: tdma_intr_enable=0  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>schan_intr_enable=&lt;val&gt; </td><td><p class="starttd">This variable controls the interrupt mode for Address Resolution Logic (ARL) operations. <br />
+ Possible value for &lt;val&gt; are: <br />
+ 1 - Use interrupts for ARL insert/delete operations <br />
+ 0 - Use polling mode for all operations <br />
+ Example: schan_intr_enable=0  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>trunk_extend=&lt;val&gt; </td><td><p class="starttd">To extend maximum number of front panel trunk groups from 32 to 128. <br />
+ Example: trunk_extend=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>xgxs_lcpll_xtal_refclk=&lt;val&gt; </td><td><p class="starttd">To use crystal input for LCPLL. <br />
+ Example: xgxs_lcpll_xtal_refclk=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>module_64ports=&lt;val&gt; </td><td><p class="starttd">Device that can support more than 32 ports per single modid will operate in configuration where all ports are mapped to the base modid. <br />
+ Example: module_64ports=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>lpm_scaling_enable=&lt;val&gt; </td><td><p class="starttd">Possible values for &lt;val&gt; are: <br />
+ 1: Allow adding 64B IPV6 LPM entries in unreserved paired TCAM. <br />
+ 0: Do not allow adding 64B IPV6 LPM entries in paired TCAM. <br />
+ Example: lpm_scaling_enable=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>lpm_ipv6_128b_reserved=&lt;val&gt; </td><td><p class="starttd">Possible values for &lt;val&gt; are: <br />
+ 1: Number of entries specified by num_ipv6_lpm_128b_entries property are reserved exclusively for 128B V6 LPM entries. <br />
+ 0: Do not reserve any entries for 128B V6 entries and use the whole of paired TCAMs for either 128B V6, 64B V6, V4 entries. Ignored if lpm_scaling_enable is 0. <br />
+ Example: lpm_ipv6_128b_reserved=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>num_ipv6_lpm_128b_entries=&lt;val&gt; </td><td><p class="starttd">Configure the number of 128b prefix LPM routes. <br />
+ Example: num_ipv6_lpm_128b_entries=2000  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>ipv6_lpm_128b_enable=&lt;val&gt; </td><td><p class="starttd">1: Enable IPv6 128b prefix LPM routes. <br />
+ 0: Disable IPv6 128b prefix LPM routes. <br />
+ Example: ipv6_lpm_128b_enable=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>l3_alpm_enable=&lt;val&gt; </td><td><p class="starttd">Enable ALPM for L3 Prefix routes. Set to 1 for parallel search mode, 2 for combined search mode. 3 for TCAM/ALPM mode. <br />
+ Example: l3_alpm_enable=2  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>max_vp_lags=&lt;val&gt; </td><td><p class="starttd">The maximum number of virtual port trunk groups. <br />
+ Example: max_vp_lags=0  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>serdes_firmware_mode=&lt;val&gt; </td><td><p class="starttd">To set Serdes micro controller firmware mode. <br />
+ Example: serdes_firmware_mode=2  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>serdes_if_type=&lt;val&gt; </td><td><p class="starttd">To manually select the port interface type like SFI, XFI, GMII, SGMII, XAUI, XLAUI. <br />
+ Use the values defined in _shr_port_if_t for &lt;val&gt;. <br />
+ Example: serdes_if_type=10 for XFI interface type.  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>skip_L2_USER_ENTRY=&lt;val&gt; </td><td><p class="starttd">To control sending of some reserved multicast MAC addresses to the CPU as PDU's. <br />
+ Possible value for &lt;val&gt; are: <br />
+ 1 - To enable L2 caching of BPDU MAC addresses. <br />
+ 0 - To disable L2 caching of BPDU MAC addresses. <br />
+ Example: skip_L2_USER_ENTRY=0  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>port_init_cl72=&lt;val&gt; </td><td><p class="starttd">Possible value for &lt;val&gt; are: <br />
+ 1 - To initialize the port with CL72 enabled. <br />
+ 0 - To initialize the port with CL72 diabled. <br />
+ Example: port_init_cl72=0  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>mmu_lossless=&lt;val&gt; </td><td><p class="starttd">To set the default MMU lossless behaviour.<br />
+ Possible value for &lt;val&gt; are: <br />
+ 0 - For lossy application. Addressing fairness between queues. <br />
+ 1 - For lossless application. Addressing avoiding packet loss, pause generation. <br />
+ Example: mmu_lossless=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>l2xmsg_hostbuf_size=&lt;val&gt; </td><td><p class="starttd">Size of the buffer that is used to drain L2 FIFO when working in the L2 FIFO mode. <br />
+ Example: l2xmsg_hostbuf_size=16384  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>l2xmsg_mode=&lt;val&gt; </td><td><p class="starttd">Mode control to select L2 Table DMA mode for L2 table change notifications. 0 - Polled, 1 - FIFO mode. <br />
+ Example: l2xmsg_mode=1  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>lls_num_l2uc=&lt;val&gt; </td><td><p class="starttd">The default number of unicast queues at L2 for Linked List Scheduler (LLS) setup. <br />
+ Example: lls_num_l2uc=16  </p>
 <p class="endtd"></p>
 </td></tr>
 </table>

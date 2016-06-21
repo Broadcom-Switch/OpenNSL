@@ -1049,10 +1049,13 @@ extern int opennsl_cosq_priority_get(
  *          When a parent node is created by using opennsl_cosq_gport_add API
  *          call by passing num_cos_levels = -1 then that node can have any
  *          number of child nodes.
- *          On the chips network switch, the first call to the API
- *          opennsl_cosq_gport_add will destroy the default schedule
- *          hierarchies for all of ports and traffic will not flow on those
- *          ports until new schedule hierarchies for those ports are built.
+ *          On the chips network switch, default schedule hierarchies are set
+ *          up at SDK initialization. Default schedule hierarchy elements
+ *          cannot be managed except using non-gport APIs to configure COSQs
+ *          at port level. The first call to the API opennsl_cosq_gport_add
+ *          will destroy the default schedule hierarchies for all of ports and
+ *          traffic will not flow on those ports until new schedule
+ *          hierarchies for those ports are built.
  *          On the chip network switch API opennsl_cosq_gport_add return
  *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
  *          during init. On the chip network switch because of fixed hierarchy
@@ -1529,10 +1532,13 @@ extern int opennsl_cosq_gport_statistic_set(
  *          When a parent node is created by using opennsl_cosq_gport_add API
  *          call by passing num_cos_levels = -1 then that node can have any
  *          number of child nodes.
- *          On the chips network switch, the first call to the API
- *          opennsl_cosq_gport_add will destroy the default schedule
- *          hierarchies for all of ports and traffic will not flow on those
- *          ports until new schedule hierarchies for those ports are built.
+ *          On the chips network switch, default schedule hierarchies are set
+ *          up at SDK initialization. Default schedule hierarchy elements
+ *          cannot be managed except using non-gport APIs to configure COSQs
+ *          at port level. The first call to the API opennsl_cosq_gport_add
+ *          will destroy the default schedule hierarchies for all of ports and
+ *          traffic will not flow on those ports until new schedule
+ *          hierarchies for those ports are built.
  *          On the chip network switch API opennsl_cosq_gport_add return
  *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
  *          during init. On the chip network switch because of fixed hierarchy

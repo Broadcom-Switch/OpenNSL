@@ -215,7 +215,7 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__field.html#gga7e4b15dc0ad1411548bfbaff998cb97faa817daee11e7fb405a06bcdd41cac3fb">opennslFieldActionStat</a> = opennslFieldActionStat0, 
 <br />
-&#160;&#160;<a class="el" href="group__field.html#gga7e4b15dc0ad1411548bfbaff998cb97fa86bb99a386c59d7750b62d2b1d8b4b32">opennslFieldActionCount</a> = 434
+&#160;&#160;<a class="el" href="group__field.html#gga7e4b15dc0ad1411548bfbaff998cb97fa86bb99a386c59d7750b62d2b1d8b4b32">opennslFieldActionCount</a> = 437
 <br />
  }<tr class="memdesc:ga7e4b15dc0ad1411548bfbaff998cb97f"><td class="mdescLeft">&#160;</td><td class="mdescRight">opennsl_field_action_e  <a href="group__field.html#ga7e4b15dc0ad1411548bfbaff998cb97f">More...</a><br /></td></tr>
 <tr class="separator:ga7e4b15dc0ad1411548bfbaff998cb97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3156,7 +3156,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Re-install a field entry into the hardware tables. </p>
-<dl class="section user"><dt>Description</dt><dd>Re-installs an entry into the hardware tables. This call may only be used to change the actions associated with an entry that is already installed in the hardware table. It avoids the need to completely delete and re-add the entry.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Re-installs an entry into the hardware tables. This call may only be used to change the actions associated with an entry that is already installed in the hardware table. It avoids the need to completely delete and re-add the entry. Hitless entry install: Hitless entry install provides the capability to apply existing rules of the already installed entry to the incoming traffic while updating new modifications on the entry in the hardware tables. For achieving entry hitless update, it is recommended that the entries created in a group should have unique priority. Eventhough entry installation might not result in hitless update in the following cases 1. Entry hitless update can't be achieved if all the slices are full with entries. 2. Entry installation might not result in hitless update if non-global counters/flex stats or non-global meters are attached to the entry. In the above two cases entry installation might result in error, if config property field_atomic_update is set.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>

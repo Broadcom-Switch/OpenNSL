@@ -20,7 +20,7 @@
 #
 # CROSS_COMPILE setting for GTO boards (Broadcom SVKs)
 CROSS_COMPILE_GTO = /projects/nwsoft-toolchains/brl_2.0/gto/bin/powerpc-broadcom-linux-gnu-
-# CROSS_COMPILE setting for IM-x86 and Celestica Redstone-x86 boards
+# CROSS_COMPILE setting for IM-x86 and Celestica x86 boards
 CROSS_COMPILE_x86 = /usr/bin/
 
 # Default to GTO cross compile
@@ -44,7 +44,7 @@ export RM      = rm
 
 export OPENNSL_ROOT = ./..
 
-export CFLAGS += -DCDP_EXCLUDE=1
+export CFLAGS += -DCDP_PACKAGE=1
 export CFLAGS += -I$(OPENNSL_ROOT)/include
 
 FEATURE_LIST = L3

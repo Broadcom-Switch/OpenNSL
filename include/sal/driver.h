@@ -50,7 +50,7 @@ extern int opennsl_driver_init(opennsl_init_t *init);
  *****************************************************************************/
 extern unsigned int opennsl_driver_boot_flags_get(void);
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
 /*****************************************************************//**
 * \brief Bringup diagnostic shell prompt and process the input commands.
 *

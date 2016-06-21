@@ -314,7 +314,7 @@ int main(int argc, char *argv[])
     printf("1. Enable/Disable BST feature.\n");
     printf("2. Display BST statistics of a port.\n");
     printf("3. Clear BST statistics of a port.\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application.\n");
@@ -427,7 +427,7 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 3 */
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

@@ -428,7 +428,7 @@ int main(int argc, char *argv[])
     printf("1. Create KNET interface\n");
     printf("2. Delete KNET interface\n");
     printf("3. Display KNET interface database\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application.\n");
@@ -457,7 +457,7 @@ int main(int argc, char *argv[])
         break;
       }
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

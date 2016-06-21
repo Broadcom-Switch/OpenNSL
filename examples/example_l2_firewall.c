@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
     printf("2. Remove firewall\n");
     printf("3. Show L2 table\n");
     printf("4. Save the configuration to scache\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application\n");
@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 4 */
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

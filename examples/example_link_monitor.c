@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
     printf("\r\nUser menu: Select one of the following options\r\n");
     printf("1. Enable the link monitoring mode.\r\n");
     printf("2. Disable the link monitoring mode.\r\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application.\r\n");
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
         break;
       }
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

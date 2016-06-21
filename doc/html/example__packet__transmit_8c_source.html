@@ -207,7 +207,7 @@
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    printf(<span class="stringliteral">&quot;\r\nUser menu: Select one of the following options\r\n&quot;</span>);</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    printf(<span class="stringliteral">&quot;1. Transmit a packet\n&quot;</span>);</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    printf(<span class="stringliteral">&quot;2. Display OpenNSL version\n&quot;</span>);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">#ifdef INCLUDE_DIAG_SHELL</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application\n&quot;</span>);</div>
@@ -247,10 +247,10 @@
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;      }</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">#ifdef INCLUDE_DIAG_SHELL</span></div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      <span class="keywordflow">case</span> 9:</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      {</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        opennsl_driver_shell();</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;      }</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -270,7 +270,6 @@
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="example__packet__transmit_8c_html_adbb76aecfc5eef000cb4cb55bc2fd404"><div class="ttname"><a href="example__packet__transmit_8c.html#adbb76aecfc5eef000cb4cb55bc2fd404">DEFAULT_UNIT</a></div><div class="ttdeci">#define DEFAULT_UNIT</div><div class="ttdef"><b>Definition:</b> <a href="example__packet__transmit_8c_source.html#l00040">example_packet_transmit.c:40</a></div></div>
-<div class="ttc" id="driver_8h_html_ae2cb0180311015b4ac70e67fea713438"><div class="ttname"><a href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a></div><div class="ttdeci">int opennsl_driver_shell()</div><div class="ttdoc">Bringup diagnostic shell prompt and process the input commands. </div></div>
 <div class="ttc" id="opennsl__api_8dox_html_abd1fe5382f13606db566da3450b351b0"><div class="ttname"><a href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a></div><div class="ttdeci">page OPENNSL_MPLS_OVERVIEW MPLS management MPLS support can be broken down into two Layer and Layer MPLS L2 MPLS consists of point to point Virtual Private Wire Ethernet frames are mapped into a MPLS pseudowire based on incoming port plus packet header information At the end of a forwarding of Ethernet frames after MPLS decapsulation is based on the MPLS label lookup In Ethernet frames of interest are also identified by incoming port plus packet header information Ethernet frames are switched into one or more MPLS pseudowires based on the MAC DA lookup At the end of a frames again are switched based on MAC DA lookup L3 MPLS deals with the establishment of MPLS tunnels At the MPLS tunnel initiation packets entering the tunnel are encapsulated with an MPLS MPLS label and POP operations are supported At the end of an MPLS forwarding of IPv4 and IPv6 packets is based on DIP lookup Virtual routing tables are supported for the DIP lookup In the MPLS the concept of VPN is introduced A VPN can be of type or a VPN is similar to a which identifies a group of physical ports to be included in a broadcast domain instead of physical a VPLS VPN identifies a group of virtual ports to be included in a broadcast domain In the MPLS a virtual port is called an MPLS port(see description below).The VPN ID is used to qualify MAC DA lookups in VPLS.For VPWS</div></div>
 <div class="ttc" id="opennsl_2port_8h_html"><div class="ttname"><a href="opennsl_2port_8h.html">port.h</a></div></div>
 <div class="ttc" id="structopennsl__config__s_html"><div class="ttname"><a href="structopennsl__config__s.html">opennsl_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="driver_8h_source.html#l00027">driver.h:27</a></div></div>

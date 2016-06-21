@@ -123,6 +123,7 @@ typedef enum opennsl_switch_control_e {
     opennslSwitchVxlanTunnelMissToCpu = 732, /**< If set, send a copy of VXLAN packet
                                            to CPU if VXLAN Tunnel lookup fails. */
     opennslSwitchEcmpMacroFlowHashEnable = 782, /**< Enable ECMP macro-flow hashing. */
+    opennslSwitchBstSnapshotEnable = 878, /**< BST resource usage SnapShot mode. */
     opennslSwitchMirrorExclusive = 912, /**< Set Mirror exclusive behaviour
                                            between FP and Port */
 } opennsl_switch_control_t;

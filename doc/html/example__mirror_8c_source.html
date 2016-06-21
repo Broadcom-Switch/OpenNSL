@@ -165,7 +165,7 @@
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    printf(<span class="stringliteral">&quot;\r\nUser menu: Select one of the following options\r\n&quot;</span>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifdef INCLUDE_DIAG_SHELL</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\r\n&quot;</span>);</div>
@@ -178,10 +178,10 @@
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">switch</span>(choice)</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#ifdef INCLUDE_DIAG_SHELL</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      <span class="keywordflow">case</span> 9:</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        opennsl_driver_shell();</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      }</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -256,7 +256,6 @@
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="example__mirror_8c_html_afc7d01e6dbea2c820a68fb8081c58a89"><div class="ttname"><a href="example__mirror_8c.html#afc7d01e6dbea2c820a68fb8081c58a89">example_usage</a></div><div class="ttdeci">char example_usage[]</div><div class="ttdef"><b>Definition:</b> <a href="example__mirror_8c_source.html#l00040">example_mirror.c:40</a></div></div>
-<div class="ttc" id="driver_8h_html_ae2cb0180311015b4ac70e67fea713438"><div class="ttname"><a href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a></div><div class="ttdeci">int opennsl_driver_shell()</div><div class="ttdoc">Bringup diagnostic shell prompt and process the input commands. </div></div>
 <div class="ttc" id="structopennsl__mirror__destination__s_html"><div class="ttname"><a href="structopennsl__mirror__destination__s.html">opennsl_mirror_destination_s</a></div><div class="ttdoc">Mirror destination Structure. </div><div class="ttdef"><b>Definition:</b> <a href="mirrorX_8h_source.html#l00106">mirrorX.h:106</a></div></div>
 <div class="ttc" id="group__mirror_html_ga7cc534c5b7e7ab88c083ae0cb85ed9c4"><div class="ttname"><a href="group__mirror.html#ga7cc534c5b7e7ab88c083ae0cb85ed9c4">opennsl_mirror_port_dest_add</a></div><div class="ttdeci">int opennsl_mirror_port_dest_add(int unit, opennsl_port_t port, uint32 flags, opennsl_gport_t mirror_dest_id) LIB_DLL_EXPORTED</div><div class="ttdoc">Add mirroring destination to a port. </div></div>
 <div class="ttc" id="structopennsl__config__s_html"><div class="ttname"><a href="structopennsl__config__s.html">opennsl_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="driver_8h_source.html#l00027">driver.h:27</a></div></div>

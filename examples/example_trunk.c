@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
     printf("4. Get trunk info\n");
     printf("5. Delete trunk\n");
     printf("6. Save the configuration to scache\n");
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
     printf("0. Quit the application\n");
@@ -311,7 +311,7 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 6 */
 
-#ifndef CDP_EXCLUDE
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();

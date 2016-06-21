@@ -76,12 +76,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a06a6fe41f5ea8664c461423d3cad0923"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#a06a6fe41f5ea8664c461423d3cad0923">opennsl_driver_init</a> (<a class="el" href="driver_8h.html#a9d90a1c69549fe9f0797faee4f5daab5">opennsl_init_t</a> *init)</td></tr>
 <tr class="memdesc:a06a6fe41f5ea8664c461423d3cad0923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initialize the switch.  <a href="#a06a6fe41f5ea8664c461423d3cad0923">More...</a><br /></td></tr>
 <tr class="separator:a06a6fe41f5ea8664c461423d3cad0923"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cbf6c0a5d36c4232661053519f6028b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#a7cbf6c0a5d36c4232661053519f6028b">opennsl_driver_process_command</a> (char *commandBuf)</td></tr>
-<tr class="memdesc:a7cbf6c0a5d36c4232661053519f6028b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process diagnostic shell command.  <a href="#a7cbf6c0a5d36c4232661053519f6028b">More...</a><br /></td></tr>
-<tr class="separator:a7cbf6c0a5d36c4232661053519f6028b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2cb0180311015b4ac70e67fea713438"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a> ()</td></tr>
-<tr class="memdesc:ae2cb0180311015b4ac70e67fea713438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bringup diagnostic shell prompt and process the input commands.  <a href="#ae2cb0180311015b4ac70e67fea713438">More...</a><br /></td></tr>
-<tr class="separator:ae2cb0180311015b4ac70e67fea713438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc634fefff1a9f71c87a04e1eddb8649"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#adc634fefff1a9f71c87a04e1eddb8649">readline</a> (const char *prompt)</td></tr>
 <tr class="separator:adc634fefff1a9f71c87a04e1eddb8649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -141,51 +135,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
-
-<p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7cbf6c0a5d36c4232661053519f6028b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int opennsl_driver_process_command </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>commandBuf</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Process diagnostic shell command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">commandBuf</td><td>[IN] pointer to hold the diagnostic shell command</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ae2cb0180311015b4ac70e67fea713438"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int opennsl_driver_shell </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Bringup diagnostic shell prompt and process the input commands. </p>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
 <p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
