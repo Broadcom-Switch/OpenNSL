@@ -193,9 +193,7 @@ int main(int argc, char *argv[])
     printf("2. Disable sFlow\n");
     printf("3. Display sFlow configuration\n");
     printf("4. Save the configuration to scache\n");
-#ifndef CDP_EXCLUDE
     printf("9. Launch diagnostic shell\n");
-#endif
     printf("0. Quit the application.\r\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -286,13 +284,11 @@ int main(int argc, char *argv[])
           break;
         } /* End of case 1 */
 
-#ifndef CDP_EXCLUDE
       case 9:
         {
           opennsl_driver_shell();
           break;
         }
-#endif
 
       case 0:
         {

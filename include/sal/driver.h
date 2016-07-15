@@ -50,7 +50,6 @@ extern int opennsl_driver_init(opennsl_init_t *init);
  *****************************************************************************/
 extern unsigned int opennsl_driver_boot_flags_get(void);
 
-#ifndef CDP_EXCLUDE
 /*****************************************************************//**
 * \brief Bringup diagnostic shell prompt and process the input commands.
 *
@@ -66,7 +65,6 @@ extern int opennsl_driver_shell();
 * \return OPENNSL_E_XXX     OpenNSL API return code
 ********************************************************************/
 extern int opennsl_driver_process_command(char *commandBuf);
-#endif
 
 extern char *readline(const char *prompt);
 #endif  /* DRIVER_H */

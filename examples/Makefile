@@ -44,7 +44,7 @@ export RM      = rm
 
 export OPENNSL_ROOT = ./..
 
-export CFLAGS += -DCDP_EXCLUDE=1
+export CFLAGS += -DCDP_PACKAGE=1
 export CFLAGS += -I$(OPENNSL_ROOT)/include
 
 FEATURE_LIST = L3

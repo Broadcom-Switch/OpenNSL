@@ -458,52 +458,48 @@
 <div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    printf(<span class="stringliteral">&quot;\r\nUser menu: Select one of the following options\r\n&quot;</span>);</div>
 <div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    printf(<span class="stringliteral">&quot;1. Save the configuration to scache\n&quot;</span>);</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\r\n&quot;</span>);</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    {</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;        printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    }</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    <span class="keywordflow">switch</span>(choice)</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    {</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;      <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;      {</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;        <span class="comment">/* Sync the current configuration */</span></div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        rv = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca0aa383217d779424e826a470d4c924ae">opennslSwitchControlSync</a>, 1);</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;          printf(<span class="stringliteral">&quot;Failed to synchronize the configuration to scache. &quot;</span></div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;              <span class="stringliteral">&quot;Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;          <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;        }</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        printf(<span class="stringliteral">&quot;Warmboot configuration is saved successfully.\n&quot;</span>);</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;      } <span class="comment">/* End of case 1 */</span></div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;      <span class="keywordflow">case</span> 9:</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;      {</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;      }</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;      {</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;      }</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    } <span class="comment">/* End of switch */</span></div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;  } <span class="comment">/* End of while */</span></div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;}</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\r\n&quot;</span>);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    {</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    }</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    <span class="keywordflow">switch</span>(choice)</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    {</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;      <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;      {</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;        <span class="comment">/* Sync the current configuration */</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        rv = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca0aa383217d779424e826a470d4c924ae">opennslSwitchControlSync</a>, 1);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;        <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;          printf(<span class="stringliteral">&quot;Failed to synchronize the configuration to scache. &quot;</span></div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;              <span class="stringliteral">&quot;Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;          <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        }</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;        printf(<span class="stringliteral">&quot;Warmboot configuration is saved successfully.\n&quot;</span>);</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;      } <span class="comment">/* End of case 1 */</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;      <span class="keywordflow">case</span> 9:</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;      {</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;      }</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;      {</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;      }</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    } <span class="comment">/* End of switch */</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;  } <span class="comment">/* End of while */</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;  <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;}</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="structopennsl__l3__route__s_html"><div class="ttname"><a href="structopennsl__l3__route__s.html">opennsl_l3_route_s</a></div><div class="ttdoc">L3 Route Structure. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00210">l3.h:210</a></div></div>
 <div class="ttc" id="structopennsl__l3__egress__s_html_a4559c3254ee6ba88106523dd8c9b4422"><div class="ttname"><a href="structopennsl__l3__egress__s.html#a4559c3254ee6ba88106523dd8c9b4422">opennsl_l3_egress_s::vlan</a></div><div class="ttdeci">opennsl_vlan_t vlan</div><div class="ttdoc">Next hop vlan id. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00112">l3.h:112</a></div></div>
 <div class="ttc" id="structopennsl__l3__egress__s_html_af53aa7695462aa231d4ba889ad06601a"><div class="ttname"><a href="structopennsl__l3__egress__s.html#af53aa7695462aa231d4ba889ad06601a">opennsl_l3_egress_s::port</a></div><div class="ttdeci">opennsl_port_t port</div><div class="ttdoc">Port packet switched to (if !OPENNSL_L3_TGID). </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00114">l3.h:114</a></div></div>
@@ -521,17 +517,17 @@
 <div class="ttc" id="structopennsl__l3__intf__s_html_aad83eb732b3da244ed88ee02531bea82"><div class="ttname"><a href="structopennsl__l3__intf__s.html#aad83eb732b3da244ed88ee02531bea82">opennsl_l3_intf_s::l3a_intf_id</a></div><div class="ttdeci">opennsl_if_t l3a_intf_id</div><div class="ttdoc">Interface ID. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00092">l3.h:92</a></div></div>
 <div class="ttc" id="group__l3_html_gafc35f6809a98707e3c54610512094a1d"><div class="ttname"><a href="group__l3.html#gafc35f6809a98707e3c54610512094a1d">opennsl_l3_route_add</a></div><div class="ttdeci">int opennsl_l3_route_add(int unit, opennsl_l3_route_t *info) LIB_DLL_EXPORTED</div><div class="ttdoc">Add an IP route to the L3 route table. </div></div>
 <div class="ttc" id="sal_2types_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="sal_2types_8h_source.html#l00040">types.h:40</a></div></div>
-<div class="ttc" id="structopennsl__l2__addr__s_html"><div class="ttname"><a href="structopennsl__l2__addr__s.html">opennsl_l2_addr_s</a></div><div class="ttdoc">Device-independent L2 address structure. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00041">l2.h:41</a></div></div>
+<div class="ttc" id="structopennsl__l2__addr__s_html"><div class="ttname"><a href="structopennsl__l2__addr__s.html">opennsl_l2_addr_s</a></div><div class="ttdoc">Device-independent L2 address structure. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00042">l2.h:42</a></div></div>
 <div class="ttc" id="structopennsl__l3__route__s_html_af36c5f11f9ed1ea6f18a96e180ec48fa"><div class="ttname"><a href="structopennsl__l3__route__s.html#af36c5f11f9ed1ea6f18a96e180ec48fa">opennsl_l3_route_s::l3a_ip_mask</a></div><div class="ttdeci">opennsl_ip_t l3a_ip_mask</div><div class="ttdoc">IP subnet mask (IPv4). </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00217">l3.h:217</a></div></div>
 <div class="ttc" id="structopennsl__l3__route__s_html_acfbb25072754c882757a9738475a3fd6"><div class="ttname"><a href="structopennsl__l3__route__s.html#acfbb25072754c882757a9738475a3fd6">opennsl_l3_route_s::l3a_flags</a></div><div class="ttdeci">uint32 l3a_flags</div><div class="ttdoc">See OPENNSL_L3_xxx flag definitions. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00211">l3.h:211</a></div></div>
-<div class="ttc" id="structopennsl__l2__addr__s_html_a7546884120ba8ab5dce9348fd9bd819f"><div class="ttname"><a href="structopennsl__l2__addr__s.html#a7546884120ba8ab5dce9348fd9bd819f">opennsl_l2_addr_s::port</a></div><div class="ttdeci">int port</div><div class="ttdoc">Zero-based port number. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00046">l2.h:46</a></div></div>
+<div class="ttc" id="structopennsl__l2__addr__s_html_a7546884120ba8ab5dce9348fd9bd819f"><div class="ttname"><a href="structopennsl__l2__addr__s.html#a7546884120ba8ab5dce9348fd9bd819f">opennsl_l2_addr_s::port</a></div><div class="ttdeci">int port</div><div class="ttdoc">Zero-based port number. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00047">l2.h:47</a></div></div>
 <div class="ttc" id="driver_8h_html"><div class="ttname"><a href="driver_8h.html">driver.h</a></div></div>
 <div class="ttc" id="group__l2_html_ga838d2e1cee40e3ae41cd4a59599dd333"><div class="ttname"><a href="group__l2.html#ga838d2e1cee40e3ae41cd4a59599dd333">OPENNSL_L2_STATIC</a></div><div class="ttdeci">#define OPENNSL_L2_STATIC</div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00032">l2.h:32</a></div></div>
 <div class="ttc" id="example__routing_8c_html_a04eabb557cecbe6d7f8f9aa84a5fa74d"><div class="ttname"><a href="example__routing_8c.html#a04eabb557cecbe6d7f8f9aa84a5fa74d">example_create_l3_intf</a></div><div class="ttdeci">int example_create_l3_intf(int unit, int open_vlan, opennsl_gport_t port, opennsl_vlan_t vid, opennsl_mac_t mac_addr, int *l3_id)</div><div class="ttdoc">Creates Router interface. </div><div class="ttdef"><b>Definition:</b> <a href="example__routing_8c_source.html#l00179">example_routing.c:179</a></div></div>
 <div class="ttc" id="example__routing_8c_html_a95a6480e9efa3bdf9ec640a482c7f685"><div class="ttname"><a href="example__routing_8c.html#a95a6480e9efa3bdf9ec640a482c7f685">example_create_l3_egress</a></div><div class="ttdeci">int example_create_l3_egress(int unit, unsigned int flags, int out_port, int vlan, int l3_eg_intf, opennsl_mac_t next_hop_mac_addr, int *intf)</div><div class="ttdoc">create l3 egress object object includes next hop information. </div><div class="ttdef"><b>Definition:</b> <a href="example__routing_8c_source.html#l00237">example_routing.c:237</a></div></div>
 <div class="ttc" id="structopennsl__l3__egress__s_html_a414a0355e3fd86ac89a7f061810f4ce6"><div class="ttname"><a href="structopennsl__l3__egress__s.html#a414a0355e3fd86ac89a7f061810f4ce6">opennsl_l3_egress_s::mac_addr</a></div><div class="ttdeci">opennsl_mac_t mac_addr</div><div class="ttdoc">Next hop forwarding destination mac. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00111">l3.h:111</a></div></div>
 <div class="ttc" id="group__error_html_ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b"><div class="ttname"><a href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2error_8h_source.html#l00036">error.h:36</a></div></div>
-<div class="ttc" id="structopennsl__l2__addr__s_html_a3c915015c746bbad9799b9a40a51b829"><div class="ttname"><a href="structopennsl__l2__addr__s.html#a3c915015c746bbad9799b9a40a51b829">opennsl_l2_addr_s::flags</a></div><div class="ttdeci">uint32 flags</div><div class="ttdoc">OPENNSL_L2_xxx flags. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00042">l2.h:42</a></div></div>
+<div class="ttc" id="structopennsl__l2__addr__s_html_a3c915015c746bbad9799b9a40a51b829"><div class="ttname"><a href="structopennsl__l2__addr__s.html#a3c915015c746bbad9799b9a40a51b829">opennsl_l2_addr_s::flags</a></div><div class="ttdeci">uint32 flags</div><div class="ttdoc">OPENNSL_L2_xxx flags. </div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00043">l2.h:43</a></div></div>
 <div class="ttc" id="structopennsl__l3__intf__s_html_acc865cc8d7ef1ed69ca9d3648ad47c07"><div class="ttname"><a href="structopennsl__l3__intf__s.html#acc865cc8d7ef1ed69ca9d3648ad47c07">opennsl_l3_intf_s::l3a_vid</a></div><div class="ttdeci">opennsl_vlan_t l3a_vid</div><div class="ttdoc">VLAN ID. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00094">l3.h:94</a></div></div>
 <div class="ttc" id="structopennsl__l3__host__s_html_a7bb54abde72384e8b7dc7693791105c6"><div class="ttname"><a href="structopennsl__l3__host__s.html#a7bb54abde72384e8b7dc7693791105c6">opennsl_l3_host_s::l3a_port_tgid</a></div><div class="ttdeci">opennsl_port_t l3a_port_tgid</div><div class="ttdoc">Port/TGID packet is switched to. </div><div class="ttdef"><b>Definition:</b> <a href="l3_8h_source.html#l00193">l3.h:193</a></div></div>
 <div class="ttc" id="example__routing_8c_html_aac2edc87c4397b83513067ac545599ea"><div class="ttname"><a href="example__routing_8c.html#aac2edc87c4397b83513067ac545599ea">example_add_host</a></div><div class="ttdeci">int example_add_host(int unit, unsigned int addr, int intf)</div><div class="ttdoc">Add host address to the routing table. </div><div class="ttdef"><b>Definition:</b> <a href="example__routing_8c_source.html#l00281">example_routing.c:281</a></div></div>

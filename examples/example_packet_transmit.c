@@ -175,9 +175,7 @@ int main(int argc, char *argv[])
     printf("\r\nUser menu: Select one of the following options\r\n");
     printf("1. Transmit a packet\n");
     printf("2. Display OpenNSL version\n");
-#ifndef CDP_EXCLUDE
     printf("9. Launch diagnostic shell\n");
-#endif
     printf("0. Quit the application\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -215,13 +213,11 @@ int main(int argc, char *argv[])
         break;
       }
 
-#ifndef CDP_EXCLUDE
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
-#endif
 
       case 0:
       {

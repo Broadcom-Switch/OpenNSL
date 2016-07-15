@@ -346,141 +346,137 @@
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    printf(<span class="stringliteral">&quot;1. Enable/Disable BST feature.\n&quot;</span>);</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    printf(<span class="stringliteral">&quot;2. Display BST statistics of a port.\n&quot;</span>);</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    printf(<span class="stringliteral">&quot;3. Clear BST statistics of a port.\n&quot;</span>);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\n&quot;</span>);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;      printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordflow">switch</span>(choice) {</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;          printf(<span class="stringliteral">&quot;\r\nConfigure BST feature: 1-Enable, 0-Disable.\r\n&quot;</span>);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;          {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;          }</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;          <span class="keywordflow">if</span>((choice != 0) &amp;&amp; (choice != 1))</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;          {</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            printf(<span class="stringliteral">&quot;Invalid input. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;          }</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;          rc = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca6cef28f8214d21d47749799eeb840ff2">opennslSwitchBstEnable</a>, choice);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;          <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            printf(<span class="stringliteral">&quot;\r\nFailed to %s BST feature, rc = %d (%s).\r\n&quot;</span>,</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                (choice == 0)? <span class="stringliteral">&quot;Disable&quot;</span> : <span class="stringliteral">&quot;Enable&quot;</span>, rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;          }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;          printf(<span class="stringliteral">&quot;BST feature is %s.\r\n&quot;</span>, (choice == 0)? <span class="stringliteral">&quot;Disabled&quot;</span> : <span class="stringliteral">&quot;Enabled&quot;</span>);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        } <span class="comment">/* End of case 1 */</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        {</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;          printf(<span class="stringliteral">&quot;\r\nEnter the port number.\r\n&quot;</span>);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;          {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;          }</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;          rc = <a class="code" href="group__port.html#gac3b1ddc83dbed38868b5ba256d29cdf7">opennsl_port_gport_get</a> (unit, port, &amp;gport);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;          <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;          {</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;          }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;          <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;          {</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            rc = (<a class="code" href="group__cosq.html#ga16395745326578895d5d025000030a07">opennsl_cosq_bst_stat_sync</a>(unit, id_list[index].bid));</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            printf(<span class="stringliteral">&quot;\r\nFailed to sync the state of port, rc = %d (%s).\r\n&quot;</span>,</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                   rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;          }</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        {</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;          <span class="keywordflow">for</span> (cosq = 0; cosq &lt;=7; cosq++)</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;          {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            rc = <a class="code" href="group__cosq.html#gafb618145bceb834e7e0d62622f3174eb">opennsl_cosq_bst_stat_get</a>(unit, gport, cosq,</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                id_list[index].bid, options, &amp;val[index][cosq]);</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;              printf(<span class="stringliteral">&quot;\r\nFailed to get the port stats, rc = %d (%s).\r\n&quot;</span>,</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                     rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;              <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            }</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            printf(<span class="stringliteral">&quot;BST Counter: %s for COS queue: %d is : %llu\n&quot;</span>,</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                id_list[index].name, cosq, val[index][cosq]);</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;          }</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;          printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        }</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      } <span class="comment">/* End of case 2 */</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      <span class="keywordflow">case</span> 3:</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;      {</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        printf(<span class="stringliteral">&quot;\r\nEnter the port number.\r\n&quot;</span>);</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        {</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        }</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        rc = <a class="code" href="group__port.html#gac3b1ddc83dbed38868b5ba256d29cdf7">opennsl_port_gport_get</a> (unit, port, &amp;gport);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="keywordflow">if</span> (rc!= <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        {</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        }</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        {</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;          <span class="keywordflow">for</span> (cosq = 0; cosq &lt;= 7; cosq++)</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;          {</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;            rc = <a class="code" href="group__cosq.html#ga98ae2a8fe5ee8b19dd7cdae16342de50">opennsl_cosq_bst_stat_clear</a>(unit, gport, cosq,</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                id_list[index].bid);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;              printf(<span class="stringliteral">&quot;\r\nFailed to clear the port stats, rc = %d (%s).\r\n&quot;</span>,</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                     rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;              <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;          }</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;          printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        }</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        printf(<span class="stringliteral">&quot;\r\nPort %d stats cleared\r\n&quot;</span>, port);</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;      } <span class="comment">/* End of case 3 */</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;      <span class="keywordflow">case</span> 9:</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;      {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      }</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;      {</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;      }</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;      <span class="keywordflow">default</span> :</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    } <span class="comment">/* End of switch */</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  } <span class="comment">/* End of while */</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;}</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\n&quot;</span>);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">switch</span>(choice) {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        {</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;          printf(<span class="stringliteral">&quot;\r\nConfigure BST feature: 1-Enable, 0-Disable.\r\n&quot;</span>);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;          {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;          }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;          <span class="keywordflow">if</span>((choice != 0) &amp;&amp; (choice != 1))</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;          {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            printf(<span class="stringliteral">&quot;Invalid input. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;          }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;          rc = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca6cef28f8214d21d47749799eeb840ff2">opennslSwitchBstEnable</a>, choice);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;          <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            printf(<span class="stringliteral">&quot;\r\nFailed to %s BST feature, rc = %d (%s).\r\n&quot;</span>,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                (choice == 0)? <span class="stringliteral">&quot;Disable&quot;</span> : <span class="stringliteral">&quot;Enable&quot;</span>, rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;          }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;          printf(<span class="stringliteral">&quot;BST feature is %s.\r\n&quot;</span>, (choice == 0)? <span class="stringliteral">&quot;Disabled&quot;</span> : <span class="stringliteral">&quot;Enabled&quot;</span>);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        } <span class="comment">/* End of case 1 */</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        {</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;          printf(<span class="stringliteral">&quot;\r\nEnter the port number.\r\n&quot;</span>);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;          {</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;          }</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;          rc = <a class="code" href="group__port.html#gac3b1ddc83dbed38868b5ba256d29cdf7">opennsl_port_gport_get</a> (unit, port, &amp;gport);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;          <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;          {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;          }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;          <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;          {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            rc = (<a class="code" href="group__cosq.html#ga16395745326578895d5d025000030a07">opennsl_cosq_bst_stat_sync</a>(unit, id_list[index].bid));</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            printf(<span class="stringliteral">&quot;\r\nFailed to sync the state of port, rc = %d (%s).\r\n&quot;</span>,</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                   rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;          }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        }</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;          <span class="keywordflow">for</span> (cosq = 0; cosq &lt;=7; cosq++)</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;          {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            rc = <a class="code" href="group__cosq.html#gafb618145bceb834e7e0d62622f3174eb">opennsl_cosq_bst_stat_get</a>(unit, gport, cosq,</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                id_list[index].bid, options, &amp;val[index][cosq]);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;              printf(<span class="stringliteral">&quot;\r\nFailed to get the port stats, rc = %d (%s).\r\n&quot;</span>,</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                     rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;              <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            printf(<span class="stringliteral">&quot;BST Counter: %s for COS queue: %d is : %llu\n&quot;</span>,</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                id_list[index].name, cosq, val[index][cosq]);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;          }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;          printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;      } <span class="comment">/* End of case 2 */</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      {</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        printf(<span class="stringliteral">&quot;\r\nEnter the port number.\r\n&quot;</span>);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        {</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        rc = <a class="code" href="group__port.html#gac3b1ddc83dbed38868b5ba256d29cdf7">opennsl_port_gport_get</a> (unit, port, &amp;gport);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordflow">if</span> (rc!= <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        <span class="keywordflow">for</span> (index = 0; index &lt; <a class="code" href="example__bst_8c.html#ae561a2dab8025f585c77571f67d4771e">MAX_COUNTERS</a>; index++)</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        {</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;          <span class="keywordflow">for</span> (cosq = 0; cosq &lt;= 7; cosq++)</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;          {</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;            rc = <a class="code" href="group__cosq.html#ga98ae2a8fe5ee8b19dd7cdae16342de50">opennsl_cosq_bst_stat_clear</a>(unit, gport, cosq,</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                id_list[index].bid);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;            <span class="keywordflow">if</span> (rc != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;              printf(<span class="stringliteral">&quot;\r\nFailed to clear the port stats, rc = %d (%s).\r\n&quot;</span>,</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                     rc, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rc));</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;              <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            }</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;          }</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;          printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        printf(<span class="stringliteral">&quot;\r\nPort %d stats cleared\r\n&quot;</span>, port);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;      } <span class="comment">/* End of case 3 */</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;      <span class="keywordflow">case</span> 9:</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;      {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;      }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      {</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;      }</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;      <span class="keywordflow">default</span> :</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    } <span class="comment">/* End of switch */</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  } <span class="comment">/* End of while */</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;}</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="example__bst_8c_html_a9a771f1c42a929c0d0dd0b7707396d1e"><div class="ttname"><a href="example__bst_8c.html#a9a771f1c42a929c0d0dd0b7707396d1e">_BST_STAT_ID_UCAST_GROUP</a></div><div class="ttdeci">#define _BST_STAT_ID_UCAST_GROUP</div><div class="ttdef"><b>Definition:</b> <a href="example__bst_8c_source.html#l00075">example_bst.c:75</a></div></div>
 <div class="ttc" id="group__error_html_ga5f011dc99e86e654876271415d140e8d"><div class="ttname"><a href="group__error.html#ga5f011dc99e86e654876271415d140e8d">opennsl_switch_event_t</a></div><div class="ttdeci">enum opennsl_switch_event_e opennsl_switch_event_t</div><div class="ttdoc">Switch event types. </div></div>
 <div class="ttc" id="example__bst_8c_html_a0a7fea14479b16553be4a990b27d9e45"><div class="ttname"><a href="example__bst_8c.html#a0a7fea14479b16553be4a990b27d9e45">_BST_STAT_ID_ING_POOL</a></div><div class="ttdeci">#define _BST_STAT_ID_ING_POOL</div><div class="ttdef"><b>Definition:</b> <a href="example__bst_8c_source.html#l00065">example_bst.c:65</a></div></div>

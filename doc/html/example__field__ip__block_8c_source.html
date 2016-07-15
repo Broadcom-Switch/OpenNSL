@@ -241,39 +241,35 @@
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    printf(<span class="stringliteral">&quot;\r\nUser menu: Select one of the following options\r\n&quot;</span>);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\r\n&quot;</span>);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    }</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">switch</span>(choice)</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="preprocessor">#ifndef CDP_EXCLUDE</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      <span class="keywordflow">case</span> 9:</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;      {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;      }</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;      }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    } <span class="comment">/* End of switch */</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  } <span class="comment">/* End of while */</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    printf(<span class="stringliteral">&quot;9. Launch diagnostic shell\n&quot;</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    printf(<span class="stringliteral">&quot;0. Quit the application.\r\n&quot;</span>);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;choice) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    {</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;      printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">switch</span>(choice)</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;      <span class="keywordflow">case</span> 9:</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;      {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;      }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;      {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    } <span class="comment">/* End of switch */</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  } <span class="comment">/* End of while */</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
 <div class="ttc" id="structopennsl__field__qset__s_html"><div class="ttname"><a href="structopennsl__field__qset__s.html">opennsl_field_qset_s</a></div><div class="ttdoc">Field qset defines the set of fields used for lookup. </div><div class="ttdef"><b>Definition:</b> <a href="fieldX_8h_source.html#l00233">fieldX.h:233</a></div></div>
 <div class="ttc" id="group__field_html_ga4387a1b4682c605fcc1a2b8297f8a404"><div class="ttname"><a href="group__field.html#ga4387a1b4682c605fcc1a2b8297f8a404">opennsl_field_group_t</a></div><div class="ttdeci">int opennsl_field_group_t</div><div class="ttdoc">Opaque handle to a field group. </div><div class="ttdef"><b>Definition:</b> <a href="fieldX_8h_source.html#l00134">fieldX.h:134</a></div></div>
 <div class="ttc" id="driver_8h_html_ae2cb0180311015b4ac70e67fea713438"><div class="ttname"><a href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a></div><div class="ttdeci">int opennsl_driver_shell()</div><div class="ttdoc">Bringup diagnostic shell prompt and process the input commands. </div></div>
