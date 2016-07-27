@@ -260,92 +260,121 @@
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;          rv = <a class="code" href="group__port.html#ga26e92ba256f329fd8647ce9670e50d87">opennsl_port_sample_rate_set</a>(unit, port, irate, 0);</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            printf(<span class="stringliteral">&quot;Failed to configure sFlow. Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;          }</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;          printf(<span class="stringliteral">&quot;Enabled sFlow on port %d with sample rate of %d\n&quot;</span>,</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;              port, irate);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        }</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;          printf(<span class="stringliteral">&quot;Enter port number\n&quot;</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;          {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            printf(<span class="stringliteral">&quot;Failed to configure sFlow sample rate. Error %s\n&quot;</span>,</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;          }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;          <span class="comment">/* To copy packets to CPU */</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;          rv = <a class="code" href="group__port.html#gaadb3a3b151da4c086bb70045b577ef3f">opennsl_port_control_set</a>(unit, port,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;              <a class="code" href="group__port.html#gga5379940dfdb23bbc238f5bb9fa6114c9a32da731f083c189dbb45b3863b8f9260">opennslPortControlSampleIngressDest</a>,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;              <a class="code" href="group__port.html#gaa31762888991b59f79ecbd7d40b3b484">OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU</a>);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;          <span class="comment">/* Some of the older chips do not have support for this port   *</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">           * control and returns UNAVAIL return code. Ignore it safely.  */</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a> &amp;&amp; rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a006d3a00f98cb2a8e177bf1766a7789b">OPENNSL_E_UNAVAIL</a>) {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            printf(<span class="stringliteral">&quot;Failed to configure sFlow port control. Error %s\n&quot;</span>,</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">return</span> rv;</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;          }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;          rv = <a class="code" href="group__port.html#ga26e92ba256f329fd8647ce9670e50d87">opennsl_port_sample_rate_set</a>(unit, port, 0, 0);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            printf(<span class="stringliteral">&quot;Failed to disabled sFlow. Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;          }</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;          printf(<span class="stringliteral">&quot;Disabled sFlow on port %d successfully\n&quot;</span>, port);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        }</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      <span class="keywordflow">case</span> 3:</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          printf(<span class="stringliteral">&quot;Enter port number\n&quot;</span>);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          {</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;          }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          rv = <a class="code" href="group__port.html#ga579cd6a05b1a0d6b97a1a367a2d37dad">opennsl_port_sample_rate_get</a>(unit, port, &amp;irate, &amp;erate);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            printf(<span class="stringliteral">&quot;Failed to get sFlow configuration. Error %s\n&quot;</span>,</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;          }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;          printf(<span class="stringliteral">&quot;sFlow configuration parameters on port: %d\n&quot;</span>, port);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;          printf(<span class="stringliteral">&quot;  Ingress sampling rate: %d Egress sampling rate: %d\n&quot;</span>,</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;              irate, erate);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        }</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      <span class="keywordflow">case</span> 4:</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        {</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;          <span class="comment">/* Sync the current configuration */</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;          rv = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca0aa383217d779424e826a470d4c924ae">opennslSwitchControlSync</a>, 1);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            printf(<span class="stringliteral">&quot;Failed to synchronize the configuration to scache. &quot;</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="stringliteral">&quot;Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;          }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;          printf(<span class="stringliteral">&quot;Warmboot configuration is saved successfully.\n&quot;</span>);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        } <span class="comment">/* End of case 1 */</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="keywordflow">case</span> 9:</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;          <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;          printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        }</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    } <span class="comment">/* End of switch */</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  } <span class="comment">/* End of while */</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;}</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          printf(<span class="stringliteral">&quot;Enabled sFlow on port %d with sample rate of %d\n&quot;</span>,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;              port, irate);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          printf(<span class="stringliteral">&quot;Enter port number\n&quot;</span>);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          rv = <a class="code" href="group__port.html#ga26e92ba256f329fd8647ce9670e50d87">opennsl_port_sample_rate_set</a>(unit, port, 0, 0);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            printf(<span class="stringliteral">&quot;Failed to clear sFlow sample rate. Error %s\n&quot;</span>,</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;          rv = <a class="code" href="group__port.html#gaadb3a3b151da4c086bb70045b577ef3f">opennsl_port_control_set</a>(unit, port,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;              <a class="code" href="group__port.html#gga5379940dfdb23bbc238f5bb9fa6114c9a32da731f083c189dbb45b3863b8f9260">opennslPortControlSampleIngressDest</a>,</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;              0);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;          <span class="comment">/* Some of the older chips do not have support for this port   *</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">           * control and returns UNAVAIL return code. Ignore it safely.  */</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a> &amp;&amp; rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a006d3a00f98cb2a8e177bf1766a7789b">OPENNSL_E_UNAVAIL</a>) {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            printf(<span class="stringliteral">&quot;Failed to configure sFlow port control. Error %s\n&quot;</span>,</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;          }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          printf(<span class="stringliteral">&quot;Disabled sFlow on port %d successfully\n&quot;</span>, port);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;          printf(<span class="stringliteral">&quot;Enter port number\n&quot;</span>);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;          <span class="keywordflow">if</span>(<a class="code" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a>(&amp;port) != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>)</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;          {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            printf(<span class="stringliteral">&quot;Invalid option entered. Please re-enter.\n&quot;</span>);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;          }</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;          rv = <a class="code" href="group__port.html#ga579cd6a05b1a0d6b97a1a367a2d37dad">opennsl_port_sample_rate_get</a>(unit, port, &amp;irate, &amp;erate);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            printf(<span class="stringliteral">&quot;Failed to get sFlow configuration. Error %s\n&quot;</span>,</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;          }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;          printf(<span class="stringliteral">&quot;sFlow configuration parameters on port: %d\n&quot;</span>, port);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;          printf(<span class="stringliteral">&quot;  Ingress sampling rate: %d Egress sampling rate: %d\n&quot;</span>,</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;              irate, erate);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;      <span class="keywordflow">case</span> 4:</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;          <span class="comment">/* Sync the current configuration */</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;          rv = <a class="code" href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a>(unit, <a class="code" href="group__switch.html#gga8465f9bee535c4a0c8e4360bcc21e33ca0aa383217d779424e826a470d4c924ae">opennslSwitchControlSync</a>, 1);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;          <span class="keywordflow">if</span>(rv != <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>) {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            printf(<span class="stringliteral">&quot;Failed to synchronize the configuration to scache. &quot;</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                <span class="stringliteral">&quot;Error %s\n&quot;</span>, <a class="code" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>(rv));</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;          printf(<span class="stringliteral">&quot;Warmboot configuration is saved successfully.\n&quot;</span>);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        } <span class="comment">/* End of case 1 */</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;      <span class="keywordflow">case</span> 9:</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;          <a class="code" href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a>();</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;          printf(<span class="stringliteral">&quot;Exiting the application.\n&quot;</span>);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    } <span class="comment">/* End of switch */</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  } <span class="comment">/* End of while */</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keywordflow">return</span> rv;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">/* __doxy_func_body_end__ */</span></div>
+<div class="ttc" id="group__port_html_gaa31762888991b59f79ecbd7d40b3b484"><div class="ttname"><a href="group__port.html#gaa31762888991b59f79ecbd7d40b3b484">OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU</a></div><div class="ttdeci">#define OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU</div><div class="ttdoc">Copy packet samples to CPU. </div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2port_8h_source.html#l02682">port.h:2682</a></div></div>
 <div class="ttc" id="structopennsl__pkt__s_html_a8b74ee20ea123084b3af2ed696cd558d"><div class="ttname"><a href="structopennsl__pkt__s.html#a8b74ee20ea123084b3af2ed696cd558d">opennsl_pkt_s::cos</a></div><div class="ttdeci">uint8 cos</div><div class="ttdoc">The local COS queue to use. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00095">pkt.h:95</a></div></div>
 <div class="ttc" id="driver_8h_html_ae2cb0180311015b4ac70e67fea713438"><div class="ttname"><a href="driver_8h.html#ae2cb0180311015b4ac70e67fea713438">opennsl_driver_shell</a></div><div class="ttdeci">int opennsl_driver_shell()</div><div class="ttdoc">Bringup diagnostic shell prompt and process the input commands. </div></div>
 <div class="ttc" id="opennsl__api_8dox_html_abd1fe5382f13606db566da3450b351b0"><div class="ttname"><a href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a></div><div class="ttdeci">page OPENNSL_MPLS_OVERVIEW MPLS management MPLS support can be broken down into two Layer and Layer MPLS L2 MPLS consists of point to point Virtual Private Wire Ethernet frames are mapped into a MPLS pseudowire based on incoming port plus packet header information At the end of a forwarding of Ethernet frames after MPLS decapsulation is based on the MPLS label lookup In Ethernet frames of interest are also identified by incoming port plus packet header information Ethernet frames are switched into one or more MPLS pseudowires based on the MAC DA lookup At the end of a frames again are switched based on MAC DA lookup L3 MPLS deals with the establishment of MPLS tunnels At the MPLS tunnel initiation packets entering the tunnel are encapsulated with an MPLS MPLS label and POP operations are supported At the end of an MPLS forwarding of IPv4 and IPv6 packets is based on DIP lookup Virtual routing tables are supported for the DIP lookup In the MPLS the concept of VPN is introduced A VPN can be of type or a VPN is similar to a which identifies a group of physical ports to be included in a broadcast domain instead of physical a VPLS VPN identifies a group of virtual ports to be included in a broadcast domain In the MPLS a virtual port is called an MPLS port(see description below).The VPN ID is used to qualify MAC DA lookups in VPLS.For VPWS</div></div>
 <div class="ttc" id="structopennsl__pkt__s_html_a018621bffc7eaf27e544e6355ee64cb2"><div class="ttname"><a href="structopennsl__pkt__s.html#a018621bffc7eaf27e544e6355ee64cb2">opennsl_pkt_s::src_port</a></div><div class="ttdeci">int16 src_port</div><div class="ttdoc">Source port used in header/tag. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00104">pkt.h:104</a></div></div>
+<div class="ttc" id="group__error_html_ggab4c007d9d8465756b8f672c33764e6d5a006d3a00f98cb2a8e177bf1766a7789b"><div class="ttname"><a href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a006d3a00f98cb2a8e177bf1766a7789b">OPENNSL_E_UNAVAIL</a></div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2error_8h_source.html#l00052">error.h:52</a></div></div>
 <div class="ttc" id="example__sflow_8c_html_afc7d01e6dbea2c820a68fb8081c58a89"><div class="ttname"><a href="example__sflow_8c.html#afc7d01e6dbea2c820a68fb8081c58a89">example_usage</a></div><div class="ttdeci">char example_usage[]</div><div class="ttdef"><b>Definition:</b> <a href="example__sflow_8c_source.html#l00047">example_sflow.c:47</a></div></div>
 <div class="ttc" id="structopennsl__config__s_html"><div class="ttname"><a href="structopennsl__config__s.html">opennsl_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="driver_8h_source.html#l00027">driver.h:27</a></div></div>
 <div class="ttc" id="examples_2util_8h_html"><div class="ttname"><a href="examples_2util_8h.html">util.h</a></div></div>
@@ -355,12 +384,14 @@
 <div class="ttc" id="driver_8h_html"><div class="ttname"><a href="driver_8h.html">driver.h</a></div></div>
 <div class="ttc" id="group__pkt_html_ggab3c76010359578b32d909c1a945d4e6bac213d716b61c2233015ea51594fc0ad9"><div class="ttname"><a href="group__pkt.html#ggab3c76010359578b32d909c1a945d4e6bac213d716b61c2233015ea51594fc0ad9">OPENNSL_RX_HANDLED</a></div><div class="ttdoc">Packet handled, not owned. </div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2rx_8h_source.html#l00038">rx.h:38</a></div></div>
 <div class="ttc" id="group__error_html_ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b"><div class="ttname"><a href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2error_8h_source.html#l00036">error.h:36</a></div></div>
+<div class="ttc" id="group__port_html_gaadb3a3b151da4c086bb70045b577ef3f"><div class="ttname"><a href="group__port.html#gaadb3a3b151da4c086bb70045b577ef3f">opennsl_port_control_set</a></div><div class="ttdeci">int opennsl_port_control_set(int unit, opennsl_port_t port, opennsl_port_control_t type, int value) LIB_DLL_EXPORTED</div><div class="ttdoc">Get or set various features at the port level. </div></div>
 <div class="ttc" id="opennsl_2error_8h_html"><div class="ttname"><a href="opennsl_2error_8h.html">error.h</a></div></div>
 <div class="ttc" id="structopennsl__pkt__s_html"><div class="ttname"><a href="structopennsl__pkt__s.html">opennsl_pkt_s</a></div><div class="ttdoc">Initialize a OPENNSL packet structure. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00091">pkt.h:91</a></div></div>
 <div class="ttc" id="structopennsl__pkt__s_html_a9145f60be572ce797ead3572103fd3cf"><div class="ttname"><a href="structopennsl__pkt__s.html#a9145f60be572ce797ead3572103fd3cf">opennsl_pkt_s::rx_port</a></div><div class="ttdeci">uint8 rx_port</div><div class="ttdoc">Local rx port; not in HG hdr. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00132">pkt.h:132</a></div></div>
 <div class="ttc" id="structopennsl__pkt__s_html_a7789a3fac07245a5a3bfc58d06603999"><div class="ttname"><a href="structopennsl__pkt__s.html#a7789a3fac07245a5a3bfc58d06603999">opennsl_pkt_s::rx_reason</a></div><div class="ttdeci">uint32 rx_reason</div><div class="ttdoc">Opcode from packet. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00128">pkt.h:128</a></div></div>
 <div class="ttc" id="opennsl_2rx_8h_html"><div class="ttname"><a href="opennsl_2rx_8h.html">rx.h</a></div></div>
 <div class="ttc" id="group__pkt_html_gad0ff17308c631605f5b442ce263f46da"><div class="ttname"><a href="group__pkt.html#gad0ff17308c631605f5b442ce263f46da">opennsl_rx_t</a></div><div class="ttdeci">enum opennsl_rx_e opennsl_rx_t</div><div class="ttdoc">Return values from PKT RX callout routines. </div></div>
+<div class="ttc" id="group__port_html_gga5379940dfdb23bbc238f5bb9fa6114c9a32da731f083c189dbb45b3863b8f9260"><div class="ttname"><a href="group__port.html#gga5379940dfdb23bbc238f5bb9fa6114c9a32da731f083c189dbb45b3863b8f9260">opennslPortControlSampleIngressDest</a></div><div class="ttdoc">Set Ingress sFlow sample destination. </div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2port_8h_source.html#l02472">port.h:2472</a></div></div>
 <div class="ttc" id="structopennsl__pkt__s_html_a677cfa60b3e1be38bd8c32c2ba1011de"><div class="ttname"><a href="structopennsl__pkt__s.html#a677cfa60b3e1be38bd8c32c2ba1011de">opennsl_pkt_s::pkt_data</a></div><div class="ttdeci">opennsl_pkt_blk_t * pkt_data</div><div class="ttdoc">Pointer to array of data blocks. </div><div class="ttdef"><b>Definition:</b> <a href="pkt_8h_source.html#l00092">pkt.h:92</a></div></div>
 <div class="ttc" id="group__error_html_ggab4c007d9d8465756b8f672c33764e6d5a8b380efdb47b4a4b0ebafbb1c7823748"><div class="ttname"><a href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a8b380efdb47b4a4b0ebafbb1c7823748">OPENNSL_E_PARAM</a></div><div class="ttdef"><b>Definition:</b> <a href="opennsl_2error_8h_source.html#l00040">error.h:40</a></div></div>
 <div class="ttc" id="group__switch_html_gaecf4eb5e6b57081dc8f06c72919e4e0b"><div class="ttname"><a href="group__switch.html#gaecf4eb5e6b57081dc8f06c72919e4e0b">opennsl_switch_control_set</a></div><div class="ttdeci">int opennsl_switch_control_set(int unit, opennsl_switch_control_t type, int arg) LIB_DLL_EXPORTED</div><div class="ttdoc">Configure port-specific and device-wide operating modes. </div></div>

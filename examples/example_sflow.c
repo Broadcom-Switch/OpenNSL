@@ -221,7 +221,21 @@ int main(int argc, char *argv[])
 
           rv = opennsl_port_sample_rate_set(unit, port, irate, 0);
           if(rv != OPENNSL_E_NONE) {
-            printf("Failed to configure sFlow. Error %s\n", opennsl_errmsg(rv));
+            printf("Failed to configure sFlow sample rate. Error %s\n",
+                opennsl_errmsg(rv));
+            return rv;
+          }
+
+          /* To copy packets to CPU */
+          rv = opennsl_port_control_set(unit, port,
+              opennslPortControlSampleIngressDest,
+              OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU);
+
+          /* Some of the older chips do not have support for this port   *
+           * control and returns UNAVAIL return code. Ignore it safely.  */
+          if(rv != OPENNSL_E_NONE && rv != OPENNSL_E_UNAVAIL) {
+            printf("Failed to configure sFlow port control. Error %s\n",
+                opennsl_errmsg(rv));
             return rv;
           }
           printf("Enabled sFlow on port %d with sample rate of %d\n",
@@ -241,7 +255,20 @@ int main(int argc, char *argv[])
 
           rv = opennsl_port_sample_rate_set(unit, port, 0, 0);
           if(rv != OPENNSL_E_NONE) {
-            printf("Failed to disabled sFlow. Error %s\n", opennsl_errmsg(rv));
+            printf("Failed to clear sFlow sample rate. Error %s\n",
+                opennsl_errmsg(rv));
+            return rv;
+          }
+
+          rv = opennsl_port_control_set(unit, port,
+              opennslPortControlSampleIngressDest,
+              0);
+
+          /* Some of the older chips do not have support for this port   *
+           * control and returns UNAVAIL return code. Ignore it safely.  */
+          if(rv != OPENNSL_E_NONE && rv != OPENNSL_E_UNAVAIL) {
+            printf("Failed to configure sFlow port control. Error %s\n",
+                opennsl_errmsg(rv));
             return rv;
           }
           printf("Disabled sFlow on port %d successfully\n", port);
