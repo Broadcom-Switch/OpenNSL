@@ -125,7 +125,11 @@ typedef int opennsl_cos_t;
 /** opennsl_cos_queue_t */
 typedef int opennsl_cos_queue_t;
 
+#define OPENNSL_COS_MIN         0          
+#define OPENNSL_COS_MAX         7          
 #define OPENNSL_COS_COUNT       8          
+#define OPENNSL_COS_DEFAULT     4          
+#define OPENNSL_COS_INVALID     -1         
 #define OPENNSL_PRIO_MIN        0          
 #define OPENNSL_PRIO_MAX        7          
 #define OPENNSL_PRIO_RED        0x100      
@@ -188,17 +192,59 @@ typedef int opennsl_gport_t;
     _SHR_GPORT_MODPORT_PORT_GET(_gport)) 
 #define OPENNSL_GPORT_TRUNK_SET(_gport, _trunk_id)  \
     _SHR_GPORT_TRUNK_SET(_gport, _trunk_id) 
+#define OPENNSL_GPORT_TRAP_SET(_gport, _trap_id, _trap_strength, _snoop_strength)  \
+   _SHR_GPORT_TRAP_SET(_gport, _trap_id, _trap_strength, _snoop_strength) 
+#define OPENNSL_GPORT_TRAP_GET_ID(_gport)  \
+     (!_SHR_GPORT_IS_TRAP(_gport) ? -1 : \
+   _SHR_GPORT_TRAP_GET_ID(_gport)) 
+#define OPENNSL_GPORT_TRAP_GET_STRENGTH(_gport)  \
+   _SHR_GPORT_TRAP_GET_STRENGTH(_gport) 
+#define OPENNSL_GPORT_TRAP_GET_SNOOP_STRENGTH(_gport)  \
+   _SHR_GPORT_TRAP_GET_SNOOP_STRENGTH(_gport) 
+#define OPENNSL_GPORT_IS_TRAP(_gport)  \
+   _SHR_GPORT_IS_TRAP(_gport)         
 #define OPENNSL_GPORT_TRUNK_GET(_gport)  \
     (!_SHR_GPORT_IS_TRUNK(_gport) ? OPENNSL_TRUNK_INVALID : \
     _SHR_GPORT_TRUNK_GET(_gport)) 
 #define OPENNSL_GPORT_UCAST_QUEUE_GROUP_SET(_gport, _qid)  \
          _SHR_GPORT_UCAST_QUEUE_GROUP_SET(_gport, _qid) 
+#define OPENNSL_GPORT_UCAST_QUEUE_GROUP_SYSQID_SET(_gport, _sysport_id, _qid)  \
+         _SHR_GPORT_UCAST_QUEUE_GROUP_SYSQID_SET(_gport, _sysport_id, _qid) 
+#define OPENNSL_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_GET(_gport)  \
+            (!_SHR_GPORT_IS_UCAST_QUEUE_GROUP(_gport) ? -1 :  \
+        _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_GET(_gport))
+ 
+#define OPENNSL_GPORT_UCAST_QUEUE_GROUP_QID_GET(_gport)  \
+            (!_SHR_GPORT_IS_UCAST_QUEUE_GROUP(_gport) ? -1 :  \
+        _SHR_GPORT_UCAST_QUEUE_GROUP_QID_GET(_gport))
+ 
 #define OPENNSL_GPORT_MCAST_QUEUE_GROUP_SET(_gport, _qid)  \
          _SHR_GPORT_MCAST_QUEUE_GROUP_SET(_gport, _qid)
  
 #define OPENNSL_GPORT_MCAST_QUEUE_GROUP_GET(_gport)  \
             (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 :  \
         _SHR_GPORT_MCAST_QUEUE_GROUP_GET(_gport))
+ 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_SYSQID_SET(_gport, _sysport_id, _qid)  \
+     _SHR_GPORT_MCAST_QUEUE_GROUP_SYSQID_SET(_gport, _sysport_id, _qid)
+ 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_GET(_gport)  \
+            (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 :  \
+        _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_GET(_gport))
+ 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_QID_GET(_gport)  \
+            (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 :  \
+        _SHR_GPORT_MCAST_QUEUE_GROUP_QID_GET(_gport)) 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_QUEUE_SET(_gport, _qid)  \
+         _SHR_GPORT_MCAST_QUEUE_GROUP_QUEUE_SET(_gport, _qid) 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_CORE_QUEUE_SET(_gport, _core, _qid)  \
+         _SHR_GPORT_MCAST_QUEUE_GROUP_CORE_QUEUE_SET(_gport, _core, _qid) 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_QUEUE_GET(_gport)  \
+         (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 : \
+         _SHR_GPORT_MCAST_QUEUE_GROUP_QUEUE_GET(_gport)) 
+#define OPENNSL_GPORT_MCAST_QUEUE_GROUP_CORE_GET(_gport)  \
+         (!_SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) ? -1 : \
+         _SHR_GPORT_MCAST_QUEUE_GROUP_CORE_GET(_gport))
  
 #define OPENNSL_GPORT_SCHEDULER_SET(_gport, _scheduler_id)  \
     _SHR_GPORT_SCHEDULER_SET(_gport, _scheduler_id) 
@@ -217,6 +263,11 @@ typedef int opennsl_fabric_distribution_t;
 typedef int opennsl_failover_t;
 
 #define OPENNSL_GPORT_LOCAL_CPU _SHR_GPORT_LOCAL_CPU 
+#define OPENNSL_GPORT_MIRROR_SET(_gport, _value)  \
+    _SHR_GPORT_MIRROR_SET(_gport, _value) 
+#define OPENNSL_GPORT_MIRROR_GET(_gport)  \
+    (!_SHR_GPORT_IS_MIRROR(_gport) ? -1 : \
+    _SHR_GPORT_MIRROR_GET(_gport)) 
 /** opennsl_stg_t */
 typedef int opennsl_stg_t;
 

@@ -45,6 +45,7 @@
 #define _SHR_GPORT_TYPE_MCAST              11  /* Multicast Set          */
 #define _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP  12  /* Multicast Queue Group  */
 #define _SHR_GPORT_TYPE_SCHEDULER          13  /* Scheduler              */
+#define _SHR_GPORT_TYPE_MIRROR             15  /* Mirror destination.    */
 #define _SHR_GPORT_TYPE_CHILD              20  /* Child port             */
 #define _SHR_GPORT_TYPE_EGRESS_GROUP       21  /* Egress group port      */
 #define _SHR_GPORT_TYPE_EGRESS_CHILD       22  /* Egress child port      */
@@ -55,9 +56,12 @@
 #define _SHR_GPORT_TYPE_PROFILE            40
 #define _SHR_GPORT_TYPE_DESTMOD_QUEUE_GROUP      41 /* DMVOQ gport */
 
+#define _SHR_COSQ_GPORT_COMMON_QUEUE_BITS 18
+#define _SHR_COSQ_GPORT_COMMON_QUEUE_MASK ((1 << _SHR_COSQ_GPORT_COMMON_QUEUE_BITS) - 1)
 #define _SHR_COSQ_GPORT_COMMON_CORE_BITS 3
 #define _SHR_COSQ_GPORT_COMMON_CORE_MASK ((1 << _SHR_COSQ_GPORT_COMMON_CORE_BITS) - 1)
 #define _SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE _SHR_COSQ_GPORT_COMMON_CORE_MASK
+#define _SHR_COSQ_GPORT_COMMON_CORE_SHIFT _SHR_COSQ_GPORT_COMMON_QUEUE_BITS
 
 #define _SHR_CORE_ALL -17
 #define _SHR_CORE_FIELD2ID(field) ((field) != _SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE ? field : _SHR_CORE_ALL)
@@ -78,12 +82,28 @@
 #define _SHR_GPORT_UCAST_QUEUE_GROUP_QID_MASK           0x3fff
 #define _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_SHIFT    14
 #define _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_MASK     0xfff
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT          0
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_QID_MASK           0x3fff
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_SHIFT    14
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_MASK     0xfff
 #define _SHR_GPORT_SCHEDULER_SHIFT                      0
 #define _SHR_GPORT_SCHEDULER_MASK                       0x7fffff
 #define _SHR_GPORT_SCHEDULER_CORE_SHIFT                 23
 #define _SHR_GPORT_SCHEDULER_CORE_MASK                  _SHR_COSQ_GPORT_COMMON_CORE_MASK
 #define _SHR_GPORT_SCHEDULER_NODE_SHIFT                 0
 #define _SHR_GPORT_SCHEDULER_NODE_MASK                  0xfffff
+#define _SHR_GPORT_MIRROR_SHIFT                         0
+#define _SHR_GPORT_MIRROR_MASK                          0xffff
+
+#define _SHR_GPORT_TYPE_TRAP                            ((_SHR_GPORT_TYPE_LOCAL_CPU << 1) | 1) /* This will mark the CPU type, and
+                                                                                                  the 1st bit in the value to indicate trap */
+#define _SHR_GPORT_TYPE_TRAP_SHIFT                      (_SHR_GPORT_TYPE_SHIFT-1)   /* 25 */
+#define _SHR_GPORT_TRAP_ID_SHIFT                         0
+#define _SHR_GPORT_TRAP_ID_MASK                          0xfff
+#define _SHR_GPORT_TRAP_STRENGTH_SHIFT                       12
+#define _SHR_GPORT_TRAP_STRENGTH_MASK                        0xf
+#define _SHR_GPORT_TRAP_SNOOP_STRENGTH_SHIFT             16
+#define _SHR_GPORT_TRAP_SNOOP_STRENGTH_MASK              0xf
 
 #define _SHR_GPORT_IS_MODPORT(_gport)    \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MODPORT)
@@ -155,5 +175,72 @@
 
 #define _SHR_GPORT_SCHEDULER_NODE_GET(_gport)   \
          (((_gport) >> _SHR_GPORT_SCHEDULER_NODE_SHIFT) & _SHR_GPORT_SCHEDULER_NODE_MASK)
+
+#define _SHR_GPORT_TRAP_SET(_gport, _trap_id, _trap_strength, _snoop_strength)     \
+        ((_gport) = (_SHR_GPORT_TYPE_TRAP << _SHR_GPORT_TYPE_TRAP_SHIFT)   |      \
+         (((_trap_id) & _SHR_GPORT_TRAP_ID_MASK) << _SHR_GPORT_TRAP_ID_SHIFT)  |    \
+         (((_trap_strength) & _SHR_GPORT_TRAP_STRENGTH_MASK) << _SHR_GPORT_TRAP_STRENGTH_SHIFT)  |  \
+         (((_snoop_strength) & _SHR_GPORT_TRAP_SNOOP_STRENGTH_MASK) << _SHR_GPORT_TRAP_SNOOP_STRENGTH_SHIFT) )
+
+#define _SHR_GPORT_IS_TRAP(_gport)    \
+        (((_gport) >> _SHR_GPORT_TYPE_TRAP_SHIFT) == _SHR_GPORT_TYPE_TRAP)
+
+#define _SHR_GPORT_TRAP_GET_STRENGTH(_gport)    \
+        (((_gport) >> _SHR_GPORT_TRAP_STRENGTH_SHIFT & _SHR_GPORT_TRAP_STRENGTH_MASK))
+
+#define _SHR_GPORT_TRAP_GET_SNOOP_STRENGTH(_gport)    \
+        (((_gport) >> _SHR_GPORT_TRAP_SNOOP_STRENGTH_SHIFT & _SHR_GPORT_TRAP_SNOOP_STRENGTH_MASK))
+
+#define _SHR_GPORT_IS_TRAP(_gport)    \
+        (((_gport) >> _SHR_GPORT_TYPE_TRAP_SHIFT) == _SHR_GPORT_TYPE_TRAP)
+
+#define _SHR_GPORT_IS_MIRROR(_gport)    \
+        (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MIRROR)
+
+#define _SHR_GPORT_MIRROR_SET(_gport, _value)                               \
+        ((_gport) = (_SHR_GPORT_TYPE_MIRROR << _SHR_GPORT_TYPE_SHIFT)   | \
+         (((_value) & _SHR_GPORT_MIRROR_MASK) << _SHR_GPORT_MIRROR_SHIFT))
+
+#define _SHR_GPORT_MIRROR_GET(_gport)    \
+        (((_gport) >> _SHR_GPORT_MIRROR_SHIFT) & _SHR_GPORT_MIRROR_MASK)
+
+#define _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_GET(_gport)                       \
+        (((_gport) >> _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_SHIFT) & _SHR_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_MASK)
+
+#define _SHR_GPORT_UCAST_QUEUE_GROUP_QID_GET(_gport)                       \
+        (((_gport) >> _SHR_GPORT_UCAST_QUEUE_GROUP_QID_SHIFT) & _SHR_GPORT_UCAST_QUEUE_GROUP_QID_MASK)
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_GET(_gport)                       \
+        (((_gport) >> _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_SHIFT) & _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_MASK)
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_QID_GET(_gport)                       \
+         (((_gport) >> _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT) & _SHR_GPORT_MCAST_QUEUE_GROUP_QID_MASK)
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_SYSQID_SET(_gport, _sysport_id, _qid)                       \
+        ((_gport) = (_SHR_GPORT_TYPE_MCAST_QUEUE_GROUP << _SHR_GPORT_TYPE_SHIFT)   | \
+         (((_sysport_id) & _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_MASK)  << _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_SHIFT)  | \
+         (((_qid) & _SHR_GPORT_MCAST_QUEUE_GROUP_QID_MASK)     << _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT))
+
+/* for multicast queue gports representing queue ID + core ID */
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_QUEUE_SET(_gport, _qid) \
+        ((_gport) = (_SHR_GPORT_TYPE_MCAST_QUEUE_GROUP << _SHR_GPORT_TYPE_SHIFT) | \
+         (_SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE << _SHR_COSQ_GPORT_COMMON_CORE_SHIFT) | \
+         (((_qid) & _SHR_COSQ_GPORT_COMMON_QUEUE_MASK) << _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT))
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_CORE_QUEUE_SET(_gport, _core, _qid) \
+        ((_gport) = (_SHR_GPORT_TYPE_MCAST_QUEUE_GROUP << _SHR_GPORT_TYPE_SHIFT) | \
+         (_SHR_CORE_ID2FIELD(_core) << _SHR_COSQ_GPORT_COMMON_CORE_SHIFT) | \
+         (((_qid) & _SHR_COSQ_GPORT_COMMON_QUEUE_MASK) << _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT))
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_QUEUE_GET(_gport) \
+        (_SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_GET(_gport) == _SHR_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_MASK ? \
+        _SHR_GPORT_MCAST_QUEUE_GROUP_QID_GET(_gport) : \
+        (((_gport) >> _SHR_GPORT_MCAST_QUEUE_GROUP_QID_SHIFT) & _SHR_COSQ_GPORT_COMMON_QUEUE_MASK))
+
+#define _SHR_GPORT_MCAST_QUEUE_GROUP_CORE_GET(_gport) \
+        _SHR_CORE_FIELD2ID(((_gport) >> _SHR_COSQ_GPORT_COMMON_CORE_SHIFT) & _SHR_COSQ_GPORT_COMMON_CORE_MASK)
+
+#define _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) \
+        (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP)
 
 #endif  /* !_SHR_GPORT_H */

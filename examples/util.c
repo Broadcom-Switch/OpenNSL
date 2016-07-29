@@ -30,10 +30,85 @@
 #include <opennsl/error.h>
 #include <opennsl/l2.h>
 #include <opennsl/vlan.h>
+#include <opennsl/stg.h>
+#include <opennsl/link.h>
 #include <examples/util.h>
 
 #define DEFAULT_VLAN          1
 #define MAX_DIGITS_IN_CHOICE  5
+
+/*****************************************************************//**
+ * \brief Set default configuration (like STP state, speed/duplex) for 
+ *        all ports
+ *
+ * \param unit   [IN]    unit number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
+int example_port_default_config(int unit)
+{
+  opennsl_port_config_t pcfg;
+  opennsl_port_info_t info;
+  int rv;
+  int port;
+  int stp_state = OPENNSL_STG_STP_FORWARD;
+  int stg = 1;
+
+  /*
+   * Create VLAN with id DEFAULT_VLAN and
+   * add ethernet ports to the VLAN
+   */
+  rv = opennsl_port_config_get(unit, &pcfg);
+  if (rv != OPENNSL_E_NONE) 
+  {
+    printf("Failed to get port configuration. Error %s\n", opennsl_errmsg(rv));
+    return rv;
+  }
+
+  /* Set the STP state to forward in default STG for all ports */
+  OPENNSL_PBMP_ITER(pcfg.e, port)
+  {
+    rv = opennsl_stg_stp_set(unit, stg, port, stp_state);
+    if (rv != OPENNSL_E_NONE) 
+    {
+      printf("Failed to set STP state for unit %d port %d, Error %s\n",
+          unit, port, opennsl_errmsg(rv));
+      return rv;
+    }
+  }
+
+  /* Setup default configuration on the ports */
+  opennsl_port_info_t_init(&info);
+
+  info.speed        = 0;
+  info.duplex       = OPENNSL_PORT_DUPLEX_FULL;
+  info.pause_rx     = OPENNSL_PORT_ABILITY_PAUSE_RX;
+  info.pause_tx     = OPENNSL_PORT_ABILITY_PAUSE_TX;
+  info.linkscan     = OPENNSL_LINKSCAN_MODE_SW;
+  info.autoneg      = FALSE;
+  info.enable = 1;
+
+  info.action_mask |= ( OPENNSL_PORT_ATTR_AUTONEG_MASK |
+      OPENNSL_PORT_ATTR_SPEED_MASK    |
+      OPENNSL_PORT_ATTR_DUPLEX_MASK   |
+      OPENNSL_PORT_ATTR_PAUSE_RX_MASK |
+      OPENNSL_PORT_ATTR_PAUSE_TX_MASK |
+      OPENNSL_PORT_ATTR_LINKSCAN_MASK |
+      OPENNSL_PORT_ATTR_ENABLE_MASK   );
+
+  OPENNSL_PBMP_ITER(pcfg.e, port)
+  {
+    rv = opennsl_port_selective_set(unit, port, &info);
+    if (OPENNSL_FAILURE(rv)) 
+    {
+      printf("Failed to set port config for unit %d, port %d, Error %s",
+          unit, port, opennsl_errmsg(rv));
+      return rv;
+    }
+  }
+
+  return OPENNSL_E_NONE;
+}
 
 /*****************************************************************//**
  * \brief Add all ports to default vlan

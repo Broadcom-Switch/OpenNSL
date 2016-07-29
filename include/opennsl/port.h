@@ -2320,6 +2320,11 @@ extern int opennsl_port_priority_color_get(
 typedef enum opennsl_port_class_e {
     opennslPortClassFieldLookup = 0,    /**< Class for field stage Lookup */
     opennslPortClassFieldIngress = 1,   /**< Class for field stage Ingress */
+    opennslPortClassFieldEgress = 2,    /**< Class for field stage Egress */
+    opennslPortClassFieldIngressPacketProcessing = 6, /**< Packet processing port Class for
+                                           field stage Ingress */
+    opennslPortClassFieldEgressPacketProcessing = 7, /**< Packet processing port Class for
+                                           field stage Egress */
     opennslPortClassEgress = 14,        /**< EGR_PORT class ID field for field
                                            stage Egress */
 } opennsl_port_class_t;
@@ -2415,7 +2420,12 @@ typedef enum opennsl_port_control_e {
                                            (Value=TRUE/FALSE) */
     opennslPortControlVxlanDefaultTunnelEnable = 189, /**< Set per port dafult-SVP for Tunnel
                                            lookup failure(Value=TRUE/FALSE) */
+    opennslPortControlMmuDrain = 285,   /**< Draining the cells of the port */
+    opennslPortControlMmuTrafficEnable = 286, /**< Enable/disable enqueing the packets
+                                           to the port */
     opennslPortControlSampleIngressDest = 304, /**< Set Ingress sFlow sample destination */
+    opennslPortControlSampleFlexDest = 305, /**< Set Flex sFlow sample destination */
+    opennslPortControlSampleFlexRate = 306, /**< Set Flex sFlow sampling rate */
 } opennsl_port_control_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -2626,6 +2636,12 @@ extern int opennsl_port_stat_enable_set(
 
 #define OPENNSL_PORT_CONTROL_SAMPLE_DEST_CPU 0x1        /**< Copy packet samples to
                                                           CPU */
+#define OPENNSL_PORT_CONTROL_SAMPLE_DEST_MIRROR 0x2        /**< Copy packet samples to
+                                                          all mirror
+                                                          destinations created
+                                                          with
+                                                          OPENNSL_MIRROR_PORT_SFLOW
+                                                          flag */
 /** Parameter for opennslPortControlFieldEgressClassSelect */
 typedef enum opennsl_port_field_egress_class_select_e {
     opennslPortEgressClassSelectPort = 1, /**< Class Id from Port Interface. */

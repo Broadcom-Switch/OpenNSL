@@ -49,6 +49,9 @@
                                                           priority */
 #define OPENNSL_MIRROR_DEST_TUNNEL_ETAG     (1 << 14)  /**< Mirrored packet should
                                                           be ETAG tunneled. */
+#define OPENNSL_MIRROR_DEST_TUNNEL_SFLOW    (1 << 15)  /**< Mirrored packet should
+                                                          be with sFlow
+                                                          encapsulation */
 #define OPENNSL_MIRROR_DEST_IS_SNOOP        (1 << 16)  /**< Specify that the
                                                           destination type is a
                                                           snoop destination. */
@@ -69,6 +72,14 @@
                                                           PORT. */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_1 (1 << 21)  /**< update counter No.1 */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_2 (1 << 22)  /**< update counter No.2 */
+/**  represents the options for the mirroring of packets */
+typedef struct opennsl_mirror_options_s {
+    uint32 flags;           /**< opennsl_mirror_pkt_header_updates_t_init. */
+    uint8 forward_strength; /**< opennsl_mirror_pkt_header_updates_t_init. */
+    uint8 copy_strength;    /**< opennsl_mirror_pkt_header_updates_t_init. */
+    uint32 recycle_cmd;     /**< dedicated for ETPP traps */
+} opennsl_mirror_options_t;
+
 /** 
  * Mirror destination Structure
  * 
@@ -129,6 +140,7 @@ typedef struct opennsl_mirror_destination_s {
                                            truncated to the first
                                            packet_copy_size . Current supported
                                            values for DNX are 0, 256. */
+    uint8 reserved6; 
 } opennsl_mirror_destination_t;
 
 /** opennsl_mirror_pkt_header_updates_t_init. */

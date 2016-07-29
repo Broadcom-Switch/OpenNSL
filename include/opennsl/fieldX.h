@@ -115,6 +115,11 @@ typedef enum opennsl_field_stat_e {
     opennslFieldStatCount = 58          /**< Always Last. Not a usable value. */
 } opennsl_field_stat_t;
 
+#define OPENNSL_FIELD_COLOR_PRESERVE    0          
+#define OPENNSL_FIELD_COLOR_GREEN       1          
+#define OPENNSL_FIELD_COLOR_YELLOW      2          
+#define OPENNSL_FIELD_COLOR_RED         3          
+#define OPENNSL_FIELD_COLOR_BLACK       4          
 #define OPENNSL_FIELD_PKT_RES_UNKNOWN       0x0        /**< No resolution. */
 #define OPENNSL_FIELD_PKT_RES_CONTROL       0x1        /**< Ethernet control
                                                           (8808). */
@@ -164,8 +169,13 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyDstTrunk = 41,   /**<  Destination Trunk Group ID . */
     opennslFieldQualifyPacketRes = 43,  /**<  Pkt resolution
                                            (OPENNSL_FIELD_PKT_RES_xxx). */
+    opennslFieldQualifySrcClassField = 47, /**<  Source Class based on
+                                           opennslFieldStageLookup result. */
+    opennslFieldQualifyDstClassField = 50, /**<  Destination Class based on
+                                           opennslFieldStageLookup result. */
     opennslFieldQualifyIpProtocolCommon = 52, /**<  3: Common IP protocols. */
     opennslFieldQualifyIpType = 61,     /**<  IP Type (opennslFieldIpTypeXXX). */
+    opennslFieldQualifyStage = 67,      /**<  Field Processor pipeline stage. */
     opennslFieldQualifyStageIngress = 68, /**<  Field Processor pipeline ingress
                                            stage. */
     opennslFieldQualifyStageLookup = 71, /**<  Field Processor pipeline lookup
@@ -179,6 +189,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyIp4 = 87,        /**<  Qualify IpType == IPv4Any. */
     opennslFieldQualifyIp6 = 88,        /**<  Qualify IpType == Ipv6Any. */
     opennslFieldQualifyDstL3Egress = 131, /**<  Egress Object id. */
+    opennslFieldQualifyColor = 141,     /**<  Packet color. */
     opennslFieldQualifyMyStationHit = 153, /**<  When RIOT is not enabled or not
                                            supported, qualifies on L2 tunnel
                                            termination lookup or Routing hit
@@ -188,8 +199,31 @@ typedef enum opennsl_field_qualify_e {
                                            hit status. */
     opennslFieldQualifyDstIpLocal = 171, /**<  Dest IP is local. */
     opennslFieldQualifyCpuQueue = 194,  /**<  CPU COS Queue value. */
+    opennslFieldQualifyInterfaceClassProcessingPort = 213, /**< Packet-processing Port Class ID */
+    opennslFieldQualifyIngressClassField = 269, /**< Class Id assigned for packet by
+                                           Ingress Stage */
     opennslFieldQualifyCount = 603      /**< Always Last. Not a usable value. */
 } opennsl_field_qualify_t;
+
+/** 
+ * Field Stage Type
+ * 
+ * Selects which pipeline stage an entry applies to.
+ */
+typedef enum opennsl_field_stage_e {
+    opennslFieldStageFirst = 0,         /**< Earliest Field stage in device. */
+    opennslFieldStageIngressEarly = 1,  /**< Early Ingress Field stage. */
+    opennslFieldStageIngressLate = 2,   /**< Late Ingress Field stage. */
+    opennslFieldStageDefault = 3,       /**< Default stage for device. */
+    opennslFieldStageLast = 4,          /**< Latest Field stage in device. */
+    opennslFieldStageIngress = 5,       /**< Ingress stage, when there is only one
+                                           such. */
+    opennslFieldStageEgress = 6,        /**< Egress field stage */
+    opennslFieldStageExternal = 7,      /**< External field stage */
+    opennslFieldStageHash = 8,          /**< Hashing stage */
+    opennslFieldStageIngressExactMatch = 9, /**< Ingress exact match stage */
+    opennslFieldStageCount = 10         /**< Always Last. Not a usable value. */
+} opennsl_field_stage_t;
 
 #define OPENNSL_FIELD_QUALIFY_MAX   (opennslFieldQualifyCount + OPENNSL_FIELD_USER_NUM_UDFS) /**< Must be >=
                                                   opennslFieldQualifyCount. */
@@ -259,14 +293,74 @@ typedef enum opennsl_field_action_e {
     opennslFieldActionMirrorEgress = 43, /**< Egress mirror; param0: Dest modid;
                                            param1: Dest port/tgid. */
     opennslFieldActionRpDrop = 52,      /**< Red Priority Drop. */
+    opennslFieldActionRpDropCancel = 53, /**< Override another rule. */
+    opennslFieldActionRpCopyToCpu = 55, /**< Red Priority Copy to CPU. */
+    opennslFieldActionRpCopyToCpuCancel = 56, /**< Override another rule. */
+    opennslFieldActionRpDscpNew = 61,   /**< Red packet change DSCP value; param0:
+                                           New DSCP value. */
+    opennslFieldActionRpDscpCancel = 62, /**< Override any changes to DSCP field. */
+    opennslFieldActionRpCosQNew = 72,   /**< Red packet change CoS Queue; param0:
+                                           New CoS Queue. */
     opennslFieldActionYpDrop = 84,      /**< Yellow Priority Drop. */
+    opennslFieldActionYpDropCancel = 85, /**< Override another rule. */
+    opennslFieldActionYpCopyToCpu = 87, /**< Yellow Priority Copy to CPU. */
+    opennslFieldActionYpCopyToCpuCancel = 88, /**< Override another rule. */
+    opennslFieldActionYpDscpNew = 93,   /**< Yellow packet change DSCP value;
+                                           param0: New DSCP value. */
+    opennslFieldActionYpDscpCancel = 94, /**< Override any changes to DSCP field. */
+    opennslFieldActionYpCosQNew = 104,  /**< Yellow packet change CoS Queue;
+                                           param0: New CoS Queue. */
+    opennslFieldActionClassDestSet = 119, /**< Set destination address lookup class
+                                           ID. */
+    opennslFieldActionClassSet = opennslFieldActionClassDestSet, /**< Same as
+                                           opennslFieldActionClassDestSet. */
+    opennslFieldActionClassSourceSet = 120, /**< Set source address lookup class ID. */
+    opennslFieldActionGpDrop = 136,     /**< Green Priority Drop. */
+    opennslFieldActionGpDropCancel = 137, /**< Override another rule. */
+    opennslFieldActionGpCopyToCpu = 139, /**< Green Priority Copy to CPU. */
+    opennslFieldActionGpCopyToCpuCancel = 140, /**< Override another rule. */
+    opennslFieldActionGpDscpNew = 145,  /**< Green packet change DSCP value;
+                                           param0: New DSCP value. */
+    opennslFieldActionGpDscpCancel = 146, /**< Override any changes to DSCP field. */
+    opennslFieldActionGpCosQNew = 158,  /**< Green packet change CoS Queue;
+                                           param0: New CoS Queue. */
     opennslFieldActionNewClassId = 178, /**< Assign new classification ID. */
+    opennslFieldActionRpRedirectPort = 184, /**< Redirect red packet to single port;
+                                           param0: Destination modid; param1:
+                                           Destination port. */
+    opennslFieldActionRpMirrorIngress = 185, /**< Red packet ingress mirror; param0:
+                                           Dest modid; param1: Dest port/tgid. */
+    opennslFieldActionGpRedirectPort = 204, /**< Redirect green packet to single port;
+                                           param0: Destination modid; param1:
+                                           Destination port. */
+    opennslFieldActionGpMirrorIngress = 205, /**< Green packet ingress mirror; param0:
+                                           Dest modid; param1: Dest port/tgid. */
+    opennslFieldActionEgressClassSelect = 235, /**< Select class to pass to EFP */
     opennslFieldActionStat0 = 243,      /**< Update statistics (statId in param0)
                                            on entry hit.  See
                                            opennsl_field_entry_stat_attach and
                                            related APIs. */
     opennslFieldActionStat = opennslFieldActionStat0, /**< Alias for opennslFieldActionStat0 */
-    opennslFieldActionCount = 434       /**< Always Last. Not a usable value. */
+    opennslFieldActionPolicerLevel0 = 244, /**< Apply policer (policerId in param0)
+                                           to traffic hitting this entry.  See
+                                           opennsl_field_entry_policer_attach
+                                           and related APIs. */
+    opennslFieldActionUsePolicerResult = 252, /**< Specify/override where policer result
+                                           will be used for matched packets. 
+                                           See
+                                           OPENNSL_FIELD_USE_POLICER_RESULT_*
+                                           for flags that go in param0. */
+    opennslFieldActionSnoop = 255,      /**< Snoop matched packets (treat them
+                                           according to the specified snoop
+                                           profile) */
+    opennslFieldActionYpMirrorIngress = 295, /**< Yellow packet ingress mirror; param0:
+                                           Dest modid; param1: Dest port/tgid. */
+    opennslFieldActionYpRedirectPort = 296, /**< Redirect yellow packet to single
+                                           port; param0: Destination modid;
+                                           param1: Destination port. */
+    opennslFieldActionIngSampleEnable = 315, /**< Set the SFLOW Ingress Sampling. */
+    opennslFieldActionEgrSampleEnable = 316, /**< Set the SFLOW Egress Sampling. */
+    opennslFieldActionCount = 437       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
 
 /** 
@@ -282,6 +376,11 @@ typedef struct opennsl_field_aset_s {
 #define OPENNSL_FIELD_ASET_ADD(aset, q)  SHR_BITSET(((aset).w), (q)) 
 #define OPENNSL_FIELD_ASET_REMOVE(aset, q)  SHR_BITCLR(((aset).w), (q)) 
 #define OPENNSL_FIELD_ASET_TEST(aset, q)  SHR_BITGET(((aset).w), (q)) 
+#define OPENNSL_FIELD_PRESEL_INIT(presel_set)  \
+    memset(&(presel_set), 0, sizeof(opennsl_field_presel_set_t)) 
+#define OPENNSL_FIELD_PRESEL_ADD(presel_set, presel_id)  SHR_BITSET(((presel_set).w), (presel_id)) 
+#define OPENNSL_FIELD_PRESEL_REMOVE(presel_set, presel_id)  SHR_BITCLR(((presel_set).w), (presel_id)) 
+#define OPENNSL_FIELD_PRESEL_TEST(presel_set, presel_id)  SHR_BITGET(((presel_set).w), (presel_id)) 
 /** Field Group Status structure. */
 typedef struct opennsl_field_group_status_s {
     int prio_min;       /**< Minimum priority within group. */
@@ -304,6 +403,13 @@ typedef enum opennsl_field_group_mode_e {
     opennslFieldGroupModeAuto = 4,      /**< Auto-expand group based on Qset
                                            (default). */
 } opennsl_field_group_mode_t;
+
+#define OPENNSL_FIELD_PRESEL_SEL_MAX    1024       /**< Maximum Preselection
+                                                      entries supported. */
+/** Bitmap of all possible preselection specification IDs. */
+typedef struct opennsl_field_presel_set_s {
+    SHR_BITDCL w[_SHR_BITDCLSIZE(OPENNSL_FIELD_PRESEL_SEL_MAX)]; 
+} opennsl_field_presel_set_t;
 
 /***************************************************************************//** 
  *\brief De-initialize field software subsystem.
@@ -932,6 +1038,19 @@ extern int opennsl_field_entry_install(
  *          be used to change the actions associated with an entry that is
  *          already installed in the hardware table.  It avoids the need to
  *          completely delete and re-add the entry.
+ *          Hitless entry install: Hitless entry install provides the
+ *          capability to apply existing rules of the already installed entry
+ *          to the incoming traffic while updating new modifications on the
+ *          entry in the hardware tables. For achieving entry hitless update,
+ *          it is recommended that the entries created in a group should have
+ *          unique priority. Eventhough entry installation might not result in
+ *          hitless update in the following cases 1. Entry hitless update
+ *          can't be achieved if all the slices are full with entries. 2.
+ *          Entry installation might not result in hitless update if
+ *          non-global counters/flex stats or non-global meters    are
+ *          attached to the entry.
+ *          In the above two cases entry installation might result in error,
+ *          if config property field_atomic_update is set.
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]   Field entry ID
@@ -1193,6 +1312,11 @@ extern int opennsl_field_entry_prio_set(
     opennsl_field_entry_t entry, 
     int prio) LIB_DLL_EXPORTED ;
 
+#define OPENNSL_FIELD_QUALIFY_PRESEL    0x40000000 /**< OR with ID when calling
+                                                      opennsl_field_qualify_*
+                                                      functions to indicate ID
+                                                      is a preselector instead
+                                                      of an entry */
 /***************************************************************************//** 
  *
  *
@@ -1370,6 +1494,20 @@ extern int opennsl_field_qualify_DstL3Egress(
     int unit, 
     opennsl_field_entry_t entry, 
     opennsl_if_t if_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    color [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_Color(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 color) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
@@ -1614,6 +1752,38 @@ extern int opennsl_field_qualify_InterfaceClassPort(
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_SrcClassField(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 data, 
+    uint32 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_DstClassField(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 data, 
+    uint32 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
  *\param    protocol [IN]
  *
  *\retval   OPENNSL_E_xxx
@@ -1686,6 +1856,20 @@ extern int opennsl_field_qualify_MyStationHit(
     opennsl_field_entry_t entry, 
     uint8 data, 
     uint8 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    color [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_Color_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 *color) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
@@ -2096,6 +2280,38 @@ extern int opennsl_field_qualify_InterfaceClassPort_get(
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_SrcClassField_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 *data, 
+    uint32 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_DstClassField_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 *data, 
+    uint32 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
  *\param    protocol [OUT]
  *
  *\retval   OPENNSL_E_xxx
@@ -2216,6 +2432,38 @@ extern int opennsl_field_qualify_CpuQueue_get(
     opennsl_field_entry_t entry, 
     uint8 *data, 
     uint8 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_InterfaceClassProcessingPort(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint64 data, 
+    uint64 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_InterfaceClassProcessingPort_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint64 *data, 
+    uint64 *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Add an action to a field entry.
@@ -2676,6 +2924,182 @@ extern int opennsl_field_entry_stat_get(
 extern int opennsl_field_stat_detach(
     int unit, 
     uint32 stat_id) LIB_DLL_EXPORTED ;
+
+/** Opaque handle to a field presel. */
+typedef int opennsl_field_presel_t;
+
+/***************************************************************************//** 
+ *\brief Create a preselection specification.
+ *
+ *\description Create a preselection specification for a preselector set. The
+ *          preselector indicates which packets are selected for this set.
+ *          To destroy the preselector, use =opennsl_field_presel_destroy API.
+ *          .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    presel_id [OUT]   presel ID
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL unit not initialized
+ *\retval    OPENNSL_E_PARAM *entry points to NULL
+ *\retval    OPENNSL_E_MEMORY Memory allocation failure
+ *\retval    OPENNSL_E_RESOURCE No unused entries available
+ ******************************************************************************/
+extern int opennsl_field_presel_create(
+    int unit, 
+    opennsl_field_presel_t *presel_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Create a preselection specification using a specific ID.
+ *
+ *\description Create a preselection specification for a preselector set using a
+ *          specific ID. The preselector indicates which packets are selected
+ *          for this set.
+ *          To destroy the preselector, use =opennsl_field_presel_destroy API.
+ *          .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    presel_id [IN]   presel ID
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL unit not initialized
+ *\retval    OPENNSL_E_EXISTS Requested presel ID already exists
+ *\retval    OPENNSL_E_PARAM *entry points to NULL
+ *\retval    OPENNSL_E_MEMORY Memory allocation failure
+ *\retval    OPENNSL_E_RESOURCE No unused entries available
+ ******************************************************************************/
+extern int opennsl_field_presel_create_id(
+    int unit, 
+    opennsl_field_presel_t presel_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Destroy a preselection specification.
+ *
+ *\description Destroy a preselection specification. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    presel_id [IN]
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL unit not initialized
+ *\retval    OPENNSL_E_NOT_FOUND Presel ID not found in unit
+ *\retval    OPENNSL_E_XXX Other error code
+ ******************************************************************************/
+extern int opennsl_field_presel_destroy(
+    int unit, 
+    opennsl_field_presel_t presel_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Associate a set of preselectors with a Field group.
+ *
+ *\description Associate a set of preselectors with a Field group, operation is
+ *          OR -- if any preselector is matched by the frame, the frame goes
+ *          to the group. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Field group ID
+ *\param    presel [IN]   A pointer to a presel_set structure
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL unit not initialized
+ *\retval    OPENNSL_E_NOT_FOUND Group ID not found in unit
+ *\retval    OPENNSL_E_PARAM *presel_set points to NULL
+ *          (opennsl_field_presel_set_t)
+ ******************************************************************************/
+extern int opennsl_field_group_presel_set(
+    int unit, 
+    opennsl_field_group_t group, 
+    opennsl_field_presel_set_t *presel) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the set of preselectors associated with a Field group.
+ *
+ *\description Get the set of preselectors associated with a Field group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Field group ID
+ *\param    presel [OUT]   A pointer to a presel_set structure
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL unit not initialized
+ *\retval    OPENNSL_E_NOT_FOUND Group ID not found in unit
+ *\retval    OPENNSL_E_MEMORY Memory allocation failure
+ ******************************************************************************/
+extern int opennsl_field_group_presel_get(
+    int unit, 
+    opennsl_field_group_t group, 
+    opennsl_field_presel_set_t *presel) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IngressClassField(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 data, 
+    uint32 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IngressClassField_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint32 *data, 
+    uint32 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set qualification on a particular stage. This feature is normally used
+ *       for preselectors.
+ *
+ *\description Set qualification on a particular stage. The API is only used for
+ *          preselector entries. For XGS devices, it is mandatory to call this
+ *          API specifying the stage
+ *          (opennslFieldStageIngress/opennslFieldStageIngressExactMatch)
+ *          before setting any other qualifier to the preselector entry. On
+ *          Tomahawk, only Stage Ingress and Stage Exact Match supports
+ *          Preselection,  so this API is used to associate the stage to the
+ *          preselector. Preselector Entry ID can be retrieved using a macro
+ *          OPENNSL_FIELD_PRESEL_ENTRY_SET.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]   OPENNSL field entry id.
+ *\param    data [IN]   Stage on which to qualify
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_Stage(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_field_stage_t data) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_Stage_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_field_stage_t *data) LIB_DLL_EXPORTED ;
 
 #endif /* __OPENNSL_FIELDX_H__ */
 /*@}*/

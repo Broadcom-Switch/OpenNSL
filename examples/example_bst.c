@@ -279,6 +279,13 @@ int main(int argc, char *argv[])
            rc, opennsl_errmsg(rc));
   }
 
+  rc = example_port_default_config(unit);
+  if (rc != OPENNSL_E_NONE)
+  {   
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+        rc, opennsl_errmsg(rc));
+  } 
+
   /* Set default BST profiles */
   rc = example_bst_default_profile_set (unit);
   if (rc != OPENNSL_E_NONE) {
@@ -314,7 +321,9 @@ int main(int argc, char *argv[])
     printf("1. Enable/Disable BST feature.\n");
     printf("2. Display BST statistics of a port.\n");
     printf("3. Clear BST statistics of a port.\n");
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application.\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -425,11 +434,13 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 3 */
 
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
+#endif
 
       case 0:
       {

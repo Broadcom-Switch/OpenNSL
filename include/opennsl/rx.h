@@ -27,6 +27,7 @@
 #include <opennsl/types.h>
 #include <opennsl/pkt.h>
 #include <opennsl/tx.h>
+#include <opennsl/mirror.h>
 
 #define OPENNSL_RX_CHANNELS     4          /**< Max. number of RX channels. */
 #define OPENNSL_RCO_F_COS_ACCEPT(cos)  (1 << (cos)) 
@@ -531,6 +532,10 @@ extern int opennsl_rx_control_set(
     int unit, 
     opennsl_rx_control_t type, 
     int arg) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

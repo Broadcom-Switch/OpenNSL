@@ -38,6 +38,7 @@
                                                       trunk. */
 #define OPENNSL_MIRROR_PORT_EGRESS_ACL  0x00000020 /**< Enable Egress Mirroring
                                                       for ACLs */
+#define OPENNSL_MIRROR_PORT_SFLOW       0x00000040 /**< sFlow mirroring */
 #define OPENNSL_MIRROR_NIV_LOOP 1          /**< Mirrored packet is a loop in NIV
                                               path */
 #ifndef OPENNSL_HIDE_DISPATCHABLE

@@ -122,7 +122,11 @@ typedef enum opennsl_switch_control_e {
                                            to Cpu */
     opennslSwitchVxlanTunnelMissToCpu = 732, /**< If set, send a copy of VXLAN packet
                                            to CPU if VXLAN Tunnel lookup fails. */
+    opennslSwitchFlexibleMirrorDestinations = 781, /**< Enable configuration of the maximum
+                                           number of mirror destinations. */
     opennslSwitchEcmpMacroFlowHashEnable = 782, /**< Enable ECMP macro-flow hashing. */
+    opennslSwitchMcQueueSchedMode = 871, /**< Schedule mode select for multicast
+                                           queues. */
     opennslSwitchBstSnapshotEnable = 878, /**< BST resource usage SnapShot mode. */
     opennslSwitchMirrorExclusive = 912, /**< Set Mirror exclusive behaviour
                                            between FP and Port */

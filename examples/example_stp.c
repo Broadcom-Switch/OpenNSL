@@ -133,6 +133,13 @@ int main(int argc, char *argv[])
     return rv;
   }
 
+  /* cold boot initialization commands */
+  rv = example_port_default_config(unit);
+  if (rv != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rv, opennsl_errmsg(rv));
+  }
+
   /* Extract inputs parameters */
   port1 = atoi(argv[1]);
   port2 = atoi(argv[2]);
@@ -147,7 +154,9 @@ int main(int argc, char *argv[])
     printf("Interactive User Menu:\n");
     printf("1. Configure STP state of a port\n");
     printf("2. Display the STP state of ports\n");
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application\n");
 
    if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -219,11 +228,13 @@ int main(int argc, char *argv[])
         break;
       }
 
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
+#endif
 
       case 0:
       {

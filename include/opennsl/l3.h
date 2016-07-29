@@ -169,14 +169,14 @@ typedef struct opennsl_l3_host_s {
     opennsl_ip6_t l3a_ip6_addr;     /**< Destination host IP address (IPv6). */
     opennsl_cos_t l3a_pri;          /**< New priority in packet. */
     opennsl_if_t l3a_intf;          /**< L3 intf associated with this address. */
-    opennsl_mac_t reserved2; 
-    opennsl_module_t reserved3; 
+    opennsl_mac_t l3a_nexthop_mac;  /**< Next hop MAC addr. */
+    opennsl_module_t reserved2; 
     opennsl_port_t l3a_port_tgid;   /**< Port/TGID packet is switched to. */
-    opennsl_port_t reserved4; 
+    opennsl_port_t reserved3; 
+    int reserved4; 
     int reserved5; 
-    int reserved6; 
+    opennsl_if_t reserved6; 
     opennsl_if_t reserved7; 
-    opennsl_if_t reserved8; 
 } opennsl_l3_host_t;
 
 /** 

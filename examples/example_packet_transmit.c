@@ -163,6 +163,13 @@ int main(int argc, char *argv[])
     return rv;
   }
 
+  /* cold boot initialization commands */
+  rv = example_port_default_config(unit);
+  if (rv != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rv, opennsl_errmsg(rv));
+  }
+
   /* Add ports to default vlan. */
   printf("Adding ports to default vlan.\r\n");
   rv = example_switch_default_vlan_config(unit);
@@ -175,7 +182,9 @@ int main(int argc, char *argv[])
     printf("\r\nUser menu: Select one of the following options\r\n");
     printf("1. Transmit a packet\n");
     printf("2. Display OpenNSL version\n");
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -213,11 +222,13 @@ int main(int argc, char *argv[])
         break;
       }
 
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
+#endif
 
       case 0:
       {

@@ -1,8 +1,5 @@
-       How to Install OpenNSL Binary
-       ----------------------------
-
 This document describes how to install OpenNSL binary provided
-in this package on the Celestica Redstone-XP platform.
+in this package on the Celestica Redstone-XP/Seastone-XP platform.
 
 Building OpenNSL
 ================
@@ -11,7 +8,7 @@ following steps to compile OpenNSL including sample applications.
 
 1) Extract the code tarball into the destination directory say opennsl_root.
 
-2) Go to output directory. For Celestica Redstone-XP platform, it is 
+2) Go to output directory. For Celestica Redstone-XP/Seastone-XP platform, it is 
    opennsl_root/opennsl/output/cel-x86-trident2-ub14
 
 3) Issue "make" to create an OpenNSL shared library object, linux kernel modules.
@@ -31,7 +28,7 @@ Source code for OpenNSL sample applications may be built on the switch. The
 example applications are dynamically linked with the OpenNSL shared library.
 Use the following steps to compile example applications.
 
-1) Go to output directory. For Celestica Redstone-XP platform, it is 
+1) Go to output directory. For Celestica Redstone-XP/Seastone-XP platform, it is 
    opennsl_root/opennsl/output/cel-x86-trident2-ub14.
 
 2) Issue "make examples" to compile all the sample applications
@@ -40,7 +37,7 @@ Use the following steps to compile example applications.
 Downloading and running OpenNSL sample applications
 ===================================================
 
-1) cd to target deliverables directory. For Celestica Redstone-XP platform, it is 
+1) cd to target deliverables directory. For Celestica Redstone-XP/Seastone-XP platform, it is 
    opennsl_root/opennsl/output/cel-x86-trident2-ub14/build.
 
 2) Use the following commands to update the linux kernel modules
@@ -67,3 +64,10 @@ Downloading and running OpenNSL sample applications
     # chmod +x sample_application
     #./sample_application
 
+Platform Customization
+======================
+OpenNSL supports platform customization by taking the configuration from a file 
+as mentioned in the doxygen documentation under "Platform customization" section.
+
+The default configuration that is built into the library for Redstone-XP and 
+Smallstone-XP platforms are available at opennsl_root/opennsl/output/cel-x86-trident2-ub14.

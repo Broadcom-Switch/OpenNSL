@@ -394,6 +394,13 @@ int main(int argc, char *argv[])
 
   if(!warm_boot)
   {
+    /* cold boot initialization commands */
+    rv = example_port_default_config(unit);
+    if (rv != OPENNSL_E_NONE) {
+      printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+             rv, opennsl_errmsg(rv));
+    }
+
     /* Set L3 Egress Mode */
     rv =  opennsl_switch_control_set(unit, opennslSwitchL3EgressMode, 1);
     if (rv != OPENNSL_E_NONE) {
@@ -479,7 +486,9 @@ int main(int argc, char *argv[])
   while(1) {
     printf("\r\nUser menu: Select one of the following options\r\n");
     printf("1. Save the configuration to scache\n");
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application.\r\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -502,11 +511,13 @@ int main(int argc, char *argv[])
         break;
       } /* End of case 1 */
 
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
       {
         opennsl_driver_shell();
         break;
       }
+#endif
 
       case 0:
       {

@@ -24,6 +24,8 @@
 #ifndef DRIVER_H
 #define DRIVER_H
 
+#define OPENNSL_F_FAST_BOOT   0x00000001  /* Fast boot mode */
+
 typedef struct opennsl_config_s
 {
   char         *cfg_fname;  /* Configuration file name along with the path */
@@ -31,6 +33,9 @@ typedef struct opennsl_config_s
   char         *wb_fname;   /* File to store warmboot configuration *
                             * along with the path */
   char         *rmcfg_fname; /* RM config file name along with the path */
+  char         *cfg_post_fname;  /* Post init configuration file name *
+                                  * along with the path */
+  unsigned int opennsl_flags;  /* OpenNSL flags */
 } opennsl_init_t;
 
 /*****************************************************************//**
@@ -50,6 +55,7 @@ extern int opennsl_driver_init(opennsl_init_t *init);
  *****************************************************************************/
 extern unsigned int opennsl_driver_boot_flags_get(void);
 
+#ifdef INCLUDE_DIAG_SHELL
 /*****************************************************************//**
 * \brief Bringup diagnostic shell prompt and process the input commands.
 *
@@ -65,6 +71,7 @@ extern int opennsl_driver_shell();
 * \return OPENNSL_E_XXX     OpenNSL API return code
 ********************************************************************/
 extern int opennsl_driver_process_command(char *commandBuf);
+#endif
 
 extern char *readline(const char *prompt);
 #endif  /* DRIVER_H */

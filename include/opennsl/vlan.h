@@ -217,6 +217,28 @@ extern int opennsl_vlan_gport_delete_all(
     opennsl_vlan_t vlan) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get a virtual or physical port from the specified VLAN.
+ *
+ *\description Checks whether the given port is a member of the VLAN. For network
+ *          switch and network switch,  the port can be either a WLAN virtual
+ *          port or a regular physical port. For network switch, the port can
+ *          be a layer 2 logical port or a regular physical port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN ID
+ *\param    port [IN]   Virtual or physical port to get VLAN information
+ *\param    flags [OUT]   Control flags. See =OPENNSL_VLAN_PORT_t
+ *
+ *\retval    OPENNSL_E_NOT_FOUND VLAN ID not in use or port is not a member
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_gport_get(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_gport_t port, 
+    int *flags) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Returns an array of defined VLANs and their port bitmaps. If by pbmp,
  *       then only VLANs which contain at least one of the specified ports are
  *       listed.

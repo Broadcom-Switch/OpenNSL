@@ -165,11 +165,26 @@ int main(int argc, char *argv[])
     /* Add ports to default vlan. */
     printf("Adding ports to default vlan.\r\n");
     rv = example_switch_default_vlan_config(unit);
-    if(rv != OPENNSL_E_NONE) {
+    if(rv != OPENNSL_E_NONE)
+    {
       printf("\r\nFailed to add default ports. rv: %s\r\n", opennsl_errmsg(rv));
       return rv;
     }
 
+    rv = example_port_default_config(unit);
+    if (rv != OPENNSL_E_NONE)
+    {
+      printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+             rv, opennsl_errmsg(rv));
+    }
+  }
+
+  /* rx start */
+  if (!opennsl_rx_active(unit))
+  {
+    rv = opennsl_rx_start(unit, NULL);
+    if (OPENNSL_FAILURE(rv))
+      printf("RX start failed unit %d.\n", unit);
   }
 
   rv = opennsl_rx_register(
@@ -193,7 +208,9 @@ int main(int argc, char *argv[])
     printf("2. Disable sFlow\n");
     printf("3. Display sFlow configuration\n");
     printf("4. Save the configuration to scache\n");
+#ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
+#endif
     printf("0. Quit the application.\r\n");
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
@@ -238,6 +255,7 @@ int main(int argc, char *argv[])
                 opennsl_errmsg(rv));
             return rv;
           }
+
           printf("Enabled sFlow on port %d with sample rate of %d\n",
               port, irate);
 
@@ -311,11 +329,13 @@ int main(int argc, char *argv[])
           break;
         } /* End of case 1 */
 
+#ifdef INCLUDE_DIAG_SHELL
       case 9:
         {
           opennsl_driver_shell();
           break;
         }
+#endif
 
       case 0:
         {

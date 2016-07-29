@@ -395,6 +395,34 @@ extern int opennsl_stat_get(
 /***************************************************************************//** 
  *\brief Get the specified statistics from the device.
  *
+ *\description The native statistics are 64-bits wide; use opennsl_stat_get32()
+ *          for 32-bit  statistics. Some counters are implemented on a given
+ *          port only when it is  operating in a specific mode, for example,
+ *          10 or 100, and not 1000 Mbps.  If the counter is not implemented
+ *          on the specified port, or on the port  given its current operating
+ *          mode, OPENNSL_E_UNAVAIL is returned.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Zero-based device or logical port number
+ *\param    type [IN]   SNMP statistics type defined in opennsl_stat_val_t
+ *\param    value [OUT]   Counter value
+ *
+ *\retval    OPENNSL_E_NONE Success.
+ *\retval    OPENNSL_E_PARAM Illegal parameter.
+ *\retval    OPENNSL_E_BADID Illegal port number.
+ *\retval    OPENNSL_E_INTERNAL Device access failure.
+ *\retval    OPENNSL_E_UNAVAIL Counter/variable is not implemented on this current
+ *          chip.
+ ******************************************************************************/
+extern int opennsl_stat_get32(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_stat_val_t type, 
+    uint32 *value) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the specified statistics from the device.
+ *
  *\description This API will retrieve a set of statistic values of the types
  *          specified in the stat_arr array.  The number of values in the
  *          stat_arr array and the available positions in the value_arr array
@@ -417,6 +445,112 @@ extern int opennsl_stat_multi_get(
     int nstat, 
     opennsl_stat_val_t *stat_arr, 
     uint64 *value_arr) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the specified statistics from the device.
+ *
+ *\description This API will retrieve a set of statistic values of the types
+ *          specified in the stat_arr array.  The number of values in the
+ *          stat_arr array and the available positions in the value_arr array
+ *          must match the number given in the nstat argument. 64-bit values
+ *          may be truncated to fit into a 32-bit array for
+ *          opennsl_stat_multi_get32.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   <UNDEF>
+ *\param    nstat [IN]   Number of elements in stat array
+ *\param    stat_arr [IN]   Array of SNMP statistics types defined in
+ *          opennsl_stat_val_t
+ *\param    value_arr [OUT]   Collected 64-bit or 32-bit statistics values
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_stat_multi_get32(
+    int unit, 
+    opennsl_port_t port, 
+    int nstat, 
+    opennsl_stat_val_t *stat_arr, 
+    uint32 *value_arr) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Force an immediate counter update and get statistics for a specified
+ *       device. Note: If opennsl_stat_sync_get was continuously called for a
+ *       counter, the corresponding rate calculated with CLI show counter will be
+ *       incorrect.
+ *
+ *\description Same as opennsl_stat_get(), value returned is per-port software
+ *          accumulated  counter synced with the hardware counter.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Zero-based device or logical port number
+ *\param    type [IN]   SNMP statistics type defined in opennsl_stat_val_t
+ *\param    value [OUT]   Counter value
+ *
+ *\retval    OPENNSL_E_NONE Success.
+ *\retval    OPENNSL_E_PARAM Illegal parameter.
+ *\retval    OPENNSL_E_BADID Illegal port number.
+ *\retval    OPENNSL_E_INTERNAL Device access failure.
+ *\retval    OPENNSL_E_UNAVAIL Counter/variable is not implemented on this current
+ *          chip.
+ ******************************************************************************/
+extern int opennsl_stat_sync_get32(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_stat_val_t type, 
+    uint32 *value) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Force an immediate counter update and get a set of statistics for a
+ *       specified device.
+ *
+ *\description Same as opennsl_stat_multi_get(), value returned is per-port
+ *          software accumulated  counter synced with the hardware counter.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Zero-based device or logical port number
+ *\param    nstat [IN]   Number of elements in stat array
+ *\param    stat_arr [IN]   Array of SNMP statistics types defined in
+ *\param    value_arr [OUT]   Collected statistics values
+ *
+ *\retval    OPENNSL_E_NONE Success.
+ *\retval    OPENNSL_E_PARAM Illegal parameter.
+ *\retval    OPENNSL_E_BADID Illegal port number.
+ *\retval    OPENNSL_E_INTERNAL Device access failure.
+ *\retval    OPENNSL_E_UNAVAIL Counter/variable is not implemented on this current
+ *          chip.
+ ******************************************************************************/
+extern int opennsl_stat_sync_multi_get32(
+    int unit, 
+    opennsl_port_t port, 
+    int nstat, 
+    opennsl_stat_val_t *stat_arr, 
+    uint32 *value_arr) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Clear specific statistics for a port from the device.
+ *
+ *\description Set all counters to zero for a specific statistics type of the
+ *          specified port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Zero-based device or logical port number
+ *\param    type [IN]   SNMP statistics type defined in opennsl_stat_val_t
+ *
+ *\retval    OPENNSL_E_NONE Success.
+ *\retval    OPENNSL_E_PARAM Illegal parameter.
+ *\retval    OPENNSL_E_BADID Illegal port number.
+ *\retval    OPENNSL_E_INTERNAL Device access failure.
+ *\retval    OPENNSL_E_UNAVAIL Counter/variable is not implemented on this current
+ *          chip.
+ ******************************************************************************/
+extern int opennsl_stat_clear_single(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_stat_val_t type) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 

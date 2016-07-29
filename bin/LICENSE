@@ -206,7 +206,7 @@ Switch System
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP Switch System
+bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP/Smallstone-XP Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
@@ -219,6 +219,18 @@ bin/wedge-trident        - Wedge Switch System
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
 bin/as5712               - AS5712 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/x86-xgs5-deb80       - Dell s6000/s6100 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/as6712               - AS6712 Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2

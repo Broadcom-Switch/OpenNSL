@@ -180,16 +180,16 @@ struct opennsl_pkt_s {
     opennsl_gport_t reserved69; 
     opennsl_gport_t reserved70; 
     uint32 reserved71; 
-    int reserved72; 
-    opennsl_gport_t reserved73; 
+    int snoop_cmnd;                     /**< Snoop command */
+    opennsl_gport_t reserved72; 
+    uint32 reserved73; 
     uint32 reserved74; 
-    uint32 reserved75; 
-    uint8 reserved76; 
-    opennsl_reserved_enum_t reserved77; 
-    opennsl_pkt_oam_counter_t reserved78[OPENNSL_PKT_OAM_COUNTER_MAX]; 
-    uint32 reserved79; 
-    uint8 reserved80[20]; 
-    uint8 reserved81; 
+    uint8 reserved75; 
+    opennsl_reserved_enum_t reserved76; 
+    opennsl_pkt_oam_counter_t reserved77[OPENNSL_PKT_OAM_COUNTER_MAX]; 
+    uint32 reserved78; 
+    uint8 reserved79[20]; 
+    uint8 reserved80; 
 };
 
 #define OPENNSL_PKT_F_NO_VTAG   0x4        /**< Packet does not contain VLAN tag. */
