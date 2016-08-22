@@ -101,7 +101,6 @@
     serdes_preemphasis_lane0_xe55=0xa760
     serdes_preemphasis_lane0_xe47=0xa760
     serdes_preemphasis_lane0_xe39=0xa760
-    parity_correction=0
     serdes_preemphasis_lane0_xe7=0xd2b0
     xgxs_rx_lane_map_40=0x213
     xgxs_rx_lane_map_32=0x213
@@ -464,7 +463,6 @@
     serdes_preemphasis_lane2_xe38=0xa760
     serdes_preemphasis_lane1_xe76=0xc6e0
     l2_mem_entries=163840
-    os=unix
     serdes_driver_current_lane3_xe39=0x1
     xgxs_rx_lane_map_75=0x213
     serdes_driver_current_lane2_xe77=0x4
@@ -618,7 +616,6 @@
     serdes_driver_current_lane0_xe31=0x5
     serdes_driver_current_lane0_xe23=0x4
     serdes_driver_current_lane0_xe15=0x4
-    parity_enable=0
     serdes_driver_current_lane3_xe77=0x4
     serdes_pre_driver_current_lane3_xe35=0x2
     serdes_pre_driver_current_lane2_xe73=0x4

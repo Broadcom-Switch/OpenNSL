@@ -417,7 +417,18 @@ extern int opennsl_switch_event_unregister(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_HASH_CONTROL_MULTIPATH_L4PORTS 0x0001     /**< Use TCP/UDP ports. */
+#define OPENNSL_HASH_CONTROL_MULTIPATH_DIP  0x0002     /**< Use destination IP
+                                                          address. */
+#define OPENNSL_HASH_CONTROL_TRUNK_UC_SRCPORT 0x0008     /**< Use source port. */
+#define OPENNSL_HASH_CONTROL_TRUNK_NUC_DST  0x0010     /**< Use destination MAC or
+                                                          IP address. */
+#define OPENNSL_HASH_CONTROL_TRUNK_NUC_SRC  0x0020     /**< Use source MAC or IP
+                                                          address. */
 #define OPENNSL_HASH_CONTROL_ECMP_ENHANCE   0x0080     /**< Use enhanced ECMP
+                                                          hashing. */
+#define OPENNSL_HASH_CONTROL_TRUNK_NUC_ENHANCE 0x0100     /**< Use enhanced
+                                                          non-unicast trunk
                                                           hashing. */
 #define OPENNSL_HASH_FIELD_CONFIG_CRC16CCITT 0x00000007 /**< 16-bit CRC using CCITT
                                                           polynomial. */

@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <opennsl/init.h>
 #include <opennsl/error.h>
 #include <opennsl/cosq.h>
 #include <opennsl/vlan.h>
@@ -52,7 +53,8 @@ char example_usage[] =
 "Usage Guidelines: This program request the user to enter the port     \n\r"
 "                  number interactively                                \n\r";
 
-typedef struct {
+typedef struct
+{
   opennsl_bst_stat_id_t bid;
   char name[50];
 } example_bst_counter_t;
@@ -75,13 +77,18 @@ typedef struct {
 #define _BST_STAT_ID_CPU                       opennslBstStatIdCpuQueue
 #define _BST_STAT_ID_MAX_COUNT                 opennslBstStatIdMaxCount
 
+#define _BRCM_56960_DEVICE_ID                  0xb960
+
+#define _BRCM_IS_CHIP_TH(_info)               \
+                 (((_info).device == _BRCM_56960_DEVICE_ID))
+
 /*****************************************************************//**
  * \brief To set the default BST profiles
  *
  * \param unit      [IN]    Unit number
  *
  * \return None
- * \remarks This function is currently support for Trident 2 silicon only
+ * \remarks None
  ********************************************************************/
 int example_bst_default_profile_set (int unit)
 {
@@ -90,30 +97,59 @@ int example_bst_default_profile_set (int unit)
   int depth;
   int index;
   int max_threshold;
-  int max_ports;
   int gport;
   int port;
   opennsl_cosq_bst_profile_t profile;
+  opennsl_info_t info;
+  opennsl_port_config_t pcfg;
 
-  /* Get maximum number of front panel ports available */
-  if((rc = example_max_port_count_get(unit, &max_ports)) != OPENNSL_E_NONE)
+  /* Get port configuration */
+  rc = opennsl_port_config_get(unit, &pcfg);
+  if (rc != OPENNSL_E_NONE)
   {
-    printf("\r\nFailed to get number of front panel ports, rc = %d (%s).\r\n",
+    printf("Failed to get port configuration, rc = %d (%s).\n",
         rc, opennsl_errmsg(rc));
-    return OPENNSL_E_FAIL;
+    return rc;
   }
 
-  for (bid = 0; bid < opennslBstStatIdMaxCount; bid++) {
+  if((rc = opennsl_info_get(unit, &info)) != OPENNSL_E_NONE)
+  {
+    printf("\r\nFailed to get switch device details, rc = %d (%s).\r\n",
+        rc, opennsl_errmsg(rc));
+    return rc;
+  }
 
-    /* Find out the maximum threshold for a bid */
-    if (bid == opennslBstStatIdUcast              ||
-        bid == opennslBstStatIdEgrUCastPortShared ||
-        bid == opennslBstStatIdUcastGroup) {
-      max_threshold =  0x3FFF * 208;
-    } else if (bid == opennslBstStatIdPriGroupHeadroom) {
-      max_threshold =  0xFFF * 208;
-    } else {
-      max_threshold =  0x1FFFF * 208;
+  for (bid = 0; bid < opennslBstStatIdMaxCount; bid++)
+  {
+    if(_BRCM_IS_CHIP_TH(info)) /* Tomahawk */
+    {
+      if (bid == opennslBstStatIdUcast ||
+          bid == opennslBstStatIdUcastGroup)
+      {
+        max_threshold = 0xFFF * 208;
+      }
+      else
+      {
+        max_threshold = 0x7FFF * 208;
+      }
+    }
+    else /* Trident 2 */
+    {
+      /* Find out the maximum threshold for a bid */
+      if (bid == opennslBstStatIdUcast              ||
+          bid == opennslBstStatIdEgrUCastPortShared ||
+          bid == opennslBstStatIdUcastGroup)
+      {
+        max_threshold =  0x3FFF * 208;
+      }
+      else if (bid == opennslBstStatIdPriGroupHeadroom)
+      {
+        max_threshold =  0xFFF * 208;
+      }
+      else
+      {
+        max_threshold =  0x1FFFF * 208;
+      }
     }
 
     profile.byte = max_threshold;
@@ -162,7 +198,7 @@ int example_bst_default_profile_set (int unit)
                gport, bid, index, rc, opennsl_errmsg(rc));
            return rc;
          }
-       } /* Iter ... Cosq*/
+       } /* Iter ... Cosq */
     }
     else if (bid == _BST_STAT_ID_PRI_GROUP_SHARED      ||
              bid == _BST_STAT_ID_PRI_GROUP_HEADROOM    ||
@@ -172,9 +208,9 @@ int example_bst_default_profile_set (int unit)
              bid == _BST_STAT_ID_EGR_PORT_SHARED       ||
              bid == _BST_STAT_ID_EGR_UCAST_PORT_SHARED)
     {
-      for(port = 1; port < max_ports; port++)
+      OPENNSL_PBMP_ITER(pcfg.e, port)
       {
-        /* Get GPORT*/
+        /* Get GPORT */
         rc = opennsl_port_gport_get (unit, port, &gport);
         if (rc != OPENNSL_E_NONE)
         {
@@ -250,13 +286,16 @@ int main(int argc, char *argv[])
   uint64 val[MAX_COUNTERS][MAX_COSQ_COUNT];
 
   /* Intitializing val array */
-  for (i = 0; i < MAX_COUNTERS; i++) {
-    for (j = 0; j < MAX_COSQ_COUNT; j++) {
+  for (i = 0; i < MAX_COUNTERS; i++)
+  {
+    for (j = 0; j < MAX_COSQ_COUNT; j++)
+    {
         val[i][j] = 0;
     }
   }
 
-  if ((argc != 1) || ((argc > 1) && (strcmp(argv[1], "--help") == 0))) {
+  if ((argc != 1) || ((argc > 1) && (strcmp(argv[1], "--help") == 0)))
+  {
     printf("%s\n\r", example_usage);
     return OPENNSL_E_PARAM;
   }
@@ -265,32 +304,37 @@ int main(int argc, char *argv[])
   printf("Initializing the system.\r\n");
   rc = opennsl_driver_init((opennsl_init_t *) NULL);
 
-  if (rc != OPENNSL_E_NONE) {
+  if (rc != OPENNSL_E_NONE)
+  {
     printf("\r\nFailed to initialize the system, rc = %d (%s).\r\n",
            rc, opennsl_errmsg(rc));
-    return 0;
+    return rc;
   }
 
   /* Add ports to default vlan. */
   printf("Adding ports to default vlan.\r\n");
   rc = example_switch_default_vlan_config(unit);
-  if (rc != OPENNSL_E_NONE) {
+  if (rc != OPENNSL_E_NONE)
+  {
     printf("\r\nFailed to add default ports, rc = %d (%s).\r\n",
            rc, opennsl_errmsg(rc));
+    return rc;
   }
 
   rc = example_port_default_config(unit);
   if (rc != OPENNSL_E_NONE)
-  {   
+  {
     printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
         rc, opennsl_errmsg(rc));
-  } 
+  }
 
   /* Set default BST profiles */
   rc = example_bst_default_profile_set (unit);
-  if (rc != OPENNSL_E_NONE) {
+  if (rc != OPENNSL_E_NONE)
+  {
     printf("\r\nFailed to set default profile for BST, rc = %d (%s).\r\n",
         rc, opennsl_errmsg(rc));
+    return rc;
   }
   printf("Default BST profiles are set successfully.\r\n");
 
@@ -302,21 +346,23 @@ int main(int argc, char *argv[])
   {
     printf("\r\nFailed to register BST callback, rc = %d (%s).\r\n",
         rc, opennsl_errmsg(rc));
-    return OPENNSL_E_FAIL;
+    return rc;
   }
   printf("BST callback for triggers is registered.\r\n");
 
   /* Enabling bst module. */
   rc = opennsl_switch_control_set(unit, opennslSwitchBstEnable, 1);
-  if (rc != OPENNSL_E_NONE) {
+  if (rc != OPENNSL_E_NONE)
+  {
     printf("\r\nFailed to Enable bst, rc = %d (%s).\r\n",
         rc, opennsl_errmsg(rc));
-    return 0;
+    return rc;
   }
   printf("BST feature is enabled.\r\n");
 
 
-  while (1) {
+  while (1)
+  {
     printf("\nUser Menu: Select one of the following options\n");
     printf("1. Enable/Disable BST feature.\n");
     printf("2. Display BST statistics of a port.\n");
@@ -331,8 +377,8 @@ int main(int argc, char *argv[])
       printf("Invalid option entered. Please re-enter.\n");
       continue;
     }
-    switch(choice) {
-
+    switch(choice)
+    {
       case 1:
         {
           printf("\r\nConfigure BST feature: 1-Enable, 0-Disable.\r\n");
@@ -348,10 +394,11 @@ int main(int argc, char *argv[])
           }
 
           rc = opennsl_switch_control_set(unit, opennslSwitchBstEnable, choice);
-          if (rc != OPENNSL_E_NONE) {
+          if (rc != OPENNSL_E_NONE)
+          {
             printf("\r\nFailed to %s BST feature, rc = %d (%s).\r\n",
                 (choice == 0)? "Disable" : "Enable", rc, opennsl_errmsg(rc));
-            return OPENNSL_E_FAIL;
+            return rc;
           }
 
           printf("BST feature is %s.\r\n", (choice == 0)? "Disabled" : "Enabled");
@@ -369,37 +416,39 @@ int main(int argc, char *argv[])
           rc = opennsl_port_gport_get (unit, port, &gport);
           if (rc != OPENNSL_E_NONE)
           {
-            return OPENNSL_E_FAIL;
+            return rc;
           }
           for (index = 0; index < MAX_COUNTERS; index++)
           {
             rc = (opennsl_cosq_bst_stat_sync(unit, id_list[index].bid));
-            if (rc != OPENNSL_E_NONE) {
-            printf("\r\nFailed to sync the state of port, rc = %d (%s).\r\n",
-                   rc, opennsl_errmsg(rc));
-            break;
-          }
-        }
-
-        for (index = 0; index < MAX_COUNTERS; index++)
-        {
-          for (cosq = 0; cosq <=7; cosq++)
-          {
-            rc = opennsl_cosq_bst_stat_get(unit, gport, cosq,
-                id_list[index].bid, options, &val[index][cosq]);
-            if (rc != OPENNSL_E_NONE) {
-              printf("\r\nFailed to get the port stats, rc = %d (%s).\r\n",
-                     rc, opennsl_errmsg(rc));
+            if (rc != OPENNSL_E_NONE)
+            {
+              printf("\r\nFailed to sync the state of port, rc = %d (%s).\r\n",
+                  rc, opennsl_errmsg(rc));
               break;
             }
-            printf("BST Counter: %s for COS queue: %d is : %llu\n",
-                id_list[index].name, cosq, val[index][cosq]);
           }
-          printf("\n");
-        }
 
-        break;
-      } /* End of case 2 */
+          for (index = 0; index < MAX_COUNTERS; index++)
+          {
+            for (cosq = 0; cosq <=7; cosq++)
+            {
+              rc = opennsl_cosq_bst_stat_get(unit, gport, cosq,
+                  id_list[index].bid, options, &val[index][cosq]);
+              if (rc != OPENNSL_E_NONE)
+              {
+                printf("\r\nFailed to get the port stats, rc = %d (%s).\r\n",
+                    rc, opennsl_errmsg(rc));
+                break;
+              }
+              printf("BST Counter: %s for COS queue: %d is : %llu\n",
+                  id_list[index].name, cosq, val[index][cosq]);
+            }
+            printf("\n");
+          }
+
+          break;
+        } /* End of case 2 */
 
       case 3:
       {
@@ -412,7 +461,7 @@ int main(int argc, char *argv[])
         rc = opennsl_port_gport_get (unit, port, &gport);
         if (rc!= OPENNSL_E_NONE)
         {
-          return OPENNSL_E_FAIL;
+          return rc;
         }
 
         for (index = 0; index < MAX_COUNTERS; index++)
@@ -421,7 +470,8 @@ int main(int argc, char *argv[])
           {
             rc = opennsl_cosq_bst_stat_clear(unit, gport, cosq,
                 id_list[index].bid);
-            if (rc != OPENNSL_E_NONE) {
+            if (rc != OPENNSL_E_NONE)
+            {
               printf("\r\nFailed to clear the port stats, rc = %d (%s).\r\n",
                      rc, opennsl_errmsg(rc));
               break;

@@ -327,9 +327,7 @@ portmap_33=132:10
 portmap_67=133:10
 portmap_101=134:10
 portmap_135=135:10
-parity_correction=0
 mem_cache_enable=0
-parity_enable=0
 l2xmsg_mode=1
 fpem_mem_entries=32768
 portmap_1=1:40:2
@@ -398,16 +396,7 @@ portmap_116=125:40:2
 portmap_117=127:40:2
 serdes_fiber_pref_xe=0
 serdes_if_type_xe=14
-#[npu-port-config]
-physical_ports=64
-logical_ports=136
-start_vlan=100
-prbs_polynomial=3
 #[npu-uplink-port-config]
-uplink_ports=2
 dport_map_port_66=65
 dport_map_port_100=66
-start_vlan=1000
-#[npu-led-config]
-no_leds_proc=3
 scache_filename=/tmp/scache

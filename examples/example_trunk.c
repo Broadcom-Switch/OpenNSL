@@ -78,6 +78,43 @@ int example_trunk_create(int unit, opennsl_trunk_t *tid)
 }
 
 /*****************************************************************//**
+ * \brief Set hash controls
+ *
+ * \param unit	[IN]	Unit number.
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
+int example_trunk_hash_controls_set(int unit)
+{
+  opennsl_error_t rv = OPENNSL_E_NONE;
+  int hashControl = 0;
+
+  /* Set the ECMP hashControl to include dstip also - for XGS3 only */
+  OPENNSL_IF_ERROR_RETURN(opennsl_switch_control_get(unit,
+        opennslSwitchHashControl, &hashControl));
+
+  /* Set the L2 hash controls first. */
+  hashControl |= (OPENNSL_HASH_CONTROL_TRUNK_NUC_DST
+      | OPENNSL_HASH_CONTROL_TRUNK_NUC_SRC
+      | OPENNSL_HASH_CONTROL_TRUNK_UC_SRCPORT);
+
+  OPENNSL_IF_ERROR_RETURN(opennsl_switch_control_set(unit,
+        opennslSwitchHashControl, hashControl));
+
+  /* Set the L3 hash controls next. */
+  /* L4 ports hashControl below is valid for ECMP as well as regular UC
+   * trunk load balacing
+   */
+  hashControl |=  (OPENNSL_HASH_CONTROL_MULTIPATH_L4PORTS
+      | OPENNSL_HASH_CONTROL_MULTIPATH_DIP);
+
+  OPENNSL_IF_ERROR_RETURN(opennsl_switch_control_set(unit,
+        opennslSwitchHashControl, hashControl));
+
+  return rv;
+}
+
+/*****************************************************************//**
  * \brief Main function for Trunk application
  *
  * \param argc, argv         commands line arguments
@@ -125,7 +162,8 @@ int main(int argc, char *argv[])
   {
    /* cold boot initialization commands */
     rv = example_port_default_config(unit);
-    if (rv != OPENNSL_E_NONE) {
+    if (rv != OPENNSL_E_NONE)
+    {
       printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
              rv, opennsl_errmsg(rv));
     }
@@ -133,8 +171,18 @@ int main(int argc, char *argv[])
     /* Add ports to default vlan. */
     printf("Adding ports to default vlan.\r\n");
     rv = example_switch_default_vlan_config(unit);
-    if(rv != OPENNSL_E_NONE) {
+    if(rv != OPENNSL_E_NONE)
+    {
       printf("\r\nFailed to add default ports. rv: %s\r\n", opennsl_errmsg(rv));
+      return rv;
+    }
+
+    printf("Setting Hash controls for Trunk.\r\n");
+    rv = example_trunk_hash_controls_set(unit);
+    if(rv != OPENNSL_E_NONE)
+    {
+      printf("\r\nFailed to hash control for Trunk. Error %s\r\n",
+          opennsl_errmsg(rv));
       return rv;
     }
   }

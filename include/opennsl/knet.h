@@ -50,6 +50,8 @@ typedef struct opennsl_knet_netif_s {
                                            interface. */
     opennsl_port_t port;                /**< Local port associated with this
                                            interface. */
+    opennsl_cos_queue_t cosq;           /**< Cos offset from base queue of port
+                                           associated with this interface. */
     char name[OPENNSL_KNET_NETIF_NAME_MAX]; /**< Network interface name (assigned by
                                            kernel) */
 } opennsl_knet_netif_t;
