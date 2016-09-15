@@ -258,6 +258,8 @@ typedef enum opennsl_field_action_e {
                                            param1: Dest port/tgid. */
     opennslFieldActionMirrorEgress = 43, /**< Egress mirror; param0: Dest modid;
                                            param1: Dest port/tgid. */
+    opennslFieldActionL3Switch = 48,    /**< L3-switch packet; param0: ECMP or
+                                           next hop info. */
     opennslFieldActionRpDrop = 52,      /**< Red Priority Drop. */
     opennslFieldActionYpDrop = 84,      /**< Yellow Priority Drop. */
     opennslFieldActionNewClassId = 178, /**< Assign new classification ID. */
