@@ -192,7 +192,7 @@ Appendix B
 
 Open Source Software
 
-bin/gto-trident-brl20/   - Broadcom Trident Switch Verification Kits
+bin/gto-trident-brl20/   - Broadcom Switch Verification Kits with GTO CPU
 
   gto_uImage                         -> Covered by GPLv2
   linux-kernel-bde.ko                -> Covered by GPLv2
@@ -229,3 +229,10 @@ bin/x86-xgs5-deb80       - Dell s6000/s6100 Switch System
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/xlr-xgs5-ub14        - Broadcom Switch Verification Kits with XLR CPU
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+

@@ -395,7 +395,6 @@
     phy_xaui_rx_polarity_flip_1=0xc
     serdes_preemphasis_lane2_xe36=0xa760
     serdes_preemphasis_lane1_xe74=0xc6e0
-    higig2_hdr_mode=1
     serdes_driver_current_lane3_xe37=0x2
     xgxs_rx_lane_map_73=0x1320
     tdma_timeout_usec=5000000
@@ -742,7 +741,6 @@
     serdes_preemphasis_lane0_xe24=0xc6e0
     serdes_preemphasis_lane0_xe16=0xc6e0
     serdes_pre_driver_current_lane3_xe74=0x5
-    stat_if_parity_enable=0
     serdes_preemphasis_lane0_xe0=0xc2f0
     serdes_preemphasis_lane3_xe78=0xcad0
     portmap_5=25:10

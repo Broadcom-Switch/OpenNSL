@@ -2649,6 +2649,124 @@ typedef enum opennsl_port_field_egress_class_select_e {
 
 #if defined(INCLUDE_CES)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Assign/retrieve the Priority Group mapped to the input priority.
+ *
+ *\description Assign/retrieve the Priority Group mapped to the input priority.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   generic port
+ *\param    prio [IN]   input priority
+ *\param    priority_group  [IN]   priority group ID that the input priority
+ *          mapped to
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_priority_group_mapping_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    int prio, 
+    int priority_group ) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Assign/retrieve the Priority Group mapped to the input priority.
+ *
+ *\description Assign/retrieve the Priority Group mapped to the input priority.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   generic port
+ *\param    prio [IN]   input priority
+ *\param    priority_group [OUT]   priority group ID that the input priority
+ *          mapped to
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_priority_group_mapping_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    int prio, 
+    int *priority_group) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/** Priority Group attributes */
+typedef struct opennsl_port_priority_group_config_s {
+    int pfc_transmit_enable;    /**< enable/disable of transmitting PFC message
+                                   even in IBP state */
+} opennsl_port_priority_group_config_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/get the port priority group configuration.
+ *
+ *\description Set/get the port Priority Group configuration.
+ *          The structure opennsl_port_priority_group_config_t is used to
+ *          describte the attributes of a Priority Group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   generic port
+ *\param    priority_group [IN]   priority group id
+ *\param    prigrp_config [IN]   structure describes port priority group
+ *          configuration
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_priority_group_config_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    int priority_group, 
+    opennsl_port_priority_group_config_t *prigrp_config) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set/get the port priority group configuration.
+ *
+ *\description Set/get the port Priority Group configuration.
+ *          The structure opennsl_port_priority_group_config_t is used to
+ *          describte the attributes of a Priority Group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   generic port
+ *\param    priority_group [IN]   priority group id
+ *\param    prigrp_config [OUT]   structure describes port priority group
+ *          configuration
+ *
+ *\retval    OPENNSL_E_NONE Success
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_priority_group_config_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    int priority_group, 
+    opennsl_port_priority_group_config_t *prigrp_config) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/***************************************************************************//** 
+ *\brief Initialize a port priority group configuration struct.
+ *
+ *\description Initializes a Priority Group configuration structure to default
+ *          values. This function should be used to initialize any Priority
+ *          Group configuration structure prior to filling it out and passing
+ *          it to an API function.
+ *
+ *\param    prigrp_config [IN,OUT]   Pointer to the priority group configuration
+ *          object struct.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_port_priority_group_config_t_init(
+    opennsl_port_priority_group_config_t *prigrp_config) LIB_DLL_EXPORTED ;
+
 #include <opennsl/portX.h>
 #endif /* __OPENNSL_PORT_H__ */
 /*@}*/

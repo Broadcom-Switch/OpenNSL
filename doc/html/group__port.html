@@ -57,6 +57,9 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__port__info__s.html">opennsl_port_info_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structopennsl__port__info__s.html" title="opennsl_port_info_s ">opennsl_port_info_s</a>  <a href="structopennsl__port__info__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopennsl__port__priority__group__config__s.html">opennsl_port_priority_group_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority Group attributes.  <a href="structopennsl__port__priority__group__config__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
@@ -605,6 +608,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gaccdf3423fc3e996047cdf8fa1795babf"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="shared_2port_8h.html#a31b56f595ec0709f41157b687e3c4c8a">_shr_port_medium_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#gaccdf3423fc3e996047cdf8fa1795babf">opennsl_port_medium_t</a></td></tr>
 <tr class="memdesc:gaccdf3423fc3e996047cdf8fa1795babf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combo port control/status.  <a href="#gaccdf3423fc3e996047cdf8fa1795babf">More...</a><br /></td></tr>
 <tr class="separator:gaccdf3423fc3e996047cdf8fa1795babf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaafd8349667803f44fa88728f004368db"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__port__priority__group__config__s.html">opennsl_port_priority_group_config_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a></td></tr>
+<tr class="memdesc:gaafd8349667803f44fa88728f004368db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority Group attributes.  <a href="#gaafd8349667803f44fa88728f004368db">More...</a><br /></td></tr>
+<tr class="separator:gaafd8349667803f44fa88728f004368db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -841,6 +847,21 @@ Functions</h2></td></tr>
 <tr class="memitem:gabac44f58ca77a030e1eb930fc0c4d281"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#gabac44f58ca77a030e1eb930fc0c4d281">opennsl_port_priority_color_set</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int prio, <a class="el" href="group__types.html#gac94ae8f7ffe8590dd41a9c7168208c30">opennsl_color_t</a> color) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gabac44f58ca77a030e1eb930fc0c4d281"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set or retrieve color assignment for a given port and priority.  <a href="#gabac44f58ca77a030e1eb930fc0c4d281">More...</a><br /></td></tr>
 <tr class="separator:gabac44f58ca77a030e1eb930fc0c4d281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga46296c89c1b5d2d04d3aec24f8c3d60d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga46296c89c1b5d2d04d3aec24f8c3d60d">opennsl_port_priority_group_config_get</a> (int unit, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> gport, int priority_group, <a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *prigrp_config) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga46296c89c1b5d2d04d3aec24f8c3d60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/get the port priority group configuration.  <a href="#ga46296c89c1b5d2d04d3aec24f8c3d60d">More...</a><br /></td></tr>
+<tr class="separator:ga46296c89c1b5d2d04d3aec24f8c3d60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3bc255011176697e70f41c3e768f71ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga3bc255011176697e70f41c3e768f71ee">opennsl_port_priority_group_config_set</a> (int unit, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> gport, int priority_group, <a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *prigrp_config) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga3bc255011176697e70f41c3e768f71ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set/get the port priority group configuration.  <a href="#ga3bc255011176697e70f41c3e768f71ee">More...</a><br /></td></tr>
+<tr class="separator:ga3bc255011176697e70f41c3e768f71ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61fc8d0bc5f5a1cd2b967755fad4cea0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga61fc8d0bc5f5a1cd2b967755fad4cea0">opennsl_port_priority_group_config_t_init</a> (<a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *prigrp_config) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga61fc8d0bc5f5a1cd2b967755fad4cea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a port priority group configuration struct.  <a href="#ga61fc8d0bc5f5a1cd2b967755fad4cea0">More...</a><br /></td></tr>
+<tr class="separator:ga61fc8d0bc5f5a1cd2b967755fad4cea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafaa111c6bef2c5085a5e61472cf7be9a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#gafaa111c6bef2c5085a5e61472cf7be9a">opennsl_port_priority_group_mapping_get</a> (int unit, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> gport, int prio, int *priority_group) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:gafaa111c6bef2c5085a5e61472cf7be9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign/retrieve the Priority Group mapped to the input priority.  <a href="#gafaa111c6bef2c5085a5e61472cf7be9a">More...</a><br /></td></tr>
+<tr class="separator:gafaa111c6bef2c5085a5e61472cf7be9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ef06a1b8190f6151575299ee87ddf3d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#ga4ef06a1b8190f6151575299ee87ddf3d">opennsl_port_priority_group_mapping_set</a> (int unit, <a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a> gport, int prio, int priority_group) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
+<tr class="memdesc:ga4ef06a1b8190f6151575299ee87ddf3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign/retrieve the Priority Group mapped to the input priority.  <a href="#ga4ef06a1b8190f6151575299ee87ddf3d">More...</a><br /></td></tr>
+<tr class="separator:ga4ef06a1b8190f6151575299ee87ddf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac8a0a7d51474daeddf0e5d8966de8704"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__port.html#gac8a0a7d51474daeddf0e5d8966de8704">opennsl_port_probe</a> (int unit, <a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> pbmp, <a class="el" href="group__types.html#gafe01e01990c60a6e77599be1845613e2">opennsl_pbmp_t</a> *okay_pbmp) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:gac8a0a7d51474daeddf0e5d8966de8704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Probe the port to determine the proper MAC and PHY drivers.  <a href="#gac8a0a7d51474daeddf0e5d8966de8704">More...</a><br /></td></tr>
 <tr class="separator:gac8a0a7d51474daeddf0e5d8966de8704"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4279,6 +4300,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gaafd8349667803f44fa88728f004368db"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structopennsl__port__priority__group__config__s.html">opennsl_port_priority_group_config_s</a>  <a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Priority Group attributes. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a class="anchor" id="ga903dae8c0551492cc12715a9890175f3"></a>
 <div class="memitem">
@@ -7330,6 +7365,269 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Not supported. </td></tr>
     <tr><td class="paramname">OPENNSL_E_XXX</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga46296c89c1b5d2d04d3aec24f8c3d60d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_port_priority_group_config_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>gport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority_group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *&#160;</td>
+          <td class="paramname"><em>prigrp_config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set/get the port priority group configuration. </p>
+<dl class="section user"><dt>Description</dt><dd>Set/get the port Priority Group configuration. The structure opennsl_port_priority_group_config_t is used to describte the attributes of a Priority Group.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">gport</td><td>[IN] generic port </td></tr>
+    <tr><td class="paramname">priority_group</td><td>[IN] priority group id </td></tr>
+    <tr><td class="paramname">prigrp_config</td><td>[OUT] structure describes port priority group configuration</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Feature unavailable </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3bc255011176697e70f41c3e768f71ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_port_priority_group_config_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>gport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority_group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *&#160;</td>
+          <td class="paramname"><em>prigrp_config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set/get the port priority group configuration. </p>
+<dl class="section user"><dt>Description</dt><dd>Set/get the port Priority Group configuration. The structure opennsl_port_priority_group_config_t is used to describte the attributes of a Priority Group.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">gport</td><td>[IN] generic port </td></tr>
+    <tr><td class="paramname">priority_group</td><td>[IN] priority group id </td></tr>
+    <tr><td class="paramname">prigrp_config</td><td>[IN] structure describes port priority group configuration</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Feature unavailable </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga61fc8d0bc5f5a1cd2b967755fad4cea0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opennsl_port_priority_group_config_t_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__port.html#gaafd8349667803f44fa88728f004368db">opennsl_port_priority_group_config_t</a> *&#160;</td>
+          <td class="paramname"><em>prigrp_config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize a port priority group configuration struct. </p>
+<dl class="section user"><dt>Description</dt><dd>Initializes a Priority Group configuration structure to default values. This function should be used to initialize any Priority Group configuration structure prior to filling it out and passing it to an API function.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prigrp_config</td><td>[IN,OUT] Pointer to the priority group configuration object struct.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gafaa111c6bef2c5085a5e61472cf7be9a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_port_priority_group_mapping_get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>gport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>priority_group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assign/retrieve the Priority Group mapped to the input priority. </p>
+<dl class="section user"><dt>Description</dt><dd>Assign/retrieve the Priority Group mapped to the input priority.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">gport</td><td>[IN] generic port </td></tr>
+    <tr><td class="paramname">prio</td><td>[IN] input priority </td></tr>
+    <tr><td class="paramname">priority_group</td><td>[OUT] priority group ID that the input priority mapped to</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Feature unavailable </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Error occurred </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4ef06a1b8190f6151575299ee87ddf3d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int opennsl_port_priority_group_mapping_set </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__types.html#ga238c767c6c5b6a0a47dd9d1504936cf0">opennsl_gport_t</a>&#160;</td>
+          <td class="paramname"><em>gport</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority_group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assign/retrieve the Priority Group mapped to the input priority. </p>
+<dl class="section user"><dt>Description</dt><dd>Assign/retrieve the Priority Group mapped to the input priority.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
+    <tr><td class="paramname">gport</td><td>[IN] generic port </td></tr>
+    <tr><td class="paramname">prio</td><td>[IN] input priority </td></tr>
+    <tr><td class="paramname">priority_group</td><td>[IN] priority group ID that the input priority mapped to</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">OPENNSL_E_NONE</td><td>Success </td></tr>
+    <tr><td class="paramname">OPENNSL_E_UNAVAIL</td><td>Feature unavailable </td></tr>
+    <tr><td class="paramname">OPENNSL_E_XXX</td><td>Error occurred </td></tr>
   </table>
   </dd>
 </dl>

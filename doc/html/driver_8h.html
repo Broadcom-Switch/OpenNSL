@@ -82,6 +82,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a06a6fe41f5ea8664c461423d3cad0923"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#a06a6fe41f5ea8664c461423d3cad0923">opennsl_driver_init</a> (<a class="el" href="driver_8h.html#a9d90a1c69549fe9f0797faee4f5daab5">opennsl_init_t</a> *init)</td></tr>
 <tr class="memdesc:a06a6fe41f5ea8664c461423d3cad0923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initialize the switch.  <a href="#a06a6fe41f5ea8664c461423d3cad0923">More...</a><br /></td></tr>
 <tr class="separator:a06a6fe41f5ea8664c461423d3cad0923"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc634fefff1a9f71c87a04e1eddb8649"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="driver_8h.html#adc634fefff1a9f71c87a04e1eddb8649">readline</a> (const char *prompt)</td></tr>
+<tr class="memdesc:adc634fefff1a9f71c87a04e1eddb8649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a line from a user with editing.  <a href="#adc634fefff1a9f71c87a04e1eddb8649">More...</a><br /></td></tr>
+<tr class="separator:adc634fefff1a9f71c87a04e1eddb8649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ad234382bcecf449046210d8ec0862104"></a>
@@ -157,6 +160,31 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
 <p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc634fefff1a9f71c87a04e1eddb8649"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* readline </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>prompt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a line from a user with editing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prompt</td><td>[IN] prompt string</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* NULL, if the line is empty empty string, if the line is blank text of the line read, otherwise. </dd></dl>
 
 </div>
 </div>

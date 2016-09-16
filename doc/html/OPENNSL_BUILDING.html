@@ -65,7 +65,7 @@ Interface Masters Niagra 2948-6XL switch - x86/Trident2</h2>
 <li>Root file system: Pre-installed on IM switch</li>
 </ul>
 <h2><a class="anchor" id="OPENNSL_WEDGE"></a>
-Wedge Network Switch Platform - Trident2</h2>
+Wedge Network Switch Platform - x86/Trident2</h2>
 <p>For Wedge Network Switch platform, OpenNSL can be compiled on the Wedge switch OR using offline CentOS build server. The boot loader, kernel headers, toolchain are assumed to be pre-installed on the Switch/Server.</p>
 <ul>
 <li>Toolchain: /usr/lib/gcc/x86_64-linux-gnu/4.6/cc1 (Pre-installed) </li>
@@ -78,18 +78,30 @@ Wedge Network Switch Platform - Trident2</h2>
 Celestica Redstone-XP/Seastone-XP switch - x86/Trident2</h2>
 <p>For Celestica Redstone-XP/Seastone-XP switch, OpenNSL can be compiled on the switch OR using offline UBUNTU build server. The boot loader, kernel headers, toolchain are assumed to be pre-installed on the Switch/Server.</p>
 <ul>
-<li>Toolchain: /usr/lib/gcc/x86_64-linux-gnu/4.6/cc1 (Pre-installed) </li>
+<li>Toolchain: /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 (Pre-installed) </li>
 <li>Kernel headers: /usr/src/linux-headers-3.16.0-29-generic (Pre-installed) </li>
 <li>Bootloader: ONIE (Pre-installed) </li>
 <li>Kernel version: Linux version 3.16.0-29-generic (Pre-installed) </li>
 <li>Root file system: Pre-installed on Celestica Redstone-XP/Seastone-XP switch</li>
 </ul>
+<h2><a class="anchor" id="OPENNSL_ACT"></a>
+Accton AS5712 switch - x86/Trident2</h2>
 <p>For Accton AS5712 Network Switch platform, OpenNSL can be compiled using offline build server. The boot loader, kernel headers, toolchain are assumed to be pre-installed on the Server.</p>
 <ul>
 <li>Toolchain: build/tmp/sysroots/x86_64-linux/usr/bin/x86_64-openswitch-linux/x86_64-openswitch-linux-gcc (Pre-installed) </li>
 <li>Kernel headers: Linux headers for kernel version 3.9.11 (Pre-installed) </li>
 <li>Bootloader: ONIE (Pre-installed) </li>
 <li>Kernel version: Linux version 3.9.11 (Pre-installed) </li>
+<li>Root file system: Pre-installed on the switch</li>
+</ul>
+<h2><a class="anchor" id="OPENNSL_DELL"></a>
+Dell S6000 (x86/Trident2), Dell S6100 (x86/Tomahawk) switch</h2>
+<p>For Dell S6000/S6100 Network Switch platforms, OpenNSL can be compiled using offline build server. The boot loader, kernel headers, toolchain are assumed to be pre-installed on the Server.</p>
+<ul>
+<li>Toolchain: /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 (Pre-installed) </li>
+<li>Kernel headers: Linux headers for kernel version 3.16.7-ckt7 (Pre-installed) </li>
+<li>Bootloader: ONIE (Pre-installed) </li>
+<li>Kernel version: Linux version 3.16.7-ckt7 (Pre-installed) </li>
 <li>Root file system: Pre-installed on the switch</li>
 </ul>
 <h1><a class="anchor" id="OPENNSL_GPL"></a>
@@ -101,9 +113,9 @@ GPL Linux Kernel modules</h1>
 <li>Identify the path for Linux header files associated with the kernel. </li>
 <li>Identify the path for toolchain used for the target platform. </li>
 <li>Update the KERNDIR, LINUX_INCLUDE, CROSS_COMPILE variables in the platform specific Makefile. </li>
-<li>For GTO based Broadcom reference platforms, use the "sdk-x.y.z-gpl-modules/make/Makefile.linux-gto-2_6" file. </li>
+<li>For x86 CPU based platforms, use the "sdk-x.y.z-gpl-modules/make/Makefile.linux-x86-smp_generic_64-2_6" file. </li>
 <li>Invoke 'make' from the platform specific target folder 'sdk-x.y.z-gpl-modules/systems/linux/user/{PLATFORM}'. </li>
-<li>For GTO based Broadcom reference platforms, invoke 'make' from 'sdk-x.y.z-gpl-modules/systems/linux/user/gto-2_6' folder. </li>
+<li>For x86 CPU based platforms, invoke 'make' from 'sdk-x.y.z-gpl-modules/systems/linux/user/x86-smp_generic_64-2_6' folder. </li>
 <li>The compiled kernel modules are available in 'sdk-x.y.z-gpl-modules/build/linux/user/{PLATFORM}' folder. </li>
 </ul>
 </div></div><!-- contents -->

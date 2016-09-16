@@ -73,4 +73,15 @@ extern int opennsl_driver_shell();
 extern int opennsl_driver_process_command(char *commandBuf);
 #endif
 
+/*****************************************************************//**
+* \brief Get a line from a user with editing
+*
+* \param prompt    [IN]    prompt string
+*
+* \return char*     NULL, if the line is empty
+*                   empty string, if the line is blank
+*                   text of the line read, otherwise.
+********************************************************************/
+extern char *readline(const char *prompt);
+
 #endif  /* DRIVER_H */

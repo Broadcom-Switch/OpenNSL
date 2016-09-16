@@ -41,30 +41,14 @@
 <div class="title">Tool Chain installation </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The Broadcom&reg; Tool Chain provides compiler tools and libraries for the development of OpenNSL applications on Broadcom reference platforms. Consult your Broadcom&reg; support representative to determine the correct toolchain to use for your platform, and the correct CPU within that toolchain. For the Interface Masters/Celestica Redstone-XP/Seastone-XP platforms the vendor supplied compiler should be used.</p>
-<p>The Broadcom Linux Toolchain is supported on the following systems:</p>
-<ul>
-<li>Centos 5.2 or later (64-bit) </li>
-<li>Red Hat Enterprise Linux 5 (64-bit)</li>
-</ul>
-<h1><a class="anchor" id="OPENNSL_TOOLCHAIN_BRCM"></a>
-Broadcom Linux Tool Chain</h1>
-<p>The Broadcom Linux toolchain tar ball contains a number of different toolchains for different CPU architectures. The toolchain is available on DocSafe.</p>
-<p>The toolchain is supplied as a compressed tar ball. The tools must be installed as follows:</p>
-<pre>
-  unix% su
-  # cd /
-  # rm -rf /projects/nwsoft-toolchains/brl
-  # tar jxf &lt;path&gt;/&lt;toolchain.tar.bz2&gt;
-</pre><h2><a class="anchor" id="OPENNSL_CROSS_COMPILE"></a>
-Updating the CROSS_COMPILE variable</h2>
+<div class="textblock"><p>For the Interface Masters/Celestica Redstone-XP, Seastone-XP/AS5712/Dell S6000 and S6100 platforms the vendor supplied compiler should be used.</p>
 <p>The OpenNSL compile environment requires that the CROSS_COMPILE variable be set to the full path of the cross compiler you are using.</p>
 <p>This can be done in one of two ways:</p>
 <ul>
 <li>Issue the command below. This must be done once for each shell instance:</li>
 </ul>
 <pre>
-  unix% export CROSS_COMPILE=/projects/nwsoft-toolchains/brl_2.0/gto/bin/powerpc-broadcom-linux-gnu-
+  unix% export CROSS_COMPILE=/usr/bin
 </pre><ul>
 <li>Edit the file output/&lt;platform&gt;/Makefile in the OpenNSL and modify the lines that sets the CROSS_COMPILE variable, or add your own line. This need to be done only once for all shell instances.</li>
 </ul>
