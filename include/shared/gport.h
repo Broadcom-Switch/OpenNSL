@@ -16,8 +16,7 @@
  *
  **********************************************************************
  * File:        gport.h
- * Details:     This file defines common error codes to be shared
- *                              between API layers.
+ * Details:     This file defines gport (generic port) parameters.
  *
  *             Its contents are not used directly by applications;
  *             it is used only by header files of parent APIs which
@@ -56,20 +55,23 @@
 #define _SHR_GPORT_TYPE_PROFILE            40
 #define _SHR_GPORT_TYPE_DESTMOD_QUEUE_GROUP      41 /* DMVOQ gport */
 
+/* definitions for cosq core handling */
 #define _SHR_COSQ_GPORT_COMMON_QUEUE_BITS 18
 #define _SHR_COSQ_GPORT_COMMON_QUEUE_MASK ((1 << _SHR_COSQ_GPORT_COMMON_QUEUE_BITS) - 1)
 #define _SHR_COSQ_GPORT_COMMON_CORE_BITS 3
+#define _SHR_COSQ_GPORT_COMMON_CORE_SHIFT _SHR_COSQ_GPORT_COMMON_QUEUE_BITS
 #define _SHR_COSQ_GPORT_COMMON_CORE_MASK ((1 << _SHR_COSQ_GPORT_COMMON_CORE_BITS) - 1)
 #define _SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE _SHR_COSQ_GPORT_COMMON_CORE_MASK
-#define _SHR_COSQ_GPORT_COMMON_CORE_SHIFT _SHR_COSQ_GPORT_COMMON_QUEUE_BITS
-
+/*
+ * Note that only the bits under _SHR_COSQ_GPORT_CORE_MASK are considred
+ * See, e.g. _SHR_COSQ_GPORT_CORE_GET
+ */
 #define _SHR_CORE_ALL -17
 #define _SHR_CORE_FIELD2ID(field) ((field) != _SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE ? field : _SHR_CORE_ALL)
 #define _SHR_CORE_ID2FIELD(id) ((id) != _SHR_CORE_ALL ? id : _SHR_COSQ_GPORT_COMMON_ALL_CORES_VALUE)
 
 #define _SHR_GPORT_TYPE_SHIFT                           26
 #define _SHR_GPORT_TYPE_MASK                            0x3f
-
 #define _SHR_GPORT_MODID_SHIFT                          11
 #define _SHR_GPORT_MODID_MASK                           0x7fff
 #define _SHR_GPORT_PORT_SHIFT                           0

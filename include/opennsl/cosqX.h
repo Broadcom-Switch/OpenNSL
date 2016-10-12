@@ -271,13 +271,15 @@ extern int opennsl_cosq_port_mapping_get(
     opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
- *\brief Get or set the mapping from internal priority to CoS queue.
+ *\brief Get or set the mapping of multiple internal priorities to their
+ *       corresponding CoS queues.
  *
- *\description Configure or retrieve the mapping from the internal priority value
- *          to Cos Queue. The internal priority is usually initialized from
- *          the packet priority.  For tagged packets the priority is extracted
- *          from the PRI field of the tag. For untagged packets, the priority
- *          is specified using the API =opennsl_port_untagged_priority_set .
+ *\description Configure or retrieve the mapping of multiple internal priority
+ *          value to their corresponding  Cos Queue. The internal priority is
+ *          usually initialized from the packet priority.  For tagged packets
+ *          the priority is extracted from the PRI field of the tag. For
+ *          untagged packets, the priority is specified using the API
+ *          =opennsl_port_untagged_priority_set .
  *          On some devices, the mapping tables may be shared among several
  *          ports, so setting one port's mappings may affect other ports'.
  *          On some devices, packets directed to the CPU interface port may
@@ -297,8 +299,10 @@ extern int opennsl_cosq_port_mapping_get(
  *\param    port [IN]   Device or logical port or GPORT ID
  *\param    count [IN]   number of elements in priority array and cosq array in
  *          case of multi get or set
- *\param    priority_array [IN]
- *\param    cosq_array [IN]
+ *\param    priority_array [IN]   array of internal priority to map
+ *\param    cosq_array [IN]   array of Cos queue where each element of cosq_array
+ *          (cos) corresponds to the respective element of priority_array
+ *          (internal priority)
  *
  *\retval    OPENNSL_E_NONE
  *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
@@ -313,13 +317,15 @@ extern int opennsl_cosq_port_mapping_multi_set(
     opennsl_cos_queue_t *cosq_array) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
- *\brief Get or set the mapping from internal priority to CoS queue.
+ *\brief Get or set the mapping of multiple internal priorities to their
+ *       corresponding CoS queues.
  *
- *\description Configure or retrieve the mapping from the internal priority value
- *          to Cos Queue. The internal priority is usually initialized from
- *          the packet priority.  For tagged packets the priority is extracted
- *          from the PRI field of the tag. For untagged packets, the priority
- *          is specified using the API =opennsl_port_untagged_priority_set .
+ *\description Configure or retrieve the mapping of multiple internal priority
+ *          value to their corresponding  Cos Queue. The internal priority is
+ *          usually initialized from the packet priority.  For tagged packets
+ *          the priority is extracted from the PRI field of the tag. For
+ *          untagged packets, the priority is specified using the API
+ *          =opennsl_port_untagged_priority_set .
  *          On some devices, the mapping tables may be shared among several
  *          ports, so setting one port's mappings may affect other ports'.
  *          On some devices, packets directed to the CPU interface port may
@@ -339,8 +345,10 @@ extern int opennsl_cosq_port_mapping_multi_set(
  *\param    port [IN]   Device or logical port or GPORT ID
  *\param    count [IN]   number of elements in priority array and cosq array in
  *          case of multi get or set
- *\param    priority_array [IN]
- *\param    cosq_array [OUT]
+ *\param    priority_array [IN]   array of internal priority to map
+ *\param    cosq_array [OUT]   array of Cos queue where each element of cosq_array
+ *          (cos) corresponds to the respective element of priority_array
+ *          (internal priority)
  *
  *\retval    OPENNSL_E_NONE
  *\retval    OPENNSL_E_PARAM Invalid priority, or device not configured for the
@@ -395,7 +403,10 @@ extern int opennsl_cosq_port_mapping_multi_get(
  *\param    unit [IN]   Unit number.
  *\param    mode [IN]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [IN]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
+ *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
+ *          arrays in network switch devices if and only if opennsl_num_cos=10 is
+ *          configured.
  *\param    delay [IN]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -439,7 +450,10 @@ extern int opennsl_cosq_sched_set(
  *\param    pbm [IN]   Port bit map of ports to configure
  *\param    mode [IN]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [IN]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
+ *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
+ *          arrays in network switch devices if and only if opennsl_num_cos=10 is
+ *          configured.
  *\param    delay [IN]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -483,7 +497,10 @@ extern int opennsl_cosq_port_sched_set(
  *\param    unit [IN]   Unit number.
  *\param    mode [OUT]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [OUT]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
+ *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
+ *          arrays in network switch devices if and only if opennsl_num_cos=10 is
+ *          configured.
  *\param    delay [OUT]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -527,7 +544,10 @@ extern int opennsl_cosq_sched_get(
  *\param    pbm [IN]   Port bit map of ports to configure
  *\param    mode [OUT]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [OUT]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
+ *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
+ *          arrays in network switch devices if and only if opennsl_num_cos=10 is
+ *          configured.
  *\param    delay [OUT]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -575,6 +595,9 @@ extern int opennsl_cosq_sched_weight_max_get(
  *          and a cosq value of -1 will configure all cosq's.
  *          The supplied bandwidth values may be rounded up to the nearest
  *          value supported by the HW.
+ *          On network switch devices, while using this API kbits_sec_min
+ *          should be used for specifying rate and kbits_sec_max for
+ *          specifying the burst.
  *          The available flags for bandwidth response tuning are
  *          =OPENNSL_COSQ_BW_f.
  *
@@ -609,6 +632,9 @@ extern int opennsl_cosq_port_bandwidth_set(
  *          and a cosq value of -1 will configure all cosq's.
  *          The supplied bandwidth values may be rounded up to the nearest
  *          value supported by the HW.
+ *          On network switch devices, while using this API kbits_sec_min
+ *          should be used for specifying rate and kbits_sec_max for
+ *          specifying the burst.
  *          The available flags for bandwidth response tuning are
  *          =OPENNSL_COSQ_BW_f.
  *
@@ -2033,9 +2059,11 @@ typedef enum opennsl_cosq_stat_e {
  *          is an enumeration of the available statistics. For _get functions,
  *          if the given cosq is -1, then the sum of the values of all the
  *          given port's CoS queues will be returned. For _set functions, if
- *          the given cosq is -1, the value of the port's first Cos queue will
- *          be set to the given value; the value of the port's all other Cos
- *          queues will be set to zero.
+ *          the given cosq is -1, the value of the port's first CoS queue will
+ *          be set to the given value; the value of the port's all other CoS
+ *          queues will be kept as untouched except for device network switch,
+ *          on which the value of the port's all other CoS queues will be set
+ *          to zero.
  *          When setting the non-zero value, if the device supports separate
  *          unicast and multicast queues, the value being set is evenly
  *          distributed between unicast and multicast counter.
@@ -2095,9 +2123,11 @@ extern int opennsl_cosq_stat_sync_get(
  *          is an enumeration of the available statistics. For _get functions,
  *          if the given cosq is -1, then the sum of the values of all the
  *          given port's CoS queues will be returned. For _set functions, if
- *          the given cosq is -1, the value of the port's first Cos queue will
- *          be set to the given value; the value of the port's all other Cos
- *          queues will be set to zero.
+ *          the given cosq is -1, the value of the port's first CoS queue will
+ *          be set to the given value; the value of the port's all other CoS
+ *          queues will be kept as untouched except for device network switch,
+ *          on which the value of the port's all other CoS queues will be set
+ *          to zero.
  *          When setting the non-zero value, if the device supports separate
  *          unicast and multicast queues, the value being set is evenly
  *          distributed between unicast and multicast counter.

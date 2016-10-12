@@ -156,9 +156,6 @@ extern int opennsl_knet_init(
  *          be the API. Once created, the application is responsible for
  *          managing the network interface through the appropriate system
  *          calls such as the POSIX sockets interface.
- *          For RCPU mode use network interface type
- *          OPENNSL_KNET_NETIF_T_TX_META_DATA and add
- *          OPENNSL_KNET_NETIF_F_RCPU_ENCAP to the network interface flags.
  *
  *\param    unit [IN]   Unit number.
  *\param    netif [IN,OUT]   Network interface configuration

@@ -83,8 +83,11 @@ typedef struct opennsl_qos_map_s {
  *          conjunction with map type. OPENNSL_QOS_MAP_EGRESS  - Create an
  *          egress map used in conjunction with map type.
  *          L2 flags: OPENNSL_QOS_MAP_L2 - create L2 type of map - defaults to
- *          outer tag map.  OPENNSL_QOS_MAP_L2_OUTER_TAG - create L2 outer tag
- *          map. OPENNSL_QOS_MAP_L2_INNER_TAG - create L2 inner tag map.
+ *          outer tag map. For Trident2plus,                  this flag will
+ *          only create an MPLS type of map while outer tag map will          
+ *                 be created via flag OPENNSL_QOS_MAP_L3.
+ *          OPENNSL_QOS_MAP_L2_OUTER_TAG - create L2 outer tag map.
+ *          OPENNSL_QOS_MAP_L2_INNER_TAG - create L2 inner tag map.
  *          OPENNSL_QOS_MAP_L2_UNTAGGED - create L2 untagged map.
  *          OPENNSL_QOS_MAP_L2_VLAN_PCP - indicates that mapping is done via
  *          VLAN_PCP rather than LIF.                            If not set
@@ -92,13 +95,16 @@ typedef struct opennsl_qos_map_s {
  *          MiM flags: OPENNSL_QOS_MAP_MIM_ITAG - create a MiM map - used in
  *          conjunction wiht L2 flags.
  *          L3 flags: OPENNSL_QOS_MAP_L3 - create L3 type of map - defaults to
- *          IPV4 map. OPENNSL_QOS_MAP_IPV4 - create IPV4 L3 map.
- *          OPENNSL_QOS_MAP_IPV6 - create IPV6 L3 map.
+ *          IPV4 map. For Trident2plus,                  this flag will create
+ *          both IPV4 map and outer tag map. OPENNSL_QOS_MAP_IPV4 - create
+ *          IPV4 L3 map. OPENNSL_QOS_MAP_IPV6 - create IPV6 L3 map.
  *          FCOE flags: OPENNSL_QOS_MAP_VFT - create a FCOE VFT map.
  *          OPENNSL_QOS_MAP_VSAN - create a FCOE VSAN map.
  *          MPLS OPENNSL_QOS_MAP_MPLS - create an MPLS type of map.
  *          OPENNSL_QOS_MAP_MPLS_ELSP - create an MPLS map for ELSP.
  *          OPENNSL_QOS_MAP_MPLS_PHP - create an MPLS map for PHP.
+ *          MiML flags: OPENNSL_QOS_MAP_MIML - create a MiML map - used in
+ *          conjunction wiht L2 flags.
  *          Other: OPENNSL_QOS_MAP_ENCAP - indicates an encapsulated header.
  *          OPENNSL_QOS_MAP_PACKET_INVALID  Drops packets on a specific
  *          port*VLAN when the UP/PCP                              values do

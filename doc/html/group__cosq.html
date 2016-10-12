@@ -209,19 +209,11 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa8959878c1b7db682aefad952de39e794">opennslBstStatIdHeadroomPool</a> = 9, 
 <br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa133237915251cc389e76f591cee31481">opennslBstStatIdEgrUCastPortShared</a> = 10, 
+&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1faf552307d224ed2c1abeca8d198db8238">opennslBstStatIdEgrPortPoolSharedUcast</a> = 10, 
 <br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa2245dc8e0c37c313779a4cca41551088">opennslBstStatIdEgrPortShared</a> = 11, 
+&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa6a8ac72075dce7503050e546ac3eb3b5">opennslBstStatIdEgrPortPoolSharedMcast</a> = 11, 
 <br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa7b2572efc737e33351e1ea52683be92d">opennslBstStatIdRQEQueue</a> = 12, 
-<br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa4475e196e1095384641098ce25f44d0a">opennslBstStatIdRQEPool</a> = 13, 
-<br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa29e2fffb9b6efeefebf1a9446fea463a">opennslBstStatIdUcastGroup</a> = 14, 
-<br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fa8af8fcc4e052c97d3ec59d07b7093695">opennslBstStatIdCpuQueue</a> = 15, 
-<br />
-&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fac0c4e84a9fc5006e54bd424c26a6c68f">opennslBstStatIdMaxCount</a> = 16
+&#160;&#160;<a class="el" href="group__cosq.html#ggad2513b2cc3002680ce77d18a8b879e1fac0c4e84a9fc5006e54bd424c26a6c68f">opennslBstStatIdMaxCount</a> = 12
 <br />
  }<tr class="memdesc:gad2513b2cc3002680ce77d18a8b879e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">BST Tracing statistics resources type eumerations.  <a href="group__cosq.html#gad2513b2cc3002680ce77d18a8b879e1f">More...</a><br /></td></tr>
 <tr class="separator:gad2513b2cc3002680ce77d18a8b879e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -578,10 +570,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:gafdd82072bef737747680321a9c77f71e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#gafdd82072bef737747680321a9c77f71e">More...</a><br /></td></tr>
 <tr class="separator:gafdd82072bef737747680321a9c77f71e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0f550fc5ae87d89568bd177db818901a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cosq.html#ga0f550fc5ae87d89568bd177db818901a">opennsl_cosq_port_mapping_multi_get</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int count, <a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a> *priority_array, <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> *cosq_array) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:ga0f550fc5ae87d89568bd177db818901a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#ga0f550fc5ae87d89568bd177db818901a">More...</a><br /></td></tr>
+<tr class="memdesc:ga0f550fc5ae87d89568bd177db818901a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping of multiple internal priorities to their corresponding CoS queues.  <a href="#ga0f550fc5ae87d89568bd177db818901a">More...</a><br /></td></tr>
 <tr class="separator:ga0f550fc5ae87d89568bd177db818901a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae7d19129e112d7abd588b6f635c11482"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cosq.html#gae7d19129e112d7abd588b6f635c11482">opennsl_cosq_port_mapping_multi_set</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, int count, <a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a> *priority_array, <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> *cosq_array) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
-<tr class="memdesc:gae7d19129e112d7abd588b6f635c11482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#gae7d19129e112d7abd588b6f635c11482">More...</a><br /></td></tr>
+<tr class="memdesc:gae7d19129e112d7abd588b6f635c11482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping of multiple internal priorities to their corresponding CoS queues.  <a href="#gae7d19129e112d7abd588b6f635c11482">More...</a><br /></td></tr>
 <tr class="separator:gae7d19129e112d7abd588b6f635c11482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga87ef1cfd5dfced9be6af791e9cce83cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cosq.html#ga87ef1cfd5dfced9be6af791e9cce83cd">opennsl_cosq_port_mapping_set</a> (int unit, <a class="el" href="group__types.html#gacaeba2b4ddbc89b0e556720a9388885f">opennsl_port_t</a> <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>, <a class="el" href="group__types.html#gaf6436be232d28730cfb351b4e8b967fc">opennsl_cos_t</a> priority, <a class="el" href="group__types.html#gaf746bf383c3bd5c9de4bb442727a6405">opennsl_cos_queue_t</a> cosq) <a class="el" href="commdefs_8h.html#ae4b46fd67f240eb74299c3cc714368f1">LIB_DLL_EXPORTED</a></td></tr>
 <tr class="memdesc:ga87ef1cfd5dfced9be6af791e9cce83cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get or set the mapping from internal priority to CoS queue.  <a href="#ga87ef1cfd5dfced9be6af791e9cce83cd">More...</a><br /></td></tr>
@@ -629,7 +621,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00562">562</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00582">582</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +637,7 @@ Functions</h2></td></tr>
 
 <p>Link Level Flow Control setting. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00563">563</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00583">583</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -661,7 +653,7 @@ Functions</h2></td></tr>
 
 <p>XGS3 only. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00362">362</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00370">370</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -675,7 +667,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00641">641</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00667">667</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -689,7 +681,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00638">638</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00664">664</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -703,7 +695,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00637">637</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00663">663</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -717,7 +709,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00634">634</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00660">660</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -731,7 +723,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00636">636</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00662">662</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -745,7 +737,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00635">635</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00661">661</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -759,7 +751,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00644">644</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00670">670</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -773,7 +765,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00639">639</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00665">665</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -787,7 +779,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00632">632</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00658">658</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -801,7 +793,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00649">649</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00675">675</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -815,7 +807,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00642">642</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00668">668</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -829,7 +821,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00633">633</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00659">659</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -843,7 +835,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00650">650</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00676">676</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -857,7 +849,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00640">640</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00666">666</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +863,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00643">643</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00669">669</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -885,7 +877,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00647">647</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00673">673</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -899,7 +891,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00648">648</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00674">674</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -913,7 +905,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00646">646</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00672">672</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -927,7 +919,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00645">645</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00671">671</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -941,7 +933,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01449">1449</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01475">1475</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -957,7 +949,7 @@ Functions</h2></td></tr>
 
 <p>Disable queue, used for OPENNSL_COSQ_GPORT_CALENDAR scheduling discipline. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01454">1454</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01480">1480</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -971,7 +963,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01453">1453</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01479">1479</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -985,7 +977,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01450">1450</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01476">1476</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -999,7 +991,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01451">1451</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01477">1477</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1013,7 +1005,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01447">1447</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01473">1473</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1027,7 +1019,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01446">1446</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01472">1472</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1041,7 +1033,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00929">929</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00955">955</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1055,7 +1047,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01452">1452</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01478">1478</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1069,7 +1061,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01448">1448</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01474">1474</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1083,7 +1075,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01445">1445</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01471">1471</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1099,7 +1091,7 @@ Functions</h2></td></tr>
 
 <p>Pass through. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00357">357</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00365">365</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1117,7 +1109,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00366">366</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00374">374</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1145,7 +1137,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00367">367</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00375">375</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1161,7 +1153,7 @@ Functions</h2></td></tr>
 
 <p>Weights are ignored. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00359">359</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00367">367</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1177,7 +1169,7 @@ Functions</h2></td></tr>
 
 <p>Weights are ignored. </p>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00358">358</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00366">366</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1191,7 +1183,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00365">365</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00373">373</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1205,7 +1197,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00364">364</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00372">372</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1219,7 +1211,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00363">363</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00371">371</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1233,7 +1225,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00361">361</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00369">369</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1247,7 +1239,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00360">360</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00368">368</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1330,7 +1322,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01086">1086</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l01112">1112</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1391,23 +1383,11 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa8959878c1b7db682aefad952de39e794"></a>opennslBstStatIdHeadroomPool&#160;</td><td class="fielddoc">
 <p>BST Tracing the Headroom Pool Usage Count. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa133237915251cc389e76f591cee31481"></a>opennslBstStatIdEgrUCastPortShared&#160;</td><td class="fielddoc">
-<p>BST Tracing resource UC per egress port SP. </p>
+<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1faf552307d224ed2c1abeca8d198db8238"></a>opennslBstStatIdEgrPortPoolSharedUcast&#160;</td><td class="fielddoc">
+<p>Per Port Pool unicast BST Tracing resource. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa2245dc8e0c37c313779a4cca41551088"></a>opennslBstStatIdEgrPortShared&#160;</td><td class="fielddoc">
-<p>BST Tracing resource per egress port SP. </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa7b2572efc737e33351e1ea52683be92d"></a>opennslBstStatIdRQEQueue&#160;</td><td class="fielddoc">
-<p>BST Tracing resource per RQE queue. </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa4475e196e1095384641098ce25f44d0a"></a>opennslBstStatIdRQEPool&#160;</td><td class="fielddoc">
-<p>BST tracing resource per RQE Pool. </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa29e2fffb9b6efeefebf1a9446fea463a"></a>opennslBstStatIdUcastGroup&#160;</td><td class="fielddoc">
-<p>BST Tracing resource per Ucast queue group. </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa8af8fcc4e052c97d3ec59d07b7093695"></a>opennslBstStatIdCpuQueue&#160;</td><td class="fielddoc">
-<p>BST Tracking resource per CPU queue. </p>
+<tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fa6a8ac72075dce7503050e546ac3eb3b5"></a>opennslBstStatIdEgrPortPoolSharedMcast&#160;</td><td class="fielddoc">
+<p>Per Port Pool multicast BST Tracing resource. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ggad2513b2cc3002680ce77d18a8b879e1fac0c4e84a9fc5006e54bd424c26a6c68f"></a>opennslBstStatIdMaxCount&#160;</td><td class="fielddoc">
 <p>Must be the last. </p>
@@ -1721,7 +1701,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00823">823</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l00849">849</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1766,7 +1746,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="cosqX_8h_source.html#l02021">2021</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
+<p>Definition at line <a class="el" href="cosqX_8h_source.html#l02047">2047</a> of file <a class="el" href="cosqX_8h_source.html">cosqX.h</a>.</p>
 
 </div>
 </div>
@@ -1897,8 +1877,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Referenced by <a class="el" href="example__bst_8c.html#ab09e0ef72430423530fa3a3c8434d47e">example_bst_default_profile_set()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="ga98ae2a8fe5ee8b19dd7cdae16342de50"></a>
@@ -1955,8 +1933,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
 
 </div>
 </div>
@@ -2028,8 +2004,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
 
 </div>
 </div>
@@ -2151,8 +2125,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
 
 </div>
 </div>
@@ -4496,7 +4468,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configure a port's bandwidth distribution among CoS queues. </p>
-<dl class="section user"><dt>Description</dt><dd>On some devices, the bandwidth allocated to each CoS queue may be configured. The maximum bandwidth setting is applicable to any mode on these devices. However, for non-XCore (tm) and non-XGS devices, the minimum bandwidth settings and the preference flags are only valid when the WEIGHTED_FAIR_QUEUING mode is selected. The order of the calls opennsl_cosq_port_bandwidth_set and opennsl_cosq_port_sched_set is not important. A port value of -1 or gport type for system configuration will configure all ports, and a cosq value of -1 will configure all cosq's. The supplied bandwidth values may be rounded up to the nearest value supported by the HW. The available flags for bandwidth response tuning are =OPENNSL_COSQ_BW_f.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>On some devices, the bandwidth allocated to each CoS queue may be configured. The maximum bandwidth setting is applicable to any mode on these devices. However, for non-XCore (tm) and non-XGS devices, the minimum bandwidth settings and the preference flags are only valid when the WEIGHTED_FAIR_QUEUING mode is selected. The order of the calls opennsl_cosq_port_bandwidth_set and opennsl_cosq_port_sched_set is not important. A port value of -1 or gport type for system configuration will configure all ports, and a cosq value of -1 will configure all cosq's. The supplied bandwidth values may be rounded up to the nearest value supported by the HW. On network switch devices, while using this API kbits_sec_min should be used for specifying rate and kbits_sec_max for specifying the burst. The available flags for bandwidth response tuning are =OPENNSL_COSQ_BW_f.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -4566,7 +4538,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configure a port's bandwidth distribution among CoS queues. </p>
-<dl class="section user"><dt>Description</dt><dd>On some devices, the bandwidth allocated to each CoS queue may be configured. The maximum bandwidth setting is applicable to any mode on these devices. However, for non-XCore (tm) and non-XGS devices, the minimum bandwidth settings and the preference flags are only valid when the WEIGHTED_FAIR_QUEUING mode is selected. The order of the calls opennsl_cosq_port_bandwidth_set and opennsl_cosq_port_sched_set is not important. A port value of -1 or gport type for system configuration will configure all ports, and a cosq value of -1 will configure all cosq's. The supplied bandwidth values may be rounded up to the nearest value supported by the HW. The available flags for bandwidth response tuning are =OPENNSL_COSQ_BW_f.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>On some devices, the bandwidth allocated to each CoS queue may be configured. The maximum bandwidth setting is applicable to any mode on these devices. However, for non-XCore (tm) and non-XGS devices, the minimum bandwidth settings and the preference flags are only valid when the WEIGHTED_FAIR_QUEUING mode is selected. The order of the calls opennsl_cosq_port_bandwidth_set and opennsl_cosq_port_sched_set is not important. A port value of -1 or gport type for system configuration will configure all ports, and a cosq value of -1 will configure all cosq's. The supplied bandwidth values may be rounded up to the nearest value supported by the HW. On network switch devices, while using this API kbits_sec_min should be used for specifying rate and kbits_sec_max for specifying the burst. The available flags for bandwidth response tuning are =OPENNSL_COSQ_BW_f.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -4687,15 +4659,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get or set the mapping from internal priority to CoS queue. </p>
-<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping from the internal priority value to Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
+<p>Get or set the mapping of multiple internal priorities to their corresponding CoS queues. </p>
+<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping of multiple internal priority value to their corresponding Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">port</td><td>[IN] Device or logical port or GPORT ID </td></tr>
     <tr><td class="paramname">count</td><td>[IN] number of elements in priority array and cosq array in case of multi get or set </td></tr>
-    <tr><td class="paramname">priority_array</td><td>[IN] </td></tr>
-    <tr><td class="paramname">cosq_array</td><td>[OUT]</td></tr>
+    <tr><td class="paramname">priority_array</td><td>[IN] array of internal priority to map </td></tr>
+    <tr><td class="paramname">cosq_array</td><td>[OUT] array of Cos queue where each element of cosq_array (cos) corresponds to the respective element of priority_array (internal priority)</td></tr>
   </table>
   </dd>
 </dl>
@@ -4752,15 +4724,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get or set the mapping from internal priority to CoS queue. </p>
-<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping from the internal priority value to Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
+<p>Get or set the mapping of multiple internal priorities to their corresponding CoS queues. </p>
+<dl class="section user"><dt>Description</dt><dd>Configure or retrieve the mapping of multiple internal priority value to their corresponding Cos Queue. The internal priority is usually initialized from the packet priority. For tagged packets the priority is extracted from the PRI field of the tag. For untagged packets, the priority is specified using the API =opennsl_port_untagged_priority_set . On some devices, the mapping tables may be shared among several ports, so setting one port's mappings may affect other ports'. On some devices, packets directed to the CPU interface port may have their priority assigned independent of this setting. For more information see =opennsl_switch_control_set . On some devices, a port value of -1 or gport type for system configuration will configure all ports. Some devices support Enhanced Transmission Selection (ETS) which requires to use GPORT ID for the port argument. When the ETS mode is enabled, they configure and retrive the mapping from the internal priority to the offset (which is equal to the value of cosq) of the unicast queues and multicast queues attached to the egress port. Most devices have 8 internal priorities (0 to 7).</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">port</td><td>[IN] Device or logical port or GPORT ID </td></tr>
     <tr><td class="paramname">count</td><td>[IN] number of elements in priority array and cosq array in case of multi get or set </td></tr>
-    <tr><td class="paramname">priority_array</td><td>[IN] </td></tr>
-    <tr><td class="paramname">cosq_array</td><td>[IN]</td></tr>
+    <tr><td class="paramname">priority_array</td><td>[IN] array of internal priority to map </td></tr>
+    <tr><td class="paramname">cosq_array</td><td>[IN] array of Cos queue where each element of cosq_array (cos) corresponds to the respective element of priority_array (internal priority)</td></tr>
   </table>
   </dd>
 </dl>
@@ -4882,7 +4854,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">pbm</td><td>[IN] Port bit map of ports to configure </td></tr>
     <tr><td class="paramname">mode</td><td>[OUT] Scheduling mode, see table =OPENNSL_COSQ_table </td></tr>
-    <tr><td class="paramname">weights</td><td>[OUT] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO </td></tr>
+    <tr><td class="paramname">weights</td><td>[OUT] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO. Note: Be aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights arrays in network switch devices if and only if opennsl_num_cos=10 is configured. </td></tr>
     <tr><td class="paramname">delay</td><td>[OUT] Used only if scheduling algorithm is OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time before returning to the highest priority CoS queue. This value is only used for non-negative elements of the weights array.</td></tr>
   </table>
   </dd>
@@ -4945,7 +4917,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">pbm</td><td>[IN] Port bit map of ports to configure </td></tr>
     <tr><td class="paramname">mode</td><td>[IN] Scheduling mode, see table =OPENNSL_COSQ_table </td></tr>
-    <tr><td class="paramname">weights</td><td>[IN] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO </td></tr>
+    <tr><td class="paramname">weights</td><td>[IN] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO. Note: Be aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights arrays in network switch devices if and only if opennsl_num_cos=10 is configured. </td></tr>
     <tr><td class="paramname">delay</td><td>[IN] Used only if scheduling algorithm is OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time before returning to the highest priority CoS queue. This value is only used for non-negative elements of the weights array.</td></tr>
   </table>
   </dd>
@@ -5115,7 +5087,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">mode</td><td>[OUT] Scheduling mode, see table =OPENNSL_COSQ_table </td></tr>
-    <tr><td class="paramname">weights</td><td>[OUT] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO </td></tr>
+    <tr><td class="paramname">weights</td><td>[OUT] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO. Note: Be aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights arrays in network switch devices if and only if opennsl_num_cos=10 is configured. </td></tr>
     <tr><td class="paramname">delay</td><td>[OUT] Used only if scheduling algorithm is OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time before returning to the highest priority CoS queue. This value is only used for non-negative elements of the weights array.</td></tr>
   </table>
   </dd>
@@ -5171,7 +5143,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
     <tr><td class="paramname">mode</td><td>[IN] Scheduling mode, see table =OPENNSL_COSQ_table </td></tr>
-    <tr><td class="paramname">weights</td><td>[IN] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO </td></tr>
+    <tr><td class="paramname">weights</td><td>[IN] Array of relative weights indexed by CoS queue. Use depends on the selected mode. See =OPENNSL_COSQ_COMBO. Note: Be aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights arrays in network switch devices if and only if opennsl_num_cos=10 is configured. </td></tr>
     <tr><td class="paramname">delay</td><td>[IN] Used only if scheduling algorithm is OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time before returning to the highest priority CoS queue. This value is only used for non-negative elements of the weights array.</td></tr>
   </table>
   </dd>
@@ -5277,7 +5249,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve/set various MMU statistics based on stat type. </p>
-<dl class="section user"><dt>Description</dt><dd>Retrieve/set various MMU statistics. The type opennsl_cosq_stat_t is an enumeration of the available statistics. For _get functions, if the given cosq is -1, then the sum of the values of all the given port's CoS queues will be returned. For _set functions, if the given cosq is -1, the value of the port's first Cos queue will be set to the given value; the value of the port's all other Cos queues will be set to zero. When setting the non-zero value, if the device supports separate unicast and multicast queues, the value being set is evenly distributed between unicast and multicast counter. This is applicable to switch family-III devices only.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Retrieve/set various MMU statistics. The type opennsl_cosq_stat_t is an enumeration of the available statistics. For _get functions, if the given cosq is -1, then the sum of the values of all the given port's CoS queues will be returned. For _set functions, if the given cosq is -1, the value of the port's first CoS queue will be set to the given value; the value of the port's all other CoS queues will be kept as untouched except for device network switch, on which the value of the port's all other CoS queues will be set to zero. When setting the non-zero value, if the device supports separate unicast and multicast queues, the value being set is evenly distributed between unicast and multicast counter. This is applicable to switch family-III devices only.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>
@@ -5341,7 +5313,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve/set various MMU statistics based on stat type. </p>
-<dl class="section user"><dt>Description</dt><dd>Retrieve/set various MMU statistics. The type opennsl_cosq_stat_t is an enumeration of the available statistics. For _get functions, if the given cosq is -1, then the sum of the values of all the given port's CoS queues will be returned. For _set functions, if the given cosq is -1, the value of the port's first Cos queue will be set to the given value; the value of the port's all other Cos queues will be set to zero. When setting the non-zero value, if the device supports separate unicast and multicast queues, the value being set is evenly distributed between unicast and multicast counter. This is applicable to switch family-III devices only.</dd></dl>
+<dl class="section user"><dt>Description</dt><dd>Retrieve/set various MMU statistics. The type opennsl_cosq_stat_t is an enumeration of the available statistics. For _get functions, if the given cosq is -1, then the sum of the values of all the given port's CoS queues will be returned. For _set functions, if the given cosq is -1, the value of the port's first CoS queue will be set to the given value; the value of the port's all other CoS queues will be kept as untouched except for device network switch, on which the value of the port's all other CoS queues will be set to zero. When setting the non-zero value, if the device supports separate unicast and multicast queues, the value being set is evenly distributed between unicast and multicast counter. This is applicable to switch family-III devices only.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unit</td><td>[IN] Unit number. </td></tr>

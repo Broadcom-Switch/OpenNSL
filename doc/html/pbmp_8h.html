@@ -117,6 +117,8 @@ Macros</h2></td></tr>
 <tr class="separator:a20b14fac80d272daf2d6d6fcb18e6520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af711ca270ebfccffe65a06bbd563194c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pbmp_8h.html#af711ca270ebfccffe65a06bbd563194c">_SHR_PBMP_PORT_SET</a>(bm,  <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>)</td></tr>
 <tr class="separator:af711ca270ebfccffe65a06bbd563194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda468a1434d69da48d7cba789c6a532"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pbmp_8h.html#adda468a1434d69da48d7cba789c6a532">_SHR_PBMP_PORT_VALID</a>(p)&#160;&#160;&#160;((p) &gt;= 0 &amp;&amp; (p) &lt; <a class="el" href="pbmp_8h.html#ae6b235e08029828b251d41df119eceb0">_SHR_PBMP_PORT_MAX</a>)</td></tr>
+<tr class="separator:adda468a1434d69da48d7cba789c6a532"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9709b4bb7af8b98a428151cc9a90bd9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pbmp_8h.html#a9709b4bb7af8b98a428151cc9a90bd9e">_SHR_PBMP_REMOVE</a>(bma,  bmb)&#160;&#160;&#160;<a class="el" href="pbmp_8h.html#adf0d0f63b7cd6fd18269c15860f5c654">_SHR_PBMP_BMOP</a>(bma, bmb, &amp;= ~)</td></tr>
 <tr class="separator:a9709b4bb7af8b98a428151cc9a90bd9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fe7780cf95e83512535b16de234a766"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pbmp_8h.html#a5fe7780cf95e83512535b16de234a766">_SHR_PBMP_WBIT</a>(<a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port</a>)&#160;&#160;&#160;(1U&lt;&lt;((port) % _SHR_PBMP_WORD_WIDTH))</td></tr>
@@ -800,6 +802,24 @@ Functions</h2></td></tr>
 <div class="ttc" id="pbmp_8h_html_af0a9c4b85873016bb058211b1b3b5c2b"><div class="ttname"><a href="pbmp_8h.html#af0a9c4b85873016bb058211b1b3b5c2b">_SHR_PBMP_CLEAR</a></div><div class="ttdeci">#define _SHR_PBMP_CLEAR(bm)</div><div class="ttdef"><b>Definition:</b> <a href="pbmp_8h_source.html#l00251">pbmp.h:251</a></div></div>
 </div><!-- fragment -->
 <p>Definition at line <a class="el" href="pbmp_8h_source.html#l00274">274</a> of file <a class="el" href="pbmp_8h_source.html">pbmp.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adda468a1434d69da48d7cba789c6a532"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SHR_PBMP_PORT_VALID</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">p</td><td>)</td>
+          <td>&#160;&#160;&#160;((p) &gt;= 0 &amp;&amp; (p) &lt; <a class="el" href="pbmp_8h.html#ae6b235e08029828b251d41df119eceb0">_SHR_PBMP_PORT_MAX</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="pbmp_8h_source.html#l00289">289</a> of file <a class="el" href="pbmp_8h_source.html">pbmp.h</a>.</p>
 
 </div>
 </div>

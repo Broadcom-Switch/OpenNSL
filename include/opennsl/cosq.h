@@ -103,16 +103,11 @@ typedef enum opennsl_bst_stat_id_e {
     opennslBstStatIdMcast = 8,          /**< BST Tracing resource for multicast */
     opennslBstStatIdHeadroomPool = 9,   /**< BST Tracing the Headroom Pool Usage
                                            Count */
-    opennslBstStatIdEgrUCastPortShared = 10, /**< BST Tracing resource UC per egress
-                                           port SP */
-    opennslBstStatIdEgrPortShared = 11, /**< BST Tracing resource per egress port
-                                           SP */
-    opennslBstStatIdRQEQueue = 12,      /**< BST Tracing resource per RQE queue */
-    opennslBstStatIdRQEPool = 13,       /**< BST tracing resource per RQE Pool */
-    opennslBstStatIdUcastGroup = 14,    /**< BST Tracing resource per Ucast queue
-                                           group */
-    opennslBstStatIdCpuQueue = 15,      /**< BST Tracking resource per CPU queue */
-    opennslBstStatIdMaxCount = 16       /**< Must be the last. Not a usable value. */
+    opennslBstStatIdEgrPortPoolSharedUcast = 10, /**< Per Port Pool unicast BST Tracing
+                                           resource */
+    opennslBstStatIdEgrPortPoolSharedMcast = 11, /**< Per Port Pool multicast BST Tracing
+                                           resource */
+    opennslBstStatIdMaxCount = 12       /**< Must be the last. Not a usable value. */
 } opennsl_bst_stat_id_t;
 
 typedef struct opennsl_cosq_bst_profile_s {

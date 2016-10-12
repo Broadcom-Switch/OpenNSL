@@ -124,8 +124,9 @@ typedef _shr_port_ability_t opennsl_port_ability_t;
                                                           having PAUSE_TX be
                                                           different than
                                                           PAUSE_RX. */
-#define OPENNSL_PORT_ABILITY_FEC            _SHR_PA_FEC /**< FEC ability support. */
-#define OPENNSL_PORT_ABILITY_FEC_REQUEST    _SHR_PA_FEC_REQUEST /**< FEC ability request. */
+#define OPENNSL_PORT_ABILITY_FEC_NONE       _SHR_PA_FEC_NONE /**< No FEC request */
+#define OPENNSL_PORT_ABILITY_FEC_CL74       _SHR_PA_FEC_CL74 /**< FEC CL74  request. */
+#define OPENNSL_PORT_ABILITY_FEC_CL91       _SHR_PA_FEC_CL91 /**< FEC CL91  request. */
 #define OPENNSL_PORT_ABILITY_EEE_100MB_BASETX _SHR_PA_EEE_100MB_BASETX /**< EEE ability at
                                                           100M-BaseTX. */
 #define OPENNSL_PORT_ABILITY_EEE_1GB_BASET  _SHR_PA_EEE_1GB_BASET /**< EEE ability at
@@ -138,19 +139,6 @@ typedef _shr_port_ability_t opennsl_port_ability_t;
                                                           10GB-KX4. */
 #define OPENNSL_PORT_ABILITY_EEE_10GB_KR    _SHR_PA_EEE_10GB_KR /**< EEE ability at
                                                           10GB-KR. */
-#define OPENNSL_PORT_ABILITY_FCMAP          _SHR_PA_FCMAP /**< Fiber Channel ability. */
-#define OPENNSL_PORT_ABILITY_FCMAP_FCMAC_LOOPBACK _SHR_PA_FCMAP_FCMAC_LOOPBACK /**< Fiber Channel FCMAC
-                                                          loopback ability. */
-#define OPENNSL_PORT_ABILITY_FCMAP_AUTONEG  _SHR_PA_FCMAP_AUTONEG /**< Fiber Channel FCMAC
-                                                          autoneg ability. */
-#define OPENNSL_PORT_ABILITY_FCMAP_2GB      _SHR_PA_FCMAP_2GB /**< Fiber Channel ability
-                                                          at 2GB. */
-#define OPENNSL_PORT_ABILITY_FCMAP_4GB      _SHR_PA_FCMAP_4GB /**< Fiber Channel ability
-                                                          at 4GB. */
-#define OPENNSL_PORT_ABILITY_FCMAP_8GB      _SHR_PA_FCMAP_8GB /**< Fiber Channel ability
-                                                          at 8GB. */
-#define OPENNSL_PORT_ABILITY_FCMAP_16GB     _SHR_PA_FCMAP_16GB /**< Fiber Channel ability
-                                                          at 16GB. */
 /** 
  * Port ability mask.
  * 
@@ -306,6 +294,10 @@ extern int opennsl_port_probe(
  *          It is the responsibility of the application to make the necessary
  *          changes to all other configuration settings  such as VLANS,
  *          multicast groups, and trunk configuration.
+ *          for Trident2+, Apache, Firebolt, Maverick and its variants
+ *          (portmod switches), a port needs to be removed from linkscan  if
+ *          linkscan is enabled on the port before detaching it
+ *          (opennsl_port_detach). .
  *
  *\param    unit [IN]   Unit number.
  *\param    pbmp [IN]   Port bit map of ports to be detached
@@ -1082,6 +1074,10 @@ typedef _shr_port_if_t opennsl_port_if_t;
 #define OPENNSL_PORT_IF_KX          _SHR_PORT_IF_KX 
 #define OPENNSL_PORT_IF_ZR          _SHR_PORT_IF_ZR /**< Fiber ZR 64B/66B interface */
 #define OPENNSL_PORT_IF_SR10        _SHR_PORT_IF_SR10 /**< Fiber SR10 64B/66B interface. */
+#define OPENNSL_PORT_IF_CR10        _SHR_PORT_IF_CR10 /**< Copper CR10 64B/66B interface. */
+#define OPENNSL_PORT_IF_KR10        _SHR_PORT_IF_KR10 /**< Backplane KR10 64B/66B
+                                                  interface. */
+#define OPENNSL_PORT_IF_LR10        _SHR_PORT_IF_LR10 /**< Fiber LR10 64B/66B interface. */
 #define OPENNSL_PORT_IF_OTL         _SHR_PORT_IF_OTL /**< Fiber 4x25 GbE OTL interface */
 #define OPENNSL_PORT_IF_CPU         _SHR_PORT_IF_CPU 
 #define OPENNSL_PORT_IF_ER          _SHR_PORT_IF_ER /**< Fiber ER 64B/66B interface */
@@ -1102,6 +1098,8 @@ typedef _shr_port_if_t opennsl_port_if_t;
                                                   interface */
 #define OPENNSL_PORT_IF_XLPPI       _SHR_PORT_IF_XLPPI /**< 40G parallel physical
                                                   interface */
+#define OPENNSL_PORT_IF_LBG         _SHR_PORT_IF_LBG /**< Link bonding interface */
+#define OPENNSL_PORT_IF_CAUI4       _SHR_PORT_IF_CAUI4 /**< CAUI4 100G interface */
 #define OPENNSL_PORT_IF_COUNT       _SHR_PORT_IF_COUNT 
 #define OPENNSL_PORT_IF_10B     OPENNSL_PORT_IF_TBI /**< Deprecated */
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -2647,8 +2645,6 @@ typedef enum opennsl_port_field_egress_class_select_e {
     opennslPortEgressClassSelectPort = 1, /**< Class Id from Port Interface. */
 } opennsl_port_field_egress_class_select_t;
 
-#if defined(INCLUDE_CES)
-#endif
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 

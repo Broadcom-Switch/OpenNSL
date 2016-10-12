@@ -36,6 +36,8 @@
 
 /* Declare bit array _n of size _max bits */
 #define    SHR_BITDCLNAME(_n, _max) SHR_BITDCL    _n[_SHR_BITDCLSIZE(_max)]
+/* Declare bit array _n of size _max bits, and clear it */
+#define    SHR_BIT_DCL_CLR_NAME(_n, _max) SHR_BITDCL _n[_SHR_BITDCLSIZE(_max)] = {0}
 
 /* (internal) Generic operation macro on bit array _a, with bit _b */
 #define    _SHR_BITOP(_a, _b, _op)    \
@@ -45,6 +47,7 @@
 #define    SHR_BITGET(_a, _b)    _SHR_BITOP(_a, _b, &)
 #define    SHR_BITSET(_a, _b)    _SHR_BITOP(_a, _b, |=)
 #define    SHR_BITCLR(_a, _b)    _SHR_BITOP(_a, _b, &= ~)
+#define    SHR_BITWRITE(_a, _b, _val)    ((_val) ? SHR_BITSET(_a, _b) : SHR_BITCLR(_a, _b))
 #define    SHR_BIT_ITER(_a, _max, _b)            \
            for ((_b) = 0; (_b) < (_max); (_b)++) \
                if ((_a)[(_b) / SHR_BITWID] == 0) \
@@ -63,17 +66,17 @@ extern void shr_bitop_range_set(SHR_BITDCL *a, CONST int b, CONST int c);
     (shr_bitop_range_set(_a, _b, _c))
 
 /*
- * Copy _e bits from bit array _c offset _d to bit array _a offset _b
- * There should be no overlap between source _c and desstination _a
- * _a[_b:_b + _e] = _c[_d:_d + _e]
+ * Copy _num_bits bits from bit array _src offset _src_offset to bit array _dest offset _dest_offset
+ * There should be no overlap between source _src and desstination _dest
+ * _dest[_dest_offset:_dest_offset + _num_bits] = _src[_src_offset:_src_offset + _num_bits]
  */
 extern void shr_bitop_range_copy(SHR_BITDCL *a,
                                  CONST int b,
                                  CONST SHR_BITDCL *c,
                                  CONST int d,
                                  CONST int e);
-#define SHR_BITCOPY_RANGE(_a, _b, _c, _d, _e)   \
-    (shr_bitop_range_copy(_a, _b, _c, _d, _e))
+#define SHR_BITCOPY_RANGE(_dest, _dest_offset,_src, _src_offset, _num_bits)   \
+    (shr_bitop_range_copy(_dest, _dest_offset, _src, _src_offset, _num_bits))
 
 /* Result is 0 only if all bits in the range are 0 */
 #define SHR_BITTEST_RANGE(_bits, _first, _bit_count, _result) \

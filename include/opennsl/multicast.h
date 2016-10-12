@@ -26,13 +26,13 @@
 
 #include <opennsl/types.h>
 
-#define OPENNSL_MULTICAST_WITH_ID           0x00000001 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_TYPE_L2           0x00010000 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_TYPE_L3           0x00020000 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_TYPE_VLAN         0x00400000 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_TYPE_VXLAN        0x08000000 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_TYPE_PORTS_GROUP  0x40000000 /**< multicast_replication_t_init. */
-#define OPENNSL_MULTICAST_EGRESS_GROUP      0x00000008 /**< multicast_replication_t_init. */
+#define OPENNSL_MULTICAST_WITH_ID           0x00000001 
+#define OPENNSL_MULTICAST_TYPE_L2           0x00010000 
+#define OPENNSL_MULTICAST_TYPE_L3           0x00020000 
+#define OPENNSL_MULTICAST_TYPE_VLAN         0x00400000 
+#define OPENNSL_MULTICAST_TYPE_VXLAN        0x08000000 
+#define OPENNSL_MULTICAST_TYPE_PORTS_GROUP  0x40000000 
+#define OPENNSL_MULTICAST_EGRESS_GROUP      0x00000008 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -397,7 +397,6 @@ extern int opennsl_multicast_group_free_range_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
-/** multicast_replication_t_init. */
 typedef int (*opennsl_multicast_group_traverse_cb_t)(
     int unit, 
     opennsl_multicast_t group, 

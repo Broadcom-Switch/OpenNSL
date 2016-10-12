@@ -44,6 +44,8 @@
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#if defined(INCLUDE_L3)
+#endif
 #include <opennsl/mplsX.h>
 #endif /* __OPENNSL_MPLS_H__ */
 /*@}*/

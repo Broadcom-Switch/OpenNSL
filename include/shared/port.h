@@ -115,6 +115,11 @@ typedef enum _shr_port_if_e {
     _SHR_PORT_IF_LR2,
     _SHR_PORT_IF_LRM,
     _SHR_PORT_IF_XLPPI,
+    _SHR_PORT_IF_2500X,
+    _SHR_PORT_IF_SAT,
+    _SHR_PORT_IF_IPSEC,
+    _SHR_PORT_IF_LBG,
+    _SHR_PORT_IF_CAUI4,
     _SHR_PORT_IF_COUNT /* last, please */
 } _shr_port_if_t;
 

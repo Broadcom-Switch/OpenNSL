@@ -365,6 +365,19 @@ typedef enum opennsl_vlan_control_port_e {
  *
  *\description Sets/gets miscellaneous port-specific VLAN options. The options
  *          are from the VLAN Control Port selection =vlan_ctrl_port .
+ *          Notes: (1) When setting egress vlan translation lookup key for
+ *          virtual ports, control type should be one of
+ *          {opennslVlanPortTranslateEgressKey or
+ *          opennslVlanPortTranslateEgressKeyFirst}. Also, the argument
+ *          specifying key type in case of virtual ports should be one of
+ *          {opennslVlanTranslateEgressKeyVpn,
+ *          opennslVlanTranslateEgressKeyVpnGport,
+ *          opennslVlanTranslateEgressKeyVpnGportGroup}. (2) When setting the
+ *          key for explicit second vlan translation lookup using
+ *          opennslVlanPortTranslateEgressKeySecond, the argument specifying
+ *          key type should be one of
+ *          {opennslVlanTranslateEgressKeyPortGroupDouble,
+ *          opennslVlanTranslateEgressKeyPortDouble}.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number

@@ -45,6 +45,14 @@
 #include "ofdpa_datatypes.h"
 #include <sal/commdefs.h>
 
+/*****************************************************************//**
+* @brief  To initialize the OFDPA component
+*
+* @returns  OFDPA_ERROR_t     OFDPA return code
+*
+*********************************************************************/
+int ofdpaInit() LIB_DLL_EXPORTED;
+
 /*
  * All clients must register first.
  */

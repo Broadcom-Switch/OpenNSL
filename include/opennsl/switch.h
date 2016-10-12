@@ -366,12 +366,15 @@ typedef void (*opennsl_switch_event_cb_t)(
 /***************************************************************************//** 
  *\brief Registers/Unregisters a callback function for switch critical events.
  *
- *\description These APIs allow to register a callback function which will be
- *          called upon a critical event on the chip.  By registering a
- *          callback function application can be notified upon critical errors
- *          described in table below. If such callback been called, it is
- *          strongly recommend to log all the information provided in arg1,
- *          arg2 and arg3 and reboot the chip.
+ *\description These APIs allow to the application to register a callback
+ *          function which will be called when critical event occurs on the
+ *          switch. Applications which register for switch events will be
+ *          notified about critical errors described in table below. The
+ *          application call back function should log all the information
+ *          provided in arg1, arg2 and arg3 in such a way that the system
+ *          operator is made aware of the issue. The system operator may need
+ *          to take additional actions, up to and include rebooting the
+ *          switch.
  *          Call back function is defined as following .
  *
  *\param    unit [IN]   Unit number.
@@ -392,12 +395,15 @@ extern int opennsl_switch_event_register(
 /***************************************************************************//** 
  *\brief Registers/Unregisters a callback function for switch critical events.
  *
- *\description These APIs allow to register a callback function which will be
- *          called upon a critical event on the chip.  By registering a
- *          callback function application can be notified upon critical errors
- *          described in table below. If such callback been called, it is
- *          strongly recommend to log all the information provided in arg1,
- *          arg2 and arg3 and reboot the chip.
+ *\description These APIs allow to the application to register a callback
+ *          function which will be called when critical event occurs on the
+ *          switch. Applications which register for switch events will be
+ *          notified about critical errors described in table below. The
+ *          application call back function should log all the information
+ *          provided in arg1, arg2 and arg3 in such a way that the system
+ *          operator is made aware of the issue. The system operator may need
+ *          to take additional actions, up to and include rebooting the
+ *          switch.
  *          Call back function is defined as following .
  *
  *\param    unit [IN]   Unit number.

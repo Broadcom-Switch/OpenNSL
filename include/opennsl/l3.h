@@ -123,6 +123,7 @@ typedef struct opennsl_l3_egress_s {
     opennsl_reserved_enum_t reserved21; 
     opennsl_etag_t reserved22; 
     opennsl_reserved_enum_t reserved23; 
+    int reserved24; 
 } opennsl_l3_egress_t;
 
 #define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for
@@ -1143,7 +1144,8 @@ extern int opennsl_l3_route_traverse(
     void *user_data) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
- *\brief Set the maximum ECMP paths allowed for a route (switch family only).
+ *\brief Set the maximum ECMP paths allowed for a route (switch family only). For
+ *       optimized Resilient Hashing, maximum ECMP paths is a dummy variable.
  *
  *\description For switch family only, set the maximum ECMP paths allowed for a
  *          route (the default is the maximum allowed by the hardware).
@@ -1332,9 +1334,9 @@ extern int opennsl_l3_ingress_stat_counter_get(
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
-#endif /* defined(INCLUDE_L3) */
-
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#endif /* defined(INCLUDE_L3) */
 
 #include <opennsl/l3X.h>
 #endif /* __OPENNSL_L3_H__ */

@@ -277,4 +277,6 @@ extern char		*_shr_pbmp_format(_shr_pbmp_t, char *);
 #define	_SHR_PBMP_FMT(bm, buf)		_shr_pbmp_format(bm, buf)
 #define	_SHR_PBMP_FMT_LEN		((_SHR_PBMP_WORD_MAX*8)+3)
 
+#define	_SHR_PBMP_PORT_VALID(p)		((p) >= 0 && (p) < _SHR_PBMP_PORT_MAX)
+
 #endif	/* !_SHR_PBMP_H */

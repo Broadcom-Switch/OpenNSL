@@ -84,7 +84,7 @@ typedef struct opennsl_pkt_oam_counter_s {
 } opennsl_pkt_oam_counter_t;
 
 #define OPENNSL_PKT_OAM_COUNTER_MAX 3          
-#define OPENNSL_PKT_NOF_DNX_HEADERS 9          
+#define OPENNSL_PKT_NOF_DNX_HEADERS _SHR_PKT_NOF_DNX_HEADERS 
 /** Initialize a OPENNSL packet structure. */
 struct opennsl_pkt_s { 
     opennsl_pkt_blk_t *pkt_data;        /**< Pointer to array of data blocks. */

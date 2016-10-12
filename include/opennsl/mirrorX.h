@@ -72,11 +72,23 @@
                                                           PORT. */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_1 (1 << 21)  /**< update counter No.1 */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_2 (1 << 22)  /**< update counter No.2 */
+#define OPENNSL_MIRROR_DEST_ID_SHARE        (1 << 24)  /**< Share mirror
+                                                          destination id among
+                                                          multi ports */
+#define OPENNSL_MIRROR_DEST_MTP_ADD         (1 << 25)  /**< Add an MTP into a
+                                                          shared-id mirror
+                                                          destination */
+#define OPENNSL_MIRROR_DEST_MTP_DELETE      (1 << 26)  /**< Delete an MTP from a
+                                                          shared-id mirror
+                                                          destination */
+#define OPENNSL_MIRROR_DEST_MTP_REPLACE     (1 << 27)  /**< REPLACE an MTP of a
+                                                          shared-id mirror
+                                                          destination */
 /**  represents the options for the mirroring of packets */
 typedef struct opennsl_mirror_options_s {
-    uint32 flags;           /**< opennsl_mirror_pkt_header_updates_t_init. */
-    uint8 forward_strength; /**< opennsl_mirror_pkt_header_updates_t_init. */
-    uint8 copy_strength;    /**< opennsl_mirror_pkt_header_updates_t_init. */
+    uint32 flags;           
+    uint8 forward_strength; 
+    uint8 copy_strength;    
     uint32 recycle_cmd;     /**< dedicated for ETPP traps */
 } opennsl_mirror_options_t;
 
@@ -113,22 +125,23 @@ typedef struct opennsl_mirror_destination_s {
     uint16 gre_protocol;                /**< L3 GRE header protocol */
     opennsl_policer_t policer_id;       /**< policer_id */
     int stat_id;                        /**< stat_id */
+    int reserved1; 
     opennsl_if_t encap_id;              /**< Encapsulation index */
     opennsl_if_t tunnel_id;             /**< IP tunnel for encapsulation. Valid
                                            only if
                                            OPENNSL_MIRROR_DEST_TUNNEL_IP_GRE is
                                            set */
-    uint16 reserved1; 
+    uint16 reserved2; 
     uint8 pkt_prio;                     /**< L2 header PCP */
-    uint32 reserved2; 
     uint32 reserved3; 
+    uint32 reserved4; 
     uint8 int_pri;                      /**< Internal Priority */
     uint16 etag_src_vid;                /**< Extended (source) port vlan id */
     uint16 etag_dst_vid;                /**< Extended (destination) port vlan id */
     uint16 udp_src_port;                /**< UDP source port */
     uint16 udp_dst_port;                /**< UDP destination port */
-    uint32 reserved4; 
     uint32 reserved5; 
+    uint32 reserved6; 
     uint8 recycle_context;              /**< recycle context of egress originating
                                            packets */
     uint16 packet_copy_size;            /**<  If non zero, the copied packet will
@@ -140,10 +153,10 @@ typedef struct opennsl_mirror_destination_s {
                                            truncated to the first
                                            packet_copy_size . Current supported
                                            values for DNX are 0, 256. */
-    uint8 reserved6; 
+    opennsl_reserved_enum_t reserved7; 
+    uint8 reserved8; 
 } opennsl_mirror_destination_t;
 
-/** opennsl_mirror_pkt_header_updates_t_init. */
 typedef int (*opennsl_mirror_destination_traverse_cb)(
     int unit, 
     opennsl_mirror_destination_t *mirror_dest, 

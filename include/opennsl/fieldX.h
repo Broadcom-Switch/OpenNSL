@@ -202,7 +202,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyInterfaceClassProcessingPort = 213, /**< Packet-processing Port Class ID */
     opennslFieldQualifyIngressClassField = 269, /**< Class Id assigned for packet by
                                            Ingress Stage */
-    opennslFieldQualifyCount = 603      /**< Always Last. Not a usable value. */
+    opennslFieldQualifyCount = 609      /**< Always Last. Not a usable value. */
 } opennsl_field_qualify_t;
 
 /** 
@@ -362,7 +362,7 @@ typedef enum opennsl_field_action_e {
                                            param1: Destination port. */
     opennslFieldActionIngSampleEnable = 315, /**< Set the SFLOW Ingress Sampling. */
     opennslFieldActionEgrSampleEnable = 316, /**< Set the SFLOW Egress Sampling. */
-    opennslFieldActionCount = 437       /**< Always Last. Not a usable value. */
+    opennslFieldActionCount = 442       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
 
 /** 
@@ -2473,7 +2473,7 @@ extern int opennsl_field_qualify_InterfaceClassProcessingPort_get(
  *\description Adds an action to be performed when a packet matches an entry
  *          rule. Multiple actions may be added for an entry by calling this
  *          function repeatedly.
- *          FP action is applied toports from given list that are local to 
+ *          FP action is applied to ports from given list that are local to 
  *          the devices where packets are ingressing.
  *          See =fp_actions for the list of actions and their respective
  *          parameters .
@@ -2529,7 +2529,7 @@ extern int opennsl_field_action_delete(
  *\description Adds an action to be performed when a packet matches an entry
  *          rule. Multiple actions may be added for an entry by calling this
  *          function repeatedly.
- *          FP action is applied toports from given list that are local to 
+ *          FP action is applied to ports from given list that are local to 
  *          the devices where packets are ingressing.
  *          See =fp_actions for the list of actions and their respective
  *          parameters .
@@ -2559,7 +2559,7 @@ extern int opennsl_field_action_mac_add(
  *\description Adds an action to be performed when a packet matches an entry
  *          rule. Multiple actions may be added for an entry by calling this
  *          function repeatedly.
- *          FP action is applied toports from given list that are local to 
+ *          FP action is applied to ports from given list that are local to 
  *          the devices where packets are ingressing.
  *          See =fp_actions for the list of actions and their respective
  *          parameters .

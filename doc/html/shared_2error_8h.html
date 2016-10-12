@@ -62,6 +62,8 @@
 Macros</h2></td></tr>
 <tr class="memitem:a6c5044d587031c780a346eee70f5d9d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared_2error_8h.html#a6c5044d587031c780a346eee70f5d9d0">_SHR_E_FAILURE</a>(rv)                        &#160;&#160;&#160;((rv) &lt; 0)</td></tr>
 <tr class="separator:a6c5044d587031c780a346eee70f5d9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bc0d188940d519958b7cee95f066b97"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared_2error_8h.html#a9bc0d188940d519958b7cee95f066b97">_SHR_E_IF_ERROR_CLEAN_RETURN</a>(op,  exop)&#160;&#160;&#160;do { int __rv__; if ((__rv__ = (op)) &lt; 0) { <a class="el" href="shared_2error_8h.html#ac8448a1cac144a1e0c05873ebb949e6a">_SHR_ERROR_TRACE</a>(__rv__); (exop); return(__rv__); } } while(0)</td></tr>
+<tr class="separator:a9bc0d188940d519958b7cee95f066b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaecf4ac2b82ae4bcb3d84a3046fe929f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared_2error_8h.html#aaecf4ac2b82ae4bcb3d84a3046fe929f">_SHR_E_IF_ERROR_NOT_UNAVAIL_RETURN</a>(op)                                          </td></tr>
 <tr class="separator:aaecf4ac2b82ae4bcb3d84a3046fe929f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a682b43be675f0b3e2d7b737d8de71f6b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared_2error_8h.html#a682b43be675f0b3e2d7b737d8de71f6b">_SHR_E_IF_ERROR_RETURN</a>(op)&#160;&#160;&#160;do { int __rv__; if ((__rv__ = (op)) &lt; 0) { <a class="el" href="shared_2error_8h.html#ac8448a1cac144a1e0c05873ebb949e6a">_SHR_ERROR_TRACE</a>(__rv__);  return(__rv__); } } while(0)</td></tr>
@@ -186,6 +188,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9bc0d188940d519958b7cee95f066b97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SHR_E_IF_ERROR_CLEAN_RETURN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">op, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">exop&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;do { int __rv__; if ((__rv__ = (op)) &lt; 0) { <a class="el" href="shared_2error_8h.html#ac8448a1cac144a1e0c05873ebb949e6a">_SHR_ERROR_TRACE</a>(__rv__); (exop); return(__rv__); } } while(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="shared_2error_8h_source.html#l00094">94</a> of file <a class="el" href="shared_2error_8h_source.html">error.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aaecf4ac2b82ae4bcb3d84a3046fe929f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +237,7 @@ Variables</h2></td></tr>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 <div class="ttc" id="shared_2error_8h_html_a95db2d5dcbc68fcf693bb756aca6659faf4ecf6494463d3d6bb5ac11ff5fd8596"><div class="ttname"><a href="shared_2error_8h.html#a95db2d5dcbc68fcf693bb756aca6659faf4ecf6494463d3d6bb5ac11ff5fd8596">_SHR_E_UNAVAIL</a></div><div class="ttdef"><b>Definition:</b> <a href="shared_2error_8h_source.html#l00047">error.h:47</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="shared_2error_8h_source.html#l00093">93</a> of file <a class="el" href="shared_2error_8h_source.html">error.h</a>.</p>
+<p>Definition at line <a class="el" href="shared_2error_8h_source.html#l00098">98</a> of file <a class="el" href="shared_2error_8h_source.html">error.h</a>.</p>
 
 </div>
 </div>
@@ -442,7 +472,7 @@ Variables</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="shared_2error_8h_source.html#l00101">101</a> of file <a class="el" href="shared_2error_8h_source.html">error.h</a>.</p>
+<p>Definition at line <a class="el" href="shared_2error_8h_source.html#l00108">108</a> of file <a class="el" href="shared_2error_8h_source.html">error.h</a>.</p>
 
 </div>
 </div>

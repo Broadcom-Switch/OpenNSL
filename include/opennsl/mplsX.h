@@ -36,5 +36,7 @@
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#if defined(INCLUDE_L3)
+#endif
 #endif /* __OPENNSL_MPLSX_H__ */
 /*@}*/

@@ -21,6 +21,8 @@
 #include <opennsl/tx.h>
 #include <opennsl/mirror.h>
 
+#if defined(VENDOR_BROADCOM)
+#endif
 #define OPENNSL_RX_COSQ_PACKET_TYPE_SWITCHED 0x1        
 #define OPENNSL_RX_COSQ_PACKET_TYPE_NON_UNICAST 0x2        
 #define OPENNSL_RX_COSQ_PACKET_TYPE_MIRROR  0x4        
@@ -305,6 +307,10 @@ typedef struct opennsl_rx_trap_config_s {
     opennsl_rx_trap_core_config_t *core_config_arr; /**< Destinations information per core */
     int core_config_arr_len;            /**< core_config_arr length */
     int qos_map_id;                     /**< cos profile handle */
+    int tunnel_termination_trap_strength; /**< Strength of tunnel termination trap,
+                                           strongest trap in processing holds. */
+    int tunnel_termination_snoop_strength; /**< Strength of tunnel termination trap,
+                                           strongest snoop in processing holds. */
 } opennsl_rx_trap_config_t;
 
 /***************************************************************************//** 

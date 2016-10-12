@@ -259,6 +259,8 @@ typedef enum opennsl_rx_reason_e {
     opennslRxReasonCount = _SHR_RX_REASON_COUNT 
 } opennsl_rx_reason_t;
 
+#if defined(VENDOR_BROADCOM)
+#endif
 #define OPENNSL_RX_REASON_GET(_reasons, _reason)  \
    _SHR_RX_REASON_GET(_reasons, _reason) 
 #define OPENNSL_RX_REASON_SET(_reasons, _reason)  \

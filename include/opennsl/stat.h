@@ -310,7 +310,15 @@ typedef enum opennsl_stat_val_e {
                                            (Broadcom-specific) */
     snmpOpenNSLEgressProtectionDataDrop = 218, /**< Egress Protection data drop in EPIPE.
                                            (Broadcom-specific) */
-    opennsl_spl_snmpValCount = 219      
+    snmpOpenNSLTxE2ECCControlFrames = 219, /**< Total number of End to End Congestion
+                                           Control(E2E-CC) Head of line(HOL)
+                                           packets or DMVoQ flow control packets
+                                           transmitted on each of the ports.
+                                           (Broadcom-specific) */
+    snmpOpenNSLE2EHOLDropPkts = 220,    /**< Total number of packets dropped due
+                                           to E2EHOL (End to End Head of Line)
+                                           drop status. (Broadcom-specific) */
+    opennsl_spl_snmpValCount = 221      
 } opennsl_stat_val_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -623,6 +631,13 @@ extern int opennsl_stat_group_mode_id_destroy(
  *\description This API will reserve HW counter resources as per given group mode
  *          and  Accounting object and make system ready for further stat
  *          collection action based on stat counter ID.
+ *          This API will be deprecated in the second half of 2016.  
+ *          opennsl_stat_custom_group_create (after creating mode id using
+ *          opennsl_stat_group_mode_id_config_create API) should be used to
+ *          create stat groups.
+ *          However opennsl_stat_group_destroy will continue to be used to
+ *          destroy groups  created using the new
+ *          opennsl_stat_custom_group_create API.
  *
  *\param    unit [IN]   Unit number.
  *\param    object [IN]   Accounting Object

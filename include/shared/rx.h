@@ -22,6 +22,7 @@
 #ifndef   _SHR_RX_H_
 #define   _SHR_RX_H_
 
+#include <shared/types.h>
 #include <shared/bitop.h>
 
 /*
@@ -135,7 +136,7 @@ typedef enum _shr_rx_reason_e {
     _SHR_RX_L2_MARKED                   = 89,  /* L2 table marked                     */
     _SHR_RX_WLAN_SLOWPATH_KEEPALIVE     = 90,  /* WLAN slowpath to the CPU,           */
                                                /* otherwise dropped                   */                            
-    _SHR_RX_STATION                     = 91,  /* MPLS sent to CPU                    */
+    _SHR_RX_STATION                     = 91,  /* My Station packet to CPU            */
     _SHR_RX_NIV                         = 92,  /* NIV packet                          */
     _SHR_RX_NIV_PRIO_DROP               = 93,  /* NIV packet, priority drop           */
     _SHR_RX_NIV_INTERFACE_MISS          = 94,  /* NIV packet, interface miss          */

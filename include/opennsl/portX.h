@@ -25,7 +25,5 @@
 #include <opennsl/stat.h>
 #include <shared/port_ability.h>
 
-#if defined(INCLUDE_CES)
-#endif
 #endif /* __OPENNSL_PORTX_H__ */
 /*@}*/

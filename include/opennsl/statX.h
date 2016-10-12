@@ -59,7 +59,7 @@ typedef enum opennsl_stat_group_mode_attr_e {
                                            all */
     opennslStatGroupModeAttrDrop = 13,  /**< Drop Selector: Possible Values:<0 or
                                            1> */
-    opennslStatGroupModeAttrPacketTypeIp = 14 /**< Ip Packet Selector: Possible
+    opennslStatGroupModeAttrPacketTypeIp = 14, /**< Ip Packet Selector: Possible
                                            Values:<0 or 1> */
 } opennsl_stat_group_mode_attr_t;
 
@@ -89,7 +89,16 @@ extern void opennsl_stat_group_mode_attr_selector_t_init(
  *       network switch, OAM LM is supported through Flex Counters, When
  *       OPENNSL_STAT_GROUP_MODE_CAPABILITY_OAM flag is passed along with
  *       OPENNSL_STAT_GROUP_MODE_INGRESS or OPENNSL_STAT_GROUP_MODE_EGRESS, it
- *       instructs the API to create a stat group suitable for OAM.
+ *       instructs the API to create a stat group suitable for OAM. In network
+ *       switch, the packet cfi_pri offset map of Vlan Flow Counters is supported
+ *       through this function to get the mode_id. And use this mode_id to create
+ *       the customized group mode by opennsl_stat_custom_group_create. Counters
+ *       with same counter_offset and with same attribute type but different
+ *       attributes values are counted whenever either of the value(s) are true
+ *       whereas with different attribute types the counter is incremented only
+ *       when all of the attributes satisfy with their respective values. This
+ *       API will be deprecated in the second half of 2016. stats mode id should
+ *       be created using opennsl_stat_group_mode_id_config_create API.
  *
  *\description This API create Customized Stat Group mode for given Counter
  *          Attributes and make system ready for attaching created mode id to

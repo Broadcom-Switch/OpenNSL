@@ -36,7 +36,6 @@ typedef struct _shr_port_ability_s {
     _shr_port_mode_t loopback;
     _shr_port_mode_t flags;
     _shr_port_mode_t eee;
-    _shr_port_mode_t fcmap;
     _shr_pa_encap_t  encap;
     _shr_port_mode_t fec;
 } _shr_port_ability_t;
@@ -100,8 +99,9 @@ typedef struct _shr_port_ability_s {
  *      Defines for FEC abilities.
  */
 
-#define _SHR_PA_FEC              (1 << 0)       /* FEC ability support */
-#define _SHR_PA_FEC_REQUEST      (1 << 1)       /* FEC ability request */
+#define _SHR_PA_FEC_NONE     (1 << 0)       /* FEC is not requested  */
+#define _SHR_PA_FEC_CL74     (1 << 1)       /* FEC CL74 ability request */
+#define _SHR_PA_FEC_CL91     (1 << 2)       /* FEC Cl91 ability request */
 
 /*
  * Defines:
@@ -257,13 +257,5 @@ typedef struct _shr_port_ability_s {
 #define _SHR_PA_EEE_10GB_KX            (1 << 3)    /* EEE for 10G-KX */
 #define _SHR_PA_EEE_10GB_KX4           (1 << 4)    /* EEE for 10G-KX4 */
 #define _SHR_PA_EEE_10GB_KR            (1 << 5)    /* EEE for 10G-KR */
-
-#define _SHR_PA_FCMAP                  (1 << 0)
-#define _SHR_PA_FCMAP_FCMAC_LOOPBACK   (1 << 1)
-#define _SHR_PA_FCMAP_AUTONEG          (1 << 2)
-#define _SHR_PA_FCMAP_2GB              (1 << 3)
-#define _SHR_PA_FCMAP_4GB              (1 << 4)
-#define _SHR_PA_FCMAP_8GB              (1 << 5)
-#define _SHR_PA_FCMAP_16GB             (1 << 6)
 
 #endif  /* !_SHR_PORTABILITY_H */

@@ -60,7 +60,7 @@
 <p><pre class="fragment"></pre>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="opennsl_2types_8h_source.html">opennsl/types.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="pkt_8h_source.html">opennsl/pkt.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="opennsl_2pkt_8h_source.html">opennsl/pkt.h</a>&gt;</code><br />
 </div>
 <p><a href="mirrorX_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -84,6 +84,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ga87da003ff05a237929144c62c49845c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga87da003ff05a237929144c62c49845c2">OPENNSL_MIRROR_DEST_FIELD</a>&#160;&#160;&#160;(1 &lt;&lt; 19)</td></tr>
 <tr class="memdesc:ga87da003ff05a237929144c62c49845c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify that mirror destination owner is FP.  <a href="group__mirror.html#ga87da003ff05a237929144c62c49845c2">More...</a><br /></td></tr>
 <tr class="separator:ga87da003ff05a237929144c62c49845c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d85f48c9e458684ef9df20d03a189c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga6d85f48c9e458684ef9df20d03a189c1">OPENNSL_MIRROR_DEST_ID_SHARE</a>&#160;&#160;&#160;(1 &lt;&lt; 24)</td></tr>
+<tr class="memdesc:ga6d85f48c9e458684ef9df20d03a189c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Share mirror destination id among multi ports.  <a href="group__mirror.html#ga6d85f48c9e458684ef9df20d03a189c1">More...</a><br /></td></tr>
+<tr class="separator:ga6d85f48c9e458684ef9df20d03a189c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6302cf37a218506feb478405506b4347"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga6302cf37a218506feb478405506b4347">OPENNSL_MIRROR_DEST_INT_PRI_SET</a>&#160;&#160;&#160;(1 &lt;&lt; 13)</td></tr>
 <tr class="memdesc:ga6302cf37a218506feb478405506b4347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mirrored packet should set with internal priority.  <a href="group__mirror.html#ga6302cf37a218506feb478405506b4347">More...</a><br /></td></tr>
 <tr class="separator:ga6302cf37a218506feb478405506b4347"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -93,6 +96,15 @@ Macros</h2></td></tr>
 <tr class="memitem:gaea7273c0fab667fb09a1247bab5614ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#gaea7273c0fab667fb09a1247bab5614ce">OPENNSL_MIRROR_DEST_IS_TRAP</a>&#160;&#160;&#160;(1 &lt;&lt; 17)</td></tr>
 <tr class="memdesc:gaea7273c0fab667fb09a1247bab5614ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify that the destination is a trap destination.  <a href="group__mirror.html#gaea7273c0fab667fb09a1247bab5614ce">More...</a><br /></td></tr>
 <tr class="separator:gaea7273c0fab667fb09a1247bab5614ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4288162d969978ad352c8dfdf1bf7074"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga4288162d969978ad352c8dfdf1bf7074">OPENNSL_MIRROR_DEST_MTP_ADD</a>&#160;&#160;&#160;(1 &lt;&lt; 25)</td></tr>
+<tr class="memdesc:ga4288162d969978ad352c8dfdf1bf7074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an MTP into a shared-id mirror destination.  <a href="group__mirror.html#ga4288162d969978ad352c8dfdf1bf7074">More...</a><br /></td></tr>
+<tr class="separator:ga4288162d969978ad352c8dfdf1bf7074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga434b37baa60fd51ed1d510f266fc45ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga434b37baa60fd51ed1d510f266fc45ee">OPENNSL_MIRROR_DEST_MTP_DELETE</a>&#160;&#160;&#160;(1 &lt;&lt; 26)</td></tr>
+<tr class="memdesc:ga434b37baa60fd51ed1d510f266fc45ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an MTP from a shared-id mirror destination.  <a href="group__mirror.html#ga434b37baa60fd51ed1d510f266fc45ee">More...</a><br /></td></tr>
+<tr class="separator:ga434b37baa60fd51ed1d510f266fc45ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73d2cea0f2b4c57b505711a419103052"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga73d2cea0f2b4c57b505711a419103052">OPENNSL_MIRROR_DEST_MTP_REPLACE</a>&#160;&#160;&#160;(1 &lt;&lt; 27)</td></tr>
+<tr class="memdesc:ga73d2cea0f2b4c57b505711a419103052"><td class="mdescLeft">&#160;</td><td class="mdescRight">REPLACE an MTP of a shared-id mirror destination.  <a href="group__mirror.html#ga73d2cea0f2b4c57b505711a419103052">More...</a><br /></td></tr>
+<tr class="separator:ga73d2cea0f2b4c57b505711a419103052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3febc7075b1cd176cb25446de3ba1bc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga3febc7075b1cd176cb25446de3ba1bc9">OPENNSL_MIRROR_DEST_PAYLOAD_UNTAGGED</a>&#160;&#160;&#160;(1 &lt;&lt; 4)</td></tr>
 <tr class="memdesc:ga3febc7075b1cd176cb25446de3ba1bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strip vlan tag from mirrored packet.  <a href="group__mirror.html#ga3febc7075b1cd176cb25446de3ba1bc9">More...</a><br /></td></tr>
 <tr class="separator:ga3febc7075b1cd176cb25446de3ba1bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +160,6 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga63cd8c11c214511ee33c04cec83d2a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mirror destination Structure.  <a href="group__mirror.html#ga63cd8c11c214511ee33c04cec83d2a75">More...</a><br /></td></tr>
 <tr class="separator:ga63cd8c11c214511ee33c04cec83d2a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0cffd331327595cf5ba30e6437dfd83d"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga0cffd331327595cf5ba30e6437dfd83d">opennsl_mirror_destination_traverse_cb</a>) (int unit, <a class="el" href="group__mirror.html#ga63cd8c11c214511ee33c04cec83d2a75">opennsl_mirror_destination_t</a> *mirror_dest, void *user_data)</td></tr>
-<tr class="memdesc:ga0cffd331327595cf5ba30e6437dfd83d"><td class="mdescLeft">&#160;</td><td class="mdescRight">opennsl_mirror_pkt_header_updates_t_init.  <a href="group__mirror.html#ga0cffd331327595cf5ba30e6437dfd83d">More...</a><br /></td></tr>
 <tr class="separator:ga0cffd331327595cf5ba30e6437dfd83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3ad2bc5b2a3c44c25b9f6475d93bb690"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structopennsl__mirror__options__s.html">opennsl_mirror_options_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mirror.html#ga3ad2bc5b2a3c44c25b9f6475d93bb690">opennsl_mirror_options_t</a></td></tr>
 <tr class="memdesc:ga3ad2bc5b2a3c44c25b9f6475d93bb690"><td class="mdescLeft">&#160;</td><td class="mdescRight">represents the options for the mirroring of packets  <a href="group__mirror.html#ga3ad2bc5b2a3c44c25b9f6475d93bb690">More...</a><br /></td></tr>

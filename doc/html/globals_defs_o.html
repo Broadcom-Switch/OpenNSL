@@ -909,6 +909,9 @@
 <li>OPENNSL_MIRROR_DEST_FIELD
 : <a class="el" href="group__mirror.html#ga87da003ff05a237929144c62c49845c2">mirrorX.h</a>
 </li>
+<li>OPENNSL_MIRROR_DEST_ID_SHARE
+: <a class="el" href="group__mirror.html#ga6d85f48c9e458684ef9df20d03a189c1">mirrorX.h</a>
+</li>
 <li>OPENNSL_MIRROR_DEST_INT_PRI_SET
 : <a class="el" href="group__mirror.html#ga6302cf37a218506feb478405506b4347">mirrorX.h</a>
 </li>
@@ -917,6 +920,15 @@
 </li>
 <li>OPENNSL_MIRROR_DEST_IS_TRAP
 : <a class="el" href="group__mirror.html#gaea7273c0fab667fb09a1247bab5614ce">mirrorX.h</a>
+</li>
+<li>OPENNSL_MIRROR_DEST_MTP_ADD
+: <a class="el" href="group__mirror.html#ga4288162d969978ad352c8dfdf1bf7074">mirrorX.h</a>
+</li>
+<li>OPENNSL_MIRROR_DEST_MTP_DELETE
+: <a class="el" href="group__mirror.html#ga434b37baa60fd51ed1d510f266fc45ee">mirrorX.h</a>
+</li>
+<li>OPENNSL_MIRROR_DEST_MTP_REPLACE
+: <a class="el" href="group__mirror.html#ga73d2cea0f2b4c57b505711a419103052">mirrorX.h</a>
 </li>
 <li>OPENNSL_MIRROR_DEST_PAYLOAD_UNTAGGED
 : <a class="el" href="group__mirror.html#ga3febc7075b1cd176cb25446de3ba1bc9">mirrorX.h</a>
@@ -1365,32 +1377,14 @@
 <li>OPENNSL_PORT_ABILITY_EEE_1GB_BASET
 : <a class="el" href="group__port.html#gada4ad8e629e77ec9ad5ce53664aef6c4">port.h</a>
 </li>
-<li>OPENNSL_PORT_ABILITY_FCMAP
-: <a class="el" href="group__port.html#gaed8469726e0dd342934073f43c1b0693">port.h</a>
+<li>OPENNSL_PORT_ABILITY_FEC_CL74
+: <a class="el" href="group__port.html#ga6c68073d03c3f11854921824133ddb9d">port.h</a>
 </li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_16GB
-: <a class="el" href="group__port.html#ga3ed5a57e15ab606e73e9add61a03f79b">port.h</a>
+<li>OPENNSL_PORT_ABILITY_FEC_CL91
+: <a class="el" href="group__port.html#ga16ccb606548d68711e272767ddb2f92e">port.h</a>
 </li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_2GB
-: <a class="el" href="group__port.html#gae669f2b8feb423639558435d54a116c5">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_4GB
-: <a class="el" href="group__port.html#gab3ba95682211cd867244190670cff7d0">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_8GB
-: <a class="el" href="group__port.html#gaac691642814e10b81cfd8744b6f4a265">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_AUTONEG
-: <a class="el" href="group__port.html#gabc90ab5da429b178319f0ce56aa1de3c">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FCMAP_FCMAC_LOOPBACK
-: <a class="el" href="group__port.html#gaeb6473bb7cacb4caba756402c4d56bd0">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FEC
-: <a class="el" href="group__port.html#gaa3311e3af482cc3c7b5715b058bf3165">port.h</a>
-</li>
-<li>OPENNSL_PORT_ABILITY_FEC_REQUEST
-: <a class="el" href="group__port.html#ga5f7225624ebd79492d63df59f35cefce">port.h</a>
+<li>OPENNSL_PORT_ABILITY_FEC_NONE
+: <a class="el" href="group__port.html#ga0367213b34ec1f15fa56993c7e4454b6">port.h</a>
 </li>
 <li>OPENNSL_PORT_ABILITY_INTERFACE_CGMII
 : <a class="el" href="group__port.html#ga101ed498d9e2fccbc1a0c71faf74a13f">port.h</a>
@@ -1545,6 +1539,9 @@
 <li>OPENNSL_PORT_IF_CAUI
 : <a class="el" href="group__port.html#gad9b2479a178728c0a74bd183aa2f528f">port.h</a>
 </li>
+<li>OPENNSL_PORT_IF_CAUI4
+: <a class="el" href="group__port.html#ga2d225e9753536823cc39aa31038ff92b">port.h</a>
+</li>
 <li>OPENNSL_PORT_IF_CAUI_C2C
 : <a class="el" href="group__port.html#gaf089dc51cb8a33a742ee27763246ff54">port.h</a>
 </li>
@@ -1559,6 +1556,9 @@
 </li>
 <li>OPENNSL_PORT_IF_CR
 : <a class="el" href="group__port.html#gae6b263b508aca1ff0fb6be31c7413a6b">port.h</a>
+</li>
+<li>OPENNSL_PORT_IF_CR10
+: <a class="el" href="group__port.html#ga16dd24c1b471711f3127d32df0b2b79d">port.h</a>
 </li>
 <li>OPENNSL_PORT_IF_CR2
 : <a class="el" href="group__port.html#gad75bea3ef29c20f3febd94ee3050054b">port.h</a>
@@ -1596,6 +1596,9 @@
 <li>OPENNSL_PORT_IF_KR
 : <a class="el" href="group__port.html#ga55eaad4daf44b279d9161e1510762f05">port.h</a>
 </li>
+<li>OPENNSL_PORT_IF_KR10
+: <a class="el" href="group__port.html#gaca358d9a73f2831f2e6180d952bccc7c">port.h</a>
+</li>
 <li>OPENNSL_PORT_IF_KR2
 : <a class="el" href="group__port.html#ga4b04b5b0e96fdbf98ae3a11094fc2f01">port.h</a>
 </li>
@@ -1605,8 +1608,14 @@
 <li>OPENNSL_PORT_IF_KX
 : <a class="el" href="group__port.html#ga95db792e8092a401941b9cc8f1df463a">port.h</a>
 </li>
+<li>OPENNSL_PORT_IF_LBG
+: <a class="el" href="group__port.html#ga7af383ee3fc1e22d44c0a4d3ffe12bd9">port.h</a>
+</li>
 <li>OPENNSL_PORT_IF_LR
 : <a class="el" href="group__port.html#gac594fcb528895a42db7197093e741e48">port.h</a>
+</li>
+<li>OPENNSL_PORT_IF_LR10
+: <a class="el" href="group__port.html#gadbda9c45895c07b132041cf63fa3f869">port.h</a>
 </li>
 <li>OPENNSL_PORT_IF_LR2
 : <a class="el" href="group__port.html#gad4225c677e8845038d461f794ab19c2b">port.h</a>

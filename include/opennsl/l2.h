@@ -413,7 +413,7 @@ extern int opennsl_l2_addr_delete_by_vlan_port(
  *          L2_MOD_FIFO is used,  but the thread opennslL2MOD.x is stopped,
  *          users can not know which entries are deleted, even though they
  *          already had registered callback routines and  use this API without
- *          OPENNSL_L2_DELETE_NO_CALLBACKS. .
+ *          OPENNSL_L2_DELETE_NO_CALLBACKS.
  *
  *\param    unit [IN]   Unit number.
  *\param    vid [IN]   VLAN ID
@@ -520,7 +520,11 @@ extern int opennsl_l2_addr_unregister(
  *          table. Thus if entry with one of the hit bits set added to L2
  *          table and aging interval set to X seconds then the entry should be
  *          expected to completely disappear from L2 table after 2X seconds if
- *          not hit during this period. .
+ *          not hit during this period.  When l2 table is frozoen by api
+ *          opennsl_l2_addr_freeze() or opennsl_switch_control_set(with
+ *          parameter opennslSwitchHWL2Freeze), this api cannot take effect
+ *          until l2 table is unfrozen by api opennsl_l2_addr_thaw() or
+ *          opennsl_switch_control_set (with opennslSwitchHWL2Freeze). .
  *
  *\param    unit [IN]   Unit number.
  *\param    age_seconds [IN]   Age timer value in seconds (0 to disable)
@@ -543,7 +547,11 @@ extern int opennsl_l2_age_timer_set(
  *          table. Thus if entry with one of the hit bits set added to L2
  *          table and aging interval set to X seconds then the entry should be
  *          expected to completely disappear from L2 table after 2X seconds if
- *          not hit during this period. .
+ *          not hit during this period.  When l2 table is frozoen by api
+ *          opennsl_l2_addr_freeze() or opennsl_switch_control_set(with
+ *          parameter opennslSwitchHWL2Freeze), this api cannot take effect
+ *          until l2 table is unfrozen by api opennsl_l2_addr_thaw() or
+ *          opennsl_switch_control_set (with opennslSwitchHWL2Freeze). .
  *
  *\param    unit [IN]   Unit number.
  *\param    age_seconds [OUT]   Age timer value in seconds (0 to disable)
@@ -563,8 +571,18 @@ extern int opennsl_l2_age_timer_get(
  *
  *\description Use opennsl_l2_addr_freeze() to temporarily stop the L2 table from
  *          being modified by any activity including learning, aging, or
- *          software modifications by another task. Use opennsl_l2_addr_thaw()
- *          to restore normal L2 table activity.
+ *          software modifications by another task. When
+ *          opennsl_l2_addr_freeze is called, api opennsl_l2_age_timer_set
+ *          just save age_seconds to cache, and it does not affect l2 aging.
+ *          During opennsl_l2_addr_thaw, SDK will update age_seconds from
+ *          cache to destination, and it will affect l2 aging. Use
+ *          opennsl_l2_addr_thaw() to restore normal L2 table activity. Use
+ *          opennsl_switch_control_set with parameter opennslSwitchHWL2Freeze
+ *          to temporarily stop the L2 table from being modified by H/W
+ *          activity, but not prohibit software modifications. Also can use
+ *          opennsl_switch_control_set with opennslSwitchHWL2Freeze to restore
+ *          normal L2 table H/W activity.  opennsl_l2_addr_freeze() must match
+ *          with opennsl_l2_addr_thaw().
  *
  *\param    unit [IN]   Unit number.
  *
@@ -578,8 +596,18 @@ extern int opennsl_l2_addr_freeze(
  *
  *\description Use opennsl_l2_addr_freeze() to temporarily stop the L2 table from
  *          being modified by any activity including learning, aging, or
- *          software modifications by another task. Use opennsl_l2_addr_thaw()
- *          to restore normal L2 table activity.
+ *          software modifications by another task. When
+ *          opennsl_l2_addr_freeze is called, api opennsl_l2_age_timer_set
+ *          just save age_seconds to cache, and it does not affect l2 aging.
+ *          During opennsl_l2_addr_thaw, SDK will update age_seconds from
+ *          cache to destination, and it will affect l2 aging. Use
+ *          opennsl_l2_addr_thaw() to restore normal L2 table activity. Use
+ *          opennsl_switch_control_set with parameter opennslSwitchHWL2Freeze
+ *          to temporarily stop the L2 table from being modified by H/W
+ *          activity, but not prohibit software modifications. Also can use
+ *          opennsl_switch_control_set with opennslSwitchHWL2Freeze to restore
+ *          normal L2 table H/W activity.  opennsl_l2_addr_freeze() must match
+ *          with opennsl_l2_addr_thaw().
  *
  *\param    unit [IN]   Unit number.
  *
