@@ -223,3 +223,15 @@ bin/as5712               - AS5712 Switch System
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/as6712               - AS6712 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/as7712               - AS7712 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2

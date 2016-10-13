@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
   int rv = 0;
   int i;
   int choice;
+  int unit = DEFAULT_UNIT;
 
   /* Throw command usage here. This program excepts at least one
   down port from the user. */
@@ -119,6 +120,13 @@ int main(int argc, char *argv[])
     printf("\r\nFailed to initialize the system. Error %s \n\r",
            opennsl_errmsg(rv));
     return rv;
+  }
+
+  /* cold boot initialization commands */
+  rv = example_port_default_config(unit);
+  if (rv != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rv, opennsl_errmsg(rv));
   }
 
   /* Setup link monitoring */

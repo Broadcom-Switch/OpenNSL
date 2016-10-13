@@ -279,6 +279,13 @@ int main(int argc, char *argv[])
            rc, opennsl_errmsg(rc));
   }
 
+  rc = example_port_default_config(unit);
+  if (rc != OPENNSL_E_NONE)
+  {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+        rc, opennsl_errmsg(rc));
+  }
+
   /* Set default BST profiles */
   rc = example_bst_default_profile_set (unit);
   if (rc != OPENNSL_E_NONE) {

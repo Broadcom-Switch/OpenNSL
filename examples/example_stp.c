@@ -133,6 +133,13 @@ int main(int argc, char *argv[])
     return rv;
   }
 
+  /* cold boot initialization commands */
+  rv = example_port_default_config(unit);
+  if (rv != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rv, opennsl_errmsg(rv));
+  }
+
   /* Extract inputs parameters */
   port1 = atoi(argv[1]);
   port2 = atoi(argv[2]);

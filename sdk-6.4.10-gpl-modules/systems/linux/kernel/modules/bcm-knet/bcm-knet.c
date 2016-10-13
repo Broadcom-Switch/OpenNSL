@@ -66,6 +66,10 @@
 #include <kcom.h>
 #include <bcm-knet.h>
 
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(3,16,0)
+#include <linux/nsproxy.h>
+#endif
+
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/random.h>
@@ -3748,6 +3752,11 @@ bkn_init_ndev(u8 *mac, char *name)
     if (name && *name) {
         strncpy(dev->name, name, IFNAMSIZ-1);
     }
+
+#if defined(CONFIG_NET_NS)
+    /* OPENNSL_FIXUP */
+    dev_net_set(dev, current->nsproxy->net_ns);
+#endif
 
     /* Register the kernel Ethernet device */
     if (register_netdev(dev)) {

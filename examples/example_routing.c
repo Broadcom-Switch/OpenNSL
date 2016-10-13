@@ -394,6 +394,13 @@ int main(int argc, char *argv[])
 
   if(!warm_boot)
   {
+    /* cold boot initialization commands */
+    rv = example_port_default_config(unit);
+    if (rv != OPENNSL_E_NONE) {
+      printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+             rv, opennsl_errmsg(rv));
+    }
+
     /* Set L3 Egress Mode */
     rv =  opennsl_switch_control_set(unit, opennslSwitchL3EgressMode, 1);
     if (rv != OPENNSL_E_NONE) {

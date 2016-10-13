@@ -736,6 +736,7 @@ int main(int argc, char *argv[])
   opennsl_error_t   rv;
   int choice;
   int index = 0;
+  int unit = DEFAULT_UNIT;
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -755,6 +756,13 @@ int main(int argc, char *argv[])
     printf("\r\nFailed to initialize the switch device. Error %s\r\n",
         opennsl_errmsg(rv));
     return rv;
+  }
+
+  /* cold boot initialization commands */
+  rv = example_port_default_config(unit);
+  if (rv != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rv, opennsl_errmsg(rv));
   }
 
   /* Configure VXLAN settings for access and network ports */

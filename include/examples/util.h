@@ -34,6 +34,16 @@
 #define OPENNSL_BOOT_F_WARM_BOOT        0x200000
 
 /*****************************************************************//**
+ * \brief Set default configuration (like STP state, speed/duplex) for
+ *        all ports
+ *
+ * \param unit   [IN]    unit number
+ *
+ * \return OPENNSL_E_XXX     OpenNSL API return code
+ ********************************************************************/
+int example_port_default_config(int unit);
+
+/*****************************************************************//**
  * \brief Add all ports to default vlan
  *
  * \param unit   [IN]    unit number

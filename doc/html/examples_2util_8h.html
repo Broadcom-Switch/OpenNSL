@@ -73,6 +73,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#a0ec5a9523868f063b9ebfe4cfc05cdb1">example_max_port_count_get</a> (int unit, int *count)</td></tr>
 <tr class="memdesc:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">To get the number of front panel ports.  <a href="#a0ec5a9523868f063b9ebfe4cfc05cdb1">More...</a><br /></td></tr>
 <tr class="separator:a0ec5a9523868f063b9ebfe4cfc05cdb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2846e8ec8f46d212a3ae2493bdff7980"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#a2846e8ec8f46d212a3ae2493bdff7980">example_port_default_config</a> (int unit)</td></tr>
+<tr class="memdesc:a2846e8ec8f46d212a3ae2493bdff7980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set default configuration (like STP state, speed/duplex) for all ports.  <a href="#a2846e8ec8f46d212a3ae2493bdff7980">More...</a><br /></td></tr>
+<tr class="separator:a2846e8ec8f46d212a3ae2493bdff7980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0173c952d5a8af01c14eebabc05b5df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examples_2util_8h.html#ad0173c952d5a8af01c14eebabc05b5df">example_read_user_choice</a> (int *choice)</td></tr>
 <tr class="memdesc:ad0173c952d5a8af01c14eebabc05b5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read numeric menu choice from user.  <a href="#ad0173c952d5a8af01c14eebabc05b5df">More...</a><br /></td></tr>
 <tr class="separator:ad0173c952d5a8af01c14eebabc05b5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,11 +164,42 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00348">348</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00424">424</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="structopennsl__port__config__s.html#a6a0d55ca5f29547cfcc5c3c1a6149e81">opennsl_port_config_s::ge</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, <a class="el" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>, <a class="el" href="group__types.html#gaced1b7d5db61f5d7d2262da91bdb6887">OPENNSL_PBMP_COUNT</a>, <a class="el" href="group__port.html#ga9f95e3f27b53970914dccc70ffbe7010">opennsl_port_config_get()</a>, and <a class="el" href="structopennsl__port__config__s.html#a796873998a7d8b698aa878cf51883ef8">opennsl_port_config_s::xe</a>.</p>
 
 <p>Referenced by <a class="el" href="example__bst_8c.html#ab09e0ef72430423530fa3a3c8434d47e">example_bst_default_profile_set()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2846e8ec8f46d212a3ae2493bdff7980"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int example_port_default_config </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set default configuration (like STP state, speed/duplex) for all ports. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unit</td><td>[IN] unit number</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
+
+<p>Definition at line <a class="el" href="util_8c_source.html#l00048">48</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+
+<p>References <a class="el" href="structopennsl__port__info__s.html#a61a500c509e874b958c5062fe66a2b2c">opennsl_port_info_s::action_mask</a>, <a class="el" href="structopennsl__port__info__s.html#a7bd9ca2f39a10455696871ca7e1f7d8e">opennsl_port_info_s::autoneg</a>, <a class="el" href="structopennsl__port__info__s.html#a3c1901e3d5898180c34f62e73cc6dc46">opennsl_port_info_s::duplex</a>, <a class="el" href="structopennsl__port__config__s.html#afc418db09422234cc8de20841fa71f86">opennsl_port_config_s::e</a>, <a class="el" href="structopennsl__port__info__s.html#a8d98a4c0b7fb37caa75ebd0e40b51e83">opennsl_port_info_s::enable</a>, <a class="el" href="sal_2types_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>, <a class="el" href="structopennsl__port__info__s.html#aa0377a774204e16b6eaaef1268b6fa1d">opennsl_port_info_s::linkscan</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, <a class="el" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>, <a class="el" href="group__error.html#ga93ef6bf0437e016afeb6f06a8eaffb93">OPENNSL_FAILURE</a>, <a class="el" href="group__link.html#gga09ea64aace464cf0b4cec10763102b5fa85193be37417b622791110c618ab6c6b">OPENNSL_LINKSCAN_MODE_SW</a>, <a class="el" href="group__types.html#ga742e22658005a7f2772423ba8af9077d">OPENNSL_PBMP_ITER</a>, <a class="el" href="group__port.html#ga27b9ba812dfbf680236baa0255552b8e">OPENNSL_PORT_ABILITY_PAUSE_RX</a>, <a class="el" href="group__port.html#gadef0c0114c88d72d85887f8e978f6328">OPENNSL_PORT_ABILITY_PAUSE_TX</a>, <a class="el" href="group__port.html#ga4a027cbb9a96a7aed7f79251d4a02f8f">OPENNSL_PORT_ATTR_AUTONEG_MASK</a>, <a class="el" href="group__port.html#ga0dcee148c7a1f69ab112616b5dbb6344">OPENNSL_PORT_ATTR_DUPLEX_MASK</a>, <a class="el" href="group__port.html#ga1a3b9a173ae1a9708614656794422e12">OPENNSL_PORT_ATTR_ENABLE_MASK</a>, <a class="el" href="group__port.html#ga538c83c76a5556a14f9bc94a5dc5e6b4">OPENNSL_PORT_ATTR_LINKSCAN_MASK</a>, <a class="el" href="group__port.html#gad0d00f6d36024409b0c791ab3c59d8df">OPENNSL_PORT_ATTR_PAUSE_RX_MASK</a>, <a class="el" href="group__port.html#gad31ce8a9bd5fc99fdd80e916c9c32114">OPENNSL_PORT_ATTR_PAUSE_TX_MASK</a>, <a class="el" href="group__port.html#ga3b1dd6445e115b3b21b93e9798c0598a">OPENNSL_PORT_ATTR_SPEED_MASK</a>, <a class="el" href="group__port.html#ga9f95e3f27b53970914dccc70ffbe7010">opennsl_port_config_get()</a>, <a class="el" href="group__port.html#ga4ea82680aad05dc9cb0b9fbf729b43f5">OPENNSL_PORT_DUPLEX_FULL</a>, <a class="el" href="group__port.html#gad4f4937a2c1eb33233b93e68b33fba36">opennsl_port_info_t_init()</a>, <a class="el" href="group__port.html#gacdeec38f5023bdd0132b4d4d973ab5fd">opennsl_port_selective_set()</a>, <a class="el" href="group__stg.html#gga9d59789af75382e059ed70a13fb4efe1adccd387496b817e57070e97510521094">OPENNSL_STG_STP_FORWARD</a>, <a class="el" href="group__stg.html#gac4824e77e2d0cd577a9962d63e5b53ac">opennsl_stg_stp_set()</a>, <a class="el" href="structopennsl__port__info__s.html#a5bc0c98dc36de3728b5c5bd905ac6536">opennsl_port_info_s::pause_rx</a>, <a class="el" href="structopennsl__port__info__s.html#a49a5c75b091b95d0192e55f8d952623b">opennsl_port_info_s::pause_tx</a>, <a class="el" href="opennsl__api_8dox.html#abd1fe5382f13606db566da3450b351b0">port()</a>, and <a class="el" href="structopennsl__port__info__s.html#a0069f6f0d55b1b5819d23ec3f4f3e5c7">opennsl_port_info_s::speed</a>.</p>
+
+<p>Referenced by <a class="el" href="example__bst_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main()</a>.</p>
 
 </div>
 </div>
@@ -192,7 +226,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_xxx OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00105">105</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00181">181</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="sal_2types_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>, <a class="el" href="util_8c.html#a068278b0838b6670ab0ab0a93ed77484">MAX_DIGITS_IN_CHOICE</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, and <a class="el" href="sal_2types_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>.</p>
 
@@ -234,7 +268,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Valid string if there are no errors. Otherwise, it returns 0 </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00078">78</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00154">154</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="example__knet_8c.html#a55c45cb01dca0a1b336efccb6130cb14">example_knet_intf_create()</a>, <a class="el" href="example__knet_8c.html#a3c9f9a94f61c9adb5228fd241d913d99">example_knet_intf_delete()</a>, and <a class="el" href="example__rm_8c.html#adad5d0d9eb33d04e6abd59539fd704d7">example_l2_params_get()</a>.</p>
 
@@ -263,7 +297,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00045">45</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00121">121</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="util_8c.html#a91668ed1245d073a2ac84e6121205d28">DEFAULT_VLAN</a>, <a class="el" href="structopennsl__port__config__s.html#afc418db09422234cc8de20841fa71f86">opennsl_port_config_s::e</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>, <a class="el" href="group__error.html#ga472f8df1f26ed65c2dc5142f0ea9fb9b">opennsl_errmsg</a>, <a class="el" href="group__port.html#ga9f95e3f27b53970914dccc70ffbe7010">opennsl_port_config_get()</a>, and <a class="el" href="group__vlan.html#ga1e7cecaf6718cd174f1b1aef29349340">opennsl_vlan_port_add()</a>.</p>
 
@@ -298,7 +332,7 @@ Functions</h2></td></tr>
 <p>To print the MAC address. </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00211">211</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00287">287</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="example__routing_8c.html#a04eabb557cecbe6d7f8f9aa84a5fa74d">example_create_l3_intf()</a>.</p>
 
@@ -338,7 +372,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00235">235</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00311">311</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>.</p>
 
@@ -378,7 +412,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OPENNSL_E_XXX OpenNSL API return code </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00146">146</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00222">222</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>References <a class="el" href="util_8c.html#a60cf9af36f952be0feb59d1f49d5edff">MAC_ADDR_LEN</a>, <a class="el" href="sal_2types_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5acc22c36dedd5356dfbbf50d38397cca5">OPENNSL_E_FAIL</a>, and <a class="el" href="group__error.html#ggab4c007d9d8465756b8f672c33764e6d5a549cc71e16fe086c0311d03bc995a11b">OPENNSL_E_NONE</a>.</p>
 
@@ -420,7 +454,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="util_8c_source.html#l00278">278</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c_source.html#l00354">354</a> of file <a class="el" href="util_8c_source.html">util.c</a>.</p>
 
 <p>Referenced by <a class="el" href="example__routing_8c.html#aac2edc87c4397b83513067ac545599ea">example_add_host()</a>, <a class="el" href="example__field__ip__block_8c.html#af1005fa40860866c4a2e9283ee0539c7">example_fp_ip_block()</a>, and <a class="el" href="example__routing_8c.html#abce61c2dc135d7be41729d8dc9f5cf31">example_set_default_route()</a>.</p>
 

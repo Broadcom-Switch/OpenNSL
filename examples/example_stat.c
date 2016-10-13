@@ -116,6 +116,13 @@ int main(int argc, char *argv[])
     return 0;
   }
 
+  /* cold boot initialization commands */
+  rc = example_port_default_config(unit);
+  if (rc != OPENNSL_E_NONE) {
+    printf("\r\nFailed to apply default config on ports, rc = %d (%s).\r\n",
+           rc, opennsl_errmsg(rc));
+  }
+
   /* Add ports to default vlan. */
   printf("Adding ports to default vlan.\r\n");
   rc = example_switch_default_vlan_config(unit);
