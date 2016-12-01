@@ -84,4 +84,6 @@ extern int opennsl_driver_process_command(char *commandBuf);
 ********************************************************************/
 extern char *readline(const char *prompt);
 
+extern void platform_phy_cleanup();
+
 #endif  /* DRIVER_H */
