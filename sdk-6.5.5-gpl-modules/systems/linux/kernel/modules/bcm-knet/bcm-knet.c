@@ -4335,7 +4335,7 @@ bkn_proc_link_write(struct file *file, const char *buf,
     unsigned long flags;
     char link_str[40];
     char *ptr;
-    int len;
+    char *newline;
 
     if (count >= sizeof(link_str)) {
         count = sizeof(link_str) - 1;
@@ -4344,14 +4344,18 @@ bkn_proc_link_write(struct file *file, const char *buf,
         return -EFAULT;
     }
     link_str[count] = 0;
+    newline = strchr(link_str, '\n');
+    if (newline) {
+        /* Chop off the trailing newline */
+        *newline = '\0';
+    }
 
     if ((ptr = strchr(link_str, '=')) == NULL &&
         (ptr = strchr(link_str, ':')) == NULL) {
-        gprintk("Error: link syntax not recognized\n");
+        gprintk("Error: link syntax not recognized: '%s'\n", link_str);
         return count;
     }
     *ptr++ = 0;
-    len = strlen(link_str);
 
     dev = NULL;
     list_for_each(slist, &_sinfo_list) {
@@ -4359,20 +4363,20 @@ bkn_proc_link_write(struct file *file, const char *buf,
         spin_lock_irqsave(&sinfo->lock, flags);
         list_for_each(dlist, &sinfo->ndev_list) {
             priv = (bkn_priv_t *)dlist;
-            dev = priv->dev;
-            if (dev && dev->name) {
-                if (memcmp(dev->name, link_str, len) == 0) {
+            if (priv->dev && priv->dev->name) {
+                if (strcmp(priv->dev->name, link_str) == 0) {
+                    dev = priv->dev;
                     break;
                 }
             }
         }
         if (dev) {
-            if (memcmp(ptr, "up", 2) == 0) {
+            if (strcmp(ptr, "up") == 0) {
                 netif_carrier_on(dev);
-            } else if (memcmp(ptr, "down", 4) == 0) {
+            } else if (strcmp(ptr, "down") == 0) {
                 netif_carrier_off(dev);
             } else {
-                gprintk("Warning: unknown link setting\n");
+                gprintk("Warning: unknown link state setting: '%s'\n", ptr);
             }
             spin_unlock_irqrestore(&sinfo->lock, flags);
             return count;
@@ -4380,7 +4384,7 @@ bkn_proc_link_write(struct file *file, const char *buf,
         spin_unlock_irqrestore(&sinfo->lock, flags);
     }
 
-    gprintk("Warning: unknown network interface\n");
+    gprintk("Warning: unknown network interface: '%s'\n", link_str);
 
     return count;
 }
