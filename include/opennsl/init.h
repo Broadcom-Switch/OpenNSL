@@ -123,6 +123,24 @@ extern int opennsl_info_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/***************************************************************************//** 
+ *\brief Initialize the OPENNSL Information structure.
+ *
+ *\description Initializes OPENNSL Information structure to default values. This
+ *          function should be used to initialize any OPENNSL Information
+ *          structure prior to filling it out and passing it to an API
+ *          function. This ensures that subsequent API releases may add new
+ *          structure members to the opennsl_info_t structure, and
+ *          opennsl_info_t_init will initialize the new members to correct
+ *          default values.
+ *
+ *\param    info [IN,OUT]   Pointer to OPENNSL Information structure.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_info_t_init(
+    opennsl_info_t *info) LIB_DLL_EXPORTED ;
+
 #if !defined(OPENNSL_WARM_BOOT_SUPPORT)
 #define _opennsl_shutdown(unit)  OPENNSL_E_NONE 
 #endif

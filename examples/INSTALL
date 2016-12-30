@@ -1,0 +1,14 @@
+Steps to compile opennsl and sample applications and run it on the target
+1) Go to output directory. For GTO platform, it is OPENNSL_BASE/output/gto-trident-brl20
+2) Execute "make" to create a opennsl shared library object.
+3) The executables are placed in ./build directory. Copy the files in this directory to a TFTP path that the switch can access.
+4) Steps to run example application on target
+    a. Boot the switch to Linux prompt and go to /mnt/application folder.
+    b. Copy shared libraries and example applications on to the target using the following command
+        i. tftp -g -r <FILEPATH>/<FILENAME>  <TFTP-Server-IP>
+    c. Move the shared libraries to /lib folder
+        i.  mv libopennsl.so.1 /lib
+    d. Update file permissions for example applications by issuing the following command
+        i.  chmod +x example_*
+
+    e. Run the example application by issuing "example_xxx   <arguments>". Issue "example_xxx --help" for help on the example.

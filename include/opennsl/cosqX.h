@@ -403,10 +403,10 @@ extern int opennsl_cosq_port_mapping_multi_get(
  *\param    unit [IN]   Unit number.
  *\param    mode [IN]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [IN]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
- *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
- *          arrays in network switch devices if and only if opennsl_num_cos=10 is
- *          configured.
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO . Note: Be
+ *          aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10
+ *          weights arrays in network switch devices if and only if
+ *          opennsl_num_cos=10 is configured.
  *\param    delay [IN]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -450,10 +450,10 @@ extern int opennsl_cosq_sched_set(
  *\param    pbm [IN]   Port bit map of ports to configure
  *\param    mode [IN]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [IN]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
- *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
- *          arrays in network switch devices if and only if opennsl_num_cos=10 is
- *          configured.
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO . Note: Be
+ *          aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10
+ *          weights arrays in network switch devices if and only if
+ *          opennsl_num_cos=10 is configured.
  *\param    delay [IN]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -497,10 +497,10 @@ extern int opennsl_cosq_port_sched_set(
  *\param    unit [IN]   Unit number.
  *\param    mode [OUT]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [OUT]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
- *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
- *          arrays in network switch devices if and only if opennsl_num_cos=10 is
- *          configured.
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO . Note: Be
+ *          aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10
+ *          weights arrays in network switch devices if and only if
+ *          opennsl_num_cos=10 is configured.
  *\param    delay [OUT]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -544,10 +544,10 @@ extern int opennsl_cosq_sched_get(
  *\param    pbm [IN]   Port bit map of ports to configure
  *\param    mode [OUT]   Scheduling mode, see table =OPENNSL_COSQ_table
  *\param    weights [OUT]   Array of relative weights indexed by CoS queue. Use
- *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO. Note: Be aware
- *          that despite of OPENNSL_COS_COUNT is 8, it supports up to 10 weights
- *          arrays in network switch devices if and only if opennsl_num_cos=10 is
- *          configured.
+ *          depends on the selected mode.  See =OPENNSL_COSQ_COMBO . Note: Be
+ *          aware that despite of OPENNSL_COS_COUNT is 8, it supports up to 10
+ *          weights arrays in network switch devices if and only if
+ *          opennsl_num_cos=10 is configured.
  *\param    delay [OUT]   Used only if scheduling algorithm is
  *          OPENNSL_COSQ_BOUNDED_DELAY to indicate the maximum amount of time
  *          before returning to the highest priority CoS queue.  This value is
@@ -579,8 +579,19 @@ extern int opennsl_cosq_sched_weight_max_get(
     int mode, 
     int *weight_max) LIB_DLL_EXPORTED ;
 
-#define OPENNSL_COSQ_ALL        0x00000001 
-#define OPENNSL_COSQ_BW_LLFC    0x00000010 /**< Link Level Flow Control setting */
+#define OPENNSL_COSQ_ALL            0x00000001 
+#define OPENNSL_COSQ_BW_EAV_MODE    0x00000008 /**< Prioritize selected queue(s)
+                                                  for bandwidth before
+                                                  non-selected queue(s). */
+#define OPENNSL_COSQ_BW_LLFC        0x00000010 /**< Link Level Flow Control
+                                                  setting */
+#define OPENNSL_COSQ_BW_PACKET_MODE 0x00000020 /**< The bandwidth specified is in
+                                                  packets per second instead of
+                                                  kbits per second */
+#define OPENNSL_COSQ_BW_NOT_COMMIT  0x00000040 /**< Set rate to SW DB only, commit
+                                                  to HW is done when calling the
+                                                  API with the same GPort type
+                                                  and without NOT_COMMIT flag. */
 /***************************************************************************//** 
  *\brief Configure a port's bandwidth distribution among CoS queues.
  *
@@ -835,6 +846,62 @@ extern int opennsl_cosq_discard_port_get(
     int *drop_start, 
     int *drop_slope, 
     int *average_time) LIB_DLL_EXPORTED ;
+
+/** Features that can be controlled on a gport/cosq  basis. */
+typedef enum opennsl_cosq_control_e {
+    opennslCosqControlEgressUCQueueSharedLimitBytes = 79, /**< Egress UC Shared Queue limit setting */
+    opennslCosqControlEgressMCQueueMinLimitBytes = 84, /**< MC Min Queue limit setting */
+    opennslCosqControlPortQueueUcast = 103, /**< retrieve port, cosq queue number of
+                                           PBSMH UC packet headers */
+    opennslCosqControlPortQueueMcast = 104, /**< retrieve port, cosq queue number of
+                                           PBSMH MC packet headers */
+} opennsl_cosq_control_t;
+
+/***************************************************************************//** 
+ *\brief Set various features at the gport/cosq level.
+ *
+ *\description Features that can be controlled on a gport/cosq  basis.
+ *          On some devices and for some cosq control types, a port value of
+ *          -1 or gport type for system configuration will configure system
+ *          based cosq control.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   GPORT ID for a queue group
+ *\param    cosq [IN]   CoS Queue
+ *\param    type [IN]   type of operation (see =OPENNSL_COSQ_CONTROL_table)
+ *\param    arg [IN]   (for _set) Argument whose meaning is dependent on type
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_control_set(
+    int unit, 
+    opennsl_gport_t port, 
+    opennsl_cos_queue_t cosq, 
+    opennsl_cosq_control_t type, 
+    int arg) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set various features at the gport/cosq level.
+ *
+ *\description Features that can be controlled on a gport/cosq  basis.
+ *          On some devices and for some cosq control types, a port value of
+ *          -1 or gport type for system configuration will configure system
+ *          based cosq control.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   GPORT ID for a queue group
+ *\param    cosq [IN]   CoS Queue
+ *\param    type [IN]   type of operation (see =OPENNSL_COSQ_CONTROL_table)
+ *\param    arg [OUT]   (for _set) Argument whose meaning is dependent on type
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_control_get(
+    int unit, 
+    opennsl_gport_t port, 
+    opennsl_cos_queue_t cosq, 
+    opennsl_cosq_control_t type, 
+    int *arg) LIB_DLL_EXPORTED ;
 
 /** For Virtual output queues (system ports) */
 typedef struct opennsl_cosq_gport_discard_s {
@@ -2150,5 +2217,11 @@ extern int opennsl_cosq_stat_set(
     opennsl_cosq_stat_t stat, 
     uint64 value) LIB_DLL_EXPORTED ;
 
+#if defined(INCLUDE_TCB)
+#endif
+#if defined(INCLUDE_TCB)
+#endif
+#if defined(INCLUDE_TCB)
+#endif
 #endif /* __OPENNSL_COSQX_H__ */
 /*@}*/

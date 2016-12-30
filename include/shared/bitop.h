@@ -34,6 +34,16 @@
 /* Size for giving to malloc and memset to handle _max bits */
 #define    SHR_BITALLOCSIZE(_max) (_SHR_BITDCLSIZE(_max) * sizeof (SHR_BITDCL))
 
+
+/* (internal) Number of SHR_BITDCLs needed to contain from start bit to start bit + range */
+#define _SHR_BITDCLSIZE_FROM_START_BIT(_start_bit, _range) (_range + _start_bit -1)/SHR_BITWID - _start_bit/SHR_BITWID + 1
+
+/* Size of SHR_BITDCLs needed to contain from start bit to start bit + range.
+   Needed when you want to do autosync */
+#define SHR_BITALLOCSIZE_FROM_START_BIT(_start_bit, _range) (_SHR_BITDCLSIZE_FROM_START_BIT(_start_bit, _range) * sizeof (SHR_BITDCL))
+
+
+
 /* Declare bit array _n of size _max bits */
 #define    SHR_BITDCLNAME(_n, _max) SHR_BITDCL    _n[_SHR_BITDCLSIZE(_max)]
 /* Declare bit array _n of size _max bits, and clear it */

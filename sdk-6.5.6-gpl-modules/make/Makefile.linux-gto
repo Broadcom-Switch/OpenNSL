@@ -1,0 +1,115 @@
+#
+#  Unless you and Broadcom execute a separate written software license
+#  agreement governing use of this software, this software is licensed to
+#  you under the terms of the GNU General Public License version 2 (the
+#  "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
+#  with the following added to such license:
+#  
+#  As a special exception, the copyright holders of this software give
+#  you permission to link this software with independent modules, and to
+#  copy and distribute the resulting executable under terms of your
+#  choice, provided that you also meet, for each linked independent
+#  module, the terms and conditions of the license of that module.  An
+#  independent module is a module which is not derived from this
+#  software.  The special exception does not apply to any modifications
+#  of the software.
+#
+# $Id: Makefile.linux-gto-4_4,v 1.42 Broadcom SDK $
+# $Copyright: (c) 2015 Broadcom Corp.
+# All Rights Reserved.$
+
+# User must select one platform from below.
+ifeq (,$(BUILD_PLATFORM))
+BUILD_PLATFORM=POWERPC_LINUX
+endif
+
+# TOOLCHAIN_BASE_DIR    Toolchain base directory for GTO devices
+# TARGET_ARCHITECTURE   Compiler for target architecture
+# KERNDIR               Kernel directory for iPROC-CMICd devices
+TOOLCHAIN_BASE_DIR ?= /projects/ntsw-tools/linux/gto
+TARGET_ARCHITECTURE := powerpc-broadcom-linux-gnuspe
+KERNDIR ?= $(TOOLCHAIN_BASE_DIR)/kernel/current
+
+
+ifeq (,$(CROSS_COMPILE))
+CROSS_COMPILE := $(TARGET_ARCHITECTURE)-
+endif
+
+
+# GTO toolchain
+TOOLCHAIN_BIN_DIR := $(TOOLCHAIN_BASE_DIR)/toolchain/host/usr/bin
+override PATH := $(TOOLCHAIN_BIN_DIR)/../$(TARGET_ARCHITECTURE)/bin:$(TOOLCHAIN_BIN_DIR):$(PATH)
+export TOOLCHAIN_BIN_DIR
+
+
+# Default Linux include directory
+ifeq (,$(LINUX_INCLUDE))
+LINUX_INCLUDE := $(KERNDIR)/include
+endif
+
+CFGFLAGS += -DSYS_BE_PIO=1 -DSYS_BE_PACKET=0 -DSYS_BE_OTHER=1
+ENDIAN = BE_HOST=1
+CFGFLAGS += -D$(ENDIAN) 
+CFGFLAGS += -DBCM_PLATFORM_STRING=\"GTO_MPC8548\"
+CFGFLAGS += -DSAL_BDE_DMA_MEM_DEFAULT=32
+
+# Extra variables.
+EXTRA_CFLAGS = -D"KBUILD_STR(s)=\#s" $(basename_flags) $(modname_flags)
+
+ARCH = powerpc
+KBUILD_VERBOSE = 1
+
+export ARCH KBUILD_VERBOSE 
+
+
+# From linux/arch/ppc/Makefile
+comma = ,
+basetarget = $(basename $(notdir $@))
+modname = $(basetarget)
+
+name-fix = $(subst $(comma),_,$(subst -,_,$1))
+basename_flags = -D"KBUILD_BASENAME=KBUILD_STR($(call name-fix,$(basetarget)))"
+modname_flags  = $(if $(filter 1,$(words $(modname))),\
+                 -D"KBUILD_MODNAME=KBUILD_STR($(call name-fix,$(modname)))")
+
+KFLAG_INCLD = $(TOOLCHAIN_BIN_DIR)/../lib/gcc/$(TARGET_ARCHITECTURE)/4.6.4/include
+
+ifdef BROADCOM_SVK
+ifdef BCM_BME3200_B0
+PLX_PCI2LBUS=1
+endif
+ifdef BCM_BM9600_B0
+PLX_PCI2LBUS=1
+endif
+ifeq ($PLX_PCI2LBUS, 1)
+CFLAGS += -DBCM_PLX9656_LOCAL_BUS -DBDE_LINUX_NON_INTERRUPTIBLE 
+endif
+endif
+
+ifdef DPP_CHIPS
+CFLAGS += -DDUNE_BCM -D__DUNE_GTO_BCM_CPU__ -D__DUNE_LINUX_BCM_CPU_PCIE__ -D__DUNE_LINUX_BCM_CPU_PCP_DMA__
+CFGFLAGS += -DSOC_CM_FUNCTION
+endif
+
+ifdef DFE_CHIPS
+CFLAGS += -DDUNE_BCM -D__DUNE_GTO_BCM_CPU__ -D__DUNE_LINUX_BCM_CPU_PCIE__
+CFGFLAGS += -DSOC_CM_FUNCTION
+endif
+
+ifdef SHADOW_PLX
+CFLAGS += -DBCM_PLX9656_LOCAL_BUS -DBDE_LINUX_NON_INTERRUPTIBLE -DSHADOW_SVK
+endif
+
+ifeq (,$(KFLAGS))
+KFLAGS := -D__KERNEL__ -m32 -nostdinc -isystem $(KFLAG_INCLD) -I$(LINUX_INCLUDE) -include $(LINUX_INCLUDE)/generated/uapi/linux/version.h -include $(LINUX_INCLUDE)/generated/autoconf.h -I$(KERNDIR)/arch/powerpc -I$(KERNDIR)/arch/powerpc/include -I$(KERNDIR)/include/asm-powerpc -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -O2 -fno-strict-aliasing -fno-common -msoft-float -pipe -ffixed-r2 -mmultiple -mno-altivec -funit-at-a-time -Wa,-me500 -fomit-frame-pointer  -Wdeclaration-after-statement -Wno-pointer-sign
+endif
+
+ifneq (,$(findstring TCL,$(FEATURE_LIST)))
+#LINK_STATIC = 0
+#export LINK_STATIC
+endif
+
+ifneq ($(targetplat),user)
+include ${SDK}/make/Makefile.linux-kernel-4_4
+endif
+

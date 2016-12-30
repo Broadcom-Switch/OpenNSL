@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
   opennsl_error_t   rc;
   int choice;
   int unit = DEFAULT_UNIT;
+  int i;
   int nstat;
   opennsl_port_t port;
   opennsl_stat_val_t stat_arr[] = {
@@ -174,6 +175,13 @@ int main(int argc, char *argv[])
         }
 
         rc = opennsl_stat_multi_get(unit, port, nstat, stat_arr, val);
+ 
+        if (rc == OPENNSL_E_UNAVAIL) {
+           for (i=0; i < nstat; i++) {
+              rc = opennsl_stat_get(unit, port, stat_arr[i], &val[i]);
+           }          
+        }
+
         if(rc != OPENNSL_E_NONE) {
           printf("\r\nFailed to get the port stats, rc = %d (%s).\r\n",
                  rc, opennsl_errmsg(rc));

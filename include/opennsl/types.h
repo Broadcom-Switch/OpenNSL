@@ -182,6 +182,11 @@ typedef int opennsl_gport_t;
 #define OPENNSL_GPORT_IS_MCAST_QUEUE_GROUP(_gport)  _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) 
 #define OPENNSL_GPORT_IS_SCHEDULER(_gport)  _SHR_GPORT_IS_SCHEDULER(_gport) 
 #define OPENNSL_GPORT_IS_COSQ(_gport)       _SHR_GPORT_IS_COSQ(_gport) 
+#define OPENNSL_GPORT_LOCAL_SET(_gport, _port)  \
+    _SHR_GPORT_LOCAL_SET(_gport, _port) 
+#define OPENNSL_GPORT_LOCAL_GET(_gport)  \
+    (!_SHR_GPORT_IS_LOCAL(_gport) ? -1 : \
+    _SHR_GPORT_LOCAL_GET(_gport)) 
 #define OPENNSL_GPORT_MODPORT_SET(_gport, _module, _port)  \
     _SHR_GPORT_MODPORT_SET(_gport, _module, _port) 
 #define OPENNSL_GPORT_MODPORT_MODID_GET(_gport)  \

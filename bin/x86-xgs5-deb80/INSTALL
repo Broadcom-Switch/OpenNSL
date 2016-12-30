@@ -1,5 +1,5 @@
 This document describes how to install OpenNSL binary provided
-in this package on the s6000/s6100 platforms.
+in this package on the s6000 platform.
 
 Building OpenNSL
 ================
@@ -58,7 +58,7 @@ Downloading and running OpenNSL sample applications
    # cd /usr/lib
    # ln -sf libopennsl.so.1 libopennsl.so
 
-4) Download the S6000/S6100 platform configuration files to switch. Set the OPENNSL_CONFIG_FILE path to point to configuration files. Refer to OpenNSL documentation, section "Customizing OpenNSL platform" for more details.
+4) Download the S6000 platform configuration files to switch. Set the OPENNSL_CONFIG_FILE path to point to configuration files. Refer to OpenNSL documentation, section "Customizing OpenNSL platform" for more details.
 
 5) cd to the target deliverables directory and run the sample application.
     # chmod +x sample_application

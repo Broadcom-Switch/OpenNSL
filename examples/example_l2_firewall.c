@@ -53,6 +53,7 @@
 #define DEFAULT_VLAN  1
 #define MAX_DIGITS_IN_CHOICE 5
 
+int max_l2_count = 0;  
 char example_usage[] =
 "Syntax: example_l2_firewall                                           \n\r"
 "                                                                      \n\r"
@@ -131,6 +132,7 @@ int _opennsl_l2_traverse_cb(
     void *user_data)
 {
   printf("MAC=%02x:%02x:%02x:%02x:%02x:%02x VLAN=%d PORT=%d\n", info->mac[0],info->mac[1],info->mac[2],info->mac[3],info->mac[4],info->mac[5], info->vid, info->port);
+  max_l2_count++;
   return OPENNSL_E_NONE;
 }
 
@@ -150,6 +152,7 @@ int main(int argc, char *argv[])
   void *user_data = NULL;
   unsigned int warm_boot;
   int index = 0;
+  int age_seconds = 0;  
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -202,6 +205,7 @@ int main(int argc, char *argv[])
     printf("2. Remove firewall\n");
     printf("3. Show L2 table\n");
     printf("4. Save the configuration to scache\n");
+    printf("5. Set L2 age interval\n");
 #ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
@@ -263,10 +267,13 @@ int main(int argc, char *argv[])
       case 3:
       {
         /* Iterate over all valid entries in the L2 table */
+        max_l2_count = 0;
         rv = opennsl_l2_traverse(unit, &_opennsl_l2_traverse_cb, user_data);
         if(rv != OPENNSL_E_NONE) {
           printf("\r\nFailed to iterate over L2 table. rv: %s\r\n", opennsl_errmsg(rv));
         }
+     
+        printf("\nTotal number of L2 entries: %d\n", max_l2_count);
         break;
       } /* End of case 3 */
 
@@ -282,6 +289,28 @@ int main(int argc, char *argv[])
         printf("Warmboot configuration is saved successfully.\n");
         break;
       } /* End of case 4 */
+
+      case 5:
+      {
+        rv = opennsl_l2_age_timer_get(DEFAULT_UNIT, &age_seconds);
+        if(rv != OPENNSL_E_NONE) {
+          printf("Failed to get the l2 age interval. "
+              "Error %s\n", opennsl_errmsg(rv));
+          return rv;
+        }
+        printf("Current L2 age interval: %d secs\n", age_seconds);
+
+        age_seconds = 30;
+        rv = opennsl_l2_age_timer_set(DEFAULT_UNIT, age_seconds);
+        if(rv != OPENNSL_E_NONE) {
+          printf("Failed to set the l2 age interval. "
+              "Error %s\n", opennsl_errmsg(rv));
+          return rv;
+        }
+        printf("New L2 age interval: %d secs\n", age_seconds);
+
+        break;
+      } /* End of case 5 */
 
 #ifdef INCLUDE_DIAG_SHELL
       case 9:

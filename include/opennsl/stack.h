@@ -51,6 +51,27 @@ extern int opennsl_stk_my_modid_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Given a Gport get the SAND System-Port.
+ *
+ *\description Given a Gport that ie either a Modport or Trunk Gport, get the
+ *          SAND System-Port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   Gport (Modport or LAG)
+ *\param    sysport [OUT]   SAND System-Port Gport
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_stk_gport_sysport_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_gport_t *sysport) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #include <opennsl/stackX.h>
 #endif /* __OPENNSL_STACK_H__ */
 /*@}*/

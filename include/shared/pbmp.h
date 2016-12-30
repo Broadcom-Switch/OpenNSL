@@ -90,7 +90,12 @@
  */
 
 #ifndef	_SHR_PBMP_WIDTH
+#undef   _SHR_PBMP_PORT_MAX
+#ifndef OPENNSL_PRODUCT_DNX
 #define	_SHR_PBMP_PORT_MAX	256
+#else
+#define  _SHR_PBMP_PORT_MAX 571
+#endif
 
 #define	_SHR_PBMP_WIDTH		(((_SHR_PBMP_PORT_MAX + 32 - 1)/32)*32)
 #endif

@@ -363,6 +363,23 @@ extern void opennsl_pkt_t_init(
 extern void opennsl_pkt_blk_t_init(
     opennsl_pkt_blk_t *pkt_blk) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL RX reasons structure.
+ *
+ *\description Initializes a OPENNSL RX reasons structure to default values. This
+ *          function should be used to initialize any OPENNSL RX reasons
+ *          structure prior to filling it out and passing it to an API
+ *          function. This ensures that the structure is initialized to
+ *          correct default values if subsequent API releases add new members
+ *          to the structure.
+ *
+ *\param    reasons [IN,OUT]   - Pointer to the structure to be initialized.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_rx_reasons_t_init(
+    opennsl_rx_reasons_t *reasons) LIB_DLL_EXPORTED ;
+
 #include <opennsl/pktX.h>
 #endif /* __OPENNSL_PKT_H__ */
 /*@}*/

@@ -46,6 +46,10 @@ export OPENNSL_ROOT = ./..
 
 export CFLAGS += -DCDP_PACKAGE=1
 export CFLAGS += -I$(OPENNSL_ROOT)/include
+export CFLAGS += -I$(OPENNSL_ROOT)/vendor/cjson
+
+#Uncomment the following line for DNX family of devices
+#export CFLAGS += -DOPENNSL_PRODUCT_DNX
 
 FEATURE_LIST = L3
 CFLAGS  += $(foreach feature,$(FEATURE_LIST), -DINCLUDE_$(feature))
@@ -57,6 +61,7 @@ EXAMPLE_UTIL_SRCS = $(abspath $(OPENNSL_ROOT)/examples/util.c)
 EXAMPLE_UTIL_OBJS = $(abspath $(OPENNSL_ROOT)/examples/util.o)
 
 targets := $(basename $(notdir $(wildcard example*.c)))
+targets := $(filter-out example_rpc_client.c,$(targets))
 
 .PHONY: exutils all clean dump_vars
 

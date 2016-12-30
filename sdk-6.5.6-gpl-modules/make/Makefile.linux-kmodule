@@ -1,0 +1,82 @@
+#
+#  Unless you and Broadcom execute a separate written software license
+#  agreement governing use of this software, this software is licensed to
+#  you under the terms of the GNU General Public License version 2 (the
+#  "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
+#  with the following added to such license:
+#  
+#  As a special exception, the copyright holders of this software give
+#  you permission to link this software with independent modules, and to
+#  copy and distribute the resulting executable under terms of your
+#  choice, provided that you also meet, for each linked independent
+#  module, the terms and conditions of the license of that module.  An
+#  independent module is a module which is not derived from this
+#  software.  The special exception does not apply to any modifications
+#  of the software.
+#
+# $Id: Makefile.linux-kmodule-3_6,v 1.2 Broadcom SDK $
+# $Copyright: (c) 2006 Broadcom Corp.
+# All Rights Reserved.$
+
+# Due to the extensive use of driver libraries, the SDK usually builds
+# kernel modules from a precompiled object. To avoid various warnings
+# and conflicts, the pre-compiled object must be named differently
+# from the target module, and the object file itself should be
+# appended with "_shipped".
+
+# If a module exports any symbols, then the exporting source file must
+# be compiled within the kernel source tree for correct generation of
+# module symbol versions. The symbol source file should be passed to
+# this Makefile via the MODULE_SYM variable.
+
+MODULE := $(MOD_NAME).o
+KMODULE := $(MOD_NAME).ko
+PRE_COMPILED_OBJ := obj_$(MOD_NAME).o
+
+obj-m := $(MODULE)
+$(MOD_NAME)-y := $(MODULE_SYM) $(PRE_COMPILED_OBJ)
+
+
+ifeq (,$(CROSS_COMPILE))
+
+export CROSS_COMPILE
+
+endif
+
+SAVE_CFLAGS := ${CFLAGS}
+
+include $(SDK)/make/Make.config
+
+PWD := $(shell pwd)
+
+ifneq ($(ARCH),)
+# ELDK does not seem to `automatically' define ARCH where other gccs may
+A := ARCH=$(ARCH)
+export ARCH
+endif
+
+# Provide an option in case kernel was built in separate directory
+KERNBLDDIR ?= $(KERNDIR)
+
+# Standard SDK include path for building source files that export
+# kernel symbols.
+
+override EXTRA_CFLAGS = -I${SDK}/include -I${SDK}/systems/linux/kernel/modules/include -I${SDK}/systems/bde/linux/include
+
+# The precopiled object needs a dummy command file to avoid warnings
+# from the Kbuild scripts (modpost stage).
+# Kernels before 2.6.17 do not support external module symbols files,
+# so we create a dummy to prevent build failures.
+	
+$(KMODULE):
+	rm -f *.o *.ko .*.cmd
+	rm -fr .tmp_versions
+	ln -s $(LIBDIR)/$(MODULE) $(PRE_COMPILED_OBJ)_shipped
+	echo "suppress warning" > .$(PRE_COMPILED_OBJ).cmd
+	$(MAKE) -C $(KERNBLDDIR) CROSS_COMPILE=$(CROSS_COMPILE) M=$(PWD) modules
+	if [ ! -f Module.symvers ]; then echo "old kernel (pre-2.6.17)" > Module.symvers; fi
+	cp -f $(KMODULE) $(LIBDIR)
+	rm -f $(PRE_COMPILED_OBJ)_shipped
+
+EXTRA_CFLAGS = $(CFLAGS)
+CFLAGS := ${SAVE_CFLAGS}

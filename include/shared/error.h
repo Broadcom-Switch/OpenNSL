@@ -118,6 +118,7 @@ typedef enum {
     _SHR_SWITCH_EVENT_MMU_BST_TRIGGER = 15,
     _SHR_SWITCH_EVENT_EPON_ALARM = 16,
     _SHR_SWITCH_EVENT_RUNT_DETECT = 17,
+    _SHR_SWITCH_EVENT_AUTONEG_SPEED_ERROR = 18,
     _SHR_SWITCH_EVENT_COUNT             /* last, as always */
 } _shr_switch_event_t;
 

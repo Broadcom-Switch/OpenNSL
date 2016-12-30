@@ -875,7 +875,7 @@ extern int opennsl_port_linkscan_get(
  *          a port. If auto-negotiation is already enabled, re-enabling it
  *          will restart auto-negotiation.
  *          Before enabling auto-negotiation, the desired advertised modes
- *          must be configured using =opennsl_port_advert_set .
+ *          must be configured using =opennsl_port_ability_advert_set .
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
@@ -900,7 +900,7 @@ extern int opennsl_port_autoneg_set(
  *          a port. If auto-negotiation is already enabled, re-enabling it
  *          will restart auto-negotiation.
  *          Before enabling auto-negotiation, the desired advertised modes
- *          must be configured using =opennsl_port_advert_set .
+ *          must be configured using =opennsl_port_ability_advert_set .
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
@@ -921,10 +921,20 @@ extern int opennsl_port_autoneg_get(
  *\brief Get or set the current operating speed of a port.
  *
  *\description Set or get the speed of the specified port. opennsl_port_speed_set
- *          disables auto-negotiation if it is enabled. When setting a speed,
- *          if an error is returned the PHY and the MAC may not be properly
- *          set for operation. A value of 0 indicates, set max speed. For
- *          correct operation  following an error, a valid speed must be set.
+ *          disables auto-negotiation if it is enabled.
+ *          When setting a speed, if an error is returned the PHY and the MAC
+ *          may not be properly set for operation.
+ *          On 5656x, 5676x, 5686x and 5697x class of chips, setting a speed
+ *          on a port that is not supported by the port block (because of the
+ *          PLL parameters) may result in a failure during reconfiguration.
+ *          There are also other restrictions in the chip for these class of
+ *          chips (E.g., different ports within a port block cannot have
+ *          different speeds when the port block is configured in oversub
+ *          calendar) which can cause reconfiguring the port to fail. All the
+ *          limitations/restrictions of the chip and port block will be
+ *          documented in the data sheet for the respective chips.
+ *          A value of 0 indicates, set max speed. For correct operation
+ *          following an error, a valid speed must be set.
  *          When retrieving the current speed of a port, if auto-negotiation
  *          is enabled the current negotiated speed is returned. If
  *          auto-negotiation is in progress or there is no link, speed
@@ -955,10 +965,20 @@ extern int opennsl_port_speed_max(
  *\brief Get or set the current operating speed of a port.
  *
  *\description Set or get the speed of the specified port. opennsl_port_speed_set
- *          disables auto-negotiation if it is enabled. When setting a speed,
- *          if an error is returned the PHY and the MAC may not be properly
- *          set for operation. A value of 0 indicates, set max speed. For
- *          correct operation  following an error, a valid speed must be set.
+ *          disables auto-negotiation if it is enabled.
+ *          When setting a speed, if an error is returned the PHY and the MAC
+ *          may not be properly set for operation.
+ *          On 5656x, 5676x, 5686x and 5697x class of chips, setting a speed
+ *          on a port that is not supported by the port block (because of the
+ *          PLL parameters) may result in a failure during reconfiguration.
+ *          There are also other restrictions in the chip for these class of
+ *          chips (E.g., different ports within a port block cannot have
+ *          different speeds when the port block is configured in oversub
+ *          calendar) which can cause reconfiguring the port to fail. All the
+ *          limitations/restrictions of the chip and port block will be
+ *          documented in the data sheet for the respective chips.
+ *          A value of 0 indicates, set max speed. For correct operation
+ *          following an error, a valid speed must be set.
  *          When retrieving the current speed of a port, if auto-negotiation
  *          is enabled the current negotiated speed is returned. If
  *          auto-negotiation is in progress or there is no link, speed
@@ -989,10 +1009,20 @@ extern int opennsl_port_speed_set(
  *\brief Get or set the current operating speed of a port.
  *
  *\description Set or get the speed of the specified port. opennsl_port_speed_set
- *          disables auto-negotiation if it is enabled. When setting a speed,
- *          if an error is returned the PHY and the MAC may not be properly
- *          set for operation. A value of 0 indicates, set max speed. For
- *          correct operation  following an error, a valid speed must be set.
+ *          disables auto-negotiation if it is enabled.
+ *          When setting a speed, if an error is returned the PHY and the MAC
+ *          may not be properly set for operation.
+ *          On 5656x, 5676x, 5686x and 5697x class of chips, setting a speed
+ *          on a port that is not supported by the port block (because of the
+ *          PLL parameters) may result in a failure during reconfiguration.
+ *          There are also other restrictions in the chip for these class of
+ *          chips (E.g., different ports within a port block cannot have
+ *          different speeds when the port block is configured in oversub
+ *          calendar) which can cause reconfiguring the port to fail. All the
+ *          limitations/restrictions of the chip and port block will be
+ *          documented in the data sheet for the respective chips.
+ *          A value of 0 indicates, set max speed. For correct operation
+ *          following an error, a valid speed must be set.
  *          When retrieving the current speed of a port, if auto-negotiation
  *          is enabled the current negotiated speed is returned. If
  *          auto-negotiation is in progress or there is no link, speed
@@ -1164,6 +1194,14 @@ typedef _shr_port_duplex_t opennsl_port_duplex_t;
 #define OPENNSL_PORT_DUPLEX_HALF    _SHR_PORT_DUPLEX_HALF 
 #define OPENNSL_PORT_DUPLEX_FULL    _SHR_PORT_DUPLEX_FULL 
 #define OPENNSL_PORT_DUPLEX_COUNT   _SHR_PORT_DUPLEX_COUNT 
+/** Port pause modes (mainly used by the OPENNSLX layer). */
+typedef enum opennsl_port_pause_e {
+    OPENNSL_PORT_PAUSE_NONE    = 0, 
+    OPENNSL_PORT_PAUSE_ASYM_RX = 1, 
+    OPENNSL_PORT_PAUSE_ASYM_TX = 2, 
+    OPENNSL_PORT_PAUSE_SYM     = 3  
+} opennsl_port_pause_t;
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -1564,7 +1602,66 @@ typedef _shr_port_medium_t opennsl_port_medium_t;
 #define OPENNSL_PORT_MEDIUM_COPPER  _SHR_PORT_MEDIUM_COPPER 
 #define OPENNSL_PORT_MEDIUM_FIBER   _SHR_PORT_MEDIUM_FIBER 
 #define OPENNSL_PORT_MEDIUM_COUNT   _SHR_PORT_MEDIUM_COUNT 
+/** Port loopback modes. */
+typedef enum opennsl_port_loopback_e {
+    OPENNSL_PORT_LOOPBACK_NONE = 0,     
+    OPENNSL_PORT_LOOPBACK_MAC  = 1,     
+    OPENNSL_PORT_LOOPBACK_PHY  = 2,     
+    OPENNSL_PORT_LOOPBACK_PHY_REMOTE = 3, 
+    OPENNSL_PORT_LOOPBACK_COUNT = 4     
+} opennsl_port_loopback_t;
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set or retrieve the current loopback mode of a port.
+ *
+ *\description Depending on the capabilities of a port, the port may be
+ *          configured to operate in MAC loopback, PHY loopback or no
+ *          loopback. No loopback is the normal operating mode for a device.
+ *          The external configuration of a port may not support PHY loopback
+ *          in some cases. To verify a port can support the desired loopback
+ *          mode, the API call.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port for which the loopback mode is being set or retrieved
+ *\param    loopback [IN]   Specifies the loopback mode; see table
+ *          =OPENNSL_PORT_LB_m for values
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current loopback states
+ *          the contents of the parameter loopback are undefined.
+ ******************************************************************************/
+extern int opennsl_port_loopback_set(
+    int unit, 
+    opennsl_port_t port, 
+    int loopback) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or retrieve the current loopback mode of a port.
+ *
+ *\description Depending on the capabilities of a port, the port may be
+ *          configured to operate in MAC loopback, PHY loopback or no
+ *          loopback. No loopback is the normal operating mode for a device.
+ *          The external configuration of a port may not support PHY loopback
+ *          in some cases. To verify a port can support the desired loopback
+ *          mode, the API call.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port for which the loopback mode is being set or retrieved
+ *\param    loopback [OUT]   Specifies the loopback mode; see table
+ *          =OPENNSL_PORT_LB_m for values
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current loopback states
+ *          the contents of the parameter loopback are undefined.
+ ******************************************************************************/
+extern int opennsl_port_loopback_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *loopback) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Set the spanning tree state for a port (single instance spanning tree
@@ -1872,6 +1969,13 @@ extern int opennsl_port_queued_count_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X7_X6_1 _SHR_PORT_PRBS_POLYNOMIAL_X7_X6_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X15_X14_1 _SHR_PORT_PRBS_POLYNOMIAL_X15_X14_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X23_X18_1 _SHR_PORT_PRBS_POLYNOMIAL_X23_X18_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X31_X28_1 _SHR_PORT_PRBS_POLYNOMIAL_X31_X28_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X9_X5_1 _SHR_PORT_PRBS_POLYNOMIAL_X9_X5_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X11_X9_1 _SHR_PORT_PRBS_POLYNOMIAL_X11_X9_1 
+#define OPENNSL_PORT_PRBS_POLYNOMIAL_X58_X31_1 _SHR_PORT_PRBS_POLYNOMIAL_X58_X31_1 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 
@@ -2113,14 +2217,37 @@ extern int opennsl_port_dtag_mode_get(
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #define OPENNSL_PORT_ATTR_ENABLE_MASK       0x00000001 
+#define OPENNSL_PORT_ATTR_LINKSTAT_MASK     0x00000002 /**< Get only. */
 #define OPENNSL_PORT_ATTR_AUTONEG_MASK      0x00000004 
 #define OPENNSL_PORT_ATTR_SPEED_MASK        0x00000008 
 #define OPENNSL_PORT_ATTR_DUPLEX_MASK       0x00000010 
 #define OPENNSL_PORT_ATTR_LINKSCAN_MASK     0x00000020 
+#define OPENNSL_PORT_ATTR_LEARN_MASK        0x00000040 
+#define OPENNSL_PORT_ATTR_DISCARD_MASK      0x00000080 
+#define OPENNSL_PORT_ATTR_VLANFILTER_MASK   0x00000100 
+#define OPENNSL_PORT_ATTR_UNTAG_PRI_MASK    0x00000200 
+#define OPENNSL_PORT_ATTR_UNTAG_VLAN_MASK   0x00000400 
+#define OPENNSL_PORT_ATTR_STP_STATE_MASK    0x00000800 
+#define OPENNSL_PORT_ATTR_PFM_MASK          0x00001000 
+#define OPENNSL_PORT_ATTR_LOOPBACK_MASK     0x00002000 
+#define OPENNSL_PORT_ATTR_PHY_MASTER_MASK   0x00004000 
+#define OPENNSL_PORT_ATTR_INTERFACE_MASK    0x00008000 
 #define OPENNSL_PORT_ATTR_PAUSE_TX_MASK     0x00010000 
 #define OPENNSL_PORT_ATTR_PAUSE_RX_MASK     0x00020000 
+#define OPENNSL_PORT_ATTR_PAUSE_MAC_MASK    0x00040000 
 #define OPENNSL_PORT_ATTR_LOCAL_ADVERT_MASK 0x00080000 
+#define OPENNSL_PORT_ATTR_REMOTE_ADVERT_MASK 0x00100000 /**< Get only. */
+#define OPENNSL_PORT_ATTR_ENCAP_MASK        0x00200000 
+#define OPENNSL_PORT_ATTR_RATE_MCAST_MASK   0x00400000 
+#define OPENNSL_PORT_ATTR_RATE_BCAST_MASK   0x00800000 
+#define OPENNSL_PORT_ATTR_RATE_DLFBC_MASK   0x01000000 
+#define OPENNSL_PORT_ATTR_SPEED_MAX_MASK    0x02000000 /**< Get only. */
+#define OPENNSL_PORT_ATTR_ABILITY_MASK      0x04000000 /**< Get only. */
 #define OPENNSL_PORT_ATTR_FRAME_MAX_MASK    0x08000000 
+#define OPENNSL_PORT_ATTR_MDIX_MASK         0x10000000 
+#define OPENNSL_PORT_ATTR_MDIX_STATUS_MASK  0x20000000 
+#define OPENNSL_PORT_ATTR_MEDIUM_MASK       0x40000000 
+#define OPENNSL_PORT_ATTR_FAULT_MASK        0x80000000 /**< Get only. */
 #define OPENNSL_PORT_ATTR2_PORT_ABILITY     0x00000001 
 #define OPENNSL_PORT_ATTR_ALL_MASK  0xffffffff 
 /** opennsl_port_info_s */
@@ -2394,6 +2521,15 @@ typedef enum opennsl_port_control_e {
                                            settings for ethernet packets
                                            opennslPortControlDoNotCheckVlanFromCpu
                                            port control can be used. */
+    opennslPortControlPrbsMode = 27,    /**< PRBS location - 0=>Phy PRBS 1=>MAC/SI
+                                           Port */
+    opennslPortControlPrbsPolynomial = 28, /**< Assigns PRBS polynomial,
+                                           OPENNSL_PORT_PRBS_POLYNOMIAL_ */
+    opennslPortControlPrbsTxInvertData = 29, /**< Configure inversion of Tx data */
+    opennslPortControlPrbsForceTxError = 30, /**< Configure insertion of Tx errors */
+    opennslPortControlPrbsTxEnable = 31, /**< Enable Tx PRBS */
+    opennslPortControlPrbsRxEnable = 32, /**< Enable Rx PRBS */
+    opennslPortControlPrbsRxStatus = 33, /**< PRBS Rx status */
     opennslPortControlEgressVlanPriUsesPktPri = 43, /**< If set, outgoing packets derive their
                                            priority from the incoming priority */
     opennslPortControlLanes = 55,       /**< Sets the number of active lanes for a
@@ -2557,7 +2693,67 @@ extern void opennsl_port_ability_t_init(
 extern void opennsl_port_config_t_init(
     opennsl_port_config_t *pconfig) LIB_DLL_EXPORTED ;
 
+/** opennsl_port_phy_control_t */
+typedef _shr_port_phy_control_t opennsl_port_phy_control_t;
+
+#define OPENNSL_PORT_PHY_CONTROL_FORWARD_ERROR_CORRECTION _SHR_PORT_PHY_CONTROL_FORWARD_ERROR_CORRECTION 
+#define OPENNSL_PORT_PHY_CONTROL_FEC_OFF    _SHR_PORT_PHY_CONTROL_FEC_OFF 
+#define OPENNSL_PORT_PHY_CONTROL_FEC_ON     _SHR_PORT_PHY_CONTROL_FEC_ON 
+#define OPENNSL_PORT_PHY_CONTROL_SOFTWARE_RX_LOS _SHR_PORT_PHY_CONTROL_SOFTWARE_RX_LOS 
+#define OPENNSL_PORT_PHY_CONTROL_SOFTWARE_RX_LOS_LINK_WAIT_TIMER_US _SHR_PORT_PHY_CONTROL_SOFTWARE_RX_LOS_LINK_WAIT_TIMER_US 
+#define OPENNSL_PORT_PHY_CONTROL_SOFTWARE_RX_LOS_RESTART_TIMER_US _SHR_PORT_PHY_CONTROL_SOFTWARE_RX_LOS_RESTART_TIMER_US 
+#define OPENNSL_PORT_PHY_CONTROL_RX_LOS_NONE _SHR_PORT_PHY_CONTROL_RX_LOS_NONE 
+#define OPENNSL_PORT_PHY_CONTROL_RX_LOS_SOFTWARE _SHR_PORT_PHY_CONTROL_RX_LOS_SOFTWARE 
+#define OPENNSL_PORT_PHY_CONTROL_RX_LOS_FIRMWARE _SHR_PORT_PHY_CONTROL_RX_LOS_FIRMWARE 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set/Get PHY specific configurations.
+ *
+ *\description Set or get PHY specific configurations. All configurations
+ *          enumerated in opennsl_port_phy_control_t may not be available on a
+ *          PHY.
+ *          The configuration types shown in =PORT_PHY_v .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    type [IN]   Type of configuration to update
+ *\param    value [IN]   (for _set) Value of the configuration
+ *
+ *\retval    OPENNSL_E_NONE No Error
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_PORT Invalid Port number specified
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_phy_control_set(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_phy_control_t type, 
+    uint32 value) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set/Get PHY specific configurations.
+ *
+ *\description Set or get PHY specific configurations. All configurations
+ *          enumerated in opennsl_port_phy_control_t may not be available on a
+ *          PHY.
+ *          The configuration types shown in =PORT_PHY_v .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    type [IN]   Type of configuration to update
+ *\param    value [OUT]   (for _set) Value of the configuration
+ *
+ *\retval    OPENNSL_E_NONE No Error
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable
+ *\retval    OPENNSL_E_PORT Invalid Port number specified
+ *\retval    OPENNSL_E_XXX Error occurred
+ ******************************************************************************/
+extern int opennsl_port_phy_control_get(
+    int unit, 
+    opennsl_port_t port, 
+    opennsl_port_phy_control_t type, 
+    uint32 *value) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Get the GPORT ID for the specified local port number.

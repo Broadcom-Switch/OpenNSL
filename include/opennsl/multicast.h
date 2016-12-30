@@ -260,16 +260,17 @@ extern int opennsl_multicast_egress_delete_all(
  *
  *\description Assign a set of encapsulated interfaces on specific ports as a
  *          multicast group's replication list. The multicast group's existing
- *          replication list, if any, will be deleted. The port_array contains
- *          physical ports where replicated packets will be sent. The
- *          encap_id_array contains the opaque encapsulation IDs returned from
- *          the opennsl_multicast_*_encap_get APIs. The subscriber_queue is an
- *          array of opaque subscriber queue IDs. The subscriber form is only
- *          available on certain devices in specific modes; if the
- *          non-subscriber form is used in these modes, it will assume zeros
- *          as all queue groups. For incremental modification of a multicast
- *          group's replication list, opennsl_multicast_egress_add or
- *          opennsl_multicast_egress_delete should be used.
+ *          replication list, if any, will be deleted. If port_count is 0,
+ *          then all replication lists in the multicast group will be cleared.
+ *          The port_array contains physical ports where replicated packets
+ *          will be sent. The encap_id_array contains the opaque encapsulation
+ *          IDs returned from the opennsl_multicast_*_encap_get APIs. The
+ *          subscriber_queue is an array of opaque subscriber queue IDs. The
+ *          subscriber form is only available on certain devices in specific
+ *          modes; if the non-subscriber form is used in these modes, it will
+ *          assume zeros as all queue groups. For incremental modification of
+ *          a multicast group's replication list, opennsl_multicast_egress_add
+ *          or opennsl_multicast_egress_delete should be used.
  *
  *\param    unit [IN]   Unit number.
  *\param    group [IN]   Multicast group ID

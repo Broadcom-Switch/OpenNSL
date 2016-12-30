@@ -318,7 +318,9 @@ typedef enum opennsl_stat_val_e {
     snmpOpenNSLE2EHOLDropPkts = 220,    /**< Total number of packets dropped due
                                            to E2EHOL (End to End Head of Line)
                                            drop status. (Broadcom-specific) */
-    opennsl_spl_snmpValCount = 221      
+    opennsl_spl_snmpEtherStatsTxCRCAlignErrors = 221, /**< RFC 1757 (EtherStat) */
+    opennsl_spl_snmpEtherStatsTxJabbers = 222, /**< RFC 1757 (EtherStat) */
+    opennsl_spl_snmpValCount = 223      
 } opennsl_stat_val_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE

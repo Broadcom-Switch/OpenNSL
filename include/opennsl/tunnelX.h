@@ -59,6 +59,7 @@ typedef struct opennsl_tunnel_terminator_s {
     int reserved6; 
     int qos_map_id;                 /**< QoS DSCP map this tunnel. */
     int inlif_counting_profile;     /**< In LIF counting profile */
+    int reserved7; 
 } opennsl_tunnel_terminator_t;
 
 /** opennsl_tunnel_dscp_select_e */

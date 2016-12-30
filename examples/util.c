@@ -28,6 +28,7 @@
 #include <string.h>
 #include <sal/driver.h>
 #include <opennsl/error.h>
+#include <opennsl/init.h>
 #include <opennsl/l2.h>
 #include <opennsl/vlan.h>
 #include <opennsl/stg.h>
@@ -36,6 +37,29 @@
 
 #define DEFAULT_VLAN          1
 #define MAX_DIGITS_IN_CHOICE  5
+
+/*************************************************************************//**
+ * \brief Returns true if the device belongs to DNX family of devices
+ *
+ * \param unit   [IN]    unit number
+ *
+ * \return TRUE          If the device belongs to DNX family
+ * \return FALSE         Otherwise
+ *
+ * \notes  This API needs to be invoked after initializing the OpenNSL driver
+ ****************************************************************************/
+int example_is_dnx_device(int unit)
+{
+  int rv = FALSE;
+  opennsl_info_t info;
+  opennsl_info_get(unit, &info);
+
+  if(info.device == 0x8375) /* Qumran MX */
+  {
+    rv = TRUE;
+  }
+  return rv;
+}
 
 /*****************************************************************//**
  * \brief Set default configuration (like STP state, speed/duplex) for 
@@ -53,13 +77,17 @@ int example_port_default_config(int unit)
   int port;
   int stp_state = OPENNSL_STG_STP_FORWARD;
   int stg = 1;
+  int dnx_device = FALSE;
 
+  dnx_device = example_is_dnx_device(unit);
   /*
    * Create VLAN with id DEFAULT_VLAN and
    * add ethernet ports to the VLAN
    */
+  opennsl_port_config_t_init(&pcfg);
+
   rv = opennsl_port_config_get(unit, &pcfg);
-  if (rv != OPENNSL_E_NONE) 
+  if (rv != OPENNSL_E_NONE)
   {
     printf("Failed to get port configuration. Error %s\n", opennsl_errmsg(rv));
     return rv;
@@ -69,7 +97,7 @@ int example_port_default_config(int unit)
   OPENNSL_PBMP_ITER(pcfg.e, port)
   {
     rv = opennsl_stg_stp_set(unit, stg, port, stp_state);
-    if (rv != OPENNSL_E_NONE) 
+    if (rv != OPENNSL_E_NONE)
     {
       printf("Failed to set STP state for unit %d port %d, Error %s\n",
           unit, port, opennsl_errmsg(rv));
@@ -80,7 +108,10 @@ int example_port_default_config(int unit)
   /* Setup default configuration on the ports */
   opennsl_port_info_t_init(&info);
 
-  info.speed        = 0;
+  if(dnx_device == FALSE)
+  {
+    info.speed        = 0;
+  }
   info.duplex       = OPENNSL_PORT_DUPLEX_FULL;
   info.pause_rx     = OPENNSL_PORT_ABILITY_PAUSE_RX;
   info.pause_tx     = OPENNSL_PORT_ABILITY_PAUSE_TX;
@@ -89,17 +120,20 @@ int example_port_default_config(int unit)
   info.enable = 1;
 
   info.action_mask |= ( OPENNSL_PORT_ATTR_AUTONEG_MASK |
-      OPENNSL_PORT_ATTR_SPEED_MASK    |
       OPENNSL_PORT_ATTR_DUPLEX_MASK   |
       OPENNSL_PORT_ATTR_PAUSE_RX_MASK |
       OPENNSL_PORT_ATTR_PAUSE_TX_MASK |
       OPENNSL_PORT_ATTR_LINKSCAN_MASK |
       OPENNSL_PORT_ATTR_ENABLE_MASK   );
 
+  if(dnx_device == FALSE)
+  {
+    info.action_mask |= OPENNSL_PORT_ATTR_SPEED_MASK;
+  }
   OPENNSL_PBMP_ITER(pcfg.e, port)
   {
     rv = opennsl_port_selective_set(unit, port, &info);
-    if (OPENNSL_FAILURE(rv)) 
+    if (OPENNSL_FAILURE(rv))
     {
       printf("Failed to set port config for unit %d, port %d, Error %s",
           unit, port, opennsl_errmsg(rv));
@@ -120,6 +154,7 @@ int example_port_default_config(int unit)
 int example_switch_default_vlan_config(int unit)
 {
   opennsl_port_config_t pcfg;
+  int port;
   int rv;
 
   /*
@@ -136,6 +171,17 @@ int example_switch_default_vlan_config(int unit)
   if (rv != OPENNSL_E_NONE) {
     printf("Failed to add ports to VLAN. Error %s\n", opennsl_errmsg(rv));
     return rv;
+  }
+
+  OPENNSL_PBMP_ITER(pcfg.e, port)
+  {
+    rv = opennsl_port_untagged_vlan_set(unit, port, DEFAULT_VLAN);
+    if (OPENNSL_FAILURE(rv))
+    {
+      printf("Failed to set port untagged VLAN for unit %d, port %d, Error %s",
+          unit, port, opennsl_errmsg(rv));
+      return rv;
+    }
   }
 
   return OPENNSL_E_NONE;

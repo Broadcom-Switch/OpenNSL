@@ -23,15 +23,18 @@ Grant of License
 Conditioned on Licensee's compliance with this Agreement and subject to
 the conditions and limitations set forth below, Broadcom hereby grants
 Licensee a limited, personal, non-exclusive, revocable, nontransferable
-license to internally evaluate, use, and reproduce the Code solely for the
-purpose of developing, using and externally distributing Licensee's
-applications that directly access or use a Broadcom switch integrated
+license to (i) internally evaluate, use, and reproduce the Code solely
+for the purpose of developing and using Licensee?s applications and (ii)
+externally distribute Licensee's applications (which may include the
+binary versions of the Code but in no event source code versions of
+the Code) that directly access or use a Broadcom switch integrated
 circuit. All rights not expressly granted herein are reserved by Broadcom.
 
 License Limitations - Licensee will not:
 
 a. Sell, rent, lease, distribute, sublicense, assign, or otherwise transfer
-(including by loan or gift) the Code, or any full or partial copies thereof;
+(including by loan or gift) the Code, or any full or partial copies thereof,
+unless as otherwise permitted by this Agreement;
 b. Disassemble, reverse engineer, decompile, or attempt to ascertain the
 underlying technology of the Broadcom code beneath the Code;
 c. Remove any trademark, copyright notice or licensing information contained

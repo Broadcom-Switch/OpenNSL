@@ -70,10 +70,10 @@ typedef int (*opennsl_rx_free_f)(
  * (pkt->_pkt_data.data or pkt->pkt_data[0].data).
  */
 typedef struct opennsl_rx_chan_cfg_s {
-    int reserved1; 
-    int reserved2; 
-    int reserved3; 
-    uint32 reserved4; 
+    int chains;     /**< Number of chains (DVs) set up. 0 means channel not used. */
+    int rate_pps;   /**< Deprecated: Use opennsl_rx_cos_rate_set/get. */
+    int flags;      /**< See OPENNSL_RX_F_* definitions. */
+    uint32 cos_bmp; /**< COS bitmap, if supported. */
 } opennsl_rx_chan_cfg_t;
 
 /** User-configurable, per-unit RX configuration. */
@@ -95,6 +95,7 @@ typedef struct opennsl_rx_cfg_s {
                                            addresses - ignore if not relevant. */
 } opennsl_rx_cfg_t;
 
+#define OPENNSL_RX_REASON_NAMES_INITIALIZER _SHR_RX_REASON_NAMES_INITIALIZER 
 /** 
  * PKT RX Packet Reasons; reason CPU received the packet.
  * 
@@ -363,6 +364,20 @@ extern int opennsl_rx_active(
     int unit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get highest priority queue number supported by device.
+ *
+ *\description Get highest priority queue number supported by device.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cosq [OUT]   Maximum priority queue supported by device.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_rx_queue_max_get(
+    int unit, 
+    opennsl_cos_queue_t *cosq) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Register or unregister to receive callbacks for received packets.
  *
  *\description See =opennsl_rx_reg_f for more information about the registration
@@ -480,6 +495,25 @@ extern int opennsl_rx_free(
     void *pkt_data) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/***************************************************************************//** 
+ *\brief Initialize a OPENNSL RX configuration structure.
+ *
+ *\description Initializes a OPENNSL RX configuration structure to default
+ *          values. This function should be used to initialize any OPENNSL RX
+ *          configuration structure prior to filling it out and passing it to
+ *          an API function. This ensures that subsequent API releases may add
+ *          new structure members to the opennsl_rx_cfg_t structure, and
+ *          opennsl_rx_cfg_t_init will initialize the new members to correct
+ *          default values.
+ *
+ *\param    rx_cfg [IN,OUT]   Pointer to OPENNSL RX configuration structure to
+ *          initialize.
+ *
+ *\retval    None.
+ ******************************************************************************/
+extern void opennsl_rx_cfg_t_init(
+    opennsl_rx_cfg_t *rx_cfg) LIB_DLL_EXPORTED ;
 
 #if defined(OPENNSL_RPC_SUPPORT) || defined(OPENNSL_RCPU_SUPPORT)
 #endif

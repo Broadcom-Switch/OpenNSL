@@ -87,6 +87,10 @@
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /** BST Tracing statistics resources type eumerations. */
 typedef enum opennsl_bst_stat_id_e {
     opennslBstStatIdDevice = 0,         /**< Per device BST tracing resource */
@@ -107,7 +111,12 @@ typedef enum opennsl_bst_stat_id_e {
                                            resource */
     opennslBstStatIdEgrPortPoolSharedMcast = 11, /**< Per Port Pool multicast BST Tracing
                                            resource */
-    opennslBstStatIdMaxCount = 12       /**< Must be the last. Not a usable value. */
+    opennslBstStatIdRQEQueue = 12,      /**< BST Tracing resource per RQE queue */
+    opennslBstStatIdRQEPool = 13,       /**< BST tracing resource per RQE Pool */
+    opennslBstStatIdUcastGroup = 14,    /**< BST Tracing resource per Ucast queue
+                                           group */
+    opennslBstStatIdCpuQueue = 15,      /**< BST Tracking resource per CPU queue */
+    opennslBstStatIdMaxCount = 16       /**< Must be the last. Not a usable value. */
 } opennsl_bst_stat_id_t;
 
 typedef struct opennsl_cosq_bst_profile_s {
@@ -298,6 +307,12 @@ extern int opennsl_cosq_bst_stat_multi_get(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#if defined(INCLUDE_TCB)
+#endif
+#if defined(INCLUDE_TCB)
+#endif
+#if defined(INCLUDE_TCB)
+#endif
 #include <opennsl/cosqX.h>
 #endif /* __OPENNSL_COSQ_H__ */
 /*@}*/

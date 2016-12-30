@@ -33,6 +33,18 @@
 #define OPENNSL_BOOT_F_DEFAULT          0x000000
 #define OPENNSL_BOOT_F_WARM_BOOT        0x200000
 
+/*************************************************************************//**
+ * \brief Returns true if the device belongs to DNX family of devices
+ *
+ * \param unit   [IN]    unit number
+ *
+ * \return TRUE          If the device belongs to DNX family
+ * \return FALSE         Otherwise
+ *
+ * \notes  This API needs to be invoked after initializing the OpenNSL driver
+ ****************************************************************************/
+int example_is_dnx_device(int unit);
+
 /*****************************************************************//**
  * \brief Set default configuration (like STP state, speed/duplex) for
  *        all ports

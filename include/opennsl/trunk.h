@@ -82,6 +82,7 @@ typedef struct opennsl_trunk_member_s {
     opennsl_gport_t gport;  /**< Trunk member GPORT ID. */
     int reserved1; 
     int reserved2; 
+    int reserved3; 
 } opennsl_trunk_member_t;
 
 /***************************************************************************//** 

@@ -220,6 +220,7 @@ typedef struct opennsl_vxlan_port_s {
     opennsl_gport_t match_tunnel_id;    /**< Tunnel Terminator ID */
     opennsl_if_t egress_if;             /**< VXLAN egress object. */
     opennsl_switch_network_group_t reserved2; 
+    uint32 reserved3; 
 } opennsl_vxlan_port_t;
 #endif
 

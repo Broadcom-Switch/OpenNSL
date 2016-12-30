@@ -192,16 +192,9 @@ Appendix B
 
 Open Source Software
 
-bin/gto-trident-brl20/   - Broadcom Switch Verification Kits with GTO CPU
+bin/gto-trident-brl20/   - Broadcom XGS Switch Verification Kits with GTO CPU
 
   gto_uImage                         -> Covered by GPLv2
-  linux-kernel-bde.ko                -> Covered by GPLv2
-  linux-user-bde.ko                  -> Covered by GPLv2
-  linux-bcm-knet.ko                  -> Covered by GPLv2
-
-bin/im-x86-trident-ub12/ - Interface Masters Niagara 2948-6XLM-OCP Modular
-Switch System
-
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
@@ -224,13 +217,19 @@ bin/as5712               - AS5712 Switch System
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/x86-xgs5-deb80       - Dell s6000/s6100 Switch System
+bin/x86-xgs5-deb80       - Dell s6000 Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/xlr-xgs5-ub14        - Broadcom Switch Verification Kits with XLR CPU
+bin/xlr-xgs5-ub14        - Broadcom XGS Switch Verification Kits with XLR CPU
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/xlr-dnx-ub14         - Broadcom DNX Switch Verification Kits with XLR CPU
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2

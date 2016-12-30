@@ -51,6 +51,7 @@
 #define _SHR_GPORT_TYPE_EGRESS_MODPORT     23  /* Egress Mod and port    */
 #define _SHR_GPORT_TYPE_UCAST_SUBSCRIBER_QUEUE_GROUP  24  /* Local Queue Group */
 #define _SHR_GPORT_TYPE_MCAST_SUBSCRIBER_QUEUE_GROUP  25  /* Local Multicast Queue Group  */
+#define _SHR_GPORT_TYPE_SYSTEM_PORT        27  /* DPP System-Port        */ 
 #define _SHR_GPORT_TYPE_COSQ               30  /* cosq gport */
 #define _SHR_GPORT_TYPE_PROFILE            40
 #define _SHR_GPORT_TYPE_DESTMOD_QUEUE_GROUP      41 /* DMVOQ gport */
@@ -96,6 +97,8 @@
 #define _SHR_GPORT_SCHEDULER_NODE_MASK                  0xfffff
 #define _SHR_GPORT_MIRROR_SHIFT                         0
 #define _SHR_GPORT_MIRROR_MASK                          0xffff
+#define _SHR_GPORT_SYSTEM_PORT_SHIFT                    0
+#define _SHR_GPORT_SYSTEM_PORT_MASK                     0xffffff
 
 #define _SHR_GPORT_TYPE_TRAP                            ((_SHR_GPORT_TYPE_LOCAL_CPU << 1) | 1) /* This will mark the CPU type, and
                                                                                                   the 1st bit in the value to indicate trap */
@@ -106,6 +109,25 @@
 #define _SHR_GPORT_TRAP_STRENGTH_MASK                        0xf
 #define _SHR_GPORT_TRAP_SNOOP_STRENGTH_SHIFT             16
 #define _SHR_GPORT_TRAP_SNOOP_STRENGTH_MASK              0xf
+
+#define _SHR_GPORT_LOCAL_TYPE_COMMON (0)
+#define _SHR_GPORT_LOCAL_TYPE_FABRIC (1)
+#define _SHR_GPORT_LOCAL_TYPE_SHIFT (21)
+#define _SHR_GPORT_LOCAL_TYPE_MASK (0x1f) 
+
+#define _SHR_GPORT_IS_LOCAL(_gport) \
+        (((((_gport) >> _SHR_GPORT_TYPE_SHIFT) & _SHR_GPORT_TYPE_MASK) == \
+          _SHR_GPORT_TYPE_LOCAL) && \
+        ((((_gport) >> _SHR_GPORT_LOCAL_TYPE_SHIFT) & _SHR_GPORT_LOCAL_TYPE_MASK) == \
+          _SHR_GPORT_LOCAL_TYPE_COMMON)) 
+
+#define _SHR_GPORT_LOCAL_SET(_gport, _port)\
+        ((_gport) = (_SHR_GPORT_TYPE_LOCAL << _SHR_GPORT_TYPE_SHIFT) |\
+        (_SHR_GPORT_LOCAL_TYPE_COMMON << _SHR_GPORT_LOCAL_TYPE_SHIFT)|\
+        (((_port) & _SHR_GPORT_PORT_MASK) << _SHR_GPORT_PORT_SHIFT))
+
+#define _SHR_GPORT_LOCAL_GET(_gport) \
+        (((_gport) >> _SHR_GPORT_PORT_SHIFT) & _SHR_GPORT_PORT_MASK) 
 
 #define _SHR_GPORT_IS_MODPORT(_gport)    \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MODPORT)
@@ -159,6 +181,13 @@
 #define _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP)
 
+#define _SHR_GPORT_IS_SYSTEM_PORT(_gport) \
+        (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_SYSTEM_PORT)
+#define _SHR_GPORT_SYSTEM_PORT_ID_GET(_gport)   \
+        (((_gport) >> _SHR_GPORT_SYSTEM_PORT_SHIFT) & _SHR_GPORT_SYSTEM_PORT_MASK)
+#define _SHR_GPORT_SYSTEM_PORT_ID_SET(_gport, _id)                            \
+        ((_gport) = (_SHR_GPORT_TYPE_SYSTEM_PORT << _SHR_GPORT_TYPE_SHIFT)  | \
+         (((_id) & _SHR_GPORT_SYSTEM_PORT_MASK) << _SHR_GPORT_SYSTEM_PORT_SHIFT))
 #define _SHR_GPORT_IS_COSQ(_gport) \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_COSQ)
 

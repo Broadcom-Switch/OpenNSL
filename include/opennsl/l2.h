@@ -28,10 +28,17 @@
 
 #define OPENNSL_L2_DISCARD_SRC  0x00000002 
 #define OPENNSL_L2_DISCARD_DST  0x00000004 
+#define OPENNSL_L2_COPY_TO_CPU  0x00000008 
 #define OPENNSL_L2_L3LOOKUP     0x00000010 
 #define OPENNSL_L2_STATIC       0x00000020 
+#define OPENNSL_L2_HIT          0x00000040 
 #define OPENNSL_L2_TRUNK_MEMBER 0x00000080 
+#define OPENNSL_L2_MCAST        0x00000100 
+#define OPENNSL_L2_SRC_HIT      0x00000400 
+#define OPENNSL_L2_DES_HIT      0x00000800 
 #define OPENNSL_L2_MOVE_PORT    0x00100000 
+#define OPENNSL_L2_LOCAL_CPU    0x00200000 /**< Entry is for the local CPU on the
+                                              device. */
 #define OPENNSL_L2_CALLBACK_DELETE      0          
 #define OPENNSL_L2_CALLBACK_ADD         1          
 #define OPENNSL_L2_CALLBACK_REPORT      2          

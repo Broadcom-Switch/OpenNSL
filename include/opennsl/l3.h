@@ -59,6 +59,8 @@
                                                       full. */
 #define OPENNSL_L3_IP6                  (1 << 17)  /**< IPv6. */
 #define OPENNSL_L3_DST_DISCARD          (1 << 20)  /**< Destination match discard. */
+#define OPENNSL_L3_ROUTE_LABEL          (1 << 22)  /**< Indicates that MPLS label
+                                                      in route entry is valid. */
 #define OPENNSL_L3_COPY_TO_CPU          (1 << 23)  /**< Send a copy to CPU. */
 #define OPENNSL_L3_DEREFERENCED_NEXTHOP (1 << 30)  /**< Indicates this is a wider
                                                       L3 entry. */
@@ -66,8 +68,11 @@
                                                       without RH flowset table
                                                       shuffle. */
 #define OPENNSL_L3_VXLAN_ONLY           (1 << 31)  /**< Specific for VXLAN Nexthop */
-#define OPENNSL_L3_INGRESS_REPLACE  (1 << 1)   /**< Replace existing L3 Ingress
-                                                  entry. */
+#define OPENNSL_L3_INGRESS_WITH_ID      (1 << 0)   /**< L3 Ingress ID is provided. */
+#define OPENNSL_L3_INGRESS_REPLACE      (1 << 1)   /**< Replace existing L3
+                                                      Ingress entry. */
+#define OPENNSL_L3_INGRESS_GLOBAL_ROUTE (1 << 2)   /**< Allow Global Route on L3
+                                                      Ingress Interface. */
 /** 
  * L3 Interface Structure.
  * 
@@ -110,10 +115,11 @@ typedef struct opennsl_l3_egress_s {
     uint8 reserved8; 
     uint8 reserved9; 
     int reserved10; 
-    opennsl_if_t reserved11; 
-    opennsl_failover_t reserved12; 
-    opennsl_if_t reserved13; 
-    opennsl_multicast_t reserved14; 
+    opennsl_if_t encap_id;              /**< Encapsulation index. */
+    opennsl_failover_t reserved11; 
+    opennsl_if_t reserved12; 
+    opennsl_multicast_t reserved13; 
+    int reserved14; 
     int reserved15; 
     int reserved16; 
     int reserved17; 
@@ -124,6 +130,7 @@ typedef struct opennsl_l3_egress_s {
     opennsl_etag_t reserved22; 
     opennsl_reserved_enum_t reserved23; 
     int reserved24; 
+    int reserved25; 
 } opennsl_l3_egress_t;
 
 #define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for
@@ -152,6 +159,7 @@ typedef struct opennsl_l3_ingress_s {
     int qos_map_id;                     /**< QoS DSCP priority map. */
     int ip4_options_profile_id;         /**< IP4 Options handling Profile ID */
     int nat_realm_id;                   /**< Realm id of the interface for NAT */
+    int tunnel_term_ecn_map_id;         /**< Tunnel termination ecn map id */
 } opennsl_l3_ingress_t;
 
 /** 
@@ -228,22 +236,31 @@ typedef struct opennsl_l3_info_s {
     int l3info_used_intf;   /**< L3 interfaces used. */
 } opennsl_l3_info_t;
 
+/** L3 DGM structure */
+typedef struct opennsl_l3_dgm_s {
+    uint32 reserved1; 
+    uint32 reserved2; 
+    uint32 reserved3; 
+} opennsl_l3_dgm_t;
+
 /** L3 ECMP structure */
 typedef struct opennsl_l3_egress_ecmp_s {
-    uint32 flags;           /**< See OPENNSL_L3_xxx flag definitions. */
-    opennsl_if_t ecmp_intf; /**< L3 interface ID pointing to egress ecmp object. */
-    int max_paths;          /**< Max number of paths in ECMP group. If max_paths
-                               <= 0, the default max path which can be set by
-                               the API opennsl_l3_route_max_ecmp_set will be
-                               picked. */
+    uint32 flags;               /**< See OPENNSL_L3_xxx flag definitions. */
+    opennsl_if_t ecmp_intf;     /**< L3 interface ID pointing to egress ecmp
+                                   object. */
+    int max_paths;              /**< Max number of paths in ECMP group. If
+                                   max_paths <= 0, the default max path which
+                                   can be set by the API
+                                   opennsl_l3_route_max_ecmp_set will be picked. */
     uint32 reserved1; 
-    uint32 dynamic_mode;    /**< Dynamic load balancing mode. See
-                               OPENNSL_L3_ECMP_DYNAMIC_MODE_xxx definitions. */
-    uint32 dynamic_size;    /**< Number of flows for dynamic load balancing. Valid
-                               values are 512, 1k, doubling up to 32k */
+    uint32 dynamic_mode;        /**< Dynamic load balancing mode. See
+                                   OPENNSL_L3_ECMP_DYNAMIC_MODE_xxx definitions. */
+    uint32 dynamic_size;        /**< Number of flows for dynamic load balancing.
+                                   Valid values are 512, 1k, doubling up to 32k */
     uint32 reserved2; 
     uint32 reserved3; 
     uint32 reserved4; 
+    opennsl_l3_dgm_t reserved5; 
 } opennsl_l3_egress_ecmp_t;
 
 /** L3 ECMP member structure */
@@ -764,6 +781,32 @@ extern int opennsl_l3_egress_ecmp_destroy(
     opennsl_l3_egress_ecmp_t *ecmp) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get info about an Egress ECMP forwarding object.
+ *
+ *\description Get info about the Egress ECMP forwarding object pointed to by
+ *          ecmp->ecmp_intf.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    ecmp [IN,OUT]   ECMP group info.
+ *\param    intf_size [IN]   Size of allocated entries in intf_array.
+ *\param    intf_array [OUT]   Array of Egress forwarding objects.
+ *\param    intf_count [OUT]   Number of entries of intf_count actually filled in.
+ *          This will be a value less than or equal to the value passed in as
+ *          intf_size unless intf_size is 0.  If intf_size is 0 then intf_array is
+ *          ignored and intf_count is filled in with the number of entries that
+ *          would have been filled into intf_array if intf_size was arbitrarily
+ *          large.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_l3_egress_ecmp_get(
+    int unit, 
+    opennsl_l3_egress_ecmp_t *ecmp, 
+    int intf_size, 
+    opennsl_if_t *intf_array, 
+    int *intf_count) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Add an Egress forwarding object to an Egress ECMP forwarding object.
  *
  *\description Add an Egress forwarding object to the Egress ECMP forwarding
@@ -838,6 +881,22 @@ extern int opennsl_l3_egress_ecmp_traverse(
     void *user_data) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/***************************************************************************//** 
+ *\brief Initialize L3 Ingress Interface object structure.
+ *
+ *\description Initializes an ingress object structure to default values. This
+ *          function should be used to initialize the ingress interface
+ *          structure prior to invocation of Ingress APIs. This ensures that
+ *          the structure members are initialized to the correct default
+ *          values.
+ *
+ *\param    ing_intf [IN,OUT]   Ingress object entry information
+ *
+ *\retval    Nothing
+ ******************************************************************************/
+extern void opennsl_l3_ingress_t_init(
+    opennsl_l3_ingress_t *ing_intf) LIB_DLL_EXPORTED ;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 

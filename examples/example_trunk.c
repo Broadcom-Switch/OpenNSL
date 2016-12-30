@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
   unsigned int warm_boot;
   int choice;
   int index = 0;
+  int psc = 0;
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -183,7 +184,6 @@ int main(int argc, char *argv[])
     {
       printf("\r\nFailed to hash control for Trunk. Error %s\r\n",
           opennsl_errmsg(rv));
-      return rv;
     }
   }
 
@@ -195,6 +195,7 @@ int main(int argc, char *argv[])
     printf("4. Get trunk info\n");
     printf("5. Delete trunk\n");
     printf("6. Save the configuration to scache\n");
+    printf("7. Set port selection criteria (PSC)\n");
 #ifdef INCLUDE_DIAG_SHELL
     printf("9. Launch diagnostic shell\n");
 #endif
@@ -321,7 +322,7 @@ int main(int argc, char *argv[])
                  opennsl_errmsg(rv));
           continue;
         }
-        printf("trunk %d has %d members\n",tid ,member_count);
+        printf("trunk %d has %d members, psc %d\n", tid ,member_count, t_data.psc);
         for( i = 0; i < member_count; i++)
         {
           opennsl_port_local_get(unit, member_arr[i].gport, &port);
@@ -365,6 +366,30 @@ int main(int argc, char *argv[])
         printf("Warmboot configuration is saved successfully.\n");
         break;
       } /* End of case 6 */
+
+      case 7:
+      {
+        printf("\r\nEnter the trunk id.\r\n");
+        if(example_read_user_choice(&tid) != OPENNSL_E_NONE)
+        {
+            printf("Invalid option entered. Please re-enter.\n");
+            continue;
+        }
+
+        printf("\r\nEnter the PSC.\r\n");
+        if(example_read_user_choice(&psc) != OPENNSL_E_NONE)
+        {
+            printf("Invalid option entered. Please re-enter.\n");
+            continue;
+        }
+
+        rv = opennsl_trunk_psc_set(unit, tid, psc);
+        if(rv != OPENNSL_E_NONE) {
+          printf("Failed to set the PSC. Error %s\n", opennsl_errmsg(rv));
+        }
+
+        break;
+      }
 
 #ifdef INCLUDE_DIAG_SHELL
       case 9:

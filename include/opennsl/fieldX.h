@@ -21,105 +21,20 @@
 #include <opennsl/port.h>
 #include <opennsl/rx.h>
 
-/** opennsl_field_stat_e */
-typedef enum opennsl_field_stat_e {
-    opennslFieldStatBytes = 0,          /**< Byte count of traffic of all colors. */
-    opennslFieldStatPackets = 1,        /**< Packet count of traffic of all
-                                           colors. */
-    opennslFieldStatDefault = opennslFieldStatPackets, /**< Default stat mode. */
-    opennslFieldStatGreenBytes = 2,     /**< Byte count of green traffic. */
-    opennslFieldStatGreenPackets = 3,   /**< Packet count of green traffic. */
-    opennslFieldStatYellowBytes = 4,    /**< Byte count of yellow traffic. */
-    opennslFieldStatYellowPackets = 5,  /**< Packet count of yellow traffic. */
-    opennslFieldStatRedBytes = 6,       /**< Byte count of red traffic. */
-    opennslFieldStatRedPackets = 7,     /**< Packet count of red traffic. */
-    opennslFieldStatNotGreenBytes = 8,  /**< Byte count of not green traffic. */
-    opennslFieldStatNotGreenPackets = 9, /**< Packet count of not green traffic. */
-    opennslFieldStatNotYellowBytes = 10, /**< Byte count of not yellow traffic. */
-    opennslFieldStatNotYellowPackets = 11, /**< Packet count of not yellow traffic. */
-    opennslFieldStatNotRedBytes = 12,   /**< Byte count of not red traffic. */
-    opennslFieldStatNotRedPackets = 13, /**< Packet count of not red traffic. */
-    opennslFieldStatAcceptedBytes = 14, /**< Byte count of accepted traffic of all
-                                           colors. */
-    opennslFieldStatAcceptedPackets = 15, /**< Packet count of accepted traffic of
-                                           all colors. */
-    opennslFieldStatAcceptedGreenBytes = 16, /**< Byte count of accepted green traffic. */
-    opennslFieldStatAcceptedGreenPackets = 17, /**< Packet count of accepted green
-                                           traffic. */
-    opennslFieldStatAcceptedYellowBytes = 18, /**< Byte count of accepted yellow
-                                           traffic. */
-    opennslFieldStatAcceptedYellowPackets = 19, /**< Packet count of accepted yellow
-                                           traffic. */
-    opennslFieldStatAcceptedRedBytes = 20, /**< Byte count of accepted red traffic. */
-    opennslFieldStatAcceptedRedPackets = 21, /**< Packet count of accepted red traffic. */
-    opennslFieldStatAcceptedNotGreenBytes = 22, /**< Byte count of accepted not green
-                                           traffic. */
-    opennslFieldStatAcceptedNotGreenPackets = 23, /**< Packet count of accepted not green
-                                           traffic. */
-    opennslFieldStatAcceptedNotYellowBytes = 24, /**< Byte count of accepted not yellow
-                                           traffic. */
-    opennslFieldStatAcceptedNotYellowPackets = 25, /**< Packet count of accepted not yellow
-                                           traffic. */
-    opennslFieldStatAcceptedNotRedBytes = 26, /**< Byte count of accepted not red
-                                           traffic. */
-    opennslFieldStatAcceptedNotRedPackets = 27, /**< Packet count of accepted not red
-                                           traffic. */
-    opennslFieldStatDroppedBytes = 28,  /**< Byte count of dropped traffic of all
-                                           colors. */
-    opennslFieldStatDroppedPackets = 29, /**< Packet count of dropped traffic of
-                                           all colors. */
-    opennslFieldStatDroppedGreenBytes = 30, /**< Byte count of dropped green traffic. */
-    opennslFieldStatDroppedGreenPackets = 31, /**< Packet count of dropped green
-                                           traffic. */
-    opennslFieldStatDroppedYellowBytes = 32, /**< Byte count of dropped yellow traffic. */
-    opennslFieldStatDroppedYellowPackets = 33, /**< Packet count of dropped yellow
-                                           traffic. */
-    opennslFieldStatDroppedRedBytes = 34, /**< Byte count of dropped red traffic. */
-    opennslFieldStatDroppedRedPackets = 35, /**< Packet count of dropped red traffic. */
-    opennslFieldStatDroppedNotGreenBytes = 36, /**< Byte count of dropped not green
-                                           traffic. */
-    opennslFieldStatDroppedNotGreenPackets = 37, /**< Packet count of dropped not green
-                                           traffic. */
-    opennslFieldStatDroppedNotYellowBytes = 38, /**< Byte count of dropped not yellow
-                                           traffic. */
-    opennslFieldStatDroppedNotYellowPackets = 39, /**< Packet count of dropped not yellow
-                                           traffic. */
-    opennslFieldStatDroppedNotRedBytes = 40, /**< Byte count of dropped not red
-                                           traffic. */
-    opennslFieldStatDroppedNotRedPackets = 41, /**< Packet count of dropped not red
-                                           traffic. */
-    opennslFieldStatOffset0Bytes = 42,  /**< Byte count at configurable offset 0. */
-    opennslFieldStatOffset0Packets = 43, /**< Packet count at configurable offset
-                                           0. */
-    opennslFieldStatOffset1Bytes = 44,  /**< Byte count at configurable offset 1. */
-    opennslFieldStatOffset1Packets = 45, /**< Packet count at configurable offset
-                                           1. */
-    opennslFieldStatOffset2Bytes = 46,  /**< Byte count at configurable offset 2. */
-    opennslFieldStatOffset2Packets = 47, /**< Packet count at configurable offset
-                                           2. */
-    opennslFieldStatOffset3Bytes = 48,  /**< Byte count at configurable offset 3. */
-    opennslFieldStatOffset3Packets = 49, /**< Packet count at configurable offset
-                                           3. */
-    opennslFieldStatOffset4Bytes = 50,  /**< Byte count at configurable offset 4. */
-    opennslFieldStatOffset4Packets = 51, /**< Packet count at configurable offset
-                                           4. */
-    opennslFieldStatOffset5Bytes = 52,  /**< Byte count at configurable offset 5. */
-    opennslFieldStatOffset5Packets = 53, /**< Packet count at configurable offset
-                                           5. */
-    opennslFieldStatOffset6Bytes = 54,  /**< Byte count at configurable offset 6. */
-    opennslFieldStatOffset6Packets = 55, /**< Packet count at configurable offset
-                                           6. */
-    opennslFieldStatOffset7Bytes = 56,  /**< Byte count at configurable offset 7. */
-    opennslFieldStatOffset7Packets = 57, /**< Packet count at configurable offset
-                                           7. */
-    opennslFieldStatCount = 58          /**< Always Last. Not a usable value. */
-} opennsl_field_stat_t;
-
 #define OPENNSL_FIELD_COLOR_PRESERVE    0          
 #define OPENNSL_FIELD_COLOR_GREEN       1          
 #define OPENNSL_FIELD_COLOR_YELLOW      2          
 #define OPENNSL_FIELD_COLOR_RED         3          
 #define OPENNSL_FIELD_COLOR_BLACK       4          
+#define OPENNSL_FIELD_TCPCONTROL_FIN    0x01       /**< No more data. */
+#define OPENNSL_FIELD_TCPCONTROL_SYN    0x02       /**< Sync seq numbers. */
+#define OPENNSL_FIELD_TCPCONTROL_RST    0x04       /**< Reset connection. */
+#define OPENNSL_FIELD_TCPCONTROL_PSH    0x08       /**< Push. */
+#define OPENNSL_FIELD_TCPCONTROL_ACK    0x10       /**< Ack field valid. */
+#define OPENNSL_FIELD_TCPCONTROL_URG    0x20       /**< Urgent field valid. */
+#define OPENNSL_FIELD_TCPCONTROL_R40    0x40       /**< Reserved. */
+#define OPENNSL_FIELD_TCPCONTROL_R80    0x80       /**< Reserved. */
+#define OPENNSL_FIELD_TCPCONTROL_MASK   0x3f       /**< All non-reserved bits. */
 #define OPENNSL_FIELD_PKT_RES_UNKNOWN       0x0        /**< No resolution. */
 #define OPENNSL_FIELD_PKT_RES_CONTROL       0x1        /**< Ethernet control
                                                           (8808). */
@@ -165,8 +80,10 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyDSCP = 31,       /**<  Diffserv Code Point. */
     opennslFieldQualifyTtl = 32,        /**<  Time To Live/Hop Limit. */
     opennslFieldQualifyIp6HopLimit = opennslFieldQualifyTtl, /**<  IPv6 Hop Limit. */
+    opennslFieldQualifySrcPort = 35,    /**<  Source Module ID and Port . */
     opennslFieldQualifyDstPort = 40,    /**<  Destination Module ID and Port . */
     opennslFieldQualifyDstTrunk = 41,   /**<  Destination Trunk Group ID . */
+    opennslFieldQualifyTcpControl = 42, /**<  TCP Control Flags. */
     opennslFieldQualifyPacketRes = 43,  /**<  Pkt resolution
                                            (OPENNSL_FIELD_PKT_RES_xxx). */
     opennslFieldQualifySrcClassField = 47, /**<  Source Class based on
@@ -184,10 +101,12 @@ typedef enum opennsl_field_qualify_e {
                                            stage. */
     opennslFieldQualifyInterfaceClassPort = 81, /**<  Port Class Id. */
     opennslFieldQualifyL3Routable = 82, /**<  L3 routable bit for FB2. */
+    opennslFieldQualifyIpFrag = 83,     /**<  IP Fragment info. */
     opennslFieldQualifyL3Ingress = 85,  /**<  L3 ingress interface. */
     opennslFieldQualifyOutPort = 86,    /**<  Single Output Port. */
     opennslFieldQualifyIp4 = 87,        /**<  Qualify IpType == IPv4Any. */
     opennslFieldQualifyIp6 = 88,        /**<  Qualify IpType == Ipv6Any. */
+    opennslFieldQualifyIcmpTypeCode = 125, /**<  internal use only. */
     opennslFieldQualifyDstL3Egress = 131, /**<  Egress Object id. */
     opennslFieldQualifyColor = 141,     /**<  Packet color. */
     opennslFieldQualifyMyStationHit = 153, /**<  When RIOT is not enabled or not
@@ -202,7 +121,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyInterfaceClassProcessingPort = 213, /**< Packet-processing Port Class ID */
     opennslFieldQualifyIngressClassField = 269, /**< Class Id assigned for packet by
                                            Ingress Stage */
-    opennslFieldQualifyCount = 609      /**< Always Last. Not a usable value. */
+    opennslFieldQualifyCount = 620      /**< Always Last. Not a usable value. */
 } opennsl_field_qualify_t;
 
 /** 
@@ -250,10 +169,38 @@ typedef enum opennsl_field_IpProtocolCommon_e {
     opennslFieldIpProtocolCommonIcmp = 3, /**< ICMP Packets (1) */
 } opennsl_field_IpProtocolCommon_t;
 
-#define OPENNSL_FIELD_RANGE_SRCPORT 0x00000001 /**< Check source port range */
-#define OPENNSL_FIELD_RANGE_DSTPORT 0x00000002 /**< Check dest port range */
-#define OPENNSL_FIELD_RANGE_TCP     0x00000004 /**< Check TCP port range */
-#define OPENNSL_FIELD_RANGE_UDP     0x00000008 /**< Check UDP port range */
+/** Field Qualifier IpFrag (for opennsl_field_qualify_IpFrag). */
+typedef enum opennsl_field_IpFrag_e {
+    opennslFieldIpFragNon = 0,          /**< Non-fragmented packet. */
+    opennslFieldIpFragFirst = 1,        /**< First fragment of fragmented packet. */
+    opennslFieldIpFragNonOrFirst = 2,   /**< Non-fragmented or first fragment. */
+    opennslFieldIpFragNotFirst = 3,     /**< Not the first fragment. */
+    opennslFieldIpFragAny = 4,          /**< Any fragment of fragmented packet. */
+    opennslFieldIpFragCount = 5         /**< Always last. Not a usable value. */
+} opennsl_field_IpFrag_t;
+
+#define OPENNSL_FIELD_RANGE_SRCPORT         0x00000001 /**< Check source port
+                                                          range */
+#define OPENNSL_FIELD_RANGE_DSTPORT         0x00000002 /**< Check dest port range */
+#define OPENNSL_FIELD_RANGE_TCP             0x00000004 /**< Check TCP port range */
+#define OPENNSL_FIELD_RANGE_UDP             0x00000008 /**< Check UDP port range */
+#define OPENNSL_FIELD_RANGE_INVERT          0x00000010 /**< Check for match
+                                                          outside specified port
+                                                          range */
+#define OPENNSL_FIELD_RANGE_OUTER_VLAN      0x00000040 /**< Check outer VLAN ID
+                                                          range */
+#define OPENNSL_FIELD_RANGE_INNER_VLAN      0x00000080 /**< Check inner VLAN ID
+                                                          range */
+#define OPENNSL_FIELD_RANGE_PACKET_LENGTH   0x00000100 /**< Check packet length
+                                                          range */
+#define OPENNSL_FIELD_RANGE_REPLACE         0x00000800 /**< Modify configurations
+                                                          of an existing range
+                                                          checker. Using this
+                                                          flag, the Range
+                                                          checker's range limits
+                                                          (min/max) and Type can
+                                                          be modified
+                                                          dynamically. */
 /** Opaque handle to a field range. */
 typedef uint32 opennsl_field_range_t;
 
@@ -275,6 +222,8 @@ typedef enum opennsl_field_action_e {
                                            Queue. */
     opennslFieldActionCosQCpuNew = 1,   /**< Change CoS Queue when CopyToCpu;
                                            param0: New CoS Queue. */
+    opennslFieldActionPrioIntNew = 14,  /**< Internal priority from arg; param0:
+                                           New priority. */
     opennslFieldActionDscpNew = 20,     /**< Change DSCP value; param0: New DSCP
                                            value. */
     opennslFieldActionDscpCancel = 21,  /**< Override another rule. */
@@ -362,8 +311,15 @@ typedef enum opennsl_field_action_e {
                                            param1: Destination port. */
     opennslFieldActionIngSampleEnable = 315, /**< Set the SFLOW Ingress Sampling. */
     opennslFieldActionEgrSampleEnable = 316, /**< Set the SFLOW Egress Sampling. */
-    opennslFieldActionCount = 442       /**< Always Last. Not a usable value. */
+    opennslFieldActionCount = 466       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
+
+/** Holds which action to set width for, and the size of width to set */
+typedef struct opennsl_field_action_width_s {
+    uint32 action;  
+    uint32 width;   
+    uint8 valid;    
+} opennsl_field_action_width_t;
 
 /** 
  * Used to specify the actions that can be taken by the entries in a
@@ -371,6 +327,10 @@ typedef enum opennsl_field_action_e {
  */
 typedef struct opennsl_field_aset_s {
     SHR_BITDCL w[_SHR_BITDCLSIZE(opennslFieldActionCount)]; 
+    opennsl_field_action_width_t actions_width[16]; /**< Actions width struct, used by
+                                           opennsl_petra_field_action_width_set
+                                           to set width for certain action, 16
+                                           is max_actions_per_db */
 } opennsl_field_aset_t;
 
 #define OPENNSL_FIELD_ASET_INIT(aset)  \
@@ -412,6 +372,23 @@ typedef enum opennsl_field_group_mode_e {
 typedef struct opennsl_field_presel_set_s {
     SHR_BITDCL w[_SHR_BITDCLSIZE(OPENNSL_FIELD_PRESEL_SEL_MAX)]; 
 } opennsl_field_presel_set_t;
+
+/***************************************************************************//** 
+ *\brief Initialize field software subsystem.
+ *
+ *\description Initializes the field software and hardware subsystem. Enables
+ *          field support and clears the hardware tables. Initializes the
+ *          metering function.
+ *
+ *\param    unit [IN]   Unit number.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Feature unavailable on this device
+ *\retval    OPENNSL_E_MEMORY Memory allocation failure
+ *\retval    OPENNSL_E_XXX Other errors
+ ******************************************************************************/
+extern int opennsl_field_init(
+    int unit) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief De-initialize field software subsystem.
@@ -854,6 +831,30 @@ extern int opennsl_field_range_create(
 extern int opennsl_field_group_install(
     int unit, 
     opennsl_field_group_t group) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Retrieve parameters associated with an existing range checker.
+ *
+ *\description Retrieves information that was used when a virtual range checker
+ *          was created.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    range [IN]   Range check ID
+ *\param    flags [OUT]   Range control flags =RANGE_CONTROL_FLAGS_RANGE_table
+ *\param    min [OUT]   Lowest port number to match (inclusive)
+ *\param    max [OUT]   Highest port number to match (inclusive)
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT OPENNSL field module not initialized
+ *\retval    OPENNSL_E_NOT_FOUND Range check ID not found
+ *\retval    OPENNSL_E_XXX Error code
+ ******************************************************************************/
+extern int opennsl_field_range_get(
+    int unit, 
+    opennsl_field_range_t range, 
+    uint32 *flags, 
+    opennsl_l4_port_t *min, 
+    opennsl_l4_port_t *max) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Destroy a virtual range checker.
@@ -1379,6 +1380,26 @@ extern int opennsl_field_qualify_InPorts(
  *
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
+extern int opennsl_field_qualify_SrcPort(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_module_t data_modid, 
+    opennsl_module_t mask_modid, 
+    opennsl_port_t data_port, 
+    opennsl_port_t mask_port) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data_modid [IN]
+ *\param    mask_modid [IN]
+ *\param    data_port [IN]
+ *\param    mask_port [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
 extern int opennsl_field_qualify_DstPort(
     int unit, 
     opennsl_field_entry_t entry, 
@@ -1586,6 +1607,22 @@ extern int opennsl_field_qualify_DstIp(
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
 extern int opennsl_field_qualify_DSCP(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 data, 
+    uint8 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_TcpControl(
     int unit, 
     opennsl_field_entry_t entry, 
     uint8 data, 
@@ -1816,6 +1853,20 @@ extern int opennsl_field_qualify_L3Routable(
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]
+ *\param    frag_info [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IpFrag(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_field_IpFrag_t frag_info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
  *\param    data [IN]
  *\param    mask [IN]
  *
@@ -1858,6 +1909,22 @@ extern int opennsl_field_qualify_MyStationHit(
     opennsl_field_entry_t entry, 
     uint8 data, 
     uint8 mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IcmpTypeCode(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint16 data, 
+    uint16 mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
@@ -1934,6 +2001,26 @@ extern int opennsl_field_qualify_InPorts_get(
     opennsl_field_entry_t entry, 
     opennsl_pbmp_t *data, 
     opennsl_pbmp_t *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data_modid [OUT]
+ *\param    mask_modid [OUT]
+ *\param    data_port [OUT]
+ *\param    mask_port [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_SrcPort_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_module_t *data_modid, 
+    opennsl_module_t *mask_modid, 
+    opennsl_port_t *data_port, 
+    opennsl_port_t *mask_port) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *
@@ -2110,6 +2197,22 @@ extern int opennsl_field_qualify_DstIp_get(
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
 extern int opennsl_field_qualify_DSCP_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint8 *data, 
+    uint8 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_TcpControl_get(
     int unit, 
     opennsl_field_entry_t entry, 
     uint8 *data, 
@@ -2344,6 +2447,20 @@ extern int opennsl_field_qualify_L3Routable_get(
  *
  *\param    unit [IN]   Unit number.
  *\param    entry [IN]
+ *\param    frag_info [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IpFrag_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_field_IpFrag_t *frag_info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
  *\param    data [OUT]
  *\param    mask [OUT]
  *
@@ -2370,6 +2487,22 @@ extern int opennsl_field_qualify_MyStationHit_get(
     opennsl_field_entry_t entry, 
     uint8 *data, 
     uint8 *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_IcmpTypeCode_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    uint16 *data, 
+    uint16 *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *

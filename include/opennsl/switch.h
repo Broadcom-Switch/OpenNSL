@@ -237,6 +237,36 @@ extern int opennsl_switch_control_port_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/** Entry type for retrieving temperature values. */
+typedef _shr_switch_temperature_monitor_t opennsl_switch_temperature_monitor_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief There are temperature monitors embedded in the various points of some
+ *       switch chips for the purpose of monitoring the health of the chip. This
+ *       API retrieves each temperature monitor's current value and peak value.
+ *       The value unit is 0.1 celsius degree. Table
+ *       =opennsl_switch_temperature_monitor_t describes the meaning of each
+ *       field of the structure opennsl_switch_temperature_monitor_t.
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    temperature_max [IN]   number of entries of the temperature_array.
+ *\param    temperature_array [OUT]   the buffer array to hold the retrieved
+ *          values.
+ *\param    temperature_count [OUT]   actual number of entries retrieved.
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_switch_temperature_monitor_get(
+    int unit, 
+    int temperature_max, 
+    opennsl_switch_temperature_monitor_t *temperature_array, 
+    int *temperature_count) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #define OPENNSL_SWITCH_PKT_INFO_SRC_GPORT   (1 << 0)   /**< Source gport (module,
                                                           port) field valid. */
 #define OPENNSL_SWITCH_PKT_INFO_VLAN        (1 << 1)   /**< VLAN identifier field
@@ -472,6 +502,90 @@ extern int opennsl_switch_event_unregister(
                                                       16 bits. */
 #define OPENNSL_HASH_FIELD_MACSA_HI     0x00800000 /**< MAC source address upper
                                                       16 bits. */
+typedef enum opennsl_switch_object_e {
+    opennslSwitchObjectL2EntryCurrent = 0, /**< Statistics of current L2 Entry. */
+    opennslSwitchObjectVlanCurrent = 1, /**< Statistics of current Vlan Entry. */
+    opennslSwitchObjectL3HostCurrent = 2, /**< Statistics of current L3 Hosts. */
+    opennslSwitchObjectL3RouteCurrent = 3, /**< Statistics of current L3 Routes. */
+    opennslSwitchObjectL3EgressCurrent = 4, /**< Statistics of current L3 Egress
+                                           objects. */
+    opennslSwitchObjectIpmcCurrent = 5, /**< Statistics of current IP Multicast
+                                           Objects. */
+    opennslSwitchObjectEcmpCurrent = 6, /**< Statistics of current ECMP objects. */
+    opennslSwitchObjectL3RouteV4RoutesMax = 7, /**< Maximum number of v4 routes possible */
+    opennslSwitchObjectL3RouteV4RoutesFree = 8, /**< Maximum number of v4 routes that can
+                                           be added in current state */
+    opennslSwitchObjectL3RouteV4RoutesUsed = 9, /**< Used count of v4 routes */
+    opennslSwitchObjectL3RouteV6Routes64bMax = 10, /**< Maximum number of 64bv6 routes
+                                           possible */
+    opennslSwitchObjectL3RouteV6Routes64bFree = 11, /**< Maximum number of 64bV6 routes that
+                                           can be added in current state */
+    opennslSwitchObjectL3RouteV6Routes64bUsed = 12, /**< Used count of 64bv6 routes */
+    opennslSwitchObjectL3RouteV6Routes128bMax = 13, /**< Maximum number of 128bV6 routes
+                                           possible */
+    opennslSwitchObjectL3RouteV6Routes128bFree = 14, /**< Maximum number of 128bV6 routes that
+                                           can be added in current state */
+    opennslSwitchObjectL3RouteV6Routes128bUsed = 15, /**< Used count of 128bv6 routes */
+    opennslSwitchObjectL3RouteTotalUsedRoutes = 16, /**< Sum of 44 + 64bv6 + 128bv6 routes */
+    opennslSwitchObjectIpmcHeadTableFree = 17, /**< Number of free entries in the
+                                           replication head table */
+    opennslSwitchObjectL3HostV4Used = 18, /**< Statistics of L3 Hosts used by IPv4 */
+    opennslSwitchObjectL3HostV6Used = 19, /**< Statistics of L3 Hosts used by IPv6 */
+    opennslSwitchObjectEcmpMax = 20,    /**< Maximum number of Ecmp groups
+                                           possible */
+    opennslSwitchObjectPFCDeadlockCosMax = 21, /**< Get the Max COS supported for PFC
+                                           Deadlock detection and recovery. */
+    opennslSwitchObjectL3HostV4Max = 22, /**< Maximum number of IPv4 routes
+                                           possible in L3 host table. */
+    opennslSwitchObjectL3HostV6Max = 23, /**< Maximum number of IPv6 routes
+                                           possible in L3 host table. */
+    opennslSwitchObjectL3RouteV4RoutesMinGuaranteed = 24, /**< Guaranteed number of IPv4 routes in
+                                           ALPM mode. */
+    opennslSwitchObjectL3RouteV6Routes64bMinGuaranteed = 25, /**< Guaranteed number of IPv6 64bits
+                                           routes in ALPM mode. */
+    opennslSwitchObjectL3RouteV6Routes128bMinGuaranteed = 26, /**< Guaranteed number of IPv6 128bits
+                                           routes in ALPM mode. */
+    opennslSwitchObjectL3EgressMax = 27, /**< Maximum number of L3 Egress objects
+                                           possible. */
+    opennslSwitchObjectIpmcV4Used = 28, /**< Statistics of used IPv4 Multicast
+                                           entries. */
+    opennslSwitchObjectIpmcV6Used = 29, /**< Statistics of used IPv6 Multicast
+                                           entries. */
+    opennslSwitchObjectIpmcV4Max = 30,  /**< Maximum number of IPv4 Multicast
+                                           entries possible. */
+    opennslSwitchObjectIpmcV6Max = 31,  /**< Maximum number of IPv6 Multicast
+                                           entries possible. */
+    opennslSwitchObjectL2EntryMax = 32, /**< Maximum number of L2 entries
+                                           possible. */
+    opennslSwitchObjectCount            /**< Maximum object count. This is not an
+                                           object and should always be in the
+                                           last */
+} opennsl_switch_object_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Retrieving the statistics on the number of API objects. This retrieves
+ *       for multiple objects.
+ *
+ *\description This function is similar to opennsl_switch_object_count_get except
+ *          for retrieving the count for multiple objects.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    object_size [IN]   Number of objects for which the entries are to be
+ *\param    object_array [IN]   Object names for which the count is to be
+ *\param    entries [OUT]   The number of entries in the system for each
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_switch_object_count_multi_get(
+    int unit, 
+    int object_size, 
+    opennsl_switch_object_t *object_array, 
+    int *entries) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /** packet trace lookup result enums */
 typedef enum opennsl_switch_pkt_trace_lookup_e {
     opennslSwitchPktTraceLookupCount = 20 

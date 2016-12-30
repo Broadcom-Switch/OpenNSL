@@ -1,0 +1,45 @@
+#
+#  Unless you and Broadcom execute a separate written software license
+#  agreement governing use of this software, this software is licensed to
+#  you under the terms of the GNU General Public License version 2 (the
+#  "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
+#  with the following added to such license:
+#  
+#  As a special exception, the copyright holders of this software give
+#  you permission to link this software with independent modules, and to
+#  copy and distribute the resulting executable under terms of your
+#  choice, provided that you also meet, for each linked independent
+#  module, the terms and conditions of the license of that module.  An
+#  independent module is a module which is not derived from this
+#  software.  The special exception does not apply to any modifications
+#  of the software.
+#
+# $Id: Makefile.linux-x86-common-2_6,v 1.13 Broadcom SDK $
+# $Copyright: (c) 2005 Broadcom Corp.
+# All Rights Reserved.$
+
+CFGFLAGS += -DSYS_BE_PIO=0 -DSYS_BE_PACKET=0 -DSYS_BE_OTHER=0
+ENDIAN = LE_HOST=1
+CFGFLAGS += -D$(ENDIAN)
+CFGFLAGS += -DBCM_PLATFORM_STRING=\"X86\"
+ifeq (,$(findstring -DSAL_BDE_DMA_MEM_DEFAULT,$(CFGFLAGS)))
+CFGFLAGS += -DSAL_BDE_DMA_MEM_DEFAULT=16
+endif
+
+# Extra variables.
+EXTRA_CFLAGS = -D"KBUILD_STR(s)=\#s" $(basename_flags) $(modname_flags)
+
+comma = ,
+basetarget = $(basename $(notdir $@))
+modname = $(basetarget)
+
+name-fix = $(subst $(comma),_,$(subst -,_,$1))
+basename_flags = -D"KBUILD_BASENAME=KBUILD_STR($(call name-fix,$(basetarget)))"
+modname_flags  = $(if $(filter 1,$(words $(modname))),\
+-D"KBUILD_MODNAME=KBUILD_STR($(call name-fix,$(modname)))")
+
+ifneq ($(targetplat),user)
+# By default we exclude -Werror from x86 kernel builds
+BCM_CFLAGS   = -Wall
+include ${SDK}/make/Makefile.linux-kernel-2_6
+endif

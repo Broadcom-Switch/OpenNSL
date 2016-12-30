@@ -84,6 +84,17 @@
 #define OPENNSL_MIRROR_DEST_MTP_REPLACE     (1 << 27)  /**< REPLACE an MTP of a
                                                           shared-id mirror
                                                           destination */
+#define OPENNSL_MIRROR_DEST_EGRESS_TRAP_WITH_SYSTEM_HEADER (1 << 28)  /**< For packets recycled
+                                                          by egress applications
+                                                          and not forwarded,
+                                                          retain the incoming
+                                                          packet's system
+                                                          headers as received
+                                                          from the fabric, and
+                                                          in case of an Egress
+                                                          MC packet, stamp the
+                                                          FTMH.OutLIF field with
+                                                          the CUD. */
 /**  represents the options for the mirroring of packets */
 typedef struct opennsl_mirror_options_s {
     uint32 flags;           
