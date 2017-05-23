@@ -2439,6 +2439,46 @@ extern int opennsl_port_priority_color_get(
     int prio, 
     opennsl_color_t *color) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    pkt_pri [IN]
+ *\param    cfi [IN]
+ *\param    internal_pri [IN]
+ *\param    color [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_vlan_priority_map_set(
+    int unit, 
+    opennsl_port_t port, 
+    int pkt_pri, 
+    int cfi, 
+    int internal_pri, 
+    opennsl_color_t color) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]
+ *\param    pkt_pri [IN]
+ *\param    cfi [IN]
+ *\param    internal_pri [OUT]
+ *\param    color [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_port_vlan_priority_map_get(
+    int unit, 
+    opennsl_port_t port, 
+    int pkt_pri, 
+    int cfi, 
+    int *internal_pri, 
+    opennsl_color_t *color) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 /** opennsl_port_class_e */
@@ -2446,6 +2486,9 @@ typedef enum opennsl_port_class_e {
     opennslPortClassFieldLookup = 0,    /**< Class for field stage Lookup */
     opennslPortClassFieldIngress = 1,   /**< Class for field stage Ingress */
     opennslPortClassFieldEgress = 2,    /**< Class for field stage Egress */
+    opennslPortClassId = 5,             /**< Class for mapping local-port to
+                                           vlan-domain. vlan domain is used in
+                                           mapping packet VID to Vlan */
     opennslPortClassFieldIngressPacketProcessing = 6, /**< Packet processing port Class for
                                            field stage Ingress */
     opennslPortClassFieldEgressPacketProcessing = 7, /**< Packet processing port Class for

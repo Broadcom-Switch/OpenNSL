@@ -133,8 +133,8 @@ struct opennsl_pkt_s {
     uint32 reserved28; 
     uint32 rx_matched;                  /**< Field processor matched rule. */
     opennsl_if_t reserved29; 
-    opennsl_reserved_enum_t reserved30; 
-    opennsl_reserved_enum_t reserved31; 
+    opennsl_vlan_action_t reserved30; 
+    opennsl_vlan_action_t reserved31; 
     uint32 reserved32; 
     uint32 reserved33; 
     uint32 reserved34; 

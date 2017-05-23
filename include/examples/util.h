@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -44,6 +44,18 @@
  * \notes  This API needs to be invoked after initializing the OpenNSL driver
  ****************************************************************************/
 int example_is_dnx_device(int unit);
+
+/*************************************************************************//**
+ * \brief Returns true if the device is Qumran-MX device
+ *
+ * \param unit   [IN]    unit number
+ *
+ * \return TRUE          If the device is Qumran-MX device
+ * \return FALSE         Otherwise
+ *
+ * \notes  This API needs to be invoked after initializing the OpenNSL driver
+ ****************************************************************************/
+int example_is_qmx_device(int unit);
 
 /*****************************************************************//**
  * \brief Set default configuration (like STP state, speed/duplex) for

@@ -69,6 +69,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyDstIp = 10,      /**<  Destination IPv4 Address. */
     opennslFieldQualifyInPort = 12,     /**<  Single Input Port. */
     opennslFieldQualifyInPorts = 13,    /**<  Input Port Bitmap. */
+    opennslFieldQualifyOuterVlan = 17,  /**<  Outer VLAN. */
     opennslFieldQualifyOuterVlanId = 18, /**<  Outer VLAN Id. */
     opennslFieldQualifyInnerVlanId = 22, /**<  Inner VLAN Id. */
     opennslFieldQualifyRangeCheck = 26, /**<  TCP/UDP Port Range Check Results. */
@@ -1482,6 +1483,22 @@ extern int opennsl_field_qualify_OuterVlan(
  *
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/
+extern int opennsl_field_qualify_OuterVlanId(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_vlan_t data, 
+    opennsl_vlan_t mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [IN]
+ *\param    mask [IN]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
 extern int opennsl_field_qualify_InnerVlanId(
     int unit, 
     opennsl_field_entry_t entry, 
@@ -2089,6 +2106,22 @@ extern int opennsl_field_qualify_L4DstPort_get(
     opennsl_field_entry_t entry, 
     opennsl_l4_port_t *data, 
     opennsl_l4_port_t *mask) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]
+ *\param    data [OUT]
+ *\param    mask [OUT]
+ *
+ *\retval   OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_field_qualify_OuterVlan_get(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_vlan_t *data, 
+    opennsl_vlan_t *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *

@@ -219,8 +219,9 @@ typedef struct opennsl_vxlan_port_s {
     opennsl_gport_t egress_tunnel_id;   /**< Tunnel Initiator ID */
     opennsl_gport_t match_tunnel_id;    /**< Tunnel Terminator ID */
     opennsl_if_t egress_if;             /**< VXLAN egress object. */
-    opennsl_switch_network_group_t reserved2; 
-    uint32 reserved3; 
+    opennsl_switch_network_group_t network_group_id; /**< Split Horizon network group
+                                           identifier. */
+    uint32 reserved2; 
 } opennsl_vxlan_port_t;
 #endif
 

@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -54,10 +54,12 @@ char example_usage[] =
 #define NEWCOS_VAL    3
 #define MAC_DA        {0x00, 0x00, 0x01, 0x00, 0x02, 0x00}
 #define MAC_MASK      {0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
+#define DEFAULT_STAT_ID 2
 
 opennsl_field_group_t grp  = 1;
 opennsl_field_entry_t eid  = 0;
-int stat_id                = 2;
+int stat_id                = DEFAULT_STAT_ID;
+
 opennsl_field_stat_t stats = opennslFieldStatPackets;
 
 #define CALL_IF_ERROR_RETURN(op)                              \
@@ -91,6 +93,10 @@ int example_fp_redirect(int unit, int dport)
   int dest_gport;
   int cos = NEWCOS_VAL;
 
+  int                  old_stat_id;
+  unsigned int         counter_proc;
+  unsigned int         counter_id;
+
   /** Create qualification set */
   OPENNSL_FIELD_QSET_INIT(qset);
   OPENNSL_FIELD_QSET_ADD(qset, opennslFieldQualifyDstMac);
@@ -114,8 +120,27 @@ int example_fp_redirect(int unit, int dport)
   CALL_IF_ERROR_RETURN(opennsl_field_qualify_DstMac(unit, eid,
         bpdu_mac_da, mac_mask));
 
+  stat_id = DEFAULT_STAT_ID;
   CALL_IF_ERROR_RETURN(opennsl_field_stat_create_id(unit, grp, 1,
         &stats, stat_id));
+
+  /* Create a counter for core 1 as well */
+  /* QumranMx has 16 counter processors. We map these processors for
+   * use with ingress field processor. By default, we first create
+   * counter for core 0. Below we create an equivalent counter for core 1.
+   * This code will need to change in the new SDK, because the counter processor
+   * will be 4 bits as opposed to 2 bits
+   */
+  old_stat_id = stat_id;
+  counter_proc = OPENNSL_FIELD_STAT_ID_PROCESSOR_GET(stat_id);
+  counter_id = OPENNSL_FIELD_STAT_ID_COUNTER_GET(stat_id);
+  OPENNSL_FIELD_STAT_ID_SET(stat_id, counter_proc + 1, counter_id);
+
+  CALL_IF_ERROR_RETURN(opennsl_field_stat_create_id(unit, grp, 1, &stats, stat_id));
+
+  /* Restore the old stat id */
+  stat_id = old_stat_id;
+
 
   /** add actions associated with this entry */
   CALL_IF_ERROR_RETURN(opennsl_field_action_add(unit, eid,
@@ -157,7 +182,11 @@ int main(int argc, char *argv[])
   int choice;
   int unit = DEFAULT_UNIT;
   uint64 val;
+  uint64 val_1;
+  int stat_id_1;
   int port;
+  unsigned int counter_proc;
+  unsigned int counter_id;
 
   if((argc != 1) || ((argc > 1) && (strcmp(argv[1], "--help") == 0))) {
     printf("%s\n\r", example_usage);
@@ -222,6 +251,23 @@ int main(int argc, char *argv[])
 
       case 2:
       {
+        /* Destroy any attached stat_id before destroying the entry */
+        rv = opennsl_field_entry_stat_get(unit, eid, &stat_id);
+        if (rv == OPENNSL_E_NONE)
+        {
+          counter_proc = OPENNSL_FIELD_STAT_ID_PROCESSOR_GET(stat_id);
+          counter_id = OPENNSL_FIELD_STAT_ID_COUNTER_GET(stat_id);
+
+          opennsl_field_entry_stat_detach(unit, eid, stat_id);
+
+          /* stat_id deletion might fail if the stat_id is being shared */
+          (void) opennsl_field_stat_destroy(unit, stat_id);
+
+          /* Delete Core 1 counter as well, we create identical counters on both cores */
+          OPENNSL_FIELD_STAT_ID_SET(stat_id, counter_proc + 1, counter_id);
+          (void) opennsl_field_stat_destroy(unit, stat_id);
+        }
+
         CALL_IF_ERROR_RETURN(opennsl_field_entry_destroy(unit, eid));
         CALL_IF_ERROR_RETURN(opennsl_field_group_destroy(unit, grp));
         printf("Removed the redirection filter\n");
@@ -232,11 +278,22 @@ int main(int argc, char *argv[])
       {
         rv = opennsl_field_stat_get(unit, stat_id, stats, &val);
         if (rv != OPENNSL_E_NONE) {
-          printf("Failed to get the statistics, "
+          printf("Failed to get the statistics for core 0, "
               "Error %s\n", opennsl_errmsg(rv));
           return rv;
         }
-        printf("Number of packets redirected: %lld (0x%0x)\n", val, val);
+
+        /* Get core 1 statistics */
+        stat_id_1 = stat_id | (1 << 29);
+        rv = opennsl_field_stat_get(unit, stat_id_1, stats, &val_1);
+        if (rv != OPENNSL_E_NONE) {
+          printf("Failed to get the statistics for core 1, "
+              "Error %s\n", opennsl_errmsg(rv));
+          return rv;
+        }
+        val += val_1;
+        printf("Number of packets redirected: %lld (0x%0llx)\n", val, val);
+
         break;
       }
 

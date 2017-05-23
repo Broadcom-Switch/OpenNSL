@@ -53,6 +53,7 @@ typedef enum opennsl_switch_control_e {
     opennslSwitchHashControl = 136,     /**< Hash Control of fields. */
     opennslSwitchMirrorUnmarked = 141,  /**< Send mirror packets as simple
                                            unicast. */
+    opennslSwitchColorSelect = 143,     /**< Choose color selection source. */
     opennslSwitchHashSeed0 = 147,       /**< network switch hash seeds. */
     opennslSwitchHashSeed1 = 148,       /**< For enhanced hashing algoithm. */
     opennslSwitchHashField0PreProcessEnable = 149, /**< Enable pre-processing for enhanced
@@ -113,6 +114,7 @@ typedef enum opennsl_switch_control_e {
                                            boot state after every API. */
     opennslSwitchIpmcTtl1ToCpu = 249,   /**< Copy L3 Mcast with TTL 1 to CPU. */
     opennslSwitchL3UcastTtl1ToCpu = 250, /**< Copy L3 Ucast with TTL 1 to CPU. */
+    opennslSwitchL3UrpfMode = 262,      /**< Port rpf mode for unicast packets. */
     opennslSwitchBstEnable = 717,       /**< Enable BST tracking. */
     opennslSwitchBstTrackingMode = 718, /**< BST resource usage tracking mode. */
     opennslSwitchVxlanUdpDestPortSet = 729, /**< Set UDP Destination port for VXLAN */
@@ -502,6 +504,8 @@ extern int opennsl_switch_event_unregister(
                                                       16 bits. */
 #define OPENNSL_HASH_FIELD_MACSA_HI     0x00800000 /**< MAC source address upper
                                                       16 bits. */
+#define OPENNSL_COLOR_PRIORITY  0          /**< Priority->COLOR mapping. */
+#define OPENNSL_COLOR_OUTER_CFI 1          /**< SPVLAN CFI->COLOR mapping. */
 typedef enum opennsl_switch_object_e {
     opennslSwitchObjectL2EntryCurrent = 0, /**< Statistics of current L2 Entry. */
     opennslSwitchObjectVlanCurrent = 1, /**< Statistics of current Vlan Entry. */

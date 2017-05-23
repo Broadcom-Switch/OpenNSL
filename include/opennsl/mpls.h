@@ -34,18 +34,58 @@
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #if defined(INCLUDE_L3)
 #endif
 #if defined(INCLUDE_L3)
 #endif
 #if defined(INCLUDE_L3)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #if defined(INCLUDE_L3)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #if defined(INCLUDE_L3)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #if defined(INCLUDE_L3)
 #endif
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #include <opennsl/mplsX.h>
 #endif /* __OPENNSL_MPLS_H__ */
 /*@}*/

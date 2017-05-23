@@ -1,0 +1,66 @@
+This document describes how to install OpenNSL binary provided
+in this package on the AS7712 platform.
+
+Building OpenNSL
+================
+Source code for OpenNSL sample applications may be built on the switch. Use the
+following steps to compile OpenNSL including sample applications.
+
+1) Extract the code tarball into the destination directory say opennsl_root.
+
+2) Go to output directory. For AS7712 platform, it is 
+   opennsl_root/opennsl/output/as7712
+
+3) Issue "make" to create an OpenNSL shared library object, linux kernel modules.
+
+4) The deliverables folder : opennsl_root/opennsl/output/as7712/build
+   shall have the following files. 
+   a) Linux kernel module                     : linux-kernel-bde.ko
+   b) Linux user module                       : linux-user-bde.ko
+   c) KNET driver module                      : linux-bcm-knet.ko
+   d) OpenNSL shared object library           : libopennsl.so
+
+Building example Applications
+=============================
+NOTE: This section is applicable only if the package includes example applications.
+
+Source code for OpenNSL sample applications may be built on the switch. The
+example applications are dynamically linked with the OpenNSL shared library.
+Use the following steps to compile example applications.
+
+1) Go to output directory. For AS7712 platform, it is 
+   opennsl_root/opennsl/output/as7712
+
+2) Issue "make examples" to compile all the sample applications
+
+
+Downloading and running OpenNSL sample applications
+===================================================
+
+1) cd to target deliverables directory. For AS7712 platform, it is 
+   opennsl_root/opennsl/output/as7712/build.
+
+2) Use the following commands to update the linux kernel modules
+   i  ) Execute "lsmod" to list the installed linux kernel modules.
+   ii ) Remove the linux kernel and user modules by using "rmmod" command.
+   iii) Install linux kernel modules built for OpenNSL platform by using
+        the following commands. Please ensure that the modules are removed 
+        before inserting it using 'rmmod' command.
+        # mknod /dev/linux-kernel-bde c 127 0
+        # mknod /dev/linux-user-bde c 126 0
+        # mknod /dev/linux-bcm-knet c 122 0
+        # insmod linux-kernel-bde.ko maxpayload=128
+        # insmod linux-user-bde.ko
+        # insmod linux-bcm-knet.ko
+
+3) Install OpenNSL shared library. The destination directory to install the
+   shared library depends on the host environment configuration.  Install the
+   library files in a location included in the system's library search path.
+   # mv libopennsl.so.1 /usr/lib
+   # cd /usr/lib
+   # ln -sf libopennsl.so.1 libopennsl.so
+ 
+4) cd to the target deliverables directory and run the sample application.
+    # chmod +x sample_application
+    #./sample_application
+

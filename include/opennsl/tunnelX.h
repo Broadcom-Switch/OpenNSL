@@ -22,8 +22,14 @@
 #include <opennsl/l3.h>
 
 #define OPENNSL_TUNNEL_TERM_TUNNEL_WITH_ID  0x00000040 /**< Create tunnel with ID */
+#define OPENNSL_TUNNEL_INIT_USE_INNER_DF    0x00000080 /**< Copy DF from inner
+                                                          header. Note:flag
+                                                          takes precedence over
+                                                          ipv4_set_df flag. */
 #define OPENNSL_TUNNEL_REPLACE              0x00010000 /**< Update existing
                                                           tunnel. */
+#define OPENNSL_TUNNEL_WITH_ID              0x00080000 /**< Add using the
+                                                          specified ID. */
 /** Tunnel types. */
 typedef enum opennsl_tunnel_type_e {
     opennslTunnelTypeVxlan = 30,        /**< VXLAN Tunnel */
@@ -110,6 +116,206 @@ typedef int (*opennsl_tunnel_terminator_traverse_cb)(
     int unit, 
     opennsl_tunnel_terminator_t *info, 
     void *user_data);
+
+/***************************************************************************//** 
+ *\brief Set the tunneling initiator parameters on an L3 interface.
+ *
+ *\description Sets the tunnel configuration information for a particular L3
+ *          interface. For DNX devices, use opennsl_tunnel_initiator_create. 
+ *          For other devices, use opennsl_tunnel_initiator_set. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf [IN]   Interface information, of which only the interface ID is
+ *          used
+ *\param    tunnel [IN]   Individual tunnel configuration state
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_initiator_set(
+    int unit, 
+    opennsl_l3_intf_t *intf, 
+    opennsl_tunnel_initiator_t *tunnel) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set the tunneling initiator parameters on an L3 interface.
+ *
+ *\description Sets the tunnel configuration information for a particular L3
+ *          interface. For DNX devices, use opennsl_tunnel_initiator_create. 
+ *          For other devices, use opennsl_tunnel_initiator_set. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf [IN,OUT]   Interface information, of which only the interface ID
+ *          is used
+ *\param    tunnel [IN,OUT]   Individual tunnel configuration state
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_initiator_create(
+    int unit, 
+    opennsl_l3_intf_t *intf, 
+    opennsl_tunnel_initiator_t *tunnel) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete the tunnel association for the given L3 interface.
+ *
+ *\description Delete the tunnel association for the given L3 interface.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf [IN]   Interface information, of which only the interface ID is
+ *          used
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_initiator_clear(
+    int unit, 
+    opennsl_l3_intf_t *intf) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get the tunnel property for the given L3 interface.
+ *
+ *\description Gets the tunnel configuration information for a particular L3
+ *          interface.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    intf [IN]   Interface information, of which only the interface ID is
+ *          used
+ *\param    tunnel [OUT]   Individual tunnel configuration state
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_initiator_get(
+    int unit, 
+    opennsl_l3_intf_t *intf, 
+    opennsl_tunnel_initiator_t *tunnel) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Traverse tunnel initiator.
+ *
+ *\description Traverse tunnel initiator. The callback function is defined as
+ *          following:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cb [IN]   User callback function
+ *\param    user_data [IN]   Pointer to user supplied cookie used in parameter in
+ *          callback function
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_initiator_traverse(
+    int unit, 
+    opennsl_tunnel_initiator_traverse_cb cb, 
+    void *user_data) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Add a tunnel terminator for DIP-SIP key.
+ *
+ *\description Add a tunnel terminator for DIP-SIP key. On some devices, UDP
+ *          source/dest port values are also used in the key. UDP source/dest
+ *          port values are set to 0 for no UDP packet.
+ *          opennsl_tunnel_terminator_create API is used for DNX devices,
+ *          while  opennsl_tunnel_terminator_add API should be used for other
+ *          devices.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    info [IN]   Pointer to opennsl_tunnel_terminator_t containing fields
+ *          related to IP tunnel terminator point. Valid fields:
+ *          =TUNNEL_TERM_ADD_FIELDS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_add(
+    int unit, 
+    opennsl_tunnel_terminator_t *info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Add a tunnel terminator for DIP-SIP key.
+ *
+ *\description Add a tunnel terminator for DIP-SIP key. On some devices, UDP
+ *          source/dest port values are also used in the key. UDP source/dest
+ *          port values are set to 0 for no UDP packet.
+ *          opennsl_tunnel_terminator_create API is used for DNX devices,
+ *          while  opennsl_tunnel_terminator_add API should be used for other
+ *          devices.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    info [IN,OUT]   Pointer to opennsl_tunnel_terminator_t containing
+ *          fields related to IP tunnel terminator point. Valid fields:
+ *          =TUNNEL_TERM_ADD_FIELDS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_create(
+    int unit, 
+    opennsl_tunnel_terminator_t *info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete a tunnel terminator for DIP-SIP key.
+ *
+ *\description Delete a tunnel terminator for DIP-SIP key.  On some devices, UDP
+ *          source/dest port values are also used in the key.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    info [IN]   Pointer to opennsl_tunnel_terminator_t containing the keys
+ *          for IP tunnel terminator point. Valid fields:
+ *          =TUNNEL_TERM_DEL_FIELDS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_delete(
+    int unit, 
+    opennsl_tunnel_terminator_t *info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Update a tunnel terminator for DIP-SIP key.
+ *
+ *\description Update a tunnel terminator for DIP-SIP key.  On some devices, UDP
+ *          source/dest port values are also used in the key.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    info [IN]   Pointer to opennsl_tunnel_terminator_t containing fields
+ *          related to IP tunnel terminator point. Valid Fields:
+ *          =TUNNEL_TERM_UPDATE_FIELDS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_update(
+    int unit, 
+    opennsl_tunnel_terminator_t *info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get a tunnel terminator for DIP-SIP key.
+ *
+ *\description Get a tunnel terminator for DIP-SIP key.  On some devices, UDP
+ *          source/dest port values are also used in the key.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    info [IN,OUT]   Pointer to opennsl_tunnel_terminator_t containing
+ *          fields related to IP tunnel terminator point. Valid fields:
+ *          =TUNNEL_TERM_GET_FIELDS_table
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_get(
+    int unit, 
+    opennsl_tunnel_terminator_t *info) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Traverse tunnel terminator.
+ *
+ *\description Traverse tunnel terminator. The callback function is defined as
+ *          following:.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    cb [IN]   User callback function
+ *\param    user_data [IN]   Pointer to user supplied cookie used in parameter in
+ *          callback function
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_tunnel_terminator_traverse(
+    int unit, 
+    opennsl_tunnel_terminator_traverse_cb cb, 
+    void *user_data) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Initialize a opennsl_tunnel_initiator_t structure.

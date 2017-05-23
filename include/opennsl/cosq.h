@@ -91,6 +91,18 @@
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 /** BST Tracing statistics resources type eumerations. */
 typedef enum opennsl_bst_stat_id_e {
     opennslBstStatIdDevice = 0,         /**< Per device BST tracing resource */

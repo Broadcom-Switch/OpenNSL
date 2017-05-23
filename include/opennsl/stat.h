@@ -675,6 +675,8 @@ extern int opennsl_stat_group_destroy(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#define OPENNSL_STAT_LIF_COUNTING_PROFILE_NONE -1         /**< An indicator for a LIF
+                                                          to be uncounted */
 #include <opennsl/statX.h>
 #endif /* __OPENNSL_STAT_H__ */
 /*@}*/

@@ -66,6 +66,18 @@ typedef struct opennsl_qos_map_s {
 } opennsl_qos_map_t;
 
 /***************************************************************************//** 
+ *\brief Initialize the QoS Map structure.
+ *
+ *\description Initializes a QoS map structure to zero.
+ *
+ *\param    qos_map [IN,OUT]   Pointer to a QoS map structure.
+ *
+ *\retval    Void
+ ******************************************************************************/
+extern void opennsl_qos_map_t_init(
+    opennsl_qos_map_t *qos_map) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
  *\brief Allocates hardware resources for QoS mapping.
  *
  *\description Allocates hardware resources for QoS mapping. Depending on the

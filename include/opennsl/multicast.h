@@ -32,6 +32,8 @@
 #define OPENNSL_MULTICAST_TYPE_VLAN         0x00400000 
 #define OPENNSL_MULTICAST_TYPE_VXLAN        0x08000000 
 #define OPENNSL_MULTICAST_TYPE_PORTS_GROUP  0x40000000 
+#define OPENNSL_MULTICAST_TYPE_MASK         0x7fff0000 
+#define OPENNSL_MULTICAST_INGRESS_GROUP     0x00000004 
 #define OPENNSL_MULTICAST_EGRESS_GROUP      0x00000008 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
@@ -313,6 +315,115 @@ extern int opennsl_multicast_egress_set(
  *\retval    OPENNSL_E_XXX
  ******************************************************************************/
 extern int opennsl_multicast_egress_get(
+    int unit, 
+    opennsl_multicast_t group, 
+    int port_max, 
+    opennsl_gport_t *port_array, 
+    opennsl_if_t *encap_id_array, 
+    int *port_count) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Add a port to a Ingress Multicast group's replication list.
+ *
+ *\description Add a port to a multicast group's replication list in device
+ *          Ingress. The port is the physical port where replicated packets
+ *          will be sent. The encap_id is an opaque encapsulation ID returned
+ *          from the opennsl_multicast_*_encap_get APIs.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *\param    port [IN]   Physical GPORT ID
+ *\param    encap_id [IN]   Encapsulation ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_multicast_ingress_add(
+    int unit, 
+    opennsl_multicast_t group, 
+    opennsl_gport_t port, 
+    opennsl_if_t encap_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Delete a port from Ingress Multicast group's replication list.
+ *
+ *\description Delete a port from multicast group's replication list in device
+ *          Ingress. The port is the physical port where replicated packets
+ *          will be sent. The encap_id is an opaque encapsulation ID returned
+ *          from the opennsl_multicast_*_encap_get APIs.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *\param    port [IN]   Physical GPORT ID
+ *\param    encap_id [IN]   Encapsulation ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_multicast_ingress_delete(
+    int unit, 
+    opennsl_multicast_t group, 
+    opennsl_gport_t port, 
+    opennsl_if_t encap_id) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief opennsl_multicast_egress_delete_all.
+ *
+ *\description Remove all ports from Multicast replication list from device
+ *          Ingress.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *
+ *\retval    OPENNSL_E_xxx
+ ******************************************************************************/
+extern int opennsl_multicast_ingress_delete_all(
+    int unit, 
+    opennsl_multicast_t group) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Add a set of ports to a Ingress multicast group's replication list.
+ *
+ *\description Add a set of ports to a multicast group's replication list in
+ *          device Ingress. The port_array contains physical ports where
+ *          replicated packets will be sent. The encap_id_array contains the
+ *          opaque encapsulation IDs returned from the
+ *          opennsl_multicast_*_encap_get APIs.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *\param    port_count [IN]   Number of ports in the array
+ *\param    port_array [IN]   Array of physical ports
+ *\param    encap_id_array [IN]   Array of encapsulation IDs
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_multicast_ingress_set(
+    int unit, 
+    opennsl_multicast_t group, 
+    int port_count, 
+    opennsl_gport_t *port_array, 
+    opennsl_if_t *encap_id_array) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief opennsl_multicast_ingress_get.
+ *
+ *\description Get the ports in a multicast group's replication list from device
+ *          Ingress. The port_array contains physical ports where replicated
+ *          packets will be sent. The encap_id_array contains the opaque
+ *          encapsulation IDs returned from the opennsl_multicast_*_encap_get
+ *          APIs. If port_max = 0, port_array and encap_id_array must be NULL,
+ *          and the function will return in port_count the number of ports in
+ *          the given multicast group.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Multicast group ID
+ *\param    port_max [IN]   Number of items allocated in the array
+ *\param    port_array [OUT]   Array of physical ports
+ *\param    encap_id_array [OUT]   Array of encapsulation IDs
+ *\param    port_count [OUT]   Actual number of ports returned in the array
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_multicast_ingress_get(
     int unit, 
     opennsl_multicast_t group, 
     int port_max, 

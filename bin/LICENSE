@@ -1,5 +1,5 @@
 This Software License Agreement (the "Agreement") is a legal agreement between
-you, Licensee and Broadcom Corporation, a California corporation with its
+you, Licensee and Broadcom Limited, a California corporation with its
 principal office at 5300 California Avenue, Irvine, California 92617
 ("Broadcom"). As used in this Agreement, "you" and "Licensee" mean the company,
 entity or individual that is acquiring a license under this Agreement.
@@ -205,13 +205,19 @@ bin/cel-x86-trident2-ub14/ - Celestica Redstone-XP/Smallstone-XP Switch System
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/wedge-trident        - Wedge Switch System
+bin/wedge        - Wedge Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
 bin/as5712               - AS5712 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/as7712               - AS7712 Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
@@ -235,3 +241,8 @@ bin/xlr-dnx-ub14         - Broadcom DNX Switch Verification Kits with XLR CPU
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
+bin/ag-x86-deb80         - Agema AG7648 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2

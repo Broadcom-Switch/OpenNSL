@@ -56,13 +56,14 @@ typedef struct opennsl_l2_addr_s {
     opennsl_trunk_t tgid;               /**< Trunk group ID. */
     opennsl_cos_t reserved2; 
     opennsl_cos_t reserved3; 
-    opennsl_multicast_t reserved4; 
-    opennsl_pbmp_t reserved5; 
+    opennsl_multicast_t l2mc_group;     /**< XGS: index in L2MC table. For SBX
+                                           chips it is the Multicast Group index */
+    opennsl_pbmp_t reserved4; 
+    int reserved5; 
     int reserved6; 
-    int reserved7; 
-    opennsl_fabric_distribution_t reserved8; 
+    opennsl_fabric_distribution_t reserved7; 
+    int reserved8; 
     int reserved9; 
-    int reserved10; 
 } opennsl_l2_addr_t;
 
 #define OPENNSL_L2_CACHE_CPU        0x00000001 /**< Packet is copied to CPU. */
@@ -862,11 +863,13 @@ extern int opennsl_l2_replace(
 
 /** L2 Station address info. */
 typedef struct opennsl_l2_station_s {
-    uint32 flags;               /**< OPENNSL_L2_STATION_xxx flags. */
-    opennsl_mac_t dst_mac;      /**< Destination MAC address to match. */
-    opennsl_mac_t dst_mac_mask; /**< Destination MAC address mask value. */
-    opennsl_vlan_t vlan;        /**< VLAN to match. */
-    opennsl_vlan_t vlan_mask;   /**< VLAN mask value. */
+    uint32 flags;                   /**< OPENNSL_L2_STATION_xxx flags. */
+    opennsl_mac_t dst_mac;          /**< Destination MAC address to match. */
+    opennsl_mac_t dst_mac_mask;     /**< Destination MAC address mask value. */
+    opennsl_vlan_t vlan;            /**< VLAN to match. */
+    opennsl_vlan_t vlan_mask;       /**< VLAN mask value. */
+    opennsl_port_t src_port;        /**< Ingress port to match. */
+    opennsl_port_t src_port_mask;   /**< Ingress port mask value. */
 } opennsl_l2_station_t;
 
 #define OPENNSL_L2_STATION_WITH_ID  (1 << 0)   /**< Use the specified Station ID. */

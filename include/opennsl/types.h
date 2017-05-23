@@ -91,6 +91,7 @@ typedef int opennsl_vrf_t;
 /** opennsl_mpls_label_t */
 typedef uint32 opennsl_mpls_label_t;
 
+#define OPENNSL_VLAN_NONE       ((opennsl_vlan_t)0x0000) 
 #define OPENNSL_VLAN_DEFAULT    ((opennsl_vlan_t)0x0001) 
 /** opennsl_vlan_t */
 typedef uint16 opennsl_vlan_t;
@@ -273,6 +274,13 @@ typedef int opennsl_failover_t;
 #define OPENNSL_GPORT_MIRROR_GET(_gport)  \
     (!_SHR_GPORT_IS_MIRROR(_gport) ? -1 : \
     _SHR_GPORT_MIRROR_GET(_gport)) 
+#define OPENNSL_GPORT_TUNNEL_ID_SET(_gport, _tunnel_id)  \
+        (_SHR_GPORT_TUNNEL_ID_SET(_gport, _tunnel_id))
+ 
+#define OPENNSL_GPORT_TUNNEL_ID_GET(_gport)  \
+            (!_SHR_GPORT_IS_TUNNEL(_gport) ? -1 :  \
+        _SHR_GPORT_TUNNEL_ID_GET(_gport))
+ 
 /** opennsl_stg_t */
 typedef int opennsl_stg_t;
 
@@ -326,10 +334,134 @@ extern int opennsl_ip6_mask_create(
 extern opennsl_ip_t opennsl_ip_mask_create(
     int len) LIB_DLL_EXPORTED ;
 
+/** VLAN TPID Action definitions. */
+typedef enum opennsl_vlan_tpid_action_e {
+    opennslVlanTpidActionNone = 0,      /**< Do not modify. */
+    opennslVlanTpidActionModify = 1,    /**< Set to given value. */
+    opennslVlanTpidActionInner = 2,     /**< Use packet's inner tpid. */
+    opennslVlanTpidActionOuter = 3      /**< Use packet's outer tpid. */
+} opennsl_vlan_tpid_action_t;
+
+/** VLAN Pcp Action definitions. */
+typedef enum opennsl_vlan_pcp_action_e {
+    opennslVlanPcpActionNone = 0,       /**< Do not modify. */
+    opennslVlanPcpActionMapped = 1,     /**< Use TC/DP mapped PCP. */
+    opennslVlanPcpActionIngressInnerPcp = 2, /**< Use incoming packet's CTag PCP. */
+    opennslVlanPcpActionIngressOuterPcp = 3, /**< Use incoming packet's Stag PCP. */
+    opennslVlanPcpActionPortDefault = 4 /**< Use port default PCP. */
+} opennsl_vlan_pcp_action_t;
+
+/** VLAN Action definitions. */
+typedef enum opennsl_vlan_action_e {
+    opennslVlanActionNone = 0,          /**< Do not modify. */
+    opennslVlanActionAdd = 1,           /**< Add VLAN tag. */
+    opennslVlanActionReplace = 2,       /**< Replace VLAN tag. */
+    opennslVlanActionDelete = 3,        /**< Delete VLAN tag. */
+    opennslVlanActionCopy = 4,          /**< Copy VLAN tag. */
+    opennslVlanActionCompressed = 5,    /**< Set VLAN compress tag. */
+    opennslVlanActionMappedAdd = 6,     /**< Add a new VLAN tag according to
+                                           Mapped VLAN. */
+    opennslVlanActionMappedReplace = 7, /**< Replace existing VLAN tag according
+                                           to Mapped VLAN. */
+    opennslVlanActionOuterAdd = 8,      /**< Add a new VLAN tag with the Outer
+                                           VLAN tag value. */
+    opennslVlanActionInnerAdd = 9,      /**< Add a new VLAN tag with the Inner
+                                           VLAN tag value. */
+} opennsl_vlan_action_t;
+
 typedef enum opennsl_reserved_enum_e {
     opennsl_enum_reserved = 0   /**< Reserved value */
 } opennsl_reserved_enum_t;
 
+/** Initialize a VLAN tag action set structure. */
+typedef struct opennsl_vlan_action_set_s {
+    opennsl_vlan_t new_outer_vlan;      /**< New outer VLAN for Add/Replace
+                                           actions. */
+    opennsl_vlan_t new_inner_vlan;      /**< New inner VLAN for Add/Replace
+                                           actions. */
+    uint8 new_inner_pkt_prio;           /**< New inner packet priority for
+                                           Add/Replace actions. */
+    uint8 new_outer_cfi;                /**< New outer packet CFI for Add/Replace
+                                           actions. */
+    uint8 new_inner_cfi;                /**< New inner packet CFI for Add/Replace
+                                           actions. */
+    opennsl_if_t ingress_if;            /**< L3 Ingress Interface. */
+    int priority;                       /**< Internal or packet priority. */
+    opennsl_vlan_action_t dt_outer;     /**< Outer-tag action for double-tagged
+                                           packets. */
+    opennsl_vlan_action_t dt_outer_prio; /**< Outer-priority-tag action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t dt_outer_pkt_prio; /**< Outer packet priority action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t dt_outer_cfi; /**< Outer packet CFI action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t dt_inner;     /**< Inner-tag action for double-tagged
+                                           packets. */
+    opennsl_vlan_action_t dt_inner_prio; /**< Inner-priority-tag action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t dt_inner_pkt_prio; /**< Inner packet priority action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t dt_inner_cfi; /**< Inner packet CFI action for
+                                           double-tagged packets. */
+    opennsl_vlan_action_t ot_outer;     /**< Outer-tag action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_outer_prio; /**< Outer-priority-tag action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_outer_pkt_prio; /**< Outer packet priority action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_outer_cfi; /**< Outer packet CFI action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_inner;     /**< Inner-tag action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_inner_pkt_prio; /**< Inner packet priority action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t ot_inner_cfi; /**< Inner packet CFI action for
+                                           single-outer-tagged packets. */
+    opennsl_vlan_action_t it_outer;     /**< Outer-tag action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_outer_pkt_prio; /**< Outer packet priority action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_outer_cfi; /**< Outer packet CFI action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_inner;     /**< Inner-tag action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_inner_prio; /**< Inner-priority-tag action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_inner_pkt_prio; /**< Inner packet priority action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t it_inner_cfi; /**< Inner packet CFI action for
+                                           single-inner-tagged packets. */
+    opennsl_vlan_action_t ut_outer;     /**< Outer-tag action for untagged
+                                           packets. */
+    opennsl_vlan_action_t ut_outer_pkt_prio; /**< Outer packet priority action for
+                                           untagged packets. */
+    opennsl_vlan_action_t ut_outer_cfi; /**< Outer packet CFI action for untagged
+                                           packets. */
+    opennsl_vlan_action_t ut_inner;     /**< Inner-tag action for untagged
+                                           packets. */
+    opennsl_vlan_action_t ut_inner_pkt_prio; /**< Inner packet priority action for
+                                           untagged packets. */
+    opennsl_vlan_action_t ut_inner_cfi; /**< Inner packet CFI action for untagged
+                                           packets. */
+    opennsl_vlan_pcp_action_t outer_pcp; /**< Outer tag's pcp field action of
+                                           outgoing packets. */
+    opennsl_vlan_pcp_action_t inner_pcp; /**< Inner tag's pcp field action of
+                                           outgoing packets. */
+    opennsl_policer_t policer_id;       /**< Base policer to be used */
+    uint16 outer_tpid;                  /**< New outer-tag's tpid field for modify
+                                           action */
+    uint16 inner_tpid;                  /**< New inner-tag's tpid field for modify
+                                           action */
+    opennsl_vlan_tpid_action_t outer_tpid_action; /**< Action of outer-tag's tpid field */
+    opennsl_vlan_tpid_action_t inner_tpid_action; /**< Action of inner-tag's tpid field */
+    int action_id;                      /**< Action Set index */
+    uint32 class_id;                    /**< Class ID */
+    uint32 flags;                       /**< OPENNSL_VLAN_ACTION_SET_xxx. */
+} opennsl_vlan_action_set_t;
+
+#define OPENNSL_FIELD_STAT_ID_SET(_stat_id, _proc, _ctr)  _SHR_FIELD_STAT_ID_SET(_stat_id, _proc, _ctr) 
+#define OPENNSL_FIELD_STAT_ID_COUNTER_GET(_stat_id)  _SHR_FIELD_STAT_ID_COUNTER_GET(_stat_id) 
+#define OPENNSL_FIELD_STAT_ID_PROCESSOR_GET(_stat_id)  _SHR_FIELD_STAT_ID_PROCESSOR_GET(_stat_id) 
 /** VNTAG structure. */
 typedef struct opennsl_vntag_s {
     uint8 reserved1; 

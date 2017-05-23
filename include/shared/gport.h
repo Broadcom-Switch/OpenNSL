@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@
 #define _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP  12  /* Multicast Queue Group  */
 #define _SHR_GPORT_TYPE_SCHEDULER          13  /* Scheduler              */
 #define _SHR_GPORT_TYPE_MIRROR             15  /* Mirror destination.    */
+#define _SHR_GPORT_TYPE_TUNNEL             19  /* Tunnel ID              */
 #define _SHR_GPORT_TYPE_CHILD              20  /* Child port             */
 #define _SHR_GPORT_TYPE_EGRESS_GROUP       21  /* Egress group port      */
 #define _SHR_GPORT_TYPE_EGRESS_CHILD       22  /* Egress child port      */
@@ -97,6 +98,8 @@
 #define _SHR_GPORT_SCHEDULER_NODE_MASK                  0xfffff
 #define _SHR_GPORT_MIRROR_SHIFT                         0
 #define _SHR_GPORT_MIRROR_MASK                          0xffff
+#define _SHR_GPORT_TUNNEL_SHIFT                         0
+#define _SHR_GPORT_TUNNEL_MASK                          0x3ffffff
 #define _SHR_GPORT_SYSTEM_PORT_SHIFT                    0
 #define _SHR_GPORT_SYSTEM_PORT_MASK                     0xffffff
 
@@ -180,6 +183,16 @@
 
 #define _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP)
+
+#define _SHR_GPORT_IS_TUNNEL(_gport)    \
+        (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_TUNNEL)
+
+#define _SHR_GPORT_TUNNEL_ID_SET(_gport, _tunnel_id)                       \
+        ((_gport) = (_SHR_GPORT_TYPE_TUNNEL   << _SHR_GPORT_TYPE_SHIFT)  | \
+         (((_tunnel_id) & _SHR_GPORT_TUNNEL_MASK) << _SHR_GPORT_TUNNEL_SHIFT))
+
+#define _SHR_GPORT_TUNNEL_ID_GET(_gport)   \
+        (((_gport) >> _SHR_GPORT_TUNNEL_SHIFT) & _SHR_GPORT_TUNNEL_MASK)
 
 #define _SHR_GPORT_IS_SYSTEM_PORT(_gport) \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_SYSTEM_PORT)
@@ -273,5 +286,55 @@
 
 #define _SHR_GPORT_IS_MCAST_QUEUE_GROUP(_gport) \
         (((_gport) >> _SHR_GPORT_TYPE_SHIFT) == _SHR_GPORT_TYPE_MCAST_QUEUE_GROUP)
+
+#define _SHR_FIELD_CTR_PROC_MASK_LEGACY ((1 << 2) - 1) /*2 bits for counter engines in Arad */
+#define _SHR_FIELD_CTR_PROC_SHIFT_LEGACY 29 /* minimum 20 for the Statistic-Report Counter in Arad */
+#define _SHR_FIELD_CTR_SET_MASK_LEGACY ((1 << _SHR_FIELD_CTR_PROC_SHIFT_LEGACY) - 1)
+#define _SHR_FIELD_CTR_SET_SHIFT_LEGACY 0
+
+#define _SHR_FIELD_STAT_ID_PROC_LEGACY_GET(_stat_id) \
+    (((_stat_id) >> _SHR_FIELD_CTR_PROC_SHIFT_LEGACY) & _SHR_FIELD_CTR_PROC_MASK_LEGACY)
+
+#define _SHR_FIELD_STAT_ID_CNTR_LEGACY_GET(_stat_id) \
+    (((_stat_id) >> _SHR_FIELD_CTR_SET_SHIFT_LEGACY) & _SHR_FIELD_CTR_SET_MASK_LEGACY)
+
+#define _SHR_FIELD_STAT_ID_LEGACY_SET(_proc, _ctr) \
+    ((((_proc) & _SHR_FIELD_CTR_PROC_MASK_LEGACY) << _SHR_FIELD_CTR_PROC_SHIFT_LEGACY)\
+    | (((_ctr) & _SHR_FIELD_CTR_SET_MASK_LEGACY) << _SHR_FIELD_CTR_SET_SHIFT_LEGACY))
+
+#define _SHR_FIELD_STAT_ID_IS_LEGACY(_stat_id) (!((_stat_id >> 31) & 0x1))
+#define _SHR_FIELD_STAT_ID_LEGACY              (0x1 << 31)
+
+/* minimum 20 for the Statistic-Report Counter in Arad */
+#define _SHR_FIELD_CTR_PROC_MASK ((1 << 4) - 1) /*4 bits for counter engines in Arad */
+
+#define _SHR_FIELD_CTR_PROC_SHIFT 27 /* minimum 20 for the Statistic-Report Counter in Jericho */
+#define _SHR_FIELD_CTR_SET_MASK ((1 << _SHR_FIELD_CTR_PROC_SHIFT) - 1)
+#define _SHR_FIELD_CTR_SET_SHIFT 0
+
+#define _SHR_FIELD_CTR_PROC_SHIFT_GET(_stat_id) (_SHR_FIELD_STAT_ID_IS_LEGACY(_stat_id) ? _SHR_FIELD_CTR_PROC_SHIFT_LEGACY : _SHR_FIELD_CTR_PROC_SHIFT)
+#define _SHR_FIELD_STAT_ID_PROC_NEW_GET(_stat_id) \
+    (((_stat_id) >> _SHR_FIELD_CTR_PROC_SHIFT) & _SHR_FIELD_CTR_PROC_MASK)
+
+#define _SHR_FIELD_STAT_ID_CNTR_NEW_GET(_stat_id) \
+    (((_stat_id) >> _SHR_FIELD_CTR_SET_SHIFT) & _SHR_FIELD_CTR_SET_MASK)
+
+#define _SHR_FIELD_STAT_ID_NEW_SET(_proc, _ctr) \
+    (_SHR_FIELD_STAT_ID_LEGACY | \
+    (((_proc) & _SHR_FIELD_CTR_PROC_MASK) << _SHR_FIELD_CTR_PROC_SHIFT)|\
+     (((_ctr) & _SHR_FIELD_CTR_SET_MASK) << _SHR_FIELD_CTR_SET_SHIFT))
+
+#define _SHR_FIELD_STAT_ID_PROCESSOR_GET(_stat_id) \
+             (_SHR_FIELD_STAT_ID_IS_LEGACY(_stat_id) ? \
+             _SHR_FIELD_STAT_ID_PROC_LEGACY_GET(_stat_id) : \
+             _SHR_FIELD_STAT_ID_PROC_NEW_GET(_stat_id))
+
+#define _SHR_FIELD_STAT_ID_COUNTER_GET(_stat_id) \
+             (_SHR_FIELD_STAT_ID_IS_LEGACY(_stat_id) ? \
+             _SHR_FIELD_STAT_ID_CNTR_LEGACY_GET(_stat_id) : \
+             _SHR_FIELD_STAT_ID_CNTR_NEW_GET(_stat_id))
+
+#define _SHR_FIELD_STAT_ID_SET(_stat_id, _proc, _ctr) \
+    (_stat_id = _SHR_FIELD_STAT_ID_NEW_SET(_proc, _ctr))
 
 #endif  /* !_SHR_GPORT_H */

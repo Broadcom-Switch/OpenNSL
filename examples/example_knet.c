@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@
 #include <sal/driver.h>
 #include <opennsl/error.h>
 #include <opennsl/vlan.h>
+#include <opennsl/rx.h>
 #include <opennsl/knet.h>
 #include <examples/util.h>
 
@@ -398,6 +399,7 @@ int main(int argc, char *argv[])
   int rv = 0;
   int unit = DEFAULT_UNIT;
   int choice;
+  opennsl_port_config_t pcfg;
 
   if((argc != 1) || ((argc > 1) && (strcmp(argv[1], "--help") == 0))) {
     printf("%s\n\r", example_usage);
@@ -413,6 +415,17 @@ int main(int argc, char *argv[])
     return rv;
   }
 
+  /* rx start */
+  if (!opennsl_rx_active(unit))
+  {
+    rv = opennsl_rx_start(unit, NULL);
+    if (OPENNSL_FAILURE(rv))
+    {
+      printf("RX start failed. rv = %s\n", opennsl_errmsg(rv));
+      return rv;
+    }
+  }
+
   /* cold boot initialization commands */
   rv = example_port_default_config(unit);
   if (rv != OPENNSL_E_NONE) {
@@ -426,6 +439,19 @@ int main(int argc, char *argv[])
   if(rv != OPENNSL_E_NONE) {
     printf("\r\nFailed to add ports to default VLAN %d. rv: %d\r\n",
         DEFAULT_VLAN,  rv);
+    return rv;
+  }
+
+  /* Add CPU to default vlan. */
+  rv = opennsl_port_config_get(unit, &pcfg);
+  if (rv != OPENNSL_E_NONE) {
+    printf("Failed to get port configuration. Error %s\n", opennsl_errmsg(rv));
+    return rv;
+  }
+
+  rv = opennsl_vlan_port_add(unit, DEFAULT_VLAN, pcfg.cpu, pcfg.cpu);
+  if (rv != OPENNSL_E_NONE) {
+    printf("Failed to add ports to VLAN. Error %s\n", opennsl_errmsg(rv));
     return rv;
   }
 

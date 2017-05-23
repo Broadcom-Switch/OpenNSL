@@ -49,6 +49,48 @@ extern int opennsl_stk_my_modid_get(
     int unit, 
     int *my_modid) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Get or set the module ID of the local device.
+ *
+ *\description    Set or get the device's module identifier.  Each device in a   
+ *             system must have a unique module number.  Some devices, such   
+ *             as switch family fabric switches, do not have a module
+ *          identifier, and will return OPENNSL_E_UNAVAIL.
+ *          opennsl_stk_modid_set and opennsl_stk_modid_get will do module
+ *          mapping by calling =opennsl_stk_modmap_map .
+ *          opennsl_stk_my_modid_set and opennsl_stk_my_modid_get control the
+ *          non mapped module identifier for the device.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    modid [IN]   (for _set) Module identifier
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_stk_modid_set(
+    int unit, 
+    int modid) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Get or set the module ID of the local device.
+ *
+ *\description    Set or get the device's module identifier.  Each device in a   
+ *             system must have a unique module number.  Some devices, such   
+ *             as switch family fabric switches, do not have a module
+ *          identifier, and will return OPENNSL_E_UNAVAIL.
+ *          opennsl_stk_modid_set and opennsl_stk_modid_get will do module
+ *          mapping by calling =opennsl_stk_modmap_map .
+ *          opennsl_stk_my_modid_set and opennsl_stk_my_modid_get control the
+ *          non mapped module identifier for the device.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    modid [OUT]   (for _set) Module identifier
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_stk_modid_get(
+    int unit, 
+    int *modid) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE

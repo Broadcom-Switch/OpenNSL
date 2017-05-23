@@ -29,6 +29,10 @@
 #include <opennsl/types.h>
 #include <opennsl/l3.h>
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #endif /* defined(INCLUDE_L3) */
 
 #include <opennsl/tunnelX.h>

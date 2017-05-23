@@ -368,6 +368,10 @@ extern int opennsl_cosq_port_mapping_multi_get(
 #define OPENNSL_COSQ_WEIGHTED_ROUND_ROBIN   0x03       
 #define OPENNSL_COSQ_WEIGHTED_FAIR_QUEUING  0x04       
 #define OPENNSL_COSQ_DEFICIT_ROUND_ROBIN    0x05       /**< XGS3 only. */
+#define OPENNSL_COSQ_SP0                    0x0C       /**< Strict priority level
+                                                          0. */
+#define OPENNSL_COSQ_SP1                    0x0D       /**< Strict priority level
+                                                          1. */
 #define OPENNSL_COSQ_WEIGHT_UNLIMITED   -1         
 #define OPENNSL_COSQ_WEIGHT_STRICT      0          
 #define OPENNSL_COSQ_WEIGHT_MIN         1          
@@ -847,6 +851,8 @@ extern int opennsl_cosq_discard_port_get(
     int *drop_slope, 
     int *average_time) LIB_DLL_EXPORTED ;
 
+#define OPENNSL_COSQ_HIGH_PRIORITY  -4         
+#define OPENNSL_COSQ_LOW_PRIORITY   -5         
 /** Features that can be controlled on a gport/cosq  basis. */
 typedef enum opennsl_cosq_control_e {
     opennslCosqControlEgressUCQueueSharedLimitBytes = 79, /**< Egress UC Shared Queue limit setting */
@@ -2103,6 +2109,173 @@ extern int opennsl_cosq_gport_child_get(
     opennsl_gport_t in_gport, 
     opennsl_cos_queue_t cosq, 
     opennsl_gport_t *out_gport) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure/retrieve {traffic class, dp} mapping to egress queue on a
+ *       port.
+ *
+ *\description Configure/retrieve {traffic class, dp} mapping to egress queue on
+ *          a port. The gport identifies the underlying resource. The resource
+ *          will be either Unicast or Multicast egress queues for a port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   gport referencing unicast or multicast egress queues on a
+ *          port
+ *\param    ingress_pri [IN]   packet priority/traffic class
+ *\param    ingress_dp [IN]   packet drop precedence
+ *\param    offset [IN]   (for _set) queue offset from base
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_egress_map_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_t ingress_pri, 
+    opennsl_color_t ingress_dp, 
+    opennsl_cos_queue_t offset) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure/retrieve {traffic class, dp} mapping to egress queue on a
+ *       port.
+ *
+ *\description Configure/retrieve {traffic class, dp} mapping to egress queue on
+ *          a port. The gport identifies the underlying resource. The resource
+ *          will be either Unicast or Multicast egress queues for a port.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   gport referencing unicast or multicast egress queues on a
+ *          port
+ *\param    ingress_pri [IN]   packet priority/traffic class
+ *\param    ingress_dp [IN]   packet drop precedence
+ *\param    offset [OUT]   (for _set) queue offset from base
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_egress_map_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_t ingress_pri, 
+    opennsl_color_t ingress_dp, 
+    opennsl_cos_queue_t *offset) LIB_DLL_EXPORTED ;
+
+#define OPENNSL_COSQ_MULTICAST_SCHEDULED    0x00000001 /**< multicast scheduled
+                                                          values are valid */
+/** multicast configuration settings */
+typedef struct opennsl_cosq_egress_multicast_config_s {
+    opennsl_color_t scheduled_dp;   /**< drop precedence */
+    opennsl_cos_t priority;         /**< TC */
+    int unscheduled_se;             /**< shared resource eligibility */
+    int unscheduled_sp;             /**< service pool ID */
+} opennsl_cosq_egress_multicast_config_t;
+
+/***************************************************************************//** 
+ *\brief Configure/retrieve {traffic class, dp} mapping to multicast egress
+ *       configuration on a port.
+ *
+ *\description Configure/retrieve {traffic class, dp} mapping to multicast egress
+ *          configuration on a port. The gport identifies the underlying
+ *          resource. The resource will be local gport. When gport is local
+ *          port, flags should be OPENNSL_COSQ_MULTICAST_SCHEDULED, and only
+ *          scheduled fields of opennsl_cosq_egress_multicast_config_t
+ *          structure are valid. When gport is null, flags should be
+ *          OPENNSL_COSQ_MULTICAST_UNSCHEDULED, and only unscheduled fields of
+ *          opennsl_cosq_egress_multicast_config_t structure are valid.
+ *          Gport parameter identifies the mapping to be for scheduled
+ *          multicast or unscheduled multicast. The flags parameter is
+ *          redundant. However the flag value identifies what fields of
+ *          opennsl_cosq_egress_multicast_config_t structure are valid.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   gport referencing unicast or multicast egress queues on a
+ *          port
+ *\param    ingress_pri [IN]   packet priority/traffic class
+ *\param    ingress_dp [IN]   packet drop precedence
+ *\param    flags [IN]   Specifies configuration. Valid flags:
+ *          OPENNSL_COSQ_MULTICAST_SCHEDULED, OPENNSL_COSQ_MULTICAST_UNSCHEDULED
+ *\param    config [IN]   (for _set)  multicast egress configuration
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_egress_multicast_config_set(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_t ingress_pri, 
+    opennsl_color_t ingress_dp, 
+    uint32 flags, 
+    opennsl_cosq_egress_multicast_config_t *config) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Configure/retrieve {traffic class, dp} mapping to multicast egress
+ *       configuration on a port.
+ *
+ *\description Configure/retrieve {traffic class, dp} mapping to multicast egress
+ *          configuration on a port. The gport identifies the underlying
+ *          resource. The resource will be local gport. When gport is local
+ *          port, flags should be OPENNSL_COSQ_MULTICAST_SCHEDULED, and only
+ *          scheduled fields of opennsl_cosq_egress_multicast_config_t
+ *          structure are valid. When gport is null, flags should be
+ *          OPENNSL_COSQ_MULTICAST_UNSCHEDULED, and only unscheduled fields of
+ *          opennsl_cosq_egress_multicast_config_t structure are valid.
+ *          Gport parameter identifies the mapping to be for scheduled
+ *          multicast or unscheduled multicast. The flags parameter is
+ *          redundant. However the flag value identifies what fields of
+ *          opennsl_cosq_egress_multicast_config_t structure are valid.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport [IN]   gport referencing unicast or multicast egress queues on a
+ *          port
+ *\param    ingress_pri [IN]   packet priority/traffic class
+ *\param    ingress_dp [IN]   packet drop precedence
+ *\param    flags [IN]   Specifies configuration. Valid flags:
+ *          OPENNSL_COSQ_MULTICAST_SCHEDULED, OPENNSL_COSQ_MULTICAST_UNSCHEDULED
+ *\param    config [OUT]   (for _set)  multicast egress configuration
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_egress_multicast_config_get(
+    int unit, 
+    opennsl_gport_t gport, 
+    opennsl_cos_t ingress_pri, 
+    opennsl_color_t ingress_dp, 
+    uint32 flags, 
+    opennsl_cosq_egress_multicast_config_t *config) LIB_DLL_EXPORTED ;
+
+/** cosq gport type eumerations */
+typedef enum opennsl_cosq_gport_type_e {
+    opennslCosqGportTypeUnicastEgress = 1, /**< Unicast Egress Queues - Port
+                                           hierarchy */
+    opennslCosqGportTypeMulticastEgress = 2, /**< Multicast Egress Queues - Port
+                                           Hierarchy */
+    opennslCosqGportTypeLocalPort = 6,  /**< Ports in Egress transmit hierarchy */
+} opennsl_cosq_gport_type_t;
+
+/** gport information related to getting a handle */
+typedef struct opennsl_cosq_gport_info_s {
+    opennsl_gport_t in_gport;   /**< gport to be converted. NULL for global gports
+                                   (i.e. single instance on a device) */
+    opennsl_cos_queue_t cosq;   /**< Num of cosq levels */
+    opennsl_gport_t out_gport;  /**< retreived gport */
+} opennsl_cosq_gport_info_t;
+
+/***************************************************************************//** 
+ *\brief Getting a gport handle.
+ *
+ *\description Getting a gport handle. This could be either a global gport
+ *          (single instance on a device) or converting a gport to the desired
+ *          type .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    gport_type [IN]   gport type.  see table =OPENNSL_COSQ_GPORT_type
+ *\param    gport_info [IN,OUT]   gport info.  see table
+ *          =OPENNSL_COSQ_GPORT_INFO_table in_gport parameter is an input
+ *          parameter
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_cosq_gport_handle_get(
+    int unit, 
+    opennsl_cosq_gport_type_t gport_type, 
+    opennsl_cosq_gport_info_t *gport_info) LIB_DLL_EXPORTED ;
 
 /** XGS3 cosq counters */
 typedef enum opennsl_cosq_stat_e {

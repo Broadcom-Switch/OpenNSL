@@ -58,6 +58,7 @@
 #define OPENNSL_L3_HOST_AS_ROUTE        (1 << 16)  /**< Use LPM if host table
                                                       full. */
 #define OPENNSL_L3_IP6                  (1 << 17)  /**< IPv6. */
+#define OPENNSL_L3_RPF                  (1 << 18)  /**< RPF check. */
 #define OPENNSL_L3_DST_DISCARD          (1 << 20)  /**< Destination match discard. */
 #define OPENNSL_L3_ROUTE_LABEL          (1 << 22)  /**< Indicates that MPLS label
                                                       in route entry is valid. */
@@ -73,6 +74,17 @@
                                                       Ingress entry. */
 #define OPENNSL_L3_INGRESS_GLOBAL_ROUTE (1 << 2)   /**< Allow Global Route on L3
                                                       Ingress Interface. */
+#define OPENNSL_L3_INGRESS_DSCP_TRUST   (1 << 3)   /**< Trust incoming DSCP on L3
+                                                      Ingress */
+/** L3 Interface QOS setting. */
+typedef struct opennsl_l3_intf_qos_s {
+    uint32 flags;   /**< See OPENNSL_L3_INTF_QOS_XXX flag definitions. */
+    int qos_map_id; /**< QOS Map ID. */
+    uint8 pri;      /**< Packet .1p. */
+    uint8 cfi;      /**< Packet CFI. */
+    int dscp;       /**< Packet DSCP. */
+} opennsl_l3_intf_qos_t;
+
 /** 
  * L3 Interface Structure.
  * 
@@ -86,7 +98,11 @@ typedef struct opennsl_l3_intf_s {
     opennsl_vlan_t l3a_vid;             /**< VLAN ID. */
     int l3a_ttl;                        /**< TTL threshold. */
     int l3a_mtu;                        /**< MTU. */
+    int l3a_mtu_forwarding;             /**< Forwarding Layer MTU. */
+    opennsl_l3_intf_qos_t dscp_qos;     /**< DSCP QoS Setting. */
     int l3a_ip4_options_profile_id;     /**< IP4 Options handling Profile ID */
+    uint8 native_routing_vlan_tags;     /**< Set number of VLAN tags expected when
+                                           interface is used for native routing */
 } opennsl_l3_intf_t;
 
 /** 
@@ -97,7 +113,8 @@ typedef struct opennsl_l3_intf_s {
 typedef struct opennsl_l3_egress_s {
     uint32 flags;                       /**< Interface flags (OPENNSL_L3_TGID,
                                            OPENNSL_L3_L2TOCPU). */
-    uint32 reserved1; 
+    uint32 flags2;                      /**< See OPENNSL_L3_FLAGS2_xxx flag
+                                           definitions. */
     opennsl_if_t intf;                  /**< L3 interface (source MAC, tunnel). */
     opennsl_mac_t mac_addr;             /**< Next hop forwarding destination mac. */
     opennsl_vlan_t vlan;                /**< Next hop vlan id. */
@@ -106,31 +123,31 @@ typedef struct opennsl_l3_egress_s {
                                            !OPENNSL_L3_TGID). */
     opennsl_trunk_t trunk;              /**< Trunk packet switched to (if
                                            OPENNSL_L3_TGID). */
-    uint32 reserved2; 
-    opennsl_mpls_label_t reserved3; 
-    opennsl_reserved_enum_t reserved4; 
+    uint32 reserved1; 
+    opennsl_mpls_label_t reserved2; 
+    opennsl_mpls_egress_action_t reserved3; 
+    int reserved4; 
     int reserved5; 
-    int reserved6; 
+    uint8 reserved6; 
     uint8 reserved7; 
     uint8 reserved8; 
-    uint8 reserved9; 
-    int reserved10; 
+    int qos_map_id;                     /**< General QOS map id */
     opennsl_if_t encap_id;              /**< Encapsulation index. */
-    opennsl_failover_t reserved11; 
-    opennsl_if_t reserved12; 
-    opennsl_multicast_t reserved13; 
+    opennsl_failover_t reserved9; 
+    opennsl_if_t reserved10; 
+    opennsl_multicast_t reserved11; 
+    int reserved12; 
+    int reserved13; 
     int reserved14; 
     int reserved15; 
-    int reserved16; 
-    int reserved17; 
-    uint32 reserved18; 
-    uint16 reserved19; 
-    opennsl_vntag_t reserved20; 
+    uint32 reserved16; 
+    uint16 reserved17; 
+    opennsl_vntag_t reserved18; 
+    opennsl_reserved_enum_t reserved19; 
+    opennsl_etag_t reserved20; 
     opennsl_reserved_enum_t reserved21; 
-    opennsl_etag_t reserved22; 
-    opennsl_reserved_enum_t reserved23; 
-    int reserved24; 
-    int reserved25; 
+    int reserved22; 
+    int reserved23; 
 } opennsl_l3_egress_t;
 
 #define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for

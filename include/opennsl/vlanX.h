@@ -44,6 +44,9 @@ typedef struct opennsl_vlan_protocol_packet_ctrl_s {
                                        (DIP=224.0.0.X) action */
     int ip6_rsvd_mc_action;         /**< IPv6 reserved multicast packet
                                        (DIP=ff0X:0:0:0:0:0:0:0) action */
+    int reserved1; 
+    int reserved2; 
+    int reserved3; 
 } opennsl_vlan_protocol_packet_ctrl_t;
 
 #if defined(INCLUDE_L3)
