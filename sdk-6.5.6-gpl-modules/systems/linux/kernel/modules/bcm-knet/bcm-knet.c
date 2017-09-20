@@ -6195,7 +6195,8 @@ bkn_get_next_dma_event(kcom_msg_dma_info_t *kmsg)
             sinfo = bkn_sinfo_from_unit(dev_no);
         }
 
-        if ((sinfo->inst_id != 0) && ((sinfo->inst_id & (1 << dev_evt)) == 0)){
+        if (sinfo && (sinfo->inst_id != 0) &&
+	    ((sinfo->inst_id & (1 << dev_evt)) == 0)) {
             DBG_INST((" %s skip dev(%d)\n",__FUNCTION__,dev_evt));
             continue;
         }
