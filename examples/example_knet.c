@@ -501,7 +501,8 @@ int main(int argc, char *argv[])
       case 0:
       {
         printf("Exiting the application.\n");
-        return OPENNSL_E_NONE;
+        rv = opennsl_driver_exit();
+        return rv;
       }
 
       default:

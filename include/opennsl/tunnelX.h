@@ -105,6 +105,7 @@ typedef struct opennsl_tunnel_initiator_s {
     uint16 span_id;                     /**< Erspan Span ID. */
     uint32 aux_data;                    /**< Tunnel associated data. */
     int outlif_counting_profile;        /**< Out LIF counting profile */
+    opennsl_reserved_enum_t encap_access; /**< Encapsulation Access stage */
 } opennsl_tunnel_initiator_t;
 
 typedef int (*opennsl_tunnel_initiator_traverse_cb)(

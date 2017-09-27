@@ -68,6 +68,8 @@ typedef struct opennsl_stat_group_mode_attr_selector_s {
     uint32 counter_offset;              /**< Counter Offset */
     opennsl_stat_group_mode_attr_t attr; /**< Attribute Selector */
     uint32 attr_value;                  /**< Attribute Values */
+    uint32 udf_bitmap;                  /**< valid UDF bits, should be same in one
+                                           mode id */
 } opennsl_stat_group_mode_attr_selector_t;
 
 /***************************************************************************//** 
@@ -125,7 +127,7 @@ extern int opennsl_stat_group_mode_id_create(
  *\brief Associate an accounting object to customized group mode.
  *
  *\description This API Associate an accounting object to customized group mode
- *          and make  system ready for further stat collection action.
+ *          and make system ready for further stat collection action.
  *
  *\param    unit [IN]   Unit number.
  *\param    mode_id [IN]   Created Mode Identifier for Stat Flex Group Mode

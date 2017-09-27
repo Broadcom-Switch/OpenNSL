@@ -95,6 +95,11 @@
                                                           MC packet, stamp the
                                                           FTMH.OutLIF field with
                                                           the CUD. */
+#define OPENNSL_MIRROR_DEST_TUNNEL_PSAMP    (1 << 29)  /**< Update mirror
+                                                          destination with PSAMP
+                                                          encapsulation */
+#define OPENNSL_MIRROR_DEST_OUT_MIRROR_DISABLE (1 << 30)  /**< Assert out mirror
+                                                          disable */
 /**  represents the options for the mirroring of packets */
 typedef struct opennsl_mirror_options_s {
     uint32 flags;           
@@ -166,6 +171,9 @@ typedef struct opennsl_mirror_destination_s {
                                            values for DNX are 0, 256. */
     opennsl_reserved_enum_t reserved7; 
     uint8 reserved8; 
+    uint8 reserved9; 
+    uint16 reserved10; 
+    uint32 reserved11; 
 } opennsl_mirror_destination_t;
 
 typedef int (*opennsl_mirror_destination_traverse_cb)(
@@ -348,5 +356,8 @@ extern int opennsl_mirror_vlan_get(
     uint16 *tpid, 
     uint16 *vlan) LIB_DLL_EXPORTED ;
 
+#define OPENNSL_MIRROR_DEST_NO_COUNT    -2         /**< Value to disable counting
+                                                      of the snooped/mirrored
+                                                      copy. */
 #endif /* __OPENNSL_MIRRORX_H__ */
 /*@}*/

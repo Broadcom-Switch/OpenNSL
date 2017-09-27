@@ -105,6 +105,17 @@ typedef struct opennsl_l3_intf_s {
                                            interface is used for native routing */
 } opennsl_l3_intf_t;
 
+#define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for
+                                                          dynamic_scaling_factor. */
+#define OPENNSL_L3_ECMP_DYNAMIC_LOAD_WEIGHT_INVALID -1         /**< Invalid value for
+                                                          dynamic_load_weight. */
+/** L3 Ingress Interface URPF Mode setting. */
+typedef enum opennsl_l3_ingress_urpf_mode_e {
+    opennslL3IngressUrpfDisable = 0,    /**< Disable unicast RPF. */
+    opennslL3IngressUrpfLoose = 1,      /**< Loose mode Unicast RPF. */
+    opennslL3IngressUrpfStrict = 2      /**< Strict mode Unicast RPF. */
+} opennsl_l3_ingress_urpf_mode_t;
+
 /** 
  * L3 Egress Structure.
  * 
@@ -146,20 +157,15 @@ typedef struct opennsl_l3_egress_s {
     opennsl_reserved_enum_t reserved19; 
     opennsl_etag_t reserved20; 
     opennsl_reserved_enum_t reserved21; 
-    int reserved22; 
-    int reserved23; 
+    uint32 reserved22; 
+    uint32 reserved23; 
+    uint32 reserved24; 
+    opennsl_flow_logical_field_t reserved25[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    uint32 reserved26; 
+    int reserved27; 
+    int reserved28; 
+    opennsl_l3_ingress_urpf_mode_t reserved29; 
 } opennsl_l3_egress_t;
-
-#define OPENNSL_L3_ECMP_DYNAMIC_SCALING_FACTOR_INVALID -1         /**< Invalid value for
-                                                          dynamic_scaling_factor. */
-#define OPENNSL_L3_ECMP_DYNAMIC_LOAD_WEIGHT_INVALID -1         /**< Invalid value for
-                                                          dynamic_load_weight. */
-/** L3 Ingress Interface URPF Mode setting. */
-typedef enum opennsl_l3_ingress_urpf_mode_e {
-    opennslL3IngressUrpfDisable = 0,    /**< Disable unicast RPF. */
-    opennslL3IngressUrpfLoose = 1,      /**< Loose mode Unicast RPF. */
-    opennslL3IngressUrpfStrict = 2      /**< Strict mode Unicast RPF. */
-} opennsl_l3_ingress_urpf_mode_t;
 
 /** 
  * L3 Ingress Structure.
@@ -177,6 +183,8 @@ typedef struct opennsl_l3_ingress_s {
     int ip4_options_profile_id;         /**< IP4 Options handling Profile ID */
     int nat_realm_id;                   /**< Realm id of the interface for NAT */
     int tunnel_term_ecn_map_id;         /**< Tunnel termination ecn map id */
+    uint32 intf_class_route_disable;    /**< routing enablers bit map in rif
+                                           profile */
 } opennsl_l3_ingress_t;
 
 /** 
@@ -188,21 +196,25 @@ typedef struct opennsl_l3_ingress_s {
  * the IPv4 or IPv6 addresses are valid.
  */
 typedef struct opennsl_l3_host_s {
-    uint32 l3a_flags;               /**< See OPENNSL_L3_xxx flag definitions. */
+    uint32 l3a_flags;                   /**< See OPENNSL_L3_xxx flag definitions. */
     uint32 reserved1; 
-    opennsl_vrf_t l3a_vrf;          /**< Virtual router instance. */
-    opennsl_ip_t l3a_ip_addr;       /**< Destination host IP address (IPv4). */
-    opennsl_ip6_t l3a_ip6_addr;     /**< Destination host IP address (IPv6). */
-    opennsl_cos_t l3a_pri;          /**< New priority in packet. */
-    opennsl_if_t l3a_intf;          /**< L3 intf associated with this address. */
-    opennsl_mac_t l3a_nexthop_mac;  /**< Next hop MAC addr. */
+    opennsl_vrf_t l3a_vrf;              /**< Virtual router instance. */
+    opennsl_ip_t l3a_ip_addr;           /**< Destination host IP address (IPv4). */
+    opennsl_ip6_t l3a_ip6_addr;         /**< Destination host IP address (IPv6). */
+    opennsl_cos_t l3a_pri;              /**< New priority in packet. */
+    opennsl_if_t l3a_intf;              /**< L3 intf associated with this address. */
+    opennsl_mac_t l3a_nexthop_mac;      /**< Next hop MAC addr. */
     opennsl_module_t reserved2; 
-    opennsl_port_t l3a_port_tgid;   /**< Port/TGID packet is switched to. */
+    opennsl_port_t l3a_port_tgid;       /**< Port/TGID packet is switched to. */
     opennsl_port_t reserved3; 
     int reserved4; 
     int reserved5; 
     opennsl_if_t reserved6; 
     opennsl_if_t reserved7; 
+    uint32 reserved8; 
+    uint32 reserved9; 
+    opennsl_flow_logical_field_t reserved10[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    uint32 reserved11; 
 } opennsl_l3_host_t;
 
 /** 
@@ -214,22 +226,22 @@ typedef struct opennsl_l3_host_s {
  * the IPv4 or IPv6 addresses are valid.
  */
 typedef struct opennsl_l3_route_s {
-    uint32 l3a_flags;               /**< See OPENNSL_L3_xxx flag definitions. */
+    uint32 l3a_flags;                   /**< See OPENNSL_L3_xxx flag definitions. */
     uint32 reserved1; 
     uint32 reserved2; 
-    opennsl_vrf_t l3a_vrf;          /**< Virtual router instance. */
-    opennsl_ip_t l3a_subnet;        /**< IP subnet address (IPv4). */
-    opennsl_ip6_t l3a_ip6_net;      /**< IP subnet address (IPv6). */
-    opennsl_ip_t l3a_ip_mask;       /**< IP subnet mask (IPv4). */
-    opennsl_ip6_t l3a_ip6_mask;     /**< IP subnet mask (IPv6). */
-    opennsl_if_t l3a_intf;          /**< L3 interface associated with route. */
+    opennsl_vrf_t l3a_vrf;              /**< Virtual router instance. */
+    opennsl_ip_t l3a_subnet;            /**< IP subnet address (IPv4). */
+    opennsl_ip6_t l3a_ip6_net;          /**< IP subnet address (IPv6). */
+    opennsl_ip_t l3a_ip_mask;           /**< IP subnet mask (IPv4). */
+    opennsl_ip6_t l3a_ip6_mask;         /**< IP subnet mask (IPv6). */
+    opennsl_if_t l3a_intf;              /**< L3 interface associated with route. */
     opennsl_ip_t reserved3; 
     opennsl_mac_t reserved4; 
     opennsl_module_t reserved5; 
-    opennsl_port_t l3a_port_tgid;   /**< Port or trunk group ID. */
+    opennsl_port_t l3a_port_tgid;       /**< Port or trunk group ID. */
     opennsl_port_t reserved6; 
     opennsl_vlan_t reserved7; 
-    opennsl_cos_t l3a_pri;          /**< Priority (COS). */
+    opennsl_cos_t l3a_pri;              /**< Priority (COS). */
     uint32 reserved8; 
     opennsl_mpls_label_t reserved9; 
     int reserved10; 
@@ -237,6 +249,10 @@ typedef struct opennsl_l3_route_s {
     int reserved12; 
     opennsl_multicast_t reserved13; 
     opennsl_gport_t reserved14; 
+    uint32 reserved15; 
+    uint32 reserved16; 
+    opennsl_flow_logical_field_t reserved17[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    uint32 reserved18; 
 } opennsl_l3_route_t;
 
 /** 
@@ -576,7 +592,10 @@ extern int opennsl_l3_egress_traverse(
 /***************************************************************************//** 
  *\brief Create a Multipath Egress forwarding object.
  *
- *\description Create an Egress Multipath forwarding object.
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    flags [IN]   OPENNSL_L3_REPLACE: replace existing. OPENNSL_L3_WITH_ID:
@@ -599,9 +618,10 @@ extern int opennsl_l3_egress_multipath_create(
 /***************************************************************************//** 
  *\brief Destroy an Egress Multipath forwarding object.
  *
- *\description Destroy multipath egress forwarding object.  This is only unused
- *          egress objects can be deleted, if forwarding path is used by
- *          routes/hosts objects operation will return OPENNSL_E_BUSY. .
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    mpintf [IN]   L3 interface ID pointing to Egress multipath object.
@@ -615,7 +635,10 @@ extern int opennsl_l3_egress_multipath_destroy(
 /***************************************************************************//** 
  *\brief Get an Egress Multipath forwarding object.
  *
- *\description Get an Egress Multipath forwarding object.
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    mpintf [IN]   L3 interface ID pointing to Egress multipath object.
@@ -641,8 +664,10 @@ extern int opennsl_l3_egress_multipath_get(
  *\brief Add an Egress forwarding object to an Egress Multipath forwarding
  *       object.
  *
- *\description Add an Egress forwarding object to an Egress Multipath forwarding
- *          object.
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    mpintf [IN]   L3 interface ID pointing to Egress multipath object.
@@ -659,8 +684,10 @@ extern int opennsl_l3_egress_multipath_add(
  *\brief Delete an Egress forwarding object from an Egress Multipath forwarding
  *       object.
  *
- *\description Delete an Egress forwarding object from an Egress Multipath
- *          forwarding object.
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    mpintf [IN]   L3 interface ID pointing to Egress multipath object.
@@ -676,8 +703,10 @@ extern int opennsl_l3_egress_multipath_delete(
 /***************************************************************************//** 
  *\brief Find an interface pointing to an Egress Multipath forwarding object.
  *
- *\description Find an interface pointing to Multipath Egress forwarding object
- *          with  specified unipath egress interfaces set. .
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    intf_count [IN]   Number of elements in intf_array.
@@ -696,10 +725,10 @@ extern int opennsl_l3_egress_multipath_find(
  *\brief Traverse through the multipath egress object table and run callback at
  *       each valid entry.
  *
- *\description Goes through multipath egress objects table and runs the user
- *          callback function  at each valid entry, passing back the
- *          information for that multipath egress object  entry (interface
- *          count and unipath egress objects array). .
+ *\description This API is deprecated and should not be used. This API group has
+ *          been deprecated by opennsl_l3_egress_ecmp_xxx APIs, which allow
+ *          the configuration of per ECMP group attributes such as dynamic
+ *          load balancing and resilient hashing.
  *
  *\param    unit [IN]   Unit number.
  *\param    trav_fn [IN]   Callback function

@@ -18,6 +18,7 @@
 
 #include <opennsl/types.h>
 #include <opennsl/switch.h>
+#include <shared/port.h>
 
 /***************************************************************************//** 
  *\brief Initialize the CoSQ subsystem.
@@ -1155,11 +1156,12 @@ extern int opennsl_cosq_priority_get(
  *          will destroy the default schedule hierarchies for all of ports and
  *          traffic will not flow on those ports until new schedule
  *          hierarchies for those ports are built.
- *          On the chip network switch API opennsl_cosq_gport_add return
- *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
- *          during init. On the chip network switch because of fixed hierarchy
- *          scheduler the scope of COSQ GPORT is not global but it is local to
- *          per unit. So we should not modify the MODID dynamically.
+ *          On the chips network switch and network switch API
+ *          opennsl_cosq_gport_add return OPENNSL_E_PARAM because of fixed
+ *          hierarchy. Gport tree is created during init. On the chips network
+ *          switch and network switch because of fixed hierarchy scheduler the
+ *          scope of COSQ GPORT is not global but it is local to per unit. So
+ *          we should not modify the MODID dynamically.
  *          Some device configuration support multiple queue groups on a
  *          physical port.
  *
@@ -1638,11 +1640,12 @@ extern int opennsl_cosq_gport_statistic_set(
  *          will destroy the default schedule hierarchies for all of ports and
  *          traffic will not flow on those ports until new schedule
  *          hierarchies for those ports are built.
- *          On the chip network switch API opennsl_cosq_gport_add return
- *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
- *          during init. On the chip network switch because of fixed hierarchy
- *          scheduler the scope of COSQ GPORT is not global but it is local to
- *          per unit. So we should not modify the MODID dynamically.
+ *          On the chips network switch and network switch API
+ *          opennsl_cosq_gport_add return OPENNSL_E_PARAM because of fixed
+ *          hierarchy. Gport tree is created during init. On the chips network
+ *          switch and network switch because of fixed hierarchy scheduler the
+ *          scope of COSQ GPORT is not global but it is local to per unit. So
+ *          we should not modify the MODID dynamically.
  *          Some device configuration support multiple queue groups on a
  *          physical port.
  *
@@ -1668,9 +1671,9 @@ extern int opennsl_cosq_gport_add(
  *
  *\description Deletes queue group. It could be a unicast, scheduler or a
  *          multicast queue group.
- *          On the chip network switch API opennsl_cosq_gport_delete return
- *          OPENNSL_E_PARAM because of fixed hierarchy. Gport tree is created
- *          during init.
+ *          On the chips network switch and network switch API
+ *          opennsl_cosq_gport_delete return OPENNSL_E_PARAM because of fixed
+ *          hierarchy. Gport tree is created during init.
  *
  *\param    unit [IN]   Unit number.
  *\param    gport [IN]   GPORT ID of the queue group that has to be deleted

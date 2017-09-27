@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -207,7 +207,51 @@ typedef enum _shr_rx_reason_e {
     _SHR_RX_OAM_MPLS_LMDM               = 155, /* MPLS LM/DM (RFC 6374) packet        */
     _SHR_RX_SAT                         = 156, /* OAM SAT pkt                         */
     _SHR_RX_SAMPLE_SOURCE_FLEX          = 157, /* Flexible sampled packets to CPU     */
-    _SHR_RX_REASON_COUNT                = 158  /* MUST BE LAST                        */
+    _SHR_RX_FLEX_SFLOW                  = 158, /* Flex Sflow?                         */
+    _SHR_RX_VXLT_MISS                   = 159, /* VLAN Translation miss packet        */
+    _SHR_RX_TUNNEL_DECAP_ECN_ERROR      = 160, /* Tunnel decap ECN error              */
+    _SHR_RX_TUNNEL_OBJECT_VALIDATION_FAIL = 161, /* Tunnel Object Validation Fail     */
+    _SHR_RX_L3_CPU                      = 162, /* L3 Copy to CPU                      */
+    _SHR_RX_TUNNEL_ADAPT_LOOKUP_MISS    = 163, /* Tunnel Adapt Lookup Miss Drop       */
+    _SHR_RX_PACKET_FLOW_SELECT_MISS     = 164, /* Packet Flow Select Miss             */
+    _SHR_RX_PROTECTION_DATA_DROP        = 165, /* Protection Data Drop                */
+    _SHR_RX_PACKET_FLOW_SELECT          = 166, /* Packet Flow Select                  */
+    _SHR_RX_OTHER_LOOKUP_MISS           = 167, /* Neither Source or Dest type of Lookup Miss */
+    _SHR_RX_INVALID_TPID                = 168, /* Invalid TPID                        */
+    _SHR_RX_MPLS_CONTROL_PACKET         = 169, /* MPLS Control Packet                 */
+    _SHR_RX_TUNNEL_TTL_ERROR            = 170, /* Tunnel TTL Error                    */
+    _SHR_RX_L2_HEADER_ERROR             = 171, /* L2 header                           */
+    _SHR_RX_OTHER_LOOKUP_HIT            = 172, /* Neither Source or Dest type of Lookup Hit */
+    _SHR_RX_L2_SRC_LOOKUP_MISS          = 173, /* L2 Source Lookup Miss */
+    _SHR_RX_L2_SRC_LOOKUP_HIT           = 174, /* L2 Source Lookup Hit */
+    _SHR_RX_L2_DST_LOOKUP_MISS          = 175, /* L2 Dest Lookup Miss */
+    _SHR_RX_L2_DST_LOOKUP_HIT           = 176, /* L2 Dest Lookup Hit */
+    _SHR_RX_L3_SRC_ROUTE_LOOKUP_MISS    = 177, /* L3 Source Route Lookup Miss */
+    _SHR_RX_L3_SRC_HOST_LOOKUP_MISS     = 178, /* L3 Source Host Lookup Miss */
+    _SHR_RX_L3_SRC_ROUTE_LOOKUP_HIT     = 179, /* L3 Source Route Lookup Hit */
+    _SHR_RX_L3_SRC_HOST_LOOKUP_HIT      = 180, /* L3 Source Host Lookup Hit */
+    _SHR_RX_L3_DST_ROUTE_LOOKUP_MISS    = 181, /* L3 Dest Route Lookup Miss */
+    _SHR_RX_L3_DST_HOST_LOOKUP_MISS     = 182, /* L3 Dest Host Lookup Miss */
+    _SHR_RX_L3_DST_ROUTE_LOOKUP_HIT     = 183, /* L3 Dest Route Lookup Hit */
+    _SHR_RX_L3_DST_HOST_LOOKUP_HIT      = 184, /* L3 Dest Host Lookup Hit */
+    _SHR_RX_VLAN_TRANSLATE1_LOOKUP1_MISS = 185, /* VLAN Translate1 Lookup1 Miss */
+    _SHR_RX_VLAN_TRANSLATE1_LOOKUP2_MISS = 186, /* VLAN Translate1 Lookup2 Miss */
+    _SHR_RX_MPLS_LOOKUP1_MISS            = 187, /* MPLS Lookup1 Miss */
+    _SHR_RX_MPLS_LOOKUP2_MISS            = 188, /* MPLS Lookup2 Miss */
+    _SHR_RX_L3_TUNNEL_LOOKUP_MISS        = 189, /* L3 Tunnel Lookup Miss */
+    _SHR_RX_VLAN_TRANSLATE2_LOOKUP1_MISS = 190, /* VLAN Translate2 Lookup1 Miss */
+    _SHR_RX_VLAN_TRANSLATE2_LOOKUP2_MISS = 191, /* VLAN Translate2 Lookup2 Miss */
+    _SHR_RX_L2_STU_FAIL                 = 192, /* L2 STU check fail                   */
+    _SHR_RX_SR_COUNTER_EXCEEDED         = 193, /* Seamless Redundancy(SR) -           */
+                                               /* Counter Threshold Exceeded          */
+    _SHR_RX_SR_COPY_TO_CPU_BIT0         = 194, /* Seamless Redundancy(SR) copy to CPU */
+                                               /* SR custom reason code bit 0         */
+    _SHR_RX_SR_COPY_TO_CPU_BIT1         = 195, /* SR custom reason code bit 1         */
+    _SHR_RX_SR_COPY_TO_CPU_BIT2         = 196, /* SR custom reason code bit 2         */
+    _SHR_RX_SR_COPY_TO_CPU_BIT3         = 197, /* SR custom reason code bit 3         */
+    _SHR_RX_SR_COPY_TO_CPU_BIT4         = 198, /* SR custom reason code bit 4         */
+    _SHR_RX_SR_COPY_TO_CPU_BIT5         = 199, /* SR custom reason code bit 5         */
+    _SHR_RX_REASON_COUNT                = 200  /* MUST BE LAST                        */
 } _shr_rx_reason_t;
 
 #define _SHR_RX_REASON_NAMES_INITIALIZER { \
@@ -368,7 +412,49 @@ typedef enum _shr_rx_reason_e {
     "Reserved0",                \
     "OAMMplsLmDM",              \
     "SAT",                      \
-    "SampleSourceFlex"          \
+    "SampleSourceFlex",         \
+    "FlexSflow",                \
+    "VxltMiss",                 \
+    "TunnelDecapEcnError",      \
+    "TunnelObjectValidationFail",   \
+    "L3Cpu",                    \
+    "TunnelAdaptLookupMiss",    \
+    "PacketFlowSelectMiss",     \
+    "ProtectionDataDrop",       \
+    "PacketFlowSelect",         \
+    "OtherLookupMiss",          \
+    "InvalidTpid",              \
+    "MplsControlPacket",        \
+    "TunnelTtlError",           \
+    "L2HeaderError",            \
+    "OtherLookupHit",           \
+    "L2SrcLookupMiss",          \
+    "L2SrcLookupHit",           \
+    "L2DstLookupMiss",          \
+    "L2DstLookupHit",           \
+    "L3SrcRouteLookupMiss",     \
+    "L3SrcHostLookupMiss",      \
+    "L3SrcRouteLookupHit",      \
+    "L3SrcHostLookupHit",       \
+    "L3DstRouteLookupMiss",     \
+    "L3DstHostLookupMiss",      \
+    "L3DstRouteLookupHit",      \
+    "L3DstHostLookupHit",       \
+    "MplsLookup1Miss",          \
+    "MplsLookup2Miss",          \
+    "L3TunnelLookupMiss",       \
+    "VlanTranslate1Lookup1Miss",\
+    "VlanTranslate1Lookup2Miss",\
+    "VlanTranslate2Lookup1Miss",\
+    "VlanTranslate2Lookup2Miss",\
+    "L2StuFail",                \
+    "SrCounterExceeded",        \
+    "SrCopyToCpuBit0",          \
+    "SrCopyToCpuBit1",          \
+    "SrCopyToCpuBit2",          \
+    "SrCopyToCpuBit3",          \
+    "SrCopyToCpuBit4",          \
+    "SrCopyToCpuBit5",          \
 }
 
 /*

@@ -1,21 +1,21 @@
 /*****************************************************************************
-  *
-  * Copyright © 2016 Broadcom.  The term "Broadcom" refers
-  * to Broadcom Limited and/or its subsidiaries.
-  *
-  * Licensed under the Apache License, Version 2.0 (the "License");
-  * you may not use this file except in compliance with the License.
-  *
-  * You may obtain a copy of the License at
-  * http://www.apache.org/licenses/LICENSE-2.0
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ***************************************************************************/
+ *
+ * Copyright © 2017 Broadcom.  The term "Broadcom" refers
+ * to Broadcom Limited and/or its subsidiaries.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ***************************************************************************/
 
 #include <stdio.h>
 #include <string.h>
@@ -112,124 +112,124 @@ int process_response(char *buffer, int length, int api_id)
     switch(api_id)
     {
       case 1:
-      {
-	cJSON_Print(json_result);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_result, "result");
+        {
+          cJSON_Print(json_result);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_result, "result");
 
-	printf("Result:%d.\n", json_result->valueint);
+          printf("Result:%d.\n", json_result->valueint);
 
-	break;
-      } /* End of case 1 */
+          break;
+        } /* End of case 1 */
 
       case 2:
-      {
-        cJSON *json_btm, *json_ebt, *json_es;
+        {
+          cJSON *json_btm, *json_ebt, *json_es;
 
-	json_ebt = cJSON_GetObjectItem(json_result, "enable-buffer-tracking");
-	JSON_VALIDATE_JSON_POINTER(json_ebt, "enable-buffer-tracking", -1);
-	cJSON_Print(json_ebt);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_ebt, "enable-buffer-tracking");
+          json_ebt = cJSON_GetObjectItem(json_result, "enable-buffer-tracking");
+          JSON_VALIDATE_JSON_POINTER(json_ebt, "enable-buffer-tracking", -1);
+          cJSON_Print(json_ebt);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_ebt, "enable-buffer-tracking");
 
-	json_btm = cJSON_GetObjectItem(json_result, "buffer-tracking-mode");
-	JSON_VALIDATE_JSON_POINTER(json_btm, "buffer-tracking-mode", -1);
-	cJSON_Print(json_btm);
-	JSON_VALIDATE_JSON_AS_STRING(json_btm, "buffer-tracking-mode", -1);
+          json_btm = cJSON_GetObjectItem(json_result, "buffer-tracking-mode");
+          JSON_VALIDATE_JSON_POINTER(json_btm, "buffer-tracking-mode", -1);
+          cJSON_Print(json_btm);
+          JSON_VALIDATE_JSON_AS_STRING(json_btm, "buffer-tracking-mode", -1);
 
-	json_es = cJSON_GetObjectItem(json_result, "enable-snapshots");
-	JSON_VALIDATE_JSON_POINTER(json_es, "enable-snapshots", -1);
-	cJSON_Print(json_es);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_es, "enable-snapshots");
+          json_es = cJSON_GetObjectItem(json_result, "enable-snapshots");
+          JSON_VALIDATE_JSON_POINTER(json_es, "enable-snapshots", -1);
+          cJSON_Print(json_es);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_es, "enable-snapshots");
 
-	printf("enable-buffer-tracking:%d\nbuffer-tracking-mode:%s\nenable-snapshots:%d.\n", json_ebt->valueint, json_btm->valuestring,json_es->valueint);
+          printf("enable-buffer-tracking:%d\nbuffer-tracking-mode:%s\nenable-snapshots:%d.\n", json_ebt->valueint, json_btm->valuestring,json_es->valueint);
 
-	break;
-      } /* End of case 2 */
+          break;
+        } /* End of case 2 */
 
       case 3:
-      {
-        cJSON *json_gport;
+        {
+          cJSON *json_gport;
 
-	json_gport = cJSON_GetObjectItem(json_result, "global-port-id");
-	JSON_VALIDATE_JSON_POINTER(json_gport, "global-port-id", -1);
-	cJSON_Print(json_gport);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_gport, "global-port-id");
+          json_gport = cJSON_GetObjectItem(json_result, "global-port-id");
+          JSON_VALIDATE_JSON_POINTER(json_gport, "global-port-id", -1);
+          cJSON_Print(json_gport);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_gport, "global-port-id");
 
-	printf("gport:%d.\n", json_gport->valueint);
+          printf("gport:%d.\n", json_gport->valueint);
 
-	break;
-      } /* End of case 3 */
+          break;
+        } /* End of case 3 */
 
       case 4:
-      {
-        cJSON *json_device, *json_revision;
+        {
+          cJSON *json_device, *json_revision;
 
-	json_device = cJSON_GetObjectItem(json_result, "device");
-	JSON_VALIDATE_JSON_POINTER(json_device, "device", -1);
-	cJSON_Print(json_device);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_device, "device");
+          json_device = cJSON_GetObjectItem(json_result, "device");
+          JSON_VALIDATE_JSON_POINTER(json_device, "device", -1);
+          cJSON_Print(json_device);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_device, "device");
 
-	json_revision = cJSON_GetObjectItem(json_result, "revision");
-	JSON_VALIDATE_JSON_POINTER(json_revision, "revision", -1);
-	cJSON_Print(json_revision);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_revision, "revision");
+          json_revision = cJSON_GetObjectItem(json_result, "revision");
+          JSON_VALIDATE_JSON_POINTER(json_revision, "revision", -1);
+          cJSON_Print(json_revision);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_revision, "revision");
 
-	printf("Device:%d Revision:%d.\n", json_device->valueint, json_revision->valueint);
+          printf("Device:%d Revision:%d.\n", json_device->valueint, json_revision->valueint);
 
-	break;
-      } /* End of case 4 */
+          break;
+        } /* End of case 4 */
 
       case 5:
-      {
-        cJSON *json_maxunits;
+        {
+          cJSON *json_maxunits;
 
-	json_maxunits = cJSON_GetObjectItem(json_result, "max-units");
-	JSON_VALIDATE_JSON_POINTER(json_maxunits, "max-units", -1);
-	cJSON_Print(json_maxunits);
-	JSON_VALIDATE_JSON_AS_NUMBER(json_maxunits, "max-units");
+          json_maxunits = cJSON_GetObjectItem(json_result, "max-units");
+          JSON_VALIDATE_JSON_POINTER(json_maxunits, "max-units", -1);
+          cJSON_Print(json_maxunits);
+          JSON_VALIDATE_JSON_AS_NUMBER(json_maxunits, "max-units");
 
-	printf("Max-Units:%d.\n", json_maxunits->valueint);
+          printf("Max-Units:%d.\n", json_maxunits->valueint);
 
-	break;
-      } /* End of case 5 */
+          break;
+        } /* End of case 5 */
       case 6:
-      {
-        cJSON *json_ge, *json_xe, *json_ce, *json_port, *json_cpu, *json_all;
+        {
+          cJSON *json_ge, *json_xe, *json_ce, *json_port, *json_cpu, *json_all;
 
-	json_ge = cJSON_GetObjectItem(json_result, "ge-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_ge, "ge-bmp", -1);
-	cJSON_Print(json_ge);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_ge, "ge-bmp");*/
+          json_ge = cJSON_GetObjectItem(json_result, "ge-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_ge, "ge-bmp", -1);
+          cJSON_Print(json_ge);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_ge, "ge-bmp");*/
 
-	json_xe = cJSON_GetObjectItem(json_result, "xe-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_xe, "xe-bmp", -1);
-	cJSON_Print(json_xe);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_xe, "xe-bmp");*/
+          json_xe = cJSON_GetObjectItem(json_result, "xe-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_xe, "xe-bmp", -1);
+          cJSON_Print(json_xe);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_xe, "xe-bmp");*/
 
-	json_ce = cJSON_GetObjectItem(json_result, "ce-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_ce, "ce-bmp", -1);
-	cJSON_Print(json_ce);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_ce, "ce-bmp");*/
+          json_ce = cJSON_GetObjectItem(json_result, "ce-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_ce, "ce-bmp", -1);
+          cJSON_Print(json_ce);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_ce, "ce-bmp");*/
 
-	json_port = cJSON_GetObjectItem(json_result, "port-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_port, "port-bmp", -1);
-	cJSON_Print(json_port);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_port, "port-bmp");*/
+          json_port = cJSON_GetObjectItem(json_result, "port-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_port, "port-bmp", -1);
+          cJSON_Print(json_port);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_port, "port-bmp");*/
 
-	json_cpu = cJSON_GetObjectItem(json_result, "cpu-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_cpu, "cpu-bmp", -1);
-	cJSON_Print(json_cpu);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_cpu, "cpu-bmp");*/
+          json_cpu = cJSON_GetObjectItem(json_result, "cpu-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_cpu, "cpu-bmp", -1);
+          cJSON_Print(json_cpu);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_cpu, "cpu-bmp");*/
 
-	json_all = cJSON_GetObjectItem(json_result, "all-bmp");
-	JSON_VALIDATE_JSON_POINTER(json_all, "all-bmp", -1);
-	cJSON_Print(json_all);
-/*	JSON_VALIDATE_JSON_AS_ARRAY(json_all, "all-bmp");*/
+          json_all = cJSON_GetObjectItem(json_result, "all-bmp");
+          JSON_VALIDATE_JSON_POINTER(json_all, "all-bmp", -1);
+          cJSON_Print(json_all);
+          /*	JSON_VALIDATE_JSON_AS_ARRAY(json_all, "all-bmp");*/
 
-	break;
-      } /* End of case 6 */
+          break;
+        } /* End of case 6 */
 
       default:
-	break;
+        break;
     } /* End of switch */
   }
 
@@ -317,123 +317,124 @@ int main(int argc, char *argv[]){
 
     if(example_read_user_choice(&choice) != OPENNSL_E_NONE)
     {
-        printf("Invalid option entered. Please re-enter.\n");
-        continue;
+      printf("Invalid option entered. Please re-enter.\n");
+      continue;
     }
 
     switch(choice)
     {
       case 1:
-      {
-        char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"configure-buffer-tracking\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	\
-			   \"enable-buffer-tracking\" : 1,\
-			   \"buffer-tracking-mode\" : \"peak\",\
-			   \"enable-snapshots\" : 1\
-			    },\
-	       \"id\" : 1\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"configure-buffer-tracking\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	\
+                                     \"enable-buffer-tracking\" : 1,\
+                                     \"buffer-tracking-mode\" : \"peak\",\
+                                     \"enable-snapshots\" : 1\
+        },\
+        \"id\" : 1\
+        }";
         strncpy (buffer, json_api_template, 1023);
         break;
-      } /* End of case 1 */
+        } /* End of case 1 */
 
       case 2:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-buffer-tracking\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	},\
-	       \"id\" : 2\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-buffer-tracking\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	},\
+                                     \"id\" : 2\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 2 */
+        } /* End of case 2 */
 
       case 3:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-global-portid\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	\
-			   \"local-port\" : 2\
-			    },\
-	       \"id\" : 3\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-global-portid\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	\
+                                     \"local-port\" : 2\
+        },\
+        \"id\" : 3\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 3 */
+        } /* End of case 3 */
 
       case 4:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-unit-info\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	},\
-	       \"id\" : 4\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-unit-info\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	},\
+                                     \"id\" : 4\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 4 */
+        } /* End of case 4 */
 
       case 5:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-max-units\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	},\
-	       \"id\" : 5\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-max-units\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	},\
+                                     \"id\" : 5\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 5 */
+        } /* End of case 5 */
 
       case 6:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-port-config\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	},\
-	       \"id\" : 6\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-port-config\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	},\
+                                     \"id\" : 6\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 6 */
+        } /* End of case 6 */
 
       case 7:
-      {
-	char *json_api_template = "{\
-	       \"jsonrpc\" : \"2.0\",\
-	       \"method\" : \"get-gportid\",\
-	       \"unit\" : 0,\
-	       \"params\" : {	\
-			   \"local-port\" : 2\
-			    },\
-	       \"id\" : 7\
-	}";
+        {
+          char *json_api_template = "{\
+                                     \"jsonrpc\" : \"2.0\",\
+                                     \"method\" : \"get-gportid\",\
+                                     \"unit\" : 0,\
+                                     \"params\" : {	\
+                                     \"local-port\" : 2\
+        },\
+        \"id\" : 7\
+        }";
         strncpy (buffer, json_api_template, 1023);
 
         break;
-      } /* End of case 6 */
+        } /* End of case 6 */
 
       case 0:
-      {
-        printf("Exiting the application.\n");
-        close(clientSocket);
-        exit(0);
-      }
+        {
+          printf("Exiting the application.\n");
+          close(clientSocket);
+          rv = opennsl_driver_exit();
+          exit(rv);
+        }
       default:
         continue;
     } /* End of switch */
@@ -449,25 +450,25 @@ int main(int argc, char *argv[]){
       temp = read (clientSocket, buffer, RPC_MAX_BUFFER_LEN);
       if (temp < 0)
       {
-	/* Read error. */
-	perror ("read");
-	printf("Error reading from the socket.\n");
-	break;
+        /* Read error. */
+        perror ("read");
+        printf("Error reading from the socket.\n");
+        break;
       }
       else if (temp == 0)
       {
-	printf("End of file reached.\n");
-	/* End-of-file. */
-	break;
+        printf("End of file reached.\n");
+        /* End-of-file. */
+        break;
       }
       else
       {
-	/* Data read. */
-	temp = process_response(buffer, temp, choice);
-	if(temp)
-	{
-	  printf("Error processing the response.\n");
-	}
+        /* Data read. */
+        temp = process_response(buffer, temp, choice);
+        if(temp)
+        {
+          printf("Error processing the response.\n");
+        }
       }
     }
   } /* End of while */

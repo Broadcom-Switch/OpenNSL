@@ -241,7 +241,13 @@ bin/xlr-dnx-ub14         - Broadcom DNX Switch Verification Kits with XLR CPU
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
-bin/ag-x86-deb80         - Agema AG7648 Switch System
+bin/ag-x86-xgs5-deb80         - Agema AG7648 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/ar-x86-xgs5-deb80         - Arista 7260CX3 Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2

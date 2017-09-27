@@ -65,11 +65,15 @@ typedef struct opennsl_mpls_egress_label_s {
     opennsl_mpls_egress_action_t action; /**< MPLS label action, relevant when
                                            OPENNSL_MPLS_EGRESS_LABEL_ACTION_VALID
                                            is set. */
+    int reserved1; 
+    int reserved2; 
     opennsl_failover_t egress_failover_id; /**< Failover object index for Egress
                                            Protection. */
     opennsl_if_t egress_failover_if_id; /**< Failover MPLS Tunnel identifier for
                                            Egress Protection. */
     int outlif_counting_profile;        /**< Out LIF counting profile */
+    opennsl_reserved_enum_t reserved3; 
+    opennsl_reserved_enum_t reserved4; 
 } opennsl_mpls_egress_label_t;
 
 #if defined(INCLUDE_L3)
@@ -78,9 +82,9 @@ typedef enum opennsl_mpls_port_match_e {
     OPENNSL_MPLS_PORT_MATCH_INVALID = 0, /**< Illegal. */
     OPENNSL_MPLS_PORT_MATCH_NONE = 1,   /**< No source match criteria. */
     OPENNSL_MPLS_PORT_MATCH_PORT = 2,   /**< {Module, Port} or Trunk. */
-    OPENNSL_MPLS_PORT_MATCH_PORT_VLAN = 3, /**< Mod/port/trunk + outer VLAN. */
-    OPENNSL_MPLS_PORT_MATCH_PORT_INNER_VLAN = 4, /**< Mod/port/trunk + inner VLAN. */
-    OPENNSL_MPLS_PORT_MATCH_PORT_VLAN_STACKED = 5, /**< Mod/port/trunk + outer/inner VLAN. */
+    OPENNSL_MPLS_PORT_MATCH_PORT_VLAN = 3, /**< Mod/port/trunk + outer VLAN ID. */
+    OPENNSL_MPLS_PORT_MATCH_PORT_INNER_VLAN = 4, /**< Mod/port/trunk + inner VLAN ID. */
+    OPENNSL_MPLS_PORT_MATCH_PORT_VLAN_STACKED = 5, /**< Mod/port/trunk + outer/inner VLAN ID. */
     OPENNSL_MPLS_PORT_MATCH_VLAN_PRI = 6, /**< Mod/port/trunk + VLAN-PRI + VLAN-CFI. */
     OPENNSL_MPLS_PORT_MATCH_LABEL = 7,  /**< MPLS label. */
     OPENNSL_MPLS_PORT_MATCH_LABEL_PORT = 8, /**< MPLS label + Mod/port/trunk. */
@@ -92,7 +96,11 @@ typedef enum opennsl_mpls_port_match_e {
                                            inner VLAN ID. */
     OPENNSL_MPLS_PORT_MATCH_SHARE = 13, /**< Multiple match criteria Share one
                                            MPLS logical port. */
-    OPENNSL_MPLS_PORT_MATCH_COUNT = 14  /**< Must be last. */
+    OPENNSL_MPLS_PORT_MATCH_PORT_VLAN_TAG = 14, /**< Mod/port/trunk + Outer VLAN-PRI +
+                                           Outer VLAN-CFI + Outer VLAN ID. */
+    OPENNSL_MPLS_PORT_MATCH_PORT_INNER_VLAN_TAG = 15, /**< Mod/port/trunk + Inner VLAN-PRI +
+                                           Inner VLAN-CFI + Inner VLAN ID. */
+    OPENNSL_MPLS_PORT_MATCH_COUNT = 16  /**< Must be last. */
 } opennsl_mpls_port_match_t;
 #endif
 
@@ -185,9 +193,12 @@ typedef enum opennsl_mpls_switch_action_e {
                                                           value by 1. */
 #endif
 #if defined(INCLUDE_L3)
+#endif
+#if defined(INCLUDE_L3)
 /** MPLS tunnel switch structure. */
 typedef struct opennsl_mpls_tunnel_switch_s {
     uint32 flags;                       /**< OPENNSL_MPLS_SWITCH_xxx. */
+    uint32 reserved1; 
     opennsl_mpls_label_t label;         /**< Incoming label value. */
     opennsl_mpls_label_t second_label;  /**< Incoming second label. */
     opennsl_gport_t port;               /**< Incoming port. */
@@ -218,8 +229,8 @@ typedef struct opennsl_mpls_tunnel_switch_s {
                                            ingress to egress XGS chip. */
     uint32 class_id;                    /**< Class ID */
     int inlif_counting_profile;         /**< In LIF counting profile */
-    int reserved1; 
     int reserved2; 
+    int reserved3; 
 } opennsl_mpls_tunnel_switch_t;
 #endif
 

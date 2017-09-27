@@ -53,10 +53,10 @@
                                                           be hashed. */
 /** Trunk group attributes structure. */
 typedef struct opennsl_trunk_info_s {
-    int psc;            /**< Port selection criteria. */
-    int dlf_index;      /**< DLF/broadcast port for trunk group. */
-    int mc_index;       /**< Multicast port for trunk group. */
-    int ipmc_index;     /**< IPMC port for trunk group. */
+    int psc;                            /**< Port selection criteria. */
+    int dlf_index;                      /**< DLF/broadcast port for trunk group. */
+    int mc_index;                       /**< Multicast port for trunk group. */
+    int ipmc_index;                     /**< IPMC port for trunk group. */
 } opennsl_trunk_info_t;
 
 /** Initialize a trunk chip information structure. */
@@ -301,7 +301,7 @@ extern int opennsl_trunk_destroy(
  *
  *\param    unit [IN]   Unit number.
  *\param    modid [IN]   Module ID
- *\param    port [IN]   Port ID.
+ *\param    gport [IN]
  *\param    tid [OUT]   Trunk ID
  *
  *\retval    OPENNSL_E_NONE Success
@@ -314,7 +314,7 @@ extern int opennsl_trunk_destroy(
 extern int opennsl_trunk_find(
     int unit, 
     opennsl_module_t modid, 
-    opennsl_port_t port, 
+    opennsl_gport_t gport, 
     opennsl_trunk_t *tid) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 

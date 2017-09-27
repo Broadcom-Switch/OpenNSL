@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -324,7 +324,8 @@ int main(int argc, char *argv[])
       case 0:
         {
           printf("Exiting the application.\n");
-          return OPENNSL_E_NONE;
+          rv = opennsl_driver_exit();
+          return rv;
         }
 
       default:

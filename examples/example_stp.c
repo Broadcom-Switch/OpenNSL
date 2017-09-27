@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -238,9 +238,9 @@ int main(int argc, char *argv[])
 
       case 0:
       {
-        printf("User has requested to quit the application.\n");
+        printf("Exiting the application.\n");
+        rv = opennsl_driver_exit();
         return rv;
-        break;
       }
       default:
         printf("Invalid option is entered. Please re-enter.\n");

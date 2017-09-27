@@ -44,7 +44,7 @@
 #define OPENNSL_FIELD_PKT_RES_L3MCKNOWN     0x7        /**< Known L3 multicast. */
 #define OPENNSL_FIELD_PKT_RES_L3UCKNOWN     0xa        /**< Known L3 unicast. */
 #define OPENNSL_FIELD_PKT_RES_L3UCUNKNOWN   0xb        /**< Unknown L3 unicast. */
-#define OPENNSL_FIELD_USER_NUM_UDFS 93         
+#define OPENNSL_FIELD_USER_NUM_UDFS 277        
 /** Opaque handle to a field entry. */
 typedef int opennsl_field_entry_t;
 
@@ -122,7 +122,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyInterfaceClassProcessingPort = 213, /**< Packet-processing Port Class ID */
     opennslFieldQualifyIngressClassField = 269, /**< Class Id assigned for packet by
                                            Ingress Stage */
-    opennslFieldQualifyCount = 620      /**< Always Last. Not a usable value. */
+    opennslFieldQualifyCount = 731      /**< Always Last. Not a usable value. */
 } opennsl_field_qualify_t;
 
 /** 
@@ -312,7 +312,7 @@ typedef enum opennsl_field_action_e {
                                            param1: Destination port. */
     opennslFieldActionIngSampleEnable = 315, /**< Set the SFLOW Ingress Sampling. */
     opennslFieldActionEgrSampleEnable = 316, /**< Set the SFLOW Egress Sampling. */
-    opennslFieldActionCount = 466       /**< Always Last. Not a usable value. */
+    opennslFieldActionCount = 510       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
 
 /** Holds which action to set width for, and the size of width to set */
@@ -415,7 +415,13 @@ extern int opennsl_field_detach(
  *          assigned, and may be useful when handles are desired to be the
  *          same across multiple chips. opennsl_field_group_wlan_xxx groups
  *          apply to WLAN tunnel terminated frames.  Incoming port can not be
- *          used as match criteria for WLAN traffic.
+ *          used as match criteria for WLAN traffic. It is recommended to use
+ *          opennsl_field_group_config_create API for the devices which
+ *          support Policy tables in PPD format (policy data stored in an
+ *          encoded manner). By default, all the actions supported in ingress
+ *          stage are considered if no action (ASET) is mentioned during group
+ *          create. And hence the group will be created with intra-slice mode
+ *          though QSET fits in single-wide mode.
  *
  *\param    unit [IN]   Unit number.
  *\param    qset [IN]   Field qualifier set
@@ -452,7 +458,13 @@ extern int opennsl_field_group_create(
  *          assigned, and may be useful when handles are desired to be the
  *          same across multiple chips. opennsl_field_group_wlan_xxx groups
  *          apply to WLAN tunnel terminated frames.  Incoming port can not be
- *          used as match criteria for WLAN traffic.
+ *          used as match criteria for WLAN traffic. It is recommended to use
+ *          opennsl_field_group_config_create API for the devices which
+ *          support Policy tables in PPD format (policy data stored in an
+ *          encoded manner). By default, all the actions supported in ingress
+ *          stage are considered if no action (ASET) is mentioned during group
+ *          create. And hence the group will be created with intra-slice mode
+ *          though QSET fits in single-wide mode.
  *
  *\param    unit [IN]   Unit number.
  *\param    qset [IN]   Field qualifier set
@@ -489,7 +501,13 @@ extern int opennsl_field_group_create_id(
  *          assigned, and may be useful when handles are desired to be the
  *          same across multiple chips. opennsl_field_group_wlan_xxx groups
  *          apply to WLAN tunnel terminated frames.  Incoming port can not be
- *          used as match criteria for WLAN traffic.
+ *          used as match criteria for WLAN traffic. It is recommended to use
+ *          opennsl_field_group_config_create API for the devices which
+ *          support Policy tables in PPD format (policy data stored in an
+ *          encoded manner). By default, all the actions supported in ingress
+ *          stage are considered if no action (ASET) is mentioned during group
+ *          create. And hence the group will be created with intra-slice mode
+ *          though QSET fits in single-wide mode.
  *
  *\param    unit [IN]   Unit number.
  *\param    qset [IN]   Field qualifier set
@@ -528,7 +546,13 @@ extern int opennsl_field_group_create_mode(
  *          assigned, and may be useful when handles are desired to be the
  *          same across multiple chips. opennsl_field_group_wlan_xxx groups
  *          apply to WLAN tunnel terminated frames.  Incoming port can not be
- *          used as match criteria for WLAN traffic.
+ *          used as match criteria for WLAN traffic. It is recommended to use
+ *          opennsl_field_group_config_create API for the devices which
+ *          support Policy tables in PPD format (policy data stored in an
+ *          encoded manner). By default, all the actions supported in ingress
+ *          stage are considered if no action (ASET) is mentioned during group
+ *          create. And hence the group will be created with intra-slice mode
+ *          though QSET fits in single-wide mode.
  *
  *\param    unit [IN]   Unit number.
  *\param    qset [IN]   Field qualifier set
@@ -2004,12 +2028,17 @@ extern int opennsl_field_qualify_OutPort_get(
     opennsl_port_t *mask) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
+ *\brief Get InPorts qualification match criteria from a field entry.
  *
+ *\description Get a match criteria for InPorts qualifier from a field entry. For
+ *          global groups, no pbmp is configured unless Inports is qualified
+ *          explicitly. It is done to qualify the rule even on new ports added
+ *          through flex operation.
  *
  *\param    unit [IN]   Unit number.
- *\param    entry [IN]
- *\param    data [OUT]
- *\param    mask [OUT]
+ *\param    entry [IN]   Field entry ID
+ *\param    data [OUT]   Reference to retrieve the Data associated
+ *\param    mask [OUT]   Reference to retrieve the Mask associated
  *
  *\retval   OPENNSL_E_xxx
  ******************************************************************************/

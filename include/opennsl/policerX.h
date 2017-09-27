@@ -24,7 +24,7 @@ typedef enum opennsl_policer_mode_e {
     opennslPolicerModeCommitted = 1,    
     opennslPolicerModePeak = 2,         
     opennslPolicerModeTrTcm = 3,        /**< RFC 2698 */
-    opennslPolicerModeTrTcmDs = 4,      /**< RFC 4115 */
+    opennslPolicerModeTrTcmDs = 4,      /**< RFC 4115, TrTcmModified */
 } opennsl_policer_mode_t;
 
 #define OPENNSL_POLICER_COLOR_BLIND     0x00000004 
@@ -33,12 +33,12 @@ typedef enum opennsl_policer_mode_e {
 typedef struct opennsl_policer_config_s {
     uint32 flags;                       /**< OPENNSL_POLICER_* Flags. */
     opennsl_policer_mode_t mode;        /**< Policer mode. */
-    uint32 ckbits_sec;                  /**< Committed rate. */
-    uint32 ckbits_burst;                /**< Committed burst size. */
-    uint32 pkbits_sec;                  /**< Peak rate. */
-    uint32 max_pkbits_sec;              /**< Maximum Peak rate. Applicable only
-                                           for cascade mode. */
-    uint32 pkbits_burst;                /**< Peak burst size. */
+    uint32 ckbits_sec;                  /**< Committed rate (kbits per sec). */
+    uint32 ckbits_burst;                /**< Committed burst size (kbits). */
+    uint32 pkbits_sec;                  /**< Peak rate (kbits per sec). */
+    uint32 max_pkbits_sec;              /**< Maximum Peak rate (kbits per sec),
+                                           Applicable only for cascade mode. */
+    uint32 pkbits_burst;                /**< Peak burst size (kbits). */
 } opennsl_policer_config_t;
 
 /***************************************************************************//** 

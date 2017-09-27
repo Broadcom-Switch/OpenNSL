@@ -57,9 +57,11 @@
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
-#endif /* defined(INCLUDE_L3) */
-
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#if defined(INCLUDE_L3)
+#endif
+#endif /* defined(INCLUDE_L3) */
 
 #include <opennsl/vxlanX.h>
 #endif /* __OPENNSL_VXLAN_H__ */

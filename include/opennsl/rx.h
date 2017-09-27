@@ -29,7 +29,9 @@
 #include <opennsl/tx.h>
 #include <opennsl/mirror.h>
 
-#define OPENNSL_RX_CHANNELS     4          /**< Max. number of RX channels. */
+#define OPENNSL_RX_CHANNELS         4          /**< Max. number of RX channels. */
+#define OPENNSL_CMICX_RX_CHANNELS   8          /**< Max. number of CMICx RX
+                                                  channels. */
 #define OPENNSL_RCO_F_COS_ACCEPT(cos)  (1 << (cos)) 
 #define OPENNSL_RCO_F_ALL_COS       0x40000000 
 /** Return values from PKT RX callout routines. */
@@ -84,7 +86,7 @@ typedef struct opennsl_rx_cfg_s {
                                            second. */
     int max_burst;                      /**< Max. packets to be received in a
                                            single burst. */
-    opennsl_rx_chan_cfg_t chan_cfg[OPENNSL_RX_CHANNELS]; /**< RX channel configuration. */
+    opennsl_rx_chan_cfg_t chan_cfg[OPENNSL_CMICX_RX_CHANNELS]; /**< RX channel configuration. */
     opennsl_rx_alloc_f rx_alloc;        /**< RX packet allocation function. */
     opennsl_rx_free_f rx_free;          /**< RX packet free function. */
     int32 flags;                        /**< See OPENNSL_RX_F_* definitions. */
@@ -257,6 +259,48 @@ typedef enum opennsl_rx_reason_e {
     opennslRxReasonOAMMplsLmDm = _SHR_RX_OAM_MPLS_LMDM, 
     opennslRxReasonSat = _SHR_RX_SAT,   
     opennslRxReasonSampleSourceFlex = _SHR_RX_SAMPLE_SOURCE_FLEX, 
+    opennslRxReasonFlexSflow = _SHR_RX_FLEX_SFLOW, 
+    opennslRxReasonVxltMiss = _SHR_RX_VXLT_MISS, 
+    opennslRxReasonTunnelDecapEcnError = _SHR_RX_TUNNEL_DECAP_ECN_ERROR, 
+    opennslRxReasonTunnelObjectValidationFail = _SHR_RX_TUNNEL_OBJECT_VALIDATION_FAIL, 
+    opennslRxReasonL3Cpu = _SHR_RX_L3_CPU, 
+    opennslRxReasonTunnelAdaptLookupMiss = _SHR_RX_TUNNEL_ADAPT_LOOKUP_MISS, 
+    opennslRxReasonPacketFlowSelectMiss = _SHR_RX_PACKET_FLOW_SELECT_MISS, 
+    opennslRxReasonProtectionDataDrop = _SHR_RX_PROTECTION_DATA_DROP, 
+    opennslRxReasonPacketFlowSelect = _SHR_RX_PACKET_FLOW_SELECT, 
+    opennslRxReasonOtherLookupMiss = _SHR_RX_OTHER_LOOKUP_MISS, 
+    opennslRxReasonInvalidTpid = _SHR_RX_INVALID_TPID, 
+    opennslRxReasonMplsControlPacket = _SHR_RX_MPLS_CONTROL_PACKET, 
+    opennslRxReasonTunnelTtlError = _SHR_RX_TUNNEL_TTL_ERROR, 
+    opennslRxReasonL2HeaderError = _SHR_RX_L2_HEADER_ERROR, 
+    opennslRxReasonOtherLookupHit = _SHR_RX_OTHER_LOOKUP_HIT, 
+    opennslRxReasonL2SrcLookupMiss = _SHR_RX_L2_SRC_LOOKUP_MISS, 
+    opennslRxReasonL2SrcLookupHit = _SHR_RX_L2_SRC_LOOKUP_HIT, 
+    opennslRxReasonL2DstLookupMiss = _SHR_RX_L2_DST_LOOKUP_MISS, 
+    opennslRxReasonL2DstLookupHit = _SHR_RX_L2_DST_LOOKUP_HIT, 
+    opennslRxReasonL3SrcRouteLookupMiss = _SHR_RX_L3_SRC_ROUTE_LOOKUP_MISS, 
+    opennslRxReasonL3SrcHostLookupMiss = _SHR_RX_L3_SRC_HOST_LOOKUP_MISS, 
+    opennslRxReasonL3SrcRouteLookupHit = _SHR_RX_L3_SRC_ROUTE_LOOKUP_HIT, 
+    opennslRxReasonL3SrcHostLookupHit = _SHR_RX_L3_SRC_HOST_LOOKUP_HIT, 
+    opennslRxReasonL3DstRouteLookupMiss = _SHR_RX_L3_DST_ROUTE_LOOKUP_MISS, 
+    opennslRxReasonL3DstHostLookupMiss = _SHR_RX_L3_DST_HOST_LOOKUP_MISS, 
+    opennslRxReasonL3DstRouteLookupHit = _SHR_RX_L3_DST_ROUTE_LOOKUP_HIT, 
+    opennslRxReasonL3DstHostLookupHit = _SHR_RX_L3_DST_HOST_LOOKUP_HIT, 
+    opennslRxReasonVlanTranslate1Lookup1Miss = _SHR_RX_VLAN_TRANSLATE1_LOOKUP1_MISS, 
+    opennslRxReasonVlanTranslate1Lookup2Miss = _SHR_RX_VLAN_TRANSLATE1_LOOKUP2_MISS, 
+    opennslRxReasonMplsLookup1Miss = _SHR_RX_MPLS_LOOKUP1_MISS, 
+    opennslRxReasonMplsLookup2Miss = _SHR_RX_MPLS_LOOKUP2_MISS, 
+    opennslRxReasonL3TunnelLookupMiss = _SHR_RX_L3_TUNNEL_LOOKUP_MISS, 
+    opennslRxReasonVlanTranslate2Lookup1Miss = _SHR_RX_VLAN_TRANSLATE2_LOOKUP1_MISS, 
+    opennslRxReasonVlanTranslate2Lookup2Miss = _SHR_RX_VLAN_TRANSLATE2_LOOKUP2_MISS, 
+    opennslRxReasonL2StuFail = _SHR_RX_L2_STU_FAIL, 
+    opennslRxReasonSrCounterExceeded = _SHR_RX_SR_COUNTER_EXCEEDED, 
+    opennslRxReasonSrCopyToCpuBit0 = _SHR_RX_SR_COPY_TO_CPU_BIT0, 
+    opennslRxReasonSrCopyToCpuBit1 = _SHR_RX_SR_COPY_TO_CPU_BIT1, 
+    opennslRxReasonSrCopyToCpuBit2 = _SHR_RX_SR_COPY_TO_CPU_BIT2, 
+    opennslRxReasonSrCopyToCpuBit3 = _SHR_RX_SR_COPY_TO_CPU_BIT3, 
+    opennslRxReasonSrCopyToCpuBit4 = _SHR_RX_SR_COPY_TO_CPU_BIT4, 
+    opennslRxReasonSrCopyToCpuBit5 = _SHR_RX_SR_COPY_TO_CPU_BIT5, 
     opennslRxReasonCount = _SHR_RX_REASON_COUNT 
 } opennsl_rx_reason_t;
 

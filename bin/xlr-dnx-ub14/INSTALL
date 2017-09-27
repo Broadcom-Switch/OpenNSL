@@ -49,7 +49,10 @@ Downloading and running OpenNSL sample applications
         # mknod /dev/linux-bcm-knet c 122 0
         # insmod linux-kernel-bde.ko
         # insmod linux-user-bde.ko
-        # insmod linux-bcm-knet.ko
+        # insmod linux-bcm-knet.ko ftmh_lb_key_ext=1
+          Note: The following additional parameters needs to be passed to "insmod linux-bcm-knet.ko" if required. Use "modinfo" command to list the valid parameters.
+          a) Pass "ftmh_lb_key_ext=1", if "system_ftmh_load_balancing_ext_mode" is enabled in config file.
+          b) Pass "ftmh_stacking_ext=1", if "stacking_enable" is set to "1" in config file.
 
 3) Install OpenNSL shared library. The destination directory to install the
    shared library depends on the host environment configuration.  Install the

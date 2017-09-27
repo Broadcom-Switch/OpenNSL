@@ -191,136 +191,167 @@ typedef enum opennsl_stat_val_e {
                                            (Broadcom-specific) */
     snmpOpenNSLRxCodeErrors = 125,      /**< Fabric RX 8b/10b code errors.
                                            (Broadcom-specific) */
-    snmpOpenNSLRxLlfcPrimary = 126,     /**< Fabric RX LLFC Primary.
+    snmpOpenNSLRxRsFecBitError = 126,   /**< Fabric RX RS-FEC bit error counter.
                                            (Broadcom-specific) */
-    snmpOpenNSLRxLlfcSecondary = 127,   /**< Fabric RX LLFC Secondary.
+    snmpOpenNSLRxRsFecSymbolError = 127, /**< RX RS-FEC symbol error counter.
                                            (Broadcom-specific) */
-    snmpOpenNSLCustomReceive0 = 128,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive1 = 129,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive2 = 130,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive3 = 131,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive4 = 132,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive5 = 133,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive6 = 134,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive7 = 135,    /**< Broadcom-specific */
-    snmpOpenNSLCustomReceive8 = 136,    /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit0 = 137,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit1 = 138,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit2 = 139,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit3 = 140,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit4 = 141,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit5 = 142,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit6 = 143,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit7 = 144,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit8 = 145,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit9 = 146,   /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit10 = 147,  /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit11 = 148,  /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit12 = 149,  /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit13 = 150,  /**< Broadcom-specific */
-    snmpOpenNSLCustomTransmit14 = 151,  /**< Broadcom-specific */
-    opennsl_spl_snmpDot3StatsInRangeLengthError = 152, /**< RFC 1284 */
-    opennsl_spl_snmpDot3OmpEmulationCRC8Errors = 153, /**< RFC 4837 */
-    opennsl_spl_snmpDot3MpcpRxGate = 154, /**< RFC 4837 */
-    opennsl_spl_snmpDot3MpcpRxRegister = 155, /**< RFC 4837 */
-    opennsl_spl_snmpDot3MpcpTxRegRequest = 156, /**< RFC 4837 */
-    opennsl_spl_snmpDot3MpcpTxRegAck = 157, /**< RFC 4837 */
-    opennsl_spl_snmpDot3MpcpTxReport = 158, /**< RFC 4837 */
-    opennsl_spl_snmpDot3EponFecCorrectedBlocks = 159, /**< RFC 4837 */
-    opennsl_spl_snmpDot3EponFecUncorrectableBlocks = 160, /**< RFC 4837 */
-    snmpOpenNSLPonInDroppedOctets = 161, /**< Broadcom-specific */
-    snmpOpenNSLPonOutDroppedOctets = 162, /**< Broadcom-specific */
-    snmpOpenNSLPonInDelayedOctets = 163, /**< Broadcom-specific */
-    snmpOpenNSLPonOutDelayedOctets = 164, /**< Broadcom-specific */
-    snmpOpenNSLPonInDelayedHundredUs = 165, /**< Broadcom-specific */
-    snmpOpenNSLPonOutDelayedHundredUs = 166, /**< Broadcom-specific */
-    snmpOpenNSLPonInFrameErrors = 167,  /**< Broadcom-specific */
-    snmpOpenNSLPonInOamFrames = 168,    /**< Broadcom-specific */
-    snmpOpenNSLPonOutOamFrames = 169,   /**< Broadcom-specific */
-    snmpOpenNSLPonOutUnusedOctets = 170, /**< Broadcom-specific */
-    snmpOpenNSLEtherStatsPkts9217to16383Octets = 171, /**< Broadcom-specific */
-    snmpOpenNSLReceivedPkts9217to16383Octets = 172, /**< Broadcom-specific */
-    snmpOpenNSLTransmittedPkts9217to16383Octets = 173, /**< Broadcom-specific */
-    snmpOpenNSLRxVlanTagFrame = 174,    /**< Broadcom-specific */
-    snmpOpenNSLRxDoubleVlanTagFrame = 175, /**< Broadcom-specific */
-    snmpOpenNSLTxVlanTagFrame = 176,    /**< Broadcom-specific */
-    snmpOpenNSLTxDoubleVlanTagFrame = 177, /**< Broadcom-specific */
-    snmpOpenNSLRxPFCControlFrame = 178, /**< PFC Receive Control Frame */
-    snmpOpenNSLTxPFCControlFrame = 179, /**< PFC Transmit Control Frame */
-    snmpOpenNSLRxPFCFrameXonPriority0 = 180, /**< Receive PFC Frame Priority 0 XON to
+    snmpOpenNSLRxLlfcPrimary = 128,     /**< Fabric RX LLFC Primary.
+                                           (Broadcom-specific) */
+    snmpOpenNSLRxLlfcSecondary = 129,   /**< Fabric RX LLFC Secondary.
+                                           (Broadcom-specific) */
+    snmpOpenNSLCustomReceive0 = 130,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive1 = 131,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive2 = 132,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive3 = 133,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive4 = 134,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive5 = 135,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive6 = 136,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive7 = 137,    /**< Broadcom-specific */
+    snmpOpenNSLCustomReceive8 = 138,    /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit0 = 139,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit1 = 140,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit2 = 141,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit3 = 142,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit4 = 143,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit5 = 144,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit6 = 145,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit7 = 146,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit8 = 147,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit9 = 148,   /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit10 = 149,  /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit11 = 150,  /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit12 = 151,  /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit13 = 152,  /**< Broadcom-specific */
+    snmpOpenNSLCustomTransmit14 = 153,  /**< Broadcom-specific */
+    opennsl_spl_snmpDot3StatsInRangeLengthError = 154, /**< RFC 1284 */
+    opennsl_spl_snmpDot3OmpEmulationCRC8Errors = 155, /**< RFC 4837 */
+    opennsl_spl_snmpDot3MpcpRxGate = 156, /**< RFC 4837 */
+    opennsl_spl_snmpDot3MpcpRxRegister = 157, /**< RFC 4837 */
+    opennsl_spl_snmpDot3MpcpTxRegRequest = 158, /**< RFC 4837 */
+    opennsl_spl_snmpDot3MpcpTxRegAck = 159, /**< RFC 4837 */
+    opennsl_spl_snmpDot3MpcpTxReport = 160, /**< RFC 4837 */
+    opennsl_spl_snmpDot3EponFecCorrectedBlocks = 161, /**< RFC 4837 */
+    opennsl_spl_snmpDot3EponFecUncorrectableBlocks = 162, /**< RFC 4837 */
+    snmpOpenNSLPonInDroppedOctets = 163, /**< Broadcom-specific */
+    snmpOpenNSLPonOutDroppedOctets = 164, /**< Broadcom-specific */
+    snmpOpenNSLPonInDelayedOctets = 165, /**< Broadcom-specific */
+    snmpOpenNSLPonOutDelayedOctets = 166, /**< Broadcom-specific */
+    snmpOpenNSLPonInDelayedHundredUs = 167, /**< Broadcom-specific */
+    snmpOpenNSLPonOutDelayedHundredUs = 168, /**< Broadcom-specific */
+    snmpOpenNSLPonInFrameErrors = 169,  /**< Broadcom-specific */
+    snmpOpenNSLPonInOamFrames = 170,    /**< Broadcom-specific */
+    snmpOpenNSLPonOutOamFrames = 171,   /**< Broadcom-specific */
+    snmpOpenNSLPonOutUnusedOctets = 172, /**< Broadcom-specific */
+    snmpOpenNSLEtherStatsPkts9217to16383Octets = 173, /**< Broadcom-specific */
+    snmpOpenNSLReceivedPkts9217to16383Octets = 174, /**< Broadcom-specific */
+    snmpOpenNSLTransmittedPkts9217to16383Octets = 175, /**< Broadcom-specific */
+    snmpOpenNSLRxVlanTagFrame = 176,    /**< Broadcom-specific */
+    snmpOpenNSLRxDoubleVlanTagFrame = 177, /**< Broadcom-specific */
+    snmpOpenNSLTxVlanTagFrame = 178,    /**< Broadcom-specific */
+    snmpOpenNSLTxDoubleVlanTagFrame = 179, /**< Broadcom-specific */
+    snmpOpenNSLRxPFCControlFrame = 180, /**< PFC Receive Control Frame */
+    snmpOpenNSLTxPFCControlFrame = 181, /**< PFC Transmit Control Frame */
+    snmpOpenNSLRxPFCFrameXonPriority0 = 182, /**< Receive PFC Frame Priority 0 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority1 = 181, /**< Receive PFC Frame Priority 1 XON to
+    snmpOpenNSLRxPFCFrameXonPriority1 = 183, /**< Receive PFC Frame Priority 1 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority2 = 182, /**< Receive PFC Frame Priority 2 XON to
+    snmpOpenNSLRxPFCFrameXonPriority2 = 184, /**< Receive PFC Frame Priority 2 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority3 = 183, /**< Receive PFC Frame Priority 3 XON to
+    snmpOpenNSLRxPFCFrameXonPriority3 = 185, /**< Receive PFC Frame Priority 3 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority4 = 184, /**< Receive PFC Frame Priority 4 XON to
+    snmpOpenNSLRxPFCFrameXonPriority4 = 186, /**< Receive PFC Frame Priority 4 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority5 = 185, /**< Receive PFC Frame Priority 5 XON to
+    snmpOpenNSLRxPFCFrameXonPriority5 = 187, /**< Receive PFC Frame Priority 5 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority6 = 186, /**< Receive PFC Frame Priority 6 XON to
+    snmpOpenNSLRxPFCFrameXonPriority6 = 188, /**< Receive PFC Frame Priority 6 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFrameXonPriority7 = 187, /**< Receive PFC Frame Priority 7 XON to
+    snmpOpenNSLRxPFCFrameXonPriority7 = 189, /**< Receive PFC Frame Priority 7 XON to
                                            XOFF */
-    snmpOpenNSLRxPFCFramePriority0 = 188, /**< Receive PFC Frame Priority 0 */
-    snmpOpenNSLRxPFCFramePriority1 = 189, /**< Receive PFC Frame Priority 1 */
-    snmpOpenNSLRxPFCFramePriority2 = 190, /**< Receive PFC Frame Priority 2 */
-    snmpOpenNSLRxPFCFramePriority3 = 191, /**< Receive PFC Frame Priority 3 */
-    snmpOpenNSLRxPFCFramePriority4 = 192, /**< Receive PFC Frame Priority 4 */
-    snmpOpenNSLRxPFCFramePriority5 = 193, /**< Receive PFC Frame Priority 5 */
-    snmpOpenNSLRxPFCFramePriority6 = 194, /**< Receive PFC Frame Priority 6 */
-    snmpOpenNSLRxPFCFramePriority7 = 195, /**< Receive PFC Frame Priority 7 */
-    snmpOpenNSLTxPFCFramePriority0 = 196, /**< Transmit PFC Frame Priority 0 */
-    snmpOpenNSLTxPFCFramePriority1 = 197, /**< Transmit PFC Frame Priority 1 */
-    snmpOpenNSLTxPFCFramePriority2 = 198, /**< Transmit PFC Frame Priority 2 */
-    snmpOpenNSLTxPFCFramePriority3 = 199, /**< Transmit PFC Frame Priority 3 */
-    snmpOpenNSLTxPFCFramePriority4 = 200, /**< Transmit PFC Frame Priority 4 */
-    snmpOpenNSLTxPFCFramePriority5 = 201, /**< Transmit PFC Frame Priority 5 */
-    snmpOpenNSLTxPFCFramePriority6 = 202, /**< Transmit PFC Frame Priority 6 */
-    snmpOpenNSLTxPFCFramePriority7 = 203, /**< Transmit PFC Frame Priority 7 */
-    opennsl_spl_snmpFcmPortClass3RxFrames = 204, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortClass3TxFrames = 205, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortClass3Discards = 206, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortClass2RxFrames = 207, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortClass2TxFrames = 208, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortClass2Discards = 209, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortInvalidCRCs = 210, /**< RFC 4044 */
-    opennsl_spl_snmpFcmPortDelimiterErrors = 211, /**< RFC 4044 */
-    snmpOpenNSLSampleIngressPkts = 212, /**< Total number of packets eligible to
+    snmpOpenNSLRxPFCFramePriority0 = 190, /**< Receive PFC Frame Priority 0 */
+    snmpOpenNSLRxPFCFramePriority1 = 191, /**< Receive PFC Frame Priority 1 */
+    snmpOpenNSLRxPFCFramePriority2 = 192, /**< Receive PFC Frame Priority 2 */
+    snmpOpenNSLRxPFCFramePriority3 = 193, /**< Receive PFC Frame Priority 3 */
+    snmpOpenNSLRxPFCFramePriority4 = 194, /**< Receive PFC Frame Priority 4 */
+    snmpOpenNSLRxPFCFramePriority5 = 195, /**< Receive PFC Frame Priority 5 */
+    snmpOpenNSLRxPFCFramePriority6 = 196, /**< Receive PFC Frame Priority 6 */
+    snmpOpenNSLRxPFCFramePriority7 = 197, /**< Receive PFC Frame Priority 7 */
+    snmpOpenNSLTxPFCFramePriority0 = 198, /**< Transmit PFC Frame Priority 0 */
+    snmpOpenNSLTxPFCFramePriority1 = 199, /**< Transmit PFC Frame Priority 1 */
+    snmpOpenNSLTxPFCFramePriority2 = 200, /**< Transmit PFC Frame Priority 2 */
+    snmpOpenNSLTxPFCFramePriority3 = 201, /**< Transmit PFC Frame Priority 3 */
+    snmpOpenNSLTxPFCFramePriority4 = 202, /**< Transmit PFC Frame Priority 4 */
+    snmpOpenNSLTxPFCFramePriority5 = 203, /**< Transmit PFC Frame Priority 5 */
+    snmpOpenNSLTxPFCFramePriority6 = 204, /**< Transmit PFC Frame Priority 6 */
+    snmpOpenNSLTxPFCFramePriority7 = 205, /**< Transmit PFC Frame Priority 7 */
+    opennsl_spl_snmpFcmPortClass3RxFrames = 206, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortClass3TxFrames = 207, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortClass3Discards = 208, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortClass2RxFrames = 209, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortClass2TxFrames = 210, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortClass2Discards = 211, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortInvalidCRCs = 212, /**< RFC 4044 */
+    opennsl_spl_snmpFcmPortDelimiterErrors = 213, /**< RFC 4044 */
+    snmpOpenNSLSampleIngressPkts = 214, /**< Total number of packets eligible to
                                            be sampled by Ingress Sampler.
                                            (Broadcom-specific) */
-    snmpOpenNSLSampleIngressSnapshotPkts = 213, /**< Total number of eligible packets when
+    snmpOpenNSLSampleIngressSnapshotPkts = 215, /**< Total number of eligible packets when
                                            the last packet was sampled by
                                            Ingress sampler. (Broadcom-specific) */
-    snmpOpenNSLSampleIngressSampledPkts = 214, /**< Total number of packets sampled by
+    snmpOpenNSLSampleIngressSampledPkts = 216, /**< Total number of packets sampled by
                                            Ingress sampler. (Broadcom-specific) */
-    snmpOpenNSLSampleFlexPkts = 215,    /**< Total number of packets eligible to
+    snmpOpenNSLSampleFlexPkts = 217,    /**< Total number of packets eligible to
                                            be sampled by Flex sampler enabled by
                                            IFP ingress sampling policy action.
                                            (Broadcom-specific) */
-    snmpOpenNSLSampleFlexSnapshotPkts = 216, /**< Total number of eligible packets when
+    snmpOpenNSLSampleFlexSnapshotPkts = 218, /**< Total number of eligible packets when
                                            the last packet was sampled by Flex
                                            sampler enabled by IFP ingress
                                            sampling policy action.
                                            (Broadcom-specific) */
-    snmpOpenNSLSampleFlexSampledPkts = 217, /**< Total number of packets sampled by
+    snmpOpenNSLSampleFlexSampledPkts = 219, /**< Total number of packets sampled by
                                            Flex sampler enabled by IFP ingress
                                            sampling policy action.
                                            (Broadcom-specific) */
-    snmpOpenNSLEgressProtectionDataDrop = 218, /**< Egress Protection data drop in EPIPE.
+    snmpOpenNSLEgressProtectionDataDrop = 220, /**< Egress Protection data drop in EPIPE.
                                            (Broadcom-specific) */
-    snmpOpenNSLTxE2ECCControlFrames = 219, /**< Total number of End to End Congestion
+    snmpOpenNSLTxE2ECCControlFrames = 221, /**< Total number of End to End Congestion
                                            Control(E2E-CC) Head of line(HOL)
                                            packets or DMVoQ flow control packets
                                            transmitted on each of the ports.
                                            (Broadcom-specific) */
-    snmpOpenNSLE2EHOLDropPkts = 220,    /**< Total number of packets dropped due
+    snmpOpenNSLE2EHOLDropPkts = 222,    /**< Total number of packets dropped due
                                            to E2EHOL (End to End Head of Line)
                                            drop status. (Broadcom-specific) */
-    opennsl_spl_snmpEtherStatsTxCRCAlignErrors = 221, /**< RFC 1757 (EtherStat) */
-    opennsl_spl_snmpEtherStatsTxJabbers = 222, /**< RFC 1757 (EtherStat) */
-    opennsl_spl_snmpValCount = 223      
+    opennsl_spl_snmpEtherStatsTxCRCAlignErrors = 223, /**< RFC 1757 (EtherStat) */
+    opennsl_spl_snmpEtherStatsTxJabbers = 224, /**< RFC 1757 (EtherStat) */
+    snmpOpenNSLMacMergeTxFrag = 225,    /**< Number of additional mPackets
+                                           transmitted due to preemption. */
+    snmpOpenNSLMacMergeTxVerifyFrame = 226, /**< Number of transmitted verify
+                                           mPackets. */
+    snmpOpenNSLMacMergeTxReplyFrame = 227, /**< Number of transmitted reply mPackets. */
+    snmpOpenNSLMacMergeRxFrameAssErrors = 228, /**< Number of packets with reassembly
+                                           errors in MAC receive direction. */
+    snmpOpenNSLMacMergeRxFrameSmdErrors = 229, /**< Number of received packets rejected
+                                           due to unknown SMD value or arriving
+                                           with an SMD-C when no packet is in
+                                           progress. */
+    snmpOpenNSLMacMergeRxFrameAss = 230, /**< Number of received packets that were
+                                           successfully reassembled. */
+    snmpOpenNSLMacMergeRxFrag = 231,    /**< Number of additional mPackets
+                                           received due to preemption. */
+    snmpOpenNSLMacMergeRxVerifyFrame = 232, /**< Number of received verify mPackets. */
+    snmpOpenNSLMacMergeRxReplyFrame = 233, /**< Number of received reply mPackets. */
+    snmpOpenNSLMacMergeRxFinalFragSizeError = 234, /**< Number of the received mPackets which
+                                           are less than non-final fragments
+                                           size. */
+    snmpOpenNSLMacMergeRxFragSizeError = 235, /**< Number of received mPackets which are
+                                           less than final fragments size. */
+    snmpOpenNSLMacMergeRxDiscard = 236, /**< Number of all discarded mPackets
+                                           because of error conditions. */
+    snmpOpenNSLMacMergeHoldCount = 237, /**< Number of hold request primitive
+                                           events. */
+    snmpOpenNSLRxBipErrorCount = 238,   /**< RX BER and BIP counter. */
+    opennsl_spl_snmpValCount = 239      
 } opennsl_stat_val_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -361,7 +392,7 @@ extern int opennsl_stat_clear(
  *\brief Synchronize software counters with hardware.
  *
  *\description Force an immediate counter update. Ensures that all hardware
- *          counter  activity prior  to the call to opennsl_stat_sync() is
+ *          counter  activity prior to the call to opennsl_stat_sync() is
  *          reflected in all opennsl_stat_get() calls that come after the call
  *          to opennsl_stat_sync().
  *
@@ -378,10 +409,10 @@ extern int opennsl_stat_sync(
  *\brief Get the specified statistics from the device.
  *
  *\description The native statistics are 64-bits wide; use opennsl_stat_get32()
- *          for 32-bit  statistics. Some counters are implemented on a given
- *          port only when it is  operating in a specific mode, for example,
- *          10 or 100, and not 1000 Mbps.  If the counter is not implemented
- *          on the specified port, or on the port  given its current operating
+ *          for 32-bit statistics. Some counters are implemented on a given
+ *          port only when it is operating in a specific mode, for example, 10
+ *          or 100, and not 1000 Mbps. If the counter is not implemented on
+ *          the specified port, or on the port given its current operating
  *          mode, OPENNSL_E_UNAVAIL is returned.
  *
  *\param    unit [IN]   Unit number.
@@ -406,10 +437,10 @@ extern int opennsl_stat_get(
  *\brief Get the specified statistics from the device.
  *
  *\description The native statistics are 64-bits wide; use opennsl_stat_get32()
- *          for 32-bit  statistics. Some counters are implemented on a given
- *          port only when it is  operating in a specific mode, for example,
- *          10 or 100, and not 1000 Mbps.  If the counter is not implemented
- *          on the specified port, or on the port  given its current operating
+ *          for 32-bit statistics. Some counters are implemented on a given
+ *          port only when it is operating in a specific mode, for example, 10
+ *          or 100, and not 1000 Mbps. If the counter is not implemented on
+ *          the specified port, or on the port given its current operating
  *          mode, OPENNSL_E_UNAVAIL is returned.
  *
  *\param    unit [IN]   Unit number.
@@ -489,7 +520,7 @@ extern int opennsl_stat_multi_get32(
  *       incorrect.
  *
  *\description Same as opennsl_stat_get(), value returned is per-port software
- *          accumulated  counter synced with the hardware counter.
+ *          accumulated counter synced with the hardware counter.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Zero-based device or logical port number
@@ -514,7 +545,7 @@ extern int opennsl_stat_sync_get32(
  *       specified device.
  *
  *\description Same as opennsl_stat_multi_get(), value returned is per-port
- *          software accumulated  counter synced with the hardware counter.
+ *          software accumulated counter synced with the hardware counter.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Zero-based device or logical port number
@@ -631,14 +662,14 @@ extern int opennsl_stat_group_mode_id_destroy(
  *\brief Create Counter Entries group for given accounting object.
  *
  *\description This API will reserve HW counter resources as per given group mode
- *          and  Accounting object and make system ready for further stat
+ *          and Accounting object and make system ready for further stat
  *          collection action based on stat counter ID.
- *          This API will be deprecated in the second half of 2016.  
+ *          This API will be deprecated in the second half of 2016.
  *          opennsl_stat_custom_group_create (after creating mode id using
  *          opennsl_stat_group_mode_id_config_create API) should be used to
  *          create stat groups.
  *          However opennsl_stat_group_destroy will continue to be used to
- *          destroy groups  created using the new
+ *          destroy groups created using the new
  *          opennsl_stat_custom_group_create API.
  *
  *\param    unit [IN]   Unit number.
@@ -660,7 +691,7 @@ extern int opennsl_stat_group_create(
  *\brief Destroy counter Entries group.
  *
  *\description This API will release HW counter resources as per given counter ID
- *          and makes  system unavailable for any further stat collection
+ *          and makes system unavailable for any further stat collection
  *          action based on stat counter id.
  *          Tomahawk supports stat_counter_id range from 1 to 0x26000.
  *

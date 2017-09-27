@@ -78,6 +78,7 @@ phy_xaui_rx_polarity_flip_xe77=1
 portmap_27=27:10
 portmap_19=19:10
 scache_filename=/tmp/scache
+stable_size=0x5500000
 portmap_60=59:10
 portmap_52=51:10
 portmap_44=43:10

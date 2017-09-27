@@ -1,6 +1,6 @@
 /*********************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -36,8 +36,10 @@ typedef struct _shr_port_ability_s {
     _shr_port_mode_t loopback;
     _shr_port_mode_t flags;
     _shr_port_mode_t eee;
+    _shr_port_mode_t rsvd;
     _shr_pa_encap_t  encap;
     _shr_port_mode_t fec;
+    _shr_port_mode_t channel;
 } _shr_port_ability_t;
 
 #define _SHR_PA_ABILITY_ALL     (0xffffffff)
@@ -120,12 +122,23 @@ typedef struct _shr_port_ability_s {
 
 /*
  * Defines:
+ *      _SHR_PA_CHANNEL_*
+ * Purpose:
+ *      Defines for CHANNEL abilities.
+ */
+
+#define _SHR_PA_CHANNEL_LONG     (1 << 0)       /* Channel is long   */
+#define _SHR_PA_CHANNEL_SHORT    (1 << 1)       /* Channel is short  */
+
+/*
+ * Defines:
  *      _SHR_PA_MEDIUM_*
  * Purpose:
  *      Defines for port medium modes.
  */
 #define _SHR_PA_MEDIUM_COPPER   (1 << 0)
 #define _SHR_PA_MEDIUM_FIBER    (1 << 1)
+#define _SHR_PA_MEDIUM_BACKPLANE (1 << 2)
 
 /*
  * Defines:

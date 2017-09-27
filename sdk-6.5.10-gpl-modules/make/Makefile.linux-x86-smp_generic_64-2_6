@@ -1,0 +1,34 @@
+#
+#  Unless you and Broadcom execute a separate written software license
+#  agreement governing use of this software, this software is licensed to
+#  you under the terms of the GNU General Public License version 2 (the
+#  "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
+#  with the following added to such license:
+#  
+#  As a special exception, the copyright holders of this software give
+#  you permission to link this software with independent modules, and to
+#  copy and distribute the resulting executable under terms of your
+#  choice, provided that you also meet, for each linked independent
+#  module, the terms and conditions of the license of that module.  An
+#  independent module is a module which is not derived from this
+#  software.  The special exception does not apply to any modifications
+#  of the software.
+#
+# $Id: Makefile.linux-x86-smp_generic_64-2_6,v 1.5 Broadcom SDK $
+# $Copyright: (c) 2008 Broadcom Corp.
+# All Rights Reserved.$
+
+CFGFLAGS += -DLONGS_ARE_64BITS
+CFGFLAGS += -DPTRS_ARE_64BITS
+CFGFLAGS += -DPHYS_ADDRS_ARE_64BITS
+CFGFLAGS += -DSAL_SPL_LOCK_ON_IRQ
+
+include ${SDK}/make/Makefile.linux-x86-generic-common-2_6
+
+ifeq (,$(KFLAGS))
+KFLAGS := -nostdinc -isystem $(SYSINC) -I$(KERNDIR)/include -I$(KERNDIR)/arch/x86/include -include $(AUTOCONF) -D__KERNEL__ -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -m64 -mtune=generic -mno-red-zone -mcmodel=kernel -funit-at-a-time -maccumulate-outgoing-args -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -fno-stack-protector -fomit-frame-pointer -g -Wdeclaration-after-statement -Wno-pointer-sign
+endif
+
+KFLAGS += -I$(LINUX_INCLUDE)/uapi -I$(LINUX_INCLUDE)/generated/uapi -I$(KERNDIR)/arch/x86/include/generated -I$(KERNDIR)/arch/x86/include/uapi -I$(KERNDIR)/arch/x86/include/generated/uapi
+
+include ${SDK}/make/Makefile.linux-x86-common-2_6

@@ -1,6 +1,6 @@
 /*********************************************************************
 *
-* (C) Copyright Broadcom Corporation 2013-2016
+* (C) Copyright Broadcom Corporation 2013-2017
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -47,6 +47,13 @@ typedef struct opennsl_config_s
 * \return OPENNSL_E_XXX     OpenNSL API return code
 ********************************************************************/
 extern int opennsl_driver_init(opennsl_init_t *init);
+
+/*****************************************************************//**
+* \brief Function to free up the resources and exit the driver
+*
+* \return OPENNSL_E_XXX     OpenNSL API return code
+********************************************************************/
+extern int opennsl_driver_exit();
 
 /**************************************************************************//**
  * \brief To get platform boot flags

@@ -1,0 +1,2 @@
+Before you can use the libopennsl.so.1 in this directory you must first issue
+the command `gunzip libopennsl.so.1.gz`.

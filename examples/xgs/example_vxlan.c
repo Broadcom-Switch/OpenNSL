@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * (C) Copyright Broadcom Corporation 2013-2016
+ * (C) Copyright Broadcom Corporation 2013-2017
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -737,6 +737,7 @@ int main(int argc, char *argv[])
   int choice;
   int index = 0;
   int unit = DEFAULT_UNIT;
+  int aport_1, aport_2, nport;
 
   if(strcmp(argv[0], "gdb") == 0)
   {
@@ -765,8 +766,41 @@ int main(int argc, char *argv[])
            rv, opennsl_errmsg(rv));
   }
 
+  printf("1. Enter Access port 1\n");
+  do
+  {
+    if(example_read_user_choice(&aport_1) != OPENNSL_E_NONE)
+    {
+      printf("Invalid port number entered. Please re-enter.\n");
+      continue;
+    }
+    break;
+  } while(1);
+
+  printf("2. Enter Access port 2\n");
+  do
+  {
+    if(example_read_user_choice(&aport_2) != OPENNSL_E_NONE)
+    {
+      printf("Invalid port number entered. Please re-enter.\n");
+      continue;
+    }
+    break;
+  } while(1);
+
+  printf("3. Enter Network port\n");
+  do
+  {
+    if(example_read_user_choice(&nport) != OPENNSL_E_NONE)
+    {
+      printf("Invalid port number entered. Please re-enter.\n");
+      continue;
+    }
+    break;
+  } while(1);
+
   /* Configure VXLAN settings for access and network ports */
-  example_vxlan(1, 2, 3);
+  example_vxlan(aport_1, aport_2, nport);
 
   printf("\r\nVxLAN configuration is done successfully\n");
 
@@ -795,7 +829,8 @@ int main(int argc, char *argv[])
       case 0:
       {
         printf("Exiting the application.\n");
-        return OPENNSL_E_NONE;
+        rv = opennsl_driver_exit();
+        return rv;
       }
       default:
         break;

@@ -109,7 +109,11 @@ extern void opennsl_qos_map_t_init(
  *          L3 flags: OPENNSL_QOS_MAP_L3 - create L3 type of map - defaults to
  *          IPV4 map. For Trident2plus,                  this flag will create
  *          both IPV4 map and outer tag map. OPENNSL_QOS_MAP_IPV4 - create
- *          IPV4 L3 map. OPENNSL_QOS_MAP_IPV6 - create IPV6 L3 map.
+ *          IPV4 L3 map. OPENNSL_QOS_MAP_IPV6 - create IPV6 L3 map. For the
+ *          network switch, network switch and network switch families, these
+ *          flags are not supported. To configure the ingress DSCP mapping,
+ *          user can use port API opennsl_port_dscp_map_set/get() to control
+ *          related DSCP mapping.
  *          FCOE flags: OPENNSL_QOS_MAP_VFT - create a FCOE VFT map.
  *          OPENNSL_QOS_MAP_VSAN - create a FCOE VSAN map.
  *          MPLS OPENNSL_QOS_MAP_MPLS - create an MPLS type of map.
@@ -252,6 +256,8 @@ extern int opennsl_qos_map_delete(
  *\description This API associates a GPORT with an ingress and an egress QoS map.
  *          A map ID of zero  will clear the existing QoS map and a map ID of
  *          -1 will leave the existing map unchanged.
+ *          If egress map id is zero, VLAN priority map will be restored to
+ *          default (Trident2+), or be cleared to all-zero (other devices).
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   GPORT identifier

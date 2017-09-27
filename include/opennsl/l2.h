@@ -64,6 +64,14 @@ typedef struct opennsl_l2_addr_s {
     opennsl_fabric_distribution_t reserved7; 
     int reserved8; 
     int reserved9; 
+    uint32 reserved10; 
+    uint32 reserved11; 
+    opennsl_flow_logical_field_t reserved12[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    uint32 reserved13; 
+    opennsl_pbmp_t reserved14; 
+    opennsl_tsn_flowset_t reserved15; 
+    opennsl_tsn_sr_flowset_t reserved16; 
+    opennsl_policer_t reserved17; 
 } opennsl_l2_addr_t;
 
 #define OPENNSL_L2_CACHE_CPU        0x00000001 /**< Packet is copied to CPU. */
@@ -680,6 +688,10 @@ extern int opennsl_l2_cache_size_get(
  *          OPENNSL_L2_CACHE_BPDU is used  to set the BPDU addresses on device
  *          and the zero BPDU address is used  for the special process to
  *          indicate a BPDU address delete process.
+ *          For network switch, OPENNSL_L2_CACHE_SETPRI and
+ *          OPENNSL_L2_CACHE_BPDU cannot be used together while
+ *          OPENNSL_L2_CACHE_CPU and OPENNSL_L2_CACHE_DISCARD are not set.
+ *          Instead, a FP entry can be used to set PRI field for BPDU packet.
  *          Take note of the preloaded entries as defined in.
  *
  *\param    unit [IN]   Unit number.

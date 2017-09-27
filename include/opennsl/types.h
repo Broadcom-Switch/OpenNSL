@@ -305,6 +305,13 @@ typedef struct opennsl_priority_mapping_s {
                                        policer */
 } opennsl_priority_mapping_t;
 
+/** Flow Logical Field. */
+typedef struct opennsl_flow_logical_field_s {
+    uint32 reserved1; 
+    uint32 reserved2; 
+} opennsl_flow_logical_field_t;
+
+#define OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS 20         
 #if defined(LE_HOST)
 #else
 #define opennsl_htonl(_l)       (_l)       
@@ -458,6 +465,12 @@ typedef struct opennsl_vlan_action_set_s {
     uint32 class_id;                    /**< Class ID */
     uint32 flags;                       /**< OPENNSL_VLAN_ACTION_SET_xxx. */
 } opennsl_vlan_action_set_t;
+
+/** TSN flow set */
+typedef int opennsl_tsn_flowset_t;
+
+/** SR flow set */
+typedef int opennsl_tsn_sr_flowset_t;
 
 #define OPENNSL_FIELD_STAT_ID_SET(_stat_id, _proc, _ctr)  _SHR_FIELD_STAT_ID_SET(_stat_id, _proc, _ctr) 
 #define OPENNSL_FIELD_STAT_ID_COUNTER_GET(_stat_id)  _SHR_FIELD_STAT_ID_COUNTER_GET(_stat_id) 

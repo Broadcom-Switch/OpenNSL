@@ -647,11 +647,10 @@ typedef struct opennsl_switch_pkt_trace_info_s {
  *       packets ingress processing information.
  *
  *\description Generate a visibility packet. Read visibility packet process data
- *          from PTR_RESULTS_BUFFER_IVP, ISW1, and ISW2 then store the raw
- *          data into opennsl_pkt_trace_info_t*  Last, convert the raw data
- *          into abstracted format and store into opennsl_pkt_trace_info_t*
- *          These profile options are used to set loopback headers
- *          cpu_pkt_profile field.
+ *          for chip and store the raw data into opennsl_pkt_trace_info_t*
+ *          Last, convert the raw data into abstracted format and store into
+ *          opennsl_pkt_trace_info_t* These profile options are used to set
+ *          loopback headers cpu_pkt_profile field.
  *
  *\param    unit [IN]   Unit number.
  *\param    options [IN]   FLAGS to select pre-configured cpu_pkt_profile register

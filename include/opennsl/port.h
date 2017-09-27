@@ -107,6 +107,7 @@ typedef _shr_port_ability_t opennsl_port_ability_t;
 #define OPENNSL_PORT_ABILITY_INTERFACE_CGMII _SHR_PA_INTF_CGMII 
 #define OPENNSL_PORT_ABILITY_MEDIUM_COPPER  _SHR_PA_MEDIUM_COPPER 
 #define OPENNSL_PORT_ABILITY_MEDIUM_FIBER   _SHR_PA_MEDIUM_FIBER 
+#define OPENNSL_PORT_ABILITY_MEDIUM_BACKPLANE _SHR_PA_MEDIUM_BACKPLANE 
 #define OPENNSL_PORT_ABILITY_LB_NONE        _SHR_PA_LB_NONE 
 #define OPENNSL_PORT_ABILITY_LB_MAC         _SHR_PA_LB_MAC 
 #define OPENNSL_PORT_ABILITY_LB_PHY         _SHR_PA_LB_PHY 
@@ -139,6 +140,8 @@ typedef _shr_port_ability_t opennsl_port_ability_t;
                                                           10GB-KX4. */
 #define OPENNSL_PORT_ABILITY_EEE_10GB_KR    _SHR_PA_EEE_10GB_KR /**< EEE ability at
                                                           10GB-KR. */
+#define OPENNSL_PORT_ABILITY_CHANNEL_LONG   _SHR_PA_CHANNEL_LONG /**< port is long channel. */
+#define OPENNSL_PORT_ABILITY_CHANNEL_SHORT  _SHR_PA_CHANNEL_SHORT /**< port is short channel. */
 /** 
  * Port ability mask.
  * 
@@ -294,10 +297,10 @@ extern int opennsl_port_probe(
  *          It is the responsibility of the application to make the necessary
  *          changes to all other configuration settings  such as VLANS,
  *          multicast groups, and trunk configuration.
- *          for Trident2+, Apache, Firebolt, Maverick and its variants
- *          (portmod switches), a port needs to be removed from linkscan  if
- *          linkscan is enabled on the port before detaching it
- *          (opennsl_port_detach). .
+ *          For portmod supported devices, such as Tomahawk2, Trident2+,
+ *          Apache, Firebolt, Maverick, and and these variants,  a port needs
+ *          to be removed from linkscan if linkscan is enabled on the port
+ *          before detaching it (opennsl_port_detach).  .
  *
  *\param    unit [IN]   Unit number.
  *\param    pbmp [IN]   Port bit map of ports to be detached
@@ -743,6 +746,9 @@ extern int opennsl_port_dscp_map_mode_get(
  *          designated {DSCP(7:2):ECN(1:0)}.
  *          A port value of -1 or gport type for system configuration will
  *          configure all ports.
+ *          On devices network switch and network switch, before flexport
+ *          operation, port dscp map set must be cleared on the port to be
+ *          flexed.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number or -1 to setup global
@@ -797,6 +803,9 @@ extern int opennsl_port_dscp_map_set(
  *          designated {DSCP(7:2):ECN(1:0)}.
  *          A port value of -1 or gport type for system configuration will
  *          configure all ports.
+ *          On devices network switch and network switch, before flexport
+ *          operation, port dscp map set must be cleared on the port to be
+ *          flexed.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number or -1 to setup global
@@ -1130,6 +1139,10 @@ typedef _shr_port_if_t opennsl_port_if_t;
                                                   interface */
 #define OPENNSL_PORT_IF_LBG         _SHR_PORT_IF_LBG /**< Link bonding interface */
 #define OPENNSL_PORT_IF_CAUI4       _SHR_PORT_IF_CAUI4 /**< CAUI4 100G interface */
+#define OPENNSL_PORT_IF_OAMP        _SHR_PORT_IF_OAMP 
+#define OPENNSL_PORT_IF_OLP         _SHR_PORT_IF_OLP 
+#define OPENNSL_PORT_IF_ERP         _SHR_PORT_IF_ERP 
+#define OPENNSL_PORT_IF_SAT         _SHR_PORT_IF_SAT 
 #define OPENNSL_PORT_IF_COUNT       _SHR_PORT_IF_COUNT 
 #define OPENNSL_PORT_IF_10B     OPENNSL_PORT_IF_TBI /**< Deprecated */
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -1556,7 +1569,9 @@ extern int opennsl_port_frame_max_get(
  *          the normal operation of the API, extreme care must be taken when
  *          manipulating PHYs. Normal configuration of speed, duplicity, and
  *          auto-negotiation must be performed using the normal opennsl_port
- *          APIs. .
+ *          APIs.
+ *          It allows to select the lane in the PHY register access through
+ *          gport lane  selection.
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
@@ -1608,7 +1623,8 @@ typedef enum opennsl_port_loopback_e {
     OPENNSL_PORT_LOOPBACK_MAC  = 1,     
     OPENNSL_PORT_LOOPBACK_PHY  = 2,     
     OPENNSL_PORT_LOOPBACK_PHY_REMOTE = 3, 
-    OPENNSL_PORT_LOOPBACK_COUNT = 4     
+    OPENNSL_PORT_LOOPBACK_MAC_REMOTE = 4, 
+    OPENNSL_PORT_LOOPBACK_COUNT = 5     
 } opennsl_port_loopback_t;
 
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -1883,6 +1899,10 @@ extern int opennsl_port_link_failed_clear(
  *          =opennsl_port_vlan_member_set should be called before API
  *          =opennsl_vlan_gport_add . Please refer to the DESCRIPTION of
  *          =opennsl_vlan_gport_add for more detail about VP group .
+ *          OPENNSL_PORT_VLAN_MEMBER_VP_DO_NOT_CHECK is used with
+ *          OPENNSL_PORT_VLAN_MEMBER_INGRESS/OPENNSL_PORT_VLAN_MEMBER_EGRESS
+ *          for L2 tunnel cases. When the flag is set, VLAN filtering is
+ *          performed on VLAN and phisical port, instead of on VFI and VP.
  *          This function supersedes =opennsl_port_ifilter_get . Valid
  *          settings for flags are described in
  *          =OPENNSL_PORT_VLAN_MEMBER_FLAGS_table .
@@ -1922,6 +1942,10 @@ extern int opennsl_port_vlan_member_set(
  *          =opennsl_port_vlan_member_set should be called before API
  *          =opennsl_vlan_gport_add . Please refer to the DESCRIPTION of
  *          =opennsl_vlan_gport_add for more detail about VP group .
+ *          OPENNSL_PORT_VLAN_MEMBER_VP_DO_NOT_CHECK is used with
+ *          OPENNSL_PORT_VLAN_MEMBER_INGRESS/OPENNSL_PORT_VLAN_MEMBER_EGRESS
+ *          for L2 tunnel cases. When the flag is set, VLAN filtering is
+ *          performed on VLAN and phisical port, instead of on VFI and VP.
  *          This function supersedes =opennsl_port_ifilter_get . Valid
  *          settings for flags are described in
  *          =OPENNSL_PORT_VLAN_MEMBER_FLAGS_table .
@@ -2489,8 +2513,8 @@ typedef enum opennsl_port_class_e {
     opennslPortClassId = 5,             /**< Class for mapping local-port to
                                            vlan-domain. vlan domain is used in
                                            mapping packet VID to Vlan */
-    opennslPortClassFieldIngressPacketProcessing = 6, /**< Packet processing port Class for
-                                           field stage Ingress */
+    opennslPortClassFieldIngressPacketProcessing = 6, /**< Packet processing port Class lower 32
+                                           bits for field stage Ingress */
     opennslPortClassFieldEgressPacketProcessing = 7, /**< Packet processing port Class for
                                            field stage Egress */
     opennslPortClassEgress = 14,        /**< EGR_PORT class ID field for field

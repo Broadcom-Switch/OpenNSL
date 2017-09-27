@@ -222,6 +222,9 @@ typedef struct opennsl_vxlan_port_s {
     opennsl_switch_network_group_t network_group_id; /**< Split Horizon network group
                                            identifier. */
     uint32 reserved2; 
+    int reserved3; 
+    uint8 reserved4; 
+    uint8 reserved5; 
 } opennsl_vxlan_port_t;
 #endif
 
@@ -758,6 +761,8 @@ extern int opennsl_vxlan_port_traverse(
     void *user_data) LIB_DLL_EXPORTED ;
 #endif
 
+#if defined(INCLUDE_L3)
+#endif
 #endif /* defined(INCLUDE_L3) */
 
 #endif /* __OPENNSL_VXLANX_H__ */
