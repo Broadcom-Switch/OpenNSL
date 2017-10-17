@@ -800,4 +800,4 @@
     serdes_preemphasis_lane0_xe27=0xc6e0
     serdes_preemphasis_lane0_xe19=0xcad0
     serdes_pre_driver_current_lane3_xe77=0x4
-
+    sram_scan_enable=1

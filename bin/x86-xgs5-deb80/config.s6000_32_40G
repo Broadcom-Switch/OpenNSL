@@ -560,3 +560,4 @@
     serdes_preemphasis_lane0_xe27=0xbb10
     serdes_driver_current_lane3_xe7=0x5
     serdes_preemphasis_lane0_xe19=0xa760
+    sram_scan_enable=1
