@@ -49,6 +49,117 @@ typedef struct opennsl_vlan_protocol_packet_ctrl_s {
     int reserved3; 
 } opennsl_vlan_protocol_packet_ctrl_t;
 
+/** This structure contains the configuration of a VLAN. */
+typedef struct opennsl_vlan_control_vlan_s {
+    uint32 flags;                       
+} opennsl_vlan_control_vlan_t;
+
+/***************************************************************************//** 
+ *\brief Initialize the opennsl_vlan_control_vlan_t structure.
+ *
+ *\description Initialize the opennsl_vlan_control_vlan_t structure.
+ *
+ *\param    data [IN,OUT]   Pointer to the structure to be initialized
+ *
+ *\returns  Nothing
+ ******************************************************************************/
+extern void opennsl_vlan_control_vlan_t_init(
+    opennsl_vlan_control_vlan_t *data) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or retrieve current VLAN properties.
+ *
+ *\description Sets/gets miscellaneous VLAN-specific properties. The control
+ *          properties are from =opennsl_vlan_control_vlan_t . The flags of
+ *          the opennsl_vlan_control_vlan_t can be any combination of
+ *          =OPENNSL_VLAN_CONTROL_VLAN_FLAG_table . On network switch devices
+ *          that allow per-VLAN MPLS enable/disable, the only valid control
+ *          parameter in this API is the OPENNSL_VLAN_MPLS_DISABLE control
+ *          flag (all other control parameters are ignored).
+ *          When only OPENNSL_VLAN_L2_CLASS_ID_ONLY is set, the if_class_id is
+ *          set to VLAN_CLASS_ID(L3_IIF.CLASS_ID is not set). When only
+ *          OPENNSL_VLAN_L3_CLASS_ID is set, the l3_if_class is set to
+ *          L3_IIF.CLASS_ID(VLAN_CLASS_ID is not set). If none are set, the
+ *          if_class_id is set to both VLAN_CLASS_ID and L3_IIF.CLASS_ID. If
+ *          both are set, if_class_id is set to VLAN_CLASS_ID and l3_if_class
+ *          is set to L3_IIF.CLASS_ID. Also, on a get, both the
+ *          OPENNSL_VLAN_L2_CLASS_ID_ONLY and OPENNSL_VLAN_L3_CLASS_ID are set
+ *          with the returned data, if_class is set to VLAN_CLASS_ID and
+ *          l3_if_class is set to L3_IIF.CLASS_ID.
+ *          For trident2 plus devices, this API can be used to derive VRF for
+ *          a VPN. If VRF value is 0, the VRF is INVALID.
+ *          If interface map mode (opennslSwitchL3IngressInterfaceMapSet
+ *          =opennsl_switches) is not set, the vrf value set by this api can
+ *          be overwritten by =opennsl_l3_intf_create().  If interface map
+ *          mode is set, this api will not set vrf value.
+ *          =opennsl_l3_ingress_create()  api should be used to set vrf with
+ *          an ingress interface.
+ *          For Trident3 devices, OPENNSL_VLAN_UNKNOWN_UCAST_TOCPU now becomes
+ *          a global configuration instead of per VLAN configuration, the last
+ *          API call which programs OPENNSL_VLAN_UNKNOWN_UCAST_TOCPU takes
+ *          effect. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN
+ *\param    control [OUT]   structure which contains VLAN property, see
+ *          opennsl_vlan_control_vlan_t =opennsl_vlan_control_vlan_t
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_vlan_control_vlan_get(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_vlan_control_vlan_t *control) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or retrieve current VLAN properties.
+ *
+ *\description Sets/gets miscellaneous VLAN-specific properties. The control
+ *          properties are from =opennsl_vlan_control_vlan_t . The flags of
+ *          the opennsl_vlan_control_vlan_t can be any combination of
+ *          =OPENNSL_VLAN_CONTROL_VLAN_FLAG_table . On network switch devices
+ *          that allow per-VLAN MPLS enable/disable, the only valid control
+ *          parameter in this API is the OPENNSL_VLAN_MPLS_DISABLE control
+ *          flag (all other control parameters are ignored).
+ *          When only OPENNSL_VLAN_L2_CLASS_ID_ONLY is set, the if_class_id is
+ *          set to VLAN_CLASS_ID(L3_IIF.CLASS_ID is not set). When only
+ *          OPENNSL_VLAN_L3_CLASS_ID is set, the l3_if_class is set to
+ *          L3_IIF.CLASS_ID(VLAN_CLASS_ID is not set). If none are set, the
+ *          if_class_id is set to both VLAN_CLASS_ID and L3_IIF.CLASS_ID. If
+ *          both are set, if_class_id is set to VLAN_CLASS_ID and l3_if_class
+ *          is set to L3_IIF.CLASS_ID. Also, on a get, both the
+ *          OPENNSL_VLAN_L2_CLASS_ID_ONLY and OPENNSL_VLAN_L3_CLASS_ID are set
+ *          with the returned data, if_class is set to VLAN_CLASS_ID and
+ *          l3_if_class is set to L3_IIF.CLASS_ID.
+ *          For trident2 plus devices, this API can be used to derive VRF for
+ *          a VPN. If VRF value is 0, the VRF is INVALID.
+ *          If interface map mode (opennslSwitchL3IngressInterfaceMapSet
+ *          =opennsl_switches) is not set, the vrf value set by this api can
+ *          be overwritten by =opennsl_l3_intf_create().  If interface map
+ *          mode is set, this api will not set vrf value.
+ *          =opennsl_l3_ingress_create()  api should be used to set vrf with
+ *          an ingress interface.
+ *          For Trident3 devices, OPENNSL_VLAN_UNKNOWN_UCAST_TOCPU now becomes
+ *          a global configuration instead of per VLAN configuration, the last
+ *          API call which programs OPENNSL_VLAN_UNKNOWN_UCAST_TOCPU takes
+ *          effect. .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN
+ *\param    control [IN]   structure which contains VLAN property, see
+ *          opennsl_vlan_control_vlan_t =opennsl_vlan_control_vlan_t
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported
+ *\retval    OPENNSL_E_XXX Operation failed.
+ ******************************************************************************/
+extern int opennsl_vlan_control_vlan_set(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_vlan_control_vlan_t control) LIB_DLL_EXPORTED ;
+
 #if defined(INCLUDE_L3)
 #endif
 #if defined(INCLUDE_L3)

@@ -41,6 +41,22 @@
 #define OPENNSL_MIRROR_PORT_SFLOW       0x00000040 /**< sFlow mirroring */
 #define OPENNSL_MIRROR_NIV_LOOP 1          /**< Mirrored packet is a loop in NIV
                                               path */
+#define OPENNSL_MIRROR_EXT_STAT_ID_COUNT    2          /**< Number of statistic
+                                                          interfaces for
+                                                          mirrored packets. */
+/** Contains information required for ERSPAN encapsulation header. */
+typedef struct opennsl_mirror_pkt_erspan_encap_s {
+    uint8 reserved1; 
+    uint16 reserved2; 
+    uint16 reserved3; 
+    uint8 reserved4; 
+    uint8 reserved5; 
+    uint8 reserved6; 
+    uint8 reserved7; 
+    uint16 reserved8; 
+    uint16 reserved9; 
+} opennsl_mirror_pkt_erspan_encap_t;
+
 #ifndef OPENNSL_HIDE_DISPATCHABLE
 
 /***************************************************************************//** 

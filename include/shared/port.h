@@ -122,6 +122,7 @@ typedef enum _shr_port_if_e {
     _SHR_PORT_IF_CAUI4,
     _SHR_PORT_IF_5000X,
     _SHR_PORT_IF_EVENTOR,
+    _SHR_PORT_IF_RCY_MIRROR,
     _SHR_PORT_IF_COUNT /* last, please */
 } _shr_port_if_t;
 
@@ -179,6 +180,19 @@ typedef enum _shr_port_medium_e {
     _SHR_PORT_MEDIUM_FIBER             = 2,
     _SHR_PORT_MEDIUM_COUNT             /* last, please */
 } _shr_port_medium_t;
+
+/*
+ * Defines:
+ *      _SHR_PORT_MCAST_FLOOD_*
+ * Purpose:
+ *      Multicast packet flooding mode
+ */
+typedef enum _shr_port_mcast_flood_e {
+    _SHR_PORT_MCAST_FLOOD_ALL     = 0,
+    _SHR_PORT_MCAST_FLOOD_UNKNOWN = 1,
+    _SHR_PORT_MCAST_FLOOD_NONE    = 2,
+    _SHR_PORT_MCAST_FLOOD_COUNT         /* last, please */
+} _shr_port_mcast_flood_t;
 
 /*
  * Defines:

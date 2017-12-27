@@ -1142,7 +1142,7 @@ extern int opennsl_cosq_priority_get(
  *          combination of OPENNSL_COSQ_GPORT_WITH_ID,          the value
  *          provided in gport parameters is used as the GPORT_ID.          
  *          But scheduling mode need to programmed again as per the scheduling
- *          hierarcy.  API opennsl_cosq_port_sched_set() can be used to set
+ *          hierarchy.  API opennsl_cosq_port_sched_set() can be used to set
  *          the scheduling mode to be Strict/WRR.
  *          When the OPENNSL_COSQ_GPORT_VLAN_UCAST_QUEUE_GROUP flag is set, a
  *          queue to support service based queuing is allocated
@@ -1626,7 +1626,7 @@ extern int opennsl_cosq_gport_statistic_set(
  *          combination of OPENNSL_COSQ_GPORT_WITH_ID,          the value
  *          provided in gport parameters is used as the GPORT_ID.          
  *          But scheduling mode need to programmed again as per the scheduling
- *          hierarcy.  API opennsl_cosq_port_sched_set() can be used to set
+ *          hierarchy.  API opennsl_cosq_port_sched_set() can be used to set
  *          the scheduling mode to be Strict/WRR.
  *          When the OPENNSL_COSQ_GPORT_VLAN_UCAST_QUEUE_GROUP flag is set, a
  *          queue to support service based queuing is allocated

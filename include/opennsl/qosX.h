@@ -63,6 +63,7 @@ typedef struct opennsl_qos_map_s {
     int counter_offset;             /**< Offset based on priority for indexing
                                        into the loss measurement counter table */
     int inherited_dscp_exp;         /**< Inherited DSCP EXP value */
+    uint32 opcode;                  /**< Set QOS Map Opcode ID */
 } opennsl_qos_map_t;
 
 /***************************************************************************//** 
@@ -105,7 +106,7 @@ extern void opennsl_qos_map_t_init(
  *          VLAN_PCP rather than LIF.                            If not set
  *          and other L2 flags set, indicates LIF COS map type.
  *          MiM flags: OPENNSL_QOS_MAP_MIM_ITAG - create a MiM map - used in
- *          conjunction wiht L2 flags.
+ *          conjunction with L2 flags.
  *          L3 flags: OPENNSL_QOS_MAP_L3 - create L3 type of map - defaults to
  *          IPV4 map. For Trident2plus,                  this flag will create
  *          both IPV4 map and outer tag map. OPENNSL_QOS_MAP_IPV4 - create
@@ -120,7 +121,7 @@ extern void opennsl_qos_map_t_init(
  *          OPENNSL_QOS_MAP_MPLS_ELSP - create an MPLS map for ELSP.
  *          OPENNSL_QOS_MAP_MPLS_PHP - create an MPLS map for PHP.
  *          MiML flags: OPENNSL_QOS_MAP_MIML - create a MiML map - used in
- *          conjunction wiht L2 flags.
+ *          conjunction with L2 flags.
  *          Other: OPENNSL_QOS_MAP_ENCAP - indicates an encapsulated header.
  *          OPENNSL_QOS_MAP_PACKET_INVALID  Drops packets on a specific
  *          port*VLAN when the UP/PCP                              values do

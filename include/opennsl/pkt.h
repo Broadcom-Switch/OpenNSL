@@ -200,6 +200,7 @@ struct opennsl_pkt_s {
     uint16 reserved88; 
     uint16 reserved89; 
     uint8 reserved90; 
+    uint16 reserved91; 
 };
 
 #define OPENNSL_PKT_F_NO_VTAG   0x4        /**< Packet does not contain VLAN tag. */

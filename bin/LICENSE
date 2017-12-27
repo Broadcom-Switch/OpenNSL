@@ -228,6 +228,7 @@ bin/x86-xgs5-deb80       - Dell s6000 Switch System
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2
   linux-bcm-knet.ko                  -> Covered by GPLv2
+  linux-knet-cb.ko                   -> Covered by GPLv2
 
 bin/xlr-xgs5-ub14        - Broadcom XGS Switch Verification Kits with XLR CPU
 
@@ -248,6 +249,12 @@ bin/ag-x86-xgs5-deb80         - Agema AG7648 Switch System
   linux-bcm-knet.ko                  -> Covered by GPLv2
 
 bin/ar-x86-xgs5-deb80         - Arista 7260CX3 Switch System
+
+  linux-kernel-bde.ko                -> Covered by GPLv2
+  linux-user-bde.ko                  -> Covered by GPLv2
+  linux-bcm-knet.ko                  -> Covered by GPLv2
+
+bin/ag-x86-dnx-deb80          - Agema AGC7648A Switch System
 
   linux-kernel-bde.ko                -> Covered by GPLv2
   linux-user-bde.ko                  -> Covered by GPLv2

@@ -10,14 +10,16 @@ following steps to compile OpenNSL including sample applications.
 
 2) Go to output directory: opennsl_root/opennsl/output/x86-xgs5-deb80
 
-3) Issue "make" to create an OpenNSL shared library object, linux kernel modules.
+3) Issue "make" to create an OpenNSL shared library object, linux kernel modules. Pass 
+   "BUILD_KNET_CB=1" to "make" command to generate KNET callback driver module.
 
 4) The deliverables folder : opennsl_root/opennsl/output/x86-xgs5-deb80/build
    shall have the following files.
    a) Linux kernel module                     : linux-kernel-bde.ko
    b) Linux user module                       : linux-user-bde.ko
    c) KNET driver module                      : linux-bcm-knet.ko
-   d) OpenNSL shared object library           : libopennsl.so
+   d) KNET callback driver module             : linux-knet-cb.ko
+   e) OpenNSL shared object library           : libopennsl.so
 
 Building example Applications
 =============================
@@ -31,6 +33,23 @@ Use the following steps to compile example applications.
 
 2) Issue "make examples" to compile all the sample applications
 
+Building OpenNSL debian packages (ODP customers only)
+=====================================================
+Use the following steps to create OpenNSL debian packages, assuming that the
+toolchain is pre-installed on the debian build server.
+
+1) Extract ODP source tarball into the destination directory say opennsl_root.
+   Example: tar jxf opennsl-3.4.1.7-odp.tar.bz2
+
+2) Extract the platform specific tarball into the destination directory opennsl_root
+   Example: tar jxf opennsl-3.4.1.7-odp-x86-xgs5-deb80.tar.bz2
+
+3) Issue "fakeroot debian/rules -B binary"
+4) Built packages are available at one folder up from opennsl_root.
+   Example:
+     opennsl-modules-3.16.0-4-amd64_3.4.1.7_amd64.deb
+     libopennsl-dev_3.4.1.7_amd64.deb
+     libopennsl_3.4.1.7_amd64.deb
 
 Downloading and running OpenNSL sample applications
 ===================================================
@@ -47,9 +66,11 @@ Downloading and running OpenNSL sample applications
         # mknod /dev/linux-kernel-bde c 127 0
         # mknod /dev/linux-user-bde c 126 0
         # mknod /dev/linux-bcm-knet c 122 0
+        # mknod /dev/linux-knet-cb c 121 0
         # insmod linux-kernel-bde.ko
         # insmod linux-user-bde.ko
         # insmod linux-bcm-knet.ko
+        # insmod linux-knet-cb.ko
 
 3) Install OpenNSL shared library. The destination directory to install the
    shared library depends on the host environment configuration.  Install the

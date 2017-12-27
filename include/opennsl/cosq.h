@@ -145,7 +145,7 @@ typedef struct opennsl_cosq_bst_profile_s {
  *          port parameter can be port gport, queue gport. bid parameter
  *          identifies the MMU resource, for instance the bid
  *          opennslBstStatIdEgrPool identifies the egress service pool
- *          resource. cosq parameter identifies the object withing the various
+ *          resource. cosq parameter identifies the object within the various
  *          instances of resources within the identified resource. Note: For
  *          bid=opennslBstStatIdHeadroomPool, returns OPENNSL_E_PARAM as there
  *          is no BST configuration required for Headroom Pool
@@ -176,7 +176,7 @@ extern int opennsl_cosq_bst_profile_set(
  *          port parameter can be port gport, queue gport. bid parameter
  *          identifies the MMU resource, for instance the bid
  *          opennslBstStatIdEgrPool identifies the egress service pool
- *          resource. cosq parameter identifies the object withing the various
+ *          resource. cosq parameter identifies the object within the various
  *          instances of resources within the identified resource. Note: For
  *          bid=opennslBstStatIdHeadroomPool, returns OPENNSL_E_PARAM as there
  *          is no BST configuration required for Headroom Pool
@@ -231,7 +231,7 @@ extern int opennsl_cosq_bst_stat_sync(
  *          be port gport, queue gport. bid parameter identifies the MMU
  *          resource, for instance the bid opennslBstStatIdEgrPool identifies
  *          the egress service pool resource. cosq parameter identifies the
- *          object withing the various instances of resources within the
+ *          object within the various instances of resources within the
  *          identified resource.  gport value of -1 will clear stats on all
  *          ports.
  *
@@ -258,7 +258,7 @@ extern int opennsl_cosq_bst_stat_clear(
  *          be port gport, queue gport. bid parameter identifies the MMU
  *          resource, for instance the flag opennslBstStatIdEgrPool identifies
  *          the egress service pool resource. cosq parameter identifies the
- *          object withing the various instances of resources within the
+ *          object within the various instances of resources within the
  *          identified resource. if option  OPENNSL_COSQ_STAT_CLEAR is
  *          present, a memory/register clear will be performed after stat
  *          reading. .
@@ -290,7 +290,7 @@ extern int opennsl_cosq_bst_stat_get(
  *          can be port gport, queue gport. bid parameter identifies the MMU
  *          resource, for instance the flag opennslBstStatIdEgrPool identifies
  *          the egress service pool resource. cosq parameter identifies the
- *          object withing the various instances of resources within the
+ *          object within the various instances of resources within the
  *          identified resource. if option  OPENNSL_COSQ_STAT_CLEAR is
  *          present, a memory/register clear will be performed after stat
  *          reading. .

@@ -122,7 +122,7 @@ typedef enum opennsl_field_qualify_e {
     opennslFieldQualifyInterfaceClassProcessingPort = 213, /**< Packet-processing Port Class ID */
     opennslFieldQualifyIngressClassField = 269, /**< Class Id assigned for packet by
                                            Ingress Stage */
-    opennslFieldQualifyCount = 731      /**< Always Last. Not a usable value. */
+    opennslFieldQualifyCount = 759      /**< Always Last. Not a usable value. */
 } opennsl_field_qualify_t;
 
 /** 
@@ -142,7 +142,11 @@ typedef enum opennsl_field_stage_e {
     opennslFieldStageExternal = 7,      /**< External field stage */
     opennslFieldStageHash = 8,          /**< Hashing stage */
     opennslFieldStageIngressExactMatch = 9, /**< Ingress exact match stage */
-    opennslFieldStageCount = 10         /**< Always Last. Not a usable value. */
+    opennslFieldStageIngressFlowtracker = 10, /**< Ingress flowtracker stage */
+    opennslFieldStageIngressPMF1 = 11,  /**< Stage Ingress PMF-1 */
+    opennslFieldStageIngressPMF2 = 12,  /**< Stage Ingress PMF-2 */
+    opennslFieldStageIngressPMF3 = 13,  /**< Stage Ingress PMF-3 */
+    opennslFieldStageCount = 14         /**< Always Last. Not a usable value. */
 } opennsl_field_stage_t;
 
 #define OPENNSL_FIELD_QUALIFY_MAX   (opennslFieldQualifyCount + OPENNSL_FIELD_USER_NUM_UDFS) /**< Must be >=
@@ -150,13 +154,24 @@ typedef enum opennsl_field_stage_e {
 #define OPENNSL_FIELD_EXACT_MATCH_MASK  (~0)       /**< Mask parameter value. */
 /** Field Qualifier IpType (for opennsl_field_qualify_IpType). */
 typedef enum opennsl_field_IpType_e {
+    opennslFieldIpTypeAny = 0,          /**< Don't care. */
+    opennslFieldIpTypeNonIp = 1,        /**< Non-Ip packet. */
+    opennslFieldIpTypeIpv4Not = 2,      /**< Anything but IPv4 packets. */
+    opennslFieldIpTypeIpv4NoOpts = 3,   /**< IPv4 without options. */
     opennslFieldIpTypeIpv4WithOpts = 4, /**< IPv4 with options. */
     opennslFieldIpTypeIpv4Any = 5,      /**< Any IPv4 packet. */
+    opennslFieldIpTypeIpv6Not = 6,      /**< Anything but IPv6 packets. */
+    opennslFieldIpTypeIpv6NoExtHdr = 7, /**< IPv6 packet without any extension
+                                           header. */
     opennslFieldIpTypeIpv6OneExtHdr = 8, /**< IPv6 packet with one extension
                                            header. */
     opennslFieldIpTypeIpv6TwoExtHdr = 9, /**< IPv6 packet with two or more
                                            extension headers. */
     opennslFieldIpTypeIpv6 = 10,        /**< IPv6 packet. */
+    opennslFieldIpTypeIp = 11,          /**< IPv4 and IPv6 packets. */
+    opennslFieldIpTypeArp = 12,         /**< ARP/RARP. */
+    opennslFieldIpTypeArpRequest = 13,  /**< ARP Request. */
+    opennslFieldIpTypeArpReply = 14,    /**< ARP Reply. */
 } opennsl_field_IpType_t;
 
 /** 
@@ -312,7 +327,7 @@ typedef enum opennsl_field_action_e {
                                            param1: Destination port. */
     opennslFieldActionIngSampleEnable = 315, /**< Set the SFLOW Ingress Sampling. */
     opennslFieldActionEgrSampleEnable = 316, /**< Set the SFLOW Egress Sampling. */
-    opennslFieldActionCount = 510       /**< Always Last. Not a usable value. */
+    opennslFieldActionCount = 515       /**< Always Last. Not a usable value. */
 } opennsl_field_action_t;
 
 /** Holds which action to set width for, and the size of width to set */
@@ -736,6 +751,42 @@ extern int opennsl_field_group_action_get(
 extern int opennsl_field_group_destroy(
     int unit, 
     opennsl_field_group_t group) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Assign relative priority to a group.
+ *
+ *\description Assign field group relative priority.  Priority is a positive
+ *          number, where numerically  higher value have precedence during
+ *          conflicting action resolution.  .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Field group ID
+ *\param    priority [IN]   Field group priority
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_field_group_priority_set(
+    int unit, 
+    opennsl_field_group_t group, 
+    int priority) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Extract priority for a group.
+ *
+ *\description Extract field group relative priority.  Priority is a positive
+ *          number, where numerically  higher value have precedence during
+ *          conflicting action resolution.  .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    group [IN]   Field group ID
+ *\param    priority [OUT]   Field group priority
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_field_group_priority_get(
+    int unit, 
+    opennsl_field_group_t group, 
+    int *priority) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
  *\brief Retrieve status of a specified field group.
@@ -1345,6 +1396,22 @@ extern int opennsl_field_entry_prio_set(
                                                       functions to indicate ID
                                                       is a preselector instead
                                                       of an entry */
+/***************************************************************************//** 
+ *\brief Remove match criteria from field entry.
+ *
+ *\description Remove match criteria from a field entry.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    entry [IN]   Field entry ID
+ *\param    qual_id [IN]   Field qualifier ID
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_field_qualifier_delete(
+    int unit, 
+    opennsl_field_entry_t entry, 
+    opennsl_field_qualify_t qual_id) LIB_DLL_EXPORTED ;
+
 /***************************************************************************//** 
  *
  *

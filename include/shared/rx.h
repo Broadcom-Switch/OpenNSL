@@ -251,7 +251,8 @@ typedef enum _shr_rx_reason_e {
     _SHR_RX_SR_COPY_TO_CPU_BIT3         = 197, /* SR custom reason code bit 3         */
     _SHR_RX_SR_COPY_TO_CPU_BIT4         = 198, /* SR custom reason code bit 4         */
     _SHR_RX_SR_COPY_TO_CPU_BIT5         = 199, /* SR custom reason code bit 5         */
-    _SHR_RX_REASON_COUNT                = 200  /* MUST BE LAST                        */
+    _SHR_RX_L3_HEADER_MISMATCH          = 200, /* L3 Header Mismatch */
+    _SHR_RX_REASON_COUNT                = 201  /* MUST BE LAST       */
 } _shr_rx_reason_t;
 
 #define _SHR_RX_REASON_NAMES_INITIALIZER { \
@@ -455,6 +456,7 @@ typedef enum _shr_rx_reason_e {
     "SrCopyToCpuBit3",          \
     "SrCopyToCpuBit4",          \
     "SrCopyToCpuBit5",          \
+    "L3HeaderMismatch",         \
 }
 
 /*

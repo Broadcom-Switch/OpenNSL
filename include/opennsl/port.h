@@ -1143,6 +1143,8 @@ typedef _shr_port_if_t opennsl_port_if_t;
 #define OPENNSL_PORT_IF_OLP         _SHR_PORT_IF_OLP 
 #define OPENNSL_PORT_IF_ERP         _SHR_PORT_IF_ERP 
 #define OPENNSL_PORT_IF_SAT         _SHR_PORT_IF_SAT 
+#define OPENNSL_PORT_IF_RCY_MIRROR  _SHR_PORT_IF_RCY_MIRROR 
+#define OPENNSL_PORT_IF_EVENTOR     _SHR_PORT_IF_EVENTOR 
 #define OPENNSL_PORT_IF_COUNT       _SHR_PORT_IF_COUNT 
 #define OPENNSL_PORT_IF_10B     OPENNSL_PORT_IF_TBI /**< Deprecated */
 #ifndef OPENNSL_HIDE_DISPATCHABLE
@@ -1552,6 +1554,62 @@ extern int opennsl_port_frame_max_get(
     opennsl_port_t port, 
     int *size) LIB_DLL_EXPORTED ;
 
+/***************************************************************************//** 
+ *\brief Set or retrieve the current maximum L3 packet size permitted on a port.
+ *
+ *\description Set or retrieve the current maximum egress L3 frame size for the
+ *          specified port.
+ *          When setting the frame size on a port, it is the callers
+ *          responsibility to take into account any additional tags or CRC
+ *          that may be added by the switch device.
+ *          For front-panel ports (that is, non-stacking or HiGig ports),
+ *          setting the maximum egress L3 frame size to X indicates untagged
+ *          packets of length X are permitted, while tagged packets of X + 4
+ *          bytes are permitted.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port to set or retrieve maximum L3 frame size on
+ *\param    size [IN]   the frame size to set (or current frame size returned) in
+ *          bytes.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, current egress L3 frame size for port
+ *          is undefined.
+ ******************************************************************************/
+extern int opennsl_port_l3_mtu_set(
+    int unit, 
+    opennsl_port_t port, 
+    int size) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set or retrieve the current maximum L3 packet size permitted on a port.
+ *
+ *\description Set or retrieve the current maximum egress L3 frame size for the
+ *          specified port.
+ *          When setting the frame size on a port, it is the callers
+ *          responsibility to take into account any additional tags or CRC
+ *          that may be added by the switch device.
+ *          For front-panel ports (that is, non-stacking or HiGig ports),
+ *          setting the maximum egress L3 frame size to X indicates untagged
+ *          packets of length X are permitted, while tagged packets of X + 4
+ *          bytes are permitted.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Port to set or retrieve maximum L3 frame size on
+ *\param    size [OUT]   the frame size to set (or current frame size returned) in
+ *          bytes.
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_INIT Port module not initialized, see .
+ *\retval    OPENNSL_E_XXX Operation failed, current egress L3 frame size for port
+ *          is undefined.
+ ******************************************************************************/
+extern int opennsl_port_l3_mtu_get(
+    int unit, 
+    opennsl_port_t port, 
+    int *size) LIB_DLL_EXPORTED ;
+
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
 #define OPENNSL_PORT_PHY_CLAUSE45   _SHR_PORT_PHY_CLAUSE45 
@@ -1870,6 +1928,40 @@ extern int opennsl_port_link_status_get(
 extern int opennsl_port_link_failed_clear(
     int unit, 
     opennsl_port_t port) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+#define OPENNSL_PORT_IFILTER_OFF    0          
+#define OPENNSL_PORT_IFILTER_ON     1          
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Set or retrieve current behavior of tagged packets arriving on a port
+ *       not a member of the specified VLAN.
+ *
+ *\description If ingress filtering is enabled, this drops all packets arriving
+ *          on a port with a VLAN tag identifying a VLAN of which the port is
+ *          not a member. If disabled, packets will not be dropped if the port
+ *          is not a member of the VLAN specified in the packet. It may
+ *          however be dropped for other reasons such as spanning tree state,
+ *          or head of line blocking.
+ *          This function is superseded by =opennsl_port_vlan_member_get .
+ *          Valid settings for mode are described in table
+ *          =OPENNSL_PORT_IFILTER_MODE_table .
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    port [IN]   Device or logical port number
+ *\param    mode [IN]   Port filtering mode
+ *
+ *\retval    OPENNSL_E_NONE Operation completed successfully
+ *\retval    OPENNSL_E_UNAVAIL Operation not supported on underlying device
+ *\retval    OPENNSL_E_XXX Operation failed, if retrieving current ingress
+ *          filtering mode, the parameter mode is undefined.
+ ******************************************************************************/
+extern int opennsl_port_ifilter_set(
+    int unit, 
+    opennsl_port_t port, 
+    int mode) LIB_DLL_EXPORTED ;
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
@@ -2613,8 +2705,17 @@ typedef enum opennsl_port_control_e {
     opennslPortControlL2Move = 70,      /**< Configure L2 station movement
                                            behavior using OPENNSL_PORT_LEARN_xxx
                                            flags */
+    opennslPortControlEEETransmitWakeTime = 82, /**< Time(in microsecs) to wait before
+                                           transmitter can begin transmitting
+                                           leaving Low Power Idle State */
     opennslPortControlStatOversize = 92, /**< Threshold above which packet will be
                                            counted as oversized */
+    opennslPortControlEEEEnable = 94,   /**< Enable/Disable Energy Efficient
+                                           Ethernet */
+    opennslPortControlEEETransmitIdleTime = 96, /**< Time (in microsecs) for which
+                                           condition to move to LPI state is
+                                           satisfied, at the end of which MAC
+                                           transitions to LPI state */
     opennslPortControlVxlanEnable = 187, /**< Set per port enable for VXLAN
                                            (Value=TRUE/FALSE) */
     opennslPortControlVxlanTunnelbasedVnId = 188, /**< Set per port VNID lookup key
@@ -2686,12 +2787,12 @@ extern int opennsl_port_control_get(
     int *value) LIB_DLL_EXPORTED ;
 
 /***************************************************************************//** 
- *\brief Get the list of ancilliary/flex ports belonging to the same port block
- *       as the controlling port.
+ *\brief Get the list of ancillary/flex ports belonging to the same port block as
+ *       the controlling port.
  *
  *\description Given a controlling port, this API returns the set of
- *          ancilliary/flex ports  belonging to the group (port block) that
- *          can be created by performing  Flex-IO operation on the controlling
+ *          ancillary/flex ports  belonging to the group (port block) that can
+ *          be created by performing  Flex-IO operation on the controlling
  *          port using API opennsl_port_control_set(unit,  port,
  *          opennslPortControlLanes, lanes). If the input port is not a
  *          controlling port,  OPENNSL_E_PORT error will be returned.

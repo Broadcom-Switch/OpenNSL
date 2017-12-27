@@ -500,7 +500,7 @@ static int tunnel_terminator_setup(int unit, opennsl_ip_t rip, opennsl_ip_t lip,
   tnl_term.dip = lip;
   tnl_term.tunnel_id = tunnel_init_id;
   tnl_term.flags = OPENNSL_TUNNEL_TERM_TUNNEL_WITH_ID;
-  if (net_vid != -1) {
+  if (net_vid != (opennsl_vlan_t)-1) {
     tnl_term.vlan = net_vid;  /* MC tunnel only - for Bud check */
   }
   rv = opennsl_vxlan_tunnel_terminator_create(unit, &tnl_term);

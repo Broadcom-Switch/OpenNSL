@@ -150,7 +150,7 @@ typedef enum opennsl_switch_control_e {
  *          individual ports on all devices.
  *
  *\param    unit [IN]   Unit number.
- *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
+ *\param    type [IN]   Switch control parameter (see =opennsl_switches)
  *\param    arg [OUT]   (for _set) Argument whose meaning is dependent on type
  *
  *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
@@ -174,7 +174,7 @@ extern int opennsl_switch_control_get(
  *          individual ports on all devices.
  *
  *\param    unit [IN]   Unit number.
- *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
+ *\param    type [IN]   Switch control parameter (see =opennsl_switches)
  *\param    arg [IN]   (for _set) Argument whose meaning is dependent on type
  *
  *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
@@ -199,7 +199,7 @@ extern int opennsl_switch_control_set(
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
- *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
+ *\param    type [IN]   Switch control parameter (see =opennsl_switches)
  *\param    arg [OUT]   (for _set) Argument whose meaning is dependent on type
  *
  *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
@@ -225,7 +225,7 @@ extern int opennsl_switch_control_port_get(
  *
  *\param    unit [IN]   Unit number.
  *\param    port [IN]   Device or logical port number
- *\param    type [IN]   Switch control parameter (see =opennsl_switchs)
+ *\param    type [IN]   Switch control parameter (see =opennsl_switches)
  *\param    arg [IN]   (for _set) Argument whose meaning is dependent on type
  *
  *\retval    OPENNSL_E_UNAVAIL	Feature not available on this device
@@ -468,6 +468,9 @@ extern int opennsl_switch_event_unregister(
 #define OPENNSL_HASH_CONTROL_TRUNK_NUC_ENHANCE 0x0100     /**< Use enhanced
                                                           non-unicast trunk
                                                           hashing. */
+#define OPENNSL_HASH_FIELD_CONFIG_CRC16XOR8 0x00000001 /**< 8-bit CRC16 + 8-bit
+                                                          XOR8. */
+#define OPENNSL_HASH_FIELD_CONFIG_XOR16     0x00000006 /**< 16-bit XOR. */
 #define OPENNSL_HASH_FIELD_CONFIG_CRC16CCITT 0x00000007 /**< 16-bit CRC using CCITT
                                                           polynomial. */
 #define OPENNSL_HASH_FIELD_CONFIG_CRC32LO   0x00000008 /**< Lower 16-bit of CRC32. */
@@ -650,7 +653,11 @@ typedef struct opennsl_switch_pkt_trace_info_s {
  *          for chip and store the raw data into opennsl_pkt_trace_info_t*
  *          Last, convert the raw data into abstracted format and store into
  *          opennsl_pkt_trace_info_t* These profile options are used to set
- *          loopback headers cpu_pkt_profile field.
+ *          loopback headers cpu_pkt_profile field For Trident3 1. To read the
+ *          raw data, API opennsl_switch_pkt_trace_raw_data_get should be used
+ *          instead    of raw data in opennsl_pkt_trace_info_t*. 2. network
+ *          switch - Packet trace works when single debug visibility packet is
+ *          being swicthed in the system.
  *
  *\param    unit [IN]   Unit number.
  *\param    options [IN]   FLAGS to select pre-configured cpu_pkt_profile register

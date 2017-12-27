@@ -311,6 +311,7 @@ typedef struct opennsl_rx_trap_config_s {
                                            strongest trap in processing holds. */
     int tunnel_termination_snoop_strength; /**< Strength of tunnel termination trap,
                                            strongest snoop in processing holds. */
+    int meter_cmd;                      /**< meter command. */
 } opennsl_rx_trap_config_t;
 
 /***************************************************************************//** 

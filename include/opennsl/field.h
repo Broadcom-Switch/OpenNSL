@@ -69,6 +69,10 @@
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #include <opennsl/fieldX.h>
 #endif /* __OPENNSL_FIELD_H__ */
 /*@}*/

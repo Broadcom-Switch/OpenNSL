@@ -519,6 +519,153 @@ extern int opennsl_vlan_control_port_set(
 
 #endif /* OPENNSL_HIDE_DISPATCHABLE */
 
+/** VLAN multicast flood modes. */
+typedef enum opennsl_vlan_mcast_flood_e {
+    OPENNSL_VLAN_MCAST_FLOOD_ALL = _SHR_PORT_MCAST_FLOOD_ALL, 
+    OPENNSL_VLAN_MCAST_FLOOD_UNKNOWN = _SHR_PORT_MCAST_FLOOD_UNKNOWN, 
+    OPENNSL_VLAN_MCAST_FLOOD_NONE = _SHR_PORT_MCAST_FLOOD_NONE, 
+    OPENNSL_VLAN_MCAST_FLOOD_COUNT = _SHR_PORT_MCAST_FLOOD_COUNT 
+} opennsl_vlan_mcast_flood_t;
+
+/** Per VLAN forwarding behavior. */
+typedef enum opennsl_vlan_forward_e {
+    opennslVlanForwardBridging = 0,     /**< Switching based on MAC and VLAN. */
+    opennslVlanForwardSingleCrossConnect = 1, /**< Switching based on outer VLAN. */
+    opennslVlanForwardDoubleCrossConnect = 2 /**< Switching based on outer+inner VLAN. */
+} opennsl_vlan_forward_t;
+
+/** Per VLAN URPF Mode setting. */
+typedef enum opennsl_vlan_urpf_mode_e {
+    opennslVlanUrpfDisable = 0, /**< Disable unicast RPF. */
+    opennslVlanUrpfLoose = 1,   /**< Loose mode Unicast RPF. */
+    opennslVlanUrpfStrict = 2   /**< Strict mode Unicast RPF. */
+} opennsl_vlan_urpf_mode_t;
+
+/** Per VLAN VP Mode control. */
+typedef enum opennsl_vlan_vp_mc_ctrl_e {
+    opennslVlanVPMcControlAuto = 0,     /**< VP Multicast replication auto control */
+    opennslVlanVPMcControlEnable = 1,   /**< Enable VP Multicast replication */
+    opennslVlanVPMcControlDisable = 2   /**< Disable VP Multicast replication */
+} opennsl_vlan_vp_mc_ctrl_t;
+
+#define OPENNSL_VLAN_PROTO_PKT_TOCPU_ENABLE 0x00000001 
+#define OPENNSL_VLAN_PROTO_PKT_FORWARD_ENABLE 0x00000002 
+#define OPENNSL_VLAN_PROTO_PKT_DROP_ENABLE  0x00000004 
+#define OPENNSL_VLAN_PROTO_PKT_FLOOD_ENABLE 0x00000008 
+#define OPENNSL_VLAN_LEARN_DISABLE  0x00000001 
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
+/** Types of statistics that are maintained per VLAN. */
+typedef enum opennsl_vlan_stat_e {
+    opennslVlanStatPackets = 0,         /**< Packets that have hit the VLAN
+                                           (forward/drop, L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatIngressPackets = opennslVlanStatPackets, /**< Packets that ingress on the VLAN */
+    opennslVlanStatBytes = 1,           /**< Bytes that have hit the VLAN
+                                           (forward/drop, L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatIngressBytes = opennslVlanStatBytes, /**< Bytes that ingress on the VLAN */
+    opennslVlanStatEgressPackets = 2,   /**< Packets that egress on the VLAN */
+    opennslVlanStatEgressBytes = 3,     /**< Bytes that egress on the VLAN */
+    opennslVlanStatForwardedPackets = 4, /**< Packets forwarded on the VLAN (L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatForwardedBytes = 5,  /**< Bytes forwarded on the VLAN (L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatDropPackets = 6,     /**< Packets dropped on the VLAN (L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatDropBytes = 7,       /**< Bytes dropped on the VLAN (L2/L3,
+                                           unicast/multicast/broadcast/flood) */
+    opennslVlanStatUnicastPackets = 8,  /**< L2 unicast packets forwarded on the
+                                           VLAN */
+    opennslVlanStatUnicastBytes = 9,    /**< L2 unicast bytes forwarded on the
+                                           VLAN */
+    opennslVlanStatUnicastDropPackets = 10, /**< L2 unicast packets dropped on the
+                                           VLAN */
+    opennslVlanStatUnicastDropBytes = 11, /**< L2 unicast bytes dropped on the VLAN */
+    opennslVlanStatNonUnicastPackets = 12, /**< L2 multicast packets forwarded on the
+                                           VLAN */
+    opennslVlanStatNonUnicastBytes = 13, /**< L2 multicast bytes forwarded on the
+                                           VLAN */
+    opennslVlanStatNonUnicastDropPackets = 14, /**< L2 non-unicast packets dropped on the
+                                           VLAN */
+    opennslVlanStatNonUnicastDropBytes = 15, /**< L2 non-unicast bytes dropped on the
+                                           VLAN */
+    opennslVlanStatL3Packets = 16,      /**< Packets delivered to L3 for
+                                           forwarding on the VLAN */
+    opennslVlanStatL3Bytes = 17,        /**< Bytes delivered to L3 for forwarding
+                                           on the VLAN */
+    opennslVlanStatL3DropPackets = 18,  /**< Packets delivered to L3 for dropping
+                                           on the VLAN */
+    opennslVlanStatL3DropBytes = 19,    /**< Bytes delivered to L3 for dropping on
+                                           the VLAN */
+    opennslVlanStatFloodPackets = 20,   /**< L2 flood packets forwarded on the
+                                           VLAN */
+    opennslVlanStatFloodBytes = 21,     /**< L2 flood bytes forwarded on the VLAN */
+    opennslVlanStatFloodDropPackets = 22, /**< L2 flood packets dropped on the VLAN */
+    opennslVlanStatFloodDropBytes = 23, /**< L2 flood bytes dropped on the VLAN */
+    opennslVlanStatGreenPackets = 24,   /**< Green packets forwarded on the VLAN */
+    opennslVlanStatGreenBytes = 25,     /**< Green bytes forwarded on the VLAN */
+    opennslVlanStatYellowPackets = 26,  /**< Yellow packets forwarded on the VLAN */
+    opennslVlanStatYellowBytes = 27,    /**< Yellow bytes forwared on the VLAN */
+    opennslVlanStatRedPackets = 28,     /**< Red packets forwarded on the VLAN */
+    opennslVlanStatRedBytes = 29,       /**< Red bytes forwarded on the VLAN */
+    opennslVlanStatCount = 30           /**< Always last. Not a usable value. */
+} opennsl_vlan_stat_t;
+
+#ifndef OPENNSL_HIDE_DISPATCHABLE
+
+/***************************************************************************//** 
+ *\brief Extract per-VLAN statistics from the chip.
+ *
+ *\description The cos param must be OPENNSL_COS_INVALID when fetching single or
+ *          typed mode counters. For MEF mode counters, the opennsl_cos_t
+ *          param must be valid.
+ *          The cos param must be OPENNSL_COS_INVALID for switch
+ *          family?switches.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN ID.
+ *\param    cos [IN]   CoS or priority
+ *\param    stat [IN]   Type of the counter to retrieve.
+ *\param    val [OUT]   Pointer to a counter value.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_stat_get(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_cos_t cos, 
+    opennsl_vlan_stat_t stat, 
+    uint64 *val) LIB_DLL_EXPORTED ;
+
+/***************************************************************************//** 
+ *\brief Set the specified statistic to the indicated value for the specified
+ *       VLAN.
+ *
+ *\description The cos param must be OPENNSL_COS_INVALID when setting single or
+ *          typed mode counters. For MEF mode counters, the opennsl_cos_t
+ *          param must be valid. The cos param must be OPENNSL_COS_INVALID for
+ *          switch family?switches.
+ *
+ *\param    unit [IN]   Unit number.
+ *\param    vlan [IN]   VLAN ID.
+ *\param    cos [IN]   CoS or priority
+ *\param    stat [IN]   Type of the counter to set.
+ *\param    val [IN]   New counter value.
+ *
+ *\retval    OPENNSL_E_XXX
+ ******************************************************************************/
+extern int opennsl_vlan_stat_set(
+    int unit, 
+    opennsl_vlan_t vlan, 
+    opennsl_cos_t cos, 
+    opennsl_vlan_stat_t stat, 
+    uint64 val) LIB_DLL_EXPORTED ;
+
+#endif /* OPENNSL_HIDE_DISPATCHABLE */
+
 #define OPENNSL_VLAN_PORT_REPLACE           0x00000001 /**< Replace existing
                                                           entry. */
 #define OPENNSL_VLAN_PORT_WITH_ID           0x00000002 /**< Add using the

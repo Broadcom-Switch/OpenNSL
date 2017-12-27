@@ -1052,6 +1052,8 @@ extern int opennsl_l3_host_delete(
  *
  *\retval    OPENNSL_E_XXX
  *\retval    This function supersedes .
+ *\retval    Trident3 - This function cannot be used to delete flex L3 Host entries
+ *\retval    pointing to IPMC group.
  ******************************************************************************/
 extern int opennsl_l3_host_delete_by_interface(
     int unit, 

@@ -49,29 +49,32 @@
 typedef struct opennsl_l2_addr_s {
     uint32 flags;                       /**< OPENNSL_L2_xxx flags. */
     uint32 reserved1; 
+    uint32 reserved2; 
     opennsl_mac_t mac;                  /**< 802.3 MAC address. */
     opennsl_vlan_t vid;                 /**< VLAN identifier. */
     int port;                           /**< Zero-based port number. */
     int modid;                          /**< XGS: modid. */
     opennsl_trunk_t tgid;               /**< Trunk group ID. */
-    opennsl_cos_t reserved2; 
     opennsl_cos_t reserved3; 
+    opennsl_cos_t reserved4; 
     opennsl_multicast_t l2mc_group;     /**< XGS: index in L2MC table. For SBX
                                            chips it is the Multicast Group index */
-    opennsl_pbmp_t reserved4; 
-    int reserved5; 
-    int reserved6; 
-    opennsl_fabric_distribution_t reserved7; 
+    opennsl_if_t reserved5; 
+    opennsl_pbmp_t reserved6; 
+    int reserved7; 
     int reserved8; 
-    int reserved9; 
-    uint32 reserved10; 
-    uint32 reserved11; 
-    opennsl_flow_logical_field_t reserved12[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    opennsl_fabric_distribution_t reserved9; 
+    int reserved10; 
+    int reserved11; 
+    uint32 reserved12; 
     uint32 reserved13; 
-    opennsl_pbmp_t reserved14; 
-    opennsl_tsn_flowset_t reserved15; 
-    opennsl_tsn_sr_flowset_t reserved16; 
-    opennsl_policer_t reserved17; 
+    opennsl_flow_logical_field_t reserved14[OPENNSL_FLOW_MAX_NOF_LOGICAL_FIELDS]; 
+    uint32 reserved15; 
+    opennsl_pbmp_t reserved16; 
+    opennsl_tsn_flowset_t reserved17; 
+    opennsl_tsn_sr_flowset_t reserved18; 
+    opennsl_policer_t reserved19; 
+    opennsl_tsn_pri_map_t reserved20; 
 } opennsl_l2_addr_t;
 
 #define OPENNSL_L2_CACHE_CPU        0x00000001 /**< Packet is copied to CPU. */
@@ -875,13 +878,13 @@ extern int opennsl_l2_replace(
 
 /** L2 Station address info. */
 typedef struct opennsl_l2_station_s {
-    uint32 flags;                   /**< OPENNSL_L2_STATION_xxx flags. */
-    opennsl_mac_t dst_mac;          /**< Destination MAC address to match. */
-    opennsl_mac_t dst_mac_mask;     /**< Destination MAC address mask value. */
-    opennsl_vlan_t vlan;            /**< VLAN to match. */
-    opennsl_vlan_t vlan_mask;       /**< VLAN mask value. */
-    opennsl_port_t src_port;        /**< Ingress port to match. */
-    opennsl_port_t src_port_mask;   /**< Ingress port mask value. */
+    uint32 flags;                       /**< OPENNSL_L2_STATION_xxx flags. */
+    opennsl_mac_t dst_mac;              /**< Destination MAC address to match. */
+    opennsl_mac_t dst_mac_mask;         /**< Destination MAC address mask value. */
+    opennsl_vlan_t vlan;                /**< VLAN to match. */
+    opennsl_vlan_t vlan_mask;           /**< VLAN mask value. */
+    opennsl_port_t src_port;            /**< Ingress port to match. */
+    opennsl_port_t src_port_mask;       /**< Ingress port mask value. */
 } opennsl_l2_station_t;
 
 #define OPENNSL_L2_STATION_WITH_ID  (1 << 0)   /**< Use the specified Station ID. */

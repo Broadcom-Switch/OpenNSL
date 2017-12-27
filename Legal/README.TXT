@@ -1,6 +1,6 @@
 This project uses the following open source components:
 
-cJSON: vendor/cjson - Files in this folder uses the following license.
+1. cJSON: vendor/cjson - Files in this folder uses the following license.
 
 /*
    Copyright (c) 2009 Dave Gamble
@@ -24,3 +24,6 @@ cJSON: vendor/cjson - Files in this folder uses the following license.
    THE SOFTWARE.
  */
 
+2. The sFlow(R) feature of the software is an implementation of the
+   specifications published at http://www.sflow.org and governed by the sFlow
+   License Agreement: http://www.inmon.com/technology/sflowlicense.txt

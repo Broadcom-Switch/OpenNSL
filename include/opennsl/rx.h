@@ -301,6 +301,7 @@ typedef enum opennsl_rx_reason_e {
     opennslRxReasonSrCopyToCpuBit3 = _SHR_RX_SR_COPY_TO_CPU_BIT3, 
     opennslRxReasonSrCopyToCpuBit4 = _SHR_RX_SR_COPY_TO_CPU_BIT4, 
     opennslRxReasonSrCopyToCpuBit5 = _SHR_RX_SR_COPY_TO_CPU_BIT5, 
+    opennslRxReasonL3HeaderMismatch = _SHR_RX_L3_HEADER_MISMATCH, 
     opennslRxReasonCount = _SHR_RX_REASON_COUNT 
 } opennsl_rx_reason_t;
 

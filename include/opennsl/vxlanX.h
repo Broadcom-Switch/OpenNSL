@@ -51,6 +51,7 @@ typedef struct opennsl_vxlan_vpn_config_s {
     opennsl_vlan_protocol_packet_ctrl_t protocol_pkt; 
     opennsl_vlan_t vlan;                /**< Outer VLAN */
     opennsl_gport_t match_port_class;   /**< local port vlan domain */
+    opennsl_vlan_t default_vlan;        /**< default vlan for untag payload */
 } opennsl_vxlan_vpn_config_t;
 #endif
 
@@ -281,7 +282,7 @@ extern int opennsl_vxlan_cleanup(
  *          When parameter vxlan_port->vxlan_port_id is NIV/PE port id and
  *          flag OPENNSL_VXLAN_PORT_REPLACE is used, this API is used to add
  *          the NIV/PE port to VxLAN vpn forwarding domain. But please note
- *          that the NIV/PE port is not coverted to VxLAN port, it's still
+ *          that the NIV/PE port is not converted to VxLAN port, it's still
  *          NIV/PE port. NIV/PE port id should be used for virtual port
  *          operations.
  *          When invalid vpn id OPENNSL_VXLAN_VPN_INVALID and vxlan port match

@@ -54,6 +54,7 @@ typedef struct opennsl_knet_netif_s {
                                            associated with this interface. */
     char name[OPENNSL_KNET_NETIF_NAME_MAX]; /**< Network interface name (assigned by
                                            kernel) */
+    uint32 cb_user_data;                /**< Netif user data for knet rx cb. */
 } opennsl_knet_netif_t;
 
 #define OPENNSL_KNET_FILTER_T_RX_PKT    1          /**< Rx packet filter. */
@@ -101,6 +102,7 @@ typedef struct opennsl_knet_filter_s {
     int raw_size;                       /**< Size of valid raw data and mask. */
     uint8 m_raw_data[OPENNSL_KNET_FILTER_SIZE_MAX]; /**< Raw data to match. */
     uint8 m_raw_mask[OPENNSL_KNET_FILTER_SIZE_MAX]; /**< Raw data mask for match. */
+    uint32 cb_user_data;                /**< Filter user data for knet rx cb. */
 } opennsl_knet_filter_t;
 
 /***************************************************************************//** 

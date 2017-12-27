@@ -58,6 +58,10 @@
 #define OPENNSL_MIRROR_DEST_IS_TRAP         (1 << 17)  /**< Specify that the
                                                           destination is a trap
                                                           destination. */
+#define OPENNSL_MIRROR_DEST_IS_STAT_SAMPLE  (1 << 17)  /**< Specify that the
+                                                          destination type is a
+                                                          STATISTIC SAMPLING
+                                                          destination. */
 #define OPENNSL_MIRROR_DEST_EGRESS_ADD_ORIG_SYSTEM_HEADER (1 << 18)  /**< The start of the
                                                           original packet system
                                                           header will be
@@ -70,8 +74,14 @@
 #define OPENNSL_MIRROR_DEST_PORT            (1 << 20)  /**< Specify that mirror
                                                           destination owner is
                                                           PORT. */
+#define OPENNSL_MIRROR_DEST_DROP_SNIFF_IF_FWD_DROPPED (1 << 21)  /**< Drop the sniff packet
+                                                          if the original packet
+                                                          is dropped */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_1 (1 << 21)  /**< update counter No.1 */
 #define OPENNSL_MIRROR_DEST_UPDATE_COUNTER_2 (1 << 22)  /**< update counter No.2 */
+#define OPENNSL_MIRROR_DEST_DROP_FWD_IF_SNIFF_DROPPED (1 << 22)  /**< Drop the original
+                                                          packet if the sniff
+                                                          packet is dropped */
 #define OPENNSL_MIRROR_DEST_ID_SHARE        (1 << 24)  /**< Share mirror
                                                           destination id among
                                                           multi ports */
@@ -100,6 +110,13 @@
                                                           encapsulation */
 #define OPENNSL_MIRROR_DEST_OUT_MIRROR_DISABLE (1 << 30)  /**< Assert out mirror
                                                           disable */
+#define OPENNSL_MIRROR_DEST_TUNNEL_WITH_SEQ (1 << 31)  /**< Include Sequence
+                                                          number in header. */
+#define OPENNSL_MIRROR_DEST_UPDATE_EXT_COUNTERS (1 << 31)  /**< Set statistic
+                                                          interfaces for
+                                                          mirrored packets. */
+#define OPENNSL_MIRROR_DEST_FLAGS2_TUNNEL_VXLAN (1 << 0)   /**< Mirror Tunnel is
+                                                          VXLAN. */
 /**  represents the options for the mirroring of packets */
 typedef struct opennsl_mirror_options_s {
     uint32 flags;           
@@ -170,10 +187,17 @@ typedef struct opennsl_mirror_destination_s {
                                            packet_copy_size . Current supported
                                            values for DNX are 0, 256. */
     opennsl_reserved_enum_t reserved7; 
+    uint8 df;                           /**< Set the do not fragment bit of IP
+                                           header in mirror encapsulation */
     uint8 reserved8; 
-    uint8 reserved9; 
-    uint16 reserved10; 
+    uint16 reserved9; 
+    uint32 reserved10; 
     uint32 reserved11; 
+    int reserved12[OPENNSL_MIRROR_EXT_STAT_ID_COUNT]; 
+    uint32 reserved13; 
+    uint32 reserved14; 
+    uint32 reserved15; 
+    opennsl_mirror_pkt_erspan_encap_t reserved16; 
 } opennsl_mirror_destination_t;
 
 typedef int (*opennsl_mirror_destination_traverse_cb)(

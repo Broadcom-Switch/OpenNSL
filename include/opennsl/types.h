@@ -376,6 +376,9 @@ typedef enum opennsl_vlan_action_e {
                                            VLAN tag value. */
 } opennsl_vlan_action_t;
 
+/** TSN priority map id */
+typedef int opennsl_tsn_pri_map_t;
+
 typedef enum opennsl_reserved_enum_e {
     opennsl_enum_reserved = 0   /**< Reserved value */
 } opennsl_reserved_enum_t;
@@ -463,6 +466,8 @@ typedef struct opennsl_vlan_action_set_s {
     opennsl_vlan_tpid_action_t inner_tpid_action; /**< Action of inner-tag's tpid field */
     int action_id;                      /**< Action Set index */
     uint32 class_id;                    /**< Class ID */
+    opennsl_tsn_pri_map_t taf_gate_primap; /**< TAF (Time Aware Filtering) gate
+                                           priority mapping */
     uint32 flags;                       /**< OPENNSL_VLAN_ACTION_SET_xxx. */
 } opennsl_vlan_action_set_t;
 
